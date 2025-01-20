@@ -34,9 +34,9 @@
 	</clipPath>
 </svg>
 
-<!-- Connect -->
+<!-- News -->
 <svg width="0px" height="0px" xmlns="http://www.w3.org/2000/svg">
-	<clipPath id="connect-path" clipPathUnits="objectBoundingBox" transform="scale(0.002)">
+	<clipPath id="news-path" clipPathUnits="objectBoundingBox" transform="scale(0.002)">
 		<path
 			d="M479.167 37.6704L500 32.9091V500H3.05176e-05V23.3863L20.8333 18.625C41.6667 13.8636 83.3333 4.34088 125 1.16664C166.667 -2.00761 208.333 1.16664 250 12.2765C291.667 23.3863 333.333 35.6352 375 40.3965C416.667 45.1579 458.333 42.4318 479.167 37.6704Z"
 		/>
@@ -82,9 +82,9 @@
 	</clipPath>
 </svg>
 
-<!-- Connect Mobile -->
+<!-- News Mobile -->
 <svg width="0px" height="0px" xmlns="http://www.w3.org/2000/svg">
-	<clipPath id="shop-path-mobile" clipPathUnits="objectBoundingBox" transform="scale(0.002)">
+	<clipPath id="news-path-mobile" clipPathUnits="objectBoundingBox" transform="scale(0.002)">
 		<path
 			d="M479.109 35.7791L500 37.9787V500H0V0L20.8914 9.53132C41.7827 18.916 83.2173 37.9787 125 44.284C166.783 50.5893 208.217 44.284 250 39.0051C291.783 33.7262 333.217 29.4738 375 29.4738C416.783 29.4738 458.217 33.7262 479.109 35.7791Z"
 			fill="#8E8E8E"

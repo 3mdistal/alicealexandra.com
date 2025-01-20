@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 
 	export let background: string;
-	export let name: 'about' | 'studio' | 'commissions' | 'blog' | 'connect';
+	export let name: 'about' | 'studio' | 'commissions' | 'blog' | 'news';
 	export let transitionOutWrapper: () => void;
 
 	let section: HTMLAnchorElement;
@@ -113,8 +113,8 @@
 			height: 75%;
 		}
 
-		&.connect {
-			clip-path: url(#connect-path);
+		&.news {
+			clip-path: url(#news-path);
 			height: 50%;
 		}
 	}
@@ -146,7 +146,7 @@
 			}
 		}
 
-		&.connect {
+		&.news {
 			top: 12%;
 			left: 27%;
 		}
@@ -169,7 +169,7 @@
 				height: 68%;
 			}
 
-			&.connect {
+			&.news {
 				height: 55%;
 			}
 		}
@@ -192,7 +192,7 @@
 				top: 12%;
 			}
 
-			&.connect {
+			&.news {
 				left: 23%;
 			}
 		}

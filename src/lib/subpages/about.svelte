@@ -6,8 +6,40 @@
 	import AuthorPhoto from '../../cms/images/about/author-photo.jpg?enhanced';
 	import Mirror from '../../cms/images/about/mirror.jpeg?enhanced';
 	import Owl from '../../cms/images/about/owl.png?enhanced';
+	import Socials from '$lib/icons/socials.svelte';
+	import { onDestroy } from 'svelte';
+	import { state } from '$lib/stores';
 
 	export let accent = '';
+
+	let loading = false;
+	let visibility = true;
+	let email: string;
+
+	async function subscribe(event: Event) {
+		loading = true;
+		const form = event.target as HTMLFormElement;
+		const data = new FormData(form);
+
+		const response = await fetch('/connect', {
+			method: 'POST',
+			body: data
+		});
+
+		if (response.ok) {
+			visibility = false;
+			loading = false;
+		}
+
+		if (!response.ok) {
+			const message = `An error has occured: ${response.status}`;
+			throw new Error(message);
+		}
+	}
+
+	onDestroy(() => {
+		state.set('home');
+	});
 </script>
 
 <div class="spacer"></div>
@@ -62,14 +94,12 @@
 	<div class="about-footer-content">
 		<div class="about-footer-text">
 			<p>
-				Though I have plans of fuller, richer ways to engage with the work here—even to
-				contribute—this is what I have for now. <a
-					class="about-footer-link"
-					style="color: {accent}"
-					href="/connect">My ears are open</a
-				>, and as such, I may take my time to consider before replying. I'll get back to you as I'm
-				able.
+				Though I have plans of fuller, richer ways to engage with the work here—even to contribute,
+				for now, my ears are open. I'll get back to you as I'm able.
 			</p>
+			<div class="socials-container">
+				<Socials />
+			</div>
 		</div>
 	</div>
 </div>
@@ -107,8 +137,8 @@
 		max-width: 80%;
 	}
 
-	.about-footer-link {
-		font-weight: 500;
+	.socials-container {
+		margin-top: 1rem;
 	}
 
 	@media (min-width: 768px) {

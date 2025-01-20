@@ -1,3 +1,22 @@
+## 0.5.0
+
+_20 Jan 2025_
+
+**Minor**
+
+- Tailwind stripped out. Fuck it—we're making a design system. Eventually. But this was the first step towards that.
+- News section created. More to look forward to here.
+
+**Patches**
+
+- Illustrations gallery given a facelift.
+- Updated Svelte and other packages to latest 2025 builds.
+- Switch socials from Twitter to Bluesky and updated the little squirrel's mug. All is right with the world.
+
+**Bugfixes**
+
+- Notion fetches for blogs were failing with ISR revalidation. Patched for now, but will refactor to webhook-based revalidation.
+
 ## 0.4.1
 
 _27 Feb 2024_

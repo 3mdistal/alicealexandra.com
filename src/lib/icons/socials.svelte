@@ -24,10 +24,10 @@
 		</a>
 	</div>
 	<div>
-		<a href="https://twitter.com/tempoimmaterial" target="_blank" rel="noreferrer">
+		<a href="https://bsky.app/profile/alicealexandra.com" target="_blank" rel="noreferrer">
 			<enhanced:img
-				src="../../cms/images/social-media/twitter-squirrel.webp"
-				alt="Link to Twitter in the form of a squirrel drinking its morning coffee. Painted by Alice Alexandra Moore."
+				src="../../cms/images/social-media/bsky-squirrel.webp"
+				alt="Link to Bluesky in the form of a squirrel drinking its morning coffee. Painted by Alice Alexandra Moore."
 			/>
 		</a>
 	</div>
