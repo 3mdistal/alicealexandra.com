@@ -9,8 +9,8 @@
 		| 'Product Feature';
 
 	export let publications: Array<ProfessionalPublications>;
-	export let title: String;
-	export let subtitle: String;
+	export let title: string;
+	export let subtitle: string;
 	export let type: PublicationTypes;
 </script>
 

@@ -1,8 +1,6 @@
 <script lang="ts">
 	import TextMacro from '$lib/notion/text-macro.svelte';
-	import { onMount } from 'svelte';
 	import { fade, scale } from 'svelte/transition';
-	import { browser } from '$app/environment';
 
 	// Props
 	export let data;
@@ -16,44 +14,9 @@
 
 	// State
 	let artGrid: HTMLDivElement;
-	let gridItems: HTMLDivElement[];
 	let selectedPainting: any = null;
 	let modalOpen = false;
 	let highResImageLoaded = false;
-
-	// Lifecycle
-	onMount(async () => {
-		if (browser) {
-			const gsapModule = await import('gsap');
-			const scrollTriggerModule = await import('gsap/ScrollTrigger');
-			const gsap = gsapModule.default;
-			const ScrollTrigger = scrollTriggerModule.default;
-			gsap.registerPlugin(ScrollTrigger);
-			initParallax(gsap, ScrollTrigger);
-		}
-	});
-
-	// Functions
-	function initParallax(gsap: any, ScrollTrigger: any) {
-		gridItems = Array.from(artGrid.querySelectorAll('.grid-item'));
-		gridItems.forEach((item) => {
-			gsap.fromTo(
-				item,
-				{ y: 0 },
-				{
-					y: 30,
-					ease: 'none',
-					scrollTrigger: {
-						trigger: item,
-						start: 'top bottom',
-						end: 'bottom top',
-						scrub: 1,
-						toggleActions: 'play none none reverse'
-					}
-				}
-			);
-		});
-	}
 
 	function openModal(painting: any) {
 		selectedPainting = painting;

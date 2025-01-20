@@ -28,7 +28,8 @@
 	}
 
 	function populate() {
-		fadeIn(), hideBack();
+		fadeIn();
+		hideBack();
 	}
 
 	onMount(() => {

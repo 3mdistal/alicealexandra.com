@@ -31,7 +31,7 @@ export class Note {
 	}
 
 	play() {
-		let now = this.context.currentTime;
+		const now = this.context.currentTime;
 
 		this.oscillator.start(now);
 		this.oscillator.stop(now + this.duration);
@@ -64,7 +64,7 @@ export class ADSR extends Note {
 	}
 
 	override play() {
-		let now = this.context.currentTime;
+		const now = this.context.currentTime;
 
 		this.gainNode.gain.setValueAtTime(0, now);
 
