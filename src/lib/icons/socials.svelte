@@ -16,7 +16,12 @@
 
 <div bind:this={container} id="container">
 	<div>
-		<a href="https://www.instagram.com/alice.alexandra.moore" target="_blank" rel="noreferrer">
+		<a
+			href="https://www.instagram.com/alice.alexandra.moore"
+			target="_blank"
+			rel="noreferrer"
+			aria-label="Visit Alice Alexandra Moore on Instagram"
+		>
 			<enhanced:img
 				src="../../cms/images/social-media/instagram-bear.webp"
 				alt="Link to Instagram in the form of an illustrated polar bear taking a selfie. Painted dby Alice Alexandra Moore."
@@ -24,7 +29,12 @@
 		</a>
 	</div>
 	<div>
-		<a href="https://bsky.app/profile/alicealexandra.com" target="_blank" rel="noreferrer">
+		<a
+			href="https://bsky.app/profile/alicealexandra.com"
+			target="_blank"
+			rel="noreferrer"
+			aria-label="Visit Alice Alexandra Moore on Bluesky"
+		>
 			<enhanced:img
 				src="../../cms/images/social-media/bsky-squirrel.webp"
 				alt="Link to Bluesky in the form of a squirrel drinking its morning coffee. Painted by Alice Alexandra Moore."
@@ -32,7 +42,12 @@
 		</a>
 	</div>
 	<div>
-		<a href="https://soundcloud.com/tempoimmaterial" target="_blank" rel="noreferrer">
+		<a
+			href="https://soundcloud.com/tempoimmaterial"
+			target="_blank"
+			rel="noreferrer"
+			aria-label="Visit Alice Alexandra Moore on SoundCloud"
+		>
 			<enhanced:img
 				src="../../cms/images/social-media/soundcloud-rabbit.webp"
 				alt="Link to Soundcloud in the form of an illustrated rabbit wearing headphones. Painted by Alice Alexandra Moore."
@@ -40,10 +55,15 @@
 		</a>
 	</div>
 	<div>
-		<a href="https://github.com/3mdistal/portfolio" target="_blank" rel="noreferrer">
+		<a
+			href="https://github.com/3mdistal/portfolio"
+			target="_blank"
+			rel="noreferrer"
+			aria-label="View Alice Alexandra Moore's portfolio code on GitHub"
+		>
 			<enhanced:img
 				src="../../cms/images/social-media/github-cat.webp"
-				alt="Link to Twitter in the form of a squirrel drinking its morning coffee. Painted by Alice Alexandra Moore."
+				alt="Link to GitHub in the form of a cat. Painted by Alice Alexandra Moore."
 			/>
 		</a>
 	</div>
