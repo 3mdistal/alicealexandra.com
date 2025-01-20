@@ -39,6 +39,8 @@
 	h1 {
 		margin-bottom: 2rem;
 		color: #726a12;
+		font-weight: 500;
+		font-size: 3rem;
 	}
 
 	.changelog-content {
