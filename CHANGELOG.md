@@ -1,3 +1,15 @@
+## 0.5.0
+
+_20 Jan 2025_
+
+**Minor**
+
+- Tailwind stripped out.
+
+**Patches**
+
+- Illustrations gallery given a facelift.
+
 ## 0.4.1
 
 _27 Feb 2024_
