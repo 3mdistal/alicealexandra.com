@@ -60,7 +60,7 @@
 			class="logo"
 		/>
 		<div>
-			<p bind:this={siteTitle} class="site-title">tempo immaterial</p>
+			<h1 bind:this={siteTitle} class="site-title">tempo immaterial</h1>
 			<p bind:this={subtitle} class="subtitle">work by alice alexandra moore</p>
 		</div>
 	</header>
