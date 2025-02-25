@@ -1,9 +1,9 @@
-import { queryDatabase } from '$lib/notion/notion';
+import { queryDatabase } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, PROFESSIONAL_DB } from '$env/static/private';
 import type {
 	QueryDatabaseParameters,
 	TextRichTextItemResponse
-} from '@notionhq/client/build/src/api-endpoints';
+} from '$lib/notion/types/notion-types';
 
 const queryParams: QueryDatabaseParameters = {
 	database_id: PROFESSIONAL_DB,

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TextMacro from '$lib/notion/text-macro.svelte';
+	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import { fade, scale } from 'svelte/transition';
 
 	// Props

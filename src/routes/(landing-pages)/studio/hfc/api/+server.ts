@@ -1,4 +1,4 @@
-import { listChildren } from '$lib/notion/notion';
+import { listChildren } from '$lib/notion/api/blocks';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {

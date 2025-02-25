@@ -1,4 +1,4 @@
-import { retrieveBlock } from '$lib/notion/notion';
+import { retrieveBlock } from '$lib/notion/api/blocks';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import TextMacro from '$lib/notion/text-macro.svelte';
+	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import type {
 		BlockObjectResponse,
 		ListBlockChildrenResponse,
 		TextRichTextItemResponse
-	} from '@notionhq/client/build/src/api-endpoints.js';
+	} from '$lib/notion/types/notion-types';
 	import { onMount } from 'svelte';
 
 	export let data: Data;

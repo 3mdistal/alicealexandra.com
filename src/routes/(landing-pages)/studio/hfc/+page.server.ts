@@ -1,4 +1,4 @@
-import { queryDatabase } from '$lib/notion/notion';
+import { queryDatabase } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, POEMS_SECTIONS_DB, ALL_SCRAPS_DB } from '$env/static/private';
 import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
 

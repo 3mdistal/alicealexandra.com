@@ -1,4 +1,4 @@
-import { addCommission } from '$lib/notion/notion';
+import { addCommission } from '$lib/notion/api/database';
 import type { RequestHandler } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
 

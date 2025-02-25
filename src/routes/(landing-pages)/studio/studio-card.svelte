@@ -3,8 +3,8 @@
 	import gsap from 'gsap';
 	import { accentColors, backgroundColors } from '$lib/stores';
 	import Button from '$lib/icons/button.svelte';
-	import TextMacro from '$lib/notion/text-macro.svelte';
-	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+	import TextMacro from '$lib/notion/components/text-macro.svelte';
+	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
 
 	// Card Data
 	export let card: PageObjectResponse;

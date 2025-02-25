@@ -1,10 +1,9 @@
 <script lang="ts">
-	import TextMacro from '$lib/notion/text-macro.svelte';
+	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import { Highlight, HighlightSvelte } from 'svelte-highlight';
 	import typescript from 'svelte-highlight/languages/typescript';
-	import NotionImage from './notion-image.svelte';
-	import Socials from '$lib/icons/socials.svelte';
-	import type { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+	import NotionImage from '$lib/notion/components/notion-image.svelte';
+	import type { BlockObjectResponse } from '$lib/notion/types/notion-types';
 
 	export let results: Array<BlockObjectResponse>;
 
@@ -69,31 +68,17 @@
 			{/if}
 		</div>
 	{:else if isBlockType(result, 'code')}
-		<div
-			class="pb-6 [&_.hljs]:rounded-lg [&_.hljs]:bg-gray-300 dark:[&_.hljs]:bg-[#141414] [&_code]:text-lg [&_code]:tracking-tighter [&_span.hljs-name]:text-teal-700 dark:[&_span.hljs-name]:text-red-300 dark:[&_span.hljs-params]:text-gray-300 dark:[&_span.hljs-property]:text-gray-300 dark:[&_span.language-css]:text-gray-300 dark:[&_span.language-javascript]:text-gray-300 [&_span]:font-mono"
-		>
+		<div class="code-block">
 			{#if result.code.language === 'typescript'}
 				<Highlight language={typescript} code={result.code.rich_text[0]?.plain_text ?? ''} />
 			{:else if result.code.language === 'php'}
 				<HighlightSvelte code={result.code.rich_text[0]?.plain_text ?? ''} />
 			{:else if result.code.language === 'html'}
 				{@html result.code.rich_text[0]?.plain_text ?? ''}
-			{:else if result.code.language === 'plain text'}
-				{#if result.code.rich_text[0]?.plain_text?.includes('Socials')}
-					{#if result.code.rich_text[0]?.plain_text?.includes('small')}
-						<div class="w-20">
-							<Socials />
-						</div>
-					{:else}
-						<Socials />
-					{/if}
-				{:else}
-					{@html result.code.rich_text[0]?.plain_text ?? ''}
-				{/if}
 			{/if}
 		</div>
 	{:else if isBlockType(result, 'divider')}
-		<div class="px-[30%] pb-10 pt-2 md:px-[35%]">
+		<div class="divider">
 			<hr />
 		</div>
 	{/if}

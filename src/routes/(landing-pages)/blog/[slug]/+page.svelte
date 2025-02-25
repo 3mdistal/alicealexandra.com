@@ -1,38 +1,27 @@
 <script lang="ts">
-	import NotionPageParser from '$lib/notion/notion-page-parser.svelte';
-	import { fade } from 'svelte/transition';
-	import TextMacro from '$lib/notion/text-macro.svelte';
+	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
+	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import DarkCodeTheme from 'svelte-highlight/styles/nord';
 	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
-	import { subAndSuper, wrapLists, createTOC } from '$lib/notion/blog-helpers';
+	import { subAndSuper, wrapLists, createTOC } from '$lib/notion/utils/blog-helpers';
 	import type {
 		PageObjectResponse,
-		TitlePropertyItemObjectResponse,
 		RichTextPropertyItemObjectResponse,
 		UrlPropertyItemObjectResponse,
 		SelectPropertyItemObjectResponse,
 		FormulaPropertyItemObjectResponse,
 		QueryDatabaseResponse
-	} from '@notionhq/client/build/src/api-endpoints';
+	} from '$lib/notion/types/notion-types';
 
 	let darkMode: boolean;
 	let context: HTMLElement;
-
-	function setDarkMode() {
-		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		darkMode = mediaQuery.matches;
-		mediaQuery.addEventListener('change', (e) => {
-			darkMode = e.matches;
-		});
-	}
 
 	const runBlogHelpers = async () => {
 		await tick();
 		subAndSuper(context);
 		wrapLists(context);
 		createTOC();
-		setDarkMode();
 	};
 
 	export let data: {
@@ -47,6 +36,23 @@
 	const blogPost = queryResponse?.results?.[0] as PageObjectResponse | undefined;
 
 	const content = contentResponse?.results || [];
+
+	// Type guards for Notion properties
+	function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {
+		return prop?.type === 'url';
+	}
+
+	function isSelectProperty(prop: any): prop is SelectPropertyItemObjectResponse {
+		return prop?.type === 'select';
+	}
+
+	function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
+		return prop?.type === 'formula';
+	}
+
+	function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
+		return prop?.type === 'rich_text';
+	}
 
 	const {
 		Name: title,
@@ -67,6 +73,11 @@
 		return prop?.rich_text?.[0]?.plain_text || '';
 	}
 
+	// Helper function to get URL from URL property
+	function getUrl(prop: any) {
+		return isUrlProperty(prop) ? prop.url : '';
+	}
+
 	onMount(() => {
 		runBlogHelpers();
 		fetch(window.location.href, {
@@ -74,11 +85,6 @@
 				Accept: 'application/json',
 				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
 			}
-		});
-		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		darkMode = mediaQuery.matches;
-		mediaQuery.addEventListener('change', (e) => {
-			darkMode = e.matches;
 		});
 	});
 </script>
@@ -89,11 +95,14 @@
 	<meta name="description" content={getTextContent(ogDescription)} />
 
 	<!-- Facebook Meta Tags -->
-	<meta property="og:url" content="https://www.alicealexandra.com/blog/{slug}" />
+	<meta property="og:url" content="https://www.alicealexandra.com/blog/{getUrl(slug)}" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Blog - {getTextContent(title) || 'Blog'}" />
 	<meta property="og:description" content={getTextContent(ogDescription)} />
-	<meta property="og:image" content={coverURL?.url ?? 'https://unsplash.it/1200/600'} />
+	<meta
+		property="og:image"
+		content={isUrlProperty(coverURL) ? coverURL.url : 'https://unsplash.it/1200/600'}
+	/>
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -103,19 +112,16 @@
 	<meta name="twitter:url" content="https://www.alicealexandra.com/blog" />
 	<meta name="twitter:title" content="Blog - {getTextContent(title) || 'Blog'}" />
 	<meta name="twitter:description" content={getTextContent(ogDescription)} />
-	<meta name="twitter:image" content={coverURL?.url ?? 'https://unsplash.it/1200/600'} />
+	<meta
+		name="twitter:image"
+		content={isUrlProperty(coverURL) ? coverURL.url : 'https://unsplash.it/1200/600'}
+	/>
 	<meta
 		name="twitter:image:alt"
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
 	/>
 
-	{#if darkMode}
-		<!-- eslint-disable-next-line -->
-		{@html DarkCodeTheme}
-	{:else}
-		<!-- eslint-disable-next-line -->
-		{@html LightCodeTheme}
-	{/if}
+	{@html LightCodeTheme}
 </svelte:head>
 
 <div class="blog-container">
@@ -123,7 +129,7 @@
 		<h1>{getTextContent(title) || 'Untitled'}</h1>
 		<p class="subtitle">
 			<em
-				>{#if subtitle}<TextMacro type={subtitle} />{/if}</em
+				>{#if isRichTextProperty(subtitle)}<TextMacro type={subtitle} />{/if}</em
 			>
 		</p>
 	</div>
@@ -131,12 +137,12 @@
 	<div>
 		<p class="meta-info">
 			<em>type</em>
-			<span>{category?.select?.name || 'Uncategorized'}</span>
+			<span>{isSelectProperty(category) ? category.select?.name : 'Uncategorized'}</span>
 		</p>
 		<p class="meta-info">
 			<em>time</em>
 			<span>
-				{#if readingTime?.formula?.string}
+				{#if isFormulaProperty(readingTime) && readingTime.formula.type === 'string'}
 					{readingTime.formula.string === '1 minutes' ? '1 minute' : readingTime.formula.string}
 				{:else}
 					Unknown
@@ -146,7 +152,7 @@
 		<p class="meta-info">
 			<em>tl;dr</em>
 			<span>
-				{#if summary}<TextMacro type={summary} />{/if}
+				{#if isRichTextProperty(summary)}<TextMacro type={summary} />{/if}
 			</span>
 		</p>
 	</div>
@@ -165,50 +171,54 @@
 
 <style>
 	.blog-container {
-		background-color: #e5e7eb;
-		padding: 4rem 1rem;
+		background-color: var(--blog-bg-light);
+		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
 		height: 100%;
 		min-height: 100vh;
-		color: #111827;
+		color: var(--blog-text-light);
 
 		@media (min-width: 640px) {
-			padding: 2.5rem;
+			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
 		}
 
 		@media (min-width: 768px) {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			padding: 2.5rem 5rem;
+			padding: var(--blog-spacing-lg) var(--blog-spacing-xl);
 		}
 
 		@media (min-width: 1280px) {
-			padding: 2.5rem 15rem;
+			padding: var(--blog-spacing-xl) var(--blog-spacing-xl);
 		}
 
 		@media (min-width: 1536px) {
-			padding: 2.5rem 20rem;
+			padding: var(--blog-spacing-xl) var(--blog-spacing-lg);
 		}
 
-		:global(sub),
-		:global(sup) {
-			color: inherit;
+		@media (min-width: 1920px) {
+			padding: var(--blog-spacing-xl) 25vw;
 		}
 
 		@media (prefers-color-scheme: dark) {
-			background-color: #141414;
-			color: #e5e7eb;
+			background-color: var(--blog-bg-dark);
+			color: var(--blog-text-dark);
 
 			:global(*) {
-				color: #e5e7eb;
+				color: var(--blog-text-dark);
 			}
 
 			:global(a),
 			:global(code),
 			:global(.notion-container a),
 			:global(.notion-container code) {
-				color: #a3e5eb;
+				color: var(--blog-link-dark);
 			}
+		}
+
+		:global(sub),
+		:global(sup) {
+			color: inherit;
 		}
 	}
 
@@ -222,8 +232,8 @@
 		}
 
 		@media (min-width: 768px) {
-			margin-bottom: 1rem;
-			font-size: 3.75rem;
+			margin-bottom: var(--blog-spacing-sm);
+			font-size: var(--blog-heading-large);
 			line-height: 1;
 		}
 
@@ -234,76 +244,81 @@
 	}
 
 	.subtitle {
-		max-width: 45ch;
-		color: #374151;
-		font-size: 1.25rem;
+		max-width: var(--blog-subtitle-width);
+		color: var(--blog-accent-light);
+		font-size: var(--blog-body);
 		line-height: 1.75rem;
 
 		@media (min-width: 768px) {
-			font-size: 1.5rem;
+			font-size: var(--blog-body-large);
 			line-height: 2.25rem;
 		}
 
 		em {
-			color: #6b7280;
+			color: var(--blog-secondary-light);
 		}
 
 		@media (prefers-color-scheme: dark) {
-			color: #d1d5db;
+			color: var(--blog-accent-dark);
 
 			em {
-				color: #9ca3af;
+				color: var(--blog-secondary-dark);
 			}
 		}
 	}
 
 	hr {
-		opacity: 0.5;
-		margin: 2.5rem 0;
-		border-color: #111827;
-		width: 100%;
+		display: block;
+		opacity: 0.8;
+		margin: var(--blog-spacing-xl);
+		border: none;
+		border-top: 1px solid var(--blog-border-light);
+		width: var(--blog-content-width);
+		height: 1px;
+		font-size: var(--blog-body-large);
 
 		@media (prefers-color-scheme: dark) {
-			border-color: #4b5563;
+			border-top-color: var(--blog-border-dark);
 		}
 	}
 
 	.meta-info {
 		display: flex;
-		margin-bottom: 1rem;
-		max-width: 45ch;
+		margin-bottom: var(--blog-spacing-sm);
+		width: 100%;
+		max-width: var(--blog-subtitle-width);
 
 		em {
 			display: block;
 			width: 5ch;
-			color: #111827;
+			color: var(--blog-text-light);
 			font-weight: 500;
 		}
 
 		span {
 			display: block;
 			width: 35ch;
-			color: #374151;
+			color: var(--blog-accent-light);
 		}
 
 		@media (prefers-color-scheme: dark) {
 			em {
-				color: #e5e7eb;
+				color: var(--blog-text-dark);
 			}
 
 			span {
-				color: #d1d5db;
+				color: var(--blog-accent-dark);
 			}
 		}
 	}
 
 	.notion-container {
-		max-width: 60ch;
-		font-size: 1.25rem;
+		max-width: var(--blog-content-width);
+		font-size: var(--blog-body);
 		line-height: 1.75rem;
 
 		@media (min-width: 1024px) {
-			font-size: 1.5rem;
+			font-size: var(--blog-body-large);
 			line-height: 2rem;
 		}
 
@@ -313,22 +328,24 @@
 	}
 
 	.back-link {
+		margin-top: 4em;
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		text-align: right;
 
 		@media (min-width: 768px) {
-			font-size: 3.75rem;
+			font-size: var(--blog-heading-large);
 			line-height: 1;
 		}
 
 		a {
 			display: inline-block;
-			padding: 1.5rem;
-			color: #111827;
+			padding: var(--blog-spacing-md);
+			color: var(--blog-text-light);
+			font-family: 'Spectral', serif;
 
 			@media (prefers-color-scheme: dark) {
-				color: #e5e7eb;
+				color: var(--blog-text-dark);
 			}
 		}
 	}
@@ -341,7 +358,7 @@
 		}
 
 		:global(.notion-container a) {
-			color: #31676c;
+			color: var(--blog-link-light);
 			font-weight: 500;
 
 			&:hover {
@@ -349,34 +366,44 @@
 			}
 
 			@media (prefers-color-scheme: dark) {
-				color: #a3e5eb;
+				color: var(--blog-link-dark);
 			}
 		}
 
 		:global(.notion-container code) {
-			color: #31676c;
+			border-radius: var(--blog-border-radius-sm);
+			background-color: var(--blog-code-bg);
+			padding: 0.2em 0.4em;
+			color: var(--blog-link-light);
+		}
 
-			@media (prefers-color-scheme: dark) {
-				color: #a3e5eb;
-			}
+		:global(.notion-container pre code) {
+			display: block;
+			border-radius: var(--blog-border-radius);
+			padding: 1em;
+			overflow-x: auto;
+		}
+
+		:global(.notion-container pre) {
+			margin-bottom: var(--blog-spacing-md);
 		}
 
 		:global(.notion-container blockquote) {
-			margin-top: 2.5rem;
+			margin-top: var(--blog-spacing-lg);
 			margin-left: 2em;
-			max-width: 40ch;
-			color: #d1d5db;
+			max-width: var(--blog-blockquote-width);
+			color: var(--blog-callout-light);
 			font-style: italic;
 
 			@media (prefers-color-scheme: dark) {
-				color: #9ca3af;
+				color: var(--blog-secondary-dark);
 			}
 		}
 
 		:global(.notion-container .image) {
 			margin-top: 2em;
 			margin-bottom: 2em;
-			padding-right: 0.5em;
+			padding-right: var(--blog-spacing-xs);
 
 			@media (min-width: 640px) {
 				padding-right: 3em;
@@ -398,12 +425,12 @@
 		:global(.notion-container h2) {
 			margin-top: 2.5em;
 			margin-bottom: 1.5em;
-			color: #111827;
+			color: var(--blog-heading-light);
 			font-weight: 500;
-			font-size: 1.5rem;
+			font-size: var(--blog-heading-small);
 
 			@media (min-width: 768px) {
-				font-size: 1.875rem;
+				font-size: var(--blog-heading-medium);
 			}
 
 			@media (min-width: 1024px) {
@@ -411,23 +438,23 @@
 			}
 
 			@media (prefers-color-scheme: dark) {
-				color: #f3f4f6;
+				color: var(--blog-heading-dark);
 			}
 		}
 
 		:global(.notion-container h3) {
 			margin-top: 1.5em;
 			margin-bottom: 1em;
-			color: #111827;
+			color: var(--blog-heading-light);
 			font-weight: 500;
-			font-size: 1.5rem;
+			font-size: var(--blog-heading-small);
 
 			@media (min-width: 768px) {
-				font-size: 1.875rem;
+				font-size: var(--blog-heading-medium);
 			}
 
 			@media (prefers-color-scheme: dark) {
-				color: #f3f4f6;
+				color: var(--blog-heading-dark);
 			}
 		}
 
@@ -440,13 +467,22 @@
 			}
 
 			@media (prefers-color-scheme: dark) {
-				color: #e5e7eb;
+				color: var(--blog-text-dark);
 			}
 		}
 
 		:global(.notion-container hr) {
-			margin: 3em auto;
-			width: 30%;
+			opacity: 0.8;
+			margin: var(--blog-spacing-xl) auto;
+			border: none;
+			border-top: 1px solid var(--blog-border-light);
+			width: auto;
+			max-width: var(--blog-content-width);
+			height: 1px;
+
+			@media (prefers-color-scheme: dark) {
+				border-top-color: var(--blog-border-dark);
+			}
 		}
 
 		:global(ol) {
@@ -461,44 +497,44 @@
 			display: flex;
 			align-items: flex-start;
 			gap: 1rem;
-			margin-top: 2.5rem;
-			margin-bottom: 1.5rem;
+			margin-top: var(--blog-spacing-lg);
+			margin-bottom: var(--blog-spacing-md);
 			border-radius: 0.5rem;
-			background-color: #d1d5db;
-			padding: 2.5rem 1rem 1.5rem;
+			background-color: var(--blog-callout-light);
+			padding: var(--blog-spacing-lg) var(--blog-spacing-sm) var(--blog-spacing-md);
 
 			@media (min-width: 768px) {
-				gap: 2.5rem;
+				gap: var(--blog-spacing-lg);
 				padding-right: 5rem;
 				padding-left: 5rem;
 			}
 
 			& > :first-child {
-				font-size: 1.5rem;
+				font-size: var(--blog-heading-small);
 
 				@media (min-width: 768px) {
-					font-size: 2.25rem;
+					font-size: var(--blog-heading-medium);
 				}
 			}
 
 			& > :last-child {
-				font-size: 1.125rem;
+				font-size: var(--blog-body-small);
 
 				@media (min-width: 768px) {
-					font-size: 1.25rem;
+					font-size: var(--blog-body);
 				}
 			}
 
 			@media (prefers-color-scheme: dark) {
-				background-color: #1f2937;
+				background-color: var(--blog-callout-dark);
 			}
 		}
 
 		:global(.notion-container p, li) {
-			color: #4b5563;
+			color: var(--blog-accent-light);
 
 			@media (prefers-color-scheme: dark) {
-				color: #d1d5db;
+				color: var(--blog-accent-dark);
 			}
 		}
 	}

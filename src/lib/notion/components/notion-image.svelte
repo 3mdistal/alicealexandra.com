@@ -32,11 +32,17 @@
 {:then source}
 	<img {alt} src={source} />
 {:catch error}
-	<p>{error}</p>
+	<p class="error">{error}</p>
 {/await}
 
 <style>
 	img {
-		color: white;
+		border-radius: var(--blog-border-radius);
+		max-width: 100%;
+	}
+
+	.error {
+		color: var(--blog-text);
+		font-style: italic;
 	}
 </style>
