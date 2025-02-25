@@ -5,10 +5,13 @@ import { NOTION_KEY } from '$env/static/private';
  * Custom error class for Notion API errors
  */
 export class NotionAPIError extends Error {
-    constructor(message: string, public originalError?: unknown) {
-        super(message);
-        this.name = 'NotionAPIError';
-    }
+	constructor(
+		message: string,
+		public originalError?: unknown
+	) {
+		super(message);
+		this.name = 'NotionAPIError';
+	}
 }
 
 /**
@@ -16,16 +19,16 @@ export class NotionAPIError extends Error {
  * @throws {NotionAPIError} If any required environment variables are missing
  */
 export function validateEnvironmentVariables(): void {
-    if (!NOTION_KEY) {
-        throw new NotionAPIError('Missing required NOTION_KEY environment variable');
-    }
+	if (!NOTION_KEY) {
+		throw new NotionAPIError('Missing required NOTION_KEY environment variable');
+	}
 }
 
 /**
  * The Notion client instance for making API calls
  */
 export const notionClient = new Client({
-    auth: NOTION_KEY
+	auth: NOTION_KEY
 });
 
 /**
@@ -35,28 +38,28 @@ export const notionClient = new Client({
  * @throws {NotionAPIError} If the API call fails
  */
 export async function withErrorHandling<T>(apiCall: () => Promise<T>): Promise<T> {
-    try {
-        validateEnvironmentVariables();
-        return await apiCall();
-    } catch (error) {
-        if (error instanceof NotionAPIError) {
-            throw error;
-        }
+	try {
+		validateEnvironmentVariables();
+		return await apiCall();
+	} catch (error) {
+		if (error instanceof NotionAPIError) {
+			throw error;
+		}
 
-        // Handle rate limiting
-        if (error instanceof Error && error.message.includes('rate_limited')) {
-            throw new NotionAPIError('Notion API rate limit exceeded. Please try again later.', error);
-        }
+		// Handle rate limiting
+		if (error instanceof Error && error.message.includes('rate_limited')) {
+			throw new NotionAPIError('Notion API rate limit exceeded. Please try again later.', error);
+		}
 
-        // Handle authentication errors
-        if (error instanceof Error && error.message.includes('unauthorized')) {
-            throw new NotionAPIError('Authentication failed with Notion API. Check your API key.', error);
-        }
+		// Handle authentication errors
+		if (error instanceof Error && error.message.includes('unauthorized')) {
+			throw new NotionAPIError('Authentication failed with Notion API. Check your API key.', error);
+		}
 
-        // Generic error
-        throw new NotionAPIError(
-            `Failed to execute Notion API call: ${error instanceof Error ? error.message : 'Unknown error'}`,
-            error
-        );
-    }
-} 
+		// Generic error
+		throw new NotionAPIError(
+			`Failed to execute Notion API call: ${error instanceof Error ? error.message : 'Unknown error'}`,
+			error
+		);
+	}
+}

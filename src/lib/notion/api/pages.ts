@@ -9,12 +9,12 @@ import type { CommissionRequest, Subscriber } from '../types/notion-types';
  * @returns The page object
  */
 export async function retrievePage(pageId: string): Promise<PageObjectResponse> {
-    return withErrorHandling(async () => {
-        const response = await notionClient.pages.retrieve({
-            page_id: pageId
-        });
-        return response as PageObjectResponse;
-    });
+	return withErrorHandling(async () => {
+		const response = await notionClient.pages.retrieve({
+			page_id: pageId
+		});
+		return response as PageObjectResponse;
+	});
 }
 
 /**
@@ -24,16 +24,16 @@ export async function retrievePage(pageId: string): Promise<PageObjectResponse> 
  * @returns The created page
  */
 export async function createPage(
-    databaseId: string,
-    properties: Record<string, any>
+	databaseId: string,
+	properties: Record<string, any>
 ): Promise<PageObjectResponse> {
-    return withErrorHandling(async () => {
-        const response = await notionClient.pages.create({
-            parent: { database_id: databaseId },
-            properties
-        });
-        return response as PageObjectResponse;
-    });
+	return withErrorHandling(async () => {
+		const response = await notionClient.pages.create({
+			parent: { database_id: databaseId },
+			properties
+		});
+		return response as PageObjectResponse;
+	});
 }
 
 /**
@@ -43,16 +43,16 @@ export async function createPage(
  * @returns The updated page
  */
 export async function updatePage(
-    pageId: string,
-    properties: Record<string, any>
+	pageId: string,
+	properties: Record<string, any>
 ): Promise<PageObjectResponse> {
-    return withErrorHandling(async () => {
-        const response = await notionClient.pages.update({
-            page_id: pageId,
-            properties
-        });
-        return response as PageObjectResponse;
-    });
+	return withErrorHandling(async () => {
+		const response = await notionClient.pages.update({
+			page_id: pageId,
+			properties
+		});
+		return response as PageObjectResponse;
+	});
 }
 
 /**
@@ -61,49 +61,49 @@ export async function updatePage(
  * @returns The created page
  */
 export async function addCommission(commission: CommissionRequest): Promise<PageObjectResponse> {
-    return withErrorHandling(async () => {
-        if (!COMMISSIONS_DB || !USER_ID_ALICE) {
-            throw new Error('Missing required environment variables for commissions');
-        }
+	return withErrorHandling(async () => {
+		if (!COMMISSIONS_DB || !USER_ID_ALICE) {
+			throw new Error('Missing required environment variables for commissions');
+		}
 
-        const { name, email, description } = commission;
+		const { name, email, description } = commission;
 
-        const response = await notionClient.pages.create({
-            parent: { database_id: COMMISSIONS_DB },
-            properties: {
-                title: {
-                    title: [
-                        {
-                            text: {
-                                content: name
-                            }
-                        }
-                    ]
-                },
-                Email: {
-                    email: email
-                },
-                Description: {
-                    rich_text: [
-                        {
-                            text: {
-                                content: description
-                            }
-                        }
-                    ]
-                },
-                Notify: {
-                    people: [
-                        {
-                            id: USER_ID_ALICE
-                        }
-                    ]
-                }
-            }
-        });
+		const response = await notionClient.pages.create({
+			parent: { database_id: COMMISSIONS_DB },
+			properties: {
+				title: {
+					title: [
+						{
+							text: {
+								content: name
+							}
+						}
+					]
+				},
+				Email: {
+					email: email
+				},
+				Description: {
+					rich_text: [
+						{
+							text: {
+								content: description
+							}
+						}
+					]
+				},
+				Notify: {
+					people: [
+						{
+							id: USER_ID_ALICE
+						}
+					]
+				}
+			}
+		});
 
-        return response as PageObjectResponse;
-    });
+		return response as PageObjectResponse;
+	});
 }
 
 /**
@@ -112,24 +112,24 @@ export async function addCommission(commission: CommissionRequest): Promise<Page
  * @returns The created page
  */
 export async function addSubscriber(subscriber: Subscriber): Promise<PageObjectResponse> {
-    return withErrorHandling(async () => {
-        if (!SUBSCRIBERS_DB) {
-            throw new Error('Missing required environment variables for subscribers');
-        }
+	return withErrorHandling(async () => {
+		if (!SUBSCRIBERS_DB) {
+			throw new Error('Missing required environment variables for subscribers');
+		}
 
-        const { email } = subscriber;
+		const { email } = subscriber;
 
-        const response = await notionClient.pages.create({
-            parent: {
-                database_id: SUBSCRIBERS_DB
-            },
-            properties: {
-                Email: {
-                    email: email
-                }
-            }
-        });
+		const response = await notionClient.pages.create({
+			parent: {
+				database_id: SUBSCRIBERS_DB
+			},
+			properties: {
+				Email: {
+					email: email
+				}
+			}
+		});
 
-        return response as PageObjectResponse;
-    });
-} 
+		return response as PageObjectResponse;
+	});
+}

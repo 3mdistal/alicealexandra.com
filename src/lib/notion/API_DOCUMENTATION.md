@@ -23,19 +23,19 @@ classDiagram
         +validateEnvironmentVariables()
         +withErrorHandling(apiCall)
     }
-    
+
     class NotionAPIError {
         +string message
         +unknown originalError
     }
-    
+
     class DatabaseAPI {
         +queryDatabase(params)
         +queryDatabasePaginated(databaseId, filter, sorts, pageSize, startCursor)
         +retrieveDatabase(databaseId)
         +extractBlogPosts(response)
     }
-    
+
     class BlocksAPI {
         +retrieveBlock(blockId)
         +listBlockChildren(blockId, pageSize, startCursor)
@@ -44,7 +44,7 @@ classDiagram
         +deleteBlock(blockId)
         +appendBlockChildren(blockId, children)
     }
-    
+
     class PagesAPI {
         +retrievePage(pageId)
         +createPage(databaseId, properties)
@@ -52,35 +52,35 @@ classDiagram
         +addCommission(commission)
         +addSubscriber(subscriber)
     }
-    
+
     class Components {
         +NotionPageParser
         +TextMacro
         +NotionImage
         +NotionListItems
     }
-    
+
     class Types {
         +NotionTypes
         +TypeGuards
     }
-    
+
     class Utils {
         +BlogHelpers
     }
-    
+
     NotionClient <-- DatabaseAPI
     NotionClient <-- BlocksAPI
     NotionClient <-- PagesAPI
     NotionClient --> NotionAPIError
-    
+
     DatabaseAPI --> Types
     BlocksAPI --> Types
     PagesAPI --> Types
-    
+
     Components --> Types
     Components --> BlocksAPI
-    
+
     Utils --> Types
 ```
 
@@ -159,19 +159,19 @@ import { queryDatabase } from '$lib/notion/api/database';
 import { BLOG_DB } from '$env/static/private';
 
 const response = await queryDatabase({
-  database_id: BLOG_DB,
-  filter: {
-    property: 'Published',
-    checkbox: {
-      equals: true
-    }
-  },
-  sorts: [
-    {
-      property: 'Date',
-      direction: 'descending'
-    }
-  ]
+	database_id: BLOG_DB,
+	filter: {
+		property: 'Published',
+		checkbox: {
+			equals: true
+		}
+	},
+	sorts: [
+		{
+			property: 'Date',
+			direction: 'descending'
+		}
+	]
 });
 ```
 
@@ -194,20 +194,20 @@ const content = await listAllBlockChildren(pageId);
 import { createPage } from '$lib/notion/api/pages';
 
 const newPage = await createPage(databaseId, {
-  Name: {
-    title: [
-      {
-        text: {
-          content: 'New Page Title'
-        }
-      }
-    ]
-  },
-  Status: {
-    select: {
-      name: 'Draft'
-    }
-  }
+	Name: {
+		title: [
+			{
+				text: {
+					content: 'New Page Title'
+				}
+			}
+		]
+	},
+	Status: {
+		select: {
+			name: 'Draft'
+		}
+	}
 });
 ```
 
@@ -217,13 +217,13 @@ All API functions use the `withErrorHandling` wrapper which provides consistent 
 
 ```typescript
 try {
-  const result = await queryDatabase(params);
-  // Process result
+	const result = await queryDatabase(params);
+	// Process result
 } catch (error) {
-  if (error instanceof NotionAPIError) {
-    // Handle specific error
-    console.error(error.message);
-  }
+	if (error instanceof NotionAPIError) {
+		// Handle specific error
+		console.error(error.message);
+	}
 }
 ```
 
@@ -235,4 +235,4 @@ The following environment variables are used:
 - `BLOG_DB`: ID of the blog database
 - `COMMISSIONS_DB`: ID of the commissions database
 - `SUBSCRIBERS_DB`: ID of the subscribers database
-- `USER_ID_ALICE`: User ID for Alice 
+- `USER_ID_ALICE`: User ID for Alice

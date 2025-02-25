@@ -1,6 +1,6 @@
 /**
  * Notion types module
- * 
+ *
  * This module exports all types for working with Notion content.
  */
 
@@ -8,4 +8,4 @@
 export * from './notion-types';
 
 // Re-export all type guards
-export * from './guards'; 
+export * from './guards';

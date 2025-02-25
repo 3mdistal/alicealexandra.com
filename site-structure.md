@@ -87,6 +87,7 @@ classDiagram
 ## Directory Structure Details
 
 ### Root Structure
+
 - `src/` - Main source code directory
   - `app.html` - Base HTML template
   - `app.css` - Global styles
@@ -94,6 +95,7 @@ classDiagram
   - `index.test.ts` - Test file
 
 ### Routes
+
 - `routes/` - Page routing
   - `+layout.svelte` - Main layout component
   - `+page.svelte` - Main page component
@@ -101,6 +103,7 @@ classDiagram
   - `unsubscribe/` - Unsubscribe functionality
 
 ### Library
+
 - `lib/` - Shared components and utilities
   - `stores.ts` - State management
   - `partials/` - Reusable partial components
@@ -126,6 +129,7 @@ classDiagram
   - `icons/` - Icon components
 
 ### Configuration Files
+
 - `svelte.config.js` - Svelte configuration
 - `vite.config.ts` - Vite build configuration
 - `tsconfig.json` - TypeScript configuration
@@ -198,6 +202,7 @@ classDiagram
 ### Notion Integration Components
 
 #### 1. Core Integration (`notion.ts`)
+
 - **Purpose**: Handles all Notion API interactions
 - **Key Functions**:
   - `queryDatabase`: Lists and filters database contents
@@ -208,6 +213,7 @@ classDiagram
 - **Dependencies**: @notionhq/client
 
 #### 2. Page Parser (`notion-page-parser.svelte`)
+
 - **Purpose**: Renders Notion blocks as HTML/Svelte components
 - **Supported Blocks**:
   - Paragraphs
@@ -221,6 +227,7 @@ classDiagram
 - **Dependencies**: TextMacro, NotionImage, svelte-highlight
 
 #### 3. Text Macro (`text-macro.svelte`)
+
 - **Purpose**: Handles rich text rendering
 - **Features**:
   - Text formatting
@@ -229,6 +236,7 @@ classDiagram
 - **Used by**: NotionPageParser
 
 #### 4. Image Component (`notion-image.svelte`)
+
 - **Purpose**: Manages image rendering
 - **Features**:
   - External image handling
@@ -237,6 +245,7 @@ classDiagram
   - Alt text management
 
 #### 5. Blog Helpers (`blog-helpers.ts`)
+
 - **Purpose**: Content enhancement utilities
 - **Functions**:
   - `subAndSuper`: Processes subscript/superscript
@@ -244,6 +253,7 @@ classDiagram
   - `createTOC`: Generates table of contents
 
 ### Data Flow
+
 1. NotionCore fetches data from Notion API
 2. Data is passed to NotionPageParser
 3. Parser delegates to specialized components:
@@ -319,6 +329,7 @@ classDiagram
 ### Current Components
 
 #### 1. Core Integration (`notion.ts`)
+
 - **Purpose**: Handles all Notion API interactions
 - **Key Functions**:
   - `queryDatabase`: Lists and filters database contents
@@ -329,6 +340,7 @@ classDiagram
 - **Dependencies**: @notionhq/client
 
 #### 2. Page Parser (`notion-page-parser.svelte`)
+
 - **Purpose**: Renders Notion blocks as HTML/Svelte components
 - **Supported Blocks**:
   - Paragraphs
@@ -342,6 +354,7 @@ classDiagram
 - **Dependencies**: TextMacro, NotionImage, svelte-highlight
 
 #### 3. Text Macro (`text-macro.svelte`)
+
 - **Purpose**: Handles rich text rendering
 - **Features**:
   - Text formatting
@@ -350,6 +363,7 @@ classDiagram
 - **Used by**: NotionPageParser
 
 #### 4. Image Component (`notion-image.svelte`)
+
 - **Purpose**: Manages image rendering
 - **Features**:
   - External image handling
@@ -358,6 +372,7 @@ classDiagram
   - Alt text management
 
 #### 5. Blog Helpers (`blog-helpers.ts`)
+
 - **Purpose**: Content enhancement utilities
 - **Functions**:
   - `subAndSuper`: Processes subscript/superscript
@@ -365,6 +380,7 @@ classDiagram
   - `createTOC`: Generates table of contents
 
 ### Current Data Flow
+
 1. NotionCore fetches data from Notion API
 2. Data is passed to NotionPageParser
 3. Parser delegates to specialized components:
@@ -404,55 +420,60 @@ notion/
 
 ```typescript
 interface NotionTransformed {
-  content: {
-    markdown: string;
-    html: string;  // Optional
-    toc: TableOfContents;
-  };
-  metadata: {
-    title: string;
-    author?: string;
-    date?: Date;
-    tags?: string[];
-    // Other page properties
-  };
-  assets: {
-    images: ImageReference[];
-    files: FileReference[];
-  };
-  relationships: {
-    parentPage?: string;
-    childPages?: string[];
-    linkedPages?: string[];
-  };
+	content: {
+		markdown: string;
+		html: string; // Optional
+		toc: TableOfContents;
+	};
+	metadata: {
+		title: string;
+		author?: string;
+		date?: Date;
+		tags?: string[];
+		// Other page properties
+	};
+	assets: {
+		images: ImageReference[];
+		files: FileReference[];
+	};
+	relationships: {
+		parentPage?: string;
+		childPages?: string[];
+		linkedPages?: string[];
+	};
 }
 ```
 
 ### 3. Key Improvements
 
 #### API Organization
+
 - Separate endpoints by object type (Blocks, Pages, Databases, Users)
 - Implement proper versioning support
 - Add dedicated error handling for different status codes
 
 #### Content Transformation
+
 - Convert blocks to markdown/HTML
 - Maintain heading hierarchy
 - Process code blocks with syntax highlighting
 - Handle callouts and quotes consistently
 
 #### Asset Management
+
 - Improved image URL handling and caching
 - File attachment processing
 - Image optimization
 - Better Notion CDN URL management
 
 #### Type Safety
+
 - Dedicated types for different Notion objects
 - Better rich text handling
 - Proper parent-child relationship typing
 
 #### Performance
+
 - Implement caching strategies
 - Add rate limiting
 - Handle request limits properly
@@ -542,6 +563,7 @@ flowchart TB
 #### Cache Types and TTLs
 
 1. **Page Cache**
+
    - TTL: 24 hours
    - Invalidation triggers:
      - Notion webhook for page updates
@@ -550,6 +572,7 @@ flowchart TB
    - Partial invalidation supported
 
 2. **Block Cache**
+
    - TTL: 12 hours
    - Invalidation triggers:
      - Block content changes
@@ -558,6 +581,7 @@ flowchart TB
    - Granular block-level invalidation
 
 3. **Image Cache**
+
    - TTL: 7 days
    - Invalidation triggers:
      - Image file changes
@@ -576,26 +600,29 @@ flowchart TB
 #### Invalidation Strategies
 
 1. **Webhook-Based**
+
    ```typescript
    interface NotionWebhookPayload {
-     type: 'page' | 'block' | 'image' | 'metadata';
-     action: 'update' | 'delete' | 'create';
-     id: string;
-     relationships?: string[]; // Related items to invalidate
+   	type: 'page' | 'block' | 'image' | 'metadata';
+   	action: 'update' | 'delete' | 'create';
+   	id: string;
+   	relationships?: string[]; // Related items to invalidate
    }
    ```
 
 2. **Time-Based**
+
    - Staggered TTLs to prevent cache stampede
    - Background refresh before expiration
    - Soft vs hard expiration times
 
 3. **Dependency-Based**
+
    ```typescript
    interface CacheDependency {
-     type: 'parent' | 'child' | 'sibling' | 'reference';
-     ids: string[];
-     cascading: boolean;
+   	type: 'parent' | 'child' | 'sibling' | 'reference';
+   	ids: string[];
+   	cascading: boolean;
    }
    ```
 
@@ -607,29 +634,32 @@ flowchart TB
 #### Implementation Details
 
 1. **Cache Keys**
+
    ```typescript
    type CacheKey = {
-     type: 'page' | 'block' | 'image' | 'metadata';
-     id: string;
-     version: number;
-     dependencies: CacheDependency[];
-     lastUpdated: Date;
-     ttl: number;
+   	type: 'page' | 'block' | 'image' | 'metadata';
+   	id: string;
+   	version: number;
+   	dependencies: CacheDependency[];
+   	lastUpdated: Date;
+   	ttl: number;
    };
    ```
 
 2. **Cache Storage**
+
    - Redis for distributed caching
    - Local memory cache for frequent access
    - Filesystem cache for large assets
 
 3. **Invalidation Logic**
+
    ```typescript
    interface InvalidationRule {
-     pattern: RegExp | string;
-     scope: 'single' | 'tree' | 'related';
-     strategy: 'immediate' | 'lazy' | 'background';
-     priority: number;
+   	pattern: RegExp | string;
+   	scope: 'single' | 'tree' | 'related';
+   	strategy: 'immediate' | 'lazy' | 'background';
+   	priority: number;
    }
    ```
 
@@ -642,12 +672,14 @@ flowchart TB
 #### Monitoring and Maintenance
 
 1. **Cache Analytics**
+
    - Hit/miss ratios
    - Invalidation patterns
    - Storage utilization
    - Performance metrics
 
 2. **Health Checks**
+
    - Cache consistency validation
    - Orphaned cache detection
    - Storage optimization
@@ -704,85 +736,91 @@ flowchart TB
 #### Webhook Processing Strategy
 
 1. **Priority Queues**
+
    ```typescript
    interface UpdateQueue {
-     high: {
-       maxRate: 3; // requests per second
-       items: WebhookEvent[];
-       types: ['page.essential', 'database.critical'];
-     };
-     low: {
-       maxRate: 1; // request per second
-       items: WebhookEvent[];
-       types: ['page.content', 'block.update'];
-     };
-     background: {
-       maxRate: 0.2; // 1 request per 5 seconds
-       items: WebhookEvent[];
-       types: ['metadata', 'relationship'];
-     };
+   	high: {
+   		maxRate: 3; // requests per second
+   		items: WebhookEvent[];
+   		types: ['page.essential', 'database.critical'];
+   	};
+   	low: {
+   		maxRate: 1; // request per second
+   		items: WebhookEvent[];
+   		types: ['page.content', 'block.update'];
+   	};
+   	background: {
+   		maxRate: 0.2; // 1 request per 5 seconds
+   		items: WebhookEvent[];
+   		types: ['metadata', 'relationship'];
+   	};
    }
    ```
 
 2. **Smart Batching**
+
    ```typescript
    interface BatchStrategy {
-     maxBatchSize: number;
-     batchWindow: number; // ms
-     mergeable: {
-       blocks: boolean; // Can we combine block requests?
-       pages: boolean;  // Can we combine page requests?
-     };
-     conditions: {
-       parentId?: string;    // Same parent page
-       database?: string;    // Same database
-       updateType?: string;  // Same type of update
-     };
+   	maxBatchSize: number;
+   	batchWindow: number; // ms
+   	mergeable: {
+   		blocks: boolean; // Can we combine block requests?
+   		pages: boolean; // Can we combine page requests?
+   	};
+   	conditions: {
+   		parentId?: string; // Same parent page
+   		database?: string; // Same database
+   		updateType?: string; // Same type of update
+   	};
    }
    ```
 
 3. **Rate Limit Management**
    ```typescript
    interface RateLimitConfig {
-     maxRequestsPerMinute: 180;  // Notion's limit
-     maxRequestsPerHour: 1000;   // Notion's limit
-     backoffStrategy: {
-       initial: 1000;    // 1 second
-       max: 300000;      // 5 minutes
-       multiplier: 2;    // Exponential backoff
-     };
-     priorityOverrides: {
-       critical: boolean;    // Bypass normal rate limiting
-       maintenance: boolean; // Lower priority
-     };
+   	maxRequestsPerMinute: 180; // Notion's limit
+   	maxRequestsPerHour: 1000; // Notion's limit
+   	backoffStrategy: {
+   		initial: 1000; // 1 second
+   		max: 300000; // 5 minutes
+   		multiplier: 2; // Exponential backoff
+   	};
+   	priorityOverrides: {
+   		critical: boolean; // Bypass normal rate limiting
+   		maintenance: boolean; // Lower priority
+   	};
    }
    ```
 
 #### Update Strategies
 
 1. **Essential Updates** (High Priority)
+
    - Navigation structure changes
    - Critical content updates
    - User-triggered refreshes
+
    ```typescript
    const essentialStrategy = {
-     maxRetries: 5,
-     timeout: 10000,
-     bypassCache: true,
-     notifyFailure: true
+   	maxRetries: 5,
+   	timeout: 10000,
+   	bypassCache: true,
+   	notifyFailure: true
    };
    ```
 
 2. **Content Updates** (Low Priority)
+
    - Regular content changes
    - Non-critical updates
    - Background refreshes
+
    ```typescript
    const contentStrategy = {
-     maxRetries: 3,
-     timeout: 30000,
-     batchable: true,
-     bypassCache: false
+   	maxRetries: 3,
+   	timeout: 30000,
+   	batchable: true,
+   	bypassCache: false
    };
    ```
 
@@ -792,31 +830,33 @@ flowchart TB
    - Asset optimization
    ```typescript
    const maintenanceStrategy = {
-     maxRetries: 1,
-     timeout: 60000,
-     batchable: true,
-     deferrable: true
+   	maxRetries: 1,
+   	timeout: 60000,
+   	batchable: true,
+   	deferrable: true
    };
    ```
 
 #### Failure Handling
 
 1. **Retry Strategies**
+
    ```typescript
    interface RetryStrategy {
-     maxAttempts: number;
-     backoffMs: number;
-     strategy: 'exponential' | 'linear' | 'fixed';
-     onFailure: {
-       logError: boolean;
-       notifyAdmin: boolean;
-       fallbackToCache: boolean;
-       markForReprocess: boolean;
-     };
+   	maxAttempts: number;
+   	backoffMs: number;
+   	strategy: 'exponential' | 'linear' | 'fixed';
+   	onFailure: {
+   		logError: boolean;
+   		notifyAdmin: boolean;
+   		fallbackToCache: boolean;
+   		markForReprocess: boolean;
+   	};
    }
    ```
 
 2. **Fallback Mechanisms**
+
    - Serve stale cache on failure
    - Graceful degradation options
    - Alternative content sources
@@ -829,6 +869,7 @@ flowchart TB
 #### Monitoring
 
 1. **Webhook Health**
+
    - Webhook delivery success rate
    - Processing latency
    - Queue lengths
@@ -843,16 +884,19 @@ flowchart TB
 ### 7. Benefits
 
 1. **Better Separation of Concerns**
+
    - Clear boundaries between API interaction and content transformation
    - Isolated component rendering logic
    - Dedicated asset handling
 
 2. **Improved Developer Experience**
+
    - Type-safe content handling
    - Consistent API patterns
    - Better testing capabilities
 
 3. **Enhanced Performance**
+
    - Strategic caching
    - Optimized asset loading
    - Batch processing capabilities
@@ -873,4 +917,4 @@ flowchart TB
 7. Improve error handling
 8. Add comprehensive testing
 
-This restructuring will provide a more robust, maintainable, and performant Notion integration while improving the developer experience and making future updates easier to implement. 
+This restructuring will provide a more robust, maintainable, and performant Notion integration while improving the developer experience and making future updates easier to implement.

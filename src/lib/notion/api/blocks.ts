@@ -1,8 +1,5 @@
 import { notionClient, withErrorHandling } from './client';
-import type {
-    BlockObjectResponse,
-    ListBlockChildrenResponse
-} from '../types/notion-types';
+import type { BlockObjectResponse, ListBlockChildrenResponse } from '../types/notion-types';
 import { isSyncedBlock } from '../types/guards';
 
 /**
@@ -11,12 +8,12 @@ import { isSyncedBlock } from '../types/guards';
  * @returns The block object
  */
 export async function retrieveBlock(blockId: string): Promise<BlockObjectResponse> {
-    return withErrorHandling(async () => {
-        const response = await notionClient.blocks.retrieve({
-            block_id: blockId
-        });
-        return response as BlockObjectResponse;
-    });
+	return withErrorHandling(async () => {
+		const response = await notionClient.blocks.retrieve({
+			block_id: blockId
+		});
+		return response as BlockObjectResponse;
+	});
 }
 
 /**
@@ -27,18 +24,18 @@ export async function retrieveBlock(blockId: string): Promise<BlockObjectRespons
  * @returns The response containing the children blocks
  */
 export async function listBlockChildren(
-    blockId: string,
-    pageSize: number = 100,
-    startCursor?: string
+	blockId: string,
+	pageSize: number = 100,
+	startCursor?: string
 ): Promise<ListBlockChildrenResponse> {
-    return withErrorHandling(async () => {
-        const response = await notionClient.blocks.children.list({
-            block_id: blockId,
-            page_size: pageSize,
-            ...(startCursor && { start_cursor: startCursor })
-        });
-        return response;
-    });
+	return withErrorHandling(async () => {
+		const response = await notionClient.blocks.children.list({
+			block_id: blockId,
+			page_size: pageSize,
+			...(startCursor && { start_cursor: startCursor })
+		});
+		return response;
+	});
 }
 
 /**
@@ -48,41 +45,41 @@ export async function listBlockChildren(
  * @returns The response containing all children blocks
  */
 export async function listAllBlockChildren(
-    blockId: string,
-    cursor?: string
+	blockId: string,
+	cursor?: string
 ): Promise<ListBlockChildrenResponse> {
-    return withErrorHandling(async () => {
-        // Get initial response
-        const response = await notionClient.blocks.children.list({
-            block_id: blockId,
-            ...(cursor && { start_cursor: cursor })
-        });
+	return withErrorHandling(async () => {
+		// Get initial response
+		const response = await notionClient.blocks.children.list({
+			block_id: blockId,
+			...(cursor && { start_cursor: cursor })
+		});
 
-        // If there are more children, recursively fetch them
-        if (response.has_more && response.next_cursor) {
-            const moreResponse = await listAllBlockChildren(blockId, response.next_cursor);
-            response.results.push(...moreResponse.results);
-        }
+		// If there are more children, recursively fetch them
+		if (response.has_more && response.next_cursor) {
+			const moreResponse = await listAllBlockChildren(blockId, response.next_cursor);
+			response.results.push(...moreResponse.results);
+		}
 
-        // Process synced blocks
-        for (let i = 0; i < response.results.length; i++) {
-            const block = response.results[i] as BlockObjectResponse;
+		// Process synced blocks
+		for (let i = 0; i < response.results.length; i++) {
+			const block = response.results[i] as BlockObjectResponse;
 
-            // If this is a synced block, replace it with its original content
-            if (isSyncedBlock(block) && block.synced_block.synced_from !== null) {
-                const originalBlockId = block.synced_block.synced_from.block_id;
-                const originalBlockContent = await listAllBlockChildren(originalBlockId);
+			// If this is a synced block, replace it with its original content
+			if (isSyncedBlock(block) && block.synced_block.synced_from !== null) {
+				const originalBlockId = block.synced_block.synced_from.block_id;
+				const originalBlockContent = await listAllBlockChildren(originalBlockId);
 
-                // Replace the synced block with its original content
-                response.results.splice(i, 1, ...originalBlockContent.results);
+				// Replace the synced block with its original content
+				response.results.splice(i, 1, ...originalBlockContent.results);
 
-                // Adjust the index to account for the newly inserted blocks
-                i += originalBlockContent.results.length - 1;
-            }
-        }
+				// Adjust the index to account for the newly inserted blocks
+				i += originalBlockContent.results.length - 1;
+			}
+		}
 
-        return response;
-    });
+		return response;
+	});
 }
 
 /**
@@ -92,16 +89,16 @@ export async function listAllBlockChildren(
  * @returns The updated block
  */
 export async function updateBlock(
-    blockId: string,
-    properties: Record<string, any>
+	blockId: string,
+	properties: Record<string, any>
 ): Promise<BlockObjectResponse> {
-    return withErrorHandling(async () => {
-        const response = await notionClient.blocks.update({
-            block_id: blockId,
-            ...properties
-        });
-        return response as BlockObjectResponse;
-    });
+	return withErrorHandling(async () => {
+		const response = await notionClient.blocks.update({
+			block_id: blockId,
+			...properties
+		});
+		return response as BlockObjectResponse;
+	});
 }
 
 /**
@@ -110,12 +107,12 @@ export async function updateBlock(
  * @returns The deleted block
  */
 export async function deleteBlock(blockId: string): Promise<BlockObjectResponse> {
-    return withErrorHandling(async () => {
-        const response = await notionClient.blocks.delete({
-            block_id: blockId
-        });
-        return response as BlockObjectResponse;
-    });
+	return withErrorHandling(async () => {
+		const response = await notionClient.blocks.delete({
+			block_id: blockId
+		});
+		return response as BlockObjectResponse;
+	});
 }
 
 /**
@@ -124,19 +121,16 @@ export async function deleteBlock(blockId: string): Promise<BlockObjectResponse>
  * @param children - The children blocks to append
  * @returns The response from the append operation
  */
-export async function appendBlockChildren(
-    blockId: string,
-    children: any[]
-) {
-    return withErrorHandling(async () => {
-        return await notionClient.blocks.children.append({
-            block_id: blockId,
-            children
-        });
-    });
+export async function appendBlockChildren(blockId: string, children: any[]) {
+	return withErrorHandling(async () => {
+		return await notionClient.blocks.children.append({
+			block_id: blockId,
+			children
+		});
+	});
 }
 
 /**
  * Alias for listAllBlockChildren for backward compatibility
  */
-export const listChildren = listAllBlockChildren; 
+export const listChildren = listAllBlockChildren;
