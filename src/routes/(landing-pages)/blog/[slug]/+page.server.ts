@@ -1,9 +1,9 @@
 import { queryDatabase } from '$lib/notion/api/database';
 import { listChildren } from '$lib/notion/api/blocks';
-import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
+import type { QueryDatabaseParameters } from '$lib/notion/types/notion-types';
 import { BYPASS_TOKEN, BLOGS_DB } from '$env/static/private';
 
-export async function load({ params }) {
+export async function load({ params }: { params: { slug: string } }) {
 	async function fetchContent(slug: string) {
 		const queryParams: QueryDatabaseParameters = {
 			database_id: BLOGS_DB,

@@ -4,7 +4,7 @@
 	import DarkCodeTheme from 'svelte-highlight/styles/nord';
 	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
-	import { subAndSuper, wrapLists, createTOC } from '$lib/notion/blog-helpers';
+	import { subAndSuper, wrapLists, createTOC } from '$lib/notion/utils/blog-helpers';
 	import type {
 		PageObjectResponse,
 		TitlePropertyItemObjectResponse,

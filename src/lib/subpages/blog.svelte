@@ -1,18 +1,8 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import type { QueryDatabaseResponse } from '$lib/notion/types/notion-types';
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
 	import { page } from '$app/stores';
-	import { browser } from '$app/environment';
-	import type {
-		PageObjectResponse,
-		PartialPageObjectResponse,
-		PartialDatabaseObjectResponse,
-		DatabaseObjectResponse
-	} from '@notionhq/client/build/src/api-endpoints';
+	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 	import type {
 		RichTextItemResponse,
 		TextRichTextItemResponse

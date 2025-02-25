@@ -1,8 +1,8 @@
 <script lang="ts">
-	import TextMacro from './text-macro.svelte';
+	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import { Highlight, HighlightSvelte } from 'svelte-highlight';
 	import typescript from 'svelte-highlight/languages/typescript';
-	import NotionImage from './notion-image.svelte';
+	import NotionImage from '$lib/notion/components/notion-image.svelte';
 	import Socials from '$lib/icons/socials.svelte';
 	import type { BlockObjectResponse } from '$lib/notion/types/notion-types';
 
