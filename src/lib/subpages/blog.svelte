@@ -21,7 +21,7 @@
 	});
 </script>
 
-<h3 class="posts-title" style="color: {accent}">Posts</h3>
+<h1 class="posts-title" style="color: {accent}">Posts</h1>
 {#each results as { properties: { Slug: { url }, Name: { title: [{ text: { content: title } }] }, Subtitle, Category: { select: { name: category } }, FormattedPublicationDate: { formula: { string: date } } } }}
 	<div class="post-item">
 		<p class="post-title-wrapper">
@@ -51,22 +51,34 @@
 	.posts-title {
 		margin-bottom: 1em;
 		font-weight: 500;
-		font-size: 1.5rem;
+		font-size: 4rem;
 	}
 
 	.post-item {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		margin-bottom: 1.5rem;
+		margin-bottom: 3rem;
+
+		@media (min-width: 768px) {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
 	}
 
 	.post-title-wrapper {
 		grid-column: span 2;
+		margin-bottom: 0;
 	}
 
 	.post-title-link {
 		color: white;
 		font-weight: 500;
+		font-size: 2rem;
+		line-height: 1;
+		font-family: 'Spectral', serif;
+
+		@media (max-width: 768px) {
+			font-size: 1.75rem;
+		}
 	}
 
 	.post-title-link:hover {
@@ -80,52 +92,41 @@
 	.post-subtitle {
 		grid-row-start: 2;
 		grid-column: span 2;
+		margin-bottom: 0.5em;
+		max-width: 45ch;
 		color: #f3f4f6;
 		font-style: italic;
+		font-size: 1.25rem;
+		line-height: 1;
+		text-wrap: balance;
 	}
 
 	.post-date {
 		grid-row-start: 3;
 		color: #f3f4f6;
+
+		@media (min-width: 768px) {
+			grid-row-start: 1;
+			grid-column-start: 3;
+		}
 	}
 
 	.post-category-wrapper {
 		display: flex;
 		grid-column-start: 2;
 		justify-content: flex-end;
-	}
 
-	.post-category {
-		color: #f3f4f6;
-	}
-
-	@media (min-width: 768px) {
-		.posts-title {
-			font-size: 1.875rem;
-		}
-
-		.post-item {
-			grid-template-columns: 1fr 1fr 1fr;
-		}
-
-		.post-title-wrapper {
-			grid-column: span 2;
-		}
-
-		.post-date {
-			grid-row-start: 1;
-			grid-column-start: 3;
-		}
-
-		.post-category-wrapper {
+		@media (min-width: 768px) {
 			grid-column-start: 1;
 			justify-content: flex-start;
 		}
 	}
 
-	@media (min-width: 1024px) {
-		.posts-title {
-			font-size: 2.25rem;
+	.post-category {
+		color: #f3f4f6;
+
+		@media (max-width: 768px) {
+			display: none;
 		}
 	}
 </style>

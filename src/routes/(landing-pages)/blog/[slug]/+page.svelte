@@ -494,7 +494,7 @@
 			}
 		}
 
-		:global(.notion-container p) {
+		:global(.notion-container p, li) {
 			color: #4b5563;
 
 			@media (prefers-color-scheme: dark) {

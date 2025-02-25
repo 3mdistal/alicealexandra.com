@@ -16,12 +16,13 @@ h1,
 h2,
 h3 {
 	font-family: 'Spectral', serif;
+	text-wrap: balance;
 }
 
 h2 {
 	margin-bottom: 1.5em;
 	font-weight: 500;
-	font-size: 1.5rem;
+	font-size: 2rem;
 }
 
 p {
@@ -70,6 +71,7 @@ a {
 	li {
 		font-size: 1.5rem;
 		line-height: 1.75;
+		text-wrap: pretty;
 	}
 }
 
