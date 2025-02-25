@@ -7,7 +7,6 @@
 	import { subAndSuper, wrapLists, createTOC } from '$lib/notion/utils/blog-helpers';
 	import type {
 		PageObjectResponse,
-		TitlePropertyItemObjectResponse,
 		RichTextPropertyItemObjectResponse,
 		UrlPropertyItemObjectResponse,
 		SelectPropertyItemObjectResponse,
@@ -18,20 +17,11 @@
 	let darkMode: boolean;
 	let context: HTMLElement;
 
-	function setDarkMode() {
-		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		darkMode = mediaQuery.matches;
-		mediaQuery.addEventListener('change', (e) => {
-			darkMode = e.matches;
-		});
-	}
-
 	const runBlogHelpers = async () => {
 		await tick();
 		subAndSuper(context);
 		wrapLists(context);
 		createTOC();
-		setDarkMode();
 	};
 
 	export let data: {
@@ -96,11 +86,6 @@
 				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
 			}
 		});
-		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		darkMode = mediaQuery.matches;
-		mediaQuery.addEventListener('change', (e) => {
-			darkMode = e.matches;
-		});
 	});
 </script>
 
@@ -136,13 +121,7 @@
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
 	/>
 
-	{#if darkMode}
-		<!-- eslint-disable-next-line -->
-		{@html DarkCodeTheme}
-	{:else}
-		<!-- eslint-disable-next-line -->
-		{@html LightCodeTheme}
-	{/if}
+	{@html LightCodeTheme}
 </svelte:head>
 
 <div class="blog-container">
@@ -193,28 +172,32 @@
 <style>
 	.blog-container {
 		background-color: var(--blog-bg-light);
-		padding: var(--blog-spacing-large) var(--blog-spacing-small);
+		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
 		height: 100%;
 		min-height: 100vh;
 		color: var(--blog-text-light);
 
 		@media (min-width: 640px) {
-			padding: var(--blog-spacing-large);
+			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
 		}
 
 		@media (min-width: 768px) {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			padding: var(--blog-spacing-large) 5rem;
+			padding: var(--blog-spacing-lg) var(--blog-spacing-xl);
 		}
 
 		@media (min-width: 1280px) {
-			padding: var(--blog-spacing-large) 15rem;
+			padding: var(--blog-spacing-xl) var(--blog-spacing-xl);
 		}
 
 		@media (min-width: 1536px) {
-			padding: var(--blog-spacing-large) 20rem;
+			padding: var(--blog-spacing-xl) var(--blog-spacing-lg);
+		}
+
+		@media (min-width: 1920px) {
+			padding: var(--blog-spacing-xl) 25vw;
 		}
 
 		@media (prefers-color-scheme: dark) {
@@ -249,7 +232,7 @@
 		}
 
 		@media (min-width: 768px) {
-			margin-bottom: var(--blog-spacing-small);
+			margin-bottom: var(--blog-spacing-sm);
 			font-size: var(--blog-heading-large);
 			line-height: 1;
 		}
@@ -285,19 +268,24 @@
 	}
 
 	hr {
-		opacity: 0.5;
-		margin: var(--blog-spacing-large) 0;
-		border-color: var(--blog-border-light);
-		width: 100%;
+		display: block;
+		opacity: 0.8;
+		margin: var(--blog-spacing-xl);
+		border: none;
+		border-top: 1px solid var(--blog-border-light);
+		width: var(--blog-content-width);
+		height: 1px;
+		font-size: var(--blog-body-large);
 
 		@media (prefers-color-scheme: dark) {
-			border-color: var(--blog-border-dark);
+			border-top-color: var(--blog-border-dark);
 		}
 	}
 
 	.meta-info {
 		display: flex;
-		margin-bottom: var(--blog-spacing-small);
+		margin-bottom: var(--blog-spacing-sm);
+		width: 100%;
 		max-width: var(--blog-subtitle-width);
 
 		em {
@@ -340,6 +328,7 @@
 	}
 
 	.back-link {
+		margin-top: 4em;
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		text-align: right;
@@ -351,8 +340,9 @@
 
 		a {
 			display: inline-block;
-			padding: var(--blog-spacing-medium);
+			padding: var(--blog-spacing-md);
 			color: var(--blog-text-light);
+			font-family: 'Spectral', serif;
 
 			@media (prefers-color-scheme: dark) {
 				color: var(--blog-text-dark);
@@ -381,15 +371,25 @@
 		}
 
 		:global(.notion-container code) {
+			border-radius: var(--blog-border-radius-sm);
+			background-color: var(--blog-code-bg);
+			padding: 0.2em 0.4em;
 			color: var(--blog-link-light);
+		}
 
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-link-dark);
-			}
+		:global(.notion-container pre code) {
+			display: block;
+			border-radius: var(--blog-border-radius);
+			padding: 1em;
+			overflow-x: auto;
+		}
+
+		:global(.notion-container pre) {
+			margin-bottom: var(--blog-spacing-md);
 		}
 
 		:global(.notion-container blockquote) {
-			margin-top: var(--blog-spacing-large);
+			margin-top: var(--blog-spacing-lg);
 			margin-left: 2em;
 			max-width: var(--blog-blockquote-width);
 			color: var(--blog-callout-light);
@@ -472,8 +472,17 @@
 		}
 
 		:global(.notion-container hr) {
-			margin: 3em auto;
-			width: 30%;
+			opacity: 0.8;
+			margin: var(--blog-spacing-xl) auto;
+			border: none;
+			border-top: 1px solid var(--blog-border-light);
+			width: auto;
+			max-width: var(--blog-content-width);
+			height: 1px;
+
+			@media (prefers-color-scheme: dark) {
+				border-top-color: var(--blog-border-dark);
+			}
 		}
 
 		:global(ol) {
@@ -488,14 +497,14 @@
 			display: flex;
 			align-items: flex-start;
 			gap: 1rem;
-			margin-top: var(--blog-spacing-large);
-			margin-bottom: var(--blog-spacing-medium);
+			margin-top: var(--blog-spacing-lg);
+			margin-bottom: var(--blog-spacing-md);
 			border-radius: 0.5rem;
 			background-color: var(--blog-callout-light);
-			padding: var(--blog-spacing-large) var(--blog-spacing-small) var(--blog-spacing-medium);
+			padding: var(--blog-spacing-lg) var(--blog-spacing-sm) var(--blog-spacing-md);
 
 			@media (min-width: 768px) {
-				gap: var(--blog-spacing-large);
+				gap: var(--blog-spacing-lg);
 				padding-right: 5rem;
 				padding-left: 5rem;
 			}

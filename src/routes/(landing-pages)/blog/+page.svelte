@@ -9,7 +9,6 @@
 	export let data: { post: QueryDatabaseResponse };
 
 	const accent = '#d1dce7';
-	const background = '#838391';
 
 	function fadeIn() {
 		gsap.to('.opacity-0', {
@@ -50,7 +49,7 @@
 				class="background-image"
 			/>
 		</div>
-		<div class="background-overlay" style="background-color: {background}"></div>
+		<div class="background-overlay"></div>
 	</div>
 </div>
 
@@ -92,6 +91,7 @@
 		position: absolute;
 		opacity: 1;
 		inset: 0;
+		background-color: #838391;
 		width: 100%;
 		height: 100%;
 	}

@@ -87,25 +87,4 @@
 		--blog-equation: var(--blog-equation-dark);
 		--blog-border: var(--blog-border-dark);
 	}
-
-	/* Apply light mode variables */
-	:global(:root:not(.dark)) {
-		--blog-text: var(--blog-text-light);
-		--blog-bg: var(--blog-bg-light);
-		--blog-link: var(--blog-link-light);
-		--blog-link-hover: var(--blog-link-hover-light);
-		--blog-accent: var(--blog-accent-light);
-		--blog-secondary: var(--blog-secondary-light);
-		--blog-heading: var(--blog-heading-light);
-		--blog-callout-bg: var(--blog-callout-light);
-		--blog-quote-bg: var(--blog-quote-bg-light);
-		--blog-code-bg: var(--blog-code-bg-light);
-		--blog-inline-code-bg: var(--blog-inline-code-bg-light);
-		--blog-code-tag: var(--blog-code-tag-light);
-		--blog-code-property: var(--blog-code-property-light);
-		--blog-divider: var(--blog-divider-light);
-		--blog-mention: var(--blog-mention-light);
-		--blog-equation: var(--blog-equation-light);
-		--blog-border: var(--blog-border-light);
-	}
 </style>

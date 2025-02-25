@@ -18,9 +18,6 @@
 	let loadingTitle = '';
 
 	onMount(async () => {
-		const response = await fetch('/api/notion/blog');
-		results = await response.json();
-
 		// Set accent color based on URL
 		$page.url.searchParams.forEach((value, key) => {
 			if (key === 'accent') {
