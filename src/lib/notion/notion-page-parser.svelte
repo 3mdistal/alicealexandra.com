@@ -69,9 +69,7 @@
 			{/if}
 		</div>
 	{:else if isBlockType(result, 'code')}
-		<div
-			class="pb-6 [&_.hljs]:rounded-lg [&_.hljs]:bg-gray-300 dark:[&_.hljs]:bg-[#141414] [&_code]:text-lg [&_code]:tracking-tighter [&_span.hljs-name]:text-teal-700 dark:[&_span.hljs-name]:text-red-300 dark:[&_span.hljs-params]:text-gray-300 dark:[&_span.hljs-property]:text-gray-300 dark:[&_span.language-css]:text-gray-300 dark:[&_span.language-javascript]:text-gray-300 [&_span]:font-mono"
-		>
+		<div class="code-block">
 			{#if result.code.language === 'typescript'}
 				<Highlight language={typescript} code={result.code.rich_text[0]?.plain_text ?? ''} />
 			{:else if result.code.language === 'php'}
@@ -93,8 +91,105 @@
 			{/if}
 		</div>
 	{:else if isBlockType(result, 'divider')}
-		<div class="px-[30%] pb-10 pt-2 md:px-[35%]">
+		<div class="divider">
 			<hr />
 		</div>
 	{/if}
 {/each}
+
+<style>
+	.callout {
+		display: flex;
+		margin: var(--blog-spacing-md) 0;
+		border-radius: var(--blog-border-radius);
+		background-color: var(--blog-callout-bg);
+		padding: var(--blog-spacing-md);
+
+		& p {
+			margin: 0;
+		}
+
+		& div {
+			margin-right: var(--blog-spacing-sm);
+		}
+	}
+
+	.whitespace-pre-line {
+		white-space: pre-line;
+	}
+
+	blockquote {
+		margin: var(--blog-spacing-md) 0;
+		border-left: 4px solid var(--blog-accent);
+		background-color: var(--blog-quote-bg);
+		padding: var(--blog-spacing-md);
+		font-style: italic;
+	}
+
+	.image {
+		margin: var(--blog-spacing-lg) 0;
+
+		& img {
+			border-radius: var(--blog-border-radius);
+			max-width: 100%;
+		}
+	}
+
+	.relative {
+		position: relative;
+	}
+
+	.code-block {
+		padding-bottom: var(--blog-spacing-md);
+
+		& :global(.hljs) {
+			border-radius: var(--blog-border-radius);
+			background-color: var(--blog-code-bg);
+		}
+
+		& :global(code) {
+			font-size: var(--blog-code);
+			letter-spacing: -0.05em;
+		}
+
+		& :global(span.hljs-name) {
+			color: var(--blog-code-tag);
+		}
+
+		& :global(span.hljs-params),
+		& :global(span.hljs-property),
+		& :global(span.language-css),
+		& :global(span.language-javascript) {
+			color: var(--blog-code-property);
+		}
+
+		& :global(span) {
+			font-family: monospace;
+		}
+	}
+
+	.divider {
+		padding: 0 30%;
+		padding-top: var(--blog-spacing-sm);
+		padding-bottom: var(--blog-spacing-lg);
+
+		@media (min-width: 768px) {
+			padding: 0 35%;
+			padding-top: var(--blog-spacing-sm);
+			padding-bottom: var(--blog-spacing-lg);
+		}
+
+		& hr {
+			border-color: var(--blog-divider);
+		}
+	}
+
+	li.ordered {
+		margin-left: var(--blog-spacing-lg);
+		list-style-type: decimal;
+	}
+
+	li {
+		margin-left: var(--blog-spacing-lg);
+	}
+</style>

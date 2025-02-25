@@ -44,9 +44,36 @@
 		color: inherit;
 	}
 
+	a {
+		color: var(--blog-link);
+		text-decoration: underline;
+
+		&:hover {
+			color: var(--blog-link-hover);
+		}
+	}
+
+	code {
+		border-radius: var(--blog-border-radius-sm);
+		background-color: var(--blog-inline-code-bg);
+		padding: 0.1em 0.3em;
+		font-size: var(--blog-code);
+		font-family: monospace;
+	}
+
 	span {
 		&.line-through {
 			text-decoration: line-through;
+		}
+
+		&.mention {
+			color: var(--blog-mention);
+			font-weight: 500;
+		}
+
+		&.equation {
+			color: var(--blog-equation);
+			font-style: italic;
 		}
 	}
 </style>
