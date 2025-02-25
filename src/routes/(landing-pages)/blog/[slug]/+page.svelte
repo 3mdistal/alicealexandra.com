@@ -1,6 +1,6 @@
 <script lang="ts">
-	import NotionPageParser from '$lib/notion/notion-page-parser.svelte';
-	import TextMacro from '$lib/notion/text-macro.svelte';
+	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
+	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import DarkCodeTheme from 'svelte-highlight/styles/nord';
 	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
@@ -13,7 +13,7 @@
 		SelectPropertyItemObjectResponse,
 		FormulaPropertyItemObjectResponse,
 		QueryDatabaseResponse
-	} from '@notionhq/client/build/src/api-endpoints';
+	} from '$lib/notion/types/notion-types';
 
 	let darkMode: boolean;
 	let context: HTMLElement;

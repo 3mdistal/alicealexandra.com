@@ -1,10 +1,10 @@
 <script lang="ts">
-	import TextMacro from '$lib/notion/text-macro.svelte';
+	import TextMacro from './text-macro.svelte';
 	import { Highlight, HighlightSvelte } from 'svelte-highlight';
 	import typescript from 'svelte-highlight/languages/typescript';
 	import NotionImage from './notion-image.svelte';
 	import Socials from '$lib/icons/socials.svelte';
-	import type { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+	import type { BlockObjectResponse } from '$lib/notion/types/notion-types';
 
 	export let results: Array<BlockObjectResponse>;
 

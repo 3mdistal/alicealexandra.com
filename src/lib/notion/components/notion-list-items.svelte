@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { NumberedListItemBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+	import type { NumberedListItemBlockObjectResponse } from '$lib/notion/types/notion-types';
 	import { onMount, tick } from 'svelte';
 	import TextMacro from './text-macro.svelte';
 

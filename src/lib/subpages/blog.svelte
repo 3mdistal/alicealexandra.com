@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import TextMacro from '$lib/notion/text-macro.svelte';
-	import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+	import TextMacro from '$lib/notion/components/text-macro.svelte';
+	import type { QueryDatabaseResponse } from '$lib/notion/types/notion-types';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';

@@ -1,4 +1,5 @@
-import { queryDatabase, listChildren } from '$lib/notion/notion';
+import { queryDatabase } from '$lib/notion/api/database';
+import { listChildren } from '$lib/notion/api/blocks';
 import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
 import { BYPASS_TOKEN, BLOGS_DB } from '$env/static/private';
 

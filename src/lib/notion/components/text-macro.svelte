@@ -2,7 +2,7 @@
 	import type {
 		RichTextItemResponse,
 		TextRichTextItemResponse
-	} from '@notionhq/client/build/src/api-endpoints';
+	} from '$lib/notion/types/notion-types';
 	export let type: { rich_text: Array<RichTextItemResponse> };
 	export let paragraphs: boolean = false;
 
