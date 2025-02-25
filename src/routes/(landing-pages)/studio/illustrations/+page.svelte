@@ -1,7 +1,6 @@
 <script lang="ts">
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import { fade, scale } from 'svelte/transition';
-	import type { PageObjectResponse, QueryDatabaseResponse } from '$lib/notion/types/notion-types';
 
 	// Props
 	export let data;
