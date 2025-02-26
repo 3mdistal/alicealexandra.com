@@ -232,9 +232,6 @@
 	}
 
 	.hero {
-		@media (hover: hover) {
-			background-attachment: fixed;
-		}
 		display: flex;
 		position: relative;
 		justify-content: center;
@@ -246,6 +243,10 @@
 		width: 100%;
 		height: 100vh;
 		overflow: hidden;
+
+		@media (hover: hover) {
+			background-attachment: fixed;
+		}
 	}
 
 	.hero-text {
@@ -254,10 +255,11 @@
 		border-radius: 10px;
 		background-color: rgba(255, 255, 255, 0.5);
 		padding: 3em;
-	}
 
-	.hero p {
-		font-size: clamp(1.5rem, 3vw, 4rem);
+		& p {
+			font-size: clamp(1.5rem, 3vw, 4rem);
+			font-family: 'Spectral', serif;
+		}
 	}
 
 	.header {
@@ -382,9 +384,11 @@
 		row-gap: 10em;
 		flex-direction: column;
 		padding: 15vw;
+
 		@media screen and (max-width: 45rem) {
 			padding: 7vw;
 		}
+
 		@media screen and (max-width: 30rem) {
 			padding: 4vw;
 		}
