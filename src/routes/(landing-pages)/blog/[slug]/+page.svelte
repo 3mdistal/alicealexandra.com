@@ -270,10 +270,11 @@
 	hr {
 		display: block;
 		opacity: 0.8;
-		margin: var(--blog-spacing-xl);
+		margin: var(--blog-spacing-xl) 0;
 		border: none;
 		border-top: 1px solid var(--blog-border-light);
-		width: var(--blog-content-width);
+		width: 100%;
+		max-width: var(--blog-content-width);
 		height: 1px;
 		font-size: var(--blog-body-large);
 
