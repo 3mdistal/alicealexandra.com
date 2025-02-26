@@ -40,8 +40,8 @@
 		--blog-mention-dark: #34d399;
 		--blog-equation-light: #4b5563;
 		--blog-equation-dark: #d1d5db;
-		--blog-border-light: #111827;
-		--blog-border-dark: #4b5563;
+		--blog-border-light: #939599;
+		--blog-border-dark: #686a6c;
 
 		/* Typography */
 		--blog-heading-large: 3.75rem;
