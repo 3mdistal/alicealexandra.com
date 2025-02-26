@@ -36,6 +36,9 @@ export async function createPage(
 	});
 }
 
+// Alias for createPage to maintain backward compatibility
+export const createDatabaseItem = createPage;
+
 /**
  * Update a page's properties
  * @param pageId - The ID of the page to update
@@ -57,16 +60,37 @@ export async function updatePage(
 
 /**
  * Add a commission to the commissions database
- * @param commission - The commission request data
+ * @param commissionOrName - Either a CommissionRequest object or the name of the requester
+ * @param email - The email of the requester (when using the string signature)
+ * @param description - The description of the commission (when using the string signature) 
  * @returns The created page
  */
-export async function addCommission(commission: CommissionRequest): Promise<PageObjectResponse> {
+export async function addCommission(
+	commissionOrName: CommissionRequest | string,
+	email?: string,
+	description?: string
+): Promise<PageObjectResponse> {
 	return withErrorHandling(async () => {
 		if (!COMMISSIONS_DB || !USER_ID_ALICE) {
 			throw new Error('Missing required environment variables for commissions');
 		}
 
-		const { name, email, description } = commission;
+		let name: string;
+		let emailValue: string;
+		let descriptionValue: string;
+
+		// Handle both function signatures
+		if (typeof commissionOrName === 'string') {
+			// Legacy signature with separate parameters
+			name = commissionOrName;
+			emailValue = email || '';
+			descriptionValue = description || '';
+		} else {
+			// Object signature
+			name = commissionOrName.name;
+			emailValue = commissionOrName.email;
+			descriptionValue = commissionOrName.description;
+		}
 
 		const response = await notionClient.pages.create({
 			parent: { database_id: COMMISSIONS_DB },
@@ -81,13 +105,13 @@ export async function addCommission(commission: CommissionRequest): Promise<Page
 					]
 				},
 				Email: {
-					email: email
+					email: emailValue
 				},
 				Description: {
 					rich_text: [
 						{
 							text: {
-								content: description
+								content: descriptionValue
 							}
 						}
 					]
@@ -108,16 +132,25 @@ export async function addCommission(commission: CommissionRequest): Promise<Page
 
 /**
  * Add a subscriber to the subscribers database
- * @param subscriber - The subscriber data
+ * @param subscriberOrEmail - Either a Subscriber object or an email string
  * @returns The created page
  */
-export async function addSubscriber(subscriber: Subscriber): Promise<PageObjectResponse> {
+export async function addSubscriber(subscriberOrEmail: Subscriber | string): Promise<PageObjectResponse> {
 	return withErrorHandling(async () => {
 		if (!SUBSCRIBERS_DB) {
 			throw new Error('Missing required environment variables for subscribers');
 		}
 
-		const { email } = subscriber;
+		let emailValue: string;
+
+		// Handle both function signatures
+		if (typeof subscriberOrEmail === 'string') {
+			// Legacy signature with just the email
+			emailValue = subscriberOrEmail;
+		} else {
+			// Object signature
+			emailValue = subscriberOrEmail.email;
+		}
 
 		const response = await notionClient.pages.create({
 			parent: {
@@ -125,7 +158,7 @@ export async function addSubscriber(subscriber: Subscriber): Promise<PageObjectR
 			},
 			properties: {
 				Email: {
-					email: email
+					email: emailValue
 				}
 			}
 		});

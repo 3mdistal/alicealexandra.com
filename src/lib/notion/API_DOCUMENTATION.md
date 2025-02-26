@@ -48,9 +48,10 @@ classDiagram
     class PagesAPI {
         +retrievePage(pageId)
         +createPage(databaseId, properties)
+        +createDatabaseItem(databaseId, properties)
         +updatePage(pageId, properties)
-        +addCommission(commission)
-        +addSubscriber(subscriber)
+        +addCommission(commissionOrName, email, description)
+        +addSubscriber(subscriberOrEmail)
     }
 
     class Components {
@@ -121,9 +122,14 @@ Functions for working with Notion pages:
 
 - `retrievePage(pageId)`: Retrieve a page by its ID
 - `createPage(databaseId, properties)`: Create a new page in a database
+- `createDatabaseItem(databaseId, properties)`: Alias for createPage for backward compatibility
 - `updatePage(pageId, properties)`: Update a page's properties
-- `addCommission(commission)`: Add a new commission request to the commissions database
-- `addSubscriber(subscriber)`: Add a new subscriber to the subscribers database
+- `addCommission(commissionOrName, email, description)`: Add a new commission request to the commissions database
+  - Supports both object format: `addCommission({name, email, description})`
+  - And individual parameters: `addCommission(name, email, description)`
+- `addSubscriber(subscriberOrEmail)`: Add a new subscriber to the subscribers database
+  - Supports both object format: `addSubscriber({email})`
+  - And string parameter: `addSubscriber(email)`
 
 ### Types (`types/notion-types.ts`, `types/guards.ts`)
 
