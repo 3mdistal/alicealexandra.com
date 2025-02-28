@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { state } from '$lib/stores';
 	import { cubicIn } from 'svelte/easing';
 	import gsap from 'gsap';
+	import { state } from '$lib/stores';
 
-	let logo: HTMLImageElement;
-	let siteTitle: HTMLParagraphElement;
-	let subtitle: HTMLParagraphElement;
+	let logo: HTMLImageElement | null = null;
+	let siteTitle: HTMLParagraphElement | null = null;
+	let subtitle: HTMLParagraphElement | null = null;
 
 	function inAnimation() {
+		if (!logo || !siteTitle || !subtitle) return;
+
 		const tl = gsap.timeline();
 
 		tl.fromTo(
@@ -47,7 +48,7 @@
 		};
 	}
 
-	onMount(() => {
+	$effect(() => {
 		inAnimation();
 	});
 </script>
