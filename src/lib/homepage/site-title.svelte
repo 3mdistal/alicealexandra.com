@@ -1,7 +1,9 @@
 <script lang="ts">
-	import gsap from 'gsap';
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 	import { state } from '$lib/stores';
+	import { cubicIn } from 'svelte/easing';
+	import gsap from 'gsap';
 
 	let logo: HTMLImageElement;
 	let siteTitle: HTMLParagraphElement;
@@ -31,43 +33,41 @@
 		return tl;
 	}
 
-	onMount(() => {
-		inAnimation();
-	});
-
-	function outAnimation(node: Element, options: { delay?: number; duration?: number } = {}) {
-		const tl = gsap.timeline();
-
-		tl.to(logo, {
-			opacity: 0,
-			x: '-200%',
-			rotation: '-360deg',
-			ease: 'back'
-		});
-		tl.to(siteTitle, { opacity: 0, duration: 0.5, ease: 'power1.out' }, '<');
-		tl.to(subtitle, { opacity: 0, duration: 0.5, ease: 'power1.out' }, '<');
-
+	function flyRotate(node: Element, { duration = 500, x = -200, rotation = -360 } = {}) {
 		return {
-			duration: 1000, // Duration in ms
-			tick: (t: number) => {
-				// This function is called on each frame
-				// You don't need to do anything here since GSAP handles the animation
+			duration,
+			css: (t: number) => {
+				const eased = cubicIn(t);
+
+				return `
+					transform: translateX(${(1 - eased) * 2 * x}%) rotate(${(1 - eased) * 1.5 * rotation}deg);
+					opacity: ${eased};
+				`;
 			}
 		};
 	}
+
+	onMount(() => {
+		inAnimation();
+	});
 </script>
 
 {#if $state === 'home'}
-	<header out:outAnimation={{}} class="site-header-container">
+	<header class="site-header-container">
 		<img
 			bind:this={logo}
 			src="images/logos/logo.svg"
 			alt="The logo for Tempo Immaterial."
 			class="logo"
+			out:flyRotate={{ duration: 1000, x: -200, rotation: -360 }}
 		/>
 		<div>
-			<h1 bind:this={siteTitle} class="site-title">tempo immaterial</h1>
-			<p bind:this={subtitle} class="subtitle">work by alice alexandra moore</p>
+			<h1 bind:this={siteTitle} class="site-title" out:fade={{ duration: 500 }}>
+				tempo immaterial
+			</h1>
+			<p bind:this={subtitle} class="subtitle" out:fade={{ duration: 500 }}>
+				work by alice alexandra moore
+			</p>
 		</div>
 	</header>
 {/if}
