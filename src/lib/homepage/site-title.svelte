@@ -35,7 +35,7 @@
 		inAnimation();
 	});
 
-	function outAnimation() {
+	function outAnimation(node: Element, options: { delay?: number; duration?: number } = {}) {
 		const tl = gsap.timeline();
 
 		tl.to(logo, {
@@ -47,12 +47,18 @@
 		tl.to(siteTitle, { opacity: 0, duration: 0.5, ease: 'power1.out' }, '<');
 		tl.to(subtitle, { opacity: 0, duration: 0.5, ease: 'power1.out' }, '<');
 
-		return tl;
+		return {
+			duration: 1000, // Duration in ms
+			tick: (t: number) => {
+				// This function is called on each frame
+				// You don't need to do anything here since GSAP handles the animation
+			}
+		};
 	}
 </script>
 
 {#if $state === 'home'}
-	<header out:outAnimation class="site-header-container">
+	<header out:outAnimation={{}} class="site-header-container">
 		<img
 			bind:this={logo}
 			src="images/logos/logo.svg"
