@@ -33,14 +33,14 @@
 		return tl;
 	}
 
-	function flyRotate(node: Element, { duration = 500, x = -200, rotation = -360 } = {}) {
+	function flyRotate(node: Element, { duration = 500, x = -400, rotation = -360 } = {}) {
 		return {
 			duration,
 			css: (t: number) => {
 				const eased = cubicIn(t);
 
 				return `
-					transform: translateX(${(1 - eased) * 2 * x}%) rotate(${(1 - eased) * 1.5 * rotation}deg);
+					transform: translateX(${(1 - eased) * x}%) rotate(${(1 - eased) * rotation}deg);
 					opacity: ${eased};
 				`;
 			}
@@ -59,7 +59,7 @@
 			src="images/logos/logo.svg"
 			alt="The logo for Tempo Immaterial."
 			class="logo"
-			out:flyRotate={{ duration: 1000, x: -200, rotation: -360 }}
+			out:flyRotate={{ duration: 750, x: -400, rotation: -360 * 1.5 }}
 		/>
 		<div>
 			<h1 bind:this={siteTitle} class="site-title" out:fade={{ duration: 500 }}>
