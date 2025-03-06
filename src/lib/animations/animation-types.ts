@@ -24,6 +24,18 @@ export type AnimationDirection =
     | 'bottom';
 
 /**
+ * Names of available animation presets
+ */
+export type AnimationPresetName =
+    | 'fadeIn'
+    | 'fadeOut'
+    | 'slideInLeft'
+    | 'slideInRight'
+    | 'slideInUp'
+    | 'slideInDown'
+    | 'scaleIn';
+
+/**
  * Configuration for animations
  */
 export interface AnimationConfig {
@@ -34,6 +46,11 @@ export interface AnimationConfig {
     stagger?: number;
     direction?: AnimationDirection;
     distance?: number;
+    opacity?: number;
+    x?: number;
+    y?: number;
+    scale?: number;
+    rotation?: number;
     [key: string]: any;
 }
 
