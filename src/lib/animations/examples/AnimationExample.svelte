@@ -1,14 +1,107 @@
 <script lang="ts">
 	import { animate, staggerAnimate } from '../index';
+	import { GSAPService } from '../gsap-service';
 
 	// State variables with runes
 	let staggerContainer = $state<HTMLElement | undefined>(undefined);
 	let showStaggered = $state(false);
+	let timelineProgress = $state(0);
+	let timelineContainer = $state<HTMLElement | undefined>(undefined);
+	let scrollContainer = $state<HTMLElement | undefined>(undefined);
+	let timeline: any = $state(undefined);
 
 	// Toggle visibility for the staggered boxes
 	const toggleStaggered = () => {
 		showStaggered = !showStaggered;
 	};
+
+	// Create and control a GSAP timeline with runes
+	$effect(() => {
+		if (!timelineContainer) return;
+
+		const initTimeline = async () => {
+			const gsapService = GSAPService.getInstance();
+			const gsap = await gsapService.loadGSAP();
+
+			// Create a new timeline
+			timeline = gsap.timeline({ paused: true });
+
+			// Add animations to the timeline
+			timeline.from('.timeline-box:nth-child(1)', {
+				x: -100,
+				opacity: 0,
+				duration: 0.7,
+				ease: 'power2.out'
+			});
+
+			timeline.from(
+				'.timeline-box:nth-child(2)',
+				{
+					y: 50,
+					opacity: 0,
+					duration: 0.7,
+					ease: 'back.out(1.7)'
+				},
+				'-=0.4'
+			);
+
+			timeline.from(
+				'.timeline-box:nth-child(3)',
+				{
+					scale: 0.5,
+					opacity: 0,
+					duration: 0.7,
+					ease: 'elastic.out(1, 0.5)'
+				},
+				'-=0.4'
+			);
+		};
+
+		initTimeline();
+
+		// Cleanup function
+		return () => {
+			if (timeline) {
+				timeline.kill();
+			}
+		};
+	});
+
+	// Control timeline progress with runes
+	$effect(() => {
+		if (timeline) {
+			timeline.progress(timelineProgress);
+		}
+	});
+
+	// Set up scroll-triggered animation with runes
+	$effect(() => {
+		if (!scrollContainer) return;
+
+		const setupScrollTrigger = async () => {
+			const gsapService = GSAPService.getInstance();
+			const gsap = await gsapService.loadGSAP();
+			const ScrollTrigger = await gsapService.loadPlugin('ScrollTrigger');
+
+			// Create scroll-triggered animation
+			gsap.from('.scroll-item', {
+				y: 50,
+				opacity: 0,
+				duration: 0.8,
+				stagger: 0.2,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: scrollContainer,
+					start: 'top 80%',
+					end: 'bottom 20%',
+					toggleActions: 'play none none reverse'
+					// markers: true, // Uncomment for debugging
+				}
+			});
+		};
+
+		setupScrollTrigger();
+	});
 </script>
 
 <div class="animation-examples">
@@ -80,6 +173,38 @@
 			</ul>
 		{/if}
 	</section>
+
+	<section>
+		<h3>Timeline Animation with Runes</h3>
+		<p>Drag the slider to control the timeline progress:</p>
+
+		<input
+			type="range"
+			min="0"
+			max="1"
+			step="0.01"
+			bind:value={timelineProgress}
+			class="timeline-slider"
+		/>
+
+		<div class="timeline-container" bind:this={timelineContainer}>
+			<div class="timeline-box">First animation</div>
+			<div class="timeline-box">Second animation</div>
+			<div class="timeline-box">Third animation</div>
+		</div>
+	</section>
+
+	<section>
+		<h3>ScrollTrigger Animation with Runes</h3>
+		<p>Scroll down to see the animation:</p>
+
+		<div class="scroll-container" bind:this={scrollContainer}>
+			<div class="scroll-item">Scroll Item 1</div>
+			<div class="scroll-item">Scroll Item 2</div>
+			<div class="scroll-item">Scroll Item 3</div>
+			<div class="scroll-item">Scroll Item 4</div>
+		</div>
+	</section>
 </div>
 
 <style>
@@ -105,6 +230,8 @@
 
 	section {
 		margin-bottom: 3rem;
+		border-bottom: 1px solid #eaeaea;
+		padding-bottom: 2rem;
 	}
 
 	.action-examples {
@@ -113,7 +240,9 @@
 		margin-bottom: 1rem;
 	}
 
-	.box {
+	.box,
+	.timeline-box,
+	.scroll-item {
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 		border-radius: 0.5rem;
 		background-color: #4a5568;
@@ -151,5 +280,30 @@
 		background-color: #4a5568;
 		padding: 1rem;
 		color: white;
+	}
+
+	.timeline-slider {
+		margin: 1rem 0;
+		width: 100%;
+	}
+
+	.timeline-container {
+		display: flex;
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	.scroll-container {
+		margin-top: 1rem;
+		border: 1px solid #eaeaea;
+		border-radius: 0.5rem;
+		padding: 1rem;
+		height: 300px;
+		overflow-y: auto;
+	}
+
+	.scroll-item {
+		margin-bottom: 1rem;
+		width: auto;
 	}
 </style>

@@ -1,0 +1,1 @@
+1. The next step I'd like to take with GSAP animations is getting an intersection observer (or GSAP equivalent) abstracted into the Svelte action as a parameter, so that we can easily say, "Hey, this animation should run once this is scrolled to on the page.
