@@ -1,56 +1,11 @@
 <script lang="ts">
-	import { animate, staggerAnimate, fadeIn, slideIn, scaleIn, createTimeline } from '../index';
+	import { animate, staggerAnimate } from '../index';
 
 	// State variables with runes
-	let container = $state<HTMLElement | undefined>(undefined);
-	let boxes = $state<HTMLElement[]>([]);
 	let staggerContainer = $state<HTMLElement | undefined>(undefined);
-	let timeline = $state<any>(undefined);
-	let animationsReady = $state(false);
-
-	// Use $effect for initialization, but don't auto-play
-	$effect(() => {
-		if (container && boxes.length >= 3 && !animationsReady) {
-			// Create a timeline with autoplay disabled
-			createTimeline({ autoplay: false }).then((createdTimeline) => {
-				// Store the timeline first
-				timeline = createdTimeline;
-
-				// Get the box elements
-				const box1 = boxes[0];
-				const box2 = boxes[1];
-				const box3 = boxes[2];
-
-				if (box1 && box2 && box3) {
-					// Create animations sequentially without playing them
-					// This avoids the double-play issue by not using Promise.all
-					fadeIn(box1, 0.5, 0).then((fadeInAnim) => {
-						timeline.add(fadeInAnim);
-
-						slideIn(box2, 'right', 100, 0.5, 0).then((slideInAnim) => {
-							timeline.add(slideInAnim, '-=0.3');
-
-							scaleIn(box3, 0.5, 0.5, 0).then((scaleInAnim) => {
-								timeline.add(scaleInAnim, '-=0.3');
-								// Mark animations as ready only after all are added to timeline
-								animationsReady = true;
-							});
-						});
-					});
-				}
-			});
-		}
-	});
-
-	// Function to play the animation
-	const playAnimation = () => {
-		if (timeline && animationsReady) {
-			timeline.restart();
-		}
-	};
+	let showStaggered = $state(false);
 
 	// Toggle visibility for the staggered boxes
-	let showStaggered = $state(false);
 	const toggleStaggered = () => {
 		showStaggered = !showStaggered;
 	};
@@ -58,16 +13,6 @@
 
 <div class="animation-examples">
 	<h2>Animation Examples</h2>
-
-	<section>
-		<h3>Timeline Animation Example</h3>
-		<div class="container" bind:this={container}>
-			<div class="box" bind:this={boxes[0]}>Fade In</div>
-			<div class="box" bind:this={boxes[1]}>Slide In</div>
-			<div class="box" bind:this={boxes[2]}>Scale In</div>
-		</div>
-		<button onclick={playAnimation}>Play Animation</button>
-	</section>
 
 	<section>
 		<h3>Svelte Action Examples</h3>
@@ -89,7 +34,8 @@
 				use:animate={{
 					animation: 'slideInRight',
 					distance: 150,
-					duration: 0.8
+					duration: 0.8,
+					delay: 0.5 // Added delay to simulate timeline sequence
 				}}
 			>
 				Slide In Action
@@ -100,7 +46,8 @@
 				use:animate={{
 					animation: 'scaleIn',
 					scale: 0.3,
-					duration: 1.2
+					duration: 1.2,
+					delay: 0.8 // Added delay to simulate timeline sequence
 				}}
 			>
 				Scale In Action
@@ -160,7 +107,6 @@
 		margin-bottom: 3rem;
 	}
 
-	.container,
 	.action-examples {
 		display: flex;
 		gap: 1rem;
