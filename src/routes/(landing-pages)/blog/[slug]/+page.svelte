@@ -15,8 +15,37 @@
 		QueryDatabaseResponse
 	} from '$lib/notion/types/notion-types';
 
+	const { data } = $props<{
+		data: {
+			post: {
+				queryResponse: QueryDatabaseResponse | null;
+				contentResponse: any | null;
+			};
+		};
+	}>();
+
 	let context: HTMLElement;
 	let tocVisible = false;
+	let codeTheme = LightCodeTheme; // Default to light theme
+
+	$effect(() => {
+		if (typeof window !== 'undefined') {
+			const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+			const updateTheme = (e: MediaQueryListEvent | MediaQueryList) => {
+				codeTheme = e.matches ? DarkCodeTheme : LightCodeTheme;
+			};
+
+			// Set initial theme
+			updateTheme(darkModeMediaQuery);
+
+			// Listen for changes
+			darkModeMediaQuery.addEventListener('change', updateTheme);
+
+			return () => {
+				darkModeMediaQuery.removeEventListener('change', updateTheme);
+			};
+		}
+	});
 
 	const runBlogHelpers = async () => {
 		await tick();
@@ -34,13 +63,6 @@
 				tocVisible = document.querySelector('.toc-container') !== null;
 			}, 500);
 		}
-	};
-
-	export let data: {
-		post: {
-			queryResponse: QueryDatabaseResponse | null;
-			contentResponse: any | null;
-		};
 	};
 
 	const { queryResponse, contentResponse } = data.post || {};
@@ -133,9 +155,7 @@
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
 	/>
 
-	{@html window?.matchMedia('(prefers-color-scheme: dark)').matches
-		? DarkCodeTheme
-		: LightCodeTheme}
+	{@html codeTheme}
 </svelte:head>
 
 <div class="blog-post-container">
