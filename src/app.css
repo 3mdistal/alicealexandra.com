@@ -15,6 +15,7 @@
 @import './lib/styles/components/notion/text-macro.css';
 @import './lib/styles/components/blog/post.css';
 @import './lib/styles/components/blog/toc.css';
+@import './lib/styles/components/blog/index.css';
 
 /* Utility Styles */
 @import './lib/styles/utils/animations.css';

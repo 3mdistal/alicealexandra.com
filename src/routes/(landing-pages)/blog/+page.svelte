@@ -1,21 +1,44 @@
 <script lang="ts">
-	import Blog from '$lib/subpages/blog.svelte';
-	import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+	import type { PageData } from './$types';
+	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
 	import { state } from '$lib/stores';
-	import Bird from '../../../cms/images/blog/bird.webp?enhanced';
+	import { fade } from 'svelte/transition';
 
-	export let data: { post: QueryDatabaseResponse };
+	interface NotionProperties {
+		Slug: { id: string; type: 'url'; url: string };
+		Name: { id: 'title'; type: 'title'; title: Array<{ plain_text: string }> };
+		Description: { id: string; type: 'rich_text'; rich_text: Array<{ plain_text: string }> };
+		'Publication Date': {
+			id: string;
+			type: 'date';
+			date: { start: string; end: null; time_zone: null };
+		};
+		Category: { id: string; type: 'select'; select: { id: string; name: string; color: string } };
+		Cover: { id: string; type: 'files'; files: Array<{ file: { url: string } }> };
+	}
+
+	export let data: PageData;
+	const { post } = data;
 
 	const accent = '#d1dce7';
 
 	function fadeIn() {
-		gsap.to('.fade-item', {
+		gsap.to(['.blog-header', '.blog-content'], {
 			duration: 0.8,
 			opacity: 1,
 			y: 0,
+			stagger: 0.2,
+			ease: 'power2.out'
+		});
+
+		gsap.to('.blog-post-preview', {
+			duration: 0.6,
+			opacity: 1,
+			y: 0,
 			stagger: 0.1,
+			delay: 0.4,
 			ease: 'power2.out'
 		});
 	}
@@ -27,40 +50,66 @@
 	onDestroy(() => {
 		state.set('home');
 	});
+
+	function formatDate(dateString: string): string {
+		return new Date(dateString).toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		});
+	}
 </script>
 
 <svelte:head>
 	<title>Blog | Alice Alexandra Moore</title>
-	<meta
-		name="description"
-		content="Blog entries and writing that doesn't quite fit anywhere else, from Alice Alexandra Moore."
-	/>
+	<meta name="description" content="Thoughts on software development, design, and life." />
 </svelte:head>
 
 <div class="blog-page">
-	<div class="blog-header fade-item">
-		<h1>Thoughts & <span style="color: {accent}">Musings</span></h1>
-		<p class="blog-intro">
-			Welcome to my corner of the internet where I share ideas, reflections, and creative
-			explorations.
-		</p>
+	<div class="blog-background">
+		<div class="blog-background-overlay"></div>
 	</div>
 
-	<div class="blog-content fade-item">
-		<div class="blog-wrapper">
-			<Blog {accent} {data} />
-		</div>
-	</div>
+	<header class="blog-header">
+		<h1>Blog</h1>
+		<p>Thoughts on software development, design, and life.</p>
+	</header>
 
-	<div class="background-container">
-		<div class="image-wrapper fade-item">
-			<enhanced:img
-				src={Bird}
-				alt="A painting of a colorful bird in flight."
-				class="background-image"
-			/>
-		</div>
-		<div class="background-overlay"></div>
+	<div class="blog-content">
+		{#if post?.results?.length}
+			{#each post.results as blogPost}
+				{@const properties = (blogPost as PageObjectResponse)
+					.properties as unknown as NotionProperties}
+				<div class="blog-post-preview">
+					<div class="preview-content">
+						<h2>{properties.Name?.title[0]?.plain_text || ''}</h2>
+						<p class="preview-description">
+							{properties.Description?.rich_text[0]?.plain_text || ''}
+						</p>
+						<div class="preview-meta">
+							<time datetime={properties['Publication Date']?.date?.start || ''}>
+								{formatDate(properties['Publication Date']?.date?.start || '')}
+							</time>
+							<span class="preview-category"
+								>{properties.Category?.select?.name || 'Uncategorized'}</span
+							>
+						</div>
+						<a href="/blog/{properties.Slug?.url || ''}" class="read-more">Read article</a>
+					</div>
+					{#if properties.Cover?.files[0]?.file?.url}
+						<img
+							src={properties.Cover.files[0].file.url}
+							alt={properties.Name?.title[0]?.plain_text || ''}
+							class="preview-image"
+						/>
+					{/if}
+				</div>
+			{/each}
+		{:else}
+			<div class="no-posts">
+				<p>No blog posts available at the moment.</p>
+			</div>
+		{/if}
 	</div>
 </div>
 
@@ -88,14 +137,6 @@
 		line-height: 1.1;
 	}
 
-	.blog-intro {
-		margin: 0 auto;
-		max-width: 600px;
-		color: rgba(255, 255, 255, 0.8);
-		font-size: 1.25rem;
-		line-height: 1.6;
-	}
-
 	.blog-content {
 		position: relative;
 		transform: translateY(20px);
@@ -111,50 +152,85 @@
 		max-width: 1200px;
 	}
 
-	.blog-wrapper {
-		width: 100%;
-	}
-
-	.fade-item {
+	.blog-post-preview {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 2rem;
 		transform: translateY(20px);
 		opacity: 0;
+		transition:
+			transform 0.2s ease-in-out,
+			background-color 0.2s ease-in-out;
+		margin-bottom: 2rem;
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.05);
+		padding: 1.5rem;
 	}
 
-	.background-container {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: -1;
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
+	.blog-post-preview:hover {
+		transform: translateY(-2px);
+		background: rgba(255, 255, 255, 0.1);
 	}
 
-	.image-wrapper {
-		position: absolute;
-		top: 0;
-		right: 0;
-		opacity: 0;
-		width: 50%;
-		height: 100%;
+	.preview-content {
+		flex: 1;
 	}
 
-	.background-image {
-		opacity: 0.7;
-		filter: saturate(1.2);
-		width: 100%;
-		height: 100%;
+	.preview-content h2 {
+		margin-bottom: 1rem;
+		color: white;
+		font-weight: 600;
+		font-size: 1.75rem;
+	}
+
+	.preview-description {
+		margin-bottom: 1.5rem;
+		color: rgba(255, 255, 255, 0.8);
+		line-height: 1.6;
+	}
+
+	.preview-meta {
+		display: flex;
+		gap: 1rem;
+		margin-bottom: 1rem;
+		color: rgba(255, 255, 255, 0.6);
+		font-size: 0.9rem;
+	}
+
+	.preview-category {
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.25rem 0.75rem;
+	}
+
+	.read-more {
+		display: inline-block;
+		transition: all 0.2s ease-in-out;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 4px;
+		padding: 0.5rem 1rem;
+		color: white;
+		font-size: 0.9rem;
+		text-decoration: none;
+	}
+
+	.read-more:hover {
+		border-color: rgba(255, 255, 255, 0.4);
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	.preview-image {
+		border-radius: 8px;
+		width: 200px;
+		height: 200px;
 		object-fit: cover;
-		object-position: center;
 	}
 
-	.background-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		background: linear-gradient(135deg, rgba(20, 30, 48, 0.95) 0%, rgba(36, 59, 85, 0.8) 100%);
-		width: 100%;
-		height: 100%;
+	.no-posts {
+		padding: 3rem;
+		color: rgba(255, 255, 255, 0.8);
+		font-size: 1.2rem;
+		text-align: center;
 	}
 
 	@media (max-width: 768px) {
@@ -166,9 +242,14 @@
 			padding: 1.5rem;
 		}
 
-		.image-wrapper {
-			opacity: 0.3;
+		.blog-post-preview {
+			grid-template-columns: 1fr;
+		}
+
+		.preview-image {
+			order: -1;
 			width: 100%;
+			height: 200px;
 		}
 	}
 
