@@ -1,0 +1,150 @@
+.blog-container {
+    background-color: var(--blog-bg-light);
+    color: var(--blog-text-light);
+    min-height: 100vh;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.spacer {
+    height: 100px;
+}
+
+/* Blog Post Layout */
+.blog-post-header {
+    margin: 0 auto;
+    padding: 2rem 2rem;
+    width: 100%;
+    max-width: var(--blog-content-width);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+    color: var(--blog-accent-light);
+    font-size: 1rem;
+}
+
+.back-link:hover {
+    transform: translateX(-5px);
+    color: var(--blog-text-light);
+    text-decoration: none;
+}
+
+.title-container {
+    margin-bottom: 2rem;
+}
+
+.blog-post-header h1 {
+    margin-bottom: 1rem;
+    color: var(--blog-heading-light);
+    font-weight: 700;
+    font-size: var(--blog-heading-large);
+    line-height: 1.2;
+}
+
+.subtitle {
+    max-width: var(--blog-subtitle-width);
+    color: var(--blog-accent-light);
+    font-size: var(--blog-body-large);
+    line-height: 1.5;
+}
+
+/* Meta Information */
+.meta-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.meta-label {
+    color: var(--blog-secondary-light);
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.meta-value {
+    color: var(--blog-accent-light);
+    font-size: 1rem;
+}
+
+.category-tag {
+    display: inline-block;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.75rem;
+    width: fit-content;
+    font-size: 0.875rem;
+}
+
+.summary {
+    margin-top: 0.5rem;
+}
+
+.summary-text {
+    color: var(--blog-accent-light);
+    font-size: var(--blog-body);
+    line-height: 1.6;
+}
+
+/* Cover Image */
+.cover-image-container {
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+    width: 100%;
+    max-width: var(--blog-content-width);
+}
+
+.cover-image {
+    border-radius: var(--blog-border-radius);
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.notion-content-container {
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+    max-width: var(--blog-content-width);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .meta-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .summary {
+        flex-basis: 100%;
+        margin-top: 1rem;
+    }
+}

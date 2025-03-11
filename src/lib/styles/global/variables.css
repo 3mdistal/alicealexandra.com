@@ -1,0 +1,109 @@
+/**
+ * Global CSS Variables
+ * ------------------
+ * This file contains all global CSS variables used throughout the application.
+ * Variables are organized by category and follow a consistent naming pattern:
+ * - Base colors: --color-*
+ * - Blog specific: --blog-*
+ * - Typography: --font-*
+ * - Spacing: --space-*
+ */
+
+:root {
+   /* Base Theme Colors
+     * These colors form the foundation of the application's color scheme.
+     * They are used directly or as a base for component-specific colors.
+     */
+   --color-primary: #d1dce7;
+   --color-primary-light: #e5edf5;
+   --color-primary-dark: #a3b8cc;
+   --color-secondary: #838391;
+   --color-secondary-light: #9f9fad;
+   --color-secondary-dark: #6a6a78;
+
+   /* Font Families */
+   --font-primary: 'Lato', sans-serif;
+   --font-heading: 'Spectral', serif;
+   --font-mono: 'Cutive Mono', monospace;
+   --font-decorative: 'Euphoria Script', cursive;
+
+   /* Blog Colors - Light Mode
+     * These variables define the light mode color scheme for blog content.
+     * Each variable has a corresponding dark mode version below.
+     */
+   --blog-bg-light: #1a1a2e;
+   --blog-text-light: #ffffff;
+   --blog-heading-light: #ffffff;
+   --blog-accent-light: rgba(255, 255, 255, 0.9);
+   --blog-secondary-light: #d1dce7;
+   --blog-link-light: #d1dce7;
+   --blog-border-light: rgba(255, 255, 255, 0.2);
+   --blog-callout-light: rgba(255, 255, 255, 0.05);
+   --blog-code-bg-light: rgba(0, 0, 0, 0.2);
+   --blog-inline-code-bg-light: rgba(255, 255, 255, 0.1);
+   --blog-code-tag-light: #81a1c1;
+   --blog-code-property-light: #88c0d0;
+   --blog-divider-light: rgba(255, 255, 255, 0.1);
+   --blog-mention-light: #d1dce7;
+   --blog-equation-light: #ffffff;
+
+   /* Blog Colors - Dark Mode
+     * Dark mode variants of the blog color scheme.
+     * These are applied via media queries in dark-mode.css
+     */
+   --blog-bg-dark: #0f0f1a;
+   --blog-text-dark: #e5e7eb;
+   --blog-heading-dark: #ffffff;
+   --blog-accent-dark: rgba(255, 255, 255, 0.85);
+   --blog-secondary-dark: #a3b8cc;
+   --blog-link-dark: #e5edf5;
+   --blog-border-dark: rgba(255, 255, 255, 0.1);
+   --blog-callout-dark: rgba(255, 255, 255, 0.03);
+   --blog-code-bg-dark: rgba(0, 0, 0, 0.3);
+   --blog-inline-code-bg-dark: rgba(255, 255, 255, 0.05);
+   --blog-code-tag-dark: #88c0d0;
+   --blog-code-property-dark: #81a1c1;
+   --blog-divider-dark: rgba(255, 255, 255, 0.05);
+   --blog-mention-dark: #e5edf5;
+   --blog-equation-dark: #e5e7eb;
+
+   /* Typography Scale
+     * A modular scale for consistent typography throughout the blog
+     */
+   --blog-heading-large: 3.5rem;
+   --blog-heading-medium: 2rem;
+   --blog-heading-small: 1.5rem;
+   --blog-body-large: 1.25rem;
+   --blog-body: 1.125rem;
+   --blog-body-small: 1rem;
+
+   /* Spacing Scale
+     * Consistent spacing values for margins, padding, and gaps
+     */
+   --blog-spacing-xs: 0.5rem;
+   --blog-spacing-sm: 1rem;
+   --blog-spacing-md: 1.5rem;
+   --blog-spacing-lg: 2rem;
+   --blog-spacing-xl: 3rem;
+   --blog-paragraph-spacing: 2rem;
+
+   /* Layout Measurements
+     * Defines standard widths and other layout values
+     */
+   --blog-content-width: 80ch;
+   --blog-subtitle-width: 60ch;
+   --blog-blockquote-width: 40ch;
+
+   /* Border Radius
+     * Standard border radius values for consistency
+     */
+   --blog-border-radius: 0.5rem;
+   --blog-border-radius-sm: 0.25rem;
+
+   /* Animation Timing
+     * Standard durations for animations and transitions
+     */
+   --transition-fast: 0.2s;
+   --transition-medium: 0.3s;
+   --transition-slow: 0.5s;
+}

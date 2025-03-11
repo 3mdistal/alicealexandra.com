@@ -1,0 +1,151 @@
+/**
+ * Global Typography Styles
+ * ----------------------
+ * This file defines the base typography styles for the application.
+ * It uses CSS variables defined in variables.css for consistent
+ * font families, sizes, and spacing across the application.
+ */
+
+/* Base Typography
+ * Default styles applied to all text elements
+ */
+* {
+    color: var(--blog-text-light);
+    font-weight: 300;
+    font-family: var(--font-primary);
+}
+
+/* Headings
+ * Common styles for all heading levels
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    line-height: 1.2;
+    text-wrap: balance;
+    color: var(--blog-heading-light);
+}
+
+h1 {
+    font-size: var(--blog-heading-large);
+    margin-bottom: var(--blog-spacing-lg);
+}
+
+h2 {
+    font-size: var(--blog-heading-medium);
+    margin-bottom: var(--blog-spacing-md);
+}
+
+h3 {
+    font-size: var(--blog-heading-small);
+    margin-bottom: var(--blog-spacing-sm);
+}
+
+/* Body Text
+ * Styles for paragraphs and list items
+ */
+p {
+    font-size: var(--blog-body);
+    line-height: 1.6;
+    margin-bottom: var(--blog-paragraph-spacing);
+}
+
+li {
+    font-size: var(--blog-body);
+    line-height: 1.6;
+    margin-bottom: var(--blog-spacing-sm);
+}
+
+/* Links
+ * Global link styles
+ */
+a {
+    color: var(--blog-link-light);
+    text-decoration: none;
+    transition: color var(--transition-fast) ease;
+}
+
+a:hover {
+    color: var(--blog-text-light);
+    text-decoration: underline;
+}
+
+/* Code
+ * Monospace text for inline code and code blocks
+ */
+code,
+pre {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+/* Utility Classes
+ * Text wrapping and balance utilities
+ */
+.text-balance {
+    text-wrap: balance;
+}
+
+.text-pretty {
+    text-wrap: pretty;
+}
+
+/* Responsive Typography
+ * Adjust typography for different screen sizes
+ */
+@media (min-width: 768px) {
+    h2 {
+        font-size: calc(var(--blog-heading-medium) * 0.9375);
+        /* 1.875rem */
+    }
+
+    p,
+    li {
+        font-size: var(--blog-body);
+    }
+}
+
+@media (min-width: 1024px) {
+    h2 {
+        font-size: calc(var(--blog-heading-medium) * 1.125);
+        /* 2.25rem */
+    }
+
+    p,
+    li {
+        font-size: var(--blog-body-large);
+        line-height: 1.75;
+        text-wrap: pretty;
+    }
+}
+
+/* Dark Mode Adjustments
+ * Handle color changes in dark mode
+ */
+@media (prefers-color-scheme: dark) {
+    * {
+        color: var(--blog-text-dark);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: var(--blog-heading-dark);
+    }
+
+    a {
+        color: var(--blog-link-dark);
+    }
+
+    a:hover {
+        color: var(--blog-text-dark);
+    }
+}

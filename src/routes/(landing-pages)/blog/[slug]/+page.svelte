@@ -158,96 +158,101 @@
 	{@html codeTheme}
 </svelte:head>
 
-<div class="blog-post-container">
-	<div class="blog-post-header" in:fade={{ duration: 800, delay: 200 }}>
-		<div class="header-top">
-			<a href="/blog" class="back-link" in:fly={{ x: -20, duration: 600, delay: 100 }}>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="20"
-					height="20"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<line x1="19" y1="12" x2="5" y2="12"></line>
-					<polyline points="12 19 5 12 12 5"></polyline>
-				</svg>
-				Back to posts
-			</a>
-		</div>
-
-		<div class="title-container" in:fly={{ y: 20, duration: 800, delay: 300 }}>
-			<h1>{getTextContent(title) || 'Untitled'}</h1>
-			{#if isRichTextProperty(subtitle)}
-				<p class="subtitle">
-					<em><TextMacro type={subtitle} /></em>
-				</p>
-			{/if}
-		</div>
-
-		<div class="meta-container" in:fly={{ y: 20, duration: 800, delay: 400 }}>
-			<div class="meta-item">
-				<span class="meta-label">Category</span>
-				<span class="meta-value category-tag">
-					{isSelectProperty(category) ? category.select?.name : 'Uncategorized'}
-				</span>
+<article class="blog-post">
+	<div class="blog-post-container">
+		<div class="blog-post-header" in:fade={{ duration: 800, delay: 200 }}>
+			<div class="header-top">
+				<a href="/blog" class="back-link" in:fly={{ x: -20, duration: 600, delay: 100 }}>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<line x1="19" y1="12" x2="5" y2="12"></line>
+						<polyline points="12 19 5 12 12 5"></polyline>
+					</svg>
+					Back to posts
+				</a>
 			</div>
 
-			<div class="meta-item">
-				<span class="meta-label">Reading Time</span>
-				<span class="meta-value">
-					{#if isFormulaProperty(readingTime) && readingTime.formula.type === 'string'}
-						{readingTime.formula.string === '1 minutes' ? '1 minute' : readingTime.formula.string}
-					{:else}
-						Unknown
-					{/if}
-				</span>
+			<div class="title-container" in:fly={{ y: 20, duration: 800, delay: 300 }}>
+				<h1>{getTextContent(title) || 'Untitled'}</h1>
+				{#if isRichTextProperty(subtitle)}
+					<p class="subtitle">
+						<em><TextMacro type={subtitle} /></em>
+					</p>
+				{/if}
 			</div>
 
-			{#if isRichTextProperty(summary)}
-				<div class="meta-item summary">
-					<span class="meta-label">Summary</span>
-					<span class="meta-value summary-text">
-						<TextMacro type={summary} />
+			<div class="meta-container" in:fly={{ y: 20, duration: 800, delay: 400 }}>
+				<div class="meta-item">
+					<span class="meta-label">Category</span>
+					<span class="meta-value category-tag">
+						{isSelectProperty(category) ? category.select?.name : 'Uncategorized'}
 					</span>
 				</div>
-			{/if}
+
+				<div class="meta-item">
+					<span class="meta-label">Reading Time</span>
+					<span class="meta-value">
+						{#if isFormulaProperty(readingTime) && readingTime.formula.type === 'string'}
+							{readingTime.formula.string === '1 minutes' ? '1 minute' : readingTime.formula.string}
+						{:else}
+							Unknown
+						{/if}
+					</span>
+				</div>
+
+				{#if isRichTextProperty(summary)}
+					<div class="meta-item summary">
+						<span class="meta-label">Summary</span>
+						<span class="meta-value summary-text">
+							<TextMacro type={summary} />
+						</span>
+					</div>
+				{/if}
+			</div>
 		</div>
+
+		{#if isUrlProperty(coverURL) && coverURL.url}
+			<div class="cover-image-container" in:fade={{ duration: 1000, delay: 500 }}>
+				<img src={coverURL.url} alt={getTextContent(title)} class="cover-image" />
+			</div>
+		{/if}
+
+		{#if content.length > 0}
+			<div
+				class="notion-content-container"
+				in:fade={{ duration: 800, delay: 600 }}
+				bind:this={context}
+			>
+				<NotionPageParser results={content} />
+			</div>
+		{/if}
 	</div>
-
-	{#if isUrlProperty(coverURL) && coverURL.url}
-		<div class="cover-image-container" in:fade={{ duration: 1000, delay: 500 }}>
-			<img src={coverURL.url} alt={getTextContent(title)} class="cover-image" />
-		</div>
-	{/if}
-
-	{#if content.length > 0}
-		<div
-			class="notion-content-container"
-			in:fade={{ duration: 800, delay: 600 }}
-			bind:this={context}
-		>
-			<NotionPageParser results={content} />
-		</div>
-	{/if}
-</div>
+</article>
 
 <style>
+	.blog-post {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
 	.blog-post-container {
 		background-color: var(--blog-bg-light);
-		padding-bottom: 4rem;
 		min-height: 100vh;
-		color: var(--blog-text-light);
 	}
 
 	@media (prefers-color-scheme: dark) {
 		.blog-post-container {
 			background-color: var(--blog-bg-dark);
-			color: var(--blog-text-dark);
 		}
 	}
 

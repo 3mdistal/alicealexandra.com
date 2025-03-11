@@ -1,0 +1,58 @@
+/**
+ * Dark Mode Styles
+ * --------------
+ * This file handles all dark mode color transitions and variable updates.
+ * It uses the prefers-color-scheme media query to detect system dark mode preference.
+ * All color transitions are handled through CSS variables defined in variables.css.
+ */
+
+/* Apply smooth transitions to color changes */
+:root {
+    transition:
+        color var(--transition-medium) ease,
+        background-color var(--transition-medium) ease,
+        border-color var(--transition-medium) ease,
+        box-shadow var(--transition-medium) ease;
+}
+
+/* Dark Mode Variable Overrides
+ * When in dark mode, we override the light mode variables with their dark mode equivalents.
+ * This ensures a consistent approach to theming across the application.
+ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Base Theme Colors */
+        --color-primary: var(--color-primary-dark);
+        --color-secondary: var(--color-secondary-dark);
+
+        /* Background and Text Colors */
+        --blog-bg-light: var(--blog-bg-dark);
+        --blog-text-light: var(--blog-text-dark);
+        --blog-heading-light: var(--blog-heading-dark);
+        --blog-accent-light: var(--blog-accent-dark);
+        --blog-secondary-light: var(--blog-secondary-dark);
+
+        /* Interactive Elements */
+        --blog-link-light: var(--blog-link-dark);
+        --blog-border-light: var(--blog-border-dark);
+
+        /* Component Colors */
+        --blog-callout-light: var(--blog-callout-dark);
+        --blog-code-bg-light: var(--blog-code-bg-dark);
+        --blog-inline-code-bg-light: var(--blog-inline-code-bg-dark);
+        --blog-code-tag-light: var(--blog-code-tag-dark);
+        --blog-code-property-light: var(--blog-code-property-dark);
+        --blog-divider-light: var(--blog-divider-dark);
+        --blog-mention-light: var(--blog-mention-dark);
+        --blog-equation-light: var(--blog-equation-dark);
+    }
+}
+
+/* Disable Transitions When System Animations are Disabled
+ * This respects the user's preference for reduced motion
+ */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        transition: none;
+    }
+}

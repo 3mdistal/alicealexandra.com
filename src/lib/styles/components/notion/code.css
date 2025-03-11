@@ -1,0 +1,34 @@
+.notion-code {
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: var(--blog-code-bg, rgba(0, 0, 0, 0.3));
+    overflow: hidden;
+}
+
+.code-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem;
+}
+
+.code-language {
+    color: var(--blog-secondary-light, rgba(255, 255, 255, 0.6));
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.code-content {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    .code-language {
+        color: var(--blog-secondary-dark);
+    }
+}

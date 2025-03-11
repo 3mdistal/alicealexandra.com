@@ -1,0 +1,64 @@
+/* Base text styles */
+em,
+strong,
+span {
+    color: inherit;
+}
+
+/* Link styles */
+a {
+    transition: color 0.2s ease;
+    color: var(--blog-link-light);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+a:hover {
+    color: var(--blog-text-light);
+}
+
+/* Code styles */
+code {
+    border-radius: var(--blog-border-radius-sm);
+    background-color: var(--blog-code-bg);
+    padding: 0.1em 0.3em;
+    font-size: 0.9em;
+    font-family: 'Cutive Mono', monospace;
+}
+
+/* Text formatting */
+strong {
+    font-weight: 600;
+}
+
+span.line-through {
+    text-decoration: line-through;
+}
+
+/* Special elements */
+span.mention {
+    color: var(--blog-accent-light);
+    font-weight: 500;
+}
+
+span.equation {
+    color: var(--blog-accent-light);
+    font-style: italic;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    a {
+        color: var(--blog-link-dark);
+    }
+
+    a:hover {
+        color: var(--blog-text-dark);
+    }
+
+    span.mention,
+    span.equation {
+        color: var(--blog-accent-dark);
+    }
+}

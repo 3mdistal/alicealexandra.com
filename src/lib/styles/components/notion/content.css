@@ -1,0 +1,125 @@
+.notion-content {
+    width: 100%;
+}
+
+/* Add styles for list containers */
+.notion-content ul,
+.notion-content ol {
+    margin: 0 0 var(--blog-paragraph-spacing) 0;
+    padding-left: 2rem;
+    list-style-position: outside;
+}
+
+.notion-content p {
+    margin-bottom: var(--blog-paragraph-spacing);
+    max-width: 100%;
+    color: var(--blog-text-light);
+    line-height: 1.7;
+}
+
+/* Add nested list styles */
+.notion-content ul ul,
+.notion-content ul ol,
+.notion-content ol ul,
+.notion-content ol ol {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+}
+
+.notion-heading {
+    margin: 2.5rem 0 1.5rem;
+    color: var(--blog-heading-light);
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 1.3;
+}
+
+.notion-subheading {
+    margin: 2rem 0 1rem;
+    color: var(--blog-heading-light);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+/* Update list item styles */
+.notion-list-item {
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+    color: var(--blog-text-light);
+    line-height: 1.7;
+}
+
+/* Add style for the last list item */
+.notion-list-item:last-child {
+    margin-bottom: 0;
+}
+
+.spacer {
+    height: 1rem;
+}
+
+.notion-divider {
+    margin: 2.5rem 0;
+}
+
+.notion-divider hr {
+    border: none;
+    border-top: 1px solid var(--blog-border-light);
+}
+
+.notion-image {
+    margin: 2.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.notion-image img {
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.notion-image:hover img {
+    transform: scale(1.02);
+}
+
+.image-caption {
+    margin-top: 0.75rem;
+    color: var(--blog-secondary-light);
+    font-style: italic;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .notion-heading {
+        font-size: 2rem;
+    }
+
+    .notion-subheading {
+        font-size: 1.625rem;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .notion-content p,
+    .notion-list-item {
+        color: var(--blog-text-dark);
+    }
+
+    .notion-heading,
+    .notion-subheading {
+        color: var(--blog-heading-dark);
+    }
+
+    .notion-divider hr {
+        border-color: var(--blog-border-dark);
+    }
+
+    .image-caption {
+        color: var(--blog-secondary-dark);
+    }
+}
