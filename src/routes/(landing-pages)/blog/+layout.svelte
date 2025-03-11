@@ -60,9 +60,9 @@
 		--blog-spacing-xs: 0.5rem;
 
 		/* Layout */
-		--blog-content-width: 60ch;
-		--blog-subtitle-width: 45ch;
-		--blog-blockquote-width: 40ch;
+		/* --blog-content-width: 60ch; */
+		/* --blog-subtitle-width: 45ch; */
+		/* --blog-blockquote-width: 40ch; */
 		--blog-border-radius: 0.375rem;
 		--blog-border-radius-sm: 0.25rem;
 	}

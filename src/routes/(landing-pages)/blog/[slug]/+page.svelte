@@ -4,7 +4,8 @@
 	import DarkCodeTheme from 'svelte-highlight/styles/nord';
 	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
-	import { subAndSuper, wrapLists, createTOC } from '$lib/notion/utils/blog-helpers';
+	import { subAndSuper, wrapLists, createTOC, insertTOC } from '$lib/notion/utils/blog-helpers';
+	import { fade, fly } from 'svelte/transition';
 	import type {
 		PageObjectResponse,
 		RichTextPropertyItemObjectResponse,
@@ -14,14 +15,26 @@
 		QueryDatabaseResponse
 	} from '$lib/notion/types/notion-types';
 
-	let darkMode: boolean;
+	let darkMode = false;
 	let context: HTMLElement;
+	let tocVisible = false;
 
 	const runBlogHelpers = async () => {
 		await tick();
 		subAndSuper(context);
 		wrapLists(context);
-		createTOC();
+
+		// Explicitly call insertTOC and set tocVisible flag
+		insertTOC();
+		tocVisible = document.querySelector('.toc-container') !== null;
+
+		// If TOC wasn't created, try again after a short delay
+		if (!tocVisible) {
+			setTimeout(() => {
+				insertTOC();
+				tocVisible = document.querySelector('.toc-container') !== null;
+			}, 500);
+		}
 	};
 
 	export let data: {
@@ -78,7 +91,17 @@
 		return isUrlProperty(prop) ? prop.url : '';
 	}
 
+	function toggleDarkMode() {
+		darkMode = !darkMode;
+		document.documentElement.classList.toggle('dark-mode', darkMode);
+	}
+
 	onMount(() => {
+		// Check system preference for dark mode
+		const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		darkMode = prefersDarkMode;
+		document.documentElement.classList.toggle('dark-mode', darkMode);
+
 		runBlogHelpers();
 		fetch(window.location.href, {
 			headers: {
@@ -121,432 +144,349 @@
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
 	/>
 
-	{@html LightCodeTheme}
+	{@html darkMode ? DarkCodeTheme : LightCodeTheme}
 </svelte:head>
 
-<div class="blog-container">
-	<div>
-		<h1>{getTextContent(title) || 'Untitled'}</h1>
-		<p class="subtitle">
-			<em
-				>{#if isRichTextProperty(subtitle)}<TextMacro type={subtitle} />{/if}</em
-			>
-		</p>
-	</div>
-	<hr />
-	<div>
-		<p class="meta-info">
-			<em>type</em>
-			<span>{isSelectProperty(category) ? category.select?.name : 'Uncategorized'}</span>
-		</p>
-		<p class="meta-info">
-			<em>time</em>
-			<span>
-				{#if isFormulaProperty(readingTime) && readingTime.formula.type === 'string'}
-					{readingTime.formula.string === '1 minutes' ? '1 minute' : readingTime.formula.string}
+<div class="blog-post-container" class:dark-mode={darkMode}>
+	<div class="blog-post-header" in:fade={{ duration: 800, delay: 200 }}>
+		<div class="header-top">
+			<a href="/blog" class="back-link" in:fly={{ x: -20, duration: 600, delay: 100 }}>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<line x1="19" y1="12" x2="5" y2="12"></line>
+					<polyline points="12 19 5 12 12 5"></polyline>
+				</svg>
+				Back to posts
+			</a>
+
+			<button class="theme-toggle" on:click={toggleDarkMode}>
+				{#if darkMode}
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<circle cx="12" cy="12" r="5"></circle>
+						<line x1="12" y1="1" x2="12" y2="3"></line>
+						<line x1="12" y1="21" x2="12" y2="23"></line>
+						<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+						<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+						<line x1="1" y1="12" x2="3" y2="12"></line>
+						<line x1="21" y1="12" x2="23" y2="12"></line>
+						<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+					</svg>
 				{:else}
-					Unknown
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+					</svg>
 				{/if}
-			</span>
-		</p>
-		<p class="meta-info">
-			<em>tl;dr</em>
-			<span>
-				{#if isRichTextProperty(summary)}<TextMacro type={summary} />{/if}
-			</span>
-		</p>
+			</button>
+		</div>
+
+		<div class="title-container" in:fly={{ y: 20, duration: 800, delay: 300 }}>
+			<h1>{getTextContent(title) || 'Untitled'}</h1>
+			{#if isRichTextProperty(subtitle)}
+				<p class="subtitle">
+					<em><TextMacro type={subtitle} /></em>
+				</p>
+			{/if}
+		</div>
+
+		<div class="meta-container" in:fly={{ y: 20, duration: 800, delay: 400 }}>
+			<div class="meta-item">
+				<span class="meta-label">Category</span>
+				<span class="meta-value category-tag">
+					{isSelectProperty(category) ? category.select?.name : 'Uncategorized'}
+				</span>
+			</div>
+
+			<div class="meta-item">
+				<span class="meta-label">Reading Time</span>
+				<span class="meta-value">
+					{#if isFormulaProperty(readingTime) && readingTime.formula.type === 'string'}
+						{readingTime.formula.string === '1 minutes' ? '1 minute' : readingTime.formula.string}
+					{:else}
+						Unknown
+					{/if}
+				</span>
+			</div>
+
+			{#if isRichTextProperty(summary)}
+				<div class="meta-item summary">
+					<span class="meta-label">Summary</span>
+					<span class="meta-value summary-text">
+						<TextMacro type={summary} />
+					</span>
+				</div>
+			{/if}
+		</div>
 	</div>
-	<hr />
+
+	{#if isUrlProperty(coverURL) && coverURL.url}
+		<div class="cover-image-container" in:fade={{ duration: 1000, delay: 500 }}>
+			<img src={coverURL.url} alt={getTextContent(title)} class="cover-image" />
+		</div>
+	{/if}
+
 	{#if content.length > 0}
-		<div class="notion-container" bind:this={context}>
+		<div
+			class="notion-content-container"
+			in:fade={{ duration: 800, delay: 600 }}
+			bind:this={context}
+		>
 			<NotionPageParser results={content} />
 		</div>
-	{:else}
-		<p>No content available.</p>
 	{/if}
-	<p class="back-link">
-		<a href="/blog" data-sveltekit-noscroll>back.</a>
-	</p>
 </div>
 
 <style>
-	.blog-container {
+	.blog-post-container {
 		background-color: var(--blog-bg-light);
-		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
-		height: 100%;
+		padding-bottom: 4rem;
 		min-height: 100vh;
 		color: var(--blog-text-light);
+	}
 
-		@media (min-width: 640px) {
-			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
-		}
+	.blog-post-container.dark-mode {
+		background-color: var(--blog-bg-dark);
+		color: var(--blog-text-dark);
+	}
 
-		@media (min-width: 768px) {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding: var(--blog-spacing-lg) var(--blog-spacing-xl);
-		}
+	.blog-post-header {
+		margin: 0 auto;
+		padding: 2rem 2rem;
+		width: 100%;
+		max-width: var(--blog-content-width);
+	}
 
-		@media (min-width: 1280px) {
-			padding: var(--blog-spacing-xl) var(--blog-spacing-xl);
-		}
+	.header-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2rem;
+	}
 
-		@media (min-width: 1536px) {
-			padding: var(--blog-spacing-xl) var(--blog-spacing-lg);
-		}
+	.back-link {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		transition:
+			transform 0.3s ease,
+			color 0.3s ease;
+		color: var(--blog-accent-light);
+		font-size: 1rem;
+	}
 
-		@media (min-width: 1920px) {
-			padding: var(--blog-spacing-xl) 25vw;
-		}
+	.back-link:hover {
+		transform: translateX(-5px);
+		color: var(--blog-text-light);
+		text-decoration: none;
+	}
 
-		@media (prefers-color-scheme: dark) {
-			background-color: var(--blog-bg-dark);
-			color: var(--blog-text-dark);
+	.theme-toggle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition:
+			background-color 0.3s ease,
+			color 0.3s ease;
+		cursor: pointer;
+		border: none;
+		border-radius: 50%;
+		background: transparent;
+		padding: 0.5rem;
+		color: var(--blog-accent-light);
+	}
 
-			:global(*) {
-				color: var(--blog-text-dark);
-			}
+	.theme-toggle:hover {
+		background-color: rgba(255, 255, 255, 0.1);
+		color: var(--blog-text-light);
+	}
 
-			:global(a),
-			:global(code),
-			:global(.notion-container a),
-			:global(.notion-container code) {
-				color: var(--blog-link-dark);
-			}
-		}
-
-		:global(sub),
-		:global(sup) {
-			color: inherit;
-		}
+	.title-container {
+		margin-bottom: 2rem;
 	}
 
 	h1 {
-		font-size: 2.25rem;
-		line-height: 2.5rem;
-
-		@media (min-width: 640px) {
-			font-size: 3rem;
-			line-height: 1;
-		}
-
-		@media (min-width: 768px) {
-			margin-bottom: var(--blog-spacing-sm);
-			font-size: var(--blog-heading-large);
-			line-height: 1;
-		}
-
-		@media (min-width: 1024px) {
-			font-size: 4.5rem;
-			line-height: 1;
-		}
+		margin-bottom: 1rem;
+		color: var(--blog-heading-light);
+		font-weight: 700;
+		font-size: var(--blog-heading-large);
+		line-height: 1.2;
 	}
 
 	.subtitle {
 		max-width: var(--blog-subtitle-width);
 		color: var(--blog-accent-light);
-		font-size: var(--blog-body);
-		line-height: 1.75rem;
-
-		@media (min-width: 768px) {
-			font-size: var(--blog-body-large);
-			line-height: 2.25rem;
-		}
-
-		em {
-			color: var(--blog-secondary-light);
-		}
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-accent-dark);
-
-			em {
-				color: var(--blog-secondary-dark);
-			}
-		}
-	}
-
-	hr {
-		display: block;
-		opacity: 0.8;
-		margin: var(--blog-spacing-xl) 0;
-		border: none;
-		border-top: 1px solid var(--blog-border-light);
-		width: 100%;
-		max-width: var(--blog-content-width);
-		height: 1px;
 		font-size: var(--blog-body-large);
-
-		@media (prefers-color-scheme: dark) {
-			border-top-color: var(--blog-border-dark);
-		}
+		line-height: 1.5;
 	}
 
-	.meta-info {
+	.meta-container {
 		display: flex;
-		margin-bottom: var(--blog-spacing-sm);
-		width: 100%;
-		max-width: var(--blog-subtitle-width);
-
-		em {
-			display: block;
-			width: 5ch;
-			color: var(--blog-text-light);
-			font-weight: 500;
-		}
-
-		span {
-			display: block;
-			width: 35ch;
-			color: var(--blog-accent-light);
-		}
-
-		@media (prefers-color-scheme: dark) {
-			em {
-				color: var(--blog-text-dark);
-			}
-
-			span {
-				color: var(--blog-accent-dark);
-			}
-		}
+		flex-direction: column;
+		gap: 1rem;
+		margin-bottom: 2rem;
 	}
 
-	.notion-container {
-		max-width: var(--blog-content-width);
+	.meta-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.meta-label {
+		color: var(--blog-secondary-light);
+		font-size: 0.875rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.meta-value {
+		color: var(--blog-accent-light);
+		font-size: 1rem;
+	}
+
+	.category-tag {
+		display: inline-block;
+		border-radius: 2rem;
+		background-color: rgba(255, 255, 255, 0.1);
+		padding: 0.25rem 0.75rem;
+		width: fit-content;
+		font-size: 0.875rem;
+	}
+
+	.summary {
+		margin-top: 0.5rem;
+	}
+
+	.summary-text {
+		color: var(--blog-accent-light);
 		font-size: var(--blog-body);
-		line-height: 1.75rem;
+		line-height: 1.6;
+	}
 
-		@media (min-width: 1024px) {
-			font-size: var(--blog-body-large);
-			line-height: 2rem;
+	.cover-image-container {
+		margin: 0 auto 2rem;
+		padding: 0 2rem;
+		width: 100%;
+		max-width: var(--blog-content-width);
+	}
+
+	.cover-image {
+		border-radius: var(--blog-border-radius);
+		aspect-ratio: 16/9;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	.notion-content-container {
+		margin: 0 auto;
+		padding: 0 2rem;
+		width: 100%;
+		max-width: var(--blog-content-width);
+	}
+
+	/* Custom TOC styles to ensure visibility */
+	:global(.toc-container) {
+		margin: 2rem 0 3rem;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.08);
+		padding: 1.5rem;
+	}
+
+	:global(.toc-header) {
+		margin-bottom: 1rem;
+		color: var(--blog-heading-light);
+		font-weight: 600;
+		font-size: 1.25rem;
+	}
+
+	:global(.toc-list) {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	:global(.toc-item) {
+		transition: border-color 0.2s ease;
+		margin-bottom: 0.75rem;
+		border-left: 2px solid rgba(255, 255, 255, 0.2);
+		padding-left: 1rem;
+	}
+
+	:global(.toc-item:hover) {
+		border-left-color: rgba(255, 255, 255, 0.6);
+	}
+
+	:global(.toc-link) {
+		display: inline-block;
+		transition:
+			color 0.2s ease,
+			transform 0.2s ease;
+		color: var(--blog-accent-light);
+		font-size: 1rem;
+		text-decoration: none;
+	}
+
+	:global(.toc-link:hover) {
+		transform: translateX(3px);
+		color: var(--blog-text-light);
+		text-decoration: none;
+	}
+
+	:global(.highlight-heading) {
+		animation: highlight-pulse 2s ease-out;
+	}
+
+	@keyframes highlight-pulse {
+		0% {
+			background-color: rgba(209, 220, 231, 0.2);
 		}
-
-		:global(p) {
-			margin-bottom: 1em;
+		100% {
+			background-color: transparent;
 		}
 	}
 
-	.back-link {
-		margin-top: 4em;
-		font-size: 2.25rem;
-		line-height: 2.5rem;
-		text-align: right;
-
-		@media (min-width: 768px) {
-			font-size: var(--blog-heading-large);
-			line-height: 1;
+	@media (min-width: 768px) {
+		.meta-container {
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: 2rem;
 		}
 
-		a {
-			display: inline-block;
-			padding: var(--blog-spacing-md);
-			color: var(--blog-text-light);
-			font-family: 'Spectral', serif;
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-text-dark);
-			}
-		}
-	}
-
-	/* Styles from blog-post.css */
-	.blog-container {
-		:global(.notion-container .toc) {
-			margin-top: 2em;
-			margin-bottom: 2em;
-		}
-
-		:global(.notion-container a) {
-			color: var(--blog-link-light);
-			font-weight: 500;
-
-			&:hover {
-				text-decoration: underline;
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-link-dark);
-			}
-		}
-
-		:global(.notion-container code) {
-			border-radius: var(--blog-border-radius-sm);
-			background-color: var(--blog-code-bg);
-			padding: 0.2em 0.4em;
-			color: var(--blog-link-light);
-		}
-
-		:global(.notion-container pre code) {
-			display: block;
-			border-radius: var(--blog-border-radius);
-			padding: 1em;
-			overflow-x: auto;
-		}
-
-		:global(.notion-container pre) {
-			margin-bottom: var(--blog-spacing-md);
-		}
-
-		:global(.notion-container blockquote) {
-			margin-top: var(--blog-spacing-lg);
-			margin-left: 2em;
-			max-width: var(--blog-blockquote-width);
-			color: var(--blog-callout-light);
-			font-style: italic;
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-secondary-dark);
-			}
-		}
-
-		:global(.notion-container .image) {
-			margin-top: 2em;
-			margin-bottom: 2em;
-			padding-right: var(--blog-spacing-xs);
-
-			@media (min-width: 640px) {
-				padding-right: 3em;
-				padding-left: 1em;
-			}
-
-			& img {
-				border-radius: 1.5rem;
-				width: 100%;
-				height: 100%;
-				object-fit: contain;
-
-				@media (min-width: 1024px) {
-					object-position: left;
-				}
-			}
-		}
-
-		:global(.notion-container h2) {
-			margin-top: 2.5em;
-			margin-bottom: 1.5em;
-			color: var(--blog-heading-light);
-			font-weight: 500;
-			font-size: var(--blog-heading-small);
-
-			@media (min-width: 768px) {
-				font-size: var(--blog-heading-medium);
-			}
-
-			@media (min-width: 1024px) {
-				font-size: 2.25rem;
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-heading-dark);
-			}
-		}
-
-		:global(.notion-container h3) {
-			margin-top: 1.5em;
-			margin-bottom: 1em;
-			color: var(--blog-heading-light);
-			font-weight: 500;
-			font-size: var(--blog-heading-small);
-
-			@media (min-width: 768px) {
-				font-size: var(--blog-heading-medium);
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-heading-dark);
-			}
-		}
-
-		:global(.notion-container ol),
-		:global(.notion-container ul) {
-			margin-left: 2em;
-
-			li {
-				color: inherit;
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-text-dark);
-			}
-		}
-
-		:global(.notion-container hr) {
-			opacity: 0.8;
-			margin: var(--blog-spacing-xl) auto;
-			border: none;
-			border-top: 1px solid var(--blog-border-light);
-			width: auto;
-			max-width: var(--blog-content-width);
-			height: 1px;
-
-			@media (prefers-color-scheme: dark) {
-				border-top-color: var(--blog-border-dark);
-			}
-		}
-
-		:global(ol) {
-			list-style-type: decimal;
-		}
-
-		:global(ul) {
-			list-style-type: disc;
-		}
-
-		:global(div.callout) {
-			display: flex;
-			align-items: flex-start;
-			gap: 1rem;
-			margin-top: var(--blog-spacing-lg);
-			margin-bottom: var(--blog-spacing-md);
-			border-radius: 0.5rem;
-			background-color: var(--blog-callout-light);
-			padding: var(--blog-spacing-lg) var(--blog-spacing-sm) var(--blog-spacing-md);
-
-			@media (min-width: 768px) {
-				gap: var(--blog-spacing-lg);
-				padding-right: 5rem;
-				padding-left: 5rem;
-			}
-
-			& > :first-child {
-				font-size: var(--blog-heading-small);
-
-				@media (min-width: 768px) {
-					font-size: var(--blog-heading-medium);
-				}
-			}
-
-			& > :last-child {
-				font-size: var(--blog-body-small);
-
-				@media (min-width: 768px) {
-					font-size: var(--blog-body);
-				}
-			}
-
-			@media (prefers-color-scheme: dark) {
-				background-color: var(--blog-callout-dark);
-			}
-		}
-
-		:global(.notion-container p, li) {
-			color: var(--blog-accent-light);
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-accent-dark);
-			}
-		}
-	}
-
-	.blog-container {
-		:global(.notion-container code) {
-			font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
-		}
-
-		:global(.notion-container pre code *) {
-			font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
+		.summary {
+			flex-basis: 100%;
+			margin-top: 1rem;
 		}
 	}
 </style>

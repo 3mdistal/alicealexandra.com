@@ -45,35 +45,40 @@
 	}
 
 	a {
-		color: var(--blog-link);
+		transition: color 0.2s ease;
+		color: var(--blog-link-light, #d1dce7);
 		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 2px;
+	}
 
-		&:hover {
-			color: var(--blog-link-hover);
-		}
+	a:hover {
+		color: var(--blog-text-light, #ffffff);
 	}
 
 	code {
-		border-radius: var(--blog-border-radius-sm);
-		background-color: var(--blog-inline-code-bg);
+		border-radius: var(--blog-border-radius-sm, 0.25rem);
+		background-color: var(--blog-code-bg, rgba(0, 0, 0, 0.2));
 		padding: 0.1em 0.3em;
-		font-size: var(--blog-code);
-		font-family: monospace;
+		font-size: 0.9em;
+		font-family: 'Cutive Mono', monospace;
 	}
 
-	span {
-		&.line-through {
-			text-decoration: line-through;
-		}
+	strong {
+		font-weight: 600;
+	}
 
-		&.mention {
-			color: var(--blog-mention);
-			font-weight: 500;
-		}
+	span.line-through {
+		text-decoration: line-through;
+	}
 
-		&.equation {
-			color: var(--blog-equation);
-			font-style: italic;
-		}
+	span.mention {
+		color: var(--blog-accent-light, rgba(255, 255, 255, 0.9));
+		font-weight: 500;
+	}
+
+	span.equation {
+		color: var(--blog-accent-light, rgba(255, 255, 255, 0.9));
+		font-style: italic;
 	}
 </style>
