@@ -178,12 +178,12 @@
 		return;
 	}
 
-	function handleClickMessage(e) {
+	function handleClickMessage(e: CustomEvent) {
 		// Handle click events from the button
 		loading = e.detail.click;
 	}
 
-	function handleFocusMessage(e) {
+	function handleFocusMessage(e: CustomEvent) {
 		// Handle focus events from the button
 		if (e.detail.focus === true) {
 			seeBack();
@@ -212,7 +212,7 @@
 	<!-- Front of Card -->
 	<div class="card-front" bind:this={front}>
 		<div class="logo-container">
-			<p class="logo-text"><TextMacro type={logo} /></p>
+			<div class="logo-text"><TextMacro type={logo} /></div>
 		</div>
 		<div class="title-container">
 			<h2>{title}</h2>

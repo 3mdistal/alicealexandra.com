@@ -48,7 +48,7 @@
 		<img src={Logo} alt="Home button logo." class="logo" bind:this={logo} />
 		<div bind:this={circle} class="circle-container">
 			<img src={PlainCircle} class="circle-image" alt="Home button logo." />
-			<p class="home-text">home.</p>
+			<div class="home-text">home.</div>
 		</div>
 	</a>
 </div>
