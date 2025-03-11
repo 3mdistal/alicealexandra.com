@@ -128,6 +128,14 @@
 		width: 100%;
 	}
 
+	/* Add styles for list containers */
+	:global(.notion-content ul),
+	:global(.notion-content ol) {
+		margin: 0 0 var(--blog-paragraph-spacing) 0;
+		padding-left: 2rem;
+		list-style-position: outside;
+	}
+
 	.spacer {
 		height: 1rem;
 	}
@@ -148,10 +156,17 @@
 		line-height: 1.3;
 	}
 
+	/* Update list item styles */
 	.notion-list-item {
 		margin-bottom: 0.75rem;
+		padding-left: 0.5rem;
 		color: var(--blog-text-light);
-		line-height: 1.6;
+		line-height: 1.7;
+	}
+
+	/* Add style for the last list item */
+	.notion-list-item:last-child {
+		margin-bottom: 0;
 	}
 
 	.notion-callout {
@@ -320,5 +335,15 @@
 		.notion-quote {
 			margin: 2rem auto;
 		}
+	}
+
+	/* Add nested list styles */
+	:global(.notion-content ul ul),
+	:global(.notion-content ul ol),
+	:global(.notion-content ol ul),
+	:global(.notion-content ol ol) {
+		margin-top: 0.75rem;
+		margin-bottom: 0;
+		padding-left: 1.5rem;
 	}
 </style>
