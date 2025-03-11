@@ -346,4 +346,40 @@
 		margin-bottom: 0;
 		padding-left: 1.5rem;
 	}
+
+	/* Convert dark mode styles to use media queries */
+	@media (prefers-color-scheme: dark) {
+		:global(.notion-content p),
+		.notion-list-item,
+		.callout-content {
+			color: var(--blog-text-dark);
+		}
+
+		.notion-heading,
+		.notion-subheading {
+			color: var(--blog-heading-dark);
+		}
+
+		.notion-quote {
+			border-left-color: var(--blog-border-dark);
+			color: var(--blog-accent-dark);
+		}
+
+		.notion-callout {
+			border-left-color: var(--blog-border-dark);
+			background: var(--blog-callout-dark);
+		}
+
+		.image-caption {
+			color: var(--blog-secondary-dark);
+		}
+
+		.code-language {
+			color: var(--blog-secondary-dark);
+		}
+
+		.notion-divider hr {
+			border-color: var(--blog-border-dark);
+		}
+	}
 </style>

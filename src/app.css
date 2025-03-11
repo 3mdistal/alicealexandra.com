@@ -58,13 +58,25 @@
 }
 
 /* Dark mode class for the HTML element */
-html.dark-mode {
-	--blog-bg-light: var(--blog-bg-dark);
-	--blog-text-light: var(--blog-text-dark);
-	--blog-accent-light: var(--blog-accent-dark);
-	--blog-link-light: var(--blog-link-dark);
-	--blog-border-light: var(--blog-border-dark);
-	--blog-callout-light: var(--blog-callout-dark);
+@media (prefers-color-scheme: dark) {
+	:root {
+		--blog-bg-light: var(--blog-bg-dark);
+		--blog-text-light: var(--blog-text-dark);
+		--blog-heading-light: var(--blog-heading-dark);
+		--blog-accent-light: var(--blog-accent-dark);
+		--blog-secondary-light: var(--blog-secondary-dark);
+		--blog-link-light: var(--blog-link-dark);
+		--blog-border-light: var(--blog-border-dark);
+		--blog-callout-light: var(--blog-callout-dark);
+		--blog-quote-bg-light: var(--blog-quote-bg-dark);
+		--blog-code-bg-light: var(--blog-code-bg-dark);
+		--blog-inline-code-bg-light: var(--blog-inline-code-bg-dark);
+		--blog-code-tag-light: var(--blog-code-tag-dark);
+		--blog-code-property-light: var(--blog-code-property-dark);
+		--blog-divider-light: var(--blog-divider-dark);
+		--blog-mention-light: var(--blog-mention-dark);
+		--blog-equation-light: var(--blog-equation-dark);
+	}
 }
 
 * {

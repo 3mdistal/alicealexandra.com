@@ -15,7 +15,6 @@
 		QueryDatabaseResponse
 	} from '$lib/notion/types/notion-types';
 
-	let darkMode = false;
 	let context: HTMLElement;
 	let tocVisible = false;
 
@@ -91,17 +90,7 @@
 		return isUrlProperty(prop) ? prop.url : '';
 	}
 
-	function toggleDarkMode() {
-		darkMode = !darkMode;
-		document.documentElement.classList.toggle('dark-mode', darkMode);
-	}
-
 	onMount(() => {
-		// Check system preference for dark mode
-		const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		darkMode = prefersDarkMode;
-		document.documentElement.classList.toggle('dark-mode', darkMode);
-
 		runBlogHelpers();
 		fetch(window.location.href, {
 			headers: {
@@ -144,10 +133,12 @@
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
 	/>
 
-	{@html darkMode ? DarkCodeTheme : LightCodeTheme}
+	{@html window?.matchMedia('(prefers-color-scheme: dark)').matches
+		? DarkCodeTheme
+		: LightCodeTheme}
 </svelte:head>
 
-<div class="blog-post-container" class:dark-mode={darkMode}>
+<div class="blog-post-container">
 	<div class="blog-post-header" in:fade={{ duration: 800, delay: 200 }}>
 		<div class="header-top">
 			<a href="/blog" class="back-link" in:fly={{ x: -20, duration: 600, delay: 100 }}>
@@ -167,46 +158,6 @@
 				</svg>
 				Back to posts
 			</a>
-
-			<button class="theme-toggle" on:click={toggleDarkMode}>
-				{#if darkMode}
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="20"
-						height="20"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<circle cx="12" cy="12" r="5"></circle>
-						<line x1="12" y1="1" x2="12" y2="3"></line>
-						<line x1="12" y1="21" x2="12" y2="23"></line>
-						<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-						<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-						<line x1="1" y1="12" x2="3" y2="12"></line>
-						<line x1="21" y1="12" x2="23" y2="12"></line>
-						<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-					</svg>
-				{:else}
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="20"
-						height="20"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-					</svg>
-				{/if}
-			</button>
 		</div>
 
 		<div class="title-container" in:fly={{ y: 20, duration: 800, delay: 300 }}>
@@ -273,9 +224,11 @@
 		color: var(--blog-text-light);
 	}
 
-	.blog-post-container.dark-mode {
-		background-color: var(--blog-bg-dark);
-		color: var(--blog-text-dark);
+	@media (prefers-color-scheme: dark) {
+		.blog-post-container {
+			background-color: var(--blog-bg-dark);
+			color: var(--blog-text-dark);
+		}
 	}
 
 	.blog-post-header {
@@ -307,26 +260,6 @@
 		transform: translateX(-5px);
 		color: var(--blog-text-light);
 		text-decoration: none;
-	}
-
-	.theme-toggle {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		transition:
-			background-color 0.3s ease,
-			color 0.3s ease;
-		cursor: pointer;
-		border: none;
-		border-radius: 50%;
-		background: transparent;
-		padding: 0.5rem;
-		color: var(--blog-accent-light);
-	}
-
-	.theme-toggle:hover {
-		background-color: rgba(255, 255, 255, 0.1);
-		color: var(--blog-text-light);
 	}
 
 	.title-container {
