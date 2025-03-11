@@ -34,6 +34,7 @@ h6 {
 h1 {
     font-size: var(--blog-heading-large);
     margin-bottom: var(--blog-spacing-lg);
+    font-weight: 300;
 }
 
 h2 {

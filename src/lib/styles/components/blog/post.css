@@ -1,22 +1,22 @@
-.blog-container {
-    background-color: var(--blog-bg-light);
-    color: var(--blog-text-light);
+/* Blog Post Styles
+ * --------------
+ * Styles for blog post layout, header, meta information,
+ * and content containers.
+ */
+
+/* Base Layout */
+.blog-post {
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
-.text-gradient {
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+.blog-post-container {
+    background-color: var(--blog-bg-light);
+    min-height: 100vh;
 }
 
-.spacer {
-    height: 100px;
-}
-
-/* Blog Post Layout */
+/* Blog Post Header */
 .blog-post-header {
     margin: 0 auto;
     padding: 2rem 2rem;
@@ -36,10 +36,10 @@
     align-items: center;
     gap: 0.5rem;
     transition:
-        transform 0.3s ease,
-        color 0.3s ease;
+        transform var(--transition-medium) ease,
+        color var(--transition-medium) ease;
     color: var(--blog-accent-light);
-    font-size: 1rem;
+    font-size: var(--blog-body-small);
 }
 
 .back-link:hover {
@@ -55,7 +55,6 @@
 .blog-post-header h1 {
     margin-bottom: 1rem;
     color: var(--blog-heading-light);
-    font-weight: 700;
     font-size: var(--blog-heading-large);
     line-height: 1.2;
 }
@@ -90,13 +89,13 @@
 
 .meta-value {
     color: var(--blog-accent-light);
-    font-size: 1rem;
+    font-size: var(--blog-body-small);
 }
 
 .category-tag {
     display: inline-block;
     border-radius: 2rem;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--blog-callout-light);
     padding: 0.25rem 0.75rem;
     width: fit-content;
     font-size: 0.875rem;
@@ -128,11 +127,51 @@
     object-fit: cover;
 }
 
+/* Content Container */
 .notion-content-container {
     margin: 0 auto;
     padding: 0 2rem;
     width: 100%;
     max-width: var(--blog-content-width);
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+    .blog-post-container {
+        background-color: var(--blog-bg-dark);
+    }
+
+    .blog-post-header h1 {
+        color: var(--blog-heading-dark);
+    }
+
+    .back-link {
+        color: var(--blog-accent-dark);
+    }
+
+    .back-link:hover {
+        color: var(--blog-text-dark);
+    }
+
+    .subtitle {
+        color: var(--blog-accent-dark);
+    }
+
+    .meta-label {
+        color: var(--blog-secondary-dark);
+    }
+
+    .meta-value {
+        color: var(--blog-accent-dark);
+    }
+
+    .category-tag {
+        background-color: var(--blog-callout-dark);
+    }
+
+    .summary-text {
+        color: var(--blog-accent-dark);
+    }
 }
 
 /* Responsive Design */

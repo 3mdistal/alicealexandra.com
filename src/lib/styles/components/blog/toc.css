@@ -1,10 +1,16 @@
-/* Table of Contents */
+/* Table of Contents Styles
+ * ------------------
+ * Styles for the blog post table of contents.
+ * These styles handle the TOC container, header, list items,
+ * and interactive states.
+ */
+
 .toc-container {
     margin: 2rem 0 3rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--blog-border-light);
+    border-radius: var(--blog-border-radius);
+    background: var(--blog-callout-light);
     padding: 1.5rem;
 }
 
@@ -22,23 +28,23 @@
 }
 
 .toc-item {
-    transition: border-color 0.2s ease;
+    transition: border-color var(--transition-fast) ease;
     margin-bottom: 0.75rem;
-    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    border-left: 2px solid var(--blog-border-light);
     padding-left: 1rem;
 }
 
 .toc-item:hover {
-    border-left-color: rgba(255, 255, 255, 0.6);
+    border-left-color: var(--blog-accent-light);
 }
 
 .toc-link {
     display: inline-block;
     transition:
-        color 0.2s ease,
-        transform 0.2s ease;
+        color var(--transition-fast) ease,
+        transform var(--transition-fast) ease;
     color: var(--blog-accent-light);
-    font-size: 1rem;
+    font-size: var(--blog-body);
     text-decoration: none;
 }
 
@@ -50,6 +56,34 @@
 
 .highlight-heading {
     animation: highlight-pulse 2s ease-out;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .toc-container {
+        border-color: var(--blog-border-dark);
+        background: var(--blog-callout-dark);
+    }
+
+    .toc-header {
+        color: var(--blog-heading-dark);
+    }
+
+    .toc-item {
+        border-left-color: var(--blog-border-dark);
+    }
+
+    .toc-item:hover {
+        border-left-color: var(--blog-accent-dark);
+    }
+
+    .toc-link {
+        color: var(--blog-accent-dark);
+    }
+
+    .toc-link:hover {
+        color: var(--blog-text-dark);
+    }
 }
 
 @keyframes highlight-pulse {

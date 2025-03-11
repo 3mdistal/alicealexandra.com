@@ -1,0 +1,38 @@
+/* Animations
+ * ----------
+ * Global animation keyframes and utility classes for animations
+ * throughout the application.
+ */
+
+/* Highlight Pulse
+ * Used for highlighting elements like TOC headings
+ */
+@keyframes highlight-pulse {
+    0% {
+        background-color: var(--blog-callout-light);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    @keyframes highlight-pulse {
+        0% {
+            background-color: var(--blog-callout-dark);
+        }
+
+        100% {
+            background-color: transparent;
+        }
+    }
+}
+
+/* Disable animations when reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
