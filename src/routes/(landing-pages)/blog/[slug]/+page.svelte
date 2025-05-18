@@ -10,9 +10,10 @@
 		RichTextPropertyItemObjectResponse,
 		UrlPropertyItemObjectResponse,
 		SelectPropertyItemObjectResponse,
-		FormulaPropertyItemObjectResponse,
-		QueryDatabaseResponse
-	} from '$lib/notion/types/notion-types';
+                FormulaPropertyItemObjectResponse,
+                FilesPropertyItemObjectResponse,
+                QueryDatabaseResponse
+        } from '$lib/notion/types/notion-types';
 
 	let darkMode: boolean;
 	let context: HTMLElement;
@@ -46,13 +47,17 @@
 		return prop?.type === 'select';
 	}
 
-	function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
-		return prop?.type === 'formula';
-	}
+        function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
+                return prop?.type === 'formula';
+        }
 
-	function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
-		return prop?.type === 'rich_text';
-	}
+        function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
+                return prop?.type === 'rich_text';
+        }
+
+        function isFilesProperty(prop: any): prop is FilesPropertyItemObjectResponse {
+                return prop?.type === 'files';
+        }
 
 	const {
 		Name: title,
@@ -74,9 +79,21 @@
 	}
 
 	// Helper function to get URL from URL property
-	function getUrl(prop: any) {
-		return isUrlProperty(prop) ? prop.url : '';
-	}
+        function getUrl(prop: any) {
+                if (isUrlProperty(prop)) {
+                        return prop.url;
+                }
+                if (isFilesProperty(prop)) {
+                        const first = prop.files?.[0];
+                        if (first?.type === 'file') {
+                                return first.file.url;
+                        }
+                        if (first?.type === 'external') {
+                                return first.external.url;
+                        }
+                }
+                return '';
+        }
 
 	onMount(() => {
 		runBlogHelpers();
@@ -99,10 +116,10 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Blog - {getTextContent(title) || 'Blog'}" />
 	<meta property="og:description" content={getTextContent(ogDescription)} />
-	<meta
-		property="og:image"
-		content={isUrlProperty(coverURL) ? coverURL.url : 'https://unsplash.it/1200/600'}
-	/>
+        <meta
+                property="og:image"
+                content={getUrl(coverURL) || 'https://unsplash.it/1200/600'}
+        />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -112,10 +129,10 @@
 	<meta name="twitter:url" content="https://www.alicealexandra.com/blog" />
 	<meta name="twitter:title" content="Blog - {getTextContent(title) || 'Blog'}" />
 	<meta name="twitter:description" content={getTextContent(ogDescription)} />
-	<meta
-		name="twitter:image"
-		content={isUrlProperty(coverURL) ? coverURL.url : 'https://unsplash.it/1200/600'}
-	/>
+        <meta
+                name="twitter:image"
+                content={getUrl(coverURL) || 'https://unsplash.it/1200/600'}
+        />
 	<meta
 		name="twitter:image:alt"
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
