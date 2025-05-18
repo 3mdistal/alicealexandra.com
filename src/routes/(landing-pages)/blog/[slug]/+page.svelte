@@ -81,15 +81,12 @@
 
 	// Helper function to get URL from URL property
         function getUrl(prop: any) {
-                console.log('getUrl prop:', prop);
                 // Handle page cover object
                 if (prop && (prop.type === 'external' || prop.type === 'file')) {
                         if (prop.type === 'external' && prop.external?.url) {
-                                console.log('getUrl page cover external:', prop.external.url);
                                 return prop.external.url;
                         }
                         if (prop.type === 'file' && prop.file?.url) {
-                                console.log('getUrl page cover file:', prop.file.url);
                                 return prop.file.url;
                         }
                 }
@@ -100,21 +97,16 @@
                 }
                 if (isFilesProperty(prop)) {
                         const first = prop.files?.[0];
-                        console.log('getUrl first (if files):', first);
                         if (first?.type === 'file') {
-                                console.log('getUrl first.file.url:', first.file.url);
                                 return first.file.url;
                         }
                         if (first?.type === 'external') {
-                                console.log('getUrl first.external.url:', first.external.url);
                                 return first.external.url;
                         }
                 }
                 if (isFormulaProperty(prop) && prop.formula.type === 'string') {
-                        console.log('getUrl formula string:', prop.formula.string);
                         return prop.formula.string;
                 }
-                console.log('getUrl returning empty string');
                 return '';
         }
 
