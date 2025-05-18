@@ -12,6 +12,7 @@ _20 Jan 2025_
 - Illustrations gallery given a facelift.
 - Updated Svelte and other packages to latest 2025 builds.
 - Switch socials from Twitter to Bluesky and updated the little squirrel's mug. All is right with the world.
+- OG image meta tags now support Notion file properties.
 
 **Bugfixes**
 

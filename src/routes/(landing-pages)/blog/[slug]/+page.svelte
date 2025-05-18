@@ -10,9 +10,10 @@
 		RichTextPropertyItemObjectResponse,
 		UrlPropertyItemObjectResponse,
 		SelectPropertyItemObjectResponse,
-		FormulaPropertyItemObjectResponse,
-		QueryDatabaseResponse
-	} from '$lib/notion/types/notion-types';
+                FormulaPropertyItemObjectResponse,
+                FilesPropertyItemObjectResponse,
+                QueryDatabaseResponse
+        } from '$lib/notion/types/notion-types';
 
 	let darkMode: boolean;
 	let context: HTMLElement;
@@ -35,6 +36,8 @@
 
 	const blogPost = queryResponse?.results?.[0] as PageObjectResponse | undefined;
 
+	const pageCover = blogPost?.cover;
+
 	const content = contentResponse?.results || [];
 
 	// Type guards for Notion properties
@@ -46,13 +49,17 @@
 		return prop?.type === 'select';
 	}
 
-	function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
-		return prop?.type === 'formula';
-	}
+        function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
+                return prop?.type === 'formula';
+        }
 
-	function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
-		return prop?.type === 'rich_text';
-	}
+        function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
+                return prop?.type === 'rich_text';
+        }
+
+        function isFilesProperty(prop: any): prop is FilesPropertyItemObjectResponse {
+                return prop?.type === 'files';
+        }
 
 	const {
 		Name: title,
@@ -61,8 +68,7 @@
 		OGDescription: ogDescription,
 		ReadTime: readingTime,
 		Category: category,
-		Slug: slug,
-		Preview: coverURL
+		Slug: slug
 	} = blogPost?.properties || {};
 
 	// Helper function to safely get text content
@@ -74,9 +80,35 @@
 	}
 
 	// Helper function to get URL from URL property
-	function getUrl(prop: any) {
-		return isUrlProperty(prop) ? prop.url : '';
-	}
+        function getUrl(prop: any) {
+                // Handle page cover object
+                if (prop && (prop.type === 'external' || prop.type === 'file')) {
+                        if (prop.type === 'external' && prop.external?.url) {
+                                return prop.external.url;
+                        }
+                        if (prop.type === 'file' && prop.file?.url) {
+                                return prop.file.url;
+                        }
+                }
+
+                // Handle regular properties if not a page cover
+                if (isUrlProperty(prop)) {
+                        return prop.url;
+                }
+                if (isFilesProperty(prop)) {
+                        const first = prop.files?.[0];
+                        if (first?.type === 'file') {
+                                return first.file.url;
+                        }
+                        if (first?.type === 'external') {
+                                return first.external.url;
+                        }
+                }
+                if (isFormulaProperty(prop) && prop.formula.type === 'string') {
+                        return prop.formula.string;
+                }
+                return '';
+        }
 
 	onMount(() => {
 		runBlogHelpers();
@@ -99,10 +131,10 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Blog - {getTextContent(title) || 'Blog'}" />
 	<meta property="og:description" content={getTextContent(ogDescription)} />
-	<meta
-		property="og:image"
-		content={isUrlProperty(coverURL) ? coverURL.url : 'https://unsplash.it/1200/600'}
-	/>
+        <meta
+                property="og:image"
+                content={getUrl(pageCover) || 'https://unsplash.it/1200/600'}
+        />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -112,10 +144,10 @@
 	<meta name="twitter:url" content="https://www.alicealexandra.com/blog" />
 	<meta name="twitter:title" content="Blog - {getTextContent(title) || 'Blog'}" />
 	<meta name="twitter:description" content={getTextContent(ogDescription)} />
-	<meta
-		name="twitter:image"
-		content={isUrlProperty(coverURL) ? coverURL.url : 'https://unsplash.it/1200/600'}
-	/>
+        <meta
+                name="twitter:image"
+                content={getUrl(pageCover) || 'https://unsplash.it/1200/600'}
+        />
 	<meta
 		name="twitter:image:alt"
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
@@ -222,6 +254,17 @@
 		}
 	}
 
+	/* Styles for constraining top sections and back-link */
+	.blog-container > div:not(.notion-container) {
+		width: 100%;
+		max-width: var(--blog-content-width);
+		font-size: var(--blog-body);
+
+		@media (min-width: 1024px) {
+			font-size: var(--blog-body-large);
+		}
+	}
+
 	h1 {
 		font-size: 2.25rem;
 		line-height: 2.5rem;
@@ -244,7 +287,7 @@
 	}
 
 	.subtitle {
-		max-width: var(--blog-subtitle-width);
+		max-width: 100%;
 		color: var(--blog-accent-light);
 		font-size: var(--blog-body);
 		line-height: 1.75rem;
@@ -287,7 +330,7 @@
 		display: flex;
 		margin-bottom: var(--blog-spacing-sm);
 		width: 100%;
-		max-width: var(--blog-subtitle-width);
+		max-width: 100%;
 
 		em {
 			display: block;
@@ -329,6 +372,8 @@
 	}
 
 	.back-link {
+		width: 100%;
+		max-width: var(--blog-content-width);
 		margin-top: 4em;
 		font-size: 2.25rem;
 		line-height: 2.5rem;
