@@ -36,6 +36,8 @@
 
 	const blogPost = queryResponse?.results?.[0] as PageObjectResponse | undefined;
 
+	const pageCover = blogPost?.cover;
+
 	const content = contentResponse?.results || [];
 
 	// Type guards for Notion properties
@@ -66,8 +68,7 @@
 		OGDescription: ogDescription,
 		ReadTime: readingTime,
 		Category: category,
-		Slug: slug,
-		Preview: coverURL
+		Slug: slug
 	} = blogPost?.properties || {};
 
 	// Helper function to safely get text content
@@ -80,18 +81,40 @@
 
 	// Helper function to get URL from URL property
         function getUrl(prop: any) {
+                console.log('getUrl prop:', prop);
+                // Handle page cover object
+                if (prop && (prop.type === 'external' || prop.type === 'file')) {
+                        if (prop.type === 'external' && prop.external?.url) {
+                                console.log('getUrl page cover external:', prop.external.url);
+                                return prop.external.url;
+                        }
+                        if (prop.type === 'file' && prop.file?.url) {
+                                console.log('getUrl page cover file:', prop.file.url);
+                                return prop.file.url;
+                        }
+                }
+
+                // Handle regular properties if not a page cover
                 if (isUrlProperty(prop)) {
                         return prop.url;
                 }
                 if (isFilesProperty(prop)) {
                         const first = prop.files?.[0];
+                        console.log('getUrl first (if files):', first);
                         if (first?.type === 'file') {
+                                console.log('getUrl first.file.url:', first.file.url);
                                 return first.file.url;
                         }
                         if (first?.type === 'external') {
+                                console.log('getUrl first.external.url:', first.external.url);
                                 return first.external.url;
                         }
                 }
+                if (isFormulaProperty(prop) && prop.formula.type === 'string') {
+                        console.log('getUrl formula string:', prop.formula.string);
+                        return prop.formula.string;
+                }
+                console.log('getUrl returning empty string');
                 return '';
         }
 
@@ -118,7 +141,7 @@
 	<meta property="og:description" content={getTextContent(ogDescription)} />
         <meta
                 property="og:image"
-                content={getUrl(coverURL) || 'https://unsplash.it/1200/600'}
+                content={getUrl(pageCover) || 'https://unsplash.it/1200/600'}
         />
 
 	<!-- Twitter Meta Tags -->
@@ -131,7 +154,7 @@
 	<meta name="twitter:description" content={getTextContent(ogDescription)} />
         <meta
                 name="twitter:image"
-                content={getUrl(coverURL) || 'https://unsplash.it/1200/600'}
+                content={getUrl(pageCover) || 'https://unsplash.it/1200/600'}
         />
 	<meta
 		name="twitter:image:alt"
