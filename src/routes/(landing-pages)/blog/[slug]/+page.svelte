@@ -254,6 +254,17 @@
 		}
 	}
 
+	/* Styles for constraining top sections and back-link */
+	.blog-container > div:not(.notion-container) {
+		width: 100%;
+		max-width: var(--blog-content-width);
+		font-size: var(--blog-body);
+
+		@media (min-width: 1024px) {
+			font-size: var(--blog-body-large);
+		}
+	}
+
 	h1 {
 		font-size: 2.25rem;
 		line-height: 2.5rem;
@@ -276,7 +287,7 @@
 	}
 
 	.subtitle {
-		max-width: var(--blog-subtitle-width);
+		max-width: 100%;
 		color: var(--blog-accent-light);
 		font-size: var(--blog-body);
 		line-height: 1.75rem;
@@ -319,7 +330,7 @@
 		display: flex;
 		margin-bottom: var(--blog-spacing-sm);
 		width: 100%;
-		max-width: var(--blog-subtitle-width);
+		max-width: 100%;
 
 		em {
 			display: block;
@@ -361,6 +372,8 @@
 	}
 
 	.back-link {
+		width: 100%;
+		max-width: var(--blog-content-width);
 		margin-top: 4em;
 		font-size: 2.25rem;
 		line-height: 2.5rem;
