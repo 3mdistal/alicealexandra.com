@@ -55,8 +55,8 @@ export async function load() {
 		// Return empty arrays as fallback when Notion is not configured
 		return {
 			props: {
-				sections: [],
-				poems: []
+				sections: { results: [] },
+				poems: { results: [] }
 			}
 		};
 	}

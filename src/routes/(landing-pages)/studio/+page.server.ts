@@ -31,7 +31,7 @@ export async function load() {
 		console.warn('Failed to load studio cards from Notion:', error instanceof Error ? error.message : error);
 		// Return empty array as fallback when Notion is not configured
 		return {
-			cards: []
+			cards: { results: [] }
 		};
 	}
 }
