@@ -214,8 +214,6 @@
 	.blog-container {
 		background-color: var(--blog-bg-light);
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
-		height: 100%;
-		min-height: 100vh;
 		color: var(--blog-text-light);
 
 		@media (min-width: 640px) {
