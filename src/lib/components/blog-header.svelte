@@ -69,7 +69,7 @@
 <style>
 	.blog-header {
 		width: 100%;
-		max-width: var(--blog-content-width);
+		max-width: 900px;
 		margin: 0 auto;
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
 		color: var(--blog-text-light);
