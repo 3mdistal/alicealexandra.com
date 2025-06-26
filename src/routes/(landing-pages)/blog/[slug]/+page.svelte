@@ -225,9 +225,16 @@
 </div>
 
 <style>
+	:global(body) {
+		margin: 0;
+		padding: 0;
+	}
+
 	.page-wrapper {
 		min-height: 100vh;
 		background-color: white;
+		position: relative;
+		z-index: 1;
 
 		@media (prefers-color-scheme: dark) {
 			background-color: #1a1a1a;
