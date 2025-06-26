@@ -232,12 +232,12 @@
 
 	.page-wrapper {
 		min-height: 100vh;
-		background-color: white;
+		background-color: var(--blog-bg-light);
 		position: relative;
 		z-index: 1;
 
 		@media (prefers-color-scheme: dark) {
-			background-color: #1a1a1a;
+			background-color: var(--blog-bg-dark);
 		}
 	}
 
@@ -245,8 +245,6 @@
 		background-color: var(--blog-bg-light);
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
 		color: var(--blog-text-light);
-		max-width: 720px;
-		margin: 0 auto;
 
 		@media (min-width: 640px) {
 			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
