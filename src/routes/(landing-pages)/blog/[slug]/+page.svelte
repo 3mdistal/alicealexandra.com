@@ -188,39 +188,16 @@
 	{@html LightCodeTheme}
 </svelte:head>
 
+{#if blogPost}
+	<BlogHeader
+		{blogPost}
+		category={categoryName}
+		publishedDate={publishedDate}
+		readTime={readTime}
+	/>
+{/if}
+
 <div class="blog-container">
-	<div>
-		<h1>{getTextContent(title) || 'Untitled'}</h1>
-		<p class="subtitle">
-			<em
-				>{#if isRichTextProperty(subtitle)}<TextMacro type={subtitle} />{/if}</em
-			>
-		</p>
-	</div>
-	<hr />
-	<div>
-		<p class="meta-info">
-			<em>type</em>
-			<span>{isSelectProperty(category) ? category.select?.name : 'Uncategorized'}</span>
-		</p>
-		<p class="meta-info">
-			<em>time</em>
-			<span>
-				{#if isFormulaProperty(readingTime) && readingTime.formula.type === 'string'}
-					{readingTime.formula.string === '1 minutes' ? '1 minute' : readingTime.formula.string}
-				{:else}
-					Unknown
-				{/if}
-			</span>
-		</p>
-		<p class="meta-info">
-			<em>tl;dr</em>
-			<span>
-				{#if isRichTextProperty(summary)}<TextMacro type={summary} />{/if}
-			</span>
-		</p>
-	</div>
-	<hr />
 	{#if content.length > 0}
 		<div class="notion-container" bind:this={context}>
 			<NotionPageParser results={content} />
