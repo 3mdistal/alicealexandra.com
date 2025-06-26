@@ -206,9 +206,10 @@
 	{:else}
 		<p>No content available.</p>
 	{/if}
-	<p class="back-link">
-		<a href="/blog" data-sveltekit-noscroll>back.</a>
-	</p>
+		<p class="back-link">
+			<a href="/blog" data-sveltekit-noscroll>back.</a>
+		</p>
+	</div>
 </div>
 
 <style>
