@@ -449,6 +449,14 @@
 
 	/* Responsive Design */
 	@media (max-width: 768px) {
+		.blog-header {
+			min-width: auto;
+		}
+
+		.header-grid {
+			grid-template-columns: 1fr;
+		}
+
 		.blog-title {
 			font-size: 32px;
 			letter-spacing: -1.6px;
@@ -472,6 +480,14 @@
 		.metadata-right {
 			order: -1;
 		}
+
+		.vertical-line {
+			display: none;
+		}
+
+		.horizontal-line {
+			display: none;
+		}
 	}
 
 	@media (max-width: 480px) {
@@ -482,6 +498,14 @@
 
 		.breadcrumb-section {
 			padding: 32px 0 16px;
+		}
+
+		.title-section {
+			padding: 0 16px 24px;
+		}
+
+		.article-metadata {
+			padding: 16px;
 		}
 	}
 </style>
