@@ -306,7 +306,8 @@
 
 
 	.notion-container {
-		max-width: var(--blog-content-width);
+		max-width: 900px;
+		margin: 0 auto;
 		font-size: var(--blog-body);
 		line-height: 1.75rem;
 
