@@ -294,7 +294,8 @@
 	/* Styles for constraining top sections and back-link */
 	.blog-container > div:not(.notion-container) {
 		width: 100%;
-		max-width: var(--blog-content-width);
+		max-width: 900px;
+		margin: 0 auto;
 		font-size: var(--blog-body);
 
 		@media (min-width: 1024px) {
