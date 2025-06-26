@@ -1,10 +1,14 @@
 <script lang="ts">
 	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
 
-	export let blogPost: PageObjectResponse;
-	export let category: string = '';
-	export let publishedDate: string = '';
-	export let readTime: string = '';
+	interface Props {
+		blogPost: PageObjectResponse;
+		category?: string;
+		publishedDate?: string;
+		readTime?: string;
+	}
+
+	const { blogPost, category = '', publishedDate = '', readTime = '' }: Props = $props();
 
 	// Helper function to safely get text content from Notion properties
 	function getTextContent(prop: any) {
