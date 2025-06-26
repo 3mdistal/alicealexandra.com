@@ -4,9 +4,9 @@
 	import gsap from 'gsap';
 	import { state } from '$lib/stores';
 
-	let logo: HTMLImageElement | null = null;
-	let siteTitle: HTMLParagraphElement | null = null;
-	let subtitle: HTMLParagraphElement | null = null;
+	let logo: HTMLImageElement | null = $state(null);
+	let siteTitle: HTMLParagraphElement | null = $state(null);
+	let subtitle: HTMLParagraphElement | null = $state(null);
 
 	function inAnimation() {
 		if (!logo || !siteTitle || !subtitle) return;

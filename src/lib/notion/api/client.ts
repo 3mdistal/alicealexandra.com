@@ -12,6 +12,18 @@ export class NotionAPIError extends Error {
 		super(message);
 		this.name = 'NotionAPIError';
 	}
+
+	toString(): string {
+		return `${this.name}: ${this.message}`;
+	}
+
+	toJSON() {
+		return {
+			name: this.name,
+			message: this.message,
+			originalError: this.originalError
+		};
+	}
 }
 
 /**
