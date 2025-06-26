@@ -1,6 +1,7 @@
 <script lang="ts">
 	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
+	import BlogHeader from '$lib/components/blog-header.svelte';
 	import DarkCodeTheme from 'svelte-highlight/styles/nord';
 	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
