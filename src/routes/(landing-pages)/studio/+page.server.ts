@@ -23,9 +23,17 @@ const queryParameters: QueryDatabaseParameters = {
 };
 
 export async function load() {
-	return {
-		cards: await queryDatabase(queryParameters)
-	};
+	try {
+		return {
+			cards: await queryDatabase(queryParameters)
+		};
+	} catch (error) {
+		console.warn('Failed to load studio cards from Notion:', error instanceof Error ? error.message : error);
+		// Return empty array as fallback when Notion is not configured
+		return {
+			cards: { results: [] }
+		};
+	}
 }
 
 export const config = {

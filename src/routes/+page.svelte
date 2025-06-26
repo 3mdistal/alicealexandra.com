@@ -2,11 +2,11 @@
 	import HomepageWrapper from '../lib/homepage/homepage-wrapper.svelte';
 	import SiteTitle from '../lib/homepage/site-title.svelte';
 	import Svgs from '$lib/icons/svgs.svelte';
-	import { state } from '../lib/stores';
+	import { pageState } from '../lib/stores';
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		state.set('home');
+		pageState.set('home');
 		document.body.style.backgroundColor = '#fafafa';
 	});
 </script>

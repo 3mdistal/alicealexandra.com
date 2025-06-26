@@ -12,6 +12,18 @@ export class NotionAPIError extends Error {
 		super(message);
 		this.name = 'NotionAPIError';
 	}
+
+	toString(): string {
+		return `${this.name}: ${this.message}`;
+	}
+
+	toJSON() {
+		return {
+			name: this.name,
+			message: this.message,
+			originalError: this.originalError
+		};
+	}
 }
 
 /**
@@ -20,7 +32,7 @@ export class NotionAPIError extends Error {
  */
 export function validateEnvironmentVariables(): void {
 	if (!NOTION_KEY) {
-		throw new NotionAPIError('Missing required NOTION_KEY environment variable');
+		throw new NotionAPIError('Missing required NOTION_KEY environment variable. Please configure your Notion API credentials in the environment variables.');
 	}
 }
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { state } from '$lib/stores';
+	import { pageState } from '$lib/stores';
 	import gsap from 'gsap';
 	import { goto } from '$app/navigation';
 
@@ -49,7 +49,7 @@
 	}
 
 	function handleClick() {
-		state.set(name);
+		pageState.set(name);
 		hover = false;
 		ease(0);
 		animateOut();

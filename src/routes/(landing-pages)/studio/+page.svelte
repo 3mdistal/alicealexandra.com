@@ -2,12 +2,12 @@
 	import { onMount, onDestroy } from 'svelte';
 	import StudioCard from './studio-card.svelte';
 	import gsap from 'gsap';
-	import { backgroundColors, state } from '$lib/stores';
+	import { backgroundColors, pageState } from '$lib/stores';
 	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 	export let data;
 
-	const cards = data.cards.results.filter((card): card is PageObjectResponse => {
+	const cards = (data.cards?.results || []).filter((card): card is PageObjectResponse => {
 		return 'parent' in card && 'properties' in card && 'icon' in card && 'cover' in card;
 	});
 
@@ -40,7 +40,7 @@
 	});
 
 	onDestroy(() => {
-		state.set('home');
+		pageState.set('home');
 	});
 </script>
 

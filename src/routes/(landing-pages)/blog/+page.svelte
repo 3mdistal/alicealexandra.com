@@ -3,7 +3,7 @@
 	import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
-	import { state } from '$lib/stores';
+	import { pageState } from '$lib/stores';
 	import Bird from '../../../cms/images/blog/bird.webp?enhanced';
 
 	export let data: { post: QueryDatabaseResponse };
@@ -23,7 +23,7 @@
 	});
 
 	onDestroy(() => {
-		state.set('home');
+		pageState.set('home');
 	});
 </script>
 

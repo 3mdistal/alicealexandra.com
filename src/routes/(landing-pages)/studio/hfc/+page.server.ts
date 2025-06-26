@@ -43,12 +43,23 @@ const scrapsQueryParams: QueryDatabaseParameters = {
 };
 
 export async function load() {
-	return {
-		props: {
-			sections: await queryDatabase(sectionsQueryParams),
-			poems: await queryDatabase(scrapsQueryParams)
-		}
-	};
+	try {
+		return {
+			props: {
+				sections: await queryDatabase(sectionsQueryParams),
+				poems: await queryDatabase(scrapsQueryParams)
+			}
+		};
+	} catch (error) {
+		console.warn('Failed to load HFC content from Notion:', error instanceof Error ? error.message : error);
+		// Return empty arrays as fallback when Notion is not configured
+		return {
+			props: {
+				sections: { results: [] },
+				poems: { results: [] }
+			}
+		};
+	}
 }
 
 export const config = {

@@ -12,7 +12,7 @@
 	export let data: { post: QueryDatabaseResponse };
 
 	let {
-		post: { results }
+		post: { results = [] } = {}
 	} = data;
 
 	let loadingTitle = '';

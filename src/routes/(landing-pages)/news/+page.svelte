@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { state } from '$lib/stores';
+	import { pageState } from '$lib/stores';
 	import { marked } from 'marked';
 
 	// Read the CHANGELOG.md content
@@ -10,7 +10,7 @@
 	const changelogHtml = marked(changelog);
 
 	onDestroy(() => {
-		state.set('home');
+		pageState.set('home');
 	});
 </script>
 
