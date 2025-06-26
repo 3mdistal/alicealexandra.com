@@ -228,6 +228,11 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
+		background-color: var(--blog-bg-light);
+
+		@media (prefers-color-scheme: dark) {
+			background-color: var(--blog-bg-dark);
+		}
 	}
 
 	.page-wrapper {
