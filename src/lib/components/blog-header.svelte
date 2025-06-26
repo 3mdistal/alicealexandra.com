@@ -23,7 +23,7 @@
 		{
 			name: 'Alice Alexandra Moore',
 			role: 'Writer & Developer',
-			avatar: '/images/alice-avatar.jpg' // Add your avatar image to static/images/
+			avatar: '/images/alice-avatar.svg'
 		}
 	];
 </script>
@@ -82,10 +82,10 @@
 			<!-- Vertical lines -->
 			<div class="vertical-line line-1"></div>
 			<div class="vertical-line line-2"></div>
-			
+
 			<!-- Horizontal line -->
 			<div class="horizontal-line"></div>
-			
+
 			<!-- Corner decorations -->
 			<div class="corner-decoration top-left"></div>
 			<div class="corner-decoration top-right"></div>
@@ -325,10 +325,10 @@
 		top: 0;
 		bottom: 0;
 		width: 1px;
-		background: linear-gradient(to bottom, 
-			rgb(235, 235, 235) 0%, 
-			rgb(235, 235, 235) 50%, 
-			transparent 50%, 
+		background: linear-gradient(to bottom,
+			rgb(235, 235, 235) 0%,
+			rgb(235, 235, 235) 50%,
+			transparent 50%,
 			transparent 100%);
 		background-size: 1px 8px;
 	}
@@ -347,10 +347,10 @@
 		right: 0;
 		height: 1px;
 		top: 50%;
-		background: linear-gradient(to right, 
-			rgb(235, 235, 235) 0%, 
-			rgb(235, 235, 235) 50%, 
-			transparent 50%, 
+		background: linear-gradient(to right,
+			rgb(235, 235, 235) 0%,
+			rgb(235, 235, 235) 50%,
+			transparent 50%,
 			transparent 100%);
 		background-size: 8px 1px;
 	}
