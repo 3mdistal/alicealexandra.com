@@ -62,6 +62,10 @@
                 return prop?.type === 'files';
         }
 
+        function isDateProperty(prop: any): prop is any {
+                return prop?.type === 'date';
+        }
+
 	const {
 		Name: title,
 		Subtitle: subtitle,
