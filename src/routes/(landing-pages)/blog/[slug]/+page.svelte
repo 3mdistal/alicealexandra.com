@@ -253,9 +253,6 @@
 		}
 
 		@media (min-width: 768px) {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
 			padding: var(--blog-spacing-lg) var(--blog-spacing-xl);
 		}
 
