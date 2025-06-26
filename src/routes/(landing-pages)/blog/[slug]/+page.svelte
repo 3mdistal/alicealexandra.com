@@ -245,6 +245,8 @@
 		background-color: var(--blog-bg-light);
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
 		color: var(--blog-text-light);
+		max-width: 900px;
+		margin: 0 auto;
 
 		@media (min-width: 640px) {
 			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
