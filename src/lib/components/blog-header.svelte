@@ -71,6 +71,7 @@
 		width: 100%;
 		max-width: 900px;
 		margin: 0 auto;
+		margin-top: 80px; /* More space from top */
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
 		color: var(--blog-text-light);
 
@@ -84,6 +85,18 @@
 
 		@media (min-width: 768px) {
 			padding: var(--blog-spacing-lg) var(--blog-spacing-xl);
+		}
+
+		@media (min-width: 1280px) {
+			padding: var(--blog-spacing-xl) var(--blog-spacing-xl);
+		}
+
+		@media (min-width: 1536px) {
+			padding: var(--blog-spacing-xl) var(--blog-spacing-lg);
+		}
+
+		@media (min-width: 1920px) {
+			padding: var(--blog-spacing-xl) 25vw;
 		}
 	}
 
