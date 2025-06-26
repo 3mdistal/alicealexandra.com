@@ -17,15 +17,6 @@
 	// Get the blog post data
 	const title = getTextContent(blogPost?.properties?.Name);
 	const subtitle = getTextContent(blogPost?.properties?.Subtitle);
-
-	// Mock author data - you can replace this with actual author data from your Notion setup
-	const authors = [
-		{
-			name: 'Alice Alexandra Moore',
-			role: 'Writer & Developer',
-			avatar: '/images/alice-avatar.svg'
-		}
-	];
 </script>
 
 <div class="blog-header">
