@@ -80,6 +80,31 @@
 		return prop?.rich_text?.[0]?.plain_text || '';
 	}
 
+	// Helper function to format reading time
+	function formatReadingTime(prop: any) {
+		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
+			const time = prop.formula.string;
+			return time === '1 minutes' ? '1 minute' : time;
+		}
+		return '5 min read';
+	}
+
+	// Helper function to format date
+	function formatDate(prop: any) {
+		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
+			return prop.formula.string;
+		}
+		return '';
+	}
+
+	// Helper function to get category
+	function getCategory(prop: any) {
+		if (isSelectProperty(prop)) {
+			return prop.select?.name || 'Article';
+		}
+		return 'Article';
+	}
+
 	// Helper function to get URL from URL property
         function getUrl(prop: any) {
                 // Handle page cover object
