@@ -7,7 +7,7 @@
 
 	export let data;
 
-	const cards = data.cards.results.filter((card): card is PageObjectResponse => {
+	const cards = (data.cards?.results || []).filter((card): card is PageObjectResponse => {
 		return 'parent' in card && 'properties' in card && 'icon' in card && 'cover' in card;
 	});
 
