@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import { cubicIn } from 'svelte/easing';
 	import gsap from 'gsap';
-	import { state } from '$lib/stores';
+	import { pageState } from '$lib/stores';
 
 	let logo: HTMLImageElement | null = $state(null);
 	let siteTitle: HTMLParagraphElement | null = $state(null);
@@ -53,7 +53,7 @@
 	});
 </script>
 
-{#if $state === 'home'}
+{#if $pageState === 'home'}
 	<header class="site-header-container">
 		<img
 			bind:this={logo}

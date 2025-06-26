@@ -1,7 +1,7 @@
 import type { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { readable, writable, type Writable, type Readable } from 'svelte/store';
 
-export const state = writable('home');
+export const pageState = writable('home');
 
 export const names: Readable<Array<'about' | 'studio' | 'commissions' | 'blog' | 'news'>> =
 	readable(['about', 'studio', 'commissions', 'blog', 'news']);
