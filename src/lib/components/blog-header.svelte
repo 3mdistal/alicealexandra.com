@@ -132,6 +132,7 @@
 		position: relative;
 		background-color: rgb(250, 250, 250);
 		margin: 0 auto;
+		margin-top: 60px; /* Account for home button */
 	}
 
 	.header-grid {
