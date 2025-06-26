@@ -214,8 +214,8 @@
 		display: flex;
 		align-items: center;
 		gap: var(--blog-spacing-md);
-		margin-bottom: var(--blog-spacing-xl);
-		padding-bottom: var(--blog-spacing-lg);
+		margin-bottom: var(--blog-spacing-md);
+		padding-bottom: var(--blog-spacing-md);
 		border-bottom: 1px solid var(--blog-border-light);
 		flex-wrap: wrap;
 
