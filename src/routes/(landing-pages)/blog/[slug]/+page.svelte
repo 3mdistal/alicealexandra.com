@@ -188,16 +188,17 @@
 	{@html LightCodeTheme}
 </svelte:head>
 
-{#if blogPost}
-	<BlogHeader
-		{blogPost}
-		category={categoryName}
-		publishedDate={publishedDate}
-		readTime={readTime}
-	/>
-{/if}
+<div class="page-wrapper">
+	{#if blogPost}
+		<BlogHeader
+			{blogPost}
+			category={categoryName}
+			publishedDate={publishedDate}
+			readTime={readTime}
+		/>
+	{/if}
 
-<div class="blog-container">
+	<div class="blog-container">
 	{#if content.length > 0}
 		<div class="notion-container" bind:this={context}>
 			<NotionPageParser results={content} />
