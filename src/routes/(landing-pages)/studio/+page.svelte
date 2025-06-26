@@ -2,7 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import StudioCard from './studio-card.svelte';
 	import gsap from 'gsap';
-	import { backgroundColors, state } from '$lib/stores';
+	import { backgroundColors, pageState } from '$lib/stores';
 	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 	export let data;
@@ -40,7 +40,7 @@
 	});
 
 	onDestroy(() => {
-		state.set('home');
+		pageState.set('home');
 	});
 </script>
 

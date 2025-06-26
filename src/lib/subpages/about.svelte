@@ -8,7 +8,7 @@
 	import Owl from '../../cms/images/about/owl.png?enhanced';
 	import Socials from '$lib/icons/socials.svelte';
 	import { onDestroy } from 'svelte';
-	import { state } from '$lib/stores';
+	import { pageState } from '$lib/stores';
 
 	export let accent = '';
 
@@ -38,7 +38,7 @@
 	}
 
 	onDestroy(() => {
-		state.set('home');
+		pageState.set('home');
 	});
 </script>
 

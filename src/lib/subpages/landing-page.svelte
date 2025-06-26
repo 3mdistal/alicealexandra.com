@@ -2,7 +2,7 @@
 	import gsap from 'gsap';
 	import { onMount } from 'svelte';
 	import { onDestroy } from 'svelte';
-	import { state } from '../stores';
+	import { pageState } from '../stores';
 
 	export let src = '';
 	export let alt = '';
@@ -38,7 +38,7 @@
 	});
 
 	onDestroy(() => {
-		state.set('home');
+		pageState.set('home');
 	});
 </script>
 
