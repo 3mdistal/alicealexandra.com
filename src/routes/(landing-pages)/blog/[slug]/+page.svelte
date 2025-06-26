@@ -1,6 +1,7 @@
 <script lang="ts">
 	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
+	import BlogHeader from '$lib/components/blog-header.svelte';
 	import DarkCodeTheme from 'svelte-highlight/styles/nord';
 	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
@@ -61,6 +62,10 @@
                 return prop?.type === 'files';
         }
 
+        function isDateProperty(prop: any): prop is any {
+                return prop?.type === 'date';
+        }
+
 	const {
 		Name: title,
 		Subtitle: subtitle,
@@ -68,8 +73,14 @@
 		OGDescription: ogDescription,
 		ReadTime: readingTime,
 		Category: category,
+		'Publication Date': publicationDate,
 		Slug: slug
 	} = blogPost?.properties || {};
+
+	// Extract data for the header
+	const categoryName = getCategory(category);
+	const publishedDate = formatDate(publicationDate);
+	const readTime = formatReadingTime(readingTime);
 
 	// Helper function to safely get text content
 	function getTextContent(prop: any) {
@@ -77,6 +88,39 @@
 			return prop.title?.[0]?.plain_text || '';
 		}
 		return prop?.rich_text?.[0]?.plain_text || '';
+	}
+
+	// Helper function to format reading time
+	function formatReadingTime(prop: any) {
+		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
+			const time = prop.formula.string;
+			return time === '1 minutes' ? '1 minute' : time;
+		}
+		return '5 min read';
+	}
+
+	// Helper function to format date
+	function formatDate(prop: any) {
+		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
+			return prop.formula.string;
+		}
+		if (isDateProperty(prop) && prop.date?.start) {
+			const date = new Date(prop.date.start);
+			return date.toLocaleDateString('en-US', {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			});
+		}
+		return '';
+	}
+
+	// Helper function to get category
+	function getCategory(prop: any) {
+		if (isSelectProperty(prop)) {
+			return prop.select?.name || 'Article';
+		}
+		return 'Article';
 	}
 
 	// Helper function to get URL from URL property
@@ -156,39 +200,17 @@
 	{@html LightCodeTheme}
 </svelte:head>
 
-<div class="blog-container">
-	<div>
-		<h1>{getTextContent(title) || 'Untitled'}</h1>
-		<p class="subtitle">
-			<em
-				>{#if isRichTextProperty(subtitle)}<TextMacro type={subtitle} />{/if}</em
-			>
-		</p>
-	</div>
-	<hr />
-	<div>
-		<p class="meta-info">
-			<em>type</em>
-			<span>{isSelectProperty(category) ? category.select?.name : 'Uncategorized'}</span>
-		</p>
-		<p class="meta-info">
-			<em>time</em>
-			<span>
-				{#if isFormulaProperty(readingTime) && readingTime.formula.type === 'string'}
-					{readingTime.formula.string === '1 minutes' ? '1 minute' : readingTime.formula.string}
-				{:else}
-					Unknown
-				{/if}
-			</span>
-		</p>
-		<p class="meta-info">
-			<em>tl;dr</em>
-			<span>
-				{#if isRichTextProperty(summary)}<TextMacro type={summary} />{/if}
-			</span>
-		</p>
-	</div>
-	<hr />
+<div class="page-wrapper">
+	{#if blogPost}
+		<BlogHeader
+			{blogPost}
+			category={categoryName}
+			publishedDate={publishedDate}
+			readTime={readTime}
+		/>
+	{/if}
+
+	<div class="blog-container">
 	{#if content.length > 0}
 		<div class="notion-container" bind:this={context}>
 			<NotionPageParser results={content} />
@@ -196,27 +218,48 @@
 	{:else}
 		<p>No content available.</p>
 	{/if}
-	<p class="back-link">
-		<a href="/blog" data-sveltekit-noscroll>back.</a>
-	</p>
+		<p class="back-link">
+			<a href="/blog" data-sveltekit-noscroll>back.</a>
+		</p>
+	</div>
 </div>
 
 <style>
+	:global(html),
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		background-color: var(--blog-bg-light) !important;
+		min-height: 100vh;
+
+		@media (prefers-color-scheme: dark) {
+			background-color: var(--blog-bg-dark) !important;
+		}
+	}
+
+	.page-wrapper {
+		min-height: 100vh;
+		background-color: var(--blog-bg-light);
+		position: relative;
+		z-index: 1;
+
+		@media (prefers-color-scheme: dark) {
+			background-color: var(--blog-bg-dark);
+		}
+	}
+
 	.blog-container {
 		background-color: var(--blog-bg-light);
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
-		height: 100%;
-		min-height: 100vh;
 		color: var(--blog-text-light);
+		max-width: 900px;
+		margin: 0 auto;
 
 		@media (min-width: 640px) {
 			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
 		}
 
 		@media (min-width: 768px) {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
 			padding: var(--blog-spacing-lg) var(--blog-spacing-xl);
 		}
 
@@ -257,7 +300,8 @@
 	/* Styles for constraining top sections and back-link */
 	.blog-container > div:not(.notion-container) {
 		width: 100%;
-		max-width: var(--blog-content-width);
+		max-width: 900px;
+		margin: 0 auto;
 		font-size: var(--blog-body);
 
 		@media (min-width: 1024px) {
@@ -265,99 +309,11 @@
 		}
 	}
 
-	h1 {
-		font-size: 2.25rem;
-		line-height: 2.5rem;
 
-		@media (min-width: 640px) {
-			font-size: 3rem;
-			line-height: 1;
-		}
-
-		@media (min-width: 768px) {
-			margin-bottom: var(--blog-spacing-sm);
-			font-size: var(--blog-heading-large);
-			line-height: 1;
-		}
-
-		@media (min-width: 1024px) {
-			font-size: 4.5rem;
-			line-height: 1;
-		}
-	}
-
-	.subtitle {
-		max-width: 100%;
-		color: var(--blog-accent-light);
-		font-size: var(--blog-body);
-		line-height: 1.75rem;
-
-		@media (min-width: 768px) {
-			font-size: var(--blog-body-large);
-			line-height: 2.25rem;
-		}
-
-		em {
-			color: var(--blog-secondary-light);
-		}
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-accent-dark);
-
-			em {
-				color: var(--blog-secondary-dark);
-			}
-		}
-	}
-
-	hr {
-		display: block;
-		opacity: 0.8;
-		margin: var(--blog-spacing-xl) 0;
-		border: none;
-		border-top: 1px solid var(--blog-border-light);
-		width: 100%;
-		max-width: var(--blog-content-width);
-		height: 1px;
-		font-size: var(--blog-body-large);
-
-		@media (prefers-color-scheme: dark) {
-			border-top-color: var(--blog-border-dark);
-		}
-	}
-
-	.meta-info {
-		display: flex;
-		margin-bottom: var(--blog-spacing-sm);
-		width: 100%;
-		max-width: 100%;
-
-		em {
-			display: block;
-			width: 5ch;
-			color: var(--blog-text-light);
-			font-weight: 500;
-		}
-
-		span {
-			display: block;
-			width: 35ch;
-			color: var(--blog-accent-light);
-		}
-
-		@media (prefers-color-scheme: dark) {
-			em {
-				color: var(--blog-text-dark);
-			}
-
-			span {
-				color: var(--blog-accent-dark);
-			}
-		}
-	}
 
 	.notion-container {
-		max-width: var(--blog-content-width);
+		max-width: 900px;
+		margin: 0 auto;
 		font-size: var(--blog-body);
 		line-height: 1.75rem;
 
