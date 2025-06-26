@@ -16,9 +16,17 @@ const queryParams: QueryDatabaseParameters = {
 };
 
 export async function load() {
-	return {
-		publicationList: await queryDatabase(queryParams)
-	};
+	try {
+		return {
+			publicationList: await queryDatabase(queryParams)
+		};
+	} catch (error) {
+		console.warn('Failed to load publications from Notion:', error instanceof Error ? error.message : error);
+		// Return empty array as fallback when Notion is not configured
+		return {
+			publicationList: []
+		};
+	}
 }
 
 export const config = {

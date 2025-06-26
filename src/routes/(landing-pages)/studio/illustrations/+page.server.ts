@@ -23,9 +23,17 @@ const queryParams: QueryDatabaseParameters = {
 };
 
 export async function load() {
-	return {
-		illustrations: await queryDatabase(queryParams)
-	};
+	try {
+		return {
+			illustrations: await queryDatabase(queryParams)
+		};
+	} catch (error) {
+		console.warn('Failed to load illustrations from Notion:', error instanceof Error ? error.message : error);
+		// Return empty array as fallback when Notion is not configured
+		return {
+			illustrations: []
+		};
+	}
 }
 
 export const config = {
