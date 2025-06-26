@@ -213,6 +213,15 @@
 </div>
 
 <style>
+	.page-wrapper {
+		min-height: 100vh;
+		background-color: var(--blog-bg-light);
+
+		@media (prefers-color-scheme: dark) {
+			background-color: var(--blog-bg-dark);
+		}
+	}
+
 	.blog-container {
 		background-color: var(--blog-bg-light);
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
