@@ -104,6 +104,14 @@
 		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
 			return prop.formula.string;
 		}
+		if (isDateProperty(prop) && prop.date?.start) {
+			const date = new Date(prop.date.start);
+			return date.toLocaleDateString('en-US', {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			});
+		}
 		return '';
 	}
 
