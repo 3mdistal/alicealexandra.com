@@ -229,11 +229,11 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
-		background-color: var(--blog-bg-light);
+		background-color: var(--blog-bg-light) !important;
 		min-height: 100vh;
 
 		@media (prefers-color-scheme: dark) {
-			background-color: var(--blog-bg-dark);
+			background-color: var(--blog-bg-dark) !important;
 		}
 	}
 
