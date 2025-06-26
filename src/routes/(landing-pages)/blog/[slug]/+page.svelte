@@ -69,8 +69,14 @@
 		OGDescription: ogDescription,
 		ReadTime: readingTime,
 		Category: category,
+		FormattedPublicationDate: publicationDate,
 		Slug: slug
 	} = blogPost?.properties || {};
+
+	// Extract data for the header
+	const categoryName = getCategory(category);
+	const publishedDate = formatDate(publicationDate);
+	const readTime = formatReadingTime(readingTime);
 
 	// Helper function to safely get text content
 	function getTextContent(prop: any) {
