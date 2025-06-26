@@ -23,7 +23,7 @@
 	});
 
 	onDestroy(() => {
-		state.set('home');
+		pageState.set('home');
 	});
 </script>
 
