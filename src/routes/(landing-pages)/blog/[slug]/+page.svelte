@@ -69,7 +69,7 @@
 		OGDescription: ogDescription,
 		ReadTime: readingTime,
 		Category: category,
-		FormattedPublicationDate: publicationDate,
+		'Publication Date': publicationDate,
 		Slug: slug
 	} = blogPost?.properties || {};
 
