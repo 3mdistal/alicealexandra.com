@@ -145,7 +145,7 @@
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		margin: 0 0 var(--blog-spacing-sm) 0;
-		color: var(--blog-heading-light);
+		color: var(--blog-heading);
 		font-weight: 500;
 		font-family: 'Spectral', serif;
 
@@ -162,10 +162,6 @@
 		@media (min-width: 1024px) {
 			font-size: 4.5rem;
 			line-height: 1;
-		}
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-heading-dark);
 		}
 	}
 
