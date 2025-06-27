@@ -321,12 +321,8 @@
 		a {
 			display: inline-block;
 			padding: var(--blog-spacing-md);
-			color: var(--blog-text-light);
+			color: var(--blog-text);
 			font-family: 'Spectral', serif;
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-text-dark);
-			}
 		}
 	}
 
