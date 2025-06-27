@@ -129,11 +129,11 @@
 		height: 16px;
 		min-width: 16px;
 		color: currentColor;
-		fill: currentColor !important;
 	}
 
-	.back-icon * {
+	.breadcrumb-link .back-icon path {
 		fill: currentColor !important;
+		color: inherit !important;
 	}
 
 	.breadcrumb-separator {
