@@ -211,6 +211,10 @@
 		color: currentColor;
 	}
 
+	.clock-icon path {
+		fill: currentColor;
+	}
+
 	.publish-date {
 		color: var(--blog-secondary);
 		font-size: var(--blog-body-small);
