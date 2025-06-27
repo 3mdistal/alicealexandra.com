@@ -196,12 +196,8 @@
 		display: flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--blog-secondary-light);
+		color: var(--blog-secondary);
 		font-size: var(--blog-body-small);
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-secondary-dark);
-		}
 	}
 
 	.clock-icon {
