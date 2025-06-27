@@ -364,12 +364,8 @@
 			margin-top: var(--blog-spacing-lg);
 			margin-left: 2em;
 			max-width: var(--blog-blockquote-width);
-			color: var(--blog-callout-light);
+			color: var(--blog-callout);
 			font-style: italic;
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-secondary-dark);
-			}
 		}
 
 		:global(.notion-container .image) {
