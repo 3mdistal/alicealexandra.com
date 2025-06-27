@@ -188,12 +188,8 @@
 		gap: var(--blog-spacing-md);
 		margin-bottom: var(--blog-spacing-md);
 		padding-bottom: var(--blog-spacing-md);
-		border-bottom: 1px solid var(--blog-border-light);
+		border-bottom: 1px solid var(--blog-border);
 		flex-wrap: wrap;
-
-		@media (prefers-color-scheme: dark) {
-			border-bottom-color: var(--blog-border-dark);
-		}
 	}
 
 	.reading-time {
