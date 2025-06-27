@@ -114,12 +114,12 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--blog-link) !important;
+		color: var(--blog-secondary) !important;
 		text-decoration: none;
 		font-weight: 500;
 
 		&:hover {
-			color: var(--blog-link-hover) !important;
+			color: var(--blog-link) !important;
 			text-decoration: underline;
 		}
 	}
