@@ -267,21 +267,7 @@
 			padding: var(--blog-spacing-xl) 25vw;
 		}
 
-		@media (prefers-color-scheme: dark) {
-			background-color: var(--blog-bg-dark);
-			color: var(--blog-text-dark);
 
-			:global(*) {
-				color: var(--blog-text-dark);
-			}
-
-			:global(a),
-			:global(code),
-			:global(.notion-container a),
-			:global(.notion-container code) {
-				color: var(--blog-link-dark);
-			}
-		}
 
 		:global(sub),
 		:global(sup) {
