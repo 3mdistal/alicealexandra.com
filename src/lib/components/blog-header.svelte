@@ -210,11 +210,11 @@
 		height: 16px;
 		min-width: 16px;
 		color: currentColor;
-		fill: currentColor !important;
 	}
 
-	.clock-icon * {
+	.reading-time .clock-icon path {
 		fill: currentColor !important;
+		color: inherit !important;
 	}
 
 	.publish-date {
