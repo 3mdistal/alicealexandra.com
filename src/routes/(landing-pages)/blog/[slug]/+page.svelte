@@ -425,10 +425,6 @@
 			li {
 				color: inherit;
 			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-text-dark);
-			}
 		}
 
 		:global(.notion-container hr) {
