@@ -77,11 +77,7 @@
 		margin: 0 auto;
 		margin-top: 80px; /* More space from top */
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
-		color: var(--blog-text-light);
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-text-dark);
-		}
+		color: var(--blog-text);
 
 		@media (min-width: 640px) {
 			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
