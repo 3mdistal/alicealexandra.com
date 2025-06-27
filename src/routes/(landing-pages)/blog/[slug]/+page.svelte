@@ -479,11 +479,7 @@
 		}
 
 		:global(.notion-container p, li) {
-			color: var(--blog-accent-light);
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-accent-dark);
-			}
+			color: var(--blog-accent);
 		}
 	}
 
