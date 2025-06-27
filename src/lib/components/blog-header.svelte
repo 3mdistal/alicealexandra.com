@@ -169,7 +169,7 @@
 	.blog-subtitle {
 		max-width: var(--blog-subtitle-width);
 		margin: 0 0 var(--blog-spacing-lg) 0;
-		color: var(--blog-accent-light);
+		color: var(--blog-accent);
 		font-style: italic;
 		font-size: var(--blog-body);
 		line-height: 1.75rem;
@@ -178,10 +178,6 @@
 		@media (min-width: 768px) {
 			font-size: var(--blog-body-large);
 			line-height: 2.25rem;
-		}
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-accent-dark);
 		}
 	}
 
