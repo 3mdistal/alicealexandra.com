@@ -132,11 +132,7 @@
 	}
 
 	.breadcrumb-separator {
-		color: var(--blog-secondary-light);
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-secondary-dark);
-		}
+		color: var(--blog-secondary);
 	}
 
 	.breadcrumb-category {
