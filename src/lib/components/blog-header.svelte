@@ -205,8 +205,12 @@
 		display: flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--blog-secondary);
+		color: var(--blog-secondary) !important;
 		font-size: var(--blog-body-small);
+	}
+
+	.reading-time span {
+		color: inherit !important;
 	}
 
 	.clock-icon {
