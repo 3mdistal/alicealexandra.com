@@ -431,14 +431,10 @@
 			opacity: 0.8;
 			margin: var(--blog-spacing-xl) auto;
 			border: none;
-			border-top: 1px solid var(--blog-border-light);
+			border-top: 1px solid var(--blog-border);
 			width: auto;
 			max-width: var(--blog-content-width);
 			height: 1px;
-
-			@media (prefers-color-scheme: dark) {
-				border-top-color: var(--blog-border-dark);
-			}
 		}
 
 		:global(ol) {
