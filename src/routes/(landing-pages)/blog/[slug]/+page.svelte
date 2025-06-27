@@ -393,7 +393,7 @@
 		:global(.notion-container h2) {
 			margin-top: 2.5em;
 			margin-bottom: 1.5em;
-			color: var(--blog-heading-light);
+			color: var(--blog-heading);
 			font-weight: 500;
 			font-size: var(--blog-heading-small);
 
@@ -404,25 +404,17 @@
 			@media (min-width: 1024px) {
 				font-size: 2.25rem;
 			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-heading-dark);
-			}
 		}
 
 		:global(.notion-container h3) {
 			margin-top: 1.5em;
 			margin-bottom: 1em;
-			color: var(--blog-heading-light);
+			color: var(--blog-heading);
 			font-weight: 500;
 			font-size: var(--blog-heading-small);
 
 			@media (min-width: 768px) {
 				font-size: var(--blog-heading-medium);
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-heading-dark);
 			}
 		}
 
