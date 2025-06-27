@@ -25,7 +25,32 @@
 		--blog-mention: #0f766e;
 		--blog-equation: #4b5563;
 		--blog-border: #939599;
+	}
 
+	/* Dark mode overrides */
+	:global(:root) {
+		@media (prefers-color-scheme: dark) {
+			--blog-text: #e5e7eb;
+			--blog-bg: #141414;
+			--blog-link: #67e8f9;
+			--blog-link-hover: #a5f3fc;
+			--blog-accent: #d1d5db;
+			--blog-secondary: #d1d5db;
+			--blog-heading: #f3f4f6;
+			--blog-callout: #1f2937;
+			--blog-quote-bg: #1f2937;
+			--blog-code-bg: #141414;
+			--blog-inline-code-bg: #1f2937;
+			--blog-code-tag: #f87171;
+			--blog-code-property: #e5e7eb;
+			--blog-divider: #4b5563;
+			--blog-mention: #34d399;
+			--blog-equation: #d1d5db;
+			--blog-border: #686a6c;
+		}
+	}
+
+	:global(:root) {
 		/* Typography */
 		--blog-heading-large: 3.75rem;
 		--blog-heading-medium: 2.25rem;
