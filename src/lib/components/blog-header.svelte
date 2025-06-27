@@ -114,21 +114,13 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--blog-link-light);
+		color: var(--blog-link);
 		text-decoration: none;
 		font-weight: 500;
 
 		&:hover {
-			color: var(--blog-link-hover-light);
+			color: var(--blog-link-hover);
 			text-decoration: underline;
-		}
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-link-dark);
-
-			&:hover {
-				color: var(--blog-link-hover-dark);
-			}
 		}
 	}
 
