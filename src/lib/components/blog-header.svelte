@@ -107,11 +107,7 @@
 		gap: 6px;
 		margin-bottom: var(--blog-spacing-md);
 		font-size: var(--blog-body-small);
-		color: var(--blog-secondary-light);
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-secondary-dark);
-		}
+		color: var(--blog-secondary);
 	}
 
 	.breadcrumb-link {
