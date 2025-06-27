@@ -229,29 +229,21 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
-		background-color: var(--blog-bg-light) !important;
+		background-color: var(--blog-bg) !important;
 		min-height: 100vh;
-
-		@media (prefers-color-scheme: dark) {
-			background-color: var(--blog-bg-dark) !important;
-		}
 	}
 
 	.page-wrapper {
 		min-height: 100vh;
-		background-color: var(--blog-bg-light);
+		background-color: var(--blog-bg);
 		position: relative;
 		z-index: 1;
-
-		@media (prefers-color-scheme: dark) {
-			background-color: var(--blog-bg-dark);
-		}
 	}
 
 	.blog-container {
-		background-color: var(--blog-bg-light);
+		background-color: var(--blog-bg);
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
-		color: var(--blog-text-light);
+		color: var(--blog-text);
 		max-width: 900px;
 		margin: 0 auto;
 
@@ -275,21 +267,7 @@
 			padding: var(--blog-spacing-xl) 25vw;
 		}
 
-		@media (prefers-color-scheme: dark) {
-			background-color: var(--blog-bg-dark);
-			color: var(--blog-text-dark);
 
-			:global(*) {
-				color: var(--blog-text-dark);
-			}
-
-			:global(a),
-			:global(code),
-			:global(.notion-container a),
-			:global(.notion-container code) {
-				color: var(--blog-link-dark);
-			}
-		}
 
 		:global(sub),
 		:global(sup) {
@@ -343,12 +321,8 @@
 		a {
 			display: inline-block;
 			padding: var(--blog-spacing-md);
-			color: var(--blog-text-light);
+			color: var(--blog-text);
 			font-family: 'Spectral', serif;
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-text-dark);
-			}
 		}
 	}
 
@@ -360,15 +334,11 @@
 		}
 
 		:global(.notion-container a) {
-			color: var(--blog-link-light);
+			color: var(--blog-link);
 			font-weight: 500;
 
 			&:hover {
 				text-decoration: underline;
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-link-dark);
 			}
 		}
 
@@ -376,7 +346,7 @@
 			border-radius: var(--blog-border-radius-sm);
 			background-color: var(--blog-code-bg);
 			padding: 0.2em 0.4em;
-			color: var(--blog-link-light);
+			color: var(--blog-link);
 		}
 
 		:global(.notion-container pre code) {
@@ -394,12 +364,8 @@
 			margin-top: var(--blog-spacing-lg);
 			margin-left: 2em;
 			max-width: var(--blog-blockquote-width);
-			color: var(--blog-callout-light);
+			color: var(--blog-callout);
 			font-style: italic;
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-secondary-dark);
-			}
 		}
 
 		:global(.notion-container .image) {
@@ -427,7 +393,7 @@
 		:global(.notion-container h2) {
 			margin-top: 2.5em;
 			margin-bottom: 1.5em;
-			color: var(--blog-heading-light);
+			color: var(--blog-heading);
 			font-weight: 500;
 			font-size: var(--blog-heading-small);
 
@@ -438,25 +404,17 @@
 			@media (min-width: 1024px) {
 				font-size: 2.25rem;
 			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-heading-dark);
-			}
 		}
 
 		:global(.notion-container h3) {
 			margin-top: 1.5em;
 			margin-bottom: 1em;
-			color: var(--blog-heading-light);
+			color: var(--blog-heading);
 			font-weight: 500;
 			font-size: var(--blog-heading-small);
 
 			@media (min-width: 768px) {
 				font-size: var(--blog-heading-medium);
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-heading-dark);
 			}
 		}
 
@@ -467,24 +425,16 @@
 			li {
 				color: inherit;
 			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-text-dark);
-			}
 		}
 
 		:global(.notion-container hr) {
 			opacity: 0.8;
 			margin: var(--blog-spacing-xl) auto;
 			border: none;
-			border-top: 1px solid var(--blog-border-light);
+			border-top: 1px solid var(--blog-border);
 			width: auto;
 			max-width: var(--blog-content-width);
 			height: 1px;
-
-			@media (prefers-color-scheme: dark) {
-				border-top-color: var(--blog-border-dark);
-			}
 		}
 
 		:global(ol) {
@@ -502,7 +452,7 @@
 			margin-top: var(--blog-spacing-lg);
 			margin-bottom: var(--blog-spacing-md);
 			border-radius: 0.5rem;
-			background-color: var(--blog-callout-light);
+			background-color: var(--blog-callout);
 			padding: var(--blog-spacing-lg) var(--blog-spacing-sm) var(--blog-spacing-md);
 
 			@media (min-width: 768px) {
@@ -526,18 +476,10 @@
 					font-size: var(--blog-body);
 				}
 			}
-
-			@media (prefers-color-scheme: dark) {
-				background-color: var(--blog-callout-dark);
-			}
 		}
 
 		:global(.notion-container p, li) {
-			color: var(--blog-accent-light);
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-accent-dark);
-			}
+			color: var(--blog-accent);
 		}
 	}
 
