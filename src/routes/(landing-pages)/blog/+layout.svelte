@@ -13,12 +13,12 @@
 		--blog-bg-light: #e5e7eb;
 		--blog-bg-dark: #141414;
 		--blog-link-light: #31676c;
-		--blog-link-dark: #a3e5eb;
-		--blog-link-hover-light: #1e4042;
-		--blog-link-hover-dark: #c7f7fc;
+		--blog-link-dark: #67e8f9;
+		--blog-link-hover-dark: #a5f3fc;
 		--blog-accent-light: #374151;
 		--blog-accent-dark: #d1d5db;
 		--blog-secondary-light: #6b7280;
+		--blog-secondary-dark: #d1d5db;
 		--blog-secondary-dark: #9ca3af;
 		--blog-heading-light: #111827;
 		--blog-heading-dark: #f3f4f6;
