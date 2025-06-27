@@ -208,12 +208,8 @@
 	}
 
 	.publish-date {
-		color: var(--blog-secondary-light);
+		color: var(--blog-secondary);
 		font-size: var(--blog-body-small);
-
-		@media (prefers-color-scheme: dark) {
-			color: var(--blog-secondary-dark);
-		}
 	}
 
 	/* Responsive Design */
