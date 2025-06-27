@@ -452,7 +452,7 @@
 			margin-top: var(--blog-spacing-lg);
 			margin-bottom: var(--blog-spacing-md);
 			border-radius: 0.5rem;
-			background-color: var(--blog-callout-light);
+			background-color: var(--blog-callout);
 			padding: var(--blog-spacing-lg) var(--blog-spacing-sm) var(--blog-spacing-md);
 
 			@media (min-width: 768px) {
@@ -475,10 +475,6 @@
 				@media (min-width: 768px) {
 					font-size: var(--blog-body);
 				}
-			}
-
-			@media (prefers-color-scheme: dark) {
-				background-color: var(--blog-callout-dark);
 			}
 		}
 
