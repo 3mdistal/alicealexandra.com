@@ -334,15 +334,11 @@
 		}
 
 		:global(.notion-container a) {
-			color: var(--blog-link-light);
+			color: var(--blog-link);
 			font-weight: 500;
 
 			&:hover {
 				text-decoration: underline;
-			}
-
-			@media (prefers-color-scheme: dark) {
-				color: var(--blog-link-dark);
 			}
 		}
 
@@ -350,7 +346,7 @@
 			border-radius: var(--blog-border-radius-sm);
 			background-color: var(--blog-code-bg);
 			padding: 0.2em 0.4em;
-			color: var(--blog-link-light);
+			color: var(--blog-link);
 		}
 
 		:global(.notion-container pre code) {
