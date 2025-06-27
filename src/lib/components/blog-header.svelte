@@ -131,6 +131,10 @@
 		color: currentColor;
 	}
 
+	.back-icon path {
+		fill: currentColor;
+	}
+
 	.breadcrumb-separator {
 		color: var(--blog-secondary);
 	}
