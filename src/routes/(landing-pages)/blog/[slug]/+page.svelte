@@ -229,29 +229,21 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
-		background-color: var(--blog-bg-light) !important;
+		background-color: var(--blog-bg) !important;
 		min-height: 100vh;
-
-		@media (prefers-color-scheme: dark) {
-			background-color: var(--blog-bg-dark) !important;
-		}
 	}
 
 	.page-wrapper {
 		min-height: 100vh;
-		background-color: var(--blog-bg-light);
+		background-color: var(--blog-bg);
 		position: relative;
 		z-index: 1;
-
-		@media (prefers-color-scheme: dark) {
-			background-color: var(--blog-bg-dark);
-		}
 	}
 
 	.blog-container {
-		background-color: var(--blog-bg-light);
+		background-color: var(--blog-bg);
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
-		color: var(--blog-text-light);
+		color: var(--blog-text);
 		max-width: 900px;
 		margin: 0 auto;
 
