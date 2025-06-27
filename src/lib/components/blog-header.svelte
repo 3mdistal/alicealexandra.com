@@ -114,14 +114,18 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--blog-link);
+		color: var(--blog-link) !important;
 		text-decoration: none;
 		font-weight: 500;
 
 		&:hover {
-			color: var(--blog-link-hover);
+			color: var(--blog-link-hover) !important;
 			text-decoration: underline;
 		}
+	}
+
+	.breadcrumb-link span {
+		color: inherit !important;
 	}
 
 	.back-icon {
