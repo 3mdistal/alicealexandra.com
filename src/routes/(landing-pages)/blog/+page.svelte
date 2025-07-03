@@ -99,13 +99,8 @@
 		object-position: right;
 	}
 
-	.background-overlay {
-		position: absolute;
-		opacity: 1;
-		inset: 0;
+	:global(body) {
 		background-color: #838391;
-		width: 100%;
-		height: 100%;
 	}
 
 	@media (min-width: 768px) {

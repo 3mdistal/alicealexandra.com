@@ -12,7 +12,6 @@
 	});
 
 	function populate(node: HTMLElement) {
-		document.body.style.backgroundColor = $backgroundColors.studio;
 		const tl = gsap.timeline();
 		tl.to('.card-div', { opacity: 1, duration: 0.5 })
 			.fromTo(
@@ -145,6 +144,10 @@
 		gap: 3rem;
 		opacity: 0;
 		z-index: 1;
+	}
+
+	:global(body) {
+		background-color: #d6ddf0;
 	}
 
 	@media (min-width: 640px) {

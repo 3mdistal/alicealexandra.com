@@ -16,7 +16,7 @@
 	/>
 </svelte:head>
 
-<div style="background-color: {background}">
+<div class="commissions-page">
 	<LandingPage
 		header="hire me for ambitious projects."
 		description="I can help you conjure the ideas you don't know how
@@ -31,3 +31,9 @@
 	</LandingPage>
 	<Commissions {accent} {background} />
 </div>
+
+<style>
+	:global(body) {
+		background-color: #dcc9c6;
+	}
+</style>
