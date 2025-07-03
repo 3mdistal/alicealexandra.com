@@ -19,6 +19,7 @@
 	}
 
 	onMount(() => {
+		document.body.style.backgroundColor = '#838391';
 		fadeIn();
 	});
 
@@ -35,7 +36,7 @@
 	/>
 </svelte:head>
 
-<div class="opacity-0 blog-page" style="background-color: #838391;">
+<div class="opacity-0 blog-page">
 	<div class="blog-content">
 		<div class="blog-wrapper">
 			<Blog {accent} {data} />
@@ -90,7 +91,7 @@
 	}
 
 	.background-container {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
