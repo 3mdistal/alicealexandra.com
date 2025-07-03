@@ -19,6 +19,7 @@
 	}
 
 	onMount(() => {
+		document.body.style.backgroundColor = '#838391';
 		fadeIn();
 	});
 
