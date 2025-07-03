@@ -54,7 +54,6 @@
 <style>
 	.homepage {
 		background-color: #fafafa;
-		min-height: 100vh;
 	}
 
 	.main-container {
