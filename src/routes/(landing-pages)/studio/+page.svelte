@@ -12,7 +12,6 @@
 	});
 
 	function populate(node: HTMLElement) {
-		document.body.style.backgroundColor = $backgroundColors.studio;
 		const tl = gsap.timeline();
 		tl.to('.card-div', { opacity: 1, duration: 0.5 })
 			.fromTo(
@@ -109,7 +108,7 @@
 <style>
 	.studio-container {
 		position: relative;
-		background-color: var(--studio-bg);
+		background-color: #d6ddf0;
 		min-height: 100lvh;
 		overflow: hidden;
 	}
