@@ -35,7 +35,7 @@
 	/>
 </svelte:head>
 
-<div class="opacity-0">
+<div class="opacity-0 blog-page">
 	<div class="blog-content">
 		<div class="blog-wrapper">
 			<Blog {accent} {data} />
@@ -49,7 +49,6 @@
 				class="background-image"
 			/>
 		</div>
-		<div class="background-overlay"></div>
 	</div>
 </div>
 
@@ -66,13 +65,18 @@
 		--blog-secondary-dark: #d1d5db;
 	}
 
+	.blog-page {
+		background-color: #838391;
+		min-height: 100vh;
+	}
+
 	.opacity-0 {
 		opacity: 0;
 	}
 
 	.blog-content {
 		display: flex;
-		position: absolute;
+		position: relative;
 		justify-content: center;
 		align-items: center;
 		z-index: 20;
@@ -88,8 +92,11 @@
 
 	.background-container {
 		position: fixed;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
+		pointer-events: none;
 	}
 
 	.background-image {
@@ -97,13 +104,6 @@
 		opacity: 0.1;
 		z-index: 10;
 		object-position: right;
-	}
-
-	.background-overlay {
-		position: absolute;
-		opacity: 1;
-		inset: 0;
-		background-color: #838391;
 		width: 100%;
 		height: 100%;
 	}

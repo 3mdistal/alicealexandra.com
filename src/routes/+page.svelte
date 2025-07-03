@@ -7,7 +7,6 @@
 
 	onMount(() => {
 		pageState.set('home');
-		document.body.style.backgroundColor = '#fafafa';
 	});
 </script>
 
@@ -43,7 +42,7 @@
 	<meta name="twitter:image:alt" content="The homepage of alicealexandra.com." />
 </svelte:head>
 
-<div class="main-container">
+<div class="main-container homepage">
 	<SiteTitle />
 	<HomepageWrapper />
 	<div class="mastodon-link">
@@ -53,6 +52,10 @@
 </div>
 
 <style>
+	.homepage {
+		background-color: #fafafa;
+	}
+
 	.main-container {
 		--top-padding: 10vh;
 		display: flex;
