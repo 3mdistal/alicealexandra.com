@@ -5,49 +5,28 @@
 <slot />
 
 <style>
-	/* Define CSS variables for blog with proper media queries */
+	/* Define CSS variables for blog - white text hierarchy for all modes */
 	:global(:root) {
-		/* Colors for light mode */
-		--blog-text: #111827;
-		--blog-bg: #e5e7eb;
-		--blog-link: #31676c;
-		--blog-link-hover: #1e4042;
-		--blog-accent: #374151;
-		--blog-secondary: #6b7280;
-		--blog-heading: #111827;
-		--blog-callout: #d1d5db;
-		--blog-quote-bg: #f3f4f6;
-		--blog-code-bg: #d1d5db;
-		--blog-inline-code-bg: #e5e7eb;
-		--blog-code-tag: #0f766e;
-		--blog-code-property: #374151;
-		--blog-divider: #6b7280;
-		--blog-mention: #0f766e;
-		--blog-equation: #4b5563;
-		--blog-border: #939599;
-	}
-
-	/* Dark mode overrides */
-	:global(:root) {
-		@media (prefers-color-scheme: dark) {
-			--blog-text: #e5e7eb;
-			--blog-bg: #141414;
-			--blog-link: #67e8f9;
-			--blog-link-hover: #a5f3fc;
-			--blog-accent: #d1d5db;
-			--blog-secondary: #d1d5db;
-			--blog-heading: #f3f4f6;
-			--blog-callout: #1f2937;
-			--blog-quote-bg: #1f2937;
-			--blog-code-bg: #141414;
-			--blog-inline-code-bg: #1f2937;
-			--blog-code-tag: #f87171;
-			--blog-code-property: #e5e7eb;
-			--blog-divider: #4b5563;
-			--blog-mention: #34d399;
-			--blog-equation: #d1d5db;
-			--blog-border: #686a6c;
-		}
+		/* White text hierarchy - no light/dark mode switching */
+		--blog-text: #ffffff;
+		--blog-bg: #141414;
+		--blog-link: #ffffff;
+		--blog-link-hover: #e5e7eb;
+		--blog-accent: #e5e7eb;
+		--blog-secondary: #d1d5db;
+		--blog-heading: #ffffff;
+		--blog-callout: #1f2937;
+		--blog-quote-bg: #1f2937;
+		--blog-code-bg: #141414;
+		--blog-inline-code-bg: #1f2937;
+		--blog-code-tag: #ffffff;
+		--blog-code-property: #e5e7eb;
+		--blog-divider: #9ca3af;
+		--blog-mention: #ffffff;
+		--blog-equation: #e5e7eb;
+		--blog-border: #686a6c;
+		--blog-heading-dark: #ffffff;
+		--blog-secondary-dark: #d1d5db;
 	}
 
 	:global(:root) {
