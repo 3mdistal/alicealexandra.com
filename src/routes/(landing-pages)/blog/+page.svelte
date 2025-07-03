@@ -19,7 +19,6 @@
 	}
 
 	onMount(() => {
-		document.body.style.backgroundColor = '#838391';
 		fadeIn();
 	});
 
@@ -67,6 +66,7 @@
 	}
 
 	.blog-page {
+		background-color: #838391;
 		min-height: 100vh;
 	}
 
