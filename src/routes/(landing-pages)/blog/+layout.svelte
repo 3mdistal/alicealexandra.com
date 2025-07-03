@@ -5,44 +5,52 @@
 <slot />
 
 <style>
-	/* Define CSS variables for blog */
+	/* Define CSS variables for blog with proper media queries */
 	:global(:root) {
-		/* Colors */
-		--blog-text-light: #111827;
-		--blog-text-dark: #e5e7eb;
-		--blog-bg-light: #e5e7eb;
-		--blog-bg-dark: #141414;
-		--blog-link-light: #31676c;
-		--blog-link-dark: #a3e5eb;
-		--blog-link-hover-light: #1e4042;
-		--blog-link-hover-dark: #c7f7fc;
-		--blog-accent-light: #374151;
-		--blog-accent-dark: #d1d5db;
-		--blog-secondary-light: #6b7280;
-		--blog-secondary-dark: #9ca3af;
-		--blog-heading-light: #111827;
-		--blog-heading-dark: #f3f4f6;
-		--blog-callout-light: #d1d5db;
-		--blog-callout-dark: #1f2937;
-		--blog-quote-bg-light: #f3f4f6;
-		--blog-quote-bg-dark: #1f2937;
-		--blog-code-bg-light: #d1d5db;
-		--blog-code-bg-dark: #141414;
-		--blog-inline-code-bg-light: #e5e7eb;
-		--blog-inline-code-bg-dark: #1f2937;
-		--blog-code-tag-light: #0f766e;
-		--blog-code-tag-dark: #f87171;
-		--blog-code-property-light: #374151;
-		--blog-code-property-dark: #e5e7eb;
-		--blog-divider-light: #6b7280;
-		--blog-divider-dark: #4b5563;
-		--blog-mention-light: #0f766e;
-		--blog-mention-dark: #34d399;
-		--blog-equation-light: #4b5563;
-		--blog-equation-dark: #d1d5db;
-		--blog-border-light: #939599;
-		--blog-border-dark: #686a6c;
+		/* Colors for light mode */
+		--blog-text: #111827;
+		--blog-bg: #e5e7eb;
+		--blog-link: #31676c;
+		--blog-link-hover: #1e4042;
+		--blog-accent: #374151;
+		--blog-secondary: #6b7280;
+		--blog-heading: #111827;
+		--blog-callout: #d1d5db;
+		--blog-quote-bg: #f3f4f6;
+		--blog-code-bg: #d1d5db;
+		--blog-inline-code-bg: #e5e7eb;
+		--blog-code-tag: #0f766e;
+		--blog-code-property: #374151;
+		--blog-divider: #6b7280;
+		--blog-mention: #0f766e;
+		--blog-equation: #4b5563;
+		--blog-border: #939599;
+	}
 
+	/* Dark mode overrides */
+	:global(:root) {
+		@media (prefers-color-scheme: dark) {
+			--blog-text: #e5e7eb;
+			--blog-bg: #141414;
+			--blog-link: #67e8f9;
+			--blog-link-hover: #a5f3fc;
+			--blog-accent: #d1d5db;
+			--blog-secondary: #d1d5db;
+			--blog-heading: #f3f4f6;
+			--blog-callout: #1f2937;
+			--blog-quote-bg: #1f2937;
+			--blog-code-bg: #141414;
+			--blog-inline-code-bg: #1f2937;
+			--blog-code-tag: #f87171;
+			--blog-code-property: #e5e7eb;
+			--blog-divider: #4b5563;
+			--blog-mention: #34d399;
+			--blog-equation: #d1d5db;
+			--blog-border: #686a6c;
+		}
+	}
+
+	:global(:root) {
 		/* Typography */
 		--blog-heading-large: 3.75rem;
 		--blog-heading-medium: 2.25rem;
