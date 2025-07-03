@@ -54,6 +54,18 @@
 </div>
 
 <style>
+	/* Override blog colors for white text hierarchy on listing page only */
+	:global(.blog-wrapper) {
+		--blog-text: #ffffff;
+		--blog-heading: #ffffff;
+		--blog-accent: #e5e7eb;
+		--blog-secondary: #d1d5db;
+		--blog-link: #ffffff;
+		--blog-link-hover: #e5e7eb;
+		--blog-heading-dark: #ffffff;
+		--blog-secondary-dark: #d1d5db;
+	}
+
 	.opacity-0 {
 		opacity: 0;
 	}
