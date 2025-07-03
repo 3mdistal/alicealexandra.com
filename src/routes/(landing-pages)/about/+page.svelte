@@ -15,7 +15,7 @@
 	/>
 </svelte:head>
 
-<div class="about-page">
+<div style="background-color: {background}">
 	<LandingPage
 		header="i'm alice, a digital creator."
 		description="Welcome to Tempo Immaterial, a place that both showcases my
@@ -29,9 +29,3 @@
 	/>
 	<About {accent} />
 </div>
-
-<style>
-	:global(body) {
-		background-color: #beb5ca;
-	}
-</style>
