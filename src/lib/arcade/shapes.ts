@@ -92,7 +92,7 @@ export class MovingShape extends Shape {
 		this.velocityX = 0;
 	}
 
-	move(inputHandler: InputHandler, deltaTime: number) {
+		move(inputHandler: InputHandler, deltaTime: number) {
 		const inputs = inputHandler.handleInputs();
 		const adjustedDeltaTime = deltaTime * 0.01;
 
@@ -101,7 +101,7 @@ export class MovingShape extends Shape {
 
 		this.#handleGravity(adjustedDeltaTime);
 		this.#checkBoundaries(inputHandler.canvas);
-		this.#handleJump(inputs);
+		this.#handleJump(inputHandler);
 	}
 
 	#checkMovementDirection(inputs: Set<string>) {
