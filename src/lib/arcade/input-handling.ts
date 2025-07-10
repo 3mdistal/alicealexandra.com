@@ -76,20 +76,16 @@ export class InputHandler {
 		return this.currentInputs;
 	}
 
-			isJumpPressed() {
-		if (this.jumpPressed && !this.jumpWasPressed) {
-			this.jumpWasPressed = true;
-			return true;
-		}
-		return false;
+				canJump() {
+		return !this.jumpConsumed && (this.jumpPressed || this.jumpBuffered);
+	}
+
+	isJumpPressed() {
+		return this.jumpPressed && !this.jumpConsumed;
 	}
 
 	isJumpBuffered(bufferTimeMs: number) {
-		if (this.jumpBuffered && Date.now() - this.jumpBufferTime <= bufferTimeMs) {
-			this.jumpBuffered = false;
-			return true;
-		}
-		return false;
+		return this.jumpBuffered && !this.jumpConsumed && Date.now() - this.jumpBufferTime <= bufferTimeMs;
 	}
 
 	getJumpHoldRatio(maxHoldTimeMs: number) {
@@ -101,7 +97,7 @@ export class InputHandler {
 	}
 
 	consumeJump() {
+		this.jumpConsumed = true;
 		this.jumpBuffered = false;
-		this.jumpWasPressed = true;
 	}
 }
