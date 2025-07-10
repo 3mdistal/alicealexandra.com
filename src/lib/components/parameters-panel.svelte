@@ -94,7 +94,7 @@
 		font-size: 16px;
 	}
 
-	.reset-button {
+		.reset-button {
 		background: #333;
 		color: white;
 		border: 1px solid #555;
@@ -102,6 +102,7 @@
 		border-radius: 4px;
 		cursor: pointer;
 		font-size: 12px;
+		font-family: monospace;
 		transition: background 0.2s;
 	}
 
