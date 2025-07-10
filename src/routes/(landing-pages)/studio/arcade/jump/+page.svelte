@@ -6,9 +6,10 @@
 
 	let backgroundCanvas: HTMLCanvasElement;
 	let ctxBackground: CanvasRenderingContext2D;
-	let inputHandler: InputHandler;
+		let inputHandler: InputHandler;
 	let lastTimeStamp = 0;
 	let showParameters = false;
+	let showInstructions = true;
 
 	const circle = new MovingCircle(100, 100, 50, 'white');
 
