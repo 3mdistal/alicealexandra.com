@@ -121,11 +121,12 @@
 		min-height: 300px;
 	}
 
-	@media (max-width: 1023px) {
+		@media (max-width: 1023px) {
 		.image-container {
-			margin-left: calc(-37.5vw + 37.5%);
-			margin-right: calc(-37.5vw + 37.5%);
+			margin-left: calc(-50vw + 50%);
+			margin-right: calc(-50vw + 50%);
 			width: 100vw;
+			max-width: none;
 		}
 	}
 
