@@ -1,4 +1,6 @@
 import type { InputHandler } from './input-handling';
+import { physicsParams } from './physics-params';
+import { get } from 'svelte/store';
 
 class Shape {
 	x: number;
