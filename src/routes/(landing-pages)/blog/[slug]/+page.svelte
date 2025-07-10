@@ -14,8 +14,7 @@
 		QueryDatabaseResponse
 	} from '$lib/notion/types/notion-types';
 
-	let darkMode: boolean;
-	let context: HTMLElement;
+		let context: HTMLElement;
 
 	const runBlogHelpers = async () => {
 		await tick();
