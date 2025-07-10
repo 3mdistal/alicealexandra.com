@@ -39,7 +39,7 @@ export class InputHandler {
 		this.#listenKeyUp();
 	}
 
-			#listenKeyDown() {
+				#listenKeyDown() {
 		document.addEventListener('keydown', (event) => {
 			const action = this.possibleInputs[event.key];
 			if (!action) return;
@@ -49,6 +49,7 @@ export class InputHandler {
 				this.jumpHoldStart = Date.now();
 				this.jumpBuffered = true;
 				this.jumpBufferTime = Date.now();
+				this.jumpConsumed = false;
 			} else {
 				this.currentInputs.add(action);
 			}
