@@ -34,5 +34,6 @@ export const parameterRanges = {
 	jumpBufferTime: { min: 50, max: 300, step: 25 },
 	friction: { min: 0, max: 0.95, step: 0.05 },
 	maxSpeed: { min: 50, max: 300, step: 10 },
-	movementLerp: { min: 0.1, max: 1, step: 0.05 }
+	movementLerp: { min: 0.1, max: 1, step: 0.05 },
+	airCoefficient: { min: 0, max: 1, step: 0.05 }
 };
