@@ -14,8 +14,8 @@ export interface PhysicsParams {
 
 export const defaultPhysicsParams: PhysicsParams = {
 	gravity: 150,
-	minJumpForce: 30,
-	maxJumpForce: 45,
+	minJumpForce: 60,
+	maxJumpForce: 90,
 	jumpHoldTime: 300,
 	jumpBufferTime: 100,
 	friction: 0.4,
