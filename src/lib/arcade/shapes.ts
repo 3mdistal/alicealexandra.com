@@ -163,18 +163,10 @@ export class MovingShape extends Shape {
 		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
 			const jumpDuration = Date.now() - this.jumpStartTime;
 			if (jumpDuration < params.jumpHoldTime) {
-																// Apply force at a constant rate - the min/max difference only affects total duration, not rate
-				const targetTotalForce = params.maxJumpForce - params.minJumpForce;
-				const elapsedRatio = jumpDuration / params.jumpHoldTime;
-				const targetForceAtThisTime = targetTotalForce * elapsedRatio;
-
-				// Calculate how much force we should have applied by now vs how much we actually have
-				const expectedVelocity = -params.minJumpForce - targetForceAtThisTime;
-				const velocityDifference = expectedVelocity - this.velocityY;
-
-				// Apply a small correction force to reach the target
-				const correctionForce = velocityDifference * 0.1;
-				this.velocityY -= correctionForce;
+																				// Simple approach: apply a small constant force while held
+				// This will accumulate over time to reach the difference between min and max
+				const additionalForce = 2.0 * deltaTime; // Constant force per frame
+				this.velocityY -= additionalForce;
 			} else {
 				this.isJumping = false;
 			}
