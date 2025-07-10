@@ -29,11 +29,16 @@ export class InputHandler {
 		this.#listenKeyUp();
 	}
 
-	#listenKeyDown() {
+		#listenKeyDown() {
 		document.addEventListener('keydown', (event) => {
 			const action = this.possibleInputs[event.key];
 			if (!action) return;
-			this.currentInputs.add(action);
+
+			if (action === 'Jump') {
+				this.jumpPressed = true;
+			} else {
+				this.currentInputs.add(action);
+			}
 		});
 	}
 
