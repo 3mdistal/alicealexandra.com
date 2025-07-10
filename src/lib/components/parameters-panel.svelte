@@ -20,8 +20,8 @@
 		physicsParams.set(currentParams);
 	}
 
-		function formatValue(key: keyof PhysicsParams, value: number): string {
-		if (key === 'friction' || key === 'movementLerp') {
+			function formatValue(key: keyof PhysicsParams, value: number): string {
+		if (key === 'friction' || key === 'movementLerp' || key === 'airCoefficient') {
 			return value.toFixed(2);
 		}
 		return value.toString();
@@ -36,7 +36,8 @@
 			jumpBufferTime: 'Jump Buffer (ms)',
 			friction: 'Friction',
 			maxSpeed: 'Max Speed',
-			movementLerp: 'Movement Smoothing'
+			movementLerp: 'Movement Smoothing',
+			airCoefficient: 'Air Control'
 		};
 		return labels[key] || key.charAt(0).toUpperCase() + key.slice(1);
 	}
