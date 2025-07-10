@@ -19,7 +19,7 @@
 
 	onMount(async () => {
 		// Set accent color based on URL
-		$page.url.searchParams.forEach((value, key) => {
+				page.url.searchParams.forEach((value, key) => {
 			if (key === 'accent') {
 				accent = value;
 			}
