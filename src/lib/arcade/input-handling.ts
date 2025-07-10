@@ -72,7 +72,7 @@ export class InputHandler {
 		return this.currentInputs;
 	}
 
-		isJumpPressed() {
+			isJumpPressed() {
 		if (this.jumpPressed && !this.jumpWasPressed) {
 			this.jumpWasPressed = true;
 			return true;
@@ -94,5 +94,10 @@ export class InputHandler {
 			return Math.min(currentHoldTime / maxHoldTimeMs, 1);
 		}
 		return Math.min(this.jumpHoldTime / maxHoldTimeMs, 1);
+	}
+
+	consumeJump() {
+		this.jumpBuffered = false;
+		this.jumpWasPressed = true;
 	}
 }
