@@ -36,8 +36,8 @@
 	
 	<div class="parameters-list">
 		{#each Object.entries(parameterRanges) as [key, range]}
-			<div class="parameter-group">
-				<label for={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</label>
+						<div class="parameter-group">
+				<label for={key}>{key === 'airCoefficient' ? 'Air Coefficient' : key.charAt(0).toUpperCase() + key.slice(1)}</label>
 				<div class="slider-container">
 					<input
 						type="range"
