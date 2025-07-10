@@ -147,7 +147,7 @@ export class MovingShape extends Shape {
 		this.y += this.velocityY * adjustedDeltaTime;
 	}
 
-							#handleJump(inputHandler: InputHandler) {
+								#handleJump(inputHandler: InputHandler, deltaTime: number) {
 		const params = get(physicsParams);
 
 		// Start jump immediately when button is first pressed
