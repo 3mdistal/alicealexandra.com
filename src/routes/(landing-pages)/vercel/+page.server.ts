@@ -21,7 +21,10 @@ export async function load() {
 			publicationList: await queryDatabase(queryParams)
 		};
 	} catch (error) {
-		console.warn('Failed to load publications from Notion:', error instanceof Error ? error.message : error);
+		console.warn(
+			'Failed to load publications from Notion:',
+			error instanceof Error ? error.message : error
+		);
 		// Return empty array as fallback when Notion is not configured
 		return {
 			publicationList: { results: [] }

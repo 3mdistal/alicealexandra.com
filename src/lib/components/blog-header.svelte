@@ -72,11 +72,11 @@
 
 <style>
 	.blog-header {
-		width: 100%;
-		max-width: 900px;
 		margin: 0 auto;
 		margin-top: 80px; /* More space from top */
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
+		width: 100%;
+		max-width: 900px;
 		color: var(--blog-text);
 
 		@media (min-width: 640px) {
@@ -106,8 +106,8 @@
 		align-items: center;
 		gap: 6px;
 		margin-bottom: var(--blog-spacing-md);
-		font-size: var(--blog-body-small);
 		color: var(--blog-secondary);
+		font-size: var(--blog-body-small);
 	}
 
 	.breadcrumb-link {
@@ -115,8 +115,8 @@
 		align-items: center;
 		gap: 6px;
 		color: var(--blog-secondary) !important;
-		text-decoration: none;
 		font-weight: 500;
+		text-decoration: none;
 
 		&:hover {
 			color: var(--blog-link) !important;
@@ -130,8 +130,8 @@
 
 	.back-icon {
 		width: 16px;
-		height: 16px;
 		min-width: 16px;
+		height: 16px;
 		color: currentColor;
 	}
 
@@ -145,17 +145,17 @@
 	}
 
 	.breadcrumb-category {
-		font-weight: 500;
 		color: var(--blog-secondary);
+		font-weight: 500;
 	}
 
 	/* Title */
 	.blog-title {
-		font-size: 2.25rem;
-		line-height: 2.5rem;
 		margin: 0 0 var(--blog-spacing-sm) 0;
 		color: var(--blog-heading);
 		font-weight: 500;
+		font-size: 2.25rem;
+		line-height: 2.5rem;
 		font-family: 'Spectral', serif;
 
 		@media (min-width: 640px) {
@@ -176,8 +176,8 @@
 
 	/* Subtitle */
 	.blog-subtitle {
-		max-width: var(--blog-subtitle-width);
 		margin: 0 0 var(--blog-spacing-lg) 0;
+		max-width: var(--blog-subtitle-width);
 		color: var(--blog-accent);
 		font-style: italic;
 		font-size: var(--blog-body);
@@ -193,12 +193,12 @@
 	/* Article Metadata */
 	.article-metadata {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		gap: var(--blog-spacing-md);
 		margin-bottom: var(--blog-spacing-md);
-		padding-bottom: var(--blog-spacing-md);
 		border-bottom: 1px solid var(--blog-border);
-		flex-wrap: wrap;
+		padding-bottom: var(--blog-spacing-md);
 	}
 
 	.reading-time {
@@ -215,8 +215,8 @@
 
 	.clock-icon {
 		width: 16px;
-		height: 16px;
 		min-width: 16px;
+		height: 16px;
 		color: currentColor;
 	}
 

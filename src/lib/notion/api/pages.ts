@@ -62,7 +62,7 @@ export async function updatePage(
  * Add a commission to the commissions database
  * @param commissionOrName - Either a CommissionRequest object or the name of the requester
  * @param email - The email of the requester (when using the string signature)
- * @param description - The description of the commission (when using the string signature) 
+ * @param description - The description of the commission (when using the string signature)
  * @returns The created page
  */
 export async function addCommission(
@@ -135,7 +135,9 @@ export async function addCommission(
  * @param subscriberOrEmail - Either a Subscriber object or an email string
  * @returns The created page
  */
-export async function addSubscriber(subscriberOrEmail: Subscriber | string): Promise<PageObjectResponse> {
+export async function addSubscriber(
+	subscriberOrEmail: Subscriber | string
+): Promise<PageObjectResponse> {
 	return withErrorHandling(async () => {
 		if (!SUBSCRIBERS_DB) {
 			throw new Error('Missing required environment variables for subscribers');

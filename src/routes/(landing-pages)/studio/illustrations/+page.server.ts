@@ -28,7 +28,10 @@ export async function load() {
 			illustrations: await queryDatabase(queryParams)
 		};
 	} catch (error) {
-		console.warn('Failed to load illustrations from Notion:', error instanceof Error ? error.message : error);
+		console.warn(
+			'Failed to load illustrations from Notion:',
+			error instanceof Error ? error.message : error
+		);
 		// Return empty array as fallback when Notion is not configured
 		return {
 			illustrations: { results: [] }

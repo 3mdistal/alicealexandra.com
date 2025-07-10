@@ -11,10 +11,10 @@
 		RichTextPropertyItemObjectResponse,
 		UrlPropertyItemObjectResponse,
 		SelectPropertyItemObjectResponse,
-                FormulaPropertyItemObjectResponse,
-                FilesPropertyItemObjectResponse,
-                QueryDatabaseResponse
-        } from '$lib/notion/types/notion-types';
+		FormulaPropertyItemObjectResponse,
+		FilesPropertyItemObjectResponse,
+		QueryDatabaseResponse
+	} from '$lib/notion/types/notion-types';
 
 	let darkMode: boolean;
 	let context: HTMLElement;
@@ -50,21 +50,21 @@
 		return prop?.type === 'select';
 	}
 
-        function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
-                return prop?.type === 'formula';
-        }
+	function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
+		return prop?.type === 'formula';
+	}
 
-        function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
-                return prop?.type === 'rich_text';
-        }
+	function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
+		return prop?.type === 'rich_text';
+	}
 
-        function isFilesProperty(prop: any): prop is FilesPropertyItemObjectResponse {
-                return prop?.type === 'files';
-        }
+	function isFilesProperty(prop: any): prop is FilesPropertyItemObjectResponse {
+		return prop?.type === 'files';
+	}
 
-        function isDateProperty(prop: any): prop is any {
-                return prop?.type === 'date';
-        }
+	function isDateProperty(prop: any): prop is any {
+		return prop?.type === 'date';
+	}
 
 	const {
 		Name: title,
@@ -124,35 +124,35 @@
 	}
 
 	// Helper function to get URL from URL property
-        function getUrl(prop: any) {
-                // Handle page cover object
-                if (prop && (prop.type === 'external' || prop.type === 'file')) {
-                        if (prop.type === 'external' && prop.external?.url) {
-                                return prop.external.url;
-                        }
-                        if (prop.type === 'file' && prop.file?.url) {
-                                return prop.file.url;
-                        }
-                }
+	function getUrl(prop: any) {
+		// Handle page cover object
+		if (prop && (prop.type === 'external' || prop.type === 'file')) {
+			if (prop.type === 'external' && prop.external?.url) {
+				return prop.external.url;
+			}
+			if (prop.type === 'file' && prop.file?.url) {
+				return prop.file.url;
+			}
+		}
 
-                // Handle regular properties if not a page cover
-                if (isUrlProperty(prop)) {
-                        return prop.url;
-                }
-                if (isFilesProperty(prop)) {
-                        const first = prop.files?.[0];
-                        if (first?.type === 'file') {
-                                return first.file.url;
-                        }
-                        if (first?.type === 'external') {
-                                return first.external.url;
-                        }
-                }
-                if (isFormulaProperty(prop) && prop.formula.type === 'string') {
-                        return prop.formula.string;
-                }
-                return '';
-        }
+		// Handle regular properties if not a page cover
+		if (isUrlProperty(prop)) {
+			return prop.url;
+		}
+		if (isFilesProperty(prop)) {
+			const first = prop.files?.[0];
+			if (first?.type === 'file') {
+				return first.file.url;
+			}
+			if (first?.type === 'external') {
+				return first.external.url;
+			}
+		}
+		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
+			return prop.formula.string;
+		}
+		return '';
+	}
 
 	onMount(() => {
 		runBlogHelpers();
@@ -175,10 +175,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Blog - {getTextContent(title) || 'Blog'}" />
 	<meta property="og:description" content={getTextContent(ogDescription)} />
-        <meta
-                property="og:image"
-                content={getUrl(pageCover) || 'https://unsplash.it/1200/600'}
-        />
+	<meta property="og:image" content={getUrl(pageCover) || 'https://unsplash.it/1200/600'} />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -188,10 +185,7 @@
 	<meta name="twitter:url" content="https://www.alicealexandra.com/blog" />
 	<meta name="twitter:title" content="Blog - {getTextContent(title) || 'Blog'}" />
 	<meta name="twitter:description" content={getTextContent(ogDescription)} />
-        <meta
-                name="twitter:image"
-                content={getUrl(pageCover) || 'https://unsplash.it/1200/600'}
-        />
+	<meta name="twitter:image" content={getUrl(pageCover) || 'https://unsplash.it/1200/600'} />
 	<meta
 		name="twitter:image:alt"
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
@@ -202,22 +196,17 @@
 
 <div class="page-wrapper">
 	{#if blogPost}
-		<BlogHeader
-			{blogPost}
-			category={categoryName}
-			publishedDate={publishedDate}
-			readTime={readTime}
-		/>
+		<BlogHeader {blogPost} category={categoryName} {publishedDate} {readTime} />
 	{/if}
 
 	<div class="blog-container">
-	{#if content.length > 0}
-		<div class="notion-container" bind:this={context}>
-			<NotionPageParser results={content} />
-		</div>
-	{:else}
-		<p>No content available.</p>
-	{/if}
+		{#if content.length > 0}
+			<div class="notion-container" bind:this={context}>
+				<NotionPageParser results={content} />
+			</div>
+		{:else}
+			<p>No content available.</p>
+		{/if}
 		<p class="back-link">
 			<a href="/blog" data-sveltekit-noscroll>back.</a>
 		</p>
@@ -228,24 +217,24 @@
 	:global(html),
 	:global(body) {
 		margin: 0;
-		padding: 0;
 		background-color: var(--blog-bg) !important;
+		padding: 0;
 		min-height: 100vh;
 	}
 
 	.page-wrapper {
-		min-height: 100vh;
-		background-color: var(--blog-bg);
 		position: relative;
 		z-index: 1;
+		background-color: var(--blog-bg);
+		min-height: 100vh;
 	}
 
 	.blog-container {
+		margin: 0 auto;
 		background-color: var(--blog-bg);
 		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
-		color: var(--blog-text);
 		max-width: 900px;
-		margin: 0 auto;
+		color: var(--blog-text);
 
 		@media (min-width: 640px) {
 			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
@@ -267,8 +256,6 @@
 			padding: var(--blog-spacing-xl) 25vw;
 		}
 
-
-
 		:global(sub),
 		:global(sup) {
 			color: inherit;
@@ -277,9 +264,9 @@
 
 	/* Styles for constraining top sections and back-link */
 	.blog-container > div:not(.notion-container) {
+		margin: 0 auto;
 		width: 100%;
 		max-width: 900px;
-		margin: 0 auto;
 		font-size: var(--blog-body);
 
 		@media (min-width: 1024px) {
@@ -287,11 +274,9 @@
 		}
 	}
 
-
-
 	.notion-container {
-		max-width: 900px;
 		margin: 0 auto;
+		max-width: 900px;
 		font-size: var(--blog-body);
 		line-height: 1.75rem;
 
@@ -306,9 +291,9 @@
 	}
 
 	.back-link {
+		margin-top: 4em;
 		width: 100%;
 		max-width: var(--blog-content-width);
-		margin-top: 4em;
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		text-align: right;

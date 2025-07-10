@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { QueryDatabaseResponse } from '$lib/notion/types/notion-types';
 	import { onMount } from 'svelte';
-		import { page } from '$app/state';
+	import { page } from '$app/state';
 	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 	import type {
 		RichTextItemResponse,
@@ -11,15 +11,13 @@
 	export let accent: string;
 	export let data: { post: QueryDatabaseResponse };
 
-	let {
-		post: { results = [] } = {}
-	} = data;
+	let { post: { results = [] } = {} } = data;
 
 	let loadingTitle = '';
 
 	onMount(async () => {
 		// Set accent color based on URL
-				page.url.searchParams.forEach((value, key) => {
+		page.url.searchParams.forEach((value, key) => {
 			if (key === 'accent') {
 				accent = value;
 			}

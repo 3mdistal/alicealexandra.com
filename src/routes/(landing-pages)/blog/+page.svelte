@@ -103,9 +103,9 @@
 		position: absolute;
 		opacity: 0.1;
 		z-index: 10;
-		object-position: right;
 		width: 100%;
 		height: 100%;
+		object-position: right;
 	}
 
 	@media (min-width: 768px) {
