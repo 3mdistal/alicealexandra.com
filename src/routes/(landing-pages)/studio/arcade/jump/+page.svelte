@@ -105,7 +105,67 @@
 		border-color: #555;
 	}
 
-	.parameters-button:active {
+		.parameters-button:active {
 		transform: scale(0.95);
+	}
+
+	.instructions {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.9);
+		color: white;
+		padding: 30px;
+		border-radius: 12px;
+		border: 2px solid #333;
+		font-family: monospace;
+		text-align: center;
+		z-index: 999;
+		animation: fadeIn 0.5s ease-in;
+	}
+
+	.instructions h3 {
+		margin: 0 0 20px 0;
+		color: #fff;
+		font-size: 18px;
+	}
+
+	.control-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.control-item {
+		font-size: 14px;
+		color: #ccc;
+	}
+
+	.keys {
+		background: #333;
+		color: #fff;
+		padding: 4px 8px;
+		border-radius: 4px;
+		font-weight: bold;
+		border: 1px solid #555;
+	}
+
+	.hint {
+		font-size: 12px;
+		color: #888;
+		font-style: italic;
+		margin-top: 8px;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translate(-50%, -50%) scale(0.9);
+		}
+		to {
+			opacity: 1;
+			transform: translate(-50%, -50%) scale(1);
+		}
 	}
 </style>
