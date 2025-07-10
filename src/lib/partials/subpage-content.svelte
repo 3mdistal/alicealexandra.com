@@ -122,7 +122,7 @@
 		height: 85vh;
 	}
 
-				.image-container img,
+					.image-container img,
 	.image-container :global(img) {
 		display: block;
 		border-radius: 1.5rem;
@@ -131,6 +131,7 @@
 		object-fit: cover;
 		object-position: center;
 		overflow: hidden;
+		filter: grayscale(1) sepia(0.3) hue-rotate(250deg) saturate(0.4);
 	}
 
 		@media (min-width: 1024px) {
