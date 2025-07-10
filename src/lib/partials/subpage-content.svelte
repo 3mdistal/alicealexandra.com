@@ -138,8 +138,8 @@
 			text-align: center;
 		}
 
-		.content {
-			flex-direction: row !important;
+				.content {
+			flex-direction: {flexDirection};
 			gap: 3em;
 		}
 
