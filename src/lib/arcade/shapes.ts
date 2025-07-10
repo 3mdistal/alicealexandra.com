@@ -142,21 +142,16 @@ export class MovingShape extends Shape {
 		this.y += this.velocityY * adjustedDeltaTime;
 	}
 
-					#handleJump(inputHandler: InputHandler) {
+						#handleJump(inputHandler: InputHandler) {
 		const params = get(physicsParams);
 
-		// Check if we should start a jump (but don't consume it yet)
-		const canJump = this.grounded && (
-			(inputHandler.jumpPressed && !inputHandler.jumpWasPressed) ||
-			inputHandler.isJumpBuffered(params.jumpBufferTime)
-		);
-
-		if (canJump) {
-			// Wait for jump to be released or max hold time reached before executing
+		if (this.grounded && inputHandler.canJump()) {
+			// Check if we should execute the jump
 			const holdRatio = inputHandler.getJumpHoldRatio(params.jumpHoldTime);
+			const shouldExecuteJump = !inputHandler.jumpPressed || holdRatio >= 1;
 
-			// Execute jump when button is released OR max hold time is reached
-			if (!inputHandler.jumpPressed || holdRatio >= 1) {
+			if (shouldExecuteJump) {
+				// Calculate jump force based on how long it was held
 				const jumpForce = params.minJumpForce + (params.maxJumpForce - params.minJumpForce) * holdRatio;
 				this.velocityY -= jumpForce;
 				this.grounded = false;
