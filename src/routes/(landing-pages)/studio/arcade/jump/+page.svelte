@@ -13,7 +13,7 @@
 
 	const circle = new MovingCircle(100, 100, 50, 'white');
 
-	function animate(timeStamp: number) {
+		function animate(timeStamp: number) {
 		const deltaTime = timeStamp - lastTimeStamp;
 		lastTimeStamp = timeStamp;
 
@@ -21,6 +21,14 @@
 
 		circle.draw(ctxBackground);
 		circle.move(inputHandler, deltaTime);
+
+		// Hide instructions when any input is detected
+		if (showInstructions && inputHandler) {
+			const inputs = inputHandler.handleInputs();
+			if (inputs.size > 0 || inputHandler.jumpPressed) {
+				showInstructions = false;
+			}
+		}
 
 		requestAnimationFrame(animate);
 	}
