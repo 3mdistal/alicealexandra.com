@@ -27,7 +27,7 @@
 		return value.toString();
 	}
 
-	function getParameterLabel(key: keyof PhysicsParams): string {
+		function getParameterLabel(key: keyof PhysicsParams): string {
 		const labels = {
 			gravity: 'Gravity',
 			minJumpForce: 'Min Jump Force',
@@ -40,6 +40,21 @@
 			airCoefficient: 'Air Control'
 		};
 		return labels[key] || key.charAt(0).toUpperCase() + key.slice(1);
+	}
+
+	function getParameterTooltip(key: keyof PhysicsParams): string {
+		const tooltips = {
+			gravity: 'How fast the character falls downward',
+			minJumpForce: 'Jump strength when tapping the jump button briefly',
+			maxJumpForce: 'Maximum jump strength when holding the jump button',
+			jumpHoldTime: 'How long to hold jump button for maximum height',
+			jumpBufferTime: 'Grace period to press jump before landing',
+			friction: 'How quickly the character stops when not moving',
+			maxSpeed: 'Maximum horizontal movement speed',
+			movementLerp: 'How smooth acceleration/deceleration feels',
+			airCoefficient: 'How much control you have while airborne (0 = none, 1 = full)'
+		};
+		return tooltips[key] || '';
 	}
 </script>
 
