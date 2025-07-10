@@ -69,10 +69,17 @@
 </div>
 
 <style>
-	.container {
+		.container {
 		margin-right: auto;
 		margin-left: auto;
 		width: 75%;
+	}
+
+	@media (max-width: 1023px) {
+		.container {
+			width: 100%;
+			padding: 0;
+		}
 	}
 
 	h2 {
