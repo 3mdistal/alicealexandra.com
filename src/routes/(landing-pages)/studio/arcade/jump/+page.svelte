@@ -58,10 +58,10 @@
 		position: relative;
 	}
 
-	.parameters-button {
+		.parameters-button {
 		position: fixed;
 		top: 20px;
-		right: 20px;
+		left: 20px;
 		background: rgba(0, 0, 0, 0.8);
 		color: white;
 		border: 2px solid #333;
