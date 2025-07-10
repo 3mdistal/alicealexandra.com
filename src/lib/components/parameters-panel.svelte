@@ -88,10 +88,11 @@
 		padding-bottom: 10px;
 	}
 
-	.panel-header h3 {
+		.panel-header h3 {
 		margin: 0;
 		color: #fff;
 		font-size: 16px;
+		font-family: monospace;
 	}
 
 		.reset-button {
