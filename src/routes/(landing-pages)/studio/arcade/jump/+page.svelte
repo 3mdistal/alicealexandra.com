@@ -56,6 +56,23 @@
 		Parameters
 	</button>
 
+	{#if showInstructions}
+		<div class="instructions">
+			<h3>Controls</h3>
+			<div class="control-list">
+				<div class="control-item">
+					<span class="keys">WASD</span> or <span class="keys">Arrow Keys</span> - Move
+				</div>
+				<div class="control-item">
+					<span class="keys">Spacebar</span> or <span class="keys">Z</span> - Jump
+				</div>
+				<div class="hint">
+					Hold jump longer for higher jumps!
+				</div>
+			</div>
+		</div>
+	{/if}
+
 	<ParametersPanel bind:isOpen={showParameters} />
 </div>
 
