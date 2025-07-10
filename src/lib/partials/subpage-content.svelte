@@ -138,8 +138,7 @@
 			text-align: center;
 		}
 
-				.content {
-			flex-direction: {flexDirection};
+						.content {
 			gap: 3em;
 		}
 
