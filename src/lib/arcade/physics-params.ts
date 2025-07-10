@@ -20,7 +20,7 @@ export const defaultPhysicsParams: PhysicsParams = {
 	jumpBufferTime: 100,
 	friction: 0.4,
 	maxSpeed: 110,
-	movementLerp: 0.8,
+		movementLerp: 0.5,
 	airCoefficient: 0.6
 };
 
