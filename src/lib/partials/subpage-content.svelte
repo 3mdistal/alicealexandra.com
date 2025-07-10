@@ -114,11 +114,19 @@
 		margin-top: 3em;
 	}
 
-		.image-container {
+			.image-container {
 		margin-right: auto;
 		margin-left: auto;
 		height: 50vh;
 		min-height: 300px;
+	}
+
+	@media (max-width: 1023px) {
+		.image-container {
+			margin-left: calc(-37.5vw + 37.5%);
+			margin-right: calc(-37.5vw + 37.5%);
+			width: 100vw;
+		}
 	}
 
 					.image-container img,
