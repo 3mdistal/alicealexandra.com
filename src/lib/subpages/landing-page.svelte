@@ -160,8 +160,15 @@
 		}
 	}
 
-	.image-wrapper.no-padding {
+		.image-wrapper.no-padding {
+		margin-left: -1.25rem;
 		margin-right: -1.25rem;
+	}
+
+	@media (min-width: 768px) {
+		.image-wrapper.no-padding {
+			margin-left: 0;
+		}
 	}
 
 	@media (min-width: 1024px) {
