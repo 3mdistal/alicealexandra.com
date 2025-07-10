@@ -2,11 +2,13 @@ import { writable } from 'svelte/store';
 
 export interface PhysicsParams {
 	gravity: number;
-	jumpForce: number;
+	minJumpForce: number;
+	maxJumpForce: number;
+	jumpHoldTime: number;
+	jumpBufferTime: number;
 	friction: number;
-	acceleration: number;
 	maxSpeed: number;
-	airCoefficient: number;
+	movementLerp: number;
 }
 
 export const defaultPhysicsParams: PhysicsParams = {
