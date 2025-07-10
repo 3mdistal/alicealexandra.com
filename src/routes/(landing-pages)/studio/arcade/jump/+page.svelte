@@ -2,16 +2,15 @@
 	import { onMount } from 'svelte';
 	import { MovingCircle } from '$lib/arcade/shapes';
 	import { InputHandler } from '$lib/arcade/input-handling';
+	import ParametersPanel from '$lib/components/parameters-panel.svelte';
 
 	let backgroundCanvas: HTMLCanvasElement;
-
 	let ctxBackground: CanvasRenderingContext2D;
+	let inputHandler: InputHandler;
+	let lastTimeStamp = 0;
+	let showParameters = false;
 
 	const circle = new MovingCircle(100, 100, 50, 'white');
-
-	let inputHandler: InputHandler;
-
-	let lastTimeStamp = 0;
 
 	function animate(timeStamp: number) {
 		const deltaTime = timeStamp - lastTimeStamp;
@@ -23,6 +22,10 @@
 		circle.move(inputHandler, deltaTime);
 
 		requestAnimationFrame(animate);
+	}
+
+	function toggleParameters() {
+		showParameters = !showParameters;
 	}
 
 	onMount(() => {
