@@ -56,7 +56,15 @@ export class InputHandler {
 		});
 	}
 
-	handleInputs() {
+		handleInputs() {
 		return this.currentInputs;
+	}
+
+	isJumpPressed() {
+		if (this.jumpPressed && !this.jumpWasPressed) {
+			this.jumpWasPressed = true;
+			return true;
+		}
+		return false;
 	}
 }
