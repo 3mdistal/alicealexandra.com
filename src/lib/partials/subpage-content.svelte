@@ -121,23 +121,7 @@
 		min-height: 300px;
 	}
 
-				@media (max-width: 1023px) {
-		.image-container {
-			position: relative;
-			overflow: visible;
-		}
-
-		.image-container img,
-		.image-container :global(img) {
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 100vw !important;
-			max-width: 100vw !important;
-			margin-left: 0 !important;
-			margin-right: 0 !important;
-		}
-	}
+				
 
 					.image-container img,
 	.image-container :global(img) {
