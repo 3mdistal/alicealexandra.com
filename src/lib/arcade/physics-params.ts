@@ -26,9 +26,11 @@ export const physicsParams = writable<PhysicsParams>(defaultPhysicsParams);
 
 export const parameterRanges = {
 	gravity: { min: 10, max: 200, step: 5 },
-	jumpForce: { min: 50, max: 500, step: 10 },
+	minJumpForce: { min: 50, max: 300, step: 10 },
+	maxJumpForce: { min: 150, max: 500, step: 10 },
+	jumpHoldTime: { min: 100, max: 800, step: 50 },
+	jumpBufferTime: { min: 50, max: 300, step: 25 },
 	friction: { min: 0, max: 0.95, step: 0.05 },
-	acceleration: { min: 20, max: 300, step: 10 },
-	maxSpeed: { min: 20, max: 200, step: 5 },
-	airCoefficient: { min: 0, max: 1, step: 0.05 }
+	maxSpeed: { min: 50, max: 300, step: 10 },
+	movementLerp: { min: 0.1, max: 1, step: 0.05 }
 };
