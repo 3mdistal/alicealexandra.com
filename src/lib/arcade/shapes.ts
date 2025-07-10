@@ -163,11 +163,10 @@ export class MovingShape extends Shape {
 		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
 			const jumpDuration = Date.now() - this.jumpStartTime;
 			if (jumpDuration < params.jumpHoldTime) {
-																												// Classic platformer approach: apply constant upward force while held
-				// The total additional force available is (maxJumpForce - minJumpForce)
-				// Distribute this over the jump hold time as a constant force per second
+																																// Apply constant upward force while held - force rate is independent of hold time
+				// jumpHoldTime only controls the maximum duration, not the force strength
 				const totalAdditionalForce = params.maxJumpForce - params.minJumpForce;
-				const additionalForcePerSecond = totalAdditionalForce / (params.jumpHoldTime / 1000); // per second
+				const additionalForcePerSecond = totalAdditionalForce * 4; // Constant rate (4x the difference per second)
 				const additionalForce = additionalForcePerSecond * deltaTime;
 
 				this.velocityY -= additionalForce;
