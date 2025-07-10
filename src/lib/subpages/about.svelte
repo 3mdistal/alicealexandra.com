@@ -61,7 +61,6 @@
 <div class="spacer"></div>
 
 <SubpageContent
-	flexDirection="row"
 	{accent}
 	imageSource={AuthorPhoto}
 	imageAlt="Alice Alexandra Moore"
