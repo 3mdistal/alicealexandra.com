@@ -131,7 +131,7 @@
 		object-fit: cover;
 		object-position: center;
 		overflow: hidden;
-						filter: grayscale(1) sepia(0.5) hue-rotate(250deg) saturate(1.0);
+								filter: grayscale(0.7) sepia(0.5) hue-rotate(250deg) saturate(1.0);
 	}
 
 		@media (min-width: 1024px) {
