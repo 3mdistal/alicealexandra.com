@@ -163,10 +163,11 @@
 		box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 	}
 
-	.parameter-value {
+		.parameter-value {
 		font-size: 12px;
 		color: #fff;
 		min-width: 40px;
 		text-align: right;
+		font-family: monospace;
 	}
 </style>
