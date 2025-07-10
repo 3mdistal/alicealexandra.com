@@ -1,4 +1,6 @@
 import type { InputHandler } from './input-handling';
+import { physicsParams } from './physics-params';
+import { get } from 'svelte/store';
 
 class Shape {
 	x: number;
@@ -72,11 +74,7 @@ class SVGToImage extends Shape {
 	}
 }
 
-const GRAVITY = 70;
-const JUMP_FORCE = 200;
-const FRICTION = 0.6;
-const ACCELERATION = 100;
-const MAX_SPEED = 100;
+
 
 export class MovingShape extends Shape {
 	dx: number;
@@ -84,6 +82,8 @@ export class MovingShape extends Shape {
 	grounded: boolean;
 	velocityY: number;
 	velocityX: number;
+	isJumping: boolean;
+	jumpStartTime: number;
 
 	constructor(x: number, y: number, size: number, color: string) {
 		super(x, y, size, color);
@@ -92,9 +92,11 @@ export class MovingShape extends Shape {
 		this.grounded = true;
 		this.velocityY = 0;
 		this.velocityX = 0;
+		this.isJumping = false;
+		this.jumpStartTime = 0;
 	}
 
-	move(inputHandler: InputHandler, deltaTime: number) {
+			move(inputHandler: InputHandler, deltaTime: number) {
 		const inputs = inputHandler.handleInputs();
 		const adjustedDeltaTime = deltaTime * 0.01;
 
@@ -103,7 +105,7 @@ export class MovingShape extends Shape {
 
 		this.#handleGravity(adjustedDeltaTime);
 		this.#checkBoundaries(inputHandler.canvas);
-		this.#handleJump(inputs);
+		this.#handleJump(inputHandler, adjustedDeltaTime);
 	}
 
 	#checkMovementDirection(inputs: Set<string>) {
@@ -129,42 +131,95 @@ export class MovingShape extends Shape {
 			this.y = this.size / 2;
 		}
 
-		if (this.y + this.size / 2 > canvas.height) {
+				if (this.y + this.size / 2 > canvas.height) {
 			this.y = canvas.height - this.size / 2;
 			this.velocityY = 0;
 			this.grounded = true;
+			this.isJumping = false;
 		} else {
 			this.grounded = false;
 		}
 	}
 
-	#handleGravity(adjustedDeltaTime: number) {
-		this.velocityY += GRAVITY * adjustedDeltaTime;
+		#handleGravity(adjustedDeltaTime: number) {
+		const params = get(physicsParams);
+		this.velocityY += params.gravity * adjustedDeltaTime;
 		this.y += this.velocityY * adjustedDeltaTime;
 	}
 
-	#handleJump(inputs: Set<string>) {
-		if (this.grounded && inputs.has('Jump')) {
-			this.velocityY -= JUMP_FORCE;
-			this.grounded = false; // Make the shape airborne
+								#handleJump(inputHandler: InputHandler, deltaTime: number) {
+		const params = get(physicsParams);
+
+		// Start jump immediately when button is first pressed
+		if (this.grounded && inputHandler.isJumpPressed()) {
+			this.velocityY -= params.minJumpForce;
+			this.grounded = false;
+			this.isJumping = true;
+			this.jumpStartTime = Date.now();
+			inputHandler.consumeJump();
+		}
+
+								// Continue applying upward force while jump is held (variable jump height)
+		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
+			const jumpDuration = Date.now() - this.jumpStartTime;
+			if (jumpDuration < params.jumpHoldTime) {
+																																								// Apply additional force at a rate controlled by jumpHoldTime
+				// Shorter jumpHoldTime = faster to reach max, Longer = slower to reach max
+				if (this.velocityY < 0) {
+					const totalAdditionalForce = params.maxJumpForce - params.minJumpForce;
+					// Rate is inversely related to jumpHoldTime - shorter time = faster rate
+					const rateMultiplier = 300 / params.jumpHoldTime; // 300ms baseline
+					const additionalForcePerSecond = totalAdditionalForce * rateMultiplier;
+					const additionalForce = additionalForcePerSecond * deltaTime;
+
+					// Calculate how much additional force we've already applied
+					const currentAdditionalVelocity = Math.abs(this.velocityY + params.minJumpForce);
+
+					// Only apply more force if we haven't reached the max yet
+					if (currentAdditionalVelocity < totalAdditionalForce) {
+						this.velocityY -= additionalForce;
+					} else {
+						this.isJumping = false; // Reached max force
+					}
+				} else {
+					// Stop jumping if we start falling
+					this.isJumping = false;
+				}
+			} else {
+				this.isJumping = false;
+			}
+		}
+
+		// Stop applying force when button is released
+		if (!inputHandler.jumpPressed) {
+			this.isJumping = false;
 		}
 	}
 
-	#handleMove(adjustedDeltaTime: number) {
-		if (this.dx !== 0) {
-			// Apply acceleration when moving left or right
-			this.velocityX += this.dx * ACCELERATION * adjustedDeltaTime;
+					#handleMove(adjustedDeltaTime: number) {
+		const params = get(physicsParams);
 
-			// Limit velocityX to not exceed currentSpeed
-			if (Math.abs(this.velocityX) > MAX_SPEED) {
-				this.velocityX = this.dx * MAX_SPEED; // Use dx to keep the direction (left or right)
-			}
+		// Calculate target velocity based on input
+		let targetVelocityX = this.dx * params.maxSpeed;
+
+		// Apply air coefficient for reduced air control
+		if (!this.grounded) {
+			targetVelocityX *= params.airCoefficient;
+		}
+
+		if (this.dx !== 0) {
+			// Smooth interpolation towards target velocity
+			this.velocityX = this.#lerp(this.velocityX, targetVelocityX, params.movementLerp);
 		} else if (this.grounded) {
 			// Apply friction only when on the ground
-			this.velocityX *= FRICTION;
+			this.velocityX *= (1 - params.friction);
 		}
 
 		this.x += this.velocityX * adjustedDeltaTime;
+	}
+
+	#lerp(start: number, end: number, factor: number): number {
+		return start + (end - start) * factor;
 	}
 }
 

@@ -15,36 +15,89 @@ export class InputHandler {
 	canvas: HTMLCanvasElement;
 	possibleInputs: { [key: string]: string };
 	currentInputs: Set<string>;
-	jumpTimeout: boolean;
+	jumpPressed: boolean;
+	jumpWasPressed: boolean;
+	jumpHoldTime: number;
+	jumpHoldStart: number;
+	jumpBuffered: boolean;
+	jumpBufferTime: number;
+	jumpConsumed: boolean;
 
 	constructor(canvas: HTMLCanvasElement, possibleInputs: { [key: string]: string } = inputs) {
 		this.canvas = canvas;
 		this.currentInputs = new Set();
 		this.possibleInputs = possibleInputs;
-		this.jumpTimeout = false;
+		this.jumpPressed = false;
+		this.jumpWasPressed = false;
+		this.jumpHoldTime = 0;
+		this.jumpHoldStart = 0;
+		this.jumpBuffered = false;
+		this.jumpBufferTime = 0;
+		this.jumpConsumed = false;
 
 		this.#listenKeyDown();
 		this.#listenKeyUp();
 	}
 
-	#listenKeyDown() {
+				#listenKeyDown() {
 		document.addEventListener('keydown', (event) => {
 			const action = this.possibleInputs[event.key];
 			if (!action) return;
-			this.currentInputs.add(action);
+
+			if (action === 'Jump' && !this.jumpPressed) {
+				this.jumpPressed = true;
+				this.jumpHoldStart = Date.now();
+				this.jumpBuffered = true;
+				this.jumpBufferTime = Date.now();
+				this.jumpConsumed = false;
+			} else {
+				this.currentInputs.add(action);
+			}
 		});
 	}
 
-	#listenKeyUp() {
+				#listenKeyUp() {
 		document.addEventListener('keyup', (event) => {
 			const action = this.possibleInputs[event.key];
-			if (action && this.currentInputs.has(action)) {
+			if (!action) return;
+
+			if (action === 'Jump') {
+				this.jumpHoldTime = Date.now() - this.jumpHoldStart;
+				this.jumpPressed = false;
+				this.jumpWasPressed = false;
+				this.jumpConsumed = false;
+			} else if (this.currentInputs.has(action)) {
 				this.currentInputs.delete(action);
 			}
 		});
 	}
 
-	handleInputs() {
+		handleInputs() {
 		return this.currentInputs;
+	}
+
+				canJump() {
+		return !this.jumpConsumed && (this.jumpPressed || this.jumpBuffered);
+	}
+
+	isJumpPressed() {
+		return this.jumpPressed && !this.jumpConsumed;
+	}
+
+	isJumpBuffered(bufferTimeMs: number) {
+		return this.jumpBuffered && !this.jumpConsumed && Date.now() - this.jumpBufferTime <= bufferTimeMs;
+	}
+
+	getJumpHoldRatio(maxHoldTimeMs: number) {
+		if (this.jumpPressed) {
+			const currentHoldTime = Date.now() - this.jumpHoldStart;
+			return Math.min(currentHoldTime / maxHoldTimeMs, 1);
+		}
+		return Math.min(this.jumpHoldTime / maxHoldTimeMs, 1);
+	}
+
+	consumeJump() {
+		this.jumpConsumed = true;
+		this.jumpBuffered = false;
 	}
 }
