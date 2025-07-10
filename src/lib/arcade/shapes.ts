@@ -150,18 +150,20 @@ export class MovingShape extends Shape {
 		}
 	}
 
-	#handleMove(adjustedDeltaTime: number) {
+		#handleMove(adjustedDeltaTime: number) {
+		const params = get(physicsParams);
+
 		if (this.dx !== 0) {
 			// Apply acceleration when moving left or right
-			this.velocityX += this.dx * ACCELERATION * adjustedDeltaTime;
+			this.velocityX += this.dx * params.acceleration * adjustedDeltaTime;
 
 			// Limit velocityX to not exceed currentSpeed
-			if (Math.abs(this.velocityX) > MAX_SPEED) {
-				this.velocityX = this.dx * MAX_SPEED; // Use dx to keep the direction (left or right)
+			if (Math.abs(this.velocityX) > params.maxSpeed) {
+				this.velocityX = this.dx * params.maxSpeed; // Use dx to keep the direction (left or right)
 			}
 		} else if (this.grounded) {
 			// Apply friction only when on the ground
-			this.velocityX *= FRICTION;
+			this.velocityX *= params.friction;
 		}
 
 		this.x += this.velocityX * adjustedDeltaTime;
