@@ -163,14 +163,14 @@ export class MovingShape extends Shape {
 		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
 			const jumpDuration = Date.now() - this.jumpStartTime;
 			if (jumpDuration < params.jumpHoldTime) {
-																								// Calculate how much additional velocity we should have at this point in time
-				const holdProgress = Math.min(jumpDuration / params.jumpHoldTime, 1.0);
-				const targetAdditionalVelocity = (params.maxJumpForce - params.minJumpForce) * holdProgress;
-				const targetTotalVelocity = -params.minJumpForce - targetAdditionalVelocity;
+																												// Classic platformer approach: apply constant upward force while held
+				// The total additional force available is (maxJumpForce - minJumpForce)
+				// Distribute this over the jump hold time as a constant force per second
+				const totalAdditionalForce = params.maxJumpForce - params.minJumpForce;
+				const additionalForcePerSecond = totalAdditionalForce / (params.jumpHoldTime / 1000); // per second
+				const additionalForce = additionalForcePerSecond * deltaTime;
 
-				// Smoothly interpolate towards the target velocity
-				const lerpFactor = 8.0 * deltaTime; // How fast to reach target
-				this.velocityY = this.velocityY + (targetTotalVelocity - this.velocityY) * lerpFactor;
+				this.velocityY -= additionalForce;
 			} else {
 				this.isJumping = false;
 			}
