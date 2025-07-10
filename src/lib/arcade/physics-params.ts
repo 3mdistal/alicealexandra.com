@@ -13,14 +13,14 @@ export interface PhysicsParams {
 }
 
 export const defaultPhysicsParams: PhysicsParams = {
-	gravity: 150,
+	gravity: 105,
 	minJumpForce: 60,
-	maxJumpForce: 90,
-	jumpHoldTime: 300,
+	maxJumpForce: 192,
+	jumpHoldTime: 100,
 	jumpBufferTime: 100,
 	friction: 0.4,
-	maxSpeed: 110,
-		movementLerp: 0.5,
+	maxSpeed: 150,
+	movementLerp: 0.5,
 	airCoefficient: 0.6
 };
 
