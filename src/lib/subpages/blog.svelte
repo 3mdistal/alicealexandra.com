@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { QueryDatabaseResponse } from '$lib/notion/types/notion-types';
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
+		import { page } from '$app/state';
 	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 	import type {
 		RichTextItemResponse,
