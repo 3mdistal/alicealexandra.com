@@ -83,9 +83,9 @@
 		color: inherit;
 	}
 
-	.content {
+		.content {
 		display: flex;
-		flex-direction: column !important;
+		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-start;
 		gap: 5em;
