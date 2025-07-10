@@ -177,11 +177,16 @@ export class MovingShape extends Shape {
 		}
 	}
 
-				#handleMove(adjustedDeltaTime: number) {
+					#handleMove(adjustedDeltaTime: number) {
 		const params = get(physicsParams);
 
 		// Calculate target velocity based on input
-		const targetVelocityX = this.dx * params.maxSpeed;
+		let targetVelocityX = this.dx * params.maxSpeed;
+
+		// Apply air coefficient for reduced air control
+		if (!this.grounded) {
+			targetVelocityX *= params.airCoefficient;
+		}
 
 		if (this.dx !== 0) {
 			// Smooth interpolation towards target velocity
