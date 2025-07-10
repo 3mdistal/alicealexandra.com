@@ -142,8 +142,8 @@ export class MovingShape extends Shape {
 		this.y += this.velocityY * adjustedDeltaTime;
 	}
 
-		#handleJump(inputs: Set<string>) {
-		if (this.grounded && inputs.has('Jump')) {
+			#handleJump(inputHandler: InputHandler) {
+		if (this.grounded && inputHandler.isJumpPressed()) {
 			const params = get(physicsParams);
 			this.velocityY -= params.jumpForce;
 			this.grounded = false; // Make the shape airborne
