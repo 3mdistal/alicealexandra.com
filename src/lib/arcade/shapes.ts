@@ -163,14 +163,24 @@ export class MovingShape extends Shape {
 		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
 			const jumpDuration = Date.now() - this.jumpStartTime;
 			if (jumpDuration < params.jumpHoldTime) {
-																																				// Apply moderate additional force while held - prevent floating
-				// Only apply force while moving upward to prevent infinite floating
+																																								// Apply additional force at a rate controlled by jumpHoldTime
+				// Shorter jumpHoldTime = faster to reach max, Longer = slower to reach max
 				if (this.velocityY < 0) {
 					const totalAdditionalForce = params.maxJumpForce - params.minJumpForce;
-					const additionalForcePerSecond = totalAdditionalForce * 1.2; // Much more reasonable rate
+					// Rate is inversely related to jumpHoldTime - shorter time = faster rate
+					const rateMultiplier = 300 / params.jumpHoldTime; // 300ms baseline
+					const additionalForcePerSecond = totalAdditionalForce * rateMultiplier;
 					const additionalForce = additionalForcePerSecond * deltaTime;
 
-					this.velocityY -= additionalForce;
+					// Calculate how much additional force we've already applied
+					const currentAdditionalVelocity = Math.abs(this.velocityY + params.minJumpForce);
+
+					// Only apply more force if we haven't reached the max yet
+					if (currentAdditionalVelocity < totalAdditionalForce) {
+						this.velocityY -= additionalForce;
+					} else {
+						this.isJumping = false; // Reached max force
+					}
 				} else {
 					// Stop jumping if we start falling
 					this.isJumping = false;
