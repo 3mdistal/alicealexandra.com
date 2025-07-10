@@ -58,8 +58,8 @@
 			</div>
 		</div>
 
-				<div class="image-container" bind:this={image}>
-			{#if typeof imageSource === 'string'}
+						<div class="image-container" bind:this={image}>
+			{#if typeof imageSource === 'string' && (imageSource.startsWith('http') || imageSource.startsWith('//'))}
 				<img src={imageSource} alt={imageAlt} />
 			{:else}
 				<enhanced:img src={imageSource} alt={imageAlt} />
