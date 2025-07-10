@@ -159,13 +159,16 @@ export class MovingShape extends Shape {
 			inputHandler.consumeJump();
 		}
 
-						// Continue applying upward force while jump is held (variable jump height)
+								// Continue applying upward force while jump is held (variable jump height)
 		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
 			const jumpDuration = Date.now() - this.jumpStartTime;
 			if (jumpDuration < params.jumpHoldTime) {
-				// Apply constant additional force while held - this gives smooth variable height
-				const additionalForcePerFrame = (params.maxJumpForce - params.minJumpForce) / 60; // 60fps
-				this.velocityY -= additionalForcePerFrame * 0.016; // Adjust for frame rate
+				// Apply additional force proportional to the remaining difference
+				// Distribute the extra force over the hold time
+				const totalAdditionalForce = params.maxJumpForce - params.minJumpForce;
+				const forcePerMs = totalAdditionalForce / params.jumpHoldTime;
+				const additionalForce = forcePerMs * 16.67; // ~60fps (16.67ms per frame)
+				this.velocityY -= additionalForce * 0.1; // Scale it down for smoothness
 			} else {
 				this.isJumping = false;
 			}
