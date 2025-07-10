@@ -55,5 +55,31 @@
 		background-color: black;
 		width: 100vw;
 		height: 100vh;
+		position: relative;
+	}
+
+	.parameters-button {
+		position: fixed;
+		top: 20px;
+		right: 20px;
+		background: rgba(0, 0, 0, 0.8);
+		color: white;
+		border: 2px solid #333;
+		padding: 10px 20px;
+		border-radius: 8px;
+		cursor: pointer;
+		font-family: monospace;
+		font-size: 14px;
+		z-index: 1001;
+		transition: all 0.2s ease;
+	}
+
+	.parameters-button:hover {
+		background: rgba(50, 50, 50, 0.9);
+		border-color: #555;
+	}
+
+	.parameters-button:active {
+		transform: scale(0.95);
 	}
 </style>
