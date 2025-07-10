@@ -50,7 +50,7 @@
 	<h2 bind:this={heading} style="color: {accent}">
 		<slot name="heading" />
 	</h2>
-	<div class="content" style="flex-direction: {flexDirection}">
+		<div class="content" style:flex-direction={flexDirection}>
 		<div class="text" bind:this={text}>
 			<slot name="text" style="color: {accent}" />
 			<div class="button-container">
