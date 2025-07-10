@@ -122,13 +122,13 @@
 		height: 85vh;
 	}
 
-			.image-container img,
+				.image-container img,
 	.image-container :global(img) {
 		display: block;
 		border-radius: 1.5rem;
 		width: 100%;
 		height: 100%;
-		object-fit: contain;
+		object-fit: cover;
 		object-position: center;
 		overflow: hidden;
 	}
