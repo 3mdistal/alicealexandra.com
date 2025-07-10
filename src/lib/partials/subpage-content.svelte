@@ -134,13 +134,14 @@
 												
 	}
 
-			@media (min-width: 1024px) {
+				@media (min-width: 1024px) {
 		h2 {
 			text-align: center;
 		}
 
 		.content {
 			gap: 3em;
+			flex-direction: var(--flex-direction, row-reverse) !important;
 		}
 
 		.image-container {
