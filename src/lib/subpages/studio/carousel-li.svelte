@@ -14,7 +14,7 @@
 	let container: HTMLAnchorElement;
 	let textContainer: HTMLDivElement;
 
-	function animateBlack(sti) {
+		function animateBlack(sti: ScrollTriggerStatic) {
 		if (window.innerWidth <= 768) {
 			gsap.registerPlugin(sti);
 			const tl = gsap.timeline();
@@ -50,7 +50,7 @@
 		}
 	}
 
-	let scrollTriggerInstance;
+	let scrollTriggerInstance: ScrollTriggerStatic;
 
 	onMount(async () => {
 		scrollTriggerInstance = await loadScrollTrigger();
