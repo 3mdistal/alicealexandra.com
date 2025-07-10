@@ -216,7 +216,7 @@
 		border: 1px solid #555;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 		transition: opacity 0.2s, visibility 0.2s;
-		max-width: 250px;
+				max-width: 500px;
 		white-space: normal;
 		text-align: left;
 	}
