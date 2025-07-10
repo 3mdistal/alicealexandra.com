@@ -125,21 +125,24 @@
 		animation: fadeIn 0.5s ease-in;
 	}
 
-	.instructions h3 {
+		.instructions h3 {
 		margin: 0 0 20px 0;
 		color: #fff;
 		font-size: 18px;
+		font-family: monospace;
 	}
 
 	.control-list {
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+		font-family: monospace;
 	}
 
 	.control-item {
 		font-size: 14px;
 		color: #ccc;
+		font-family: monospace;
 	}
 
 	.keys {
