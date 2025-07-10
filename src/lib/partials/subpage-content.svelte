@@ -130,7 +130,8 @@
 		height: 100%;
 		object-fit: cover;
 		object-position: center;
-		overflow: hidden;
+				overflow: hidden;
+		filter: grayscale(0.1);
 												
 	}
 
