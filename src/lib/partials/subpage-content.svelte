@@ -114,12 +114,11 @@
 		margin-top: 3em;
 	}
 
-	.image-container {
-		position: sticky;
-		top: 7.5vh;
+		.image-container {
 		margin-right: auto;
 		margin-left: auto;
-		height: 85vh;
+		height: 50vh;
+		min-height: 300px;
 	}
 
 					.image-container img,
