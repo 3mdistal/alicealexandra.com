@@ -72,11 +72,27 @@ export class InputHandler {
 		return this.currentInputs;
 	}
 
-	isJumpPressed() {
+		isJumpPressed() {
 		if (this.jumpPressed && !this.jumpWasPressed) {
 			this.jumpWasPressed = true;
 			return true;
 		}
 		return false;
+	}
+
+	isJumpBuffered(bufferTimeMs: number) {
+		if (this.jumpBuffered && Date.now() - this.jumpBufferTime <= bufferTimeMs) {
+			this.jumpBuffered = false;
+			return true;
+		}
+		return false;
+	}
+
+	getJumpHoldRatio(maxHoldTimeMs: number) {
+		if (this.jumpPressed) {
+			const currentHoldTime = Date.now() - this.jumpHoldStart;
+			return Math.min(currentHoldTime / maxHoldTimeMs, 1);
+		}
+		return Math.min(this.jumpHoldTime / maxHoldTimeMs, 1);
 	}
 }
