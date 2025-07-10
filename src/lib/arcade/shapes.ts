@@ -163,10 +163,14 @@ export class MovingShape extends Shape {
 		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
 			const jumpDuration = Date.now() - this.jumpStartTime;
 			if (jumpDuration < params.jumpHoldTime) {
-																				// Simple approach: apply a small constant force while held
-				// This will accumulate over time to reach the difference between min and max
-				const additionalForce = 2.0 * deltaTime; // Constant force per frame
-				this.velocityY -= additionalForce;
+																								// Calculate how much additional velocity we should have at this point in time
+				const holdProgress = Math.min(jumpDuration / params.jumpHoldTime, 1.0);
+				const targetAdditionalVelocity = (params.maxJumpForce - params.minJumpForce) * holdProgress;
+				const targetTotalVelocity = -params.minJumpForce - targetAdditionalVelocity;
+
+				// Smoothly interpolate towards the target velocity
+				const lerpFactor = 8.0 * deltaTime; // How fast to reach target
+				this.velocityY = this.velocityY + (targetTotalVelocity - this.velocityY) * lerpFactor;
 			} else {
 				this.isJumping = false;
 			}
