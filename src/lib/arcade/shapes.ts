@@ -142,11 +142,20 @@ export class MovingShape extends Shape {
 		this.y += this.velocityY * adjustedDeltaTime;
 	}
 
-			#handleJump(inputHandler: InputHandler) {
-		if (this.grounded && inputHandler.isJumpPressed()) {
-			const params = get(physicsParams);
-			this.velocityY -= params.jumpForce;
-			this.grounded = false; // Make the shape airborne
+				#handleJump(inputHandler: InputHandler) {
+		const params = get(physicsParams);
+
+		// Check for immediate jump or buffered jump
+		const shouldJump = (this.grounded && inputHandler.isJumpPressed()) ||
+						  (this.grounded && inputHandler.isJumpBuffered(params.jumpBufferTime));
+
+		if (shouldJump) {
+			// Variable jump height based on hold time
+			const holdRatio = inputHandler.getJumpHoldRatio(params.jumpHoldTime);
+			const jumpForce = params.minJumpForce + (params.maxJumpForce - params.minJumpForce) * holdRatio;
+
+			this.velocityY -= jumpForce;
+			this.grounded = false;
 		}
 	}
 
