@@ -18,7 +18,7 @@
 	let container: HTMLDivElement;
 	let carousel: HTMLUListElement;
 
-	function scrollAnimate(scrollTriggerInstance) {
+		function scrollAnimate(scrollTriggerInstance: ScrollTriggerStatic) {
 		gsap.registerPlugin(scrollTriggerInstance);
 		if (window.innerWidth > 768) {
 			gsap.to(carousel, {
@@ -33,7 +33,7 @@
 		}
 	}
 
-	let scrollTriggerInstance;
+	let scrollTriggerInstance: ScrollTriggerStatic;
 
 	onMount(async () => {
 		scrollTriggerInstance = await loadScrollTrigger();
