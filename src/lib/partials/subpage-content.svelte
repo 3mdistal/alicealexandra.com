@@ -130,7 +130,7 @@
 		object-position: center;
 	}
 
-	@media (min-width: 1024px) {
+		@media (min-width: 1024px) {
 		h2 {
 			text-align: center;
 		}
@@ -141,7 +141,7 @@
 		}
 
 		.image-container {
-			max-width: 50%;
+			max-width: 45%;
 		}
 	}
 </style>
