@@ -147,21 +147,33 @@ export class MovingShape extends Shape {
 		this.y += this.velocityY * adjustedDeltaTime;
 	}
 
-						#handleJump(inputHandler: InputHandler) {
+							#handleJump(inputHandler: InputHandler) {
 		const params = get(physicsParams);
 
-		if (this.grounded && inputHandler.canJump()) {
-			// Check if we should execute the jump
-			const holdRatio = inputHandler.getJumpHoldRatio(params.jumpHoldTime);
-			const shouldExecuteJump = !inputHandler.jumpPressed || holdRatio >= 1;
+		// Start jump immediately when button is first pressed
+		if (this.grounded && inputHandler.isJumpPressed()) {
+			this.velocityY -= params.minJumpForce;
+			this.grounded = false;
+			this.isJumping = true;
+			this.jumpStartTime = Date.now();
+			inputHandler.consumeJump();
+		}
 
-			if (shouldExecuteJump) {
-				// Calculate jump force based on how long it was held
-				const jumpForce = params.minJumpForce + (params.maxJumpForce - params.minJumpForce) * holdRatio;
-				this.velocityY -= jumpForce;
-				this.grounded = false;
-				inputHandler.consumeJump();
+		// Continue applying upward force while jump is held (variable jump height)
+		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
+			const jumpDuration = Date.now() - this.jumpStartTime;
+			if (jumpDuration < params.jumpHoldTime) {
+				// Apply additional upward force while held
+				const additionalForce = (params.maxJumpForce - params.minJumpForce) / params.jumpHoldTime * 16.67; // ~60fps
+				this.velocityY -= additionalForce;
+			} else {
+				this.isJumping = false;
 			}
+		}
+
+		// Stop applying force when button is released
+		if (!inputHandler.jumpPressed) {
+			this.isJumping = false;
 		}
 	}
 
