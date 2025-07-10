@@ -1,8 +1,9 @@
 <script lang="ts">
 	import CarouselLi from '$lib/subpages/studio/carousel-li.svelte';
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
+		import gsap from 'gsap';
 	import { loadScrollTrigger } from '$lib/partials/load-scroll-trigger';
+	import type { ScrollTriggerStatic } from '$lib/types/gsap';
 
 	import BirdTMI from '../../cms/images/studio/bird-tmi.jpg';
 	import FlowerP from '../../cms/images/studio/flower-p.jpg';
@@ -17,7 +18,7 @@
 	let container: HTMLDivElement;
 	let carousel: HTMLUListElement;
 
-	function scrollAnimate(scrollTriggerInstance) {
+		function scrollAnimate(scrollTriggerInstance: ScrollTriggerStatic) {
 		gsap.registerPlugin(scrollTriggerInstance);
 		if (window.innerWidth > 768) {
 			gsap.to(carousel, {
@@ -32,7 +33,7 @@
 		}
 	}
 
-	let scrollTriggerInstance;
+	let scrollTriggerInstance: ScrollTriggerStatic;
 
 	onMount(async () => {
 		scrollTriggerInstance = await loadScrollTrigger();

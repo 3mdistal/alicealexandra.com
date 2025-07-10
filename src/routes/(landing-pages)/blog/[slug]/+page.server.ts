@@ -23,16 +23,23 @@ export async function load({ params }: { params: { slug: string } }) {
 			// Query blogs database for blog with matching slug.
 			const queryResponse = await queryDatabase(queryParams);
 
-			if (queryResponse.results.length === 0) {
+						if (queryResponse.results.length === 0) {
 				return { queryResponse: null, contentResponse: null };
 			}
 
 			// Get the content of the blog post.
-			const contentResponse = await listChildren(queryResponse.results[0].id);
+			const firstResult = queryResponse.results[0];
+			if (!firstResult) {
+				return { queryResponse: null, contentResponse: null };
+			}
+			const contentResponse = await listChildren(firstResult.id);
 
 			return { queryResponse, contentResponse };
 		} catch (error) {
-			console.warn('Failed to load blog post from Notion:', error instanceof Error ? error.message : error);
+			console.warn(
+				'Failed to load blog post from Notion:',
+				error instanceof Error ? error.message : error
+			);
 			return { queryResponse: null, contentResponse: null };
 		}
 	}

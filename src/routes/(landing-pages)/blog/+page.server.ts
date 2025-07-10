@@ -30,7 +30,10 @@ export async function load() {
 			post: await queryDatabase(queryParams)
 		};
 	} catch (error) {
-		console.warn('Failed to load blog posts from Notion:', error instanceof Error ? error.message : error);
+		console.warn(
+			'Failed to load blog posts from Notion:',
+			error instanceof Error ? error.message : error
+		);
 		// Return empty array as fallback when Notion is not configured
 		return {
 			post: { results: [] }

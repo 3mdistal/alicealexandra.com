@@ -20,10 +20,10 @@ export type {
 	BulletedListItemBlockObjectResponse,
 	TitlePropertyItemObjectResponse,
 	RichTextPropertyItemObjectResponse,
-        UrlPropertyItemObjectResponse,
-        SelectPropertyItemObjectResponse,
-        FormulaPropertyItemObjectResponse,
-        FilesPropertyItemObjectResponse
+	UrlPropertyItemObjectResponse,
+	SelectPropertyItemObjectResponse,
+	FormulaPropertyItemObjectResponse,
+	FilesPropertyItemObjectResponse
 } from '@notionhq/client/build/src/api-endpoints';
 
 // Custom types for our application

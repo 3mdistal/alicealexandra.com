@@ -32,7 +32,9 @@ export class NotionAPIError extends Error {
  */
 export function validateEnvironmentVariables(): void {
 	if (!NOTION_KEY) {
-		throw new NotionAPIError('Missing required NOTION_KEY environment variable. Please configure your Notion API credentials in the environment variables.');
+		throw new NotionAPIError(
+			'Missing required NOTION_KEY environment variable. Please configure your Notion API credentials in the environment variables.'
+		);
 	}
 }
 

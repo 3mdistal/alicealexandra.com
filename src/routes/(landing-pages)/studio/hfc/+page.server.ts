@@ -51,7 +51,10 @@ export async function load() {
 			}
 		};
 	} catch (error) {
-		console.warn('Failed to load HFC content from Notion:', error instanceof Error ? error.message : error);
+		console.warn(
+			'Failed to load HFC content from Notion:',
+			error instanceof Error ? error.message : error
+		);
 		// Return empty arrays as fallback when Notion is not configured
 		return {
 			props: {
