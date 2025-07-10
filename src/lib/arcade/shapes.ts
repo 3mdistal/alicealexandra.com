@@ -131,10 +131,11 @@ export class MovingShape extends Shape {
 			this.y = this.size / 2;
 		}
 
-		if (this.y + this.size / 2 > canvas.height) {
+				if (this.y + this.size / 2 > canvas.height) {
 			this.y = canvas.height - this.size / 2;
 			this.velocityY = 0;
 			this.grounded = true;
+			this.isJumping = false;
 		} else {
 			this.grounded = false;
 		}
