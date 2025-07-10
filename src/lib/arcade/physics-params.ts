@@ -13,15 +13,15 @@ export interface PhysicsParams {
 }
 
 export const defaultPhysicsParams: PhysicsParams = {
-	gravity: 20,
+	gravity: 150,
 	minJumpForce: 30,
 	maxJumpForce: 45,
 	jumpHoldTime: 300,
 	jumpBufferTime: 100,
 	friction: 0.4,
-	maxSpeed: 37,
-	movementLerp: 0.5,
-	airCoefficient: 0.8
+	maxSpeed: 110,
+	movementLerp: 0.8,
+	airCoefficient: 0.6
 };
 
 export const physicsParams = writable<PhysicsParams>(defaultPhysicsParams);
