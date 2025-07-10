@@ -74,11 +74,7 @@ class SVGToImage extends Shape {
 	}
 }
 
-const GRAVITY = 70;
-const JUMP_FORCE = 200;
-const FRICTION = 0.6;
-const ACCELERATION = 100;
-const MAX_SPEED = 100;
+
 
 export class MovingShape extends Shape {
 	dx: number;
