@@ -143,8 +143,8 @@
 			gap: 3em;
 		}
 
-		.image-container {
-			max-width: 45%;
+				.image-container {
+			max-width: 50%;
 		}
 	}
 </style>
