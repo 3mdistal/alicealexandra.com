@@ -198,7 +198,7 @@
 		color: #fff;
 	}
 
-	.tooltip {
+		.tooltip {
 		visibility: hidden;
 		opacity: 0;
 		position: absolute;
@@ -211,14 +211,13 @@
 		border-radius: 6px;
 		font-size: 11px;
 		font-family: monospace;
-		white-space: nowrap;
 		z-index: 1002;
 		border: 1px solid #555;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 		transition: opacity 0.2s, visibility 0.2s;
-				max-width: 500px;
-		white-space: normal;
+		width: 400px;
 		text-align: left;
+		word-wrap: break-word;
 	}
 
 	.tooltip::after {
