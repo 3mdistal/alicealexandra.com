@@ -161,9 +161,9 @@ export class MovingShape extends Shape {
 			if (Math.abs(this.velocityX) > params.maxSpeed) {
 				this.velocityX = this.dx * params.maxSpeed; // Use dx to keep the direction (left or right)
 			}
-		} else if (this.grounded) {
+				} else if (this.grounded) {
 			// Apply friction only when on the ground
-			this.velocityX *= params.friction;
+			this.velocityX *= (1 - params.friction);
 		}
 
 		this.x += this.velocityX * adjustedDeltaTime;
