@@ -181,10 +181,12 @@
 		object-fit: contain;
 	}
 
-	@media (max-width: 767px) {
+		@media (max-width: 767px) {
 		.image-wrapper.no-padding img {
 			width: 100vw;
-			margin-left: calc(-50vw + 50%);
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
 			object-fit: cover;
 		}
 	}
