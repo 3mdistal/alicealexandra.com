@@ -121,10 +121,11 @@
 		gap: 5px;
 	}
 
-	.parameter-group label {
+		.parameter-group label {
 		font-size: 12px;
 		color: #ccc;
 		text-transform: capitalize;
+		font-family: monospace;
 	}
 
 	.slider-container {
