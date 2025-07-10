@@ -82,6 +82,8 @@ export class MovingShape extends Shape {
 	grounded: boolean;
 	velocityY: number;
 	velocityX: number;
+	isJumping: boolean;
+	jumpStartTime: number;
 
 	constructor(x: number, y: number, size: number, color: string) {
 		super(x, y, size, color);
@@ -90,6 +92,8 @@ export class MovingShape extends Shape {
 		this.grounded = true;
 		this.velocityY = 0;
 		this.velocityX = 0;
+		this.isJumping = false;
+		this.jumpStartTime = 0;
 	}
 
 		move(inputHandler: InputHandler, deltaTime: number) {
