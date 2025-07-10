@@ -20,11 +20,25 @@
 		physicsParams.set(currentParams);
 	}
 
-	function formatValue(key: keyof PhysicsParams, value: number): string {
-		if (key === 'friction') {
+		function formatValue(key: keyof PhysicsParams, value: number): string {
+		if (key === 'friction' || key === 'movementLerp') {
 			return value.toFixed(2);
 		}
 		return value.toString();
+	}
+
+	function getParameterLabel(key: keyof PhysicsParams): string {
+		const labels = {
+			gravity: 'Gravity',
+			minJumpForce: 'Min Jump Force',
+			maxJumpForce: 'Max Jump Force',
+			jumpHoldTime: 'Jump Hold Time (ms)',
+			jumpBufferTime: 'Jump Buffer (ms)',
+			friction: 'Friction',
+			maxSpeed: 'Max Speed',
+			movementLerp: 'Movement Smoothing'
+		};
+		return labels[key] || key.charAt(0).toUpperCase() + key.slice(1);
 	}
 </script>
 
