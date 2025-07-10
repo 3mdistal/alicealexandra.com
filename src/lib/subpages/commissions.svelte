@@ -104,7 +104,7 @@
 		});
 	}
 
-	async function animateAll(sti) {
+		async function animateAll(sti: ScrollTriggerStatic) {
 		gsap.registerPlugin(sti);
 		heroAnimation();
 		headerAnimation();
@@ -113,7 +113,7 @@
 		descriptionsAnimation();
 	}
 
-	let scrollTriggerInstance;
+	let scrollTriggerInstance: ScrollTriggerStatic;
 
 	onMount(async () => {
 		scrollTriggerInstance = await loadScrollTrigger();
