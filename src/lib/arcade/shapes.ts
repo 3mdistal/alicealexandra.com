@@ -136,8 +136,9 @@ export class MovingShape extends Shape {
 		}
 	}
 
-	#handleGravity(adjustedDeltaTime: number) {
-		this.velocityY += GRAVITY * adjustedDeltaTime;
+		#handleGravity(adjustedDeltaTime: number) {
+		const params = get(physicsParams);
+		this.velocityY += params.gravity * adjustedDeltaTime;
 		this.y += this.velocityY * adjustedDeltaTime;
 	}
 
