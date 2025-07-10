@@ -15,13 +15,15 @@ export class InputHandler {
 	canvas: HTMLCanvasElement;
 	possibleInputs: { [key: string]: string };
 	currentInputs: Set<string>;
-	jumpTimeout: boolean;
+	jumpPressed: boolean;
+	jumpWasPressed: boolean;
 
 	constructor(canvas: HTMLCanvasElement, possibleInputs: { [key: string]: string } = inputs) {
 		this.canvas = canvas;
 		this.currentInputs = new Set();
 		this.possibleInputs = possibleInputs;
-		this.jumpTimeout = false;
+		this.jumpPressed = false;
+		this.jumpWasPressed = false;
 
 		this.#listenKeyDown();
 		this.#listenKeyUp();
