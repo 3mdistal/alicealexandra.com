@@ -121,21 +121,21 @@
 		min-height: 300px;
 	}
 
-			@media (max-width: 1023px) {
+				@media (max-width: 1023px) {
 		.image-container {
-			margin-left: calc(-50vw + 50%) !important;
-			margin-right: calc(-50vw + 50%) !important;
-			width: 100vw !important;
-			max-width: none !important;
+			position: relative;
+			overflow: visible;
 		}
-	}
 
-	:global(.image-container) {
-		@media (max-width: 1023px) {
-			margin-left: calc(-50vw + 50%) !important;
-			margin-right: calc(-50vw + 50%) !important;
+		.image-container img,
+		.image-container :global(img) {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
 			width: 100vw !important;
-			max-width: none !important;
+			max-width: 100vw !important;
+			margin-left: 0 !important;
+			margin-right: 0 !important;
 		}
 	}
 
