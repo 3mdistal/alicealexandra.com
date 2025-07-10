@@ -160,8 +160,15 @@
 		}
 	}
 
-	.image-wrapper.no-padding {
+		.image-wrapper.no-padding {
+		margin-left: -1.25rem;
 		margin-right: -1.25rem;
+	}
+
+	@media (min-width: 768px) {
+		.image-wrapper.no-padding {
+			margin-left: 0;
+		}
 	}
 
 	@media (min-width: 1024px) {
@@ -170,8 +177,18 @@
 		}
 	}
 
-	.image-wrapper img {
+		.image-wrapper img {
 		object-fit: contain;
+	}
+
+		@media (max-width: 767px) {
+		.image-wrapper.no-padding img {
+			width: 100vw;
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+			object-fit: cover;
+		}
 	}
 
 	.slot-image-wrapper {

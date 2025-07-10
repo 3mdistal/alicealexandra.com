@@ -50,7 +50,7 @@
 	<h2 bind:this={heading} style="color: {accent}">
 		<slot name="heading" />
 	</h2>
-	<div class="content" style="flex-direction: {flexDirection}">
+				<div class="content" style="--flex-direction: {flexDirection}">
 		<div class="text" bind:this={text}>
 			<slot name="text" style="color: {accent}" />
 			<div class="button-container">
@@ -58,17 +58,27 @@
 			</div>
 		</div>
 
-		<div class="image-container" bind:this={image}>
-			<enhanced:img src={imageSource} alt={imageAlt} />
+						<div class="image-container" bind:this={image}>
+			{#if typeof imageSource === 'string' && (imageSource.startsWith('http') || imageSource.startsWith('//'))}
+				<img src={imageSource} alt={imageAlt} />
+			{:else}
+				<enhanced:img src={imageSource} alt={imageAlt} />
+			{/if}
 		</div>
 	</div>
 </div>
 
 <style>
-	.container {
+				.container {
 		margin-right: auto;
 		margin-left: auto;
 		width: 75%;
+	}
+
+	@media (max-width: 767px) {
+		.container {
+			width: 90%;
+		}
 	}
 
 	h2 {
@@ -79,12 +89,12 @@
 		color: inherit;
 	}
 
-	.content {
+			.content {
 		display: flex;
-		flex-direction: column !important;
+		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-start;
-		gap: 5em;
+		gap: 2em;
 	}
 
 	.text {
@@ -110,33 +120,46 @@
 		margin-top: 3em;
 	}
 
-	.image-container {
-		position: sticky;
-		top: 7.5vh;
+			.image-container {
 		margin-right: auto;
 		margin-left: auto;
-		height: 85vh;
+		height: 50vh;
+		min-height: 300px;
 	}
 
-	.image-container img {
+				
+
+					.image-container img,
+	.image-container :global(img) {
+		display: block;
 		border-radius: 1.5rem;
 		width: 100%;
 		height: 100%;
-		object-fit: contain;
+		object-fit: cover;
 		object-position: center;
+				overflow: hidden;
+		filter: grayscale(0.1);
+												
 	}
 
-	@media (min-width: 1024px) {
+				@media (min-width: 1024px) {
 		h2 {
 			text-align: center;
 		}
 
 		.content {
-			flex-direction: row !important;
 			gap: 3em;
+			flex-direction: var(--flex-direction, row-reverse) !important;
 		}
 
 		.image-container {
+			position: sticky;
+			top: 7.5vh;
+			height: 85vh;
+			max-width: 50%;
+		}
+
+				.image-container {
 			max-width: 50%;
 		}
 	}

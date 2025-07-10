@@ -3,7 +3,7 @@
 	import About1 from '../../cms/text/about/about1.svelte';
 	import About2 from '../../cms/text/about/about2.svelte';
 	import About3 from '../../cms/text/about/about3.svelte';
-	import AuthorPhoto from '../../cms/images/about/author-photo.jpg?enhanced';
+		const AuthorPhoto = 'https://cdn.builder.io/api/v1/image/assets%2F7055d8d0cc284adcbfeafeb0f4b74e06%2Fb073f806fad94af9be01b13f53ce53b3?format=webp&width=800';
 	import Mirror from '../../cms/images/about/mirror.jpeg?enhanced';
 	import Owl from '../../cms/images/about/owl.png?enhanced';
 	import Socials from '$lib/icons/socials.svelte';
