@@ -65,9 +65,15 @@
 	</div>
 	
 	<div class="parameters-list">
-		{#each Object.entries(parameterRanges) as [key, range]}
-						<div class="parameter-group">
-								<label for={key}>{getParameterLabel(key)}</label>
+				{#each Object.entries(parameterRanges) as [key, range]}
+			<div class="parameter-group">
+				<div class="label-container">
+					<label for={key}>{getParameterLabel(key)}</label>
+					<div class="info-container">
+						<span class="info-icon">i</span>
+						<div class="tooltip">{getParameterTooltip(key)}</div>
+					</div>
+				</div>
 				<div class="slider-container">
 					<input
 						type="range"
