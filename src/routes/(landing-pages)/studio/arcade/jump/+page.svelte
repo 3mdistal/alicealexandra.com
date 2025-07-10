@@ -42,6 +42,12 @@
 
 <div class="game-container">
 	<canvas bind:this={backgroundCanvas}></canvas>
+
+	<button class="parameters-button" on:click={toggleParameters}>
+		Parameters
+	</button>
+
+	<ParametersPanel bind:isOpen={showParameters} />
 </div>
 
 <style>
