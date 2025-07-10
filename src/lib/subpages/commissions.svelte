@@ -1,9 +1,10 @@
 <script lang="ts">
 	import Form from '../partials/form.svelte';
 
-	import gsap from 'gsap';
+		import gsap from 'gsap';
 	import { loadScrollTrigger } from '$lib/partials/load-scroll-trigger';
 	import { onMount } from 'svelte';
+	import type { ScrollTriggerStatic } from '$lib/types/gsap';
 
 	export let accent: string;
 	export let background: string;
