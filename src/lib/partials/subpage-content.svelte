@@ -134,13 +134,20 @@
 												
 	}
 
-		@media (min-width: 1024px) {
+			@media (min-width: 1024px) {
 		h2 {
 			text-align: center;
 		}
 
-						.content {
+		.content {
 			gap: 3em;
+		}
+
+		.image-container {
+			position: sticky;
+			top: 7.5vh;
+			height: 85vh;
+			max-width: 50%;
 		}
 
 				.image-container {
