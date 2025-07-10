@@ -9,6 +9,7 @@ export interface PhysicsParams {
 	friction: number;
 	maxSpeed: number;
 	movementLerp: number;
+	airCoefficient: number;
 }
 
 export const defaultPhysicsParams: PhysicsParams = {
