@@ -122,7 +122,8 @@
 		height: 85vh;
 	}
 
-	.image-container img {
+		.image-container img,
+	.image-container :global(img) {
 		border-radius: 1.5rem;
 		width: 100%;
 		height: 100%;
