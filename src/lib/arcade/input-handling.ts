@@ -21,6 +21,7 @@ export class InputHandler {
 	jumpHoldStart: number;
 	jumpBuffered: boolean;
 	jumpBufferTime: number;
+	jumpConsumed: boolean;
 
 	constructor(canvas: HTMLCanvasElement, possibleInputs: { [key: string]: string } = inputs) {
 		this.canvas = canvas;
@@ -32,6 +33,7 @@ export class InputHandler {
 		this.jumpHoldStart = 0;
 		this.jumpBuffered = false;
 		this.jumpBufferTime = 0;
+		this.jumpConsumed = false;
 
 		this.#listenKeyDown();
 		this.#listenKeyUp();
