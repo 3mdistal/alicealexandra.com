@@ -59,10 +59,10 @@
 </div>
 
 <style>
-	.parameters-panel {
+		.parameters-panel {
 		position: fixed;
 		top: 50%;
-		right: -320px;
+		left: -320px;
 		transform: translateY(-50%);
 		width: 300px;
 		background: rgba(0, 0, 0, 0.9);
@@ -70,13 +70,13 @@
 		border-radius: 8px;
 		padding: 20px;
 		z-index: 1000;
-		transition: right 0.3s ease-in-out;
+		transition: left 0.3s ease-in-out;
 		color: white;
 		font-family: monospace;
 	}
 
 	.parameters-panel.open {
-		right: 20px;
+		left: 20px;
 	}
 
 	.panel-header {
