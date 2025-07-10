@@ -145,13 +145,14 @@
 		font-family: monospace;
 	}
 
-	.keys {
+		.keys {
 		background: #333;
 		color: #fff;
 		padding: 4px 8px;
 		border-radius: 4px;
 		font-weight: bold;
 		border: 1px solid #555;
+		font-family: monospace;
 	}
 
 	.hint {
@@ -159,6 +160,7 @@
 		color: #888;
 		font-style: italic;
 		margin-top: 8px;
+		font-family: monospace;
 	}
 
 	@keyframes fadeIn {
