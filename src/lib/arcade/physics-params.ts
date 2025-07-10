@@ -14,7 +14,8 @@ export const defaultPhysicsParams: PhysicsParams = {
 	jumpForce: 200,
 	friction: 0.4,
 	acceleration: 100,
-	maxSpeed: 100
+	maxSpeed: 100,
+	airCoefficient: 0.6
 };
 
 export const physicsParams = writable<PhysicsParams>(defaultPhysicsParams);
