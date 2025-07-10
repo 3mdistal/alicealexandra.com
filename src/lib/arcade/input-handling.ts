@@ -56,7 +56,7 @@ export class InputHandler {
 		});
 	}
 
-			#listenKeyUp() {
+				#listenKeyUp() {
 		document.addEventListener('keyup', (event) => {
 			const action = this.possibleInputs[event.key];
 			if (!action) return;
@@ -65,6 +65,7 @@ export class InputHandler {
 				this.jumpHoldTime = Date.now() - this.jumpHoldStart;
 				this.jumpPressed = false;
 				this.jumpWasPressed = false;
+				this.jumpConsumed = false;
 			} else if (this.currentInputs.has(action)) {
 				this.currentInputs.delete(action);
 			}
