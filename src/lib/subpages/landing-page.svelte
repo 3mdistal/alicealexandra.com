@@ -177,8 +177,16 @@
 		}
 	}
 
-	.image-wrapper img {
+		.image-wrapper img {
 		object-fit: contain;
+	}
+
+	@media (max-width: 767px) {
+		.image-wrapper.no-padding img {
+			width: 100vw;
+			margin-left: calc(-50vw + 50%);
+			object-fit: cover;
+		}
 	}
 
 	.slot-image-wrapper {
