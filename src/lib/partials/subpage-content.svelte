@@ -58,8 +58,12 @@
 			</div>
 		</div>
 
-		<div class="image-container" bind:this={image}>
-			<enhanced:img src={imageSource} alt={imageAlt} />
+				<div class="image-container" bind:this={image}>
+			{#if typeof imageSource === 'string'}
+				<img src={imageSource} alt={imageAlt} />
+			{:else}
+				<enhanced:img src={imageSource} alt={imageAlt} />
+			{/if}
 		</div>
 	</div>
 </div>
