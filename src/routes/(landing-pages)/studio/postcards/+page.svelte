@@ -64,6 +64,10 @@
 	header {
 		text-align: center;
 		margin-bottom: 3rem;
+		padding: 2rem;
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	h1 {
