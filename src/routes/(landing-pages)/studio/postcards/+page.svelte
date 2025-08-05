@@ -166,7 +166,7 @@
 
 	.no-postcards {
 		text-align: center;
-		color: #888;
+		color: #666;
 		font-style: italic;
 		font-size: 1.1rem;
 		margin-top: 4rem;
