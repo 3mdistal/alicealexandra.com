@@ -88,6 +88,13 @@
 	</section>
 </main>
 
+{#if page.state.selectedPostcard}
+	<PostcardModal
+		data={page.state.selectedPostcard}
+		onclose={() => history.back()}
+	/>
+{/if}
+
 <style>
 	:global(body) {
 		background-color: #e8e8e8 !important;
