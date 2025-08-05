@@ -62,23 +62,66 @@
 	const postcardHeroImage = getUrl(heroImage);
 
 	onMount(() => {
-		// GSAP animation for modal entrance
-		gsap.set(modalElement, { opacity: 0 });
-		gsap.set(heroElement, { scale: 0.8, y: 50 });
+		const animationOrigin = page.state.animationOrigin;
 
-		gsap.timeline()
-			.to(modalElement, { opacity: 1, duration: 0.3 })
-			.to(heroElement, { 
-				scale: 1, 
-				y: 0, 
-				duration: 0.6, 
-				ease: 'back.out(1.7)' 
-			}, '-=0.2');
+		if (animationOrigin && modalContentElement) {
+			// Start modal from the postcard's position and size
+			gsap.set(modalElement, { opacity: 0 });
+			gsap.set(modalContentElement, {
+				position: 'fixed',
+				left: animationOrigin.x,
+				top: animationOrigin.y,
+				width: animationOrigin.width,
+				height: animationOrigin.height,
+				borderRadius: '16px',
+				transformOrigin: 'center center'
+			});
+
+			// Get the final modal position
+			const modalRect = modalElement.getBoundingClientRect();
+			const contentFinalWidth = Math.min(800, window.innerWidth - 64); // 2rem padding on each side
+			const contentFinalHeight = Math.min(window.innerHeight * 0.9, 1000);
+			const finalX = (window.innerWidth - contentFinalWidth) / 2;
+			const finalY = (window.innerHeight - contentFinalHeight) / 2;
+
+			// Animate modal entrance - postcard growing into modal
+			gsap.timeline()
+				.to(modalElement, { opacity: 1, duration: 0.2 })
+				.to(modalContentElement, {
+					left: finalX,
+					top: finalY,
+					width: contentFinalWidth,
+					height: contentFinalHeight,
+					borderRadius: '20px',
+					duration: 0.6,
+					ease: 'power2.out'
+				}, '-=0.1')
+				.set(modalContentElement, {
+					position: 'relative',
+					left: 'auto',
+					top: 'auto',
+					width: '100%',
+					height: 'auto'
+				});
+		} else {
+			// Fallback animation if no origin data
+			gsap.set(modalElement, { opacity: 0 });
+			gsap.set(modalContentElement, { scale: 0.8, y: 50 });
+
+			gsap.timeline()
+				.to(modalElement, { opacity: 1, duration: 0.3 })
+				.to(modalContentElement, {
+					scale: 1,
+					y: 0,
+					duration: 0.6,
+					ease: 'back.out(1.7)'
+				}, '-=0.2');
+		}
 
 		// Handle escape key
 		const handleKeydown = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') {
-				onclose();
+				closeWithAnimation();
 			}
 		};
 
@@ -88,6 +131,59 @@
 			document.removeEventListener('keydown', handleKeydown);
 		};
 	});
+
+	function closeWithAnimation() {
+		const animationOrigin = page.state.animationOrigin;
+
+		if (animationOrigin && modalContentElement) {
+			// Get current modal position
+			const currentRect = modalContentElement.getBoundingClientRect();
+
+			// Set up for reverse animation
+			gsap.set(modalContentElement, {
+				position: 'fixed',
+				left: currentRect.left,
+				top: currentRect.top,
+				width: currentRect.width,
+				height: currentRect.height
+			});
+
+			// Animate modal shrinking back to postcard
+			gsap.timeline()
+				.to(modalContentElement, {
+					left: animationOrigin.x,
+					top: animationOrigin.y,
+					width: animationOrigin.width,
+					height: animationOrigin.height,
+					borderRadius: '16px',
+					duration: 0.5,
+					ease: 'power2.in'
+				})
+				.to(modalElement, {
+					opacity: 0,
+					duration: 0.2
+				}, '-=0.2')
+				.call(() => {
+					onclose();
+				});
+		} else {
+			// Fallback animation
+			gsap.timeline()
+				.to(modalContentElement, {
+					scale: 0.8,
+					y: 50,
+					duration: 0.4,
+					ease: 'power2.in'
+				})
+				.to(modalElement, {
+					opacity: 0,
+					duration: 0.2
+				}, '-=0.2')
+				.call(() => {
+					onclose();
+				});
+		}
+	}
 
 	function handleBackdropClick(e: MouseEvent) {
 		if (e.target === e.currentTarget) {
