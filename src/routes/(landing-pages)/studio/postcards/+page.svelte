@@ -1,6 +1,9 @@
 <script lang="ts">
 	import ParallaxPostcard from '$lib/components/parallax-postcard.svelte';
+	import PostcardModal from '$lib/components/postcard-modal.svelte';
 	import { onMount } from 'svelte';
+	import { preloadData, pushState, goto } from '$app/navigation';
+	import { page } from '$app/state';
 
 	let { data } = $props();
 	let gridElement: HTMLElement;
