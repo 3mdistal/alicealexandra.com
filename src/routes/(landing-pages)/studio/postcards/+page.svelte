@@ -160,8 +160,12 @@
 
 	@media (max-width: 768px) {
 		.postcards-grid {
-			margin: 0 -1rem;
+			padding: 0 1rem;
 			gap: 2rem;
+		}
+
+		header {
+			padding: 1.5rem;
 		}
 
 		.postcard {
