@@ -66,15 +66,25 @@
 	{/if}
 </svelte:head>
 
+{#if postcard && postcardHeroImage}
+	<div
+		class="hero-image"
+		style="background-image: url('{postcardHeroImage}')"
+		use:transition={{
+			name: `postcard-image-${postcardSlug || postcardTitle.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`,
+			applyImmediately({ navigation }) {
+				return navigation?.from?.route?.id === '/studio/postcards';
+			}
+		}}
+	></div>
+{/if}
+
 <main>
 	{#if postcard}
 		<header>
 			<h1>{postcardTitle}</h1>
 			{#if postcardDescription}
 				<p class="description">{postcardDescription}</p>
-			{/if}
-			{#if postcardHeroImage}
-				<img src={postcardHeroImage} alt={postcardTitle} class="hero-image" />
 			{/if}
 		</header>
 
