@@ -1,4 +1,6 @@
 <script lang="ts">
+	import ParallaxPostcard from '$lib/components/parallax-postcard.svelte';
+
 	let { data } = $props();
 </script>
 
