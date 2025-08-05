@@ -142,6 +142,7 @@ export function extractPostcards(results: PageObjectResponse[]): Array<{
 				: 'Untitled';
 
 		const slug =
+			properties.Slug?.type === 'url' ? properties.Slug.url || '' :
 			properties.Slug?.type === 'rich_text' ? properties.Slug.rich_text[0]?.plain_text || '' : '';
 
 		const description =
