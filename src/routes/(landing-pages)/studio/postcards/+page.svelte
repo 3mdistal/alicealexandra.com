@@ -94,21 +94,12 @@
 
 	@media (max-width: 768px) {
 		.postcards-grid {
-			grid-template-columns: repeat(auto-fit, minmax(260px, 280px));
 			padding: 0 1rem;
 			gap: 2rem;
 		}
 
 		header {
 			padding: 1.5rem;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.postcards-grid {
-			grid-template-columns: 1fr;
-			max-width: 300px;
-			gap: 1.5rem;
 		}
 	}
 
