@@ -4,40 +4,37 @@
 
 	let { data } = $props();
 	let gridElement: HTMLElement;
+	let rotations: number[] = [];
 
-	onMount(() => {
-		// Store rotations to pass to components
-		if (gridElement) {
-			const postcards = gridElement.querySelectorAll('.postcard-link');
-			const rotations: number[] = [];
-
-			postcards.forEach((postcard, index) => {
-				let rotation: number;
-
-				// For desktop two-column layout, ensure adjacent cards have different angles
-				if (window.innerWidth >= 1024 && index > 0) {
-					// Check if this is in the same row as the previous card (even/odd pairs)
-					const isInSameRow = Math.floor(index / 2) === Math.floor((index - 1) / 2);
-
-					if (isInSameRow) {
-						// Ensure at least 8 degrees difference from the previous card
-						const previousRotation = rotations[index - 1];
-						do {
-							rotation = (Math.random() - 0.5) * 16; // -8 to 8 degrees
-						} while (Math.abs(rotation - previousRotation) < 8);
-					} else {
-						rotation = (Math.random() - 0.5) * 16;
-					}
-				} else {
-					rotation = (Math.random() - 0.5) * 16;
-				}
-
-				rotations.push(rotation);
-				// Store rotation as data attribute for the component to use
-				(postcard as HTMLElement).dataset.rotation = rotation.toString();
-			});
+	// Generate rotations function
+	function getRotation(index: number): number {
+		if (rotations[index] !== undefined) {
+			return rotations[index];
 		}
-	});
+
+		let rotation: number;
+
+		// For desktop two-column layout, ensure adjacent cards have different angles
+		if (typeof window !== 'undefined' && window.innerWidth >= 1024 && index > 0) {
+			// Check if this is in the same row as the previous card (even/odd pairs)
+			const isInSameRow = Math.floor(index / 2) === Math.floor((index - 1) / 2);
+
+			if (isInSameRow) {
+				// Ensure at least 8 degrees difference from the previous card
+				const previousRotation = rotations[index - 1];
+				do {
+					rotation = (Math.random() - 0.5) * 16; // -8 to 8 degrees
+				} while (Math.abs(rotation - previousRotation) < 8);
+			} else {
+				rotation = (Math.random() - 0.5) * 16;
+			}
+		} else {
+			rotation = (Math.random() - 0.5) * 16;
+		}
+
+		rotations[index] = rotation;
+		return rotation;
+	}
 </script>
 
 <svelte:head>
