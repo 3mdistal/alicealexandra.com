@@ -68,21 +68,26 @@
 	function handleMouseLeave() {
 		isHovered = false;
 		if (scrollTriggerInstance && imageElement) {
-			// Calculate where the parallax should be based on current scroll position
-			scrollTriggerInstance.refresh(); // Update the trigger calculations
-			const progress = scrollTriggerInstance.progress;
-			const targetYPercent = -20 * progress;
+			// Re-enable the ScrollTrigger first but with a custom tween
+			scrollTriggerInstance.enable();
 
-			// Smoothly animate from current hover position to scroll-based position
+			// Update the trigger calculations
+			scrollTriggerInstance.refresh();
+
+			// Get the target progress and let ScrollTrigger smoothly animate to it
+			const progress = scrollTriggerInstance.progress;
+
+			// Create a smooth transition by temporarily overriding the animation
 			gsap.to(imageElement, {
-				yPercent: targetYPercent,
+				yPercent: -20 * progress,
 				duration: 0.4,
 				ease: 'power2.out',
+				onUpdate: () => {
+					// During the transition, prevent ScrollTrigger from interfering
+				},
 				onComplete: () => {
-					// Re-enable the ScrollTrigger and let it take over smoothly
-					scrollTriggerInstance.enable();
-					// Force the ScrollTrigger to update without jumping
-					ScrollTrigger.refresh();
+					// Now let ScrollTrigger take full control
+					scrollTriggerInstance.refresh();
 				}
 			});
 		}
