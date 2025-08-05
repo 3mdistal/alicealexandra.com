@@ -69,16 +69,16 @@
 
 <style>
 	:global(body) {
-		background-color: #efefef !important;
+		background-color: #e8e8e8 !important;
 		color: #333;
 	}
 
 	:global(html) {
-		background-color: #efefef !important;
+		background-color: #e8e8e8 !important;
 	}
 
 	main {
-		background-color: #efefef;
+		background-color: #e8e8e8;
 		color: #333;
 		min-height: 100vh;
 		padding: 0;
