@@ -85,11 +85,10 @@
 
 	.postcards-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+		grid-template-columns: 1fr;
 		gap: 2.5rem;
-		justify-content: center;
 		padding: 0 2rem;
-		max-width: 1400px;
+		max-width: 600px;
 		margin: 0 auto;
 	}
 
