@@ -177,7 +177,6 @@
 
 	function closeWithAnimation() {
 		// Restore scroll position and body styles
-		const scrollPosition = Math.abs(parseInt(document.body.style.top) || 0);
 		document.body.style.position = '';
 		document.body.style.top = '';
 		document.body.style.width = '';
