@@ -142,13 +142,7 @@
 			<div
 				class="background-image"
 				bind:this={imageElement}
-				style="background-image: url('{heroImage || 'https://unsplash.it/800/1000'}')"
-				use:transition={{
-					name: `postcard-image-${slug || title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`,
-					shouldApply({ navigation }) {
-						return navigation?.to?.params?.slug === slug;
-					}
-				}}
+				style="background-image: url('{heroImage || 'https://unsplash.it/800/1000'}'); view-transition-name: postcard-image-{slug || title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}"
 			></div>
 		</div>
 		<div class="postcard-overlay">
