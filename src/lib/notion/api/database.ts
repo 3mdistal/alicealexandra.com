@@ -118,3 +118,49 @@ export function extractBlogPosts(results: PageObjectResponse[]): BlogPost[] {
 		};
 	});
 }
+
+/**
+ * Extract postcards from database query results
+ * @param results - The results from a database query
+ * @returns Array of postcard objects with extracted metadata
+ */
+export function extractPostcards(results: PageObjectResponse[]): Array<{
+	id: string;
+	slug: string;
+	title: string;
+	description: string;
+	heroImage?: string;
+	lastEditedTime: string;
+}> {
+	return results.map((page) => {
+		const properties = page.properties;
+
+		// Property names should match your Notion database structure
+		const title =
+			properties.Title?.type === 'title'
+				? properties.Title.title[0]?.plain_text || 'Untitled'
+				: 'Untitled';
+
+		const slug =
+			properties.Slug?.type === 'rich_text' ? properties.Slug.rich_text[0]?.plain_text || '' : '';
+
+		const description =
+			properties.Description?.type === 'rich_text'
+				? properties.Description.rich_text[0]?.plain_text || ''
+				: '';
+
+		const heroImage =
+			properties['Hero Image']?.type === 'url'
+				? properties['Hero Image'].url || undefined
+				: undefined;
+
+		return {
+			id: page.id,
+			slug,
+			title,
+			description,
+			heroImage,
+			lastEditedTime: page.last_edited_time
+		};
+	});
+}
