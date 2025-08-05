@@ -21,14 +21,9 @@
 		// Register GSAP plugins
 		gsap.registerPlugin(ScrollTrigger);
 
-		// Apply initial rotation from data attribute with a small delay to ensure it's set
-		if (cardElement) {
-			setTimeout(() => {
-				const rotation = parseFloat(cardElement.dataset.rotation || '0');
-				if (rotation !== 0) {
-					gsap.set(cardElement, { rotation });
-				}
-			}, 10);
+		// Apply initial rotation from prop
+		if (cardElement && initialRotation !== 0) {
+			gsap.set(cardElement, { rotation: initialRotation });
 		}
 
 		// Create parallax effect for the background image with reduced range
