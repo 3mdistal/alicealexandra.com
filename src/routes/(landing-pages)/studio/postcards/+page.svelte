@@ -70,12 +70,24 @@
 
 					const href = `/studio/postcards/${postcard.slug}`;
 
+					// Get the clicked postcard's position and size for animation
+					const postcardElement = e.currentTarget;
+					const rect = postcardElement.getBoundingClientRect();
+
 					// Preload the data for the postcard
 					const result = await preloadData(href);
 
 					if (result.type === 'loaded' && result.status === 200) {
-						// Use shallow routing to show the modal
-						pushState(href, { selectedPostcard: result.data });
+						// Use shallow routing to show the modal with animation data
+						pushState(href, {
+							selectedPostcard: result.data,
+							animationOrigin: {
+								x: rect.left,
+								y: rect.top,
+								width: rect.width,
+								height: rect.height
+							}
+						});
 					} else {
 						// Fallback to normal navigation
 						goto(href);
