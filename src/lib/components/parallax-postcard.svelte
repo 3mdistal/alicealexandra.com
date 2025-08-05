@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { setupViewTransition } from 'sveltekit-view-transition';
 
 	interface Props {
 		title: string;
@@ -9,9 +10,12 @@
 		heroImage?: string;
 		href: string;
 		initialRotation?: number;
+		slug?: string;
 	}
 
-	let { title, description, heroImage, href, initialRotation = 0 }: Props = $props();
+	let { title, description, heroImage, href, initialRotation = 0, slug }: Props = $props();
+
+	const { transition } = setupViewTransition();
 
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
