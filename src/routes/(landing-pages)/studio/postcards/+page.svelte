@@ -110,12 +110,12 @@
 	h1 {
 		font-size: 2.5rem;
 		margin-bottom: 0.5rem;
-		color: white;
+		color: #333;
 	}
 
 	.subtitle {
 		font-size: 1.3rem;
-		color: #ccc;
+		color: #666;
 		font-style: italic;
 		margin-top: 0.5rem;
 		font-weight: 300;
