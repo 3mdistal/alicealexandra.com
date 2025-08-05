@@ -103,6 +103,28 @@
 		margin: 0 auto;
 	}
 
+	/* Desktop layout: two columns with staggered positioning */
+	@media (min-width: 1024px) {
+		.postcards-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 3rem 4rem;
+			max-width: 1200px;
+			align-items: start;
+		}
+
+		/* Left column offset higher */
+		.postcards-grid :global(.postcard-link):nth-child(odd) {
+			transform-origin: center center;
+			margin-top: -50px;
+		}
+
+		/* Right column at normal position */
+		.postcards-grid :global(.postcard-link):nth-child(even) {
+			transform-origin: center center;
+			margin-top: 50px;
+		}
+	}
+
 	@media (max-width: 768px) {
 		.postcards-grid {
 			padding: 0 1rem;
