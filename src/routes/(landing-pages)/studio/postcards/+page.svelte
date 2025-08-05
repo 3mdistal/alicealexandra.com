@@ -60,6 +60,7 @@
 				heroImage={postcard.heroImage}
 				href="/studio/postcards/{postcard.slug}"
 				initialRotation={rotation}
+				slug={postcard.slug}
 			/>
 		{:else}
 			<p class="no-postcards">No postcards available at the moment.</p>
