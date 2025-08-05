@@ -164,4 +164,12 @@
 			max-width: 100%;
 		}
 	}
+
+	.no-postcards {
+		text-align: center;
+		color: #888;
+		font-style: italic;
+		font-size: 1.1rem;
+		margin-top: 4rem;
+	}
 </style>
