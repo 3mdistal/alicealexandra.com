@@ -133,6 +133,7 @@
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
+		will-change: transform;
 	}
 
 	.postcard-overlay {
