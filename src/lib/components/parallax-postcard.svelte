@@ -79,8 +79,10 @@
 				duration: 0.4,
 				ease: 'power2.out',
 				onComplete: () => {
-					// Re-enable the ScrollTrigger after transition
+					// Re-enable the ScrollTrigger and let it take over smoothly
 					scrollTriggerInstance.enable();
+					// Force the ScrollTrigger to update without jumping
+					ScrollTrigger.refresh();
 				}
 			});
 		}
