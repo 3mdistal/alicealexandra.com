@@ -237,6 +237,7 @@
 					duration: 0.2
 				}, '-=0.2')
 				.call(() => {
+					window.scrollTo(0, scrollPosition);
 					onclose();
 				});
 		}
