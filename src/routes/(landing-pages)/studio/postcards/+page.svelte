@@ -19,18 +19,18 @@
 
 	<section class="postcards-grid">
 		{#each data.postcards as postcard}
-			<article class="postcard" style="background-image: url('{postcard.heroImage || 'https://unsplash.it/1200/600'}')">
-				<div class="postcard-overlay">
-					<div class="postcard-content">
-						<h2>
-							<a href="/studio/postcards/{postcard.slug}">{postcard.title}</a>
-						</h2>
-						{#if postcard.description}
-							<p class="description">{postcard.description}</p>
-						{/if}
+			<a href="/studio/postcards/{postcard.slug}" class="postcard-link">
+				<article class="postcard" style="background-image: url('{postcard.heroImage || 'https://unsplash.it/1200/600'}')">
+					<div class="postcard-overlay">
+						<div class="postcard-content">
+							<h2>{postcard.title}</h2>
+							{#if postcard.description}
+								<p class="description">{postcard.description}</p>
+							{/if}
+						</div>
 					</div>
-				</div>
-			</article>
+				</article>
+			</a>
 		{:else}
 			<p>No postcards available at the moment.</p>
 		{/each}
