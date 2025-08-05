@@ -1,6 +1,5 @@
 <script lang="ts">
 	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
-	import { setupViewTransition } from 'sveltekit-view-transition';
 	import type {
 		PageObjectResponse,
 		RichTextPropertyItemObjectResponse,
@@ -9,8 +8,6 @@
 	} from '$lib/notion/types/notion-types';
 
 	let { data } = $props();
-
-	const { transition } = setupViewTransition();
 
 	const { queryResponse, contentResponse } = data.postcard || {};
 
