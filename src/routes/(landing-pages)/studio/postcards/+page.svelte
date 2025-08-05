@@ -6,8 +6,8 @@
 	let gridElement: HTMLElement;
 
 	onMount(() => {
+		// Store rotations to pass to components
 		if (gridElement) {
-			// Apply random rotation to each postcard on desktop only
 			const postcards = gridElement.querySelectorAll('.postcard-link');
 			const rotations: number[] = [];
 
@@ -33,7 +33,8 @@
 				}
 
 				rotations.push(rotation);
-				(postcard as HTMLElement).style.transform = `rotate(${rotation}deg)`;
+				// Store rotation as data attribute for the component to use
+				(postcard as HTMLElement).dataset.rotation = rotation.toString();
 			});
 		}
 	});
