@@ -71,15 +71,13 @@
 		color: white;
 	}
 
-	header p {
-		font-size: 1.2rem;
+	.subtitle {
+		font-size: 1.3rem;
 		color: #ccc;
-	}
-
-	.summary {
 		font-style: italic;
-		margin-top: 1rem;
-		color: #aaa;
+		margin-top: 0.5rem;
+		font-weight: 300;
+		letter-spacing: 0.02em;
 	}
 
 	.postcards-grid {
