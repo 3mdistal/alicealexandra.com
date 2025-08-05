@@ -123,6 +123,7 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		will-change: transform;
+		transform: scale(1.15);
 	}
 
 	.postcard-overlay {
