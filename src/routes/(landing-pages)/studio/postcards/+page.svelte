@@ -95,6 +95,7 @@
 
 	@media (max-width: 768px) {
 		.postcards-grid {
+			grid-template-columns: repeat(auto-fit, minmax(260px, 280px));
 			padding: 0 1rem;
 			gap: 2rem;
 		}
@@ -102,22 +103,13 @@
 		header {
 			padding: 1.5rem;
 		}
+	}
 
-		.postcard {
-			height: 300px;
-		}
-
-		.postcard-overlay {
-			padding: 1.5rem;
-		}
-
-		.postcard h2 {
-			font-size: 1.5rem;
-		}
-
-		.description {
-			font-size: 1rem;
-			max-width: 100%;
+	@media (max-width: 480px) {
+		.postcards-grid {
+			grid-template-columns: 1fr;
+			max-width: 300px;
+			gap: 1.5rem;
 		}
 	}
 
