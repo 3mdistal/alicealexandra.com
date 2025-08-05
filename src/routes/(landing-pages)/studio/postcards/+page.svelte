@@ -90,7 +90,11 @@
 	.postcards-grid {
 		display: grid;
 		gap: 3rem;
-		margin: 0 -2rem;
+		margin: 0;
+		padding: 0 2rem;
+		max-width: 1200px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.postcard-link {
