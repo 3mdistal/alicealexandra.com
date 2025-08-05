@@ -71,14 +71,12 @@
 		text-decoration: none;
 		color: inherit;
 		width: 100%;
-		max-width: 320px;
-		margin: 0 auto;
 	}
 
 	.postcard {
 		position: relative;
 		width: 100%;
-		height: 480px;
+		aspect-ratio: 3 / 2;
 		border-radius: 16px;
 		overflow: hidden;
 		transition: transform 0.4s ease, box-shadow 0.4s ease;
