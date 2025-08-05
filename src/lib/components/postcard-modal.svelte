@@ -200,7 +200,7 @@
 	aria-modal="true"
 	aria-labelledby="modal-title"
 >
-	<div class="modal-content">
+	<div class="modal-content" bind:this={modalContentElement}>
 		{#if postcard && postcardHeroImage}
 			<div 
 				class="modal-hero"
@@ -210,7 +210,7 @@
 		{/if}
 		
 		<div class="modal-body">
-			<button class="close-button" onclick={onclose} aria-label="Close modal">
+			<button class="close-button" onclick={closeWithAnimation} aria-label="Close modal">
 				<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 				</svg>
