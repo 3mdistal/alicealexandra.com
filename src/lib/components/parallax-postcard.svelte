@@ -14,6 +14,8 @@
 
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
+	let isHovered = $state(false);
+	let parallaxTween: gsap.core.Tween;
 
 	onMount(() => {
 		// Register GSAP plugins
@@ -21,7 +23,7 @@
 
 		// Create parallax effect for the background image
 		if (imageElement && cardElement) {
-			gsap.to(imageElement, {
+			parallaxTween = gsap.to(imageElement, {
 				yPercent: -20,
 				ease: 'none',
 				scrollTrigger: {
@@ -43,6 +45,27 @@
 			});
 		};
 	});
+
+	// Handle hover to temporarily override parallax
+	function handleMouseEnter() {
+		isHovered = true;
+		if (imageElement) {
+			gsap.to(imageElement, {
+				yPercent: -10,
+				duration: 0.4,
+				ease: 'power2.out',
+				overwrite: false
+			});
+		}
+	}
+
+	function handleMouseLeave() {
+		isHovered = false;
+		// Let the ScrollTrigger take over again
+		if (parallaxTween && parallaxTween.scrollTrigger) {
+			parallaxTween.scrollTrigger.refresh();
+		}
+	}
 </script>
 
 <a {href} class="postcard-link" bind:this={cardElement}>
