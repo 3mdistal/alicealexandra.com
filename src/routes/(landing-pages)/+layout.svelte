@@ -3,10 +3,16 @@
 	import { onNavigate } from '$app/navigation';
 
 	onNavigate((navigation) => {
-		if (!document.startViewTransition) return;
+		if (!document.startViewTransition) {
+			console.log('View Transitions API not supported');
+			return;
+		}
+
+		console.log('Starting view transition from', navigation.from?.url.pathname, 'to', navigation.to?.url.pathname);
 
 		return new Promise((resolve) => {
 			document.startViewTransition(async () => {
+				console.log('View transition started');
 				resolve();
 				await navigation.complete;
 			});
