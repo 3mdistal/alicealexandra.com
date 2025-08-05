@@ -187,7 +187,7 @@
 
 	function handleBackdropClick(e: MouseEvent) {
 		if (e.target === e.currentTarget) {
-			onclose();
+			closeWithAnimation();
 		}
 	}
 </script>
