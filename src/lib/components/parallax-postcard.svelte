@@ -20,6 +20,12 @@
 		// Register GSAP plugins
 		gsap.registerPlugin(ScrollTrigger);
 
+		// Apply initial rotation from data attribute
+		if (cardElement) {
+			const rotation = parseFloat(cardElement.dataset.rotation || '0');
+			gsap.set(cardElement, { rotation });
+		}
+
 		// Create parallax effect for the background image with reduced range
 		if (imageElement && cardElement) {
 			scrollTriggerInstance = ScrollTrigger.create({
@@ -38,6 +44,7 @@
 		// GSAP hover animations
 		if (cardElement) {
 			const postcard = cardElement.querySelector('.postcard');
+			const initialRotation = parseFloat(cardElement.dataset.rotation || '0');
 
 			const handleMouseEnter = () => {
 				gsap.to(postcard, {
@@ -54,6 +61,12 @@
 				// Scale background image to 100% and center it
 				gsap.to(imageElement, {
 					scale: 1,
+					duration: 0.4,
+					ease: 'power2.out'
+				});
+				// Rotate card to 0 degrees (straighten)
+				gsap.to(cardElement, {
+					rotation: 0,
 					duration: 0.4,
 					ease: 'power2.out'
 				});
@@ -74,6 +87,12 @@
 				// Scale background image back to 1.15 for parallax room
 				gsap.to(imageElement, {
 					scale: 1.15,
+					duration: 0.6,
+					ease: 'power3.out'
+				});
+				// Rotate card back to original angle
+				gsap.to(cardElement, {
+					rotation: initialRotation,
 					duration: 0.6,
 					ease: 'power3.out'
 				});
