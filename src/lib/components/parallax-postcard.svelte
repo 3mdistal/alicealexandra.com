@@ -68,19 +68,19 @@
 	function handleMouseLeave() {
 		isHovered = false;
 		if (scrollTriggerInstance && imageElement) {
-			// Create a smooth transition tween that will be overwritten by ScrollTrigger
-			const transitionTween = gsap.to(imageElement, {
-				yPercent: -20,
-				duration: 0.6,
-				ease: 'power2.out'
-			});
+			// Calculate the exact position where parallax should be right now
+			scrollTriggerInstance.refresh();
+			const progress = scrollTriggerInstance.progress;
+			const targetYPercent = -20 * progress;
 
-			// Re-enable ScrollTrigger after a short delay to allow smooth transition start
-			gsap.delayedCall(0.1, () => {
-				if (scrollTriggerInstance) {
+			// Animate directly to the correct parallax position
+			gsap.to(imageElement, {
+				yPercent: targetYPercent,
+				duration: 0.5,
+				ease: 'power2.out',
+				onComplete: () => {
+					// Re-enable ScrollTrigger smoothly
 					scrollTriggerInstance.enable();
-					// Let ScrollTrigger take over the animation smoothly
-					scrollTriggerInstance.refresh();
 				}
 			});
 		}
