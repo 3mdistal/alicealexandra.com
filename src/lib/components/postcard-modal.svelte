@@ -158,6 +158,20 @@
 
 		return () => {
 			document.removeEventListener('keydown', handleKeydown);
+
+			// Restore scroll position and body styles
+			const scrollPosition = Math.abs(parseInt(document.body.style.top) || 0);
+			document.body.style.position = '';
+			document.body.style.top = '';
+			document.body.style.width = '';
+			document.body.style.overflow = '';
+			window.scrollTo(0, scrollPosition);
+
+			// Remove inert from background content
+			const mainElement = document.querySelector('main');
+			if (mainElement) {
+				mainElement.inert = false;
+			}
 		};
 	});
 
