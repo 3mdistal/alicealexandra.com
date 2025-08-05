@@ -9,9 +9,30 @@
 		if (gridElement) {
 			// Apply random rotation to each postcard on desktop only
 			const postcards = gridElement.querySelectorAll('.postcard-link');
+			const rotations: number[] = [];
+
 			postcards.forEach((postcard, index) => {
-				// Random rotation between -8 and 8 degrees
-				const rotation = (Math.random() - 0.5) * 16;
+				let rotation: number;
+
+				// For desktop two-column layout, ensure adjacent cards have different angles
+				if (window.innerWidth >= 1024 && index > 0) {
+					// Check if this is in the same row as the previous card (even/odd pairs)
+					const isInSameRow = Math.floor(index / 2) === Math.floor((index - 1) / 2);
+
+					if (isInSameRow) {
+						// Ensure at least 8 degrees difference from the previous card
+						const previousRotation = rotations[index - 1];
+						do {
+							rotation = (Math.random() - 0.5) * 16; // -8 to 8 degrees
+						} while (Math.abs(rotation - previousRotation) < 8);
+					} else {
+						rotation = (Math.random() - 0.5) * 16;
+					}
+				} else {
+					rotation = (Math.random() - 0.5) * 16;
+				}
+
+				rotations.push(rotation);
 				(postcard as HTMLElement).style.transform = `rotate(${rotation}deg)`;
 			});
 		}
