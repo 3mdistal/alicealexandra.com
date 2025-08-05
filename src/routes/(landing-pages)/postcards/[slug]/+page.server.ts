@@ -12,7 +12,7 @@ export async function load({ params }: { params: { slug: string } }) {
 					and: [
 						{
 							property: 'Slug',
-							rich_text: {
+							url: {
 								equals: slug
 							}
 						}
