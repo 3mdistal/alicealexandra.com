@@ -68,25 +68,18 @@
 	function handleMouseLeave() {
 		isHovered = false;
 		if (scrollTriggerInstance && imageElement) {
-			// Re-enable the ScrollTrigger first but with a custom tween
-			scrollTriggerInstance.enable();
+			// Create a smooth transition tween that will be overwritten by ScrollTrigger
+			const transitionTween = gsap.to(imageElement, {
+				yPercent: -20,
+				duration: 0.6,
+				ease: 'power2.out'
+			});
 
-			// Update the trigger calculations
-			scrollTriggerInstance.refresh();
-
-			// Get the target progress and let ScrollTrigger smoothly animate to it
-			const progress = scrollTriggerInstance.progress;
-
-			// Create a smooth transition by temporarily overriding the animation
-			gsap.to(imageElement, {
-				yPercent: -20 * progress,
-				duration: 0.4,
-				ease: 'power2.out',
-				onUpdate: () => {
-					// During the transition, prevent ScrollTrigger from interfering
-				},
-				onComplete: () => {
-					// Now let ScrollTrigger take full control
+			// Re-enable ScrollTrigger after a short delay to allow smooth transition start
+			gsap.delayedCall(0.1, () => {
+				if (scrollTriggerInstance) {
+					scrollTriggerInstance.enable();
+					// Let ScrollTrigger take over the animation smoothly
 					scrollTriggerInstance.refresh();
 				}
 			});
