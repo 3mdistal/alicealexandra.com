@@ -130,16 +130,7 @@
 		font-size: 2rem;
 		font-weight: 600;
 		line-height: 1.2;
-	}
-
-	.postcard h2 a {
 		color: white;
-		text-decoration: none;
-		transition: opacity 0.3s ease;
-	}
-
-	.postcard h2 a:hover {
-		opacity: 0.8;
 	}
 
 	.description {
