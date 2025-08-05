@@ -48,13 +48,18 @@
 	function handleMouseEnter() {
 		isHovered = true;
 		if (scrollTriggerInstance && imageElement) {
+			// Get the current yPercent value before disabling
+			const currentTransform = gsap.getProperty(imageElement, "yPercent") as number;
+
 			// Disable the ScrollTrigger
 			scrollTriggerInstance.disable();
 
-			// Smoothly animate to center position
-			gsap.to(imageElement, {
+			// Smoothly animate from current position to center position
+			gsap.fromTo(imageElement, {
+				yPercent: currentTransform
+			}, {
 				yPercent: 0,
-				duration: 0.5,
+				duration: 0.4,
 				ease: 'power2.out'
 			});
 		}
@@ -63,19 +68,19 @@
 	function handleMouseLeave() {
 		isHovered = false;
 		if (scrollTriggerInstance && imageElement) {
-			// Get the current scroll progress to smoothly transition back
+			// Calculate where the parallax should be based on current scroll position
+			scrollTriggerInstance.refresh(); // Update the trigger calculations
 			const progress = scrollTriggerInstance.progress;
 			const targetYPercent = -20 * progress;
 
-			// Smoothly animate to the current scroll-based position
+			// Smoothly animate from current hover position to scroll-based position
 			gsap.to(imageElement, {
 				yPercent: targetYPercent,
-				duration: 0.5,
+				duration: 0.4,
 				ease: 'power2.out',
 				onComplete: () => {
 					// Re-enable the ScrollTrigger after transition
 					scrollTriggerInstance.enable();
-					scrollTriggerInstance.refresh();
 				}
 			});
 		}
