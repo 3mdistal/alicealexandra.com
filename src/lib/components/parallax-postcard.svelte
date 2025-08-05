@@ -8,9 +8,10 @@
 		description?: string;
 		heroImage?: string;
 		href: string;
+		initialRotation?: number;
 	}
 
-	let { title, description, heroImage, href }: Props = $props();
+	let { title, description, heroImage, href, initialRotation = 0 }: Props = $props();
 
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
