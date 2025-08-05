@@ -68,11 +68,17 @@
 	}
 </script>
 
-<a {href} class="postcard-link" bind:this={cardElement}>
+<a
+	{href}
+	class="postcard-link"
+	bind:this={cardElement}
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
+>
 	<article class="postcard">
 		<div class="image-container">
-			<div 
-				class="background-image" 
+			<div
+				class="background-image"
 				bind:this={imageElement}
 				style="background-image: url('{heroImage || 'https://unsplash.it/800/1000'}')"
 			></div>
