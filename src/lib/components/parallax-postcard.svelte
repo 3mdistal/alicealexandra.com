@@ -142,7 +142,7 @@
 			<div
 				class="background-image"
 				bind:this={imageElement}
-				style="background-image: url('{heroImage || 'https://unsplash.it/800/1000'}'); view-transition-name: postcard-image-{slug || title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}"
+				style="background-image: url('{heroImage || 'https://unsplash.it/800/1000'}'); view-transition-name: postcard-hero-{slug}"
 			></div>
 		</div>
 		<div class="postcard-overlay">
