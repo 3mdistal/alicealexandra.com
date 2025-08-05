@@ -1,7 +1,21 @@
 <script lang="ts">
 	import ParallaxPostcard from '$lib/components/parallax-postcard.svelte';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
+	let gridElement: HTMLElement;
+
+	onMount(() => {
+		if (gridElement) {
+			// Apply random rotation to each postcard on desktop only
+			const postcards = gridElement.querySelectorAll('.postcard-link');
+			postcards.forEach((postcard, index) => {
+				// Random rotation between -8 and 8 degrees
+				const rotation = (Math.random() - 0.5) * 16;
+				(postcard as HTMLElement).style.transform = `rotate(${rotation}deg)`;
+			});
+		}
+	});
 </script>
 
 <svelte:head>
