@@ -14,14 +14,13 @@
 
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
-	let isHovered = $state(false);
 	let scrollTriggerInstance: ScrollTrigger;
 
 	onMount(() => {
 		// Register GSAP plugins
 		gsap.registerPlugin(ScrollTrigger);
 
-		// Create parallax effect for the background image
+		// Create parallax effect for the background image with reduced range
 		if (imageElement && cardElement) {
 			scrollTriggerInstance = ScrollTrigger.create({
 				trigger: cardElement,
@@ -30,7 +29,7 @@
 				scrub: true,
 				markers: false,
 				animation: gsap.to(imageElement, {
-					yPercent: -20,
+					yPercent: -10,
 					ease: 'none'
 				})
 			});
@@ -44,45 +43,16 @@
 		};
 	});
 
-	// Handle hover to completely disable parallax
+	// Simple pause/resume on hover
 	function handleMouseEnter() {
-		isHovered = true;
-		if (scrollTriggerInstance && imageElement) {
-			// Get the current yPercent value before disabling
-			const currentTransform = gsap.getProperty(imageElement, "yPercent") as number;
-
-			// Disable the ScrollTrigger
-			scrollTriggerInstance.disable();
-
-			// Smoothly animate from current position to center position
-			gsap.fromTo(imageElement, {
-				yPercent: currentTransform
-			}, {
-				yPercent: 0,
-				duration: 0.4,
-				ease: 'power2.out'
-			});
+		if (scrollTriggerInstance) {
+			scrollTriggerInstance.pause();
 		}
 	}
 
 	function handleMouseLeave() {
-		isHovered = false;
-		if (scrollTriggerInstance && imageElement) {
-			// Calculate the exact position where parallax should be right now
-			scrollTriggerInstance.refresh();
-			const progress = scrollTriggerInstance.progress;
-			const targetYPercent = -20 * progress;
-
-			// Animate directly to the correct parallax position
-			gsap.to(imageElement, {
-				yPercent: targetYPercent,
-				duration: 0.5,
-				ease: 'power2.out',
-				onComplete: () => {
-					// Re-enable ScrollTrigger smoothly
-					scrollTriggerInstance.enable();
-				}
-			});
+		if (scrollTriggerInstance) {
+			scrollTriggerInstance.play();
 		}
 	}
 </script>
