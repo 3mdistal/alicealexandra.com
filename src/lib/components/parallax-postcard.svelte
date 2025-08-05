@@ -137,6 +137,8 @@
 	{href}
 	class="postcard-link"
 	bind:this={cardElement}
+	onclick={onclick}
+	data-sveltekit-preload-data
 >
 	<article class="postcard">
 		<div class="image-container">
