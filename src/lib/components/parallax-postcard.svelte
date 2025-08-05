@@ -47,6 +47,19 @@
 		if (cardElement) {
 			const postcard = cardElement.querySelector('.postcard');
 
+			// Function to generate a new random rotation
+			const generateNewRotation = () => {
+				let newRotation: number;
+				let attempts = 0;
+
+				do {
+					newRotation = (Math.random() - 0.5) * 16; // -8 to 8 degrees
+					attempts++;
+				} while (Math.abs(newRotation - currentRotation) < 4 && attempts < 10); // Ensure at least 4 degrees difference
+
+				return newRotation;
+			};
+
 			const handleMouseEnter = () => {
 				gsap.to(postcard, {
 					y: -8,
@@ -74,6 +87,10 @@
 			};
 
 			const handleMouseLeave = () => {
+				// Generate a new random rotation for this card
+				const newRotation = generateNewRotation();
+				currentRotation = newRotation;
+
 				gsap.to(postcard, {
 					y: 0,
 					scale: 1,
@@ -91,9 +108,9 @@
 					duration: 0.6,
 					ease: 'power3.out'
 				});
-				// Rotate card back to original angle
+				// Rotate card to NEW random angle
 				gsap.to(cardElement, {
-					rotation: initialRotation,
+					rotation: newRotation,
 					duration: 0.6,
 					ease: 'power3.out'
 				});
