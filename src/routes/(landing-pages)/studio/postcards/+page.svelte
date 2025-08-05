@@ -21,18 +21,12 @@
 
 	<section class="postcards-grid">
 		{#each data.postcards as postcard}
-			<a href="/studio/postcards/{postcard.slug}" class="postcard-link">
-				<article class="postcard" style="background-image: url('{postcard.heroImage || 'https://unsplash.it/1200/600'}')">
-					<div class="postcard-overlay">
-						<div class="postcard-content">
-							<h2>{postcard.title}</h2>
-							{#if postcard.description}
-								<p class="description">{postcard.description}</p>
-							{/if}
-						</div>
-					</div>
-				</article>
-			</a>
+			<ParallaxPostcard
+				title={postcard.title}
+				description={postcard.description}
+				heroImage={postcard.heroImage}
+				href="/studio/postcards/{postcard.slug}"
+			/>
 		{:else}
 			<p class="no-postcards">No postcards available at the moment.</p>
 		{/each}
