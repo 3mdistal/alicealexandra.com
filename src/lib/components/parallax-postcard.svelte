@@ -25,6 +25,7 @@
 		// Apply initial rotation from prop
 		if (cardElement && initialRotation !== 0) {
 			gsap.set(cardElement, { rotation: initialRotation });
+			currentRotation = initialRotation;
 		}
 
 		// Create parallax effect for the background image with reduced range
