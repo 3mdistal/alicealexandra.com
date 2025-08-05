@@ -35,12 +35,50 @@
 			});
 		}
 
-		// Cleanup function
-		return () => {
-			if (scrollTriggerInstance) {
-				scrollTriggerInstance.kill();
-			}
-		};
+		// GSAP hover animations
+		if (cardElement) {
+			const postcard = cardElement.querySelector('.postcard');
+
+			const handleMouseEnter = () => {
+				gsap.to(postcard, {
+					y: -8,
+					scale: 1.02,
+					duration: 0.4,
+					ease: 'back.out(1.7)'
+				});
+				gsap.to(postcard, {
+					boxShadow: '0 25px 50px rgba(255, 255, 255, 0.15)',
+					duration: 0.4,
+					ease: 'power2.out'
+				});
+			};
+
+			const handleMouseLeave = () => {
+				gsap.to(postcard, {
+					y: 0,
+					scale: 1,
+					duration: 0.6,
+					ease: 'power3.out'
+				});
+				gsap.to(postcard, {
+					boxShadow: '0 0px 0px rgba(255, 255, 255, 0)',
+					duration: 0.6,
+					ease: 'power2.out'
+				});
+			};
+
+			cardElement.addEventListener('mouseenter', handleMouseEnter);
+			cardElement.addEventListener('mouseleave', handleMouseLeave);
+
+			// Cleanup function
+			return () => {
+				cardElement.removeEventListener('mouseenter', handleMouseEnter);
+				cardElement.removeEventListener('mouseleave', handleMouseLeave);
+				if (scrollTriggerInstance) {
+					scrollTriggerInstance.kill();
+				}
+			};
+		}
 	});
 </script>
 
