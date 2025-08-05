@@ -32,7 +32,7 @@
 				</article>
 			</a>
 		{:else}
-			<p>No postcards available at the moment.</p>
+			<p class="no-postcards">No postcards available at the moment.</p>
 		{/each}
 	</section>
 </main>
