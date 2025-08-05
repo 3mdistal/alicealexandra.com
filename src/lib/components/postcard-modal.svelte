@@ -62,6 +62,19 @@
 	const postcardHeroImage = getUrl(heroImage);
 
 	onMount(() => {
+		// Prevent background scroll
+		const scrollPosition = window.scrollY;
+		document.body.style.position = 'fixed';
+		document.body.style.top = `-${scrollPosition}px`;
+		document.body.style.width = '100%';
+		document.body.style.overflow = 'hidden';
+
+		// Make background content inert
+		const mainElement = document.querySelector('main');
+		if (mainElement) {
+			mainElement.inert = true;
+		}
+
 		const animationOrigin = page.state.animationOrigin;
 
 		if (animationOrigin && modalContentElement) {
