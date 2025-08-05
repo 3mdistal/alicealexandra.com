@@ -85,73 +85,12 @@
 
 	.postcards-grid {
 		display: grid;
-		gap: 3rem;
-		margin: 0;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+		gap: 2.5rem;
+		justify-content: center;
 		padding: 0 2rem;
-		max-width: 1200px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.postcard-link {
-		display: block;
-		text-decoration: none;
-		color: inherit;
-	}
-
-	.postcard {
-		position: relative;
-		height: 400px;
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-		border-radius: 12px;
-		overflow: hidden;
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-		cursor: pointer;
-	}
-
-	.postcard-link:hover .postcard {
-		transform: translateY(-4px);
-		box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
-	}
-
-	.postcard-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: linear-gradient(
-			135deg,
-			rgba(0, 0, 0, 0.7) 0%,
-			rgba(0, 0, 0, 0.4) 50%,
-			rgba(0, 0, 0, 0.8) 100%
-		);
-		display: flex;
-		align-items: flex-end;
-		padding: 2rem;
-	}
-
-	.postcard-content {
-		color: white;
-		width: 100%;
-	}
-
-	.postcard h2 {
-		margin: 0 0 1rem 0;
-		font-size: 2rem;
-		font-weight: 600;
-		line-height: 1.2;
-		color: white;
-	}
-
-	.description {
-		color: rgba(255, 255, 255, 0.9);
-		margin: 0;
-		line-height: 1.5;
-		font-size: 1.1rem;
-		max-width: 80%;
+		max-width: 1400px;
+		margin: 0 auto;
 	}
 
 	@media (max-width: 768px) {
