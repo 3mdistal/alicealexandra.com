@@ -15,7 +15,7 @@
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
 	let isHovered = $state(false);
-	let parallaxTween: gsap.core.Tween;
+	let scrollTriggerInstance: ScrollTrigger;
 
 	onMount(() => {
 		// Register GSAP plugins
@@ -23,47 +23,61 @@
 
 		// Create parallax effect for the background image
 		if (imageElement && cardElement) {
-			parallaxTween = gsap.to(imageElement, {
-				yPercent: -20,
-				ease: 'none',
-				scrollTrigger: {
-					trigger: cardElement,
-					start: 'top bottom',
-					end: 'bottom top',
-					scrub: true,
-					markers: false
-				}
+			scrollTriggerInstance = ScrollTrigger.create({
+				trigger: cardElement,
+				start: 'top bottom',
+				end: 'bottom top',
+				scrub: true,
+				markers: false,
+				animation: gsap.to(imageElement, {
+					yPercent: -20,
+					ease: 'none'
+				})
 			});
 		}
 
 		// Cleanup function
 		return () => {
-			ScrollTrigger.getAll().forEach(trigger => {
-				if (trigger.trigger === cardElement) {
-					trigger.kill();
-				}
-			});
+			if (scrollTriggerInstance) {
+				scrollTriggerInstance.kill();
+			}
 		};
 	});
 
-	// Handle hover to temporarily override parallax
+	// Handle hover to completely disable parallax
 	function handleMouseEnter() {
 		isHovered = true;
-		if (imageElement) {
+		if (scrollTriggerInstance && imageElement) {
+			// Disable the ScrollTrigger
+			scrollTriggerInstance.disable();
+
+			// Smoothly animate to center position
 			gsap.to(imageElement, {
-				yPercent: -10,
-				duration: 0.4,
-				ease: 'power2.out',
-				overwrite: false
+				yPercent: 0,
+				duration: 0.5,
+				ease: 'power2.out'
 			});
 		}
 	}
 
 	function handleMouseLeave() {
 		isHovered = false;
-		// Let the ScrollTrigger take over again
-		if (parallaxTween && parallaxTween.scrollTrigger) {
-			parallaxTween.scrollTrigger.refresh();
+		if (scrollTriggerInstance && imageElement) {
+			// Get the current scroll progress to smoothly transition back
+			const progress = scrollTriggerInstance.progress;
+			const targetYPercent = -20 * progress;
+
+			// Smoothly animate to the current scroll-based position
+			gsap.to(imageElement, {
+				yPercent: targetYPercent,
+				duration: 0.5,
+				ease: 'power2.out',
+				onComplete: () => {
+					// Re-enable the ScrollTrigger after transition
+					scrollTriggerInstance.enable();
+					scrollTriggerInstance.refresh();
+				}
+			});
 		}
 	}
 </script>
