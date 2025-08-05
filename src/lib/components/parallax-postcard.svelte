@@ -149,14 +149,6 @@
 	}
 
 	@media (max-width: 768px) {
-		.postcard-link {
-			max-width: 280px;
-		}
-
-		.postcard {
-			height: 420px;
-		}
-
 		.postcard-overlay {
 			padding: 1.5rem;
 		}
@@ -172,14 +164,6 @@
 	}
 
 	@media (max-width: 480px) {
-		.postcard-link {
-			max-width: 260px;
-		}
-
-		.postcard {
-			height: 380px;
-		}
-
 		.postcard-overlay {
 			padding: 1.25rem;
 		}
