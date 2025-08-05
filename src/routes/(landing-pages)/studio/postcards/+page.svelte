@@ -55,12 +55,14 @@
 	</header>
 
 	<section class="postcards-grid" bind:this={gridElement}>
-		{#each data.postcards as postcard}
+		{#each data.postcards as postcard, index}
+			{@const rotation = getRotation(index)}
 			<ParallaxPostcard
 				title={postcard.title}
 				description={postcard.description}
 				heroImage={postcard.heroImage}
 				href="/studio/postcards/{postcard.slug}"
+				initialRotation={rotation}
 			/>
 		{:else}
 			<p class="no-postcards">No postcards available at the moment.</p>
