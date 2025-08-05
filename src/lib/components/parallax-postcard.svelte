@@ -44,7 +44,6 @@
 		// GSAP hover animations
 		if (cardElement) {
 			const postcard = cardElement.querySelector('.postcard');
-			const initialRotation = parseFloat(cardElement.dataset.rotation || '0');
 
 			const handleMouseEnter = () => {
 				gsap.to(postcard, {
