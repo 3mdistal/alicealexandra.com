@@ -100,6 +100,13 @@
 		margin-right: auto;
 	}
 
+	/* More space on desktop due to offset postcards */
+	@media (min-width: 1024px) {
+		header {
+			margin-bottom: 5rem;
+		}
+	}
+
 	h1 {
 		font-size: 2.5rem;
 		margin-bottom: 0.5rem;
