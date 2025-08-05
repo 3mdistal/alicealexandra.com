@@ -13,7 +13,8 @@
 <main>
 	<header>
 		<h1>Postcards</h1>
-		<p class="summary">All the rest from far away.</p>
+		<p>All the rest from far away</p>
+		<p class="summary">Not everything I write fits into a category. This is a place for the outcasts.</p>
 	</header>
 
 	<section class="postcards-grid">
@@ -38,17 +39,26 @@
 
 <style>
 	:global(body) {
-		background-color: black;
+		background-color: black !important;
 		color: white;
 	}
 
+	:global(html) {
+		background-color: black !important;
+	}
+
 	main {
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 2rem;
 		background-color: black;
 		color: white;
 		min-height: 100vh;
+		padding: 0;
+		margin: 0;
+		width: 100vw;
+		position: relative;
+		left: 50%;
+		right: 50%;
+		margin-left: -50vw;
+		margin-right: -50vw;
 	}
 
 	header {
