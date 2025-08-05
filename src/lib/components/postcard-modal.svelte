@@ -67,6 +67,28 @@
 		if (animationOrigin && modalContentElement) {
 			// Start modal from the postcard's position and size
 			gsap.set(modalElement, { opacity: 0 });
+
+			// First, temporarily position the modal off-screen to measure its natural size
+			gsap.set(modalContentElement, {
+				position: 'fixed',
+				left: '-9999px',
+				top: '0',
+				width: Math.min(800, window.innerWidth - 64),
+				height: 'auto',
+				visibility: 'hidden'
+			});
+
+			// Force a layout to get accurate measurements
+			modalContentElement.offsetHeight;
+
+			// Get the natural height of the content
+			const naturalHeight = modalContentElement.offsetHeight;
+			const contentFinalWidth = Math.min(800, window.innerWidth - 64);
+			const contentFinalHeight = Math.min(naturalHeight, window.innerHeight - 64);
+			const finalX = (window.innerWidth - contentFinalWidth) / 2;
+			const finalY = (window.innerHeight - contentFinalHeight) / 2;
+
+			// Now set the initial animation position
 			gsap.set(modalContentElement, {
 				position: 'fixed',
 				left: animationOrigin.x,
@@ -74,15 +96,9 @@
 				width: animationOrigin.width,
 				height: animationOrigin.height,
 				borderRadius: '16px',
-				transformOrigin: 'center center'
+				transformOrigin: 'center center',
+				visibility: 'visible'
 			});
-
-			// Get the final modal position
-			const modalRect = modalElement.getBoundingClientRect();
-			const contentFinalWidth = Math.min(800, window.innerWidth - 64); // 2rem padding on each side
-			const contentFinalHeight = Math.min(window.innerHeight * 0.9, 1000);
-			const finalX = (window.innerWidth - contentFinalWidth) / 2;
-			const finalY = (window.innerHeight - contentFinalHeight) / 2;
 
 			// Animate modal entrance - postcard growing into modal
 			gsap.timeline()
