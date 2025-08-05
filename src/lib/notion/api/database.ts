@@ -5,7 +5,7 @@ import type {
 	PageObjectResponse
 } from '../types/notion-types';
 import type { BlogPost, PaginatedResponse } from '../types/notion-types';
-import { COMMISSIONS_DB, SUBSCRIBERS_DB, USER_ID_ALICE } from '$env/static/private';
+import { COMMISSIONS_DB, SUBSCRIBERS_DB, USER_ID_ALICE, POSTCARDS_DB } from '$env/static/private';
 
 /**
  * Query a Notion database with the provided parameters
