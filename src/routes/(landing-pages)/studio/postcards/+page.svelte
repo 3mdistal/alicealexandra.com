@@ -19,19 +19,17 @@
 
 	<section class="postcards-grid">
 		{#each data.postcards as postcard}
-			<article class="postcard">
-				<h2>
-					<a href="/studio/postcards/{postcard.slug}">{postcard.title}</a>
-				</h2>
-				{#if postcard.description}
-					<p class="description">{postcard.description}</p>
-				{/if}
-				{#if postcard.heroImage}
-					<img src={postcard.heroImage} alt={postcard.title} />
-				{/if}
-				<time datetime={postcard.lastEditedTime}>
-					{new Date(postcard.lastEditedTime).toLocaleDateString()}
-				</time>
+			<article class="postcard" style="background-image: url('{postcard.heroImage || 'https://unsplash.it/1200/600'}')">
+				<div class="postcard-overlay">
+					<div class="postcard-content">
+						<h2>
+							<a href="/studio/postcards/{postcard.slug}">{postcard.title}</a>
+						</h2>
+						{#if postcard.description}
+							<p class="description">{postcard.description}</p>
+						{/if}
+					</div>
+				</div>
 			</article>
 		{:else}
 			<p>No postcards available at the moment.</p>
