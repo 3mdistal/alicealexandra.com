@@ -2,6 +2,7 @@
 	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
+	import { page } from '$app/state';
 	import type {
 		PageObjectResponse,
 		RichTextPropertyItemObjectResponse,
@@ -16,6 +17,7 @@
 	let { data, onclose }: Props = $props();
 
 	let modalElement: HTMLElement;
+	let modalContentElement: HTMLElement;
 	let heroElement: HTMLElement;
 
 	const { queryResponse, contentResponse } = data.postcard || {};
