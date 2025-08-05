@@ -31,20 +31,13 @@
 		animation-timing-function: ease-in-out;
 	}
 
-	/* General postcard image transitions */
-	:global(::view-transition-old(postcard-image-test-2)),
-	:global(::view-transition-new(postcard-image-test-2)),
-	:global(::view-transition-old(postcard-image-test-3)),
-	:global(::view-transition-new(postcard-image-test-3)) {
-		animation-duration: 0.6s;
+	/* Postcard hero transitions */
+	:global(::view-transition-old(postcard-hero-test-2)),
+	:global(::view-transition-new(postcard-hero-test-2)),
+	:global(::view-transition-old(postcard-hero-test-3)),
+	:global(::view-transition-new(postcard-hero-test-3)) {
+		animation-duration: 0.7s;
 		animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 		object-fit: cover;
-	}
-
-	/* Test if we can style all postcard transitions */
-	:global(::view-transition-old(*)),
-	:global(::view-transition-new(*)) {
-		animation-duration: 0.6s;
-		animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	}
 </style>
