@@ -10,9 +10,10 @@
 		href: string;
 		initialRotation?: number;
 		slug?: string;
+		onclick?: (e: MouseEvent) => void;
 	}
 
-	let { title, description, heroImage, href, initialRotation = 0, slug }: Props = $props();
+	let { title, description, heroImage, href, initialRotation = 0, slug, onclick }: Props = $props();
 
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
