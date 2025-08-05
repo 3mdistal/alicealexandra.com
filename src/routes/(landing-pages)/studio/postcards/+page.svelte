@@ -38,10 +38,18 @@
 </main>
 
 <style>
+	:global(body) {
+		background-color: black;
+		color: white;
+	}
+
 	main {
 		max-width: 800px;
 		margin: 0 auto;
 		padding: 2rem;
+		background-color: black;
+		color: white;
+		min-height: 100vh;
 	}
 
 	header {
@@ -52,16 +60,18 @@
 	h1 {
 		font-size: 2.5rem;
 		margin-bottom: 0.5rem;
+		color: white;
 	}
 
 	header p {
 		font-size: 1.2rem;
-		color: #666;
+		color: #ccc;
 	}
 
 	.summary {
 		font-style: italic;
 		margin-top: 1rem;
+		color: #aaa;
 	}
 
 	.postcards-grid {
