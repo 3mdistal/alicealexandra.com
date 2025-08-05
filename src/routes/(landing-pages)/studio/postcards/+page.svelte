@@ -80,6 +80,12 @@
 		margin: 0 -2rem;
 	}
 
+	.postcard-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
 	.postcard {
 		position: relative;
 		height: 400px;
@@ -88,11 +94,13 @@
 		background-repeat: no-repeat;
 		border-radius: 12px;
 		overflow: hidden;
-		transition: transform 0.3s ease;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		cursor: pointer;
 	}
 
-	.postcard:hover {
+	.postcard-link:hover .postcard {
 		transform: translateY(-4px);
+		box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
 	}
 
 	.postcard-overlay {
