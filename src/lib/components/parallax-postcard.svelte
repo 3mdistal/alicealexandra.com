@@ -48,8 +48,6 @@
 	{href}
 	class="postcard-link"
 	bind:this={cardElement}
-	onmouseenter={handleMouseEnter}
-	onmouseleave={handleMouseLeave}
 >
 	<article class="postcard">
 		<div class="image-container">
