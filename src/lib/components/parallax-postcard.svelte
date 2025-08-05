@@ -51,6 +51,12 @@
 					duration: 0.4,
 					ease: 'power2.out'
 				});
+				// Scale background image to 100% and center it
+				gsap.to(imageElement, {
+					scale: 1,
+					duration: 0.4,
+					ease: 'power2.out'
+				});
 			};
 
 			const handleMouseLeave = () => {
@@ -64,6 +70,12 @@
 					boxShadow: '0 0px 0px rgba(255, 255, 255, 0)',
 					duration: 0.6,
 					ease: 'power2.out'
+				});
+				// Scale background image back to 1.15 for parallax room
+				gsap.to(imageElement, {
+					scale: 1.15,
+					duration: 0.6,
+					ease: 'power3.out'
 				});
 			};
 
