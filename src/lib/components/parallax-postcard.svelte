@@ -177,7 +177,7 @@
 	}
 
 	.postcard-content {
-		color: white;
+		color: #333;
 		width: 100%;
 	}
 
@@ -186,11 +186,11 @@
 		font-size: 1.8rem;
 		font-weight: 600;
 		line-height: 1.2;
-		color: white;
+		color: #333;
 	}
 
 	.description {
-		color: rgba(255, 255, 255, 0.9);
+		color: #555;
 		margin: 0;
 		line-height: 1.5;
 		font-size: 1rem;
