@@ -16,6 +16,7 @@
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
 	let scrollTriggerInstance: ScrollTrigger;
+	let currentRotation = initialRotation;
 
 	onMount(() => {
 		// Register GSAP plugins
