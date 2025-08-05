@@ -8,7 +8,7 @@
 	<title>Postcards</title>
 	<meta
 		name="description"
-		content="Flash fiction, essays and anything else that doesn't really fit. Work by Alice Alexandra Moore."
+		content="Flash fiction, short stories, essays, and anything else that doesn't really fit. Work by Alice Alexandra Moore."
 	/>
 </svelte:head>
 
@@ -18,7 +18,7 @@
 	<svelte:fragment slot="subtitle">all the rest from far away</svelte:fragment>
 
 	<svelte:fragment slot="summary">
-		Not everything I write fits into a category. This will be a spot for the outcasts.
+		Not everything I write fits into a category. This is a place for the outcasts.
 	</svelte:fragment>
 
 	<svelte:fragment slot="text">
