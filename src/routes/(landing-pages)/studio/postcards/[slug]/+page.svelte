@@ -111,15 +111,31 @@
 </main>
 
 <style>
+	.hero-image {
+		width: 100vw;
+		aspect-ratio: 3 / 2;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: relative;
+		left: 50%;
+		right: 50%;
+		margin-left: -50vw;
+		margin-right: -50vw;
+	}
+
 	main {
 		max-width: 800px;
 		margin: 0 auto;
 		padding: 2rem;
 		line-height: 1.6;
+		background-color: #e8e8e8;
+		min-height: 100vh;
 	}
 
 	header {
 		margin-bottom: 3rem;
+		padding-top: 2rem;
 	}
 
 	h1 {
@@ -133,14 +149,6 @@
 		color: #666;
 		margin-bottom: 2rem;
 		font-style: italic;
-	}
-
-	.hero-image {
-		width: 100%;
-		max-width: 600px;
-		height: auto;
-		border-radius: 8px;
-		margin-bottom: 2rem;
 	}
 
 	.postcard-content {
