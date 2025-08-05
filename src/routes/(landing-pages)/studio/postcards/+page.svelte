@@ -15,8 +15,7 @@
 <main>
 	<header>
 		<h1>Postcards</h1>
-		<p>All the rest from far away</p>
-		<p class="summary">Not everything I write fits into a category. This is a place for the outcasts.</p>
+		<p class="subtitle">All the rest from far away.</p>
 	</header>
 
 	<section class="postcards-grid">
