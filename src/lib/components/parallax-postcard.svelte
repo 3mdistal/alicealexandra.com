@@ -82,6 +82,7 @@
 		aspect-ratio: 3 / 2;
 		border-radius: 16px;
 		overflow: hidden;
+		transform: translateY(0) scale(1);
 		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 		cursor: pointer;
 		background: #000;
