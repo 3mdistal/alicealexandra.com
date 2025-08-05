@@ -120,15 +120,8 @@
 		aspect-ratio: 3 / 2;
 		border-radius: 16px;
 		overflow: hidden;
-		transform: translateY(0) scale(1);
-		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 		cursor: pointer;
 		background: #000;
-	}
-
-	.postcard-link:hover .postcard {
-		transform: translateY(-8px) scale(1.02);
-		box-shadow: 0 25px 50px rgba(255, 255, 255, 0.15);
 	}
 
 	.image-container {
