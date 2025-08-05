@@ -145,7 +145,7 @@
 			<div
 				class="background-image"
 				bind:this={imageElement}
-				style="background-image: url('{heroImage || 'https://unsplash.it/800/1000'}'); view-transition-name: postcard-hero-{slug}"
+				style="background-image: url('{heroImage || 'https://unsplash.it/800/1000'}')"
 			></div>
 		</div>
 		<div class="postcard-overlay">
