@@ -47,7 +47,7 @@
 					ease: 'back.out(1.7)'
 				});
 				gsap.to(postcard, {
-					boxShadow: '0 25px 50px rgba(255, 255, 255, 0.15)',
+					boxShadow: '0 25px 50px rgba(0, 0, 0, 0.25)',
 					duration: 0.4,
 					ease: 'power2.out'
 				});
