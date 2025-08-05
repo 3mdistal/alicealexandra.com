@@ -64,9 +64,9 @@
 
 	onMount(() => {
 		// Prevent background scroll
-		const scrollPosition = window.scrollY;
+		savedScrollPosition = window.scrollY;
 		document.body.style.position = 'fixed';
-		document.body.style.top = `-${scrollPosition}px`;
+		document.body.style.top = `-${savedScrollPosition}px`;
 		document.body.style.width = '100%';
 		document.body.style.overflow = 'hidden';
 
