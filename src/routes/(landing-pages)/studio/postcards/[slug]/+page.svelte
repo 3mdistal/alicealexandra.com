@@ -66,13 +66,7 @@
 {#if postcard && postcardHeroImage}
 	<div
 		class="hero-image"
-		style="background-image: url('{postcardHeroImage}')"
-		use:transition={{
-			name: `postcard-image-${postcardSlug || postcardTitle.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`,
-			applyImmediately({ navigation }) {
-				return navigation?.from?.route?.id === '/studio/postcards';
-			}
-		}}
+		style="background-image: url('{postcardHeroImage}'); view-transition-name: postcard-image-{postcardSlug || postcardTitle.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}"
 	></div>
 {/if}
 
