@@ -134,8 +134,20 @@
 		overflow: hidden;
 		cursor: pointer;
 		background: #000;
-		border: 2px dotted rgba(0, 0, 0, 0.5) !important;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.postcard::before {
+		content: '';
+		position: absolute;
+		top: -2px;
+		left: -2px;
+		right: -2px;
+		bottom: -2px;
+		border: 2px dotted rgba(0, 0, 0, 0.5);
+		border-radius: 18px;
+		z-index: -1;
+		pointer-events: none;
 	}
 
 	.image-container {
