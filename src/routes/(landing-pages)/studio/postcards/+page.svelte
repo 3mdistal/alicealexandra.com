@@ -64,6 +64,23 @@
 				href="/studio/postcards/{postcard.slug}"
 				initialRotation={rotation}
 				slug={postcard.slug}
+				onclick={async (e) => {
+					// Prevent default navigation
+					e.preventDefault();
+
+					const href = `/studio/postcards/${postcard.slug}`;
+
+					// Preload the data for the postcard
+					const result = await preloadData(href);
+
+					if (result.type === 'loaded' && result.status === 200) {
+						// Use shallow routing to show the modal
+						pushState(href, { selectedPostcard: result.data });
+					} else {
+						// Fallback to normal navigation
+						goto(href);
+					}
+				}}
 			/>
 		{:else}
 			<p class="no-postcards">No postcards available at the moment.</p>
