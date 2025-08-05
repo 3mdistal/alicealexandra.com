@@ -42,19 +42,6 @@
 			}
 		};
 	});
-
-	// Simple pause/resume on hover
-	function handleMouseEnter() {
-		if (scrollTriggerInstance) {
-			scrollTriggerInstance.pause();
-		}
-	}
-
-	function handleMouseLeave() {
-		if (scrollTriggerInstance) {
-			scrollTriggerInstance.play();
-		}
-	}
 </script>
 
 <a
