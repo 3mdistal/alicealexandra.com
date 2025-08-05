@@ -1,8 +1,17 @@
 <script>
 	import HomeButton from '$lib/icons/home-button.svelte';
-	import { setupViewTransition } from 'sveltekit-view-transition';
+	import { onNavigate } from '$app/navigation';
 
-	setupViewTransition();
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <HomeButton />
