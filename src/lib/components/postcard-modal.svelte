@@ -19,6 +19,7 @@
 	let modalElement: HTMLElement;
 	let modalContentElement: HTMLElement;
 	let heroElement: HTMLElement;
+	let savedScrollPosition = 0;
 
 	const { queryResponse, contentResponse } = data.postcard || {};
 	const postcard = queryResponse?.results?.[0] as PageObjectResponse | undefined;
