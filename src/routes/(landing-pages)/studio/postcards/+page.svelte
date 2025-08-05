@@ -32,7 +32,7 @@
 		<p class="subtitle">All the rest from far away.</p>
 	</header>
 
-	<section class="postcards-grid">
+	<section class="postcards-grid" bind:this={gridElement}>
 		{#each data.postcards as postcard}
 			<ParallaxPostcard
 				title={postcard.title}
