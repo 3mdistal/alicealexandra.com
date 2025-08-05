@@ -165,10 +165,10 @@
 		bottom: 0;
 		background: linear-gradient(
 			180deg,
-			rgba(0, 0, 0, 0.1) 0%,
-			rgba(0, 0, 0, 0.3) 30%,
-			rgba(0, 0, 0, 0.7) 70%,
-			rgba(0, 0, 0, 0.9) 100%
+			rgba(255, 255, 255, 0.2) 0%,
+			rgba(255, 255, 255, 0.4) 30%,
+			rgba(255, 255, 255, 0.7) 70%,
+			rgba(255, 255, 255, 0.9) 100%
 		);
 		display: flex;
 		align-items: flex-end;
