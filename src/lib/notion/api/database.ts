@@ -5,7 +5,7 @@ import type {
 	PageObjectResponse
 } from '../types/notion-types';
 import type { BlogPost, PaginatedResponse } from '../types/notion-types';
-import { COMMISSIONS_DB, SUBSCRIBERS_DB, USER_ID_ALICE, POSTCARDS_DB } from '$env/static/private';
+// Note: environment constants are imported where needed per-route
 
 /**
  * Query a Notion database with the provided parameters
@@ -96,26 +96,27 @@ export function extractBlogPosts(results: PageObjectResponse[]): BlogPost[] {
 				? properties['Published Date'].date?.start || ''
 				: '';
 
-		const coverImage =
-			properties['Cover Image']?.type === 'url'
-				? properties['Cover Image'].url || undefined
-				: undefined;
+        const coverImage =
+            properties['Cover Image']?.type === 'url'
+                ? properties['Cover Image'].url || undefined
+                : undefined;
 
 		const tags =
 			properties.Tags?.type === 'multi_select'
 				? properties.Tags.multi_select.map((tag) => tag.name)
 				: [];
 
-		return {
-			id: page.id,
-			slug,
-			title,
-			description,
-			coverImage,
-			publishedDate,
-			lastEditedTime: page.last_edited_time,
-			tags
-		};
+        const base = {
+            id: page.id,
+            slug,
+            title,
+            description,
+            publishedDate,
+            lastEditedTime: page.last_edited_time,
+            tags
+        } satisfies Omit<BlogPost, 'coverImage'>;
+
+        return coverImage ? { ...base, coverImage } : base;
 	});
 }
 
@@ -150,18 +151,19 @@ export function extractPostcards(results: PageObjectResponse[]): Array<{
 				? properties.Description.rich_text[0]?.plain_text || ''
 				: '';
 
-		const heroImage =
-			properties['Hero Image']?.type === 'url'
-				? properties['Hero Image'].url || undefined
-				: undefined;
+        const heroImage =
+            properties['Hero Image']?.type === 'url'
+                ? properties['Hero Image'].url || undefined
+                : undefined;
 
-		return {
-			id: page.id,
-			slug,
-			title,
-			description,
-			heroImage,
-			lastEditedTime: page.last_edited_time
-		};
+        const base = {
+            id: page.id,
+            slug,
+            title,
+            description,
+            lastEditedTime: page.last_edited_time
+        } as const;
+
+        return heroImage ? { ...base, heroImage } : base;
 	});
 }

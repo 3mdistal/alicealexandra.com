@@ -31,4 +31,4 @@
 	});
 </script>
 
-<li bind:this={listItem}><TextMacro type={listContent} /></li>
+<li bind:this={listItem}><TextMacro type={listContent as unknown as { rich_text: any[] }} /></li>

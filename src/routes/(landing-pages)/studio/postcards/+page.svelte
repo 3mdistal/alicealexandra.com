@@ -1,12 +1,10 @@
 <script lang="ts">
 	import ParallaxPostcard from '$lib/components/parallax-postcard.svelte';
 	import PostcardModal from '$lib/components/postcard-modal.svelte';
-	import { onMount } from 'svelte';
 	import { preloadData, pushState, goto } from '$app/navigation';
 	import { page } from '$app/state';
 
 	let { data } = $props();
-	let gridElement: HTMLElement;
 	let rotations: number[] = [];
 
 	// Generate rotations function
@@ -20,11 +18,11 @@
 		// For desktop two-column layout, ensure adjacent cards have different angles
 		if (typeof window !== 'undefined' && window.innerWidth >= 1024 && index > 0) {
 			// Check if this is in the same row as the previous card (even/odd pairs)
-			const isInSameRow = Math.floor(index / 2) === Math.floor((index - 1) / 2);
+            const isInSameRow = Math.floor(index / 2) === Math.floor((index - 1) / 2);
 
 			if (isInSameRow) {
 				// Ensure at least 8 degrees difference from the previous card
-				const previousRotation = rotations[index - 1];
+                const previousRotation = rotations[index - 1] ?? 0;
 				do {
 					rotation = (Math.random() - 0.5) * 16; // -8 to 8 degrees
 				} while (Math.abs(rotation - previousRotation) < 8);
@@ -54,7 +52,7 @@
 		<p class="subtitle">All the rest from far away.</p>
 	</header>
 
-	<section class="postcards-grid" bind:this={gridElement}>
+    <section class="postcards-grid">
 		{#each data.postcards as postcard, index}
 			{@const rotation = getRotation(index)}
 			<ParallaxPostcard
@@ -71,8 +69,12 @@
 					const href = `/studio/postcards/${postcard.slug}`;
 
 					// Get the clicked postcard's position and size for animation
-					const postcardElement = e.currentTarget;
-					const rect = postcardElement.getBoundingClientRect();
+                    const postcardElement = e.currentTarget as HTMLElement | null;
+                    if (!postcardElement) {
+                        goto(href);
+                        return;
+                    }
+                    const rect = postcardElement.getBoundingClientRect();
 
 					// Preload the data for the postcard
 					const result = await preloadData(href);
@@ -100,9 +102,9 @@
 	</section>
 </main>
 
-{#if page.state.selectedPostcard}
+{#if (page.state as any).selectedPostcard}
 	<PostcardModal
-		data={page.state.selectedPostcard}
+		data={(page.state as any).selectedPostcard}
 		onclose={() => history.back()}
 	/>
 {/if}

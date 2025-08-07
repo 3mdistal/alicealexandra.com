@@ -3,11 +3,10 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { page } from '$app/state';
-	import type {
-		PageObjectResponse,
-		RichTextPropertyItemObjectResponse,
-		UrlPropertyItemObjectResponse
-	} from '$lib/notion/types/notion-types';
+import type {
+    PageObjectResponse,
+    UrlPropertyItemObjectResponse
+} from '$lib/notion/types/notion-types';
 
 	interface Props {
 		data: any;
@@ -16,10 +15,9 @@
 
 	let { data, onclose }: Props = $props();
 
-	let modalElement: HTMLElement;
-	let modalContentElement: HTMLElement;
-	let heroElement: HTMLElement;
-	let savedScrollPosition = 0;
+    let modalElement: HTMLElement;
+    let modalContentElement: HTMLElement;
+    let savedScrollPosition = 0;
 
 	const { queryResponse, contentResponse } = data.postcard || {};
 	const postcard = queryResponse?.results?.[0] as PageObjectResponse | undefined;
@@ -30,15 +28,12 @@
 		return prop?.type === 'url';
 	}
 
-	function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
-		return prop?.type === 'rich_text';
-	}
+    // Note: rich text property guard not needed in this component
 
 	const {
-		Title: title,
-		Description: description,
-		Slug: slug,
-		'Hero Image': heroImage
+        Title: title,
+        Description: description,
+        'Hero Image': heroImage
 	} = postcard?.properties || {};
 
 	// Helper function to safely get text content
@@ -57,18 +52,22 @@
 		return '';
 	}
 
-	const postcardTitle = getTextContent(title);
-	const postcardDescription = getTextContent(description);
-	const postcardSlug = getTextContent(slug);
-	const postcardHeroImage = getUrl(heroImage);
+    const postcardTitle = getTextContent(title);
+    const postcardDescription = getTextContent(description);
+    const postcardHeroImage = getUrl(heroImage);
 
-	onMount(() => {
+    onMount(() => {
 		// Prevent background scroll
 		savedScrollPosition = window.scrollY;
+        // Compensate for scrollbar to avoid layout shift when locking body
+        const scrollbarComp = window.innerWidth - document.documentElement.clientWidth;
 		document.body.style.position = 'fixed';
 		document.body.style.top = `-${savedScrollPosition}px`;
 		document.body.style.width = '100%';
 		document.body.style.overflow = 'hidden';
+        if (scrollbarComp > 0) {
+            document.body.style.paddingRight = `${scrollbarComp}px`;
+        }
 
 		// Make background content inert
 		const mainElement = document.querySelector('main');
@@ -76,7 +75,9 @@
 			mainElement.inert = true;
 		}
 
-		const animationOrigin = page.state.animationOrigin;
+        const animationOrigin = (page.state as any)?.animationOrigin as
+            | { x: number; y: number; width: number; height: number }
+            | undefined;
 
 		if (animationOrigin && modalContentElement) {
 			// Start modal from the postcard's position and size
@@ -155,40 +156,35 @@
 			}
 		};
 
-		document.addEventListener('keydown', handleKeydown);
+        document.addEventListener('keydown', handleKeydown);
 
-		return () => {
-			document.removeEventListener('keydown', handleKeydown);
+        // Manage focus for accessibility
+        if (modalElement) {
+            modalElement.focus();
+        }
 
-			// Restore scroll position and body styles
-			document.body.style.position = '';
-			document.body.style.top = '';
-			document.body.style.width = '';
-			document.body.style.overflow = '';
-			window.scrollTo(0, savedScrollPosition);
+        return () => {
+            document.removeEventListener('keydown', handleKeydown);
 
-			// Remove inert from background content
-			const mainElement = document.querySelector('main');
-			if (mainElement) {
-				mainElement.inert = false;
-			}
-		};
+            // Ensure body styles are cleared if component unmounts unexpectedly
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+
+            // Remove inert from background content
+            const mainElement = document.querySelector('main');
+            if (mainElement) {
+                mainElement.inert = false;
+            }
+        };
 	});
 
-	function closeWithAnimation() {
-		// Restore scroll position and body styles
-		document.body.style.position = '';
-		document.body.style.top = '';
-		document.body.style.width = '';
-		document.body.style.overflow = '';
-
-		// Remove inert from background content
-		const mainElement = document.querySelector('main');
-		if (mainElement) {
-			mainElement.inert = false;
-		}
-
-		const animationOrigin = page.state.animationOrigin;
+    function closeWithAnimation() {
+        const animationOrigin = (page.state as any)?.animationOrigin as
+            | { x: number; y: number; width: number; height: number }
+            | undefined;
 
 		if (animationOrigin && modalContentElement) {
 			// Get current modal position
@@ -204,7 +200,7 @@
 			});
 
 			// Animate modal shrinking back to postcard
-			gsap.timeline()
+            gsap.timeline()
 				.to(modalContentElement, {
 					left: animationOrigin.x,
 					top: animationOrigin.y,
@@ -218,10 +214,24 @@
 					opacity: 0,
 					duration: 0.2
 				}, '-=0.2')
-				.call(() => {
-					window.scrollTo(0, scrollPosition);
-					onclose();
-				});
+                .call(() => {
+                    // Restore styles and scroll synchronously in the same frame to avoid flash
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.width = '';
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+
+                    const root = document.documentElement;
+                    const prevBehavior = root.style.scrollBehavior;
+                    root.style.scrollBehavior = 'auto';
+                    window.scrollTo(0, savedScrollPosition);
+                    root.style.scrollBehavior = prevBehavior;
+
+                    const main = document.querySelector('main');
+                    if (main) main.inert = false;
+                    onclose();
+                });
 		} else {
 			// Fallback animation
 			gsap.timeline()
@@ -235,36 +245,57 @@
 					opacity: 0,
 					duration: 0.2
 				}, '-=0.2')
-				.call(() => {
-					window.scrollTo(0, scrollPosition);
-					onclose();
-				});
+                .call(() => {
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.width = '';
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+
+                    const root = document.documentElement;
+                    const prevBehavior = root.style.scrollBehavior;
+                    root.style.scrollBehavior = 'auto';
+                    window.scrollTo(0, savedScrollPosition);
+                    root.style.scrollBehavior = prevBehavior;
+
+                    const main = document.querySelector('main');
+                    if (main) main.inert = false;
+                    onclose();
+                });
 		}
 	}
 
-	function handleBackdropClick(e: MouseEvent) {
+    function handleBackdropClick(e: MouseEvent) {
 		if (e.target === e.currentTarget) {
 			closeWithAnimation();
 		}
 	}
+
+    function handleBackdropKeydown(e: KeyboardEvent) {
+        if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            closeWithAnimation();
+        }
+    }
 </script>
 
-<div 
-	class="modal-backdrop" 
-	bind:this={modalElement}
-	onclick={handleBackdropClick}
-	role="dialog"
-	aria-modal="true"
-	aria-labelledby="modal-title"
+<div
+    class="modal-backdrop"
+    bind:this={modalElement}
+    onclick={handleBackdropClick}
+    onkeydown={handleBackdropKeydown}
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    tabindex="-1"
 >
 	<div class="modal-content" bind:this={modalContentElement}>
-		{#if postcard && postcardHeroImage}
-			<div 
-				class="modal-hero"
-				bind:this={heroElement}
-				style="background-image: url('{postcardHeroImage}')"
-			></div>
-		{/if}
+        {#if postcard && postcardHeroImage}
+            <div
+                class="modal-hero"
+                style="background-image: url('{postcardHeroImage}')"
+            ></div>
+        {/if}
 		
 		<div class="modal-body">
 			<button class="close-button" onclick={closeWithAnimation} aria-label="Close modal">

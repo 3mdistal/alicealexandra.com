@@ -1,11 +1,9 @@
 <script lang="ts">
 	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
-	import type {
-		PageObjectResponse,
-		RichTextPropertyItemObjectResponse,
-		UrlPropertyItemObjectResponse,
-		QueryDatabaseResponse
-	} from '$lib/notion/types/notion-types';
+import type {
+    PageObjectResponse,
+    UrlPropertyItemObjectResponse
+} from '$lib/notion/types/notion-types';
 
 	let { data } = $props();
 
@@ -13,23 +11,19 @@
 
 	const postcard = queryResponse?.results?.[0] as PageObjectResponse | undefined;
 
-	const content = contentResponse?.results || [];
+    const content = (contentResponse?.results ?? []) as any[];
 
-	// Type guards for Notion properties
-	function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {
+    // Type guard for URL property
+    function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {
 		return prop?.type === 'url';
 	}
 
-	function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
-		return prop?.type === 'rich_text';
-	}
-
-	const {
-		Title: title,
-		Description: description,
-		Slug: slug,
-		'Hero Image': heroImage
-	} = postcard?.properties || {};
+    const {
+        Title: title,
+        Description: description,
+        Slug: slug,
+        'Hero Image': heroImage
+    } = postcard?.properties || {};
 
 	// Helper function to safely get text content
 	function getTextContent(prop: any) {

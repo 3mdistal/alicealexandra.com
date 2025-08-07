@@ -3,24 +3,24 @@
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-	interface Props {
+    interface Props {
 		title: string;
 		description?: string;
-		heroImage?: string;
+        heroImage?: string | undefined;
 		href: string;
 		initialRotation?: number;
-		slug?: string;
+        slug?: string;
 		onclick?: (e: MouseEvent) => void;
 	}
 
-	let { title, description, heroImage, href, initialRotation = 0, slug, onclick }: Props = $props();
+    let { title, description, heroImage, href, initialRotation = 0, onclick }: Props = $props();
 
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
 	let scrollTriggerInstance: ScrollTrigger;
 	let currentRotation = initialRotation;
 
-	onMount(() => {
+    onMount(() => {
 		// Register GSAP plugins
 		gsap.registerPlugin(ScrollTrigger);
 
@@ -121,16 +121,17 @@
 			cardElement.addEventListener('mouseenter', handleMouseEnter);
 			cardElement.addEventListener('mouseleave', handleMouseLeave);
 
-			// Cleanup function
-			return () => {
+        // Cleanup function
+        return () => {
 				cardElement.removeEventListener('mouseenter', handleMouseEnter);
 				cardElement.removeEventListener('mouseleave', handleMouseLeave);
 				if (scrollTriggerInstance) {
 					scrollTriggerInstance.kill();
 				}
 			};
-		}
-	});
+        }
+        return () => {};
+    });
 </script>
 
 <a

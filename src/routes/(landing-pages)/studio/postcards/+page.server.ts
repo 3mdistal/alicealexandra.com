@@ -1,6 +1,7 @@
 import { queryDatabase, extractPostcards } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, POSTCARDS_DB } from '$env/static/private';
 import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
+import type { PageObjectResponse } from '$lib/notion/types/notion-types';
 
 const queryParams: QueryDatabaseParameters = {
 	database_id: POSTCARDS_DB,
@@ -15,7 +16,10 @@ const queryParams: QueryDatabaseParameters = {
 export async function load() {
 	try {
 		const response = await queryDatabase(queryParams);
-		const postcards = extractPostcards(response.results);
+        const pages = response.results.filter((r): r is PageObjectResponse =>
+            (r as any)?.object === 'page' && 'properties' in (r as any)
+        );
+        const postcards = extractPostcards(pages);
 		
 		return {
 			postcards
