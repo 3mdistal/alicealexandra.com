@@ -45,6 +45,15 @@ import type {
 	const postcardDescription = getTextContent(description);
 	const postcardSlug = getTextContent(slug);
 	const postcardHeroImage = getUrl(heroImage);
+
+	$effect(() => {
+		fetch(window.location.href, {
+			headers: {
+				Accept: 'application/json',
+				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
+			}
+		});
+	})
 </script>
 
 <svelte:head>

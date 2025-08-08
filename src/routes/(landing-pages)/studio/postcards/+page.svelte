@@ -36,6 +36,15 @@
 		rotations[index] = rotation;
 		return rotation;
 	}
+
+	$effect(() => {
+		fetch(window.location.href, {
+			headers: {
+				Accept: 'application/json',
+				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
+			}
+		});
+	})
 </script>
 
 <svelte:head>
