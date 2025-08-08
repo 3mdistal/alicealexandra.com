@@ -33,7 +33,8 @@ import type {
 	const {
         Title: title,
         Description: description,
-        'Hero Image': heroImage
+        'Hero Image': heroImage,
+        Slug: slug
 	} = postcard?.properties || {};
 
 	// Helper function to safely get text content
@@ -52,9 +53,21 @@ import type {
 		return '';
 	}
 
+	// Helper function to get slug (can be URL or rich text)
+	function getSlug(prop: any) {
+		if (prop?.type === 'url') {
+			return prop.url || '';
+		}
+		if (prop?.type === 'rich_text') {
+			return prop.rich_text?.[0]?.plain_text || '';
+		}
+		return '';
+	}
+
     const postcardTitle = getTextContent(title);
     const postcardDescription = getTextContent(description);
     const postcardHeroImage = getUrl(heroImage);
+    const postcardSlug = getSlug(slug);
 
     onMount(() => {
 		// Prevent background scroll
@@ -88,7 +101,7 @@ import type {
 				position: 'fixed',
 				left: '-9999px',
 				top: '0',
-				width: Math.min(800, window.innerWidth - 64),
+				width: Math.min(900, window.innerWidth - 64),
 				height: 'auto',
 				visibility: 'hidden'
 			});
@@ -98,7 +111,7 @@ import type {
 
 			// Get the natural height of the content
 			const naturalHeight = modalContentElement.offsetHeight;
-			const contentFinalWidth = Math.min(800, window.innerWidth - 64);
+			const contentFinalWidth = Math.min(900, window.innerWidth - 64);
 			const contentFinalHeight = Math.min(naturalHeight, window.innerHeight - 64);
 			const finalX = (window.innerWidth - contentFinalWidth) / 2;
 			const finalY = (window.innerHeight - contentFinalHeight) / 2;
@@ -290,21 +303,29 @@ import type {
     tabindex="-1"
 >
 	<div class="modal-content" bind:this={modalContentElement}>
-        {#if postcard && postcardHeroImage}
-            <div
-                class="modal-hero"
-                style="background-image: url('{postcardHeroImage}')"
-            ></div>
-        {/if}
 		
 		<div class="modal-body">
-			<button class="close-button" onclick={closeWithAnimation} aria-label="Close modal">
-				<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-				</svg>
-			</button>
+			<div class="modal-controls">
+				<a href="/studio/postcards/{postcardSlug || ''}" class="external-link-button" aria-label="Open in full screen">
+					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+					</svg>
+				</a>
+				<button class="close-button" onclick={closeWithAnimation} aria-label="Close modal">
+					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
 
 			{#if postcard}
+				{#if postcardHeroImage}
+					<div
+						class="modal-hero"
+						style="background-image: url('{postcardHeroImage}')"
+					></div>
+				{/if}
+
 				<header class="modal-header">
 					<h1 id="modal-title">{postcardTitle}</h1>
 					{#if postcardDescription}
@@ -349,7 +370,7 @@ import type {
 	.modal-content {
 		background: #e8e8e8;
 		border-radius: 20px;
-		max-width: 800px;
+		max-width: 900px;
 		max-height: 90vh;
 		width: 100%;
 		overflow: hidden;
@@ -368,14 +389,24 @@ import type {
 
 	.modal-body {
 		position: relative;
-		max-height: 60vh;
+		max-height: 75vh;
 		overflow-y: auto;
 	}
 
-	.close-button {
-		position: absolute;
+	.modal-controls {
+		position: sticky;
 		top: 1rem;
 		right: 1rem;
+		display: flex;
+		gap: 0.5rem;
+		justify-content: flex-end;
+		z-index: 10;
+		margin-bottom: -52px;
+		pointer-events: none;
+	}
+
+	.close-button,
+	.external-link-button {
 		background: rgba(255, 255, 255, 0.9);
 		border: none;
 		border-radius: 50%;
@@ -385,16 +416,19 @@ import type {
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		z-index: 10;
 		transition: background-color 0.2s;
+		pointer-events: auto;
+		text-decoration: none;
+		color: #333;
 	}
 
-	.close-button:hover {
+	.close-button:hover,
+	.external-link-button:hover {
 		background: white;
 	}
 
 	.modal-header {
-		padding: 2rem 2rem 1rem;
+		padding: 1rem 2rem 1rem;
 	}
 
 	h1 {
