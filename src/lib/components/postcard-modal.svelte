@@ -350,7 +350,7 @@ import type {
 	.modal-content {
 		background: #e8e8e8;
 		border-radius: 20px;
-		max-width: 800px;
+		max-width: 900px;
 		max-height: 90vh;
 		width: 100%;
 		overflow: hidden;
@@ -369,7 +369,7 @@ import type {
 
 	.modal-body {
 		position: relative;
-		max-height: 60vh;
+		max-height: 75vh;
 		overflow-y: auto;
 	}
 
