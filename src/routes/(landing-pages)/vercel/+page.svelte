@@ -2,6 +2,7 @@
 	import PublicationsSection from './publications-section.svelte';
 	import type { ProfessionalPublications } from './+page.server';
 	import { onMount } from 'svelte';
+	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
 
 	export let data: Data;
 
@@ -16,12 +17,8 @@
 	} = data;
 
 	onMount(() => {
-		fetch(window.location.href, {
-			headers: {
-				Accept: 'application/json',
-				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
-			}
-		});
+		// Trigger background revalidation for future visitors
+		useBackgroundRevalidation('/vercel');
 	});
 </script>
 
