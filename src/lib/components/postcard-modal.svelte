@@ -290,12 +290,6 @@ import type {
     tabindex="-1"
 >
 	<div class="modal-content" bind:this={modalContentElement}>
-        {#if postcard && postcardHeroImage}
-            <div
-                class="modal-hero"
-                style="background-image: url('{postcardHeroImage}')"
-            ></div>
-        {/if}
 		
 		<div class="modal-body">
 			<button class="close-button" onclick={closeWithAnimation} aria-label="Close modal">
@@ -305,6 +299,13 @@ import type {
 			</button>
 
 			{#if postcard}
+				{#if postcardHeroImage}
+					<div
+						class="modal-hero"
+						style="background-image: url('{postcardHeroImage}')"
+					></div>
+				{/if}
+
 				<header class="modal-header">
 					<h1 id="modal-title">{postcardTitle}</h1>
 					{#if postcardDescription}
