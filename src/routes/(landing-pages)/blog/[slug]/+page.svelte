@@ -3,6 +3,8 @@
 		import BlogHeader from '$lib/components/blog-header.svelte';
 	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
+	import { triggerRevalidation } from '$lib/utils/revalidation';
+	import { page } from '$app/state';
 	import { subAndSuper, wrapLists, createTOC } from '$lib/notion/utils/blog-helpers';
 	import type {
 		PageObjectResponse,
@@ -153,12 +155,8 @@
 
 	onMount(() => {
 		runBlogHelpers();
-		fetch(window.location.href, {
-			headers: {
-				Accept: 'application/json',
-				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
-			}
-		});
+		// Trigger background revalidation for future visitors
+		triggerRevalidation(page.url.pathname);
 	});
 </script>
 
