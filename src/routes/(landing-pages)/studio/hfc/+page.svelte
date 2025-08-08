@@ -6,6 +6,7 @@
 		TextRichTextItemResponse
 	} from '$lib/notion/types/notion-types';
 	import { onMount } from 'svelte';
+	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
 
 	export let data: Data;
 
@@ -125,12 +126,8 @@
 	}
 
 	onMount(() => {
-		fetch('/studio/hfc', {
-			headers: {
-				Accept: 'application/json',
-				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
-			}
-		});
+		// Trigger background revalidation for future visitors
+		useBackgroundRevalidation('/studio/hfc');
 	});
 </script>
 

@@ -4,6 +4,9 @@ import type {
     PageObjectResponse,
     UrlPropertyItemObjectResponse
 } from '$lib/notion/types/notion-types';
+	import { onMount } from 'svelte';
+	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
+	import { page } from '$app/state';
 
 	let { data } = $props();
 
@@ -46,14 +49,10 @@ import type {
 	const postcardSlug = getTextContent(slug);
 	const postcardHeroImage = getUrl(heroImage);
 
-	$effect(() => {
-		fetch(window.location.href, {
-			headers: {
-				Accept: 'application/json',
-				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
-			}
-		});
-	})
+	onMount(() => {
+		// Trigger background revalidation for future visitors
+		useBackgroundRevalidation(page.url.pathname);
+	});
 </script>
 
 <svelte:head>

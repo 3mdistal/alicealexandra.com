@@ -3,6 +3,7 @@
 	import StudioCard from './studio-card.svelte';
 	import gsap from 'gsap';
 	import { backgroundColors, pageState } from '$lib/stores';
+	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
 	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 	export let data;
@@ -30,12 +31,8 @@
 	}
 
 	onMount(() => {
-		fetch('/studio', {
-			headers: {
-				Accept: 'application/json',
-				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
-			}
-		});
+		// Trigger background revalidation for future visitors
+		useBackgroundRevalidation('/studio');
 	});
 
 	onDestroy(() => {
