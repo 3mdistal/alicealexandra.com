@@ -35,6 +35,8 @@
 				Accept: 'application/json',
 				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
 			}
+		}).catch(error => {
+			console.warn('Failed to trigger studio revalidation:', error);
 		});
 	});
 
