@@ -3,6 +3,7 @@
 	import PostcardModal from '$lib/components/postcard-modal.svelte';
 	import { preloadData, pushState, goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import { triggerRevalidation } from '$lib/utils/revalidation';
 
 	let { data } = $props();
 	let rotations: number[] = [];
@@ -38,12 +39,8 @@
 	}
 
 	$effect(() => {
-		fetch(window.location.href, {
-			headers: {
-				Accept: 'application/json',
-				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
-			}
-		});
+		// Trigger background revalidation for future visitors
+		triggerRevalidation('/studio/postcards');
 	})
 </script>
 
