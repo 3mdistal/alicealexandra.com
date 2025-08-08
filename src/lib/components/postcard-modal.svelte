@@ -292,11 +292,18 @@ import type {
 	<div class="modal-content" bind:this={modalContentElement}>
 		
 		<div class="modal-body">
-			<button class="close-button" onclick={closeWithAnimation} aria-label="Close modal">
-				<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-				</svg>
-			</button>
+			<div class="modal-controls">
+				<a href="/studio/postcards/{postcard?.id || ''}" class="external-link-button" aria-label="Open in full screen">
+					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+					</svg>
+				</a>
+				<button class="close-button" onclick={closeWithAnimation} aria-label="Close modal">
+					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
 
 			{#if postcard}
 				{#if postcardHeroImage}
@@ -373,10 +380,20 @@ import type {
 		overflow-y: auto;
 	}
 
-	.close-button {
-		position: absolute;
+	.modal-controls {
+		position: sticky;
 		top: 1rem;
 		right: 1rem;
+		display: flex;
+		gap: 0.5rem;
+		justify-content: flex-end;
+		z-index: 10;
+		margin-bottom: -52px;
+		pointer-events: none;
+	}
+
+	.close-button,
+	.external-link-button {
 		background: rgba(255, 255, 255, 0.9);
 		border: none;
 		border-radius: 50%;
@@ -386,16 +403,19 @@ import type {
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		z-index: 10;
 		transition: background-color 0.2s;
+		pointer-events: auto;
+		text-decoration: none;
+		color: #333;
 	}
 
-	.close-button:hover {
+	.close-button:hover,
+	.external-link-button:hover {
 		background: white;
 	}
 
 	.modal-header {
-		padding: 2rem 2rem 1rem;
+		padding: 1rem 2rem 1rem;
 	}
 
 	h1 {
