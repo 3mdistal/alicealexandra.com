@@ -88,7 +88,7 @@ import type {
 				position: 'fixed',
 				left: '-9999px',
 				top: '0',
-				width: Math.min(800, window.innerWidth - 64),
+				width: Math.min(900, window.innerWidth - 64),
 				height: 'auto',
 				visibility: 'hidden'
 			});
@@ -98,7 +98,7 @@ import type {
 
 			// Get the natural height of the content
 			const naturalHeight = modalContentElement.offsetHeight;
-			const contentFinalWidth = Math.min(800, window.innerWidth - 64);
+			const contentFinalWidth = Math.min(900, window.innerWidth - 64);
 			const contentFinalHeight = Math.min(naturalHeight, window.innerHeight - 64);
 			const finalX = (window.innerWidth - contentFinalWidth) / 2;
 			const finalY = (window.innerHeight - contentFinalHeight) / 2;
