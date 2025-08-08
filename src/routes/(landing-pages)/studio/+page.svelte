@@ -3,6 +3,7 @@
 	import StudioCard from './studio-card.svelte';
 	import gsap from 'gsap';
 	import { backgroundColors, pageState } from '$lib/stores';
+	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
 	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 	export let data;
