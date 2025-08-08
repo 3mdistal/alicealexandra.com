@@ -4,7 +4,8 @@ import type {
     PageObjectResponse,
     UrlPropertyItemObjectResponse
 } from '$lib/notion/types/notion-types';
-	import { triggerRevalidation } from '$lib/utils/revalidation';
+	import { onMount } from 'svelte';
+	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
 	import { page } from '$app/state';
 
 	let { data } = $props();
@@ -48,10 +49,10 @@ import type {
 	const postcardSlug = getTextContent(slug);
 	const postcardHeroImage = getUrl(heroImage);
 
-	$effect(() => {
+	onMount(() => {
 		// Trigger background revalidation for future visitors
-		triggerRevalidation(page.url.pathname);
-	})
+		useBackgroundRevalidation(page.url.pathname);
+	});
 </script>
 
 <svelte:head>
