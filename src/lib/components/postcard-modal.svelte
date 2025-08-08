@@ -33,7 +33,8 @@ import type {
 	const {
         Title: title,
         Description: description,
-        'Hero Image': heroImage
+        'Hero Image': heroImage,
+        Slug: slug
 	} = postcard?.properties || {};
 
 	// Helper function to safely get text content
@@ -52,9 +53,21 @@ import type {
 		return '';
 	}
 
+	// Helper function to get slug (can be URL or rich text)
+	function getSlug(prop: any) {
+		if (prop?.type === 'url') {
+			return prop.url || '';
+		}
+		if (prop?.type === 'rich_text') {
+			return prop.rich_text?.[0]?.plain_text || '';
+		}
+		return '';
+	}
+
     const postcardTitle = getTextContent(title);
     const postcardDescription = getTextContent(description);
     const postcardHeroImage = getUrl(heroImage);
+    const postcardSlug = getSlug(slug);
 
     onMount(() => {
 		// Prevent background scroll
@@ -293,7 +306,7 @@ import type {
 		
 		<div class="modal-body">
 			<div class="modal-controls">
-				<a href="/studio/postcards/{postcard?.id || ''}" class="external-link-button" aria-label="Open in full screen">
+				<a href="/studio/postcards/{postcardSlug || ''}" class="external-link-button" aria-label="Open in full screen">
 					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 					</svg>
