@@ -4,6 +4,8 @@ import type {
     PageObjectResponse,
     UrlPropertyItemObjectResponse
 } from '$lib/notion/types/notion-types';
+	import { triggerRevalidation } from '$lib/utils/revalidation';
+	import { page } from '$app/state';
 
 	let { data } = $props();
 
@@ -47,12 +49,8 @@ import type {
 	const postcardHeroImage = getUrl(heroImage);
 
 	$effect(() => {
-		fetch(window.location.href, {
-			headers: {
-				Accept: 'application/json',
-				'x-prerender-revalidate': 'JKmtY3BJXXbqQNvcGTUCEkPrrScrd5fs'
-			}
-		});
+		// Trigger background revalidation for future visitors
+		triggerRevalidation(page.url.pathname);
 	})
 </script>
 
