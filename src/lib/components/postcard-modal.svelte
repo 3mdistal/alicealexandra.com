@@ -423,6 +423,8 @@ import type {
 	.modal-body {
 		position: relative;
 		max-height: calc(100vh - var(--modal-margin) * 2);
+		max-width: 800px;
+		margin: 0 auto;
 		overflow-y: auto;
 	}
 
@@ -461,11 +463,8 @@ import type {
 	}
 
 	.modal-header {
-		padding: 1rem 2rem 1rem;
+		padding: 2rem 2rem 1rem;
 		flex-shrink: 0;
-		max-width: 60ch;
-		margin: 0 auto;
-		width: 100%;
 	}
 
 	h1 {
@@ -488,8 +487,6 @@ import type {
 	.notion-container {
 		font-size: 1.1rem;
 		line-height: 1.7;
-		max-width: 60ch;
-		margin: 0 auto;
 	}
 
 	.notion-container :global(p) {
