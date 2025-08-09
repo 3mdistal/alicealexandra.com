@@ -20,11 +20,11 @@
 		// For desktop two-column layout, ensure adjacent cards have different angles
 		if (typeof window !== 'undefined' && window.innerWidth >= 1024 && index > 0) {
 			// Check if this is in the same row as the previous card (even/odd pairs)
-            const isInSameRow = Math.floor(index / 2) === Math.floor((index - 1) / 2);
+			const isInSameRow = Math.floor(index / 2) === Math.floor((index - 1) / 2);
 
 			if (isInSameRow) {
 				// Ensure at least 8 degrees difference from the previous card
-                const previousRotation = rotations[index - 1] ?? 0;
+				const previousRotation = rotations[index - 1] ?? 0;
 				do {
 					rotation = (Math.random() - 0.5) * 16; // -8 to 8 degrees
 				} while (Math.abs(rotation - previousRotation) < 8);
@@ -59,7 +59,7 @@
 		<p class="subtitle">All the rest from far away.</p>
 	</header>
 
-    <section class="postcards-grid">
+	<section class="postcards-grid">
 		{#each data.postcards as postcard, index}
 			{@const rotation = getRotation(index)}
 			<ParallaxPostcard
@@ -81,12 +81,12 @@
 					e.preventDefault();
 
 					// Get the clicked postcard's position and size for animation
-                    const postcardElement = e.currentTarget as HTMLElement | null;
-                    if (!postcardElement) {
-                        goto(href);
-                        return;
-                    }
-                    const rect = postcardElement.getBoundingClientRect();
+					const postcardElement = e.currentTarget as HTMLElement | null;
+					if (!postcardElement) {
+						goto(href);
+						return;
+					}
+					const rect = postcardElement.getBoundingClientRect();
 
 					// Preload the data for the postcard
 					const result = await preloadData(href);
@@ -115,10 +115,7 @@
 </main>
 
 {#if (page.state as any).selectedPostcard}
-	<PostcardModal
-		data={(page.state as any).selectedPostcard}
-		onclose={() => history.back()}
-	/>
+	<PostcardModal data={(page.state as any).selectedPostcard} onclose={() => history.back()} />
 {/if}
 
 <style>
@@ -132,26 +129,26 @@
 	}
 
 	main {
-		background-color: #e8e8e8;
-		color: #333;
-		min-height: 100vh;
-		padding: 0;
-		margin: 0;
-		width: 100vw;
 		position: relative;
-		left: 50%;
 		right: 50%;
-		margin-left: -50vw;
+		left: 50%;
+		margin: 0;
 		margin-right: -50vw;
+		margin-left: -50vw;
+		background-color: #e8e8e8;
+		padding: 0;
+		width: 100vw;
+		min-height: 100vh;
+		color: #333;
 	}
 
 	header {
-		text-align: center;
+		margin-right: auto;
 		margin-bottom: 3rem;
+		margin-left: auto;
 		padding: 2rem;
 		max-width: 800px;
-		margin-left: auto;
-		margin-right: auto;
+		text-align: center;
 	}
 
 	/* More space on desktop due to offset postcards */
@@ -162,17 +159,17 @@
 	}
 
 	h1 {
-		font-size: 2.5rem;
 		margin-bottom: 0.5rem;
 		color: #333;
+		font-size: 2.5rem;
 	}
 
 	.subtitle {
-		font-size: 1.3rem;
+		margin-top: 0.5rem;
 		color: #666;
 		font-style: italic;
-		margin-top: 0.5rem;
 		font-weight: 300;
+		font-size: 1.3rem;
 		letter-spacing: 0.02em;
 	}
 
@@ -180,18 +177,18 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 2.5rem;
+		margin: 0 auto;
 		padding: 0 2rem;
 		max-width: 600px;
-		margin: 0 auto;
 	}
 
 	/* Desktop layout: two columns with staggered positioning */
 	@media (min-width: 1024px) {
 		.postcards-grid {
 			grid-template-columns: 1fr 1fr;
+			align-items: start;
 			gap: 3rem 4rem;
 			max-width: 1200px;
-			align-items: start;
 		}
 
 		/* Left column offset higher */
@@ -209,8 +206,8 @@
 
 	@media (max-width: 768px) {
 		.postcards-grid {
-			padding: 0 1rem;
 			gap: 2rem;
+			padding: 0 1rem;
 		}
 
 		header {
@@ -219,10 +216,10 @@
 	}
 
 	.no-postcards {
-		text-align: center;
+		margin-top: 4rem;
 		color: #666;
 		font-style: italic;
 		font-size: 1.1rem;
-		margin-top: 4rem;
+		text-align: center;
 	}
 </style>
