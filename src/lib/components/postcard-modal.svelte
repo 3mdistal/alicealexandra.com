@@ -341,11 +341,6 @@ import type {
 		
 		<div class="modal-body">
 			<div class="modal-controls">
-				<a href="/studio/postcards/{postcardSlug || ''}" class="external-link-button" aria-label="Open in full screen">
-					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-					</svg>
-				</a>
 				<button class="close-button" onclick={closeWithAnimation} aria-label="Close modal">
 					<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -424,19 +419,19 @@ import type {
 		position: relative;
 		max-height: calc(100vh - var(--modal-margin) * 2);
 		overflow-y: auto;
-		padding-bottom: 3rem;
+		padding-bottom: 9rem;
 	}
 
 	.modal-controls {
 		position: sticky;
 		top: 1rem;
-		right: 1rem;
 		display: flex;
 		gap: 0.5rem;
 		justify-content: flex-end;
 		z-index: 10;
 		margin-bottom: -52px;
 		pointer-events: none;
+		padding-right: 1rem;
 	}
 
 	.close-button,
