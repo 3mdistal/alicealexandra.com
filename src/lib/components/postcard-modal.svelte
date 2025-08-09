@@ -178,9 +178,8 @@ import type {
 				.set(modalContentElement, {
 					position: 'relative',
 					left: 'auto',
-					top: 'auto',
-					width: 'auto',
-					height: 'auto'
+					top: 'auto'
+					// Keep GSAP dimensions - don't reset to auto
 				});
 		} else {
 			// Fallback animation if no origin data
@@ -406,10 +405,7 @@ import type {
 	.modal-content {
 		background: #e8e8e8;
 		border-radius: 20px;
-		width: min(var(--modal-width-percent), var(--modal-max-width));
-		width: max(var(--modal-min-width), min(var(--modal-width-percent), var(--modal-max-width)));
-		max-width: var(--modal-max-width);
-		max-height: calc(100vh - var(--modal-margin) * 2);
+		/* Remove CSS sizing - let GSAP handle dimensions */
 		overflow: hidden;
 		position: relative;
 		box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
