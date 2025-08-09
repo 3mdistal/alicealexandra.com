@@ -485,6 +485,8 @@ import type {
 	.notion-container {
 		font-size: 1.1rem;
 		line-height: 1.7;
+		max-width: 60ch;
+		margin: 0 auto;
 	}
 
 	.notion-container :global(p) {
