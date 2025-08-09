@@ -70,10 +70,15 @@
 				initialRotation={rotation}
 				slug={postcard.slug}
 				onclick={async (e) => {
-					// Prevent default navigation
-					e.preventDefault();
-
 					const href = `/studio/postcards/${postcard.slug}`;
+
+					// On tablet and narrower (<1024px), navigate directly (no modal)
+					if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+						return; // allow native navigation via href
+					}
+
+					// Desktop: open modal with animation
+					e.preventDefault();
 
 					// Get the clicked postcard's position and size for animation
                     const postcardElement = e.currentTarget as HTMLElement | null;
