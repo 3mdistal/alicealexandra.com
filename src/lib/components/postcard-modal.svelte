@@ -179,7 +179,7 @@ import type {
 					position: 'relative',
 					left: 'auto',
 					top: 'auto',
-					width: '100%',
+					width: 'auto',
 					height: 'auto'
 				});
 		} else {
@@ -408,7 +408,7 @@ import type {
 		border-radius: 20px;
 		width: min(var(--modal-width-percent), var(--modal-max-width));
 		width: max(var(--modal-min-width), min(var(--modal-width-percent), var(--modal-max-width)));
-		aspect-ratio: var(--modal-aspect-ratio);
+		max-width: var(--modal-max-width);
 		max-height: calc(100vh - var(--modal-margin) * 2);
 		overflow: hidden;
 		position: relative;
@@ -426,10 +426,8 @@ import type {
 
 	.modal-body {
 		position: relative;
-		height: 100%;
+		max-height: calc(100vh - var(--modal-margin) * 2);
 		overflow-y: auto;
-		display: flex;
-		flex-direction: column;
 	}
 
 	.modal-controls {
@@ -486,8 +484,6 @@ import type {
 
 	.modal-content-area {
 		padding: 0 2rem 2rem;
-		flex: 1;
-		overflow-y: auto;
 	}
 
 	.notion-container {
