@@ -463,6 +463,9 @@ import type {
 	.modal-header {
 		padding: 1rem 2rem 1rem;
 		flex-shrink: 0;
+		max-width: 60ch;
+		margin: 0 auto;
+		width: 100%;
 	}
 
 	h1 {
@@ -479,7 +482,7 @@ import type {
 	}
 
 	.modal-content-area {
-		padding: 0 2rem 2rem;
+		padding: 0 2rem 3rem;
 	}
 
 	.notion-container {
