@@ -19,6 +19,54 @@ import type {
     let modalContentElement: HTMLElement;
     let savedScrollPosition = 0;
 
+    // Modal sizing configuration with 3:2 aspect ratio
+    const MODAL_CONFIG = {
+        // Base width as percentage of viewport width
+        widthPercent: 85, // Wider but not full width
+        // Maximum width in pixels
+        maxWidth: 1400,
+        // Minimum width in pixels
+        minWidth: 600,
+        // Aspect ratio (width/height)
+        aspectRatio: 3/2,
+        // Viewport margins
+        margin: 40
+    };
+
+    // Calculate modal dimensions
+    function getModalDimensions() {
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        // Calculate width based on percentage, constrained by min/max
+        let width = Math.min(
+            MODAL_CONFIG.maxWidth,
+            Math.max(
+                MODAL_CONFIG.minWidth,
+                viewportWidth * (MODAL_CONFIG.widthPercent / 100)
+            )
+        );
+        
+        // Ensure width doesn't exceed viewport minus margins
+        width = Math.min(width, viewportWidth - MODAL_CONFIG.margin * 2);
+        
+        // Calculate height based on aspect ratio
+        const height = width / MODAL_CONFIG.aspectRatio;
+        
+        // Ensure height doesn't exceed viewport minus margins
+        const maxHeight = viewportHeight - MODAL_CONFIG.margin * 2;
+        if (height > maxHeight) {
+            const constrainedHeight = maxHeight;
+            const constrainedWidth = constrainedHeight * MODAL_CONFIG.aspectRatio;
+            return {
+                width: constrainedWidth,
+                height: constrainedHeight
+            };
+        }
+        
+        return { width, height };
+    }
+
 	const { queryResponse, contentResponse } = data.postcard || {};
 	const postcard = queryResponse?.results?.[0] as PageObjectResponse | undefined;
 	const content = contentResponse?.results || [];
@@ -93,30 +141,17 @@ import type {
             | undefined;
 
 		if (animationOrigin && modalContentElement) {
+            // Get calculated modal dimensions
+            const modalDimensions = getModalDimensions();
+            
 			// Start modal from the postcard's position and size
 			gsap.set(modalElement, { opacity: 0 });
 
-			// First, temporarily position the modal off-screen to measure its natural size
-			gsap.set(modalContentElement, {
-				position: 'fixed',
-				left: '-9999px',
-				top: '0',
-				width: Math.min(900, window.innerWidth - 64),
-				height: 'auto',
-				visibility: 'hidden'
-			});
+			// Calculate final position for centered modal
+			const finalX = (window.innerWidth - modalDimensions.width) / 2;
+			const finalY = (window.innerHeight - modalDimensions.height) / 2;
 
-			// Force a layout to get accurate measurements
-			modalContentElement.offsetHeight;
-
-			// Get the natural height of the content
-			const naturalHeight = modalContentElement.offsetHeight;
-			const contentFinalWidth = Math.min(900, window.innerWidth - 64);
-			const contentFinalHeight = Math.min(naturalHeight, window.innerHeight - 64);
-			const finalX = (window.innerWidth - contentFinalWidth) / 2;
-			const finalY = (window.innerHeight - contentFinalHeight) / 2;
-
-			// Now set the initial animation position
+			// Set the initial animation position to match postcard
 			gsap.set(modalContentElement, {
 				position: 'fixed',
 				left: animationOrigin.x,
@@ -134,8 +169,8 @@ import type {
 				.to(modalContentElement, {
 					left: finalX,
 					top: finalY,
-					width: contentFinalWidth,
-					height: contentFinalHeight,
+					width: modalDimensions.width,
+					height: modalDimensions.height,
 					borderRadius: '20px',
 					duration: 0.6,
 					ease: 'power2.out'
@@ -301,6 +336,7 @@ import type {
     aria-modal="true"
     aria-labelledby="modal-title"
     tabindex="-1"
+    style="--modal-width-percent: {MODAL_CONFIG.widthPercent}%; --modal-max-width: {MODAL_CONFIG.maxWidth}px; --modal-min-width: {MODAL_CONFIG.minWidth}px; --modal-aspect-ratio: {MODAL_CONFIG.aspectRatio}; --modal-margin: {MODAL_CONFIG.margin}px;"
 >
 	<div class="modal-content" bind:this={modalContentElement}>
 		
@@ -364,15 +400,16 @@ import type {
 		align-items: center;
 		justify-content: center;
 		z-index: 1000;
-		padding: 2rem;
+		padding: var(--modal-margin);
 	}
 
 	.modal-content {
 		background: #e8e8e8;
 		border-radius: 20px;
-		max-width: 900px;
-		max-height: 90vh;
-		width: 100%;
+		width: min(var(--modal-width-percent), var(--modal-max-width));
+		width: max(var(--modal-min-width), min(var(--modal-width-percent), var(--modal-max-width)));
+		aspect-ratio: var(--modal-aspect-ratio);
+		max-height: calc(100vh - var(--modal-margin) * 2);
 		overflow: hidden;
 		position: relative;
 		box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
@@ -389,8 +426,10 @@ import type {
 
 	.modal-body {
 		position: relative;
-		max-height: 75vh;
+		height: 100%;
 		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.modal-controls {
@@ -429,6 +468,7 @@ import type {
 
 	.modal-header {
 		padding: 1rem 2rem 1rem;
+		flex-shrink: 0;
 	}
 
 	h1 {
@@ -446,6 +486,8 @@ import type {
 
 	.modal-content-area {
 		padding: 0 2rem 2rem;
+		flex: 1;
+		overflow-y: auto;
 	}
 
 	.notion-container {
@@ -513,9 +555,11 @@ import type {
 		margin-bottom: 2rem;
 	}
 
+	/* Responsive adjustments */
 	@media (max-width: 768px) {
 		.modal-backdrop {
-			padding: 1rem;
+			--modal-width-percent: 95%;
+			--modal-margin: 20px;
 		}
 
 		.modal-header {
@@ -532,6 +576,17 @@ import type {
 
 		.description {
 			font-size: 1.1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.modal-backdrop {
+			--modal-width-percent: 100%;
+			--modal-margin: 10px;
+		}
+		
+		.modal-content {
+			border-radius: 16px;
 		}
 	}
 </style>
