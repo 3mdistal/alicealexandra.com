@@ -568,8 +568,12 @@
 	.poem-link {
 		padding: 1rem;
 
+		&:hover {
+			text-decoration: none;
+		}
+
 		&:hover h3 {
-			color: #cfcdcb;
+			color: #bcbab7;
 		}
 	}
 
