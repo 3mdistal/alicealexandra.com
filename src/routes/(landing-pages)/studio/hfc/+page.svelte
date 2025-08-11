@@ -621,6 +621,11 @@
 		font-size: 1.5rem;
 		text-align: right;
 
+		&:hover {
+			color: #bcbab7;
+			text-decoration: none;
+		}
+
 		@media (min-width: 768px) {
 			font-size: 1.875rem;
 		}
