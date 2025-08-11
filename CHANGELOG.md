@@ -2,10 +2,9 @@
 _11 Aug 2025_
 
 **Enhancements**
-- New interactive postcard gallery with smooth GSAP animations for better user engagement.
-- Added external link button to modal dialogs for improved navigation.
-- Enhanced arcade game with variable jump height and physics parameters panel.
-- Improved modal system with better layout, animation, and responsive behavior.
+- New interactive postcard gallery with some fun animations and even better stories.
+- Enhanced arcade game with variable jump height and physics parameters panel. (Experimental character controller.)
+- In-progress modal navigation system for half-page navigations.
 
 **Refactors**
 - Replaced manual revalidation with utility functions for cleaner codebase.
