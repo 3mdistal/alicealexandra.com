@@ -421,7 +421,7 @@
 		min-width: 60vw;
 
 		&:hover {
-			background-color: #efefef;
+			background-color: #deddda;
 			text-decoration: none;
 		}
 
