@@ -421,7 +421,7 @@
 		min-width: 60vw;
 
 		&:hover {
-			background-color: #efefef;
+			background-color: #deddda;
 			text-decoration: none;
 		}
 
@@ -568,8 +568,12 @@
 	.poem-link {
 		padding: 1rem;
 
+		&:hover {
+			text-decoration: none;
+		}
+
 		&:hover h3 {
-			color: #cfcdcb;
+			color: #bcbab7;
 		}
 	}
 
@@ -616,6 +620,11 @@
 		color: white;
 		font-size: 1.5rem;
 		text-align: right;
+
+		&:hover {
+			color: #bcbab7;
+			text-decoration: none;
+		}
 
 		@media (min-width: 768px) {
 			font-size: 1.875rem;
