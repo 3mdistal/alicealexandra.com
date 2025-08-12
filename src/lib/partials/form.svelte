@@ -15,7 +15,7 @@
 		const form = event.target as HTMLFormElement;
 		const data = new FormData(form);
 
-		const response = await fetch('/commissions', {
+		const response = await fetch('/technotes', {
 			method: 'POST',
 			body: data
 		});
