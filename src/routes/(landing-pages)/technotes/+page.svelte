@@ -1,15 +1,15 @@
 <script>
 	import Button from '$lib/icons/button.svelte';
-	import Commissions from '$lib/subpages/commissions.svelte';
+	import Technotes from '$lib/subpages/commissions.svelte';
 	import LandingPage from '$lib/subpages/landing-page.svelte';
-	import Rabbit from '../../../cms/images/commissions/rabbit-in-hat.webp';
+	import Rabbit from '../../../cms/images/technotes/rabbit-in-hat.webp';
 
 	const accent = '#642e1a';
 	const background = '#dcc9c6';
 </script>
 
 <svelte:head>
-	<title>Commissions</title>
+	<title>Technotes</title>
 	<meta
 		name="description"
 		content="Let's collaborate! I specialize in organizing difficult to categorize work and creating custom designs and workflows to meet your needs. All work by Alice Alexandra Moore."
@@ -29,5 +29,5 @@
 	>
 		<Button slot="button" text="Let's make it." url="#form" {accent} {background} />
 	</LandingPage>
-	<Commissions {accent} {background} />
+	<Technotes {accent} {background} />
 </div>
