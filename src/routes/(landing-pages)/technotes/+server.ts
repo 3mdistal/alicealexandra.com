@@ -1,4 +1,4 @@
-import { addCommission } from '$lib/notion/api/pages';
+import { addTechnote } from '$lib/notion/api/pages';
 import type { RequestHandler } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
 
