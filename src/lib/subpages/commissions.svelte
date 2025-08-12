@@ -123,7 +123,7 @@
 </script>
 
 <div class="spacer"></div>
-<div class="commissions-container">
+<div class="technotes-container">
 	<div class="hero" bind:this={heroText}>
 		<div class="hero-text">
 			<p style="color: {accent}">Bring your impossible, intangible things.</p>
@@ -137,7 +137,7 @@
 			<p style="color: {accent}">moore</p>
 		</div>
 		<div>
-			<img class="header-image" src="/images/commissions/circle.svg" alt="" />
+			<img class="header-image" src="/images/technotes/circle.svg" alt="" />
 		</div>
 		<div>
 			<p style="color: {accent}">developer</p>
@@ -185,7 +185,7 @@
 				</p>
 			</div>
 			<div class="image">
-				<img src="/images/commissions/developer.jpeg" alt="Building blocks of the web." />
+				<img src="/images/technotes/developer.jpeg" alt="Building blocks of the web." />
 			</div>
 		</div>
 		<div class="flipped flex">
@@ -199,7 +199,7 @@
 				</p>
 			</div>
 			<div class="image">
-				<img src="/images/commissions/artist.jpeg" alt="Painting of a woman in a cornfield." />
+				<img src="/images/technotes/artist.jpeg" alt="Painting of a woman in a cornfield." />
 			</div>
 		</div>
 		<div class="flex">
@@ -214,7 +214,7 @@
 				</p>
 			</div>
 			<div class="image">
-				<img src="/images/commissions/editor.jpeg" alt="A bust made of yellow flowers." />
+				<img src="/images/technotes/editor.jpeg" alt="A bust made of yellow flowers." />
 			</div>
 		</div>
 	</div>
@@ -227,7 +227,7 @@
 </div>
 
 <style>
-	.commissions-container {
+	.technotes-container {
 		max-width: 100vw;
 		overflow: hidden;
 	}
@@ -237,7 +237,7 @@
 		position: relative;
 		justify-content: center;
 		align-items: center;
-		background-image: url('/images/commissions/impossible.jpeg');
+		background-image: url('/images/technotes/impossible.jpeg');
 		background-position: 35%;
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -441,7 +441,7 @@
 	}
 
 	.villain {
-		background-image: url('/images/commissions/villain.jpeg');
+		background-image: url('/images/technotes/villain.jpeg');
 		@media (hover: hover) {
 			background-attachment: fixed;
 		}
