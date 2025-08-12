@@ -1,7 +1,7 @@
 import { notionClient, withErrorHandling } from './client';
 import { TECHNOTES_DB, SUBSCRIBERS_DB, USER_ID_ALICE } from '$env/static/private';
 import type { PageObjectResponse } from '../types/notion-types';
-import type { CommissionRequest, Subscriber } from '../types/notion-types';
+import type { TechnoteRequest, Subscriber } from '../types/notion-types';
 
 /**
  * Retrieve a page by its ID
@@ -168,3 +168,6 @@ export async function addSubscriber(
 		return response as PageObjectResponse;
 	});
 }
+
+// Alias for backward compatibility
+export const addCommission = addTechnote;
