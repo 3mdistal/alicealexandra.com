@@ -1,5 +1,5 @@
 import { notionClient, withErrorHandling } from './client';
-import { COMMISSIONS_DB, SUBSCRIBERS_DB, USER_ID_ALICE } from '$env/static/private';
+import { TECHNOTES_DB, SUBSCRIBERS_DB, USER_ID_ALICE } from '$env/static/private';
 import type { PageObjectResponse } from '../types/notion-types';
 import type { CommissionRequest, Subscriber } from '../types/notion-types';
 
@@ -59,20 +59,20 @@ export async function updatePage(
 }
 
 /**
- * Add a commission to the commissions database
- * @param commissionOrName - Either a CommissionRequest object or the name of the requester
+ * Add a technote to the technotes database
+ * @param technoteOrName - Either a TechnoteRequest object or the name of the requester
  * @param email - The email of the requester (when using the string signature)
- * @param description - The description of the commission (when using the string signature)
+ * @param description - The description of the technote (when using the string signature)
  * @returns The created page
  */
-export async function addCommission(
-	commissionOrName: CommissionRequest | string,
+export async function addTechnote(
+	technoteOrName: TechnoteRequest | string,
 	email?: string,
 	description?: string
 ): Promise<PageObjectResponse> {
 	return withErrorHandling(async () => {
-		if (!COMMISSIONS_DB || !USER_ID_ALICE) {
-			throw new Error('Missing required environment variables for commissions');
+		if (!TECHNOTES_DB || !USER_ID_ALICE) {
+			throw new Error('Missing required environment variables for technotes');
 		}
 
 		let name: string;
@@ -80,20 +80,20 @@ export async function addCommission(
 		let descriptionValue: string;
 
 		// Handle both function signatures
-		if (typeof commissionOrName === 'string') {
+		if (typeof technoteOrName === 'string') {
 			// Legacy signature with separate parameters
-			name = commissionOrName;
+			name = technoteOrName;
 			emailValue = email || '';
 			descriptionValue = description || '';
 		} else {
 			// Object signature
-			name = commissionOrName.name;
-			emailValue = commissionOrName.email;
-			descriptionValue = commissionOrName.description;
+			name = technoteOrName.name;
+			emailValue = technoteOrName.email;
+			descriptionValue = technoteOrName.description;
 		}
 
 		const response = await notionClient.pages.create({
-			parent: { database_id: COMMISSIONS_DB },
+			parent: { database_id: TECHNOTES_DB },
 			properties: {
 				title: {
 					title: [
