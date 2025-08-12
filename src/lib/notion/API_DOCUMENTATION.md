@@ -50,7 +50,7 @@ classDiagram
         +createPage(databaseId, properties)
         +createDatabaseItem(databaseId, properties)
         +updatePage(pageId, properties)
-        +addCommission(commissionOrName, email, description)
+        +addTechnote(technoteOrName, email, description)
         +addSubscriber(subscriberOrEmail)
     }
 
@@ -124,9 +124,10 @@ Functions for working with Notion pages:
 - `createPage(databaseId, properties)`: Create a new page in a database
 - `createDatabaseItem(databaseId, properties)`: Alias for createPage for backward compatibility
 - `updatePage(pageId, properties)`: Update a page's properties
-- `addCommission(commissionOrName, email, description)`: Add a new commission request to the commissions database
-  - Supports both object format: `addCommission({name, email, description})`
-  - And individual parameters: `addCommission(name, email, description)`
+- `addTechnote(technoteOrName, email, description)`: Add a new technote request to the technotes database
+  - Supports both object format: `addTechnote({name, email, description})`
+  - And individual parameters: `addTechnote(name, email, description)`
+- `addCommission()`: Alias for addTechnote for backward compatibility
 - `addSubscriber(subscriberOrEmail)`: Add a new subscriber to the subscribers database
   - Supports both object format: `addSubscriber({email})`
   - And string parameter: `addSubscriber(email)`
@@ -239,6 +240,7 @@ The following environment variables are used:
 
 - `NOTION_KEY`: Notion API key (required)
 - `BLOG_DB`: ID of the blog database
-- `COMMISSIONS_DB`: ID of the commissions database
+- `TECHNOTES_DB`: ID of the technotes database
+- `COMMISSIONS_DB`: Legacy alias for TECHNOTES_DB (deprecated)
 - `SUBSCRIBERS_DB`: ID of the subscribers database
 - `USER_ID_ALICE`: User ID for Alice
