@@ -16,9 +16,9 @@
 	</clipPath>
 </svg>
 
-<!-- Commissions -->
+<!-- Technotes -->
 <svg width="0px" height="0px" xmlns="http://www.w3.org/2000/svg">
-	<clipPath id="commissions-path" clipPathUnits="objectBoundingBox" transform="scale(0.002)">
+	<clipPath id="technotes-path" clipPathUnits="objectBoundingBox" transform="scale(0.002)">
 		<path
 			d="M12.0833 83.1664L0 86.071V500H500V33.7882L487.917 39.5974C476.25 45.4066 452.5 57.025 428.75 54.1204C404.583 51.2158 380.833 33.7882 357.083 19.2652C333.333 4.7422 309.583 -6.8762 285.833 4.74221C262.083 16.3606 237.917 51.2158 214.167 71.548C190.417 91.8802 166.667 97.6894 142.917 94.7848C119.167 91.8802 95.4167 80.2618 71.25 77.3572C47.5 74.4526 23.75 80.2618 12.0833 83.1664Z"
 		/>
@@ -63,9 +63,9 @@
 	</clipPath>
 </svg>
 
-<!-- Commissions Mobile -->
+<!-- Technotes Mobile -->
 <svg width="0px" height="0px" xmlns="http://www.w3.org/2000/svg">
-	<clipPath id="commissions-path-mobile" clipPathUnits="objectBoundingBox" transform="scale(0.002)">
+	<clipPath id="technotes-path-mobile" clipPathUnits="objectBoundingBox" transform="scale(0.002)">
 		<path
 			d="M12.0833 33.2666L0 34.4284V500H500V13.5153L487.917 15.839C476.25 18.1626 452.5 22.81 428.75 21.6482C404.583 20.4863 380.833 13.5153 357.083 7.70608C333.333 1.89688 309.583 -2.75048 285.833 1.89688C262.083 6.54424 237.917 20.4863 214.167 28.6192C190.417 36.7521 166.667 39.0758 142.917 37.9139C119.167 36.7521 95.4167 32.1047 71.25 30.9429C47.5 29.7811 23.75 32.1047 12.0833 33.2666Z"
 		/>

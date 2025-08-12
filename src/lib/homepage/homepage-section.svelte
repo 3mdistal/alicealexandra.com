@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 
 	export let background: string;
-	export let name: 'about' | 'studio' | 'commissions' | 'blog' | 'news';
+	export let name: 'about' | 'studio' | 'technotes' | 'blog' | 'news';
 	export let transitionOutWrapper: () => void;
 
 	let section: HTMLAnchorElement;
@@ -103,8 +103,8 @@
 			clip-path: url(#studio-path);
 		}
 
-		&.commissions {
-			clip-path: url(#commissions-path);
+		&.technotes {
+			clip-path: url(#technotes-path);
 			height: 82%;
 		}
 
@@ -132,7 +132,7 @@
 			right: 18%;
 		}
 
-		&.commissions {
+		&.technotes {
 			top: 9%;
 			right: 32%;
 		}
@@ -159,8 +159,8 @@
 				height: 90%;
 			}
 
-			&.commissions {
-				clip-path: url(#commissions-path-mobile);
+			&.technotes {
+				clip-path: url(#technotes-path-mobile);
 				height: 78%;
 			}
 
@@ -184,7 +184,7 @@
 				right: 14%;
 			}
 
-			&.commissions {
+			&.technotes {
 				right: 25%;
 			}
 
