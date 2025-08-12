@@ -8,7 +8,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const email = String(formData.get('email'));
 	const description = String(formData.get('description'));
 
-	const stream = await addCommission(name, email, description);
+	const stream = await addTechnote(name, email, description);
 
 	return json(stream);
 };
