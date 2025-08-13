@@ -5,7 +5,7 @@
 	let loadingDisplay = false;
 	let submittedDisplay = false;
 	let errorDisplay = false;
-	let errorText: string;
+	let errorText: string = '';
 	let client: string;
 	let email: string;
 
