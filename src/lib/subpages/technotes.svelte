@@ -15,8 +15,7 @@
 		<div class="section">
 			<h2 style="color: {accent}">Coming Soon</h2>
 			<p>
-				This space will house technical notes, code explorations, and digital experiments. 
-				Think of it as a digital lab notebook where ideas take shape and evolve.
+				This space will house technical notes, code explorations, and digital experiments.
 			</p>
 			<p>
 				From development techniques to creative coding experiments, this will be a place 
