@@ -7,7 +7,7 @@
 <div class="technotes-container" style="--bg-color: {background}">
 	<div class="hero">
 		<div class="hero-text">
-			<p style="color: {accent}">Technical notes and explorations.</p>
+			<p style="color: {accent}">Developer notes and explorations.</p>
 		</div>
 	</div>
 	<div class="spacer"></div>
