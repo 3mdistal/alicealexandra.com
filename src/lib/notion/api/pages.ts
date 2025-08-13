@@ -1,7 +1,7 @@
 import { notionClient, withErrorHandling } from './client';
-import { TECHNOTES_DB, SUBSCRIBERS_DB, USER_ID_ALICE } from '$env/static/private';
+import { SUBSCRIBERS_DB, USER_ID_ALICE } from '$env/static/private';
 import type { PageObjectResponse } from '../types/notion-types';
-import type { TechnoteRequest, Subscriber } from '../types/notion-types';
+import type { Subscriber } from '../types/notion-types';
 
 /**
  * Retrieve a page by its ID
@@ -59,78 +59,6 @@ export async function updatePage(
 }
 
 /**
- * Add a technote to the technotes database
- * @param technoteOrName - Either a TechnoteRequest object or the name of the requester
- * @param email - The email of the requester (when using the string signature)
- * @param description - The description of the technote (when using the string signature)
- * @returns The created page
- */
-export async function addTechnote(
-	technoteOrName: TechnoteRequest | string,
-	email?: string,
-	description?: string
-): Promise<PageObjectResponse> {
-	return withErrorHandling(async () => {
-		if (!TECHNOTES_DB || !USER_ID_ALICE) {
-			throw new Error('Missing required environment variables for technotes');
-		}
-
-		let name: string;
-		let emailValue: string;
-		let descriptionValue: string;
-
-		// Handle both function signatures
-		if (typeof technoteOrName === 'string') {
-			// Legacy signature with separate parameters
-			name = technoteOrName;
-			emailValue = email || '';
-			descriptionValue = description || '';
-		} else {
-			// Object signature
-			name = technoteOrName.name;
-			emailValue = technoteOrName.email;
-			descriptionValue = technoteOrName.description;
-		}
-
-		const response = await notionClient.pages.create({
-			parent: { database_id: TECHNOTES_DB },
-			properties: {
-				title: {
-					title: [
-						{
-							text: {
-								content: name
-							}
-						}
-					]
-				},
-				Email: {
-					email: emailValue
-				},
-				Description: {
-					rich_text: [
-						{
-							text: {
-								content: descriptionValue
-							}
-						}
-					]
-				},
-				Notify: {
-					people: [
-						{
-							id: USER_ID_ALICE
-						}
-					]
-				}
-			}
-		});
-
-		return response as PageObjectResponse;
-	});
-}
-
-/**
  * Add a subscriber to the subscribers database
  * @param subscriberOrEmail - Either a Subscriber object or an email string
  * @returns The created page
@@ -168,6 +96,3 @@ export async function addSubscriber(
 		return response as PageObjectResponse;
 	});
 }
-
-// Alias for backward compatibility
-export const addCommission = addTechnote;
