@@ -19,9 +19,8 @@
 <div style="background-color: {background}">
 	<LandingPage
 		header="let's get technical."
-		description="A digital lab notebook where ideas take shape.
-                From development techniques to creative coding experiments,
-                this is where the process behind the work gets documented."
+		description="A digital notebook for all my tech advice and ramblings,
+                from both my professional life and my wonky experiments."
 		src={Rabbit}
 		alt="A painting of a rabbit coming out of a hat."
 		{accent}
