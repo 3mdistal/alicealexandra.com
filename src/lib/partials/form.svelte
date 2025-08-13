@@ -15,7 +15,8 @@
 		const form = event.target as HTMLFormElement;
 		const data = new FormData(form);
 
-		const response = await fetch('/technotes', {
+		// Note: This form currently doesn't have a working endpoint
+		// const response = await fetch('/technotes', {
 			method: 'POST',
 			body: data
 		});
