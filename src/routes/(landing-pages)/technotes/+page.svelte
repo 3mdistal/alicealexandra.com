@@ -1,6 +1,6 @@
 <script>
 	import Button from '$lib/icons/button.svelte';
-	import Technotes from '$lib/subpages/commissions.svelte';
+	import Technotes from '$lib/subpages/technotes.svelte';
 	import LandingPage from '$lib/subpages/landing-page.svelte';
 	import Rabbit from '../../../cms/images/technotes/rabbit-in-hat.webp';
 
@@ -18,16 +18,15 @@
 
 <div style="background-color: {background}">
 	<LandingPage
-		header="hire me for ambitious projects."
-		description="I can help you conjure the ideas you don't know how
-                to get out of thin air. I specialize in organizing difficult
-                to categorize work and creating custom designs and workflows
-                to meet your unique needs."
+		header="technical notes and explorations."
+		description="A digital lab notebook where ideas take shape.
+                From development techniques to creative coding experiments,
+                this is where the process behind the work gets documented."
 		src={Rabbit}
 		alt="A painting of a rabbit coming out of a hat."
 		{accent}
 	>
-		<Button slot="button" text="Let's make it." url="#form" {accent} {background} />
+		<Button slot="button" text="Explore." url="#content" {accent} {background} />
 	</LandingPage>
 	<Technotes {accent} {background} />
 </div>
