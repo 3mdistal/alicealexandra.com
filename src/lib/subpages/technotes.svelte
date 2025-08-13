@@ -4,7 +4,7 @@
 </script>
 
 <div class="spacer"></div>
-<div class="technotes-container">
+<div class="technotes-container" style="--bg-color: {background}">
 	<div class="hero">
 		<div class="hero-text">
 			<p style="color: {accent}">Technical notes and explorations.</p>
