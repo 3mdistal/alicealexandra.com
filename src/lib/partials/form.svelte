@@ -12,8 +12,8 @@
 	async function contact(event: Event) {
 		formDisplay = false;
 		loadingDisplay = true;
-		const form = event.target as HTMLFormElement;
-		const data = new FormData(form);
+		// const form = event.target as HTMLFormElement;
+		// const data = new FormData(form);
 
 		// Simulate form submission for now since no database endpoint exists
 		setTimeout(() => {
