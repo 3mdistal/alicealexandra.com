@@ -67,23 +67,6 @@ export interface BlogPost {
 	tags: string[];
 }
 
-/**
- * Technote request data
- */
-export interface TechnoteRequest {
-	name: string;
-	email: string;
-	description: string;
-}
-
-/**
- * Commission request data (alias for backward compatibility)
- */
-export interface CommissionRequest {
-	name: string;
-	email: string;
-	description: string;
-}
 
 /**
  * Subscriber data
