@@ -15,8 +15,15 @@
 		const form = event.target as HTMLFormElement;
 		const data = new FormData(form);
 
-		// Note: This form currently doesn't have a working endpoint
-		// const response = await fetch('/technotes', {
+		// Simulate form submission for now since no database endpoint exists
+		setTimeout(() => {
+			loadingDisplay = false;
+			submittedDisplay = true;
+		}, 1000);
+		
+		/* 
+		// Original code for when database endpoint is restored:
+		const response = await fetch('/technotes', {
 			method: 'POST',
 			body: data
 		});
@@ -33,6 +40,7 @@
 			errorText = message;
 			throw new Error(message);
 		}
+		*/
 	}
 </script>
 
@@ -65,7 +73,7 @@
 			Thank you, <span class="highlight">{client}</span>, for your submission!
 		</p>
 		<p class="message">
-			I'll be in touch shortly to <span class="highlight">{email}</span>.
+			Note: This is currently a demo form. For real inquiries, please reach out through other channels.
 		</p>
 	</div>
 {:else if errorDisplay}
