@@ -88,6 +88,43 @@
 		}
 	}
 
+	.work-link {
+		background-color: rgba(255, 255, 255, 0.8);
+		border-radius: 10px;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		border: 2px solid transparent;
+	}
+
+	.work-link:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(100, 46, 26, 0.15);
+		border-color: rgba(100, 46, 26, 0.2);
+	}
+
+	.work-link a {
+		text-decoration: none;
+		display: block;
+	}
+
+	.work-link h3 {
+		font-size: 1.5rem;
+		font-weight: 500;
+		margin-bottom: 0.5rem;
+		transition: color 0.2s ease;
+	}
+
+	.work-link:hover h3 {
+		text-decoration: underline;
+	}
+
+	.work-link p {
+		color: #666;
+		margin: 0;
+		font-style: italic;
+	}
+
 	.spacer {
 		height: 4rem;
 	}
