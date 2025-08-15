@@ -62,7 +62,7 @@
 		z-index: 100;
 		margin: 0 2em;
 		border-radius: 10px;
-		background-color: #f8f5f2;
+		background-color: #f4efea;
 		padding: 3em;
 
 		& p {
@@ -95,7 +95,7 @@
 	}
 
 	.work-link {
-		background-color: #f8f5f2;
+		background-color: #f4efea;
 		border-radius: 10px;
 		padding: 2rem;
 		margin-bottom: 2rem;
