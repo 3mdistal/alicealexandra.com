@@ -52,9 +52,16 @@
 	<div class="content">
 		<PublicationsSection
 			{publications}
-			title="Landing Pages"
-			subtitle="Solutions marketing landing pages I've headed up and written the content for."
-			type="Landing Page"
+			title="Technical Blogs"
+			subtitle="Articles that I've written to offer developers guidance on Vercel's product."
+			type="Technical Blog"
+			{accent}
+		/>
+		<PublicationsSection
+			{publications}
+			title="Technical Guides"
+			subtitle="In-depth technical guides and tutorials for developers."
+			type="Technical Guide"
 			{accent}
 		/>
 		<PublicationsSection
@@ -76,13 +83,6 @@
 			title="Customer Stories"
 			subtitle="My profiles of customers who have experienced big wins with Vercel."
 			type="Customer Story"
-			{accent}
-		/>
-		<PublicationsSection
-			{publications}
-			title="Technical Blogs"
-			subtitle="Articles that I've written to offer developers guidance on Vercel's product."
-			type="Technical Blogs"
 			{accent}
 		/>
 	</div>
