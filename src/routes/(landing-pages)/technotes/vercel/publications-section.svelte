@@ -12,17 +12,18 @@
 	export let title: string;
 	export let subtitle: string;
 	export let type: PublicationTypes;
+	export let accent: string = '#642e1a';
 </script>
 
 <section>
-	<h2>{title}</h2>
+	<h2 style="color: {accent}">{title}</h2>
 	<p class="subtitle">{subtitle}</p>
 	<ul>
 		{#each publications as publication}
 			{#if publication.properties.Type.select.name === type}
 				<li>
-					<a href={publication.properties.Link.url}>
-						<h3>
+					<a href={publication.properties.Link.url} target="_blank" rel="noopener noreferrer">
+						<h3 style="color: {accent}">
 							{publication.properties.Name.title[0].plain_text}
 						</h3>
 					</a>
@@ -37,74 +38,105 @@
 
 <style>
 	section {
-		margin-bottom: 4rem;
+		margin-bottom: 5rem;
+		background-color: rgba(255, 255, 255, 0.6);
+		border-radius: 10px;
+		padding: 2.5rem;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 	}
 
 	h2 {
 		margin-bottom: 1rem;
-		font-size: 1.5rem;
-	}
-
-	@media (min-width: 640px) {
-		h2 {
-			font-size: 1.5rem;
-		}
-	}
-
-	@media (min-width: 768px) {
-		h2 {
-			font-size: 1.875rem;
-		}
+		font-size: 2rem;
+		font-weight: 500;
+		font-family: 'Spectral', serif;
 	}
 
 	.subtitle {
-		margin-bottom: 2rem;
+		margin-bottom: 2.5rem;
 		font-style: italic;
 		font-size: 1.125rem;
+		color: #666;
+		line-height: 1.6;
 	}
 
-	@media (min-width: 640px) {
-		.subtitle {
-			font-size: 1.25rem;
-		}
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
 	}
 
-	@media (min-width: 1024px) {
-		.subtitle {
-			font-size: 1.25rem;
-		}
+	li {
+		margin-bottom: 2rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid rgba(100, 46, 26, 0.2);
+	}
+
+	li:last-child {
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+
+	a {
+		text-decoration: none;
+		display: block;
+		transition: transform 0.2s ease;
+	}
+
+	a:hover {
+		transform: translateX(5px);
 	}
 
 	h3 {
-		color: #155e75;
-		font-weight: normal;
-		font-size: 1.125rem;
+		font-weight: 500;
+		font-size: 1.25rem;
+		margin-bottom: 0.5rem;
+		transition: color 0.2s ease;
+		font-family: 'Spectral', serif;
 	}
 
-	h3:hover {
+	a:hover h3 {
 		text-decoration: underline;
-	}
-
-	@media (min-width: 640px) {
-		h3 {
-			font-size: 1.25rem;
-		}
-	}
-
-	@media (min-width: 768px) {
-		h3 {
-			font-size: 1.5rem;
-		}
+		filter: brightness(1.2);
 	}
 
 	.description {
 		font-style: italic;
-		font-size: 0.875rem;
+		font-size: 1rem;
+		color: #555;
+		line-height: 1.5;
+		margin: 0;
 	}
 
 	@media (min-width: 640px) {
+		section {
+			padding: 3rem;
+		}
+
+		h2 {
+			font-size: 2.25rem;
+		}
+
+		.subtitle {
+			font-size: 1.25rem;
+		}
+
+		h3 {
+			font-size: 1.375rem;
+		}
+
 		.description {
 			font-size: 1.125rem;
+		}
+	}
+
+	@media (min-width: 768px) {
+		h2 {
+			font-size: 2.5rem;
+		}
+
+		h3 {
+			font-size: 1.5rem;
 		}
 	}
 </style>
