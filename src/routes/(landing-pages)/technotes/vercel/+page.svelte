@@ -33,6 +33,7 @@
 <main style="background-color: {background}">
 	<div class="hero">
 		<div class="hero-content">
+			<a href="/technotes" class="back-link">← Back to Technotes</a>
 			<h1 style="color: {accent}">
 				Work from <span class="highlight">Vercel</span>
 			</h1>
