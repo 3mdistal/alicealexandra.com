@@ -13,6 +13,16 @@
 	export let subtitle: string;
 	export let type: PublicationTypes;
 	export let accent: string = '#642e1a';
+
+	// Debug: Log all unique types found in the data
+	$: {
+		if (publications && publications.length > 0) {
+			const allTypes = publications.map(pub => pub.properties.Type.select?.name).filter(Boolean);
+			const uniqueTypes = [...new Set(allTypes)];
+			console.log('All publication types found:', uniqueTypes);
+			console.log(`Looking for type: "${type}"`, `Found ${publications.filter(pub => pub.properties.Type.select?.name === type).length} matches`);
+		}
+	}
 </script>
 
 <section>
