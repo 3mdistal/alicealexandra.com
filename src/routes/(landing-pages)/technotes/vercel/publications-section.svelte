@@ -3,7 +3,8 @@
 
 	type PublicationTypes =
 		| 'Landing Page'
-		| 'Technical Blogs'
+		| 'Technical Blog'
+		| 'Technical Guide'
 		| 'Customer Story'
 		| 'Enterprise Resource'
 		| 'Product Feature';
