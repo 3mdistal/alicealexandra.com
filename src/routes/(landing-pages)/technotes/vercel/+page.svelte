@@ -114,6 +114,7 @@
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
 		font-weight: 600;
+		font-family: 'Spectral', serif;
 	}
 
 	.subtitle {
