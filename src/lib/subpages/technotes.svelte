@@ -13,12 +13,22 @@
 	<div class="spacer"></div>
 	<div class="content">
 		<div class="section">
+			<h2 style="color: {accent}">Featured Work</h2>
+			<div class="work-link">
+				<a href="/technotes/vercel">
+					<h3 style="color: {accent}">Work from Vercel →</h3>
+					<p>Content and technical writing from my time at Vercel (2022-2025)</p>
+				</a>
+			</div>
+		</div>
+
+		<div class="section">
 			<h2 style="color: {accent}">Coming Soon</h2>
 			<p>
 				This space will house technical notes, code explorations, and digital experiments.
 			</p>
 			<p>
-				From development techniques to creative coding experiments, this will be a place 
+				From development techniques to creative coding experiments, this will be a place
 				for sharing the process behind the work.
 			</p>
 		</div>
