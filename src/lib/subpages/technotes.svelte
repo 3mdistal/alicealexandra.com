@@ -141,5 +141,13 @@
 		.section p {
 			font-size: 1.25rem;
 		}
+
+		.work-link {
+			padding: 2.5rem;
+		}
+
+		.work-link h3 {
+			font-size: 1.75rem;
+		}
 	}
 </style>
