@@ -100,7 +100,7 @@
 	.hero-content {
 		max-width: 800px;
 		margin: 0 auto;
-		background-color: rgba(255, 255, 255, 0.85);
+		background-color: #f8f5f2;
 		border-radius: 15px;
 		padding: 3rem;
 	}
@@ -129,7 +129,7 @@
 		border: 2px solid #642e1a;
 		border-radius: 8px;
 		transition: all 0.2s ease;
-		background-color: rgba(255, 255, 255, 0.85);
+		background-color: #f8f5f2;
 	}
 
 	.back-link:hover {

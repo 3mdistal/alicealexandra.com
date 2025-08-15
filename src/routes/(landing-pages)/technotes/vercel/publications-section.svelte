@@ -40,7 +40,7 @@
 <style>
 	section {
 		margin-bottom: 5rem;
-		background-color: rgba(255, 255, 255, 0.85);
+		background-color: #f8f5f2;
 		border-radius: 10px;
 		padding: 2.5rem;
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
