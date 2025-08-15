@@ -19,6 +19,13 @@
 	const accent = '#642e1a';
 	const background = '#dcc9c6';
 
+	// Debug: Log the raw data to see what we're working with
+	console.log('Publications data:', publications);
+	if (publications.length > 0) {
+		console.log('Sample publication:', publications[0]);
+		console.log('Available types:', publications.map(p => p.properties.Type.select?.name));
+	}
+
 	onMount(() => {
 		// Trigger background revalidation for future visitors
 		useBackgroundRevalidation('/technotes/vercel');
