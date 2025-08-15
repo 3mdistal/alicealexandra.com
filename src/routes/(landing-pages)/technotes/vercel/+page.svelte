@@ -151,6 +151,13 @@
 		margin: 0 auto;
 	}
 
+	.footer {
+		padding: 2rem;
+		text-align: center;
+		border-top: 1px solid rgba(100, 46, 26, 0.2);
+		margin-top: 2rem;
+	}
+
 	@media (min-width: 768px) {
 		.hero {
 			padding: 8rem 4rem 6rem;
