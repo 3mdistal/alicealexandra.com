@@ -9,7 +9,7 @@
 	let client: string;
 	let email: string;
 
-	async function contact(event: Event) {
+	async function contact(_event: Event) {
 		formDisplay = false;
 		loadingDisplay = true;
 		// const form = event.target as HTMLFormElement;
