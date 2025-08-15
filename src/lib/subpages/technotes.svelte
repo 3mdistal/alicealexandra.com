@@ -15,6 +15,12 @@
 		<div class="section">
 			<h2 style="color: {accent}">Featured Work</h2>
 			<div class="work-link">
+				<a href="/technotes/builderio">
+					<h3 style="color: {accent}">Work from Builder.io →</h3>
+					<p>Content and technical writing from my current role at Builder.io (2025-present)</p>
+				</a>
+			</div>
+			<div class="work-link">
 				<a href="/technotes/vercel">
 					<h3 style="color: {accent}">Work from Vercel →</h3>
 					<p>Content and technical writing from my time at Vercel (2022-2025)</p>
