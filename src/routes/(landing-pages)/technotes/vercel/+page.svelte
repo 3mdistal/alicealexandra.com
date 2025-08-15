@@ -59,16 +59,16 @@
 		/>
 		<PublicationsSection
 			{publications}
-			title="Product Features"
-			subtitle="Announcements and feature highlights I've collaborated with company leaders to ghostwrite."
-			type="Product Feature"
+			title="Enterprise Resources"
+			subtitle="Deep dives I've targeted at specific industries of enterprise buyers."
+			type="Enterprise Resource"
 			{accent}
 		/>
 		<PublicationsSection
 			{publications}
-			title="Enterprise Resources"
-			subtitle="Deep dives I've targeted at specific industries of enterprise buyers."
-			type="Enterprise Resource"
+			title="Product Features"
+			subtitle="Announcements and feature highlights I've collaborated with company leaders to ghostwrite."
+			type="Product Feature"
 			{accent}
 		/>
 		<PublicationsSection
