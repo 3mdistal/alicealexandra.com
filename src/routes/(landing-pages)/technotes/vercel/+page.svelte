@@ -37,7 +37,7 @@
 				Work from <span class="highlight">Vercel</span>
 			</h1>
 			<p class="subtitle">
-				Some of the best content I published while working at Vercel (2022-2025).
+				Content I published while working at Vercel (2022-2025).
 			</p>
 		</div>
 	</div>
@@ -109,7 +109,7 @@
 	}
 
 	.highlight {
-		color: #000;
+		color: #642e1a;
 		font-weight: 500;
 		font-family: 'Spectral', serif;
 	}
