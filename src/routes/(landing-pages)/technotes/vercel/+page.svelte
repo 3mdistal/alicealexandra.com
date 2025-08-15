@@ -115,6 +115,26 @@
 		font-family: 'Spectral', serif;
 	}
 
+	.back-link {
+		display: inline-block;
+		color: #642e1a;
+		text-decoration: none;
+		font-size: 1rem;
+		font-weight: 500;
+		margin-bottom: 1.5rem;
+		padding: 0.5rem 1rem;
+		border: 2px solid #642e1a;
+		border-radius: 8px;
+		transition: all 0.2s ease;
+		background-color: rgba(255, 255, 255, 0.8);
+	}
+
+	.back-link:hover {
+		background-color: #642e1a;
+		color: white;
+		transform: translateX(-2px);
+	}
+
 	.subtitle {
 		font-size: clamp(1.1rem, 2.5vw, 1.4rem);
 		color: #555;
