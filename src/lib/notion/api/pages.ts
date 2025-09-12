@@ -24,12 +24,12 @@ export async function retrievePage(pageId: string): Promise<PageObjectResponse> 
  * @returns The created page
  */
 export async function createPage(
-	databaseId: string,
+	dataSourceId: string,
 	properties: Record<string, any>
 ): Promise<PageObjectResponse> {
 	return withErrorHandling(async () => {
 		const response = await notionClient.pages.create({
-			parent: { database_id: databaseId },
+			parent: { type: 'data_source_id', data_source_id: dataSourceId },
 			properties
 		});
 		return response as PageObjectResponse;
@@ -93,7 +93,7 @@ export async function addCommission(
 		}
 
 		const response = await notionClient.pages.create({
-			parent: { database_id: COMMISSIONS_DB },
+			parent: { type: 'data_source_id', data_source_id: COMMISSIONS_DB },
 			properties: {
 				title: {
 					title: [
@@ -156,7 +156,8 @@ export async function addSubscriber(
 
 		const response = await notionClient.pages.create({
 			parent: {
-				database_id: SUBSCRIBERS_DB
+				type: 'data_source_id',
+				data_source_id: SUBSCRIBERS_DB
 			},
 			properties: {
 				Email: {
