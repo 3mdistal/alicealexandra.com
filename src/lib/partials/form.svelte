@@ -23,7 +23,7 @@
 		
 		/* 
 		// Original code for when database endpoint is restored:
-		const response = await fetch('/technotes', {
+		const response = await fetch('/career', {
 			method: 'POST',
 			body: data
 		});
