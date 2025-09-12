@@ -1,6 +1,6 @@
 import { queryDatabase } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, BLOGS_DB } from '$env/static/private';
-import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
+import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
 
 const today = new Date(Date.now()).toISOString();
 
