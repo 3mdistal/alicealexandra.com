@@ -38,7 +38,7 @@
 		return property && Array.isArray(property.title);
 	}
 
-	function isTextRichTextItem(item: RichTextItemResponse): item is TextRichTextItemResponse {
+	function isTextRichTextItem(item: any): item is TextRichTextItemResponse {
 		return item && item.type === 'text' && typeof item.text === 'object';
 	}
 
