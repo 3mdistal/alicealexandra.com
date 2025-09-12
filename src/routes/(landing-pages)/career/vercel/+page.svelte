@@ -21,19 +21,19 @@
 
 	onMount(() => {
 		// Trigger background revalidation for future visitors
-		useBackgroundRevalidation('/technotes/vercel');
+		useBackgroundRevalidation('/career/vercel');
 	});
 </script>
 
 <svelte:head>
-	<title>Vercel Work | Technotes</title>
+	<title>Vercel Work | Career</title>
 	<meta name="description" content="The work accomplished at Vercel by Alice Alexandra Moore." />
 </svelte:head>
 
-<main style="background-color: {background}">
+<main class="career-detail-surface" style="--bg-color: {background}; --accent-color: {accent}">
 	<div class="hero">
 		<div class="hero-content">
-			<h1 style="color: {accent}">
+			<h1 class="accent-color">
 				Work from <span class="highlight">Vercel</span>
 			</h1>
 			<p class="subtitle">
@@ -81,14 +81,19 @@
 	</div>
 
 	<div class="footer">
-		<a href="/technotes" class="back-link">← Back to Technotes</a>
+		<a href="/career" class="back-link">← Back to Career</a>
 	</div>
 </main>
 
 <style>
-	main {
+	.career-detail-surface {
 		min-height: 100vh;
 		font-family: 'Spectral', serif;
+		background-color: var(--bg-color);
+	}
+
+	.accent-color {
+		color: var(--accent-color);
 	}
 
 	.hero {
