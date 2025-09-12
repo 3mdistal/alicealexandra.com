@@ -26,4 +26,4 @@ export {
 } from './blocks';
 
 // Export page operations
-export { retrievePage, createPage, updatePage, addCommission, addSubscriber } from './pages';
+export { retrievePage, createPage, updatePage, addSubscriber } from './pages';
