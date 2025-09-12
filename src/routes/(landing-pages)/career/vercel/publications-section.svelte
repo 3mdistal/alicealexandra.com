@@ -16,15 +16,15 @@
 	export let accent: string = '#642e1a';
 </script>
 
-<section>
-	<h2 style="color: {accent}">{title}</h2>
+<section class="publications-section" style="--accent-color: {accent}">
+	<h2 class="section-title">{title}</h2>
 	<p class="subtitle">{subtitle}</p>
 	<ul>
 		{#each publications as publication}
 			{#if publication.properties.Type.select.name === type}
 				<li>
 					<a href={publication.properties.Link.url} target="_blank" rel="noopener noreferrer">
-						<h3 style="color: {accent}">
+						<h3 class="item-title">
 							{publication.properties.Name.title[0].plain_text}
 						</h3>
 					</a>
@@ -38,7 +38,7 @@
 </section>
 
 <style>
-	section {
+	.publications-section {
 		margin-bottom: 5rem;
 		background-color: #f4efea;
 		border-radius: 10px;
@@ -46,11 +46,12 @@
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 	}
 
-	h2 {
+	.section-title {
 		margin-bottom: 1rem;
 		font-size: 2rem;
 		font-weight: 500;
 		font-family: 'Spectral', serif;
+		color: var(--accent-color);
 	}
 
 	.subtitle {
@@ -88,15 +89,16 @@
 		transform: translateX(5px);
 	}
 
-	h3 {
+	.item-title {
 		font-weight: 500;
 		font-size: 1.25rem;
 		margin-bottom: 0.5rem;
 		transition: color 0.2s ease;
 		font-family: 'Spectral', serif;
+		color: var(--accent-color);
 	}
 
-	a:hover h3 {
+	a:hover .item-title {
 		text-decoration: underline;
 		filter: brightness(1.2);
 	}
@@ -110,11 +112,11 @@
 	}
 
 	@media (min-width: 640px) {
-		section {
+		.publications-section {
 			padding: 3rem;
 		}
 
-		h2 {
+		.section-title {
 			font-size: 2.25rem;
 		}
 
@@ -122,7 +124,7 @@
 			font-size: 1.25rem;
 		}
 
-		h3 {
+		.item-title {
 			font-size: 1.375rem;
 		}
 
@@ -132,11 +134,11 @@
 	}
 
 	@media (min-width: 768px) {
-		h2 {
+		.section-title {
 			font-size: 2.5rem;
 		}
 
-		h3 {
+		.item-title {
 			font-size: 1.5rem;
 		}
 	}
