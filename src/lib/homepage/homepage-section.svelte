@@ -134,7 +134,7 @@
 
 		&.career {
 			top: 9%;
-			right: calc(32% + 24px);
+			right: 38%;
 		}
 
 		&.blog {
@@ -185,7 +185,7 @@
 			}
 
 			&.career {
-				right: calc(25% + 24px);
+				right: 30%;
 			}
 
 			&.blog {
