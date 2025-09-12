@@ -1,4 +1,4 @@
-import type { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import type { BlockObjectResponse } from '$lib/notion/types/notion-types';
 import { readable, writable, type Writable, type Readable } from 'svelte/store';
 
 export const pageState = writable('home');

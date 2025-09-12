@@ -1,12 +1,12 @@
 import { queryDatabase } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, PROFESSIONAL_DB } from '$env/static/private';
 import type {
-	QueryDatabaseParameters,
+	DataSourceQueryParameters,
 	TextRichTextItemResponse
 } from '$lib/notion/types/notion-types';
 
-const queryParams: QueryDatabaseParameters = {
-	database_id: PROFESSIONAL_DB,
+const queryParams: DataSourceQueryParameters = {
+	data_source_id: PROFESSIONAL_DB,
 	sorts: [
 		{
 			direction: 'descending',

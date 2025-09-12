@@ -1,13 +1,13 @@
 import { queryDatabase } from '$lib/notion/api/database';
 import { listChildren } from '$lib/notion/api/blocks';
-import type { QueryDatabaseParameters } from '$lib/notion/types/notion-types';
+import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
 import { BYPASS_TOKEN, BLOGS_DB } from '$env/static/private';
 
 export async function load({ params }: { params: { slug: string } }) {
 	async function fetchContent(slug: string) {
 		try {
-			const queryParams: QueryDatabaseParameters = {
-				database_id: BLOGS_DB,
+			const queryParams: DataSourceQueryParameters = {
+				data_source_id: BLOGS_DB,
 				filter: {
 					and: [
 						{

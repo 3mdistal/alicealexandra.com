@@ -29,6 +29,17 @@ export type {
 // Custom types for our application
 
 /**
+ * Query parameters for data sources (Notion API 2025-09-03)
+ */
+export interface DataSourceQueryParameters {
+	data_source_id: string;
+	filter?: unknown;
+	sorts?: unknown;
+	page_size?: number;
+	start_cursor?: string;
+}
+
+/**
  * Supported block types for rendering
  */
 export type SupportedBlockType =

@@ -24,12 +24,12 @@ export async function retrievePage(pageId: string): Promise<PageObjectResponse> 
  * @returns The created page
  */
 export async function createPage(
-	databaseId: string,
+	dataSourceId: string,
 	properties: Record<string, any>
 ): Promise<PageObjectResponse> {
 	return withErrorHandling(async () => {
 		const response = await notionClient.pages.create({
-			parent: { database_id: databaseId },
+			parent: { type: 'data_source_id', data_source_id: dataSourceId },
 			properties
 		});
 		return response as PageObjectResponse;
@@ -54,6 +54,78 @@ export async function updatePage(
 			page_id: pageId,
 			properties
 		});
+		return response as PageObjectResponse;
+	});
+}
+
+/**
+ * Add a commission to the commissions database
+ * @param commissionOrName - Either a CommissionRequest object or the name of the requester
+ * @param email - The email of the requester (when using the string signature)
+ * @param description - The description of the commission (when using the string signature)
+ * @returns The created page
+ */
+export async function addCommission(
+	commissionOrName: CommissionRequest | string,
+	email?: string,
+	description?: string
+): Promise<PageObjectResponse> {
+	return withErrorHandling(async () => {
+		if (!COMMISSIONS_DB || !USER_ID_ALICE) {
+			throw new Error('Missing required environment variables for commissions');
+		}
+
+		let name: string;
+		let emailValue: string;
+		let descriptionValue: string;
+
+		// Handle both function signatures
+		if (typeof commissionOrName === 'string') {
+			// Legacy signature with separate parameters
+			name = commissionOrName;
+			emailValue = email || '';
+			descriptionValue = description || '';
+		} else {
+			// Object signature
+			name = commissionOrName.name;
+			emailValue = commissionOrName.email;
+			descriptionValue = commissionOrName.description;
+		}
+
+		const response = await notionClient.pages.create({
+			parent: { type: 'data_source_id', data_source_id: COMMISSIONS_DB },
+			properties: {
+				title: {
+					title: [
+						{
+							text: {
+								content: name
+							}
+						}
+					]
+				},
+				Email: {
+					email: emailValue
+				},
+				Description: {
+					rich_text: [
+						{
+							text: {
+								content: descriptionValue
+							}
+						}
+					]
+				},
+				Notify: {
+					people: [
+						{
+							id: USER_ID_ALICE
+						}
+					]
+				}
+			}
+		});
+
 		return response as PageObjectResponse;
 	});
 }
@@ -84,7 +156,8 @@ export async function addSubscriber(
 
 		const response = await notionClient.pages.create({
 			parent: {
-				database_id: SUBSCRIBERS_DB
+				type: 'data_source_id',
+				data_source_id: SUBSCRIBERS_DB
 			},
 			properties: {
 				Email: {

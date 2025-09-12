@@ -1,9 +1,9 @@
 import { queryDatabase } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, POEMS_SECTIONS_DB, ALL_SCRAPS_DB } from '$env/static/private';
-import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
+import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
 
-const sectionsQueryParams: QueryDatabaseParameters = {
-	database_id: POEMS_SECTIONS_DB,
+const sectionsQueryParams: DataSourceQueryParameters = {
+	data_source_id: POEMS_SECTIONS_DB,
 	filter: {
 		and: [
 			{
@@ -22,8 +22,8 @@ const sectionsQueryParams: QueryDatabaseParameters = {
 	]
 };
 
-const scrapsQueryParams: QueryDatabaseParameters = {
-	database_id: ALL_SCRAPS_DB,
+const scrapsQueryParams: DataSourceQueryParameters = {
+	data_source_id: ALL_SCRAPS_DB,
 	filter: {
 		and: [
 			{
