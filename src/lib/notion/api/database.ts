@@ -1,29 +1,29 @@
 import { notionClient, withErrorHandling } from './client';
 import type {
-	QueryDatabaseParameters,
 	QueryDatabaseResponse,
-	PageObjectResponse
+	PageObjectResponse,
+	DataSourceQueryParameters
 } from '../types/notion-types';
 import type { BlogPost, PaginatedResponse } from '../types/notion-types';
 // Note: environment constants are imported where needed per-route
 
 /**
- * Query a Notion database with the provided parameters
+ * Query a Notion data source with the provided parameters
  * @param params - Query parameters for the database
  * @returns The query response from Notion
  */
 export async function queryDatabase(
-	params: QueryDatabaseParameters
+	params: DataSourceQueryParameters
 ): Promise<QueryDatabaseResponse> {
 	return withErrorHandling(async () => {
-		const response = await notionClient.databases.query(params);
+		const response = await notionClient.dataSources.query(params as unknown as Record<string, any>);
 		return response;
 	});
 }
 
 /**
- * Query a database with pagination support
- * @param databaseId - The ID of the database to query
+ * Query a data source with pagination support
+ * @param dataSourceId - The ID of the data source to query
  * @param filter - Optional filter to apply to the query
  * @param sorts - Optional sorting to apply to the query
  * @param pageSize - Number of results per page (default: 100)
@@ -31,15 +31,15 @@ export async function queryDatabase(
  * @returns Paginated response with results and pagination info
  */
 export async function queryDatabasePaginated<T = PageObjectResponse>(
-	databaseId: string,
-	filter?: QueryDatabaseParameters['filter'],
-	sorts?: QueryDatabaseParameters['sorts'],
+	dataSourceId: string,
+	filter?: DataSourceQueryParameters['filter'],
+	sorts?: DataSourceQueryParameters['sorts'],
 	pageSize: number = 100,
 	startCursor?: string
 ): Promise<PaginatedResponse<T>> {
 	return withErrorHandling(async () => {
-		const response = await notionClient.databases.query({
-			database_id: databaseId,
+		const response = await notionClient.dataSources.query({
+			data_source_id: dataSourceId,
 			...(filter && { filter }),
 			...(sorts && { sorts }),
 			page_size: pageSize,
@@ -55,14 +55,14 @@ export async function queryDatabasePaginated<T = PageObjectResponse>(
 }
 
 /**
- * Retrieve a database by its ID
- * @param databaseId - The ID of the database to retrieve
+ * Retrieve a data source by its ID
+ * @param dataSourceId - The ID of the data source to retrieve
  * @returns The database object
  */
-export async function retrieveDatabase(databaseId: string) {
+export async function retrieveDatabase(dataSourceId: string) {
 	return withErrorHandling(async () => {
-		const response = await notionClient.databases.retrieve({
-			database_id: databaseId
+		const response = await notionClient.dataSources.retrieve({
+			data_source_id: dataSourceId
 		});
 		return response;
 	});

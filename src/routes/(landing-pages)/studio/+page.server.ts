@@ -1,9 +1,9 @@
 import { queryDatabase } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, STUDIO_DB } from '$env/static/private';
-import type { QueryDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
+import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
 
-const queryParameters: QueryDatabaseParameters = {
-	database_id: STUDIO_DB,
+const queryParameters: DataSourceQueryParameters = {
+	data_source_id: STUDIO_DB,
 	filter: {
 		and: [
 			{

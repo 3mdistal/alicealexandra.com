@@ -2,11 +2,11 @@
 	import type { QueryDatabaseResponse } from '$lib/notion/types/notion-types';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
-	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
 	import type {
 		RichTextItemResponse,
 		TextRichTextItemResponse
-	} from '@notionhq/client/build/src/api-endpoints';
+	} from '$lib/notion/types/notion-types';
 
 	export let accent: string;
 	export let data: { post: QueryDatabaseResponse };
@@ -38,7 +38,7 @@
 		return property && Array.isArray(property.title);
 	}
 
-	function isTextRichTextItem(item: RichTextItemResponse): item is TextRichTextItemResponse {
+	function isTextRichTextItem(item: any): item is TextRichTextItemResponse {
 		return item && item.type === 'text' && typeof item.text === 'object';
 	}
 
