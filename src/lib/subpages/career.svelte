@@ -4,32 +4,32 @@
 </script>
 
 <div class="spacer"></div>
-<div class="technotes-container" style="--bg-color: {background}">
+<div class="career-container" style="--bg-color: {background}; --accent-color: {accent}">
 	<div class="hero">
 		<div class="hero-text">
-			<p style="color: {accent}">Developer notes and explorations.</p>
+			<p class="accent-color">Developer notes and explorations.</p>
 		</div>
 	</div>
 	<div class="spacer"></div>
 	<div class="content">
 		<div class="section">
-			<h2 style="color: {accent}">Featured Work</h2>
+			<h2 class="accent-color">Featured Work</h2>
 			<div class="work-link">
-				<a href="/technotes/builderio">
-					<h3 style="color: {accent}">Work from Builder.io →</h3>
+				<a href="/career/builderio">
+					<h3 class="accent-color">Work from Builder.io →</h3>
 					<p>Content and technical writing from my current role at Builder.io (2025-present)</p>
 				</a>
 			</div>
 			<div class="work-link">
-				<a href="/technotes/vercel">
-					<h3 style="color: {accent}">Work from Vercel →</h3>
+				<a href="/career/vercel">
+					<h3 class="accent-color">Work from Vercel →</h3>
 					<p>Content and technical writing from my time at Vercel (2022-2025)</p>
 				</a>
 			</div>
 		</div>
 
 		<div class="section">
-			<h2 style="color: {accent}">Coming Soon</h2>
+			<h2 class="accent-color">Coming Soon</h2>
 			<p>
 				This space will house technical notes, code explorations, and digital experiments.
 			</p>
@@ -42,9 +42,14 @@
 </div>
 
 <style>
-	.technotes-container {
+	.career-container {
 		max-width: 100vw;
 		overflow: hidden;
+		background-color: var(--bg-color, transparent);
+	}
+
+	.accent-color {
+		color: var(--accent-color);
 	}
 
 	.hero {
