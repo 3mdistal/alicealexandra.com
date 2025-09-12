@@ -1,0 +1,145 @@
+<script lang="ts">
+	import type { ProfessionalPublications } from './+page.server';
+
+	type PublicationTypes =
+		| 'Landing Page'
+		| 'Technical Blog'
+		| 'Technical Guide'
+		| 'Customer Story'
+		| 'Enterprise Resource'
+		| 'Product Feature';
+
+	export let publications: Array<ProfessionalPublications>;
+	export let title: string;
+	export let subtitle: string;
+	export let type: PublicationTypes;
+	export let accent: string = '#642e1a';
+</script>
+
+<section class="publications-section" style="--accent-color: {accent}">
+	<h2 class="section-title">{title}</h2>
+	<p class="subtitle">{subtitle}</p>
+	<ul>
+		{#each publications as publication}
+			{#if publication.properties.Type.select.name === type}
+				<li>
+					<a href={publication.properties.Link.url} target="_blank" rel="noopener noreferrer">
+						<h3 class="item-title">
+							{publication.properties.Name.title[0].plain_text}
+						</h3>
+					</a>
+					{#if publication.properties.Description.rich_text[0]}
+						<p class="description">{publication.properties.Description.rich_text[0].plain_text}</p>
+					{/if}
+				</li>
+			{/if}
+		{/each}
+	</ul>
+</section>
+
+<style>
+	.publications-section {
+		margin-bottom: 5rem;
+		background-color: #f4efea;
+		border-radius: 10px;
+		padding: 2.5rem;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+	}
+
+	.section-title {
+		margin-bottom: 1rem;
+		font-size: 2rem;
+		font-weight: 500;
+		font-family: 'Spectral', serif;
+		color: var(--accent-color);
+	}
+
+	.subtitle {
+		margin-bottom: 2.5rem;
+		font-style: italic;
+		font-size: 1.125rem;
+		color: #666;
+		line-height: 1.6;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	li {
+		margin-bottom: 2rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid rgba(100, 46, 26, 0.2);
+	}
+
+	li:last-child {
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+
+	a {
+		text-decoration: none;
+		display: block;
+		transition: transform 0.2s ease;
+	}
+
+	a:hover {
+		transform: translateX(5px);
+	}
+
+	.item-title {
+		font-weight: 500;
+		font-size: 1.25rem;
+		margin-bottom: 0.5rem;
+		transition: color 0.2s ease;
+		font-family: 'Spectral', serif;
+		color: var(--accent-color);
+	}
+
+	a:hover .item-title {
+		text-decoration: underline;
+		filter: brightness(1.2);
+	}
+
+	.description {
+		font-style: italic;
+		font-size: 1rem;
+		color: #555;
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	@media (min-width: 640px) {
+		.publications-section {
+			padding: 3rem;
+		}
+
+		.section-title {
+			font-size: 2.25rem;
+		}
+
+		.subtitle {
+			font-size: 1.25rem;
+		}
+
+		.item-title {
+			font-size: 1.375rem;
+		}
+
+		.description {
+			font-size: 1.125rem;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.section-title {
+			font-size: 2.5rem;
+		}
+
+		.item-title {
+			font-size: 1.5rem;
+		}
+	}
+</style>

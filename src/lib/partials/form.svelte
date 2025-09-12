@@ -5,17 +5,25 @@
 	let loadingDisplay = false;
 	let submittedDisplay = false;
 	let errorDisplay = false;
-	let errorText: string;
+	let errorText: string = '';
 	let client: string;
 	let email: string;
 
-	async function contact(event: Event) {
+	async function contact(_event: Event) {
 		formDisplay = false;
 		loadingDisplay = true;
-		const form = event.target as HTMLFormElement;
-		const data = new FormData(form);
+		// const form = event.target as HTMLFormElement;
+		// const data = new FormData(form);
 
-		const response = await fetch('/commissions', {
+		// Simulate form submission for now since no database endpoint exists
+		setTimeout(() => {
+			loadingDisplay = false;
+			submittedDisplay = true;
+		}, 1000);
+		
+		/* 
+		// Original code for when database endpoint is restored:
+		const response = await fetch('/career', {
 			method: 'POST',
 			body: data
 		});
@@ -32,6 +40,7 @@
 			errorText = message;
 			throw new Error(message);
 		}
+		*/
 	}
 </script>
 
@@ -64,7 +73,7 @@
 			Thank you, <span class="highlight">{client}</span>, for your submission!
 		</p>
 		<p class="message">
-			I'll be in touch shortly to <span class="highlight">{email}</span>.
+			Note: This is currently a demo form. For real inquiries, please reach out through other channels.
 		</p>
 	</div>
 {:else if errorDisplay}

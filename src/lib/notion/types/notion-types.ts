@@ -78,14 +78,6 @@ export interface BlogPost {
 	tags: string[];
 }
 
-/**
- * Commission request data
- */
-export interface CommissionRequest {
-	name: string;
-	email: string;
-	description: string;
-}
 
 /**
  * Subscriber data

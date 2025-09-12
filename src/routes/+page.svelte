@@ -14,7 +14,7 @@
 	<title>Tempo Immaterial</title>
 	<meta
 		name="description"
-		content="The studio of Alice Alexandra Moore. Creative work, ramblings, commissions and more."
+		content="The studio of Alice Alexandra Moore. Creative work, ramblings, career and more."
 	/>
 
 	<!-- Facebook Meta Tags -->
@@ -23,7 +23,7 @@
 	<meta property="og:title" content="Tempo Immaterial" />
 	<meta
 		property="og:description"
-		content="The studio of Alice Alexandra Moore. Creative work, ramblings, commissions and more."
+		content="The studio of Alice Alexandra Moore. Creative work, ramblings, career and more."
 	/>
 	<meta property="og:image" content="https://ik.imagekit.io/tempoimmaterial/ogimage.webp" />
 

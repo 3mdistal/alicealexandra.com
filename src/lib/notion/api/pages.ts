@@ -1,7 +1,7 @@
 import { notionClient, withErrorHandling } from './client';
-import { COMMISSIONS_DB, SUBSCRIBERS_DB, USER_ID_ALICE } from '$env/static/private';
+import { SUBSCRIBERS_DB, USER_ID_ALICE } from '$env/static/private';
 import type { PageObjectResponse } from '../types/notion-types';
-import type { CommissionRequest, Subscriber } from '../types/notion-types';
+import type { Subscriber } from '../types/notion-types';
 
 /**
  * Retrieve a page by its ID
