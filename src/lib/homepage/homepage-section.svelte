@@ -134,7 +134,7 @@
 
 		&.career {
 			top: 9%;
-			right: 38%;
+			right: 36%;
 		}
 
 		&.blog {
