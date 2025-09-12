@@ -1,6 +1,10 @@
 ## 0.7.0
 _12 Sep 2025_
 
+**Features**
+- New career route linked from the homepage.
+- New career pages: /career/vercel (Vercel work and publications) and /career/builderio (Builder.io projects).
+
 **Enhancements**
 - Content/IA update: archived the legacy commissions page and assets; added a documented archive at archived/commissions-page-backup/.
 - Updated homepage/section content and asset paths to use technotes imagery.
