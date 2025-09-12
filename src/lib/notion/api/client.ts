@@ -42,7 +42,8 @@ export function validateEnvironmentVariables(): void {
  * The Notion client instance for making API calls
  */
 export const notionClient = new Client({
-	auth: NOTION_KEY
+	auth: NOTION_KEY,
+	notionVersion: '2025-09-03'
 });
 
 /**
