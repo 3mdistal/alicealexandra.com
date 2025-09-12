@@ -4,14 +4,14 @@
 </script>
 
 <svelte:head>
-	<title>Builder.io Work | Technotes</title>
+	<title>Builder.io Work | Career</title>
 	<meta name="description" content="Work and content from Alice Alexandra Moore's time at Builder.io." />
 </svelte:head>
 
-<main style="background-color: {background}">
+<main class="career-detail-surface" style="--bg-color: {background}; --accent-color: {accent}">
 	<div class="hero">
 		<div class="hero-content">
-			<h1 style="color: {accent}">
+			<h1 class="accent-color">
 				Work from <span class="highlight">Builder.io</span>
 			</h1>
 			<p class="subtitle">
@@ -22,20 +22,25 @@
 	
 	<div class="content">
 		<div class="placeholder">
-			<h2 style="color: {accent}">Coming Soon</h2>
+			<h2 class="accent-color">Coming Soon</h2>
 			<p>This page will showcase content and technical writing from my work at Builder.io.</p>
 		</div>
 	</div>
 	
 	<div class="footer">
-		<a href="/technotes" class="back-link">← Back to Technotes</a>
+		<a href="/career" class="back-link">← Back to Career</a>
 	</div>
 </main>
 
 <style>
-	main {
+	.career-detail-surface {
 		min-height: 100vh;
 		font-family: 'Spectral', serif;
+		background-color: var(--bg-color);
+	}
+
+	.accent-color {
+		color: var(--accent-color);
 	}
 
 	.hero {
