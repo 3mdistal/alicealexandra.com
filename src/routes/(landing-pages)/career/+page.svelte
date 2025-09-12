@@ -1,6 +1,6 @@
 <script>
 	import Button from '$lib/icons/button.svelte';
-	import Technotes from '$lib/subpages/technotes.svelte';
+	import Career from '$lib/subpages/career.svelte';
 	import LandingPage from '$lib/subpages/landing-page.svelte';
 	import Rabbit from '../../../cms/images/technotes/rabbit-in-hat.webp';
 
@@ -9,14 +9,14 @@
 </script>
 
 <svelte:head>
-	<title>Technotes</title>
+	<title>Career</title>
 	<meta
 		name="description"
 		content="Let's collaborate! I specialize in organizing difficult to categorize work and creating custom designs and workflows to meet your needs. All work by Alice Alexandra Moore."
 	/>
 </svelte:head>
 
-<div style="background-color: {background}">
+<div class="career-page-surface" style="--bg-color: {background}; --accent-color: {accent}">
 	<LandingPage
 		header="let's get technical."
 		description="A digital notebook for all my tech advice and ramblings,
@@ -27,5 +27,11 @@
 	>
 		<Button slot="button" text="Explore." url="#content" {accent} {background} />
 	</LandingPage>
-	<Technotes {accent} {background} />
+	<Career {accent} {background} />
 </div>
+
+<style>
+	.career-page-surface {
+		background-color: var(--bg-color);
+	}
+</style>
