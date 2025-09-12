@@ -4,8 +4,8 @@ import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
 
 const today = new Date(Date.now()).toISOString();
 
-const queryParams: QueryDatabaseParameters = {
-	database_id: BLOGS_DB,
+const queryParams: DataSourceQueryParameters = {
+	data_source_id: BLOGS_DB,
 	filter: {
 		and: [
 			{
