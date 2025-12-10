@@ -5,9 +5,6 @@
 		ListBlockChildrenResponse,
 		TextRichTextItemResponse
 	} from '$lib/notion/types/notion-types';
-	import { onMount } from 'svelte';
-	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
-
 	export let data: Data;
 
 	type PoemResults = {
@@ -125,10 +122,6 @@
 		element.scrollIntoView({ behavior });
 	}
 
-	onMount(() => {
-		// Trigger background revalidation for future visitors
-		useBackgroundRevalidation('/studio/hfc');
-	});
 </script>
 
 <svelte:head>

@@ -1,61 +1,27 @@
-import { queryDatabase } from '$lib/notion/api/database';
-import { BYPASS_TOKEN, POEMS_SECTIONS_DB, ALL_SCRAPS_DB } from '$env/static/private';
-import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
-
-const sectionsQueryParams: DataSourceQueryParameters = {
-	data_source_id: POEMS_SECTIONS_DB,
-	filter: {
-		and: [
-			{
-				property: 'Published',
-				checkbox: {
-					equals: true
-				}
-			}
-		]
-	},
-	sorts: [
-		{
-			direction: 'ascending',
-			property: 'Sequence'
-		}
-	]
-};
-
-const scrapsQueryParams: DataSourceQueryParameters = {
-	data_source_id: ALL_SCRAPS_DB,
-	filter: {
-		and: [
-			{
-				property: 'Published',
-				checkbox: {
-					equals: true
-				}
-			}
-		]
-	},
-	sorts: [
-		{
-			direction: 'ascending',
-			property: 'Sequence'
-		}
-	]
-};
+import {
+	loadSections,
+	loadPoemsMeta,
+	transformSectionsToNotionFormat,
+	transformPoemsToNotionFormat
+} from '$lib/content/poems';
+import { BYPASS_TOKEN } from '$env/static/private';
 
 export async function load() {
 	try {
+		const [sections, poems] = await Promise.all([loadSections(), loadPoemsMeta()]);
+
 		return {
 			props: {
-				sections: await queryDatabase(sectionsQueryParams),
-				poems: await queryDatabase(scrapsQueryParams)
+				sections: transformSectionsToNotionFormat(sections),
+				poems: transformPoemsToNotionFormat(poems)
 			}
 		};
 	} catch (error) {
 		console.warn(
-			'Failed to load HFC content from Notion:',
+			'Failed to load HFC content from local files:',
 			error instanceof Error ? error.message : error
 		);
-		// Return empty arrays as fallback when Notion is not configured
+		// Return empty arrays as fallback
 		return {
 			props: {
 				sections: { results: [] },
