@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"vercel-build": "bash scripts/fetch-content.sh && vite build",
 		"migrate:poems": "npx tsx scripts/migrate-poems.ts",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
