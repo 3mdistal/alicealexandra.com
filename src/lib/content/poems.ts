@@ -4,12 +4,10 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { fileURLToPath } from 'url';
 
-// Get the project root directory (works in both local dev and Vercel)
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = path.resolve(__dirname, '../../..');
-const CONTENT_PATH = path.join(PROJECT_ROOT, 'content/poems');
+// Use process.cwd() which works during SvelteKit build
+// This points to project root during both local dev and Vercel build
+const CONTENT_PATH = path.join(process.cwd(), 'content', 'poems');
 
 export interface Section {
 	id: string;
