@@ -201,7 +201,7 @@ import type {
 
 	.back-link {
 		text-align: center;
-		margin-top: 3rem;
+		margin-top: 9rem;
 	}
 
 	.back-link a {
