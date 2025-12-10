@@ -25,10 +25,6 @@ export async function load() {
 			postcards
 		};
 	} catch (error) {
-		console.warn(
-			'Failed to load postcards from Notion:',
-			error instanceof Error ? error.message : error
-		);
 		// Return empty array as fallback when Notion is not configured
 		return {
 			postcards: []

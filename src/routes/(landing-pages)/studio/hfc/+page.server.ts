@@ -10,9 +10,7 @@ export const prerender = true;
 
 export async function load() {
 	try {
-		console.log('[HFC] Loading content from:', process.cwd());
 		const [sections, poems] = await Promise.all([loadSections(), loadAllPoems()]);
-		console.log('[HFC] Loaded', sections.length, 'sections and', poems.length, 'poems');
 
 		// Transform poems to Notion format AND include content
 		const poemsWithContent = {
@@ -43,8 +41,6 @@ export async function load() {
 			}
 		};
 	} catch (error) {
-		console.error('[HFC] Failed to load content:', error);
-		console.error('[HFC] CWD:', process.cwd());
 		// Re-throw during build so we see the actual error
 		throw error;
 	}

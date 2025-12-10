@@ -36,10 +36,6 @@ export async function load({ params }: { params: { slug: string } }) {
 
 			return { queryResponse, contentResponse };
 		} catch (error) {
-			console.warn(
-				'Failed to load postcard from Notion:',
-				error instanceof Error ? error.message : error
-			);
 			return { queryResponse: null, contentResponse: null };
 		}
 	}

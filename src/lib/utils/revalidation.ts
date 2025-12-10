@@ -35,23 +35,11 @@ export async function triggerRevalidation(
 		clearTimeout(timeoutId);
 
 		if (response.ok) {
-			if (!silent) {
-				console.log(`Successfully triggered revalidation for route: ${route}`);
-			}
 			return true;
 		} else {
-			const errorData = await response.json().catch(() => null);
-			if (!silent) {
-				console.warn(`Failed to revalidate route ${route}:`, errorData?.message || response.statusText);
-			}
 			return false;
 		}
 	} catch (error) {
-		if (error instanceof Error && error.name === 'AbortError') {
-			if (!silent) console.warn(`Revalidation timeout for route: ${route}`);
-		} else {
-			if (!silent) console.warn(`Revalidation error for route ${route}:`, error);
-		}
 		return false;
 	}
 }
