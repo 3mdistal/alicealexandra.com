@@ -4,8 +4,12 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
-const CONTENT_PATH = path.resolve('content/poems');
+// Get the project root directory (works in both local dev and Vercel)
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PROJECT_ROOT = path.resolve(__dirname, '../../..');
+const CONTENT_PATH = path.join(PROJECT_ROOT, 'content/poems');
 
 export interface Section {
 	id: string;
