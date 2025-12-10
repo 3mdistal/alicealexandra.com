@@ -1,19 +1,43 @@
 import {
 	loadSections,
-	loadPoemsMeta,
+	loadAllPoems,
 	transformSectionsToNotionFormat,
-	transformPoemsToNotionFormat
+	type Poem
 } from '$lib/content/poems';
-import { BYPASS_TOKEN } from '$env/static/private';
+
+// Prerender this page at build time - no runtime file access needed
+export const prerender = true;
 
 export async function load() {
 	try {
-		const [sections, poems] = await Promise.all([loadSections(), loadPoemsMeta()]);
+		const [sections, poems] = await Promise.all([loadSections(), loadAllPoems()]);
+
+		// Transform poems to Notion format AND include content
+		const poemsWithContent = {
+			results: poems.map((poem: Poem) => ({
+				id: poem.id,
+				content: poem.content, // Include the actual content
+				properties: {
+					Name: {
+						type: 'title' as const,
+						title: [{ plain_text: poem.title }]
+					},
+					sectionName: {
+						type: 'formula' as const,
+						formula: { string: poem.sectionName }
+					},
+					NotLineated: {
+						type: 'checkbox' as const,
+						checkbox: poem.notLineated
+					}
+				}
+			}))
+		};
 
 		return {
 			props: {
 				sections: transformSectionsToNotionFormat(sections),
-				poems: transformPoemsToNotionFormat(poems)
+				poems: poemsWithContent
 			}
 		};
 	} catch (error) {
@@ -21,7 +45,6 @@ export async function load() {
 			'Failed to load HFC content from local files:',
 			error instanceof Error ? error.message : error
 		);
-		// Return empty arrays as fallback
 		return {
 			props: {
 				sections: { results: [] },
@@ -30,11 +53,3 @@ export async function load() {
 		};
 	}
 }
-
-export const config = {
-	isr: {
-		expiration: false,
-		bypassToken: BYPASS_TOKEN
-	},
-	runtime: 'nodejs20.x'
-};
