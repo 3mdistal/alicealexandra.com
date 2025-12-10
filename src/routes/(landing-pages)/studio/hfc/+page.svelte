@@ -2,16 +2,13 @@
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import type {
 		BlockObjectResponse,
-		ListBlockChildrenResponse,
 		TextRichTextItemResponse
 	} from '$lib/notion/types/notion-types';
-	import { onMount } from 'svelte';
-	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
-
 	export let data: Data;
 
 	type PoemResults = {
 		id: string;
+		content: string; // Pre-loaded markdown content
 		properties: {
 			Name: {
 				type: 'title';
@@ -85,37 +82,87 @@
 	} = data;
 
 	let open: Record<string, boolean> = {};
+
+	// Pre-parse all poem content from markdown to block format at load time
 	let poemContent: Record<string, BlockObjectResponse[]> = {};
-	let poemLoading: Record<string, boolean> = {};
+	for (const poem of poems) {
+		poemContent[poem.id] = parseMarkdownToBlocks(poem.content);
+	}
 
 	let Piano =
 		'https://ik.imagekit.io/tempoimmaterial/tr:w-1500/hymns%20for%20calliope/ruined%20piano?updatedAt=1694350822403';
 
-	const fetchContent = async (id: string) => {
-		if (poemContent[id]) return;
-		const response = await fetch('/studio/hfc/api', {
-			method: 'POST',
-			body: JSON.stringify({ id }),
-			headers: {
-				'content-type': 'application/json'
+	// Parse markdown content into block format for TextMacro component
+	function parseMarkdownToBlocks(content: string): BlockObjectResponse[] {
+		const stanzas = content.split(/\n\n+/).filter((s) => s.trim());
+		return stanzas.map((stanza) => ({
+			type: 'paragraph',
+			paragraph: {
+				rich_text: parseMarkdownToRichText(stanza)
 			}
-		});
+		})) as unknown as BlockObjectResponse[];
+	}
 
-		const content: ListBlockChildrenResponse = await response.json();
-		poemContent[id] = content.results as BlockObjectResponse[];
-	};
+	function parseMarkdownToRichText(text: string) {
+		// Simple regex-based parsing for italics
+		const parts: Array<{
+			type: 'text';
+			plain_text: string;
+			text: { content: string; link: null };
+			annotations: {
+				bold: boolean;
+				italic: boolean;
+				strikethrough: boolean;
+				underline: boolean;
+				code: boolean;
+				color: 'default';
+			};
+			href: null;
+		}> = [];
 
-	async function toggleOpen(poem: string) {
-		if (open[poem] === true) {
-			open[poem] = false;
-		} else if (open[poem] === false && poemContent[poem]) {
-			open[poem] = true;
-		} else {
-			poemLoading[poem] = true;
-			await fetchContent(poem);
-			poemLoading[poem] = false;
-			open[poem] = true;
+		// Match *italic* patterns
+		const regex = /\*([^*]+)\*/g;
+		let lastIndex = 0;
+		let match;
+
+		while ((match = regex.exec(text)) !== null) {
+			// Add text before the match
+			if (match.index > lastIndex) {
+				const plainText = text.slice(lastIndex, match.index);
+				parts.push(createRichTextItem(plainText, false));
+			}
+			// Add the italic text
+			parts.push(createRichTextItem(match[1], true));
+			lastIndex = match.index + match[0].length;
 		}
+
+		// Add remaining text
+		if (lastIndex < text.length) {
+			parts.push(createRichTextItem(text.slice(lastIndex), false));
+		}
+
+		return parts.length > 0 ? parts : [createRichTextItem(text, false)];
+	}
+
+	function createRichTextItem(content: string, italic: boolean) {
+		return {
+			type: 'text' as const,
+			plain_text: content,
+			text: { content, link: null },
+			annotations: {
+				bold: false,
+				italic,
+				strikethrough: false,
+				underline: false,
+				code: false,
+				color: 'default' as const
+			},
+			href: null
+		};
+	}
+
+	function toggleOpen(poemId: string) {
+		open[poemId] = !open[poemId];
 	}
 
 	// eslint-disable-next-line
@@ -125,10 +172,6 @@
 		element.scrollIntoView({ behavior });
 	}
 
-	onMount(() => {
-		// Trigger background revalidation for future visitors
-		useBackgroundRevalidation('/studio/hfc');
-	});
 </script>
 
 <svelte:head>
@@ -210,17 +253,10 @@
 							<a
 								class="poem-link"
 								on:click|preventDefault={() => toggleOpen(poem.id)}
-								on:mouseenter={() => {
-									fetchContent(poem.id);
-								}}
 								href=""
 							>
 								<h3 class="poem-title">
-									{#if poemLoading[poem.id] === false || !poemLoading[poem.id]}
-										{poem.properties.Name.title[0].plain_text}
-									{:else}
-										Loading...
-									{/if}
+									{poem.properties.Name.title[0].plain_text}
 								</h3>
 							</a>
 							{#if open[poem.id] === true}
