@@ -215,9 +215,11 @@ function blockToMarkdown(block: any): string {
 			return `### ${richTextToMarkdown(block.heading_3.rich_text)}`;
 
 		case 'bulleted_list_item':
+			// Prefix will be added, marker handled in fetchPostContent for grouping
 			return `- ${richTextToMarkdown(block.bulleted_list_item.rich_text)}`;
 
 		case 'numbered_list_item':
+			// Number will be replaced in fetchPostContent for proper sequencing
 			return `1. ${richTextToMarkdown(block.numbered_list_item.rich_text)}`;
 
 		case 'quote':
@@ -279,6 +281,11 @@ function blockToMarkdown(block: any): string {
 	}
 }
 
+// Check if a block type is a list item
+function isListItem(type: string): boolean {
+	return type === 'bulleted_list_item' || type === 'numbered_list_item';
+}
+
 // Fetch and convert blog post content blocks to markdown
 async function fetchPostContent(postId: string): Promise<string> {
 	const response = await notion.blocks.children.list({
@@ -286,32 +293,81 @@ async function fetchPostContent(postId: string): Promise<string> {
 		page_size: 100
 	});
 
-	const lines: string[] = [];
+	const blocks = response.results as any[];
+	const outputParts: string[] = [];
+	let i = 0;
 
-	for (const block of response.results as any[]) {
-		const markdown = blockToMarkdown(block);
-		if (markdown) {
-			lines.push(markdown);
-		}
+	while (i < blocks.length) {
+		const block = blocks[i];
+		const blockType = block.type;
 
-		// Handle blocks with children (nested lists, toggles, etc.)
-		if (block.has_children && block.type !== 'toggle') {
-			const children = await notion.blocks.children.list({
-				block_id: block.id,
-				page_size: 100
-			});
+		// Group consecutive list items together
+		if (isListItem(blockType)) {
+			const listItems: string[] = [];
+			let numberedIndex = 1;
 
-			for (const child of children.results as any[]) {
-				const childMarkdown = blockToMarkdown(child);
-				if (childMarkdown) {
-					// Indent nested content
-					lines.push('  ' + childMarkdown);
+			// Collect all consecutive list items of the same type
+			while (i < blocks.length && blocks[i].type === blockType) {
+				const currentBlock = blocks[i];
+				let markdown = blockToMarkdown(currentBlock);
+
+				// For numbered lists, replace "1." with the actual number
+				if (blockType === 'numbered_list_item') {
+					markdown = markdown.replace(/^1\./, `${numberedIndex}.`);
+					numberedIndex++;
+				}
+
+				listItems.push(markdown);
+
+				// Handle nested content within list items
+				if (currentBlock.has_children) {
+					const children = await notion.blocks.children.list({
+						block_id: currentBlock.id,
+						page_size: 100
+					});
+
+					for (const child of children.results as any[]) {
+						const childMarkdown = blockToMarkdown(child);
+						if (childMarkdown) {
+							// Indent nested content under list item
+							listItems.push('  ' + childMarkdown);
+						}
+					}
+				}
+
+				i++;
+			}
+
+			// Join list items with single newlines to keep them as one list
+			outputParts.push(listItems.join('\n'));
+		} else {
+			// Non-list block
+			const markdown = blockToMarkdown(block);
+			if (markdown) {
+				outputParts.push(markdown);
+			}
+
+			// Handle blocks with children (toggles, etc.)
+			if (block.has_children && block.type !== 'toggle') {
+				const children = await notion.blocks.children.list({
+					block_id: block.id,
+					page_size: 100
+				});
+
+				for (const child of children.results as any[]) {
+					const childMarkdown = blockToMarkdown(child);
+					if (childMarkdown) {
+						outputParts.push('  ' + childMarkdown);
+					}
 				}
 			}
+
+			i++;
 		}
 	}
 
-	return lines.join('\n\n');
+	// Join different blocks with double newlines (paragraph breaks)
+	return outputParts.join('\n\n');
 }
 
 // Generate markdown file content for a blog post
