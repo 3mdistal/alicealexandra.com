@@ -21,12 +21,11 @@ export interface Section {
 }
 
 export interface PoemMeta {
-	id: string;
+	id: string; // Derived from filename (slug)
 	title: string;
 	sectionName: string;
 	notLineated: boolean;
 	sequence: number;
-	notionId: string;
 }
 
 export interface Poem extends PoemMeta {
@@ -38,7 +37,6 @@ interface PoemFrontmatter {
 	section: string;
 	sequence: number;
 	notLineated: boolean;
-	notionId: string;
 }
 
 /**
@@ -106,13 +104,15 @@ export async function loadPoemsMeta(): Promise<PoemMeta[]> {
 		const content = await fs.readFile(filePath, 'utf-8');
 		const { frontmatter } = parseFrontmatter(content);
 
+		// Use filename (without .md) as the unique ID
+		const slug = file.replace(/\.md$/, '');
+
 		poems.push({
-			id: frontmatter.notionId,
+			id: slug,
 			title: frontmatter.title,
 			sectionName: frontmatter.section,
 			notLineated: frontmatter.notLineated,
-			sequence: frontmatter.sequence,
-			notionId: frontmatter.notionId
+			sequence: frontmatter.sequence
 		});
 	}
 
@@ -121,23 +121,18 @@ export async function loadPoemsMeta(): Promise<PoemMeta[]> {
 }
 
 /**
- * Load a single poem by its notionId (for lazy loading content)
+ * Load a single poem by its slug (filename without .md extension)
  */
-export async function loadPoemContent(notionId: string): Promise<string> {
-	const files = await fs.readdir(CONTENT_PATH);
-	const mdFiles = files.filter((f) => f.endsWith('.md'));
+export async function loadPoemContent(slug: string): Promise<string> {
+	const filePath = path.join(CONTENT_PATH, `${slug}.md`);
 
-	for (const file of mdFiles) {
-		const filePath = path.join(CONTENT_PATH, file);
+	try {
 		const content = await fs.readFile(filePath, 'utf-8');
-		const { frontmatter, body } = parseFrontmatter(content);
-
-		if (frontmatter.notionId === notionId) {
-			return body;
-		}
+		const { body } = parseFrontmatter(content);
+		return body;
+	} catch {
+		throw new Error(`Poem with slug "${slug}" not found`);
 	}
-
-	throw new Error(`Poem with notionId "${notionId}" not found`);
 }
 
 /**
@@ -154,13 +149,15 @@ export async function loadAllPoems(): Promise<Poem[]> {
 		const fileContent = await fs.readFile(filePath, 'utf-8');
 		const { frontmatter, body } = parseFrontmatter(fileContent);
 
+		// Use filename (without .md) as the unique ID
+		const slug = file.replace(/\.md$/, '');
+
 		poems.push({
-			id: frontmatter.notionId,
+			id: slug,
 			title: frontmatter.title,
 			sectionName: frontmatter.section,
 			notLineated: frontmatter.notLineated,
 			sequence: frontmatter.sequence,
-			notionId: frontmatter.notionId,
 			content: body
 		});
 	}
