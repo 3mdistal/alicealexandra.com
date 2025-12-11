@@ -435,12 +435,16 @@
 			color: var(--blog-accent);
 		}
 
-		/* Ensure italic and bold text inherit color properly (Safari dark mode fix) */
+		/* Ensure italic and bold text inherit color and have proper styling */
 		:global(.notion-container em),
-		:global(.notion-container i),
+		:global(.notion-container i) {
+			color: inherit;
+		}
+
 		:global(.notion-container strong),
 		:global(.notion-container b) {
 			color: inherit;
+			font-weight: 600;
 		}
 	}
 
