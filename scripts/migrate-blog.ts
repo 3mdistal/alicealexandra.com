@@ -104,6 +104,43 @@ function richTextToMarkdown(richText: RichTextItem[]): string {
 		.join('');
 }
 
+// Utility: Convert rich text array to HTML (for use inside HTML elements like callouts)
+function richTextToHtml(richText: RichTextItem[]): string {
+	return richText
+		.map((item) => {
+			if (item.type !== 'text' || !item.text) {
+				return escapeHtml(item.plain_text);
+			}
+
+			let text = escapeHtml(item.text.content);
+			const annotations = item.annotations;
+
+			if (annotations) {
+				if (annotations.code) text = `<code>${text}</code>`;
+				if (annotations.bold) text = `<strong>${text}</strong>`;
+				if (annotations.italic) text = `<em>${text}</em>`;
+				if (annotations.strikethrough) text = `<del>${text}</del>`;
+			}
+
+			if (item.href || item.text.link?.url) {
+				const url = item.href || item.text.link?.url;
+				text = `<a href="${url}">${text}</a>`;
+			}
+
+			return text;
+		})
+		.join('');
+}
+
+// Utility: Escape HTML special characters
+function escapeHtml(text: string): string {
+	return text
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;');
+}
+
 // Utility: Slugify a title for filename (fallback if no slug property)
 function slugify(title: string): string {
 	return title
@@ -247,8 +284,9 @@ function blockToMarkdown(block: any): string {
 
 		case 'callout':
 			const icon = block.callout.icon?.emoji || '💡';
-			const calloutText = richTextToMarkdown(block.callout.rich_text);
-			return `> ${icon} ${calloutText}`;
+			// Use HTML conversion since callout is output as HTML div
+			const calloutText = richTextToHtml(block.callout.rich_text);
+			return `<div class="callout"><span>${icon}</span><span>${calloutText}</span></div>`;
 
 		case 'toggle':
 			// Toggles with children would need recursive handling
