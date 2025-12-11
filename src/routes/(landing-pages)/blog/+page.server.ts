@@ -1,46 +1,17 @@
-import { queryDatabase } from '$lib/notion/api/database';
-import { BYPASS_TOKEN, BLOGS_DB } from '$env/static/private';
-import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
+import { loadPostsMeta, transformPostsToNotionFormat } from '$lib/content/blog';
 
-const today = new Date(Date.now()).toISOString();
-
-const queryParams: DataSourceQueryParameters = {
-	data_source_id: BLOGS_DB,
-	filter: {
-		and: [
-			{
-				property: 'Publication Date',
-				date: {
-					on_or_before: today
-				}
-			}
-		]
-	},
-	sorts: [
-		{
-			direction: 'descending',
-			property: 'Publication Date'
-		}
-	]
-};
+// Prerender this page at build time - no runtime API calls needed
+export const prerender = true;
 
 export async function load() {
 	try {
+		const posts = await loadPostsMeta();
 		return {
-			post: await queryDatabase(queryParams)
+			post: transformPostsToNotionFormat(posts)
 		};
 	} catch (error) {
-		// Return empty array as fallback when Notion is not configured
-		return {
-			post: { results: [] }
-		};
+		console.error('Failed to load blog posts:', error);
+		// Re-throw during build so we see the actual error
+		throw error;
 	}
 }
-
-export const config = {
-	isr: {
-		expiration: false,
-		bypassToken: BYPASS_TOKEN
-	},
-	runtime: 'nodejs20.x'
-};
