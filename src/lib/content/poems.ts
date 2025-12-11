@@ -48,11 +48,11 @@ function parseFrontmatter(content: string): { frontmatter: PoemFrontmatter; body
 	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
 	const match = content.match(frontmatterRegex);
 
-	if (!match) {
+	if (!match || !match[1]) {
 		throw new Error('No frontmatter found in markdown file');
 	}
 
-	const frontmatterStr = match[1];
+	const frontmatterStr: string = match[1];
 	const body = content.slice(match[0].length);
 
 	// Parse YAML-like frontmatter (simple key: value pairs)
