@@ -1,55 +1,23 @@
-import { queryDatabase } from '$lib/notion/api/database';
-import { listChildren } from '$lib/notion/api/blocks';
-import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
-import { BYPASS_TOKEN, BLOGS_DB } from '$env/static/private';
+import { loadPostsMeta, loadPostBySlug, transformPostToNotionFormat } from '$lib/content/blog';
+import { error } from '@sveltejs/kit';
 
-export async function load({ params }: { params: { slug: string } }) {
-	async function fetchContent(slug: string) {
-		try {
-			const queryParams: DataSourceQueryParameters = {
-				data_source_id: BLOGS_DB,
-				filter: {
-					and: [
-						{
-							property: 'Slug',
-							url: {
-								equals: slug
-							}
-						}
-					]
-				}
-			};
+// Prerender all blog posts at build time
+export const prerender = true;
 
-			// Query blogs database for blog with matching slug.
-			const queryResponse = await queryDatabase(queryParams);
-
-						if (queryResponse.results.length === 0) {
-				return { queryResponse: null, contentResponse: null };
-			}
-
-			// Get the content of the blog post.
-			const firstResult = queryResponse.results[0];
-			if (!firstResult) {
-				return { queryResponse: null, contentResponse: null };
-			}
-			const contentResponse = await listChildren(firstResult.id);
-
-			return { queryResponse, contentResponse };
-		} catch (error) {
-			return { queryResponse: null, contentResponse: null };
-		}
-	}
-
-	const result = await fetchContent(params['slug'] as string);
-	return {
-		post: result
-	};
+// Generate all blog post routes at build time
+export async function entries() {
+	const posts = await loadPostsMeta();
+	return posts.map((post) => ({ slug: post.slug }));
 }
 
-export const config = {
-	isr: {
-		expiration: false,
-		bypassToken: BYPASS_TOKEN
-	},
-	runtime: 'nodejs20.x'
-};
+export async function load({ params }: { params: { slug: string } }) {
+	const post = await loadPostBySlug(params.slug);
+
+	if (!post) {
+		throw error(404, 'Blog post not found');
+	}
+
+	return {
+		post: transformPostToNotionFormat(post)
+	};
+}

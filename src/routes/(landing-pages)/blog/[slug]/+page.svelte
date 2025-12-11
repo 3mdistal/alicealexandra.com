@@ -1,14 +1,11 @@
 <script lang="ts">
-	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
-		import BlogHeader from '$lib/components/blog-header.svelte';
+	import BlogHeader from '$lib/components/blog-header.svelte';
 	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
-	import { triggerRevalidation } from '$lib/utils/revalidation';
-	import { page } from '$app/state';
-	import { subAndSuper, wrapLists, createTOC } from '$lib/notion/utils/blog-helpers';
+	import { marked } from 'marked';
+	import { subAndSuper, createTOC } from '$lib/notion/utils/blog-helpers';
 	import type {
 		PageObjectResponse,
-		RichTextPropertyItemObjectResponse,
 		UrlPropertyItemObjectResponse,
 		SelectPropertyItemObjectResponse,
 		FormulaPropertyItemObjectResponse,
@@ -16,19 +13,20 @@
 		QueryDatabaseResponse
 	} from '$lib/notion/types/notion-types';
 
-		let context: HTMLElement;
+	let context: HTMLElement;
 
 	const runBlogHelpers = async () => {
 		await tick();
-		subAndSuper(context);
-		wrapLists(context);
-		createTOC();
+		if (context) {
+			subAndSuper(context);
+			createTOC();
+		}
 	};
 
 	export let data: {
 		post: {
 			queryResponse: QueryDatabaseResponse | null;
-			contentResponse: any | null;
+			contentResponse: { results: any[]; markdownContent?: string } | null;
 		};
 	};
 
@@ -38,7 +36,11 @@
 
 	const pageCover = blogPost?.cover;
 
-	const content = contentResponse?.results || [];
+	// Get markdown content
+	const markdownContent = contentResponse?.markdownContent || '';
+
+	// Convert markdown to HTML
+	const htmlContent = marked(markdownContent) as string;
 
 	// Type guards for Notion properties
 	function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {
@@ -53,22 +55,12 @@
 		return prop?.type === 'formula';
 	}
 
-	function isRichTextProperty(prop: any): prop is RichTextPropertyItemObjectResponse {
-		return prop?.type === 'rich_text';
-	}
-
 	function isFilesProperty(prop: any): prop is FilesPropertyItemObjectResponse {
 		return prop?.type === 'files';
 	}
 
-	function isDateProperty(prop: any): prop is any {
-		return prop?.type === 'date';
-	}
-
 	const {
 		Name: title,
-		Subtitle: subtitle,
-		Summary: summary,
 		OGDescription: ogDescription,
 		ReadTime: readingTime,
 		Category: category,
@@ -102,14 +94,6 @@
 	function formatDate(prop: any) {
 		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
 			return prop.formula.string;
-		}
-		if (isDateProperty(prop) && prop.date?.start) {
-			const date = new Date(prop.date.start);
-			return date.toLocaleDateString('en-US', {
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric'
-			});
 		}
 		return '';
 	}
@@ -155,8 +139,6 @@
 
 	onMount(() => {
 		runBlogHelpers();
-		// Trigger background revalidation for future visitors
-		triggerRevalidation(page.url.pathname);
 	});
 </script>
 
@@ -195,9 +177,9 @@
 	{/if}
 
 	<div class="blog-container">
-		{#if content.length > 0}
+		{#if htmlContent}
 			<div class="notion-container" bind:this={context}>
-				<NotionPageParser results={content} />
+				{@html htmlContent}
 			</div>
 		{:else}
 			<p>No content available.</p>
@@ -348,25 +330,16 @@
 			font-style: italic;
 		}
 
-		:global(.notion-container .image) {
+		:global(.notion-container img) {
 			margin-top: 2em;
 			margin-bottom: 2em;
-			padding-right: var(--blog-spacing-xs);
+			border-radius: 1.5rem;
+			width: 100%;
+			height: auto;
+			object-fit: contain;
 
-			@media (min-width: 640px) {
-				padding-right: 3em;
-				padding-left: 1em;
-			}
-
-			& img {
-				border-radius: 1.5rem;
-				width: 100%;
-				height: 100%;
-				object-fit: contain;
-
-				@media (min-width: 1024px) {
-					object-position: left;
-				}
+			@media (min-width: 1024px) {
+				object-position: left;
 			}
 		}
 
