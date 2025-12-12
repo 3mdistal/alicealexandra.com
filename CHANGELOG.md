@@ -1,3 +1,18 @@
+## 12 Dec 2025
+
+**Features**
+- News page refresh: added a tabbed `/news` layout (Studio + Site updates, with placeholders for About/Career/Blog).
+- Added site update summaries on `/news`, parsed automatically from `CHANGELOG.md`.
+
+**Enhancements**
+- Added action labels for Studio updates (`Added`/`Edited`/`Removed`) and improved styling for tabs/entries.
+- Synced `/news` tab + filter state to URL params for shareable, persistent views.
+- Improved changelog/news rendering: inline code support, preformatted code styling, and safer HTML escaping in summaries.
+
+**Refactors**
+- Standardized `CHANGELOG.md` headings to date-only labels (no version headings); updated changelog summary parsing accordingly.
+- Refactored Studio news entries structure for maintainability (segments/links) and expanded content coverage.
+
 ## 11 Dec 2025
 
 **Features**
