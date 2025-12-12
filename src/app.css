@@ -7,7 +7,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	color: light-dark(#1f2937, #e5e7eb);
+	color: #1f2937;
 	font-weight: 300;
 	font-family: 'Lato', sans-serif;
 }
