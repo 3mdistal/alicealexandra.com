@@ -1,4 +1,4 @@
-## 12 Dec 2025
+## 11 Dec 2025
 
 **Features**
 - Migrated HFC poems from Notion to local markdown content loaded at build time. (#23)
