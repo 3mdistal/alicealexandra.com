@@ -70,8 +70,15 @@ function parseFrontmatter(content: string): { frontmatter: PostcardFrontmatter; 
  */
 export async function loadPostcardsMeta(): Promise<PostcardMeta[]> {
 	const metadataPath = path.join(CONTENT_PATH, 'metadata.json');
-	const content = await fs.readFile(metadataPath, 'utf-8');
-	return JSON.parse(content);
+	try {
+		const content = await fs.readFile(metadataPath, 'utf-8');
+		return JSON.parse(content);
+	} catch (err: any) {
+		// If the postcards folder hasn't been added to teenylilcontent yet, don't fail the build.
+		// This keeps the /studio/postcards page working (it will show the empty state).
+		if (err?.code === 'ENOENT') return [];
+		throw err;
+	}
 }
 
 /**
