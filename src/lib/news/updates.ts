@@ -2,6 +2,8 @@ export type NewsMainTab = 'about' | 'studio' | 'career' | 'blog' | 'site';
 
 export type StudioNewsCategory = 'hfc' | 'postcards';
 
+export type StudioNewsAction = 'added' | 'edited' | 'removed';
+
 export type NewsTextSegment =
 	| { type: 'text'; text: string }
 	| { type: 'link'; text: string; href: string }
@@ -12,6 +14,7 @@ export interface NewsEntry {
 	date: string; // ISO (YYYY-MM-DD)
 	area: 'studio';
 	category: StudioNewsCategory;
+	action: StudioNewsAction;
 	segments: NewsTextSegment[];
 }
 
@@ -30,6 +33,7 @@ export const STUDIO_NEWS: NewsEntry[] = [
 		date: '2025-12-01',
 		area: 'studio',
 		category: 'postcards',
+		action: 'added',
 		segments: [
 			{ type: 'text', text: 'New postcard: ' },
 			{
@@ -45,6 +49,7 @@ export const STUDIO_NEWS: NewsEntry[] = [
 		date: '2025-12-11',
 		area: 'studio',
 		category: 'hfc',
+		action: 'added',
 		segments: [
 			{ type: 'text', text: 'New hymn: ' },
 			{ type: 'link', text: '“the death of baldur”', href: '/studio/hfc' },
@@ -56,6 +61,7 @@ export const STUDIO_NEWS: NewsEntry[] = [
 		date: '2025-12-11',
 		area: 'studio',
 		category: 'hfc',
+		action: 'added',
 		segments: [
 			{ type: 'text', text: 'New hymn: ' },
 			{ type: 'link', text: '“portrait of the body as a failed industry”', href: '/studio/hfc' },
