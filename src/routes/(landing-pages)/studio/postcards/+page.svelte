@@ -3,8 +3,6 @@
 	import PostcardModal from '$lib/components/postcard-modal.svelte';
 	import { preloadData, pushState, goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { onMount } from 'svelte';
-	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
 
 	let { data } = $props();
 	let rotations: number[] = [];
@@ -39,10 +37,6 @@
 		return rotation;
 	}
 
-	onMount(() => {
-		// Trigger background revalidation for future visitors
-		useBackgroundRevalidation('/studio/postcards');
-	});
 </script>
 
 <svelte:head>

@@ -1,15 +1,12 @@
 <script lang="ts">
-	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { page } from '$app/state';
-	import type {
-		PageObjectResponse,
-		UrlPropertyItemObjectResponse
-	} from '$lib/notion/types/notion-types';
+	import { marked } from 'marked';
+	import type { Postcard } from '$lib/content/postcards';
 
 	interface Props {
-		data: any;
+		data: { postcard: Postcard };
 		onclose: () => void;
 	}
 
@@ -64,55 +61,8 @@
 		return { width, height };
 	}
 
-	const { queryResponse, contentResponse } = data.postcard || {};
-	const postcard = queryResponse?.results?.[0] as PageObjectResponse | undefined;
-	const content = contentResponse?.results || [];
-
-	// Type guards for Notion properties
-	function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {
-		return prop?.type === 'url';
-	}
-
-	// Note: rich text property guard not needed in this component
-
-	const {
-		Title: title,
-		Description: description,
-		'Hero Image': heroImage,
-		Slug: slug
-	} = postcard?.properties || {};
-
-	// Helper function to safely get text content
-	function getTextContent(prop: any) {
-		if (prop?.type === 'title') {
-			return prop.title?.[0]?.plain_text || '';
-		}
-		return prop?.rich_text?.[0]?.plain_text || '';
-	}
-
-	// Helper function to get URL from URL property
-	function getUrl(prop: any) {
-		if (isUrlProperty(prop)) {
-			return prop.url;
-		}
-		return '';
-	}
-
-	// Helper function to get slug (can be URL or rich text)
-	function getSlug(prop: any) {
-		if (prop?.type === 'url') {
-			return prop.url || '';
-		}
-		if (prop?.type === 'rich_text') {
-			return prop.rich_text?.[0]?.plain_text || '';
-		}
-		return '';
-	}
-
-	const postcardTitle = getTextContent(title);
-	const postcardDescription = getTextContent(description);
-	const postcardHeroImage = getUrl(heroImage);
-	const postcardSlug = getSlug(slug);
+	const postcard = data.postcard;
+	const htmlContent = marked(postcard.content) as string;
 
 	onMount(() => {
 		// Prevent background scroll
@@ -340,6 +290,7 @@
 	}
 </script>
 
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
 	class="modal-backdrop"
 	bind:this={modalElement}
@@ -367,21 +318,21 @@
 			</div>
 
 			{#if postcard}
-				{#if postcardHeroImage}
-					<div class="modal-hero" style="background-image: url('{postcardHeroImage}')"></div>
+				{#if postcard.heroImage}
+					<div class="modal-hero" style="background-image: url('{postcard.heroImage}')"></div>
 				{/if}
 
 				<header class="modal-header">
-					<h1 id="modal-title">{postcardTitle}</h1>
-					{#if postcardDescription}
-						<p class="description">{postcardDescription}</p>
+					<h1 id="modal-title">{postcard.title}</h1>
+					{#if postcard.description}
+						<p class="description">{postcard.description}</p>
 					{/if}
 				</header>
 
 				<article class="modal-content-area">
-					{#if content.length > 0}
+					{#if htmlContent}
 						<div class="notion-container">
-							<NotionPageParser results={content} />
+							{@html htmlContent}
 						</div>
 					{:else}
 						<p>No content available.</p>
@@ -449,8 +400,7 @@
 		pointer-events: none;
 	}
 
-	.close-button,
-	.external-link-button {
+	.close-button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -466,8 +416,7 @@
 		text-decoration: none;
 	}
 
-	.close-button:hover,
-	.external-link-button:hover {
+	.close-button:hover {
 		background: white;
 	}
 
