@@ -6,8 +6,18 @@
 	// Read the CHANGELOG.md content
 	import changelog from '../../../../CHANGELOG.md?raw';
 
+	const GITHUB_REPO = '3mdistal/alicealexandra.com';
+
+	function linkifyGithubPrRefs(markdown: string): string {
+		// Convert "(#123)" → "([#123](https://github.com/<repo>/pull/123))"
+		// Keeps the changelog readable in raw markdown while rendering clickable links on /news.
+		return markdown.replace(/\(#(\d+)\)/g, (_match, prNumber: string) => {
+			return `([#${prNumber}](https://github.com/${GITHUB_REPO}/pull/${prNumber}))`;
+		});
+	}
+
 	// Parse markdown to HTML
-	const changelogHtml = marked(changelog);
+	const changelogHtml = marked(linkifyGithubPrRefs(changelog));
 
 	onDestroy(() => {
 		pageState.set('home');

@@ -1,3 +1,29 @@
+## 0.8.0
+_12 Dec 2025_
+
+**Features**
+- Migrated HFC poems from Notion to local markdown content loaded at build time. (#23)
+- Migrated blog from Notion to static markdown (including `posts.json` listing metadata). (#24)
+- Migrated postcards to static markdown and updated related components/loaders. (#25)
+
+**Enhancements**
+- Added build-time private content fetch for Vercel via `scripts/fetch-content.sh` and `vercel-build`.
+- Added `docs/NOTION_TO_LOCAL_MIGRATION.md` with a full migration blueprint.
+- Updated `@notionhq/client` to v5.3.0.
+
+**Refactors**
+- Switched content routes to full static prerendering: load all content at build time (no runtime Notion fetches).
+- Added build-time content loaders under `src/lib/content/` for blog/poems/postcards.
+- Updated poem IDs/slugs to derive from filenames; hardened frontmatter parsing for missing metadata.
+
+**Patches**
+- Improved blog migration markdown output (notably list formatting).
+- Styling fixes for callouts, dark mode italics, and strong text weight.
+- Improved error handling for postcards metadata loading; minor CSS color consistency tweak.
+
+**Breaking changes**
+- Blog/poems/postcards content is now expected to be available at build time (Vercel builds can fetch content via `GITHUB_TOKEN`).
+
 ## 0.7.0
 _12 Sep 2025_
 
