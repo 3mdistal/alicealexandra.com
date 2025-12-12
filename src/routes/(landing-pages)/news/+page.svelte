@@ -244,7 +244,7 @@
 								{#if item.items.length > 0}
 									<ul class="entry-bullets">
 										{#each item.items as bullet (bullet)}
-											<li>{bullet}</li>
+											<li>{@html bullet}</li>
 										{/each}
 									</ul>
 								{/if}
@@ -534,6 +534,16 @@
 		margin: 0.25rem 0;
 	}
 
+	/* Inline code in the Site tab cards (generated from `parseChangelogSummaries`) */
+	.entry-text :global(code) {
+		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
+		background-color: rgba(31, 41, 55, 0.08);
+		padding: 0.12rem 0.3rem;
+		border-radius: 4px;
+		font-size: 0.95em;
+		word-break: break-word;
+	}
+
 	.entry-title {
 		font-style: italic;
 	}
@@ -570,6 +580,33 @@
 
 	.changelog-content :global(p) {
 		margin-bottom: 1rem;
+	}
+
+	/* Markdown code styling (CHANGELOG.md renders via `marked` → <code>/<pre>) */
+	.changelog-content :global(code) {
+		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
+		background-color: rgba(31, 41, 55, 0.08);
+		padding: 0.15rem 0.35rem;
+		border-radius: 4px;
+		font-size: 0.95em;
+		word-break: break-word;
+	}
+
+	.changelog-content :global(pre) {
+		background-color: rgba(31, 41, 55, 0.08);
+		padding: 1rem;
+		border-radius: 10px;
+		overflow-x: auto;
+		margin: 1rem 0 1.5rem;
+	}
+
+	.changelog-content :global(pre code) {
+		background: none;
+		padding: 0;
+		border-radius: 0;
+		font-size: 0.95em;
+		white-space: pre;
+		word-break: normal;
 	}
 
 	.site-actions {

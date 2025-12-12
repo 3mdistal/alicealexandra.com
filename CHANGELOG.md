@@ -27,7 +27,7 @@
 
 **Features**
 - New career route linked from the homepage.
-- New career pages: /career/vercel (Vercel work and publications) and /career/builderio (Builder.io projects).
+- New career pages: `/career/vercel` (Vercel work and publications) and `/career/builderio` (Builder.io projects).
 
 **Enhancements**
 - Content/IA update: archived the legacy commissions page and assets; added a documented archive at archived/commissions-page-backup/.

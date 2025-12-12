@@ -44,19 +44,43 @@ function extractBullets(block: string, sectionTitle?: string): string[] {
 	return bullets;
 }
 
-function cleanBulletText(text: string): string {
+function escapeHtml(text: string): string {
 	return text
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;');
+}
+
+function renderInlineCodeHtml(text: string): string {
+	// Render inline-code spans from backticks, while escaping everything else.
+	// We intentionally only support inline code here (no bold/links/etc) since this
+	// is used in the compact “Site updates” cards.
+	const parts = text.split('`');
+	let html = '';
+	for (let i = 0; i < parts.length; i++) {
+		const part = parts[i] ?? '';
+		if (i % 2 === 1) html += `<code>${escapeHtml(part)}</code>`;
+		else html += escapeHtml(part);
+	}
+	return html;
+}
+
+function cleanBulletHtml(text: string): string {
+	const cleaned = text
 		// remove PR refs anywhere (raw or linkified)
 		.replace(/\(\s*#\d+\s*\)/g, '')
 		.replace(/\(\s*\[#\d+\]\([^)]+\)\s*\)/g, '')
 		.replace(/\[#\d+\]\([^)]+\)/g, '')
-		.replace(/`([^`]+)`/g, '$1')
 		.replace(/\s+/g, ' ')
 		.trim();
+
+	return renderInlineCodeHtml(cleaned);
 }
 
 function buildSummaryItems(bullets: string[]): string[] {
-	return bullets.map(cleanBulletText).filter(Boolean).slice(0, 3);
+	return bullets.map(cleanBulletHtml).filter(Boolean).slice(0, 3);
 }
 
 function buildSummarySentence(): string {
