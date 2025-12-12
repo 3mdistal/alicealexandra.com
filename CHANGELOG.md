@@ -1,5 +1,4 @@
-## 0.8.0
-_12 Dec 2025_
+## 12 Dec 2025
 
 **Features**
 - Migrated HFC poems from Notion to local markdown content loaded at build time. (#23)
@@ -24,8 +23,7 @@ _12 Dec 2025_
 **Breaking changes**
 - Blog/poems/postcards content is now expected to be available at build time (Vercel builds can fetch content via `GITHUB_TOKEN`).
 
-## 0.7.0
-_12 Sep 2025_
+## 12 Sep 2025
 
 **Features**
 - New career route linked from the homepage.
@@ -47,8 +45,7 @@ _12 Sep 2025_
 - Commissions backend removed; COMMISSIONS_DB is no longer used.
 - Notion wrapper API types and function signatures changed with the v5 migration (database_id → data_source_id). Update any custom consumers accordingly.
 
-## 0.6.0
-_11 Aug 2025_
+## 11 Aug 2025
 
 **Enhancements**
 - New interactive postcard gallery with some fun animations and even better stories.
@@ -67,8 +64,7 @@ _11 Aug 2025_
 - Code formatting standardized and TypeScript type safety improvements.
 - Fixed modal scroll and resize behavior across different screen sizes.
 
-## 0.5.0
-_20 Jan 2025_
+## 20 Jan 2025
 
 **Minor**
 - Tailwind stripped out. Fuck it—we're making a design system. Eventually. But this was the first step towards that.
@@ -83,8 +79,7 @@ _20 Jan 2025_
 **Bugfixes**
 - Notion fetches for blogs were failing with ISR revalidation. Patched for now, but will refactor to webhook-based revalidation.
 
-## 0.4.1
-_27 Feb 2024_
+## 27 Feb 2024
 
 **Refactors**
 - Moved application into a monorepo alongside some other projects.
@@ -105,8 +100,7 @@ _27 Feb 2024_
 - Fix CLS on homepage and subpages for better Core Web Vitals.
 - Use SvelteKit 2 image optimization.
 
-## 0.4.0
-_21 Nov 2023_
+## 21 Nov 2023
 
 **Honestly, this release is just a lot of random shit I've been working on.**
 

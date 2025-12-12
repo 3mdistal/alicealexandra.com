@@ -1,6 +1,5 @@
 export type SiteUpdateSummary = {
 	id: string;
-	version: string;
 	dateIso: string;
 	dateLabel: string;
 	summary: string;
@@ -60,12 +59,12 @@ function buildSummaryItems(bullets: string[]): string[] {
 	return bullets.map(cleanBulletText).filter(Boolean).slice(0, 3);
 }
 
-function buildSummarySentence(version: string): string {
-	return `Released ${version}.`;
+function buildSummarySentence(): string {
+	return '';
 }
 
 export function parseChangelogSummaries(markdown: string): SiteUpdateSummary[] {
-	// Split into release blocks on "## x.y.z"
+	// Split into entry blocks on "## <heading>"
 	const parts = markdown.split(/\n##\s+/);
 	const first = parts.shift();
 	const blocks = (first ? [first] : []).concat(parts.map((p) => `## ${p}`)).filter(Boolean);
@@ -73,12 +72,14 @@ export function parseChangelogSummaries(markdown: string): SiteUpdateSummary[] {
 	const summaries: SiteUpdateSummary[] = [];
 
 	for (const block of blocks) {
-		const versionMatch = block.match(/^##\s+([^\n]+)\n/m);
-		if (!versionMatch) continue;
-		const version = versionMatch[1].trim();
+		const headingMatch = block.match(/^##\s+([^\n]+)\n/m);
+		if (!headingMatch) continue;
+		const heading = headingMatch[1].trim();
 
+		// Old format: "## <version>" then "_<date label>_"
+		// New format: "## <date label>" (no version numbers)
 		const dateMatch = block.match(/\n_([^_]+)_\n/);
-		const dateLabel = dateMatch?.[1]?.trim() ?? '';
+		const dateLabel = (dateMatch?.[1]?.trim() ?? heading).trim();
 		const dateIso = dateLabel ? toIsoDate(dateLabel) : null;
 		if (!dateIso) continue;
 
@@ -103,11 +104,10 @@ export function parseChangelogSummaries(markdown: string): SiteUpdateSummary[] {
 		const items = buildSummaryItems(bullets);
 
 		summaries.push({
-			id: `site-${version}-${dateIso}`,
-			version,
+			id: `site-${dateIso}-${summaries.length}`,
 			dateIso,
 			dateLabel,
-			summary: buildSummarySentence(version),
+			summary: buildSummarySentence(),
 			items
 		});
 	}

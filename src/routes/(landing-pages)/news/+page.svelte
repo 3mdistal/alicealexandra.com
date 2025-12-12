@@ -238,7 +238,9 @@
 						<article class="entry">
 							<time class="entry-date" datetime={item.dateIso}>{formatDate(item.dateIso)}</time>
 							<div class="entry-text">
-								<p class="entry-text-line">{item.summary}</p>
+								{#if item.summary}
+									<p class="entry-text-line">{item.summary}</p>
+								{/if}
 								{#if item.items.length > 0}
 									<ul class="entry-bullets">
 										{#each item.items as bullet (bullet)}
