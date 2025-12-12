@@ -1,41 +1,10 @@
-import { queryDatabase, extractPostcards } from '$lib/notion/api/database';
-import { BYPASS_TOKEN, POSTCARDS_DB } from '$env/static/private';
-import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
-import type { PageObjectResponse } from '$lib/notion/types/notion-types';
+import { loadPostcardsMeta } from '$lib/content/postcards';
 
-const queryParams: DataSourceQueryParameters = {
-	data_source_id: POSTCARDS_DB,
-	sorts: [
-		{
-			direction: 'descending',
-			property: 'Title'
-		}
-	]
-};
+// Prerender this page at build time - no runtime API calls needed
+export const prerender = true;
 
 export async function load() {
-	try {
-		const response = await queryDatabase(queryParams);
-        const pages = response.results.filter((r): r is PageObjectResponse =>
-            (r as any)?.object === 'page' && 'properties' in (r as any)
-        );
-        const postcards = extractPostcards(pages);
-		
-		return {
-			postcards
-		};
-	} catch (error) {
-		// Return empty array as fallback when Notion is not configured
-		return {
-			postcards: []
-		};
-	}
+	// Re-throw during build so we see the actual error if content is missing/malformed
+	const postcards = await loadPostcardsMeta();
+	return { postcards };
 }
-
-export const config = {
-	isr: {
-		expiration: false,
-		bypassToken: BYPASS_TOKEN
-	},
-	runtime: 'nodejs20.x'
-};

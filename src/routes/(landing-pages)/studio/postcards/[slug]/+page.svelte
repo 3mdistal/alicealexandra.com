@@ -1,90 +1,42 @@
 <script lang="ts">
-	import NotionPageParser from '$lib/notion/components/notion-page-parser.svelte';
-import type {
-    PageObjectResponse,
-    UrlPropertyItemObjectResponse
-} from '$lib/notion/types/notion-types';
-	import { onMount } from 'svelte';
-	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
-	import { page } from '$app/state';
+	import { marked } from 'marked';
 
 	let { data } = $props();
 
-	const { queryResponse, contentResponse } = data.postcard || {};
-
-	const postcard = queryResponse?.results?.[0] as PageObjectResponse | undefined;
-
-    const content = (contentResponse?.results ?? []) as any[];
-
-    // Type guard for URL property
-    function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {
-		return prop?.type === 'url';
-	}
-
-    const {
-        Title: title,
-        Description: description,
-        Slug: slug,
-        'Hero Image': heroImage
-    } = postcard?.properties || {};
-
-	// Helper function to safely get text content
-	function getTextContent(prop: any) {
-		if (prop?.type === 'title') {
-			return prop.title?.[0]?.plain_text || '';
-		}
-		return prop?.rich_text?.[0]?.plain_text || '';
-	}
-
-	// Helper function to get URL from URL property
-	function getUrl(prop: any) {
-		if (isUrlProperty(prop)) {
-			return prop.url;
-		}
-		return '';
-	}
-
-	const postcardTitle = getTextContent(title);
-	const postcardDescription = getTextContent(description);
-	const postcardSlug = getTextContent(slug);
-	const postcardHeroImage = getUrl(heroImage);
-
-	onMount(() => {
-		// Trigger background revalidation for future visitors
-		useBackgroundRevalidation(page.url.pathname);
-	});
+	const postcard = data.postcard;
+	const htmlContent = marked(postcard.content) as string;
 </script>
 
 <svelte:head>
-	<title>{postcardTitle || 'Postcard'}</title>
-	<meta name="description" content={postcardDescription} />
-	<meta name="og:title" content={postcardTitle || 'Postcard'} />
-	<meta name="og:description" content={postcardDescription} />
-	{#if postcardHeroImage}
-		<meta name="og:image" content={postcardHeroImage} />
+	<title>{postcard.title || 'Postcard'}</title>
+	<meta name="description" content={postcard.description} />
+	<meta name="og:title" content={postcard.title || 'Postcard'} />
+	<meta name="og:description" content={postcard.description} />
+	{#if postcard.heroImage}
+		<meta name="og:image" content={postcard.heroImage} />
 	{/if}
 </svelte:head>
 
-{#if postcard && postcardHeroImage}
+{#if postcard && postcard.heroImage}
 	<div
 		class="hero-image"
-		style="background-image: url('{postcardHeroImage}'); view-transition-name: postcard-hero-{postcardSlug}"
+		style="background-image: url('{postcard.heroImage}'); view-transition-name: postcard-hero-{postcard.slug}"
 	></div>
 {/if}
 
 <main>
 	{#if postcard}
 		<header>
-			<h1>{postcardTitle}</h1>
-			{#if postcardDescription}
-				<p class="description">{postcardDescription}</p>
+			<h1>{postcard.title}</h1>
+			{#if postcard.description}
+				<p class="description">{postcard.description}</p>
 			{/if}
 		</header>
 
 		<article class="postcard-content">
-			{#if content.length > 0}
+			{#if htmlContent}
 				<div class="notion-container">
-					<NotionPageParser results={content} />
+					{@html htmlContent}
 				</div>
 			{:else}
 				<p>No content available.</p>

@@ -392,12 +392,12 @@ content/
 
 ```
 content/
-└── studio/
-    ├── illustrations/
-    │   └── metadata.json
-    ├── postcards/
-    │   └── metadata.json
-    └── ...
+├── studio/
+│   ├── illustrations/
+│   │   └── metadata.json
+│   └── ...
+└── postcards/
+    └── metadata.json
 ```
 
 ## Troubleshooting

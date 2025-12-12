@@ -8,6 +8,7 @@
 		"vercel-build": "bash scripts/fetch-content.sh && vite build",
 		"migrate:poems": "npx tsx scripts/migrate-poems.ts",
 		"migrate:blog": "npx tsx scripts/migrate-blog.ts",
+		"migrate:postcards": "npx tsx scripts/migrate-postcards.ts",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
