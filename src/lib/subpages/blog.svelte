@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { QueryDatabaseResponse } from '$lib/notion/types/notion-types';
+	import type { QueryDataSourceResponse } from '$lib/notion/types/notion-types';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
@@ -9,7 +9,7 @@
 	} from '$lib/notion/types/notion-types';
 
 	export let accent: string;
-	export let data: { post: QueryDatabaseResponse };
+	export let data: { post: QueryDataSourceResponse };
 
 	let { post: { results = [] } = {} } = data;
 

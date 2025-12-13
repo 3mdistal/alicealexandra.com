@@ -3,12 +3,11 @@
  * Re-exports from @notionhq/client and custom types
  */
 
-// Re-export types from Notion API
-export type {
+import type {
 	BlockObjectResponse,
 	ListBlockChildrenResponse,
-	QueryDatabaseParameters,
-	QueryDatabaseResponse,
+	QueryDataSourceParameters,
+	QueryDataSourceResponse,
 	PageObjectResponse,
 	PartialBlockObjectResponse,
 	RichTextItemResponse,
@@ -26,18 +25,35 @@ export type {
 	FilesPropertyItemObjectResponse
 } from '@notionhq/client/build/src/api-endpoints';
 
+// Re-export types from Notion API
+export type {
+	BlockObjectResponse,
+	ListBlockChildrenResponse,
+	QueryDataSourceParameters,
+	QueryDataSourceResponse,
+	PageObjectResponse,
+	PartialBlockObjectResponse,
+	RichTextItemResponse,
+	TextRichTextItemResponse,
+	MentionRichTextItemResponse,
+	EquationRichTextItemResponse,
+	DatabaseObjectResponse,
+	NumberedListItemBlockObjectResponse,
+	BulletedListItemBlockObjectResponse,
+	TitlePropertyItemObjectResponse,
+	RichTextPropertyItemObjectResponse,
+	UrlPropertyItemObjectResponse,
+	SelectPropertyItemObjectResponse,
+	FormulaPropertyItemObjectResponse,
+	FilesPropertyItemObjectResponse
+};
+
 // Custom types for our application
 
 /**
  * Query parameters for data sources (Notion API 2025-09-03)
  */
-export interface DataSourceQueryParameters {
-	data_source_id: string;
-	filter?: unknown;
-	sorts?: unknown;
-	page_size?: number;
-	start_cursor?: string;
-}
+export type DataSourceQueryParameters = QueryDataSourceParameters;
 
 /**
  * Supported block types for rendering

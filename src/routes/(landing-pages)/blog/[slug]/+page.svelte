@@ -10,7 +10,7 @@
 		SelectPropertyItemObjectResponse,
 		FormulaPropertyItemObjectResponse,
 		FilesPropertyItemObjectResponse,
-		QueryDatabaseResponse
+		QueryDataSourceResponse
 	} from '$lib/notion/types/notion-types';
 
 	let context: HTMLElement;
@@ -25,7 +25,7 @@
 
 	export let data: {
 		post: {
-			queryResponse: QueryDatabaseResponse | null;
+			queryResponse: QueryDataSourceResponse | null;
 			contentResponse: { results: any[]; markdownContent?: string } | null;
 		};
 	};

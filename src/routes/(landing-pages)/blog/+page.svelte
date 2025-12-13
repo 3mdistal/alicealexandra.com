@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Blog from '$lib/subpages/blog.svelte';
-	import type { QueryDatabaseResponse } from '$lib/notion/types/notion-types';
+	import type { QueryDataSourceResponse } from '$lib/notion/types/notion-types';
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
 	import { pageState } from '$lib/stores';
 	import Bird from '../../../cms/images/blog/bird.webp?enhanced';
 
-	export let data: { post: QueryDatabaseResponse };
+	export let data: { post: QueryDataSourceResponse };
 
 	const accent = '#d1dce7';
 
