@@ -21,5 +21,5 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .env*.local
 
-# Private content (fetched at build time from teenylilcontent repo)
-/content/
+# Content (now tracked as a git submodule)
+# NOTE: keep this un-ignored so the submodule gitlink can be committed.
