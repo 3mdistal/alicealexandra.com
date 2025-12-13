@@ -38,9 +38,12 @@ Run a single Playwright test:
 - `pnpm vercel-build`
   - Runs `scripts/fetch-content.sh` then `vite build`.
 
+`content/` is a private repo clone that is intentionally **not committed** here (it’s gitignored).
+
 `scripts/fetch-content.sh` behavior:
-- If `GITHUB_TOKEN` is set, it clones a private content repo into `content/` and then removes `content/.git`.
-- If `GITHUB_TOKEN` is not set, it expects `content/` to already exist (typical local dev).
+- If `content/` already exists, it does nothing.
+- Otherwise it first tries an unauthenticated clone (works if the content repo is public).
+- If that fails, it requires `GITHUB_TOKEN`, then clones and removes `content/.git`.
 
 ## Architecture (big picture)
 This is a SvelteKit app (Svelte 5) built with Vite.
