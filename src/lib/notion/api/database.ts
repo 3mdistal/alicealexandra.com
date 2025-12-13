@@ -1,6 +1,6 @@
 import { notionClient, withErrorHandling } from './client';
 import type {
-	QueryDatabaseResponse,
+	QueryDataSourceResponse,
 	PageObjectResponse,
 	DataSourceQueryParameters
 } from '../types/notion-types';
@@ -14,9 +14,9 @@ import type { BlogPost, PaginatedResponse } from '../types/notion-types';
  */
 export async function queryDatabase(
 	params: DataSourceQueryParameters
-): Promise<QueryDatabaseResponse> {
+): Promise<QueryDataSourceResponse> {
 	return withErrorHandling(async () => {
-		const response = await notionClient.dataSources.query(params as unknown as Record<string, any>);
+		const response = await notionClient.dataSources.query(params);
 		return response;
 	});
 }
