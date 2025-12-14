@@ -1,14 +1,8 @@
 <script lang="ts">
-	import type {
-		RichTextItemResponse,
-		TextRichTextItemResponse
-	} from '$lib/notion/types/notion-types';
+	import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
+	import { isTextRichTextItem } from '$lib/notion/types/guards';
 	export let type: { rich_text: Array<RichTextItemResponse> };
 	export let paragraphs: boolean = false;
-
-	function isTextRichTextItem(item: RichTextItemResponse): item is TextRichTextItemResponse {
-		return item.type === 'text';
-	}
 </script>
 
 {#each type.rich_text as rich_text}

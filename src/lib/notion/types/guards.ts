@@ -1,10 +1,10 @@
 import type {
 	BlockObjectResponse,
 	PartialBlockObjectResponse,
-	TextRichTextItemResponse,
-	MentionRichTextItemResponse,
-	EquationRichTextItemResponse,
-	RichTextItemResponse
+	RichTextItemResponse,
+	TextRichTextItem,
+	MentionRichTextItem,
+	EquationRichTextItem
 } from './notion-types';
 import type { SupportedBlockType } from './notion-types';
 
@@ -83,25 +83,21 @@ export function isCodeBlock(
 /**
  * Type guard for text rich text items
  */
-export function isTextRichTextItem(item: RichTextItemResponse): item is TextRichTextItemResponse {
+export function isTextRichTextItem(item: RichTextItemResponse): item is TextRichTextItem {
 	return item.type === 'text';
 }
 
 /**
  * Type guard for mention rich text items
  */
-export function isMentionRichTextItem(
-	item: RichTextItemResponse
-): item is MentionRichTextItemResponse {
+export function isMentionRichTextItem(item: RichTextItemResponse): item is MentionRichTextItem {
 	return item.type === 'mention';
 }
 
 /**
  * Type guard for equation rich text items
  */
-export function isEquationRichTextItem(
-	item: RichTextItemResponse
-): item is EquationRichTextItemResponse {
+export function isEquationRichTextItem(item: RichTextItemResponse): item is EquationRichTextItem {
 	return item.type === 'equation';
 }
 

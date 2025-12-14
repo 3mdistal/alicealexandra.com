@@ -2,7 +2,7 @@ import { queryDatabase } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, PROFESSIONAL_DB } from '$env/static/private';
 import type {
 	DataSourceQueryParameters,
-	TextRichTextItemResponse
+	TextRichTextItem
 } from '$lib/notion/types/notion-types';
 
 const queryParams: DataSourceQueryParameters = {
@@ -65,7 +65,7 @@ export type ProfessionalPublications = {
 		};
 		Description: {
 			type: 'rich_text';
-			rich_text: TextRichTextItemResponse[];
+			rich_text: TextRichTextItem[];
 		};
 	};
 };

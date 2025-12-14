@@ -48,6 +48,15 @@ export type {
 	FilesPropertyItemObjectResponse
 };
 
+// Stable aliases for rich-text items.
+// The Notion client exports both a broad union (`RichTextItemResponse`) and the per-variant shapes
+// (`TextRichTextItemResponse`, etc). Depending on client version, the per-variant shapes may omit
+// common fields (e.g. `plain_text`, `href`, `annotations`) that exist on the union.
+// Using `Extract<>` keeps our app types consistent.
+export type TextRichTextItem = Extract<RichTextItemResponse, { type: 'text' }>;
+export type MentionRichTextItem = Extract<RichTextItemResponse, { type: 'mention' }>;
+export type EquationRichTextItem = Extract<RichTextItemResponse, { type: 'equation' }>;
+
 // Custom types for our application
 
 /**
