@@ -8,16 +8,15 @@ import { browser } from '$app/environment';
  * @param options - Optional configuration
  */
 export async function triggerRevalidation(
-	route: string, 
-	options: { 
-		silent?: boolean; 
-		timeout?: number; 
+	route: string,
+	options: {
+		timeout?: number;
 	} = {}
 ): Promise<boolean> {
 	// Only run in browser context
 	if (!browser) return false;
 
-	const { silent = true, timeout = 5000 } = options;
+	const { timeout = 5000 } = options;
 
 	try {
 		const controller = new AbortController();
@@ -52,8 +51,7 @@ export async function triggerRevalidation(
  * @returns A function that triggers revalidation for the specified route
  */
 export function createRevalidationTrigger(route: string) {
-	return (options?: { silent?: boolean; timeout?: number }) => 
-		triggerRevalidation(route, options);
+	return (options?: { timeout?: number }) => triggerRevalidation(route, options);
 }
 
 /**
@@ -65,8 +63,7 @@ export function createRevalidationTrigger(route: string) {
  */
 export function useBackgroundRevalidation(
 	route: string,
-	options: { 
-		silent?: boolean; 
+	options: {
 		timeout?: number;
 		delay?: number; // Delay before triggering revalidation
 	} = {}
