@@ -97,8 +97,8 @@ export function parseChangelogSummaries(markdown: string): SiteUpdateSummary[] {
 
 	for (const block of blocks) {
 		const headingMatch = block.match(/^##\s+([^\n]+)\n/m);
-		if (!headingMatch) continue;
-		const heading = headingMatch[1].trim();
+		const heading = headingMatch?.[1]?.trim();
+		if (!heading) continue;
 
 		// Old format: "## <version>" then "_<date label>_"
 		// New format: "## <date label>" (no version numbers)
