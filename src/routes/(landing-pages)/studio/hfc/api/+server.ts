@@ -82,7 +82,6 @@ function parseMarkdownToRichText(text: string) {
 
 	// For markdown content, do a simple parse
 	// This handles the most common case of a single formatting per segment
-	let remaining = text;
 	let lastIndex = 0;
 
 	// Combined regex for all patterns
