@@ -1,17 +1,21 @@
 <script lang="ts">
-	import { physicsParams, parameterRanges, defaultPhysicsParams } from '$lib/arcade/physics-params';
-	import type { PhysicsParams } from '$lib/arcade/physics-params';
+	import { onDestroy } from 'svelte';
+	import { defaultPhysicsParams, parameterRanges, physicsParams, type PhysicsParams } from '$lib/arcade/physics-params';
 
 	export let isOpen: boolean = false;
 
-	let currentParams: PhysicsParams;
+	type ParameterRange = { min: number; max: number; step: number };
 
-	physicsParams.subscribe(params => {
+	let currentParams: PhysicsParams = { ...defaultPhysicsParams };
+
+	const unsubscribe = physicsParams.subscribe((params) => {
 		currentParams = { ...params };
 	});
 
+	onDestroy(unsubscribe);
+
 	function updateParam(key: keyof PhysicsParams, value: number) {
-		currentParams[key] = value;
+		currentParams = { ...currentParams, [key]: value };
 		physicsParams.set(currentParams);
 	}
 
@@ -20,15 +24,15 @@
 		physicsParams.set(currentParams);
 	}
 
-			function formatValue(key: keyof PhysicsParams, value: number): string {
+	function formatValue(key: keyof PhysicsParams, value: number): string {
 		if (key === 'friction' || key === 'movementLerp' || key === 'airCoefficient') {
 			return value.toFixed(2);
 		}
 		return value.toString();
 	}
 
-		function getParameterLabel(key: keyof PhysicsParams): string {
-		const labels = {
+	function getParameterLabel(key: keyof PhysicsParams): string {
+		const labels: Record<keyof PhysicsParams, string> = {
 			gravity: 'Gravity',
 			minJumpForce: 'Min Jump Force',
 			maxJumpForce: 'Max Jump Force',
@@ -39,11 +43,11 @@
 			movementLerp: 'Movement Smoothing',
 			airCoefficient: 'Air Control'
 		};
-		return labels[key] || key.charAt(0).toUpperCase() + key.slice(1);
+		return labels[key];
 	}
 
-		function getParameterTooltip(key: keyof PhysicsParams): string {
-		const tooltips = {
+	function getParameterTooltip(key: keyof PhysicsParams): string {
+		const tooltips: Record<keyof PhysicsParams, string> = {
 			gravity: 'How fast the character falls downward.',
 			minJumpForce: 'Jump strength when tapping the jump button briefly.',
 			maxJumpForce: 'Maximum jump strength when holding the jump button.',
@@ -54,8 +58,10 @@
 			movementLerp: 'How smooth acceleration/deceleration feels.',
 			airCoefficient: 'How much control you have while airborne (0 = none, 1 = full).'
 		};
-		return tooltips[key] || '';
+		return tooltips[key];
 	}
+
+	const parameterEntries = Object.entries(parameterRanges) as [keyof PhysicsParams, ParameterRange][];
 </script>
 
 <div class="parameters-panel" class:open={isOpen}>
@@ -63,9 +69,9 @@
 		<h3>Physics Parameters</h3>
 		<button class="reset-button" on:click={resetToDefaults}>Reset</button>
 	</div>
-	
+
 	<div class="parameters-list">
-				{#each Object.entries(parameterRanges) as [key, range]}
+		{#each parameterEntries as [key, range]}
 			<div class="parameter-group">
 				<div class="label-container">
 					<label for={key}>{getParameterLabel(key)}</label>
@@ -82,12 +88,10 @@
 						max={range.max}
 						step={range.step}
 						value={currentParams[key]}
-						on:input={(e) => updateParam(key, parseFloat(e.target.value))}
+						on:input={(e) => updateParam(key, parseFloat((e.currentTarget as HTMLInputElement).value))}
 						class="parameter-slider"
 					/>
-					<span class="parameter-value">
-						{formatValue(key, currentParams[key])}
-					</span>
+					<span class="parameter-value">{formatValue(key, currentParams[key])}</span>
 				</div>
 			</div>
 		{/each}
