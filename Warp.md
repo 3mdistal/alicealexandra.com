@@ -1,4 +1,4 @@
-# WARP.md
+# AGENTS.md
 
 IMPORTANT: This project uses bd (beads) for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods. Full Beads/bd rules are in `Beads.md`.
 
