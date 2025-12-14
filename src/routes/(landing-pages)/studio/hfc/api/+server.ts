@@ -122,25 +122,25 @@ function parseMarkdownToRichText(text: string) {
 
 		if (fullMatch.startsWith('**')) {
 			// Bold
-			content = match[2];
+			content = match[2] ?? '';
 			annotations.bold = true;
 		} else if (fullMatch.startsWith('*')) {
 			// Italic
-			content = match[3];
+			content = match[3] ?? '';
 			annotations.italic = true;
 		} else if (fullMatch.startsWith('`')) {
 			// Code
-			content = match[4];
+			content = match[4] ?? '';
 			annotations.code = true;
 		} else if (fullMatch.startsWith('~~')) {
 			// Strikethrough
-			content = match[5];
+			content = match[5] ?? '';
 			annotations.strikethrough = true;
 		} else if (fullMatch.startsWith('[')) {
 			// Link
-			content = match[6];
-			href = match[7];
-			link = { url: match[7] };
+			content = match[6] ?? '';
+			href = match[7] ?? null;
+			link = href ? { url: href } : null;
 		}
 
 		tokens.push({
