@@ -1,3 +1,19 @@
+## 14 Dec 2025
+
+**Features**
+- Added Beads (`bd`) issue/task management to the repo (new `.beads/` config + documentation).
+
+**Enhancements**
+- Converted `content/` into a git submodule.
+- Improved Notion-related type safety (types/guards) and hardened rich-text parsing in the HFC API.
+
+**Patches**
+- Fixed a batch of TypeScript errors across pages, server routes, and shared utilities.
+- Updated repo agent/project docs (`Warp.md`, `Beads.md`).
+
+**Breaking changes**
+- `content/` is now a submodule; new checkouts need to initialize/update submodules.
+
 ## 12 Dec 2025
 
 **Features**
