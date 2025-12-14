@@ -34,7 +34,7 @@
 		return tl;
 	}
 
-	function flyRotate(node: Element, { duration = 500, x = -400, rotation = -360 } = {}) {
+	function flyRotate(_node: Element, { duration = 500, x = -400, rotation = -360 } = {}) {
 		return {
 			duration,
 			css: (t: number) => {
