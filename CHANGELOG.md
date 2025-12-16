@@ -1,6 +1,13 @@
+## 16 Dec 2025
+
+**Patches**
+
+- Fixed a bunch of TypeScript and build errors across pages, server routes, and shared utils.
+
 ## 14 Dec 2025
 
 **Features**
+
 - Added Beads (`bd`) issue/task management to the repo (new `.beads/` config + documentation).
 
 **Enhancements**
