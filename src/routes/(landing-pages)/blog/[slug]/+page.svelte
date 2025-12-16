@@ -173,7 +173,12 @@
 
 <div class="page-wrapper">
 	{#if blogPost}
-		<BlogHeader {blogPost} category={categoryName} {publishedDate} {readTime} />
+		<BlogHeader
+			{blogPost}
+			category={categoryName ?? 'Article'}
+			publishedDate={publishedDate ?? ''}
+			readTime={readTime ?? ''}
+		/>
 	{/if}
 
 	<div class="blog-container">

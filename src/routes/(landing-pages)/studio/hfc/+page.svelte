@@ -1,9 +1,6 @@
 <script lang="ts">
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
-	import type {
-		BlockObjectResponse,
-		TextRichTextItemResponse
-	} from '$lib/notion/types/notion-types';
+	import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
 	export let data: Data;
 
 	type PoemResults = {
@@ -50,15 +47,15 @@
 			};
 			Quote: {
 				type: 'rich_text';
-				rich_text: TextRichTextItemResponse[];
+				rich_text: RichTextItemResponse[];
 			};
 			QuoteAuthor: {
 				type: 'rich_text';
-				rich_text: TextRichTextItemResponse[];
+				rich_text: RichTextItemResponse[];
 			};
 			Act: {
 				type: 'rich_text';
-				rich_text: TextRichTextItemResponse[];
+				rich_text: RichTextItemResponse[];
 			};
 			secondaryImage: {
 				type: 'url';
@@ -83,8 +80,13 @@
 
 	let open: Record<string, boolean> = {};
 
+	type ParagraphBlock = {
+		type: 'paragraph';
+		paragraph: { rich_text: RichTextItemResponse[] };
+	};
+
 	// Pre-parse all poem content from markdown to block format at load time
-	let poemContent: Record<string, BlockObjectResponse[]> = {};
+	let poemContent: Record<string, ParagraphBlock[]> = {};
 	for (const poem of poems) {
 		poemContent[poem.id] = parseMarkdownToBlocks(poem.content);
 	}
@@ -93,37 +95,24 @@
 		'https://ik.imagekit.io/tempoimmaterial/tr:w-1500/hymns%20for%20calliope/ruined%20piano?updatedAt=1694350822403';
 
 	// Parse markdown content into block format for TextMacro component
-	function parseMarkdownToBlocks(content: string): BlockObjectResponse[] {
+	function parseMarkdownToBlocks(content: string): ParagraphBlock[] {
 		const stanzas = content.split(/\n\n+/).filter((s) => s.trim());
 		return stanzas.map((stanza) => ({
 			type: 'paragraph',
 			paragraph: {
 				rich_text: parseMarkdownToRichText(stanza)
 			}
-		})) as unknown as BlockObjectResponse[];
+		}));
 	}
 
-	function parseMarkdownToRichText(text: string) {
+	function parseMarkdownToRichText(text: string): RichTextItemResponse[] {
 		// Simple regex-based parsing for italics
-		const parts: Array<{
-			type: 'text';
-			plain_text: string;
-			text: { content: string; link: null };
-			annotations: {
-				bold: boolean;
-				italic: boolean;
-				strikethrough: boolean;
-				underline: boolean;
-				code: boolean;
-				color: 'default';
-			};
-			href: null;
-		}> = [];
+		const parts: RichTextItemResponse[] = [];
 
 		// Match *italic* patterns
 		const regex = /\*([^*]+)\*/g;
 		let lastIndex = 0;
-		let match;
+		let match: RegExpExecArray | null;
 
 		while ((match = regex.exec(text)) !== null) {
 			// Add text before the match
@@ -132,7 +121,7 @@
 				parts.push(createRichTextItem(plainText, false));
 			}
 			// Add the italic text
-			parts.push(createRichTextItem(match[1], true));
+			parts.push(createRichTextItem(match[1] ?? '', true));
 			lastIndex = match.index + match[0].length;
 		}
 
@@ -144,7 +133,7 @@
 		return parts.length > 0 ? parts : [createRichTextItem(text, false)];
 	}
 
-	function createRichTextItem(content: string, italic: boolean) {
+	function createRichTextItem(content: string, italic: boolean): RichTextItemResponse {
 		return {
 			type: 'text' as const,
 			plain_text: content,
@@ -171,7 +160,6 @@
 		if (!element) return;
 		element.scrollIntoView({ behavior });
 	}
-
 </script>
 
 <svelte:head>
@@ -250,18 +238,14 @@
 				<div class="poem-container">
 					{#each poems as poem}
 						{#if poem.properties['sectionName'].formula.string === section.properties.Name.title[0].plain_text}
-							<a
-								class="poem-link"
-								on:click|preventDefault={() => toggleOpen(poem.id)}
-								href=""
-							>
+							<a class="poem-link" on:click|preventDefault={() => toggleOpen(poem.id)} href="">
 								<h3 class="poem-title">
 									{poem.properties.Name.title[0].plain_text}
 								</h3>
 							</a>
 							{#if open[poem.id] === true}
 								<div class="poem-content">
-									{#each poemContent[poem.id] as stanza}
+									{#each poemContent[poem.id] ?? [] as stanza}
 										<p
 											class="poem-stanza"
 											style="white-space: {poem.properties.NotLineated.checkbox === false

@@ -3,97 +3,93 @@
 	import { Triangle, Circle, Square, Heart, Star, Clear } from '$lib/arcade/shapes';
 	import { ADSR } from '$lib/arcade/notes';
 
+	const sidebarShapes = [
+		{ id: 'triangle', Shape: Triangle },
+		{ id: 'circle', Shape: Circle },
+		{ id: 'square', Shape: Square },
+		{ id: 'heart', Shape: Heart },
+		{ id: 'star', Shape: Star },
+		{ id: 'clear', Shape: Clear }
+	] as const;
+
+	type SidebarShapeId = (typeof sidebarShapes)[number]['id'];
+
 	let canvasBackground: HTMLCanvasElement;
-	let canvasTriangle: HTMLCanvasElement;
-	let canvasCircle: HTMLCanvasElement;
-	let canvasSquare: HTMLCanvasElement;
-	let canvasHeart: HTMLCanvasElement;
-	let canvasStar: HTMLCanvasElement;
-	let canvasClear: HTMLCanvasElement;
-
 	let ctxBackground: CanvasRenderingContext2D;
-	let ctxTriangle: CanvasRenderingContext2D;
-	let ctxCircle: CanvasRenderingContext2D;
-	let ctxSquare: CanvasRenderingContext2D;
-	let ctxHeart: CanvasRenderingContext2D;
-	let ctxStar: CanvasRenderingContext2D;
-	let ctxClear: CanvasRenderingContext2D;
 
-	const canvases = [
-		canvasTriangle,
-		canvasCircle,
-		canvasSquare,
-		canvasHeart,
-		canvasStar,
-		canvasClear
-	];
+	let currentShape: SidebarShapeId = sidebarShapes[0].id;
 
-	const contexts = [ctxTriangle, ctxCircle, ctxSquare, ctxHeart, ctxStar, ctxClear];
-	const shapes = [Triangle, Circle, Square, Heart, Star, Clear];
-	const shapesString = ['triangle', 'circle', 'square', 'heart', 'star', 'clear'];
+	const sidebarCanvases: Array<HTMLCanvasElement | null> = Array(sidebarShapes.length).fill(null);
+	const sidebarContexts: Array<CanvasRenderingContext2D | null> = Array(sidebarShapes.length).fill(null);
 
-	// Event Handlers
+	const audioContext = new AudioContext();
+
+	function registerSidebarCanvas(node: HTMLCanvasElement, index: number) {
+		sidebarCanvases[index] = node;
+		sidebarContexts[index] = node.getContext('2d');
+
+		return {
+			destroy() {
+				sidebarCanvases[index] = null;
+				sidebarContexts[index] = null;
+			}
+		};
+	}
+
 	function resetDimensions() {
+		if (!canvasBackground) return;
 		canvasBackground.width = window.innerWidth;
 		canvasBackground.height = window.innerHeight;
 	}
 
-	function handleClick(e: MouseEvent) {
-		const size = checkWindowWidth() === 'mobile' ? 50 : 100;
-
-		shapesString.forEach((shape) => {
-			if (currentShape !== shape || currentShape === 'clear') return;
-
-			const shapeClass = shapes[shapesString.indexOf(shape)];
-
-			if (!shapeClass) return;
-
-			const shapeInstance = new shapeClass(
-				e.offsetX,
-				e.offsetY,
-				size,
-				`hsl(${Math.random() * 360}, 50%, 50%)`
-			);
-			shapeInstance.draw(ctxBackground);
-		});
+	function checkWindowWidth() {
+		return window.innerWidth < 768 ? 'mobile' : 'desktop';
 	}
 
-	let currentShape = shapesString[0];
+	function handleClick(e: MouseEvent) {
+		if (currentShape === 'clear') return;
 
-	const audioContext = new AudioContext();
+		const size = checkWindowWidth() === 'mobile' ? 50 : 100;
+		const shapeEntry = sidebarShapes.find((shape) => shape.id === currentShape);
+		if (!shapeEntry) return;
+
+		const shapeInstance = new shapeEntry.Shape(
+			e.offsetX,
+			e.offsetY,
+			size,
+			`hsl(${Math.random() * 360}, 50%, 50%)`
+		);
+		shapeInstance.draw(ctxBackground);
+	}
 
 	function getFrequency(referenceFreq: number, stepsFromReference: number) {
 		const a = Math.pow(2, 1 / 12); // twelfth root of 2
 		return referenceFreq * Math.pow(a, stepsFromReference);
 	}
 
+	const frequencies = [
+		440,
+		getFrequency(440, 2),
+		getFrequency(440, 4),
+		getFrequency(440, 5),
+		getFrequency(440, 7),
+		getFrequency(440, -12)
+	];
+
 	function playNote(keyMultiplier: number) {
-		const frequencies = [
-			440,
-			getFrequency(440, 2),
-			getFrequency(440, 4),
-			getFrequency(440, 5),
-			getFrequency(440, 7),
-			getFrequency(440, -12)
-		];
+		const shapeIndex = sidebarShapes.findIndex((shape) => shape.id === currentShape);
+		const frequency = frequencies[shapeIndex];
+		if (!frequency) return;
 
-		shapesString.forEach((shape, index) => {
-			const frequency = frequencies[index];
-
-			if (currentShape !== shape || !frequency) return;
-
-			const soundEffect = new ADSR(audioContext, 'sine', frequency * keyMultiplier, 0, 0.5, 0.005);
-			soundEffect.play();
-		});
+		const soundEffect = new ADSR(audioContext, 'sine', frequency * keyMultiplier, 0, 0.5, 0.005);
+		soundEffect.play();
 	}
 
-	function handleMouseDown(e: MouseEvent, shape: string) {
+	function handleMouseDown(e: MouseEvent, shape: SidebarShapeId) {
 		const canvas = e.target as HTMLCanvasElement;
 		canvas.style.transform = 'scale(1)';
 
-		// Set State
 		currentShape = shape;
-
 		playNote(0.63);
 	}
 
@@ -101,29 +97,25 @@
 		const canvas = e.target as HTMLCanvasElement;
 		canvas.style.transform = 'scale(1.05)';
 
-		// Draw shape on sidebar
-		shapesString.forEach((shape, index) => {
-			if (currentShape !== shape) return;
+		const shapeIndex = sidebarShapes.findIndex((shape) => shape.id === currentShape);
+		const shapeEntry = sidebarShapes[shapeIndex];
+		const context = sidebarContexts[shapeIndex];
+		const currentCanvas = sidebarCanvases[shapeIndex];
 
-			const shapeClass = shapes[index];
-			const context = contexts[index];
-			const currentCanvas = canvases[index];
+		if (!shapeEntry || !context || !currentCanvas) return;
 
-			if (!shapeClass || !context || !currentCanvas) return;
+		const color = currentShape !== 'clear' ? `hsl(0, 0%, 80%)` : `hsl(0, 50%, 50%)`;
+		const shapeInstance = new shapeEntry.Shape(
+			currentCanvas.width / 2,
+			currentCanvas.height / 2,
+			checkWindowWidth() === 'mobile' ? 50 : 100,
+			color
+		);
+		shapeInstance.draw(context);
 
-			const shapeInstance = new shapeClass(
-				currentCanvas.width / 2,
-				currentCanvas.height / 2,
-				checkWindowWidth() === 'mobile' ? 50 : 100,
-				currentShape !== shapesString[5] ? `hsl(0, 0%, 80%)` : `hsl(0, 50%, 50%)`
-			);
-			shapeInstance.draw(context);
-
-			// Clear background canvas
-			if (currentShape !== shapesString[5]) return;
-
+		if (currentShape === 'clear') {
 			ctxBackground.clearRect(0, 0, canvasBackground.width, canvasBackground.height);
-		});
+		}
 	}
 
 	function handleMouseEnter(e: MouseEvent) {
@@ -136,51 +128,35 @@
 		canvas.style.transform = 'scale(1)';
 	}
 
-	function initializeSidebar(contexts: CanvasRenderingContext2D[]) {
-		shapes.forEach((shape, index) => {
-			const currentCanvas = canvases[index];
-			const context = contexts[index];
+	function initializeSidebar() {
+		sidebarShapes.forEach((shape, index) => {
+			const currentCanvas = sidebarCanvases[index];
+			const context = sidebarContexts[index];
 
 			if (!currentCanvas || !context) return;
 
-			const shapeInstance = new shape(
+			const color = shape.id !== 'clear' ? `hsl(0, 0%, 80%)` : `hsl(0, 50%, 50%)`;
+			const shapeInstance = new shape.Shape(
 				currentCanvas.width / 2,
 				currentCanvas.height / 2,
 				checkWindowWidth() === 'mobile' ? 50 : 100,
-				currentCanvas !== canvases[5] ? `hsl(0, 0%, 80%)` : `hsl(0, 50%, 50%)`
+				color
 			);
 			shapeInstance.draw(context);
 		});
 	}
 
-	function checkWindowWidth() {
+	function scale(node: HTMLCanvasElement) {
 		if (window.innerWidth < 768) {
-			return 'mobile';
-		} else {
-			return 'desktop';
+			node.width = 50;
+			node.height = 50;
 		}
 	}
 
-	function scale(e: HTMLCanvasElement) {
-		if (window.innerWidth < 768) {
-			e.width = 50;
-			e.height = 50;
-		}
-	}
-
-	// Lifecycle
 	onMount(() => {
-		// Initialize Background Canvas
-		canvasBackground.width = window.innerWidth;
-		canvasBackground.height = window.innerHeight;
+		resetDimensions();
 		ctxBackground = canvasBackground.getContext('2d')!;
-
-		// Initialize Sidebar Canvases
-		canvases.forEach((canvas, index) => {
-			contexts[index] = canvas.getContext('2d')!;
-		});
-
-		initializeSidebar(contexts);
+		initializeSidebar();
 	});
 </script>
 
@@ -189,12 +165,12 @@
 <canvas class="background-canvas" on:click={handleClick} bind:this={canvasBackground}></canvas>
 
 <div class="sidebar">
-	{#each canvases as canvas}
+	{#each sidebarShapes as shape, index}
 		<canvas
-			bind:this={canvas}
+			use:registerSidebarCanvas={index}
 			class="sidebar-canvas"
-			class:last-canvas={canvases.indexOf(canvas) === canvases.length - 1}
-			on:mousedown={(e) => handleMouseDown(e, shapesString[canvases.indexOf(canvas)])}
+			class:last-canvas={index === sidebarShapes.length - 1}
+			on:mousedown={(e) => handleMouseDown(e, shape.id)}
 			on:mouseup={handleMouseUp}
 			on:mouseenter={handleMouseEnter}
 			on:mouseleave={handleMouseLeave}

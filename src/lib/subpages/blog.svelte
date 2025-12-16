@@ -13,8 +13,6 @@
 
 	let { post: { results = [] } = {} } = data;
 
-	let loadingTitle = '';
-
 	onMount(async () => {
 		// Set accent color based on URL
 		page.url.searchParams.forEach((value, key) => {
@@ -81,13 +79,7 @@
 
 		<div class="post-item">
 			<p class="post-title-wrapper">
-				<a
-					on:mousedown={() => {
-						loadingTitle = titleText;
-					}}
-					href="/blog/{slug}"
-					class="post-title-link"
-				>
+				<a href="/blog/{slug}" class="post-title-link">
 					{titleText}
 				</a>
 			</p>
