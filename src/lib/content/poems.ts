@@ -61,9 +61,12 @@ function parseFrontmatter(content: string): { frontmatter: PoemFrontmatter; body
 			const key = line.slice(0, colonIndex).trim();
 			let value: any = line.slice(colonIndex + 1).trim();
 
-			// Remove quotes from strings
-			if (value.startsWith('"') && value.endsWith('"')) {
-				value = value.slice(1, -1).replace(/\\"/g, '"');
+			// Remove wrapping quotes from strings
+			if (
+				(value.startsWith('"') && value.endsWith('"')) ||
+				(value.startsWith("'") && value.endsWith("'"))
+			) {
+				value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
 			}
 			// Parse booleans
 			else if (value === 'true') value = true;
@@ -251,4 +254,3 @@ export function transformPoemsToNotionFormat(poems: PoemMeta[]) {
 		}))
 	};
 }
-
