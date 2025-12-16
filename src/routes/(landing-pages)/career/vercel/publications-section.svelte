@@ -22,14 +22,15 @@
 	<ul>
 		{#each publications as publication}
 			{#if publication.properties.Type.select.name === type}
+				{@const descriptionItem = publication.properties.Description.rich_text[0]}
 				<li>
 					<a href={publication.properties.Link.url} target="_blank" rel="noopener noreferrer">
 						<h3 class="item-title">
 							{publication.properties.Name.title[0].plain_text}
 						</h3>
 					</a>
-					{#if publication.properties.Description.rich_text[0]}
-						<p class="description">{publication.properties.Description.rich_text[0].plain_text}</p>
+					{#if descriptionItem?.type === 'text'}
+						<p class="description">{descriptionItem.text.content}</p>
 					{/if}
 				</li>
 			{/if}
@@ -40,49 +41,49 @@
 <style>
 	.publications-section {
 		margin-bottom: 5rem;
-		background-color: #f4efea;
-		border-radius: 10px;
-		padding: 2.5rem;
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+		border-radius: 10px;
+		background-color: #f4efea;
+		padding: 2.5rem;
 	}
 
 	.section-title {
 		margin-bottom: 1rem;
-		font-size: 2rem;
-		font-weight: 500;
-		font-family: 'Spectral', serif;
 		color: var(--accent-color);
+		font-weight: 500;
+		font-size: 2rem;
+		font-family: 'Spectral', serif;
 	}
 
 	.subtitle {
 		margin-bottom: 2.5rem;
+		color: #666;
 		font-style: italic;
 		font-size: 1.125rem;
-		color: #666;
 		line-height: 1.6;
 	}
 
 	ul {
-		list-style: none;
-		padding: 0;
 		margin: 0;
+		padding: 0;
+		list-style: none;
 	}
 
 	li {
 		margin-bottom: 2rem;
-		padding-bottom: 1.5rem;
 		border-bottom: 1px solid rgba(100, 46, 26, 0.2);
+		padding-bottom: 1.5rem;
 	}
 
 	li:last-child {
-		border-bottom: none;
 		margin-bottom: 0;
+		border-bottom: none;
 	}
 
 	a {
-		text-decoration: none;
 		display: block;
 		transition: transform 0.2s ease;
+		text-decoration: none;
 	}
 
 	a:hover {
@@ -90,25 +91,25 @@
 	}
 
 	.item-title {
+		transition: color 0.2s ease;
+		margin-bottom: 0.5rem;
+		color: var(--accent-color);
 		font-weight: 500;
 		font-size: 1.25rem;
-		margin-bottom: 0.5rem;
-		transition: color 0.2s ease;
 		font-family: 'Spectral', serif;
-		color: var(--accent-color);
 	}
 
 	a:hover .item-title {
-		text-decoration: underline;
 		filter: brightness(1.2);
+		text-decoration: underline;
 	}
 
 	.description {
+		margin: 0;
+		color: #555;
 		font-style: italic;
 		font-size: 1rem;
-		color: #555;
 		line-height: 1.5;
-		margin: 0;
 	}
 
 	@media (min-width: 640px) {

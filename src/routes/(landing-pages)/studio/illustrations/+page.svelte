@@ -2,34 +2,83 @@
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import { fade, scale } from 'svelte/transition';
 
+	import type { PageObjectResponse, RichTextItemResponse } from '$lib/notion/types/notion-types';
+
 	// Props
 	export let data;
-	const {
-		illustrations: { results }
-	} = data;
+	const results = data?.illustrations?.results ?? [];
+
+	function isPageObjectResponse(page: any): page is PageObjectResponse {
+		return page && typeof page === 'object' && 'properties' in page;
+	}
+
+	const paintings = results.filter(isPageObjectResponse) as PageObjectResponse[];
+
+	type UrlProperty = { type: 'url'; url: string | null };
+	type TitleProperty = { type: 'title'; title: Array<{ plain_text?: string }> };
+	type FormulaStringProperty = { type: 'formula'; formula: { type: 'string'; string: string | null } };
+	type RichTextProperty = { type: 'rich_text'; rich_text: RichTextItemResponse[] };
+
+	function isUrlProperty(prop: any): prop is UrlProperty {
+		return prop?.type === 'url';
+	}
+
+	function isTitleProperty(prop: any): prop is TitleProperty {
+		return prop?.type === 'title' && Array.isArray(prop.title);
+	}
+
+	function isFormulaStringProperty(prop: any): prop is FormulaStringProperty {
+		return prop?.type === 'formula' && prop.formula?.type === 'string';
+	}
+
+	function isRichTextProperty(prop: any): prop is RichTextProperty {
+		return prop?.type === 'rich_text' && Array.isArray(prop.rich_text);
+	}
+
+	function getPaintingImageUrl(painting: PageObjectResponse): string {
+		const prop = (painting.properties as any).Image;
+		return isUrlProperty(prop) ? prop.url ?? '' : '';
+	}
+
+	function getPaintingName(painting: PageObjectResponse): string {
+		const prop = (painting.properties as any).Name;
+		return isTitleProperty(prop) ? prop.title?.[0]?.plain_text ?? '' : '';
+	}
+
+	function getPaintingDate(painting: PageObjectResponse): string {
+		const prop = (painting.properties as any).Date;
+		return isFormulaStringProperty(prop) ? prop.formula.string ?? '' : '';
+	}
+
+	function getPaintingDescription(painting: PageObjectResponse): { rich_text: RichTextItemResponse[] } {
+		const prop = (painting.properties as any).Description;
+		return isRichTextProperty(prop) ? prop : { rich_text: [] };
+	}
 
 	// Image quality parameters
 	const lowQualityParams = '?tr=f-webp,w-800,q-40';
 	const highQualityParams = '?tr=f-webp,w-1600,q-85';
 
 	// State
-	let artGrid: HTMLDivElement;
-	let selectedPainting: any = null;
+	let selectedPainting: PageObjectResponse | null = null;
 	let modalOpen = false;
 	let highResImageLoaded = false;
 
-	function openModal(painting: any) {
+	function openModal(painting: PageObjectResponse) {
 		selectedPainting = painting;
 		modalOpen = true;
 		highResImageLoaded = false;
 		document.body.style.overflow = 'hidden';
 
 		// Preload high-res image
-		const highResImage = new Image();
-		highResImage.src = painting.properties.Image.url + highQualityParams;
-		highResImage.onload = () => {
-			highResImageLoaded = true;
-		};
+		const highResSrc = getPaintingImageUrl(painting);
+		if (highResSrc) {
+			const highResImage = new Image();
+			highResImage.src = highResSrc + highQualityParams;
+			highResImage.onload = () => {
+				highResImageLoaded = true;
+			};
+		}
 	}
 
 	function closeModal() {
@@ -84,8 +133,11 @@
 </svelte:head>
 
 <div class="background">
-	<div class="art-grid" bind:this={artGrid}>
-		{#each results as painting, i}
+	<div class="art-grid">
+		{#each paintings as painting, i}
+			{@const imageUrl = getPaintingImageUrl(painting)}
+			{@const name = getPaintingName(painting)}
+			{@const date = getPaintingDate(painting)}
 			<div
 				class="grid-item"
 				on:click={() => openModal(painting)}
@@ -98,35 +150,38 @@
 			>
 				<div class="image-wrapper">
 					<img
-						src={painting.properties.Image.url + lowQualityParams}
-						alt={painting.properties.Name.title[0].plain_text}
+						src={imageUrl + lowQualityParams}
+						alt={name}
 						class="grid-image"
 						loading="lazy"
 						on:load={handleImageLoad}
 					/>
 					<div class="image-overlay">
-						<h3>{painting.properties.Name.title[0].plain_text}</h3>
-						<p class="date">{painting.properties.Date.formula.string}</p>
+						<h3>{name}</h3>
+						<p class="date">{date}</p>
 					</div>
 				</div>
 			</div>
 		{/each}
 	</div>
 
-	{#if modalOpen}
+	{#if modalOpen && selectedPainting}
+		{@const selectedImageUrl = getPaintingImageUrl(selectedPainting)}
+		{@const selectedName = getPaintingName(selectedPainting)}
+		{@const selectedDate = getPaintingDate(selectedPainting)}
+		{@const selectedDescription = getPaintingDescription(selectedPainting)}
 		<div class="modal-overlay" on:click|self={closeModal} transition:fade={{ duration: 300 }}>
 			<div class="modal-content" transition:scale={{ duration: 300 }}>
 				<img
-					src={selectedPainting.properties.Image.url +
-						(highResImageLoaded ? highQualityParams : lowQualityParams)}
-					alt={selectedPainting.properties.Name.title[0].plain_text}
+					src={selectedImageUrl + (highResImageLoaded ? highQualityParams : lowQualityParams)}
+					alt={selectedName}
 					class="modal-image"
 					style="opacity: {highResImageLoaded ? 1 : 0.99}"
 				/>
 				<div class="modal-info">
-					<h2>{selectedPainting.properties.Name.title[0].plain_text}</h2>
-					<p class="date"><em>{selectedPainting.properties.Date.formula.string}</em></p>
-					<p class="description"><TextMacro type={selectedPainting.properties.Description} /></p>
+					<h2>{selectedName}</h2>
+					<p class="date"><em>{selectedDate}</em></p>
+					<p class="description"><TextMacro type={selectedDescription} /></p>
 				</div>
 				<button class="close-button" on:click={closeModal}>×</button>
 			</div>

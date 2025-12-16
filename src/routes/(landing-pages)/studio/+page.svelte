@@ -2,17 +2,19 @@
 	import { onMount, onDestroy } from 'svelte';
 	import StudioCard from './studio-card.svelte';
 	import gsap from 'gsap';
-	import { backgroundColors, pageState } from '$lib/stores';
+	import { pageState } from '$lib/stores';
 	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
-	import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
 
 	export let data;
 
-	const cards = (data.cards?.results || []).filter((card): card is PageObjectResponse => {
-		return 'parent' in card && 'properties' in card && 'icon' in card && 'cover' in card;
-	});
+	function isPageObjectResponse(card: any): card is PageObjectResponse {
+		return card && typeof card === 'object' && 'parent' in card && 'properties' in card;
+	}
 
-	function populate(node: HTMLElement) {
+	const cards = (data.cards?.results ?? []).filter(isPageObjectResponse) as PageObjectResponse[];
+
+	function populate(_node: HTMLElement) {
 		const tl = gsap.timeline();
 		tl.to('.card-div', { opacity: 1, duration: 0.5 })
 			.fromTo(

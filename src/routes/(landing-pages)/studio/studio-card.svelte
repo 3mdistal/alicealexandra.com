@@ -178,12 +178,12 @@
 		return;
 	}
 
-	function handleClickMessage(e) {
+	function handleClickMessage(e: CustomEvent<{ click: boolean }>) {
 		// Handle click events from the button
 		loading = e.detail.click;
 	}
 
-	function handleFocusMessage(e) {
+	function handleFocusMessage(e: CustomEvent<{ focus: boolean }>) {
 		// Handle focus events from the button
 		if (e.detail.focus === true) {
 			seeBack();

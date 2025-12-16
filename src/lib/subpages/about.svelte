@@ -3,7 +3,8 @@
 	import About1 from '../../cms/text/about/about1.svelte';
 	import About2 from '../../cms/text/about/about2.svelte';
 	import About3 from '../../cms/text/about/about3.svelte';
-		const AuthorPhoto = 'https://cdn.builder.io/api/v1/image/assets%2F7055d8d0cc284adcbfeafeb0f4b74e06%2Fb073f806fad94af9be01b13f53ce53b3?format=webp&width=800';
+	const AuthorPhoto =
+		'https://cdn.builder.io/api/v1/image/assets%2F7055d8d0cc284adcbfeafeb0f4b74e06%2Fb073f806fad94af9be01b13f53ce53b3?format=webp&width=800';
 	import Mirror from '../../cms/images/about/mirror.jpeg?enhanced';
 	import Owl from '../../cms/images/about/owl.png?enhanced';
 	import Socials from '$lib/icons/socials.svelte';
@@ -11,31 +12,6 @@
 	import { pageState } from '$lib/stores';
 
 	export let accent = '';
-
-	let loading = false;
-	let visibility = true;
-	let email: string;
-
-	async function subscribe(event: Event) {
-		loading = true;
-		const form = event.target as HTMLFormElement;
-		const data = new FormData(form);
-
-		const response = await fetch('/connect', {
-			method: 'POST',
-			body: data
-		});
-
-		if (response.ok) {
-			visibility = false;
-			loading = false;
-		}
-
-		if (!response.ok) {
-			const message = `An error has occured: ${response.status}`;
-			throw new Error(message);
-		}
-	}
 
 	onDestroy(() => {
 		pageState.set('home');
