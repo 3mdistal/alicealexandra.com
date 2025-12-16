@@ -49,8 +49,11 @@ function parseFrontmatter(content: string): { frontmatter: PostcardFrontmatter; 
 			const key = line.slice(0, colonIndex).trim();
 			let value: any = line.slice(colonIndex + 1).trim();
 
-			if (value.startsWith('"') && value.endsWith('"')) {
-				value = value.slice(1, -1).replace(/\\"/g, '"');
+			if (
+				(value.startsWith('"') && value.endsWith('"')) ||
+				(value.startsWith("'") && value.endsWith("'"))
+			) {
+				value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
 			} else if (value === 'true') value = true;
 			else if (value === 'false') value = false;
 			else if (!isNaN(Number(value))) value = Number(value);

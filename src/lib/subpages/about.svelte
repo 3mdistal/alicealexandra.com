@@ -65,7 +65,7 @@
 
 <div class="spacer"></div>
 
-<div class="about-footer">
+<div class="about-footer" id="connect">
 	<h2 class="about-footer-heading" style="color: {accent}">have thoughts to share?</h2>
 	<div class="about-footer-content">
 		<div class="about-footer-text">
