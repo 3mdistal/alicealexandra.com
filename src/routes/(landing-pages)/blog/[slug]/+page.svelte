@@ -270,6 +270,16 @@
 		:global(p) {
 			margin-bottom: 1em;
 		}
+
+		:global(p:first-of-type::first-letter) {
+			float: left;
+			margin-right: 0.1em;
+			color: var(--blog-heading);
+			font-weight: 600;
+			font-size: 3.5em;
+			font-family: 'Spectral', serif;
+			line-height: 0.8;
+		}
 	}
 
 	.back-link {
