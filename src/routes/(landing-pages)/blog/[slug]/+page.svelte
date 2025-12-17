@@ -277,7 +277,7 @@
 			margin-top: 0.07em;
 			margin-right: 0.08em;
 			color: var(--blog-heading);
-			font-weight: 600;
+			font-weight: 500;
 			font-size: 3.2em;
 			font-family: 'Spectral', serif;
 			line-height: 1;
