@@ -279,7 +279,7 @@
 		:global(p:first-of-type::first-letter),
 		:global(h2 + p::first-letter) {
 			initial-letter: 2;
-			margin-right: 0.08em;
+			margin-right: 1rem;
 			color: var(--blog-heading);
 			font-weight: 300;
 			font-family: 'Spectral', serif;
