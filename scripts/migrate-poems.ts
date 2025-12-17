@@ -21,7 +21,11 @@ dotenv.config({ path: '.env.local' });
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Configuration
-const CONTENT_REPO_PATH = path.resolve(__dirname, '../../teenylilcontent/poems');
+// Use --local flag to write to local content folder (for development)
+const isLocal = process.argv.includes('--local');
+const CONTENT_REPO_PATH = isLocal
+	? path.resolve(__dirname, '../content/poems')
+	: path.resolve(__dirname, '../../teenylilcontent/poems');
 
 // Environment variables
 const NOTION_KEY = process.env.NOTION_KEY;
@@ -288,4 +292,3 @@ migrate().catch((error) => {
 	console.error('Migration failed:', error);
 	process.exit(1);
 });
-
