@@ -238,13 +238,19 @@
 				<div class="poem-container">
 					{#each poems as poem}
 						{#if poem.properties['sectionName'].formula.string === section.properties.Name.title[0].plain_text}
-							<a class="poem-link" on:click|preventDefault={() => toggleOpen(poem.id)} href="">
+							<button
+								class="poem-link"
+								type="button"
+								aria-expanded={open[poem.id] === true}
+								aria-controls={`poem-${poem.id}`}
+								on:click={() => toggleOpen(poem.id)}
+							>
 								<h3 class="poem-title">
 									{poem.properties.Name.title[0].plain_text}
 								</h3>
-							</a>
+							</button>
 							{#if open[poem.id] === true}
-								<div class="poem-content">
+								<div class="poem-content" id={`poem-${poem.id}`}>
 									{#each poemContent[poem.id] ?? [] as stanza}
 										<p
 											class="poem-stanza"
@@ -587,6 +593,11 @@
 
 	.poem-link {
 		padding: 1rem;
+		background: none;
+		border: 0;
+		color: inherit;
+		font: inherit;
+		cursor: pointer;
 
 		&:hover {
 			text-decoration: none;
