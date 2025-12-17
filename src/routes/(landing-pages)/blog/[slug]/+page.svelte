@@ -270,6 +270,20 @@
 		:global(p) {
 			margin-bottom: 1em;
 		}
+
+		:global(> p:first-of-type),
+		:global(> h2 + p) {
+			overflow: hidden;
+		}
+
+		:global(> p:first-of-type::first-letter),
+		:global(> h2 + p::first-letter) {
+			initial-letter: 2;
+			margin-right: 0.5rem;
+			color: var(--blog-heading);
+			font-weight: 300;
+			font-family: 'Spectral', serif;
+		}
 	}
 
 	.back-link {
@@ -349,18 +363,21 @@
 		}
 
 		:global(.notion-container h2) {
-			margin-top: 2.5em;
-			margin-bottom: 1.5em;
+			margin-top: 3.5em;
+			margin-bottom: 2em;
 			color: var(--blog-heading);
-			font-weight: 500;
-			font-size: var(--blog-heading-small);
+			font-weight: 400;
+			font-size: 2rem;
+			font-family: 'Spectral', serif;
+			line-height: 1.3;
+			text-align: center;
 
 			@media (min-width: 768px) {
-				font-size: var(--blog-heading-medium);
+				font-size: 2.5rem;
 			}
 
 			@media (min-width: 1024px) {
-				font-size: 2.25rem;
+				font-size: 3rem;
 			}
 		}
 
