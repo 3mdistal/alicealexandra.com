@@ -278,14 +278,11 @@
 
 		:global(p:first-of-type::first-letter),
 		:global(h2 + p::first-letter) {
-			float: left;
-			margin-top: 0.12em;
+			initial-letter: 2;
 			margin-right: 0.08em;
 			color: var(--blog-heading);
 			font-weight: 300;
-			font-size: 3.5em;
 			font-family: 'Spectral', serif;
-			line-height: 0.8;
 		}
 	}
 
