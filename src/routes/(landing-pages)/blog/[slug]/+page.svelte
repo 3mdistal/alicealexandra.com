@@ -369,6 +369,7 @@
 			font-weight: 400;
 			font-size: 2rem;
 			font-family: 'Spectral', serif;
+			line-height: 1.3;
 			text-align: center;
 
 			@media (min-width: 768px) {
