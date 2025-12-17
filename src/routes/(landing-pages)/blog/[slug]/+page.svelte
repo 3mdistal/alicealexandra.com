@@ -363,18 +363,20 @@
 		}
 
 		:global(.notion-container h2) {
-			margin-top: 2.5em;
-			margin-bottom: 1.5em;
+			margin-top: 3.5em;
+			margin-bottom: 2em;
 			color: var(--blog-heading);
-			font-weight: 500;
-			font-size: var(--blog-heading-small);
+			font-weight: 400;
+			font-size: var(--blog-heading-medium);
+			font-family: 'Spectral', serif;
+			text-align: center;
 
 			@media (min-width: 768px) {
-				font-size: var(--blog-heading-medium);
+				font-size: 2rem;
 			}
 
 			@media (min-width: 1024px) {
-				font-size: 2.25rem;
+				font-size: 2.5rem;
 			}
 		}
 
