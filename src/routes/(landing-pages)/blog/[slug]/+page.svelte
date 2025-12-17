@@ -271,13 +271,13 @@
 			margin-bottom: 1em;
 		}
 
-		:global(p:first-of-type),
-		:global(h2 + p) {
+		:global(> p:first-of-type),
+		:global(> h2 + p) {
 			overflow: hidden;
 		}
 
-		:global(p:first-of-type::first-letter),
-		:global(h2 + p::first-letter) {
+		:global(> p:first-of-type::first-letter),
+		:global(> h2 + p::first-letter) {
 			initial-letter: 2;
 			margin-right: 0.5rem;
 			color: var(--blog-heading);
