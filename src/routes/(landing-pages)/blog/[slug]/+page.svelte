@@ -367,16 +367,16 @@
 			margin-bottom: 2em;
 			color: var(--blog-heading);
 			font-weight: 400;
-			font-size: var(--blog-heading-medium);
+			font-size: 2rem;
 			font-family: 'Spectral', serif;
 			text-align: center;
 
 			@media (min-width: 768px) {
-				font-size: 2rem;
+				font-size: 2.5rem;
 			}
 
 			@media (min-width: 1024px) {
-				font-size: 2.5rem;
+				font-size: 3rem;
 			}
 		}
 
