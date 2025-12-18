@@ -83,6 +83,10 @@
 <div class="spacer"></div>
 
 <style>
+	.spacer {
+		height: 200px;
+	}
+
 	strong {
 		font-weight: 600;
 	}
