@@ -137,6 +137,13 @@
 
 	.bordered-content h2 {
 		margin-bottom: 1.25rem;
+		font-size: 2.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.bordered-content h2 {
+			font-size: 3rem;
+		}
 	}
 
 	.button-wrapper {
