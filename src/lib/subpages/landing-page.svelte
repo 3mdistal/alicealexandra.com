@@ -111,6 +111,7 @@
 
 	.bordered-content {
 		box-sizing: border-box;
+		border-left: 4px solid;
 		padding: 5rem 2.5rem;
 	}
 
