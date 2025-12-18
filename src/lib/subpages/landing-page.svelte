@@ -111,12 +111,6 @@
 
 	.bordered-content {
 		box-sizing: border-box;
-		border-top-width: 3px;
-		border-right-width: 0px;
-		border-bottom-width: 3px;
-		border-left-width: 0px;
-		border-style: solid;
-		border-radius: 5%;
 		padding: 5rem 2.5rem;
 	}
 
