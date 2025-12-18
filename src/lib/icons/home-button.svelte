@@ -67,6 +67,10 @@
 		opacity: 0;
 		width: 3.5rem;
 		height: 3.5rem;
+
+		&:hover {
+			filter: none;
+		}
 	}
 
 	.logo {

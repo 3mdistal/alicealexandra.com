@@ -166,6 +166,10 @@
 		text-decoration: none;
 		color: inherit;
 		width: 100%;
+
+		&:hover {
+			filter: none;
+		}
 	}
 
 	.postcard {
