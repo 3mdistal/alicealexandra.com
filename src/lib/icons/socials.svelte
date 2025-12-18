@@ -75,6 +75,10 @@
 		object-fit: contain;
 	}
 
+	a:hover {
+		filter: none;
+	}
+
 	a:hover img {
 		transform: scale(1.1);
 	}
