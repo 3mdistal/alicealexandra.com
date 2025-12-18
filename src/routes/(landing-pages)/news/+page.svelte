@@ -312,6 +312,11 @@
 		font-weight: 500;
 		letter-spacing: 0.01em;
 		cursor: pointer;
+		transition: filter 0.15s ease;
+
+		&:hover {
+			filter: brightness(0.9);
+		}
 	}
 
 	.tab-button.active {
@@ -346,6 +351,11 @@
 		border-radius: 999px;
 		font-weight: 450;
 		cursor: pointer;
+		transition: filter 0.15s ease;
+
+		&:hover {
+			filter: brightness(0.9);
+		}
 	}
 
 	.subtab-button.active {
@@ -413,6 +423,7 @@
 		border-color: rgba(114, 106, 18, 0.22);
 		transform: translateY(-1px);
 		box-shadow: 0 10px 22px rgba(18, 16, 0, 0.06);
+		filter: none;
 	}
 
 	.entry--link.entry--studio:hover::after {
