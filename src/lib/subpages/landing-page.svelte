@@ -112,6 +112,8 @@
 	.bordered-content {
 		box-sizing: border-box;
 		border-left: 4px solid;
+		border-radius: 0 1rem 1rem 0;
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
 		padding: 5rem 2.5rem;
 	}
 
