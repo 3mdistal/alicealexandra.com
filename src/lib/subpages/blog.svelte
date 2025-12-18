@@ -122,13 +122,14 @@
 		font-size: var(--blog-heading-medium);
 		line-height: 1;
 		font-family: 'Spectral', serif;
+		transition: color 0.15s ease;
 
 		@media (max-width: 768px) {
 			font-size: 1.75rem;
 		}
 
 		&:hover {
-			text-decoration: underline;
+			color: var(--blog-heading-dark);
 		}
 
 		&:active {

@@ -51,9 +51,10 @@ img {
 
 a {
 	text-decoration: none;
+	transition: color 0.15s ease;
 
 	&:hover {
-		text-decoration: underline;
+		filter: brightness(0.8);
 	}
 }
 
