@@ -1,12 +1,15 @@
 <script lang="ts">
 	import HomepageSection from '$lib/homepage/homepage-section.svelte';
 	import { backgroundColors, names } from '../stores';
-	import gsap from 'gsap';
 	import { onMount } from 'svelte';
 
+	type Gsap = typeof import('gsap').gsap;
+
 	let homepageWrapper: HTMLElement;
+	let gsap: Gsap | null = null;
 
 	function springIn() {
+		if (!gsap) return;
 		gsap.from(homepageWrapper.children, {
 			scaleY: 0.3,
 			opacity: 0,
@@ -18,6 +21,7 @@
 	}
 
 	function easeOut() {
+		if (!gsap) return;
 		const tl = gsap.timeline();
 		tl.to(homepageWrapper, { y: '10vh', ease: 'power4.out' });
 		tl.to(homepageWrapper, { opacity: 0, delay: 0.15 });
@@ -29,8 +33,10 @@
 		easeOut();
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		homepageWrapper.style.opacity = '1';
+		const mod = await import('gsap');
+		gsap = mod.gsap;
 		springIn();
 	});
 </script>

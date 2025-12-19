@@ -1,15 +1,24 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { cubicIn } from 'svelte/easing';
-	import gsap from 'gsap';
+	import { onMount } from 'svelte';
 	import { pageState } from '$lib/stores';
 
+	type Gsap = typeof import('gsap').gsap;
+
+	let gsap: Gsap | null = null;
 	let logo: HTMLImageElement | null = $state(null);
 	let siteTitle: HTMLParagraphElement | null = $state(null);
 	let subtitle: HTMLParagraphElement | null = $state(null);
 
+	onMount(async () => {
+		const mod = await import('gsap');
+		gsap = mod.gsap;
+		inAnimation();
+	});
+
 	function inAnimation() {
-		if (!logo || !siteTitle || !subtitle) return;
+		if (!gsap || !logo || !siteTitle || !subtitle) return;
 
 		const tl = gsap.timeline();
 

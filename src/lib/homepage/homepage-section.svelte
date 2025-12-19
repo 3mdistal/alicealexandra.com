@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { pageState } from '$lib/stores';
-	import gsap from 'gsap';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+
+	type Gsap = typeof import('gsap').gsap;
 
 	export let background: string;
 	export let name: 'about' | 'studio' | 'career' | 'blog' | 'news';
@@ -9,12 +11,27 @@
 
 	let section: HTMLAnchorElement;
 	let hover = true;
+	let gsap: Gsap | null = null;
+
+	onMount(async () => {
+		const mod = await import('gsap');
+		gsap = mod.gsap;
+	});
 
 	function ease(yPos: number) {
+		if (!gsap) return;
 		gsap.to(section, { y: yPos, ease: 'elastic.out', duration: 2 });
 	}
 
 	function animateOut() {
+		if (!gsap) {
+			if (typeof document !== 'undefined') {
+				document.body.style.backgroundColor = background;
+			}
+			navigate();
+			return;
+		}
+
 		const tl = gsap.timeline({ onComplete: navigate });
 		tl.to(section, {
 			y: '-50vh',
