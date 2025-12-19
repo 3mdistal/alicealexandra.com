@@ -43,12 +43,13 @@
 </svelte:head>
 
 <div class="main-container homepage">
+	<!-- SVG clipPath defs must exist before homepage sections render to avoid a flash of unclipped blocks -->
+	<Svgs />
 	<SiteTitle />
 	<HomepageWrapper />
 	<div class="mastodon-link">
 		<a rel="me" href="https://hachyderm.io/@tempoimmaterial">Mastodon</a>
 	</div>
-	<Svgs />
 </div>
 
 <style>
