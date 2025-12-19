@@ -10,9 +10,9 @@
 
 	function springIn() {
 		if (!gsap) return;
-		gsap.from(homepageWrapper.children, {
-			scaleY: 0.3,
-			opacity: 0,
+		gsap.to(homepageWrapper.children, {
+			scaleY: 1,
+			opacity: 1,
 			ease: 'elastic',
 			duration: 2,
 			delay: 1.5,
@@ -34,9 +34,17 @@
 	}
 
 	onMount(async () => {
-		homepageWrapper.style.opacity = '1';
 		const mod = await import('gsap');
 		gsap = mod.gsap;
+
+		// Prevent a one-frame flash of the "final" layout before GSAP applies initial values.
+		gsap.set(homepageWrapper, { opacity: 1 });
+		gsap.set(homepageWrapper.children, {
+			scaleY: 0.3,
+			opacity: 0,
+			transformOrigin: '50% 100%'
+		});
+
 		springIn();
 	});
 </script>
