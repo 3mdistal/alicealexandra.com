@@ -16,7 +16,10 @@
 
 	type UrlProperty = { type: 'url'; url: string | null };
 	type TitleProperty = { type: 'title'; title: Array<{ plain_text?: string }> };
-	type FormulaStringProperty = { type: 'formula'; formula: { type: 'string'; string: string | null } };
+	type FormulaStringProperty = {
+		type: 'formula';
+		formula: { type: 'string'; string: string | null };
+	};
 	type RichTextProperty = { type: 'rich_text'; rich_text: RichTextItemResponse[] };
 
 	function isUrlProperty(prop: any): prop is UrlProperty {
@@ -37,20 +40,22 @@
 
 	function getPaintingImageUrl(painting: PageObjectResponse): string {
 		const prop = (painting.properties as any).Image;
-		return isUrlProperty(prop) ? prop.url ?? '' : '';
+		return isUrlProperty(prop) ? (prop.url ?? '') : '';
 	}
 
 	function getPaintingName(painting: PageObjectResponse): string {
 		const prop = (painting.properties as any).Name;
-		return isTitleProperty(prop) ? prop.title?.[0]?.plain_text ?? '' : '';
+		return isTitleProperty(prop) ? (prop.title?.[0]?.plain_text ?? '') : '';
 	}
 
 	function getPaintingDate(painting: PageObjectResponse): string {
 		const prop = (painting.properties as any).Date;
-		return isFormulaStringProperty(prop) ? prop.formula.string ?? '' : '';
+		return isFormulaStringProperty(prop) ? (prop.formula.string ?? '') : '';
 	}
 
-	function getPaintingDescription(painting: PageObjectResponse): { rich_text: RichTextItemResponse[] } {
+	function getPaintingDescription(painting: PageObjectResponse): {
+		rich_text: RichTextItemResponse[];
+	} {
 		const prop = (painting.properties as any).Description;
 		return isRichTextProperty(prop) ? prop : { rich_text: [] };
 	}
@@ -85,6 +90,13 @@
 		modalOpen = false;
 		selectedPainting = null;
 		document.body.style.overflow = '';
+	}
+
+	function handleWindowKeydown(event: KeyboardEvent) {
+		if (!modalOpen) return;
+		if (event.key !== 'Escape') return;
+		event.preventDefault();
+		closeModal();
 	}
 
 	function handleImageLoad(event: Event) {
@@ -132,15 +144,19 @@
 	<meta name="twitter:image:alt" content="The illustrations page of alicealexandra.com." />
 </svelte:head>
 
+<svelte:window on:keydown={handleWindowKeydown} />
+
 <div class="background">
 	<div class="art-grid">
 		{#each paintings as painting, i}
 			{@const imageUrl = getPaintingImageUrl(painting)}
 			{@const name = getPaintingName(painting)}
 			{@const date = getPaintingDate(painting)}
-			<div
+			<button
+				type="button"
 				class="grid-item"
 				on:click={() => openModal(painting)}
+				aria-label={name ? `Open ${name}` : 'Open artwork'}
 				style="--delay: {i * 0.1}s"
 				in:scale={{
 					duration: 800,
@@ -161,7 +177,7 @@
 						<p class="date">{date}</p>
 					</div>
 				</div>
-			</div>
+			</button>
 		{/each}
 	</div>
 
@@ -170,8 +186,16 @@
 		{@const selectedName = getPaintingName(selectedPainting)}
 		{@const selectedDate = getPaintingDate(selectedPainting)}
 		{@const selectedDescription = getPaintingDescription(selectedPainting)}
-		<div class="modal-overlay" on:click|self={closeModal} transition:fade={{ duration: 300 }}>
-			<div class="modal-content" transition:scale={{ duration: 300 }}>
+		<div class="modal-overlay" transition:fade={{ duration: 300 }}>
+			<button type="button" class="modal-backdrop" on:click={closeModal} aria-label="Close modal"
+			></button>
+			<div
+				class="modal-content"
+				role="dialog"
+				aria-modal="true"
+				aria-label={selectedName}
+				transition:scale={{ duration: 300 }}
+			>
 				<img
 					src={selectedImageUrl + (highResImageLoaded ? highQualityParams : lowQualityParams)}
 					alt={selectedName}
@@ -207,12 +231,30 @@
 	}
 
 	.grid-item {
+		display: block;
 		break-inside: avoid;
 		transform-origin: center;
 		opacity: 0;
 		animation: fadeIn 0.5s ease forwards;
 		animation-delay: var(--delay);
+		cursor: pointer;
 		margin-bottom: 1.5rem;
+		border: none;
+		background: transparent;
+		padding: 0;
+		width: 100%;
+		text-align: left;
+	}
+
+	.grid-item:focus-visible {
+		outline: none;
+	}
+
+	.grid-item:focus-visible .image-wrapper {
+		transform: translateY(-4px) scale(1.02);
+		box-shadow:
+			0 0 0 2px rgba(255, 255, 255, 0.6),
+			0 4px 6px rgba(0, 0, 0, 0.1);
 	}
 
 	.image-wrapper {
@@ -312,11 +354,29 @@
 		overflow-y: auto;
 	}
 
+	.modal-backdrop {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		cursor: pointer;
+		border: none;
+		background: transparent;
+		padding: 0;
+	}
+
+	.modal-backdrop:focus-visible {
+		outline: 2px solid rgba(255, 255, 255, 0.6);
+		outline-offset: -4px;
+	}
+
 	.modal-content {
 		display: flex;
 		position: relative;
 		flex-direction: column;
 		align-items: center;
+		z-index: 1;
 		backdrop-filter: blur(10px);
 		border-radius: 12px;
 		background-color: rgba(17, 24, 39, 0.8);
