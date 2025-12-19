@@ -41,8 +41,7 @@
 		gsap.set(homepageWrapper, { opacity: 1 });
 		gsap.set(homepageWrapper.children, {
 			scaleY: 0.3,
-			opacity: 0,
-			transformOrigin: '50% 100%'
+			opacity: 0
 		});
 
 		springIn();
