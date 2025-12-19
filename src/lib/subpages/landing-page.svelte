@@ -111,12 +111,9 @@
 
 	.bordered-content {
 		box-sizing: border-box;
-		border-top-width: 3px;
-		border-right-width: 0px;
-		border-bottom-width: 3px;
-		border-left-width: 0px;
-		border-style: solid;
-		border-radius: 5%;
+		border-left: 4px solid;
+		border-radius: 0 1rem 1rem 0;
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
 		padding: 5rem 2.5rem;
 	}
 
@@ -140,6 +137,13 @@
 
 	.bordered-content h2 {
 		margin-bottom: 1.25rem;
+		font-size: 2.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.bordered-content h2 {
+			font-size: 3rem;
+		}
 	}
 
 	.button-wrapper {

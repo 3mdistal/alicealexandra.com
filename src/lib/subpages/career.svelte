@@ -137,7 +137,7 @@
 	}
 
 	.spacer {
-		height: 4rem;
+		height: 8rem;
 	}
 
 	@media (min-width: 768px) {

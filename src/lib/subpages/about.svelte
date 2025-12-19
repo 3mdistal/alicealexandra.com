@@ -70,8 +70,8 @@
 	<div class="about-footer-content">
 		<div class="about-footer-text">
 			<p>
-				Though I have plans of fuller, richer ways to engage with the work here—even to contribute,
-				for now, my ears are open. I'll get back to you as I'm able.
+				Feel free to reach out to me on any of my socials. I'd love to hear from you. I'll get
+				back to you as I'm able.
 			</p>
 			<div class="socials-container">
 				<Socials />
@@ -83,6 +83,10 @@
 <div class="spacer"></div>
 
 <style>
+	.spacer {
+		height: 200px;
+	}
+
 	strong {
 		font-weight: 600;
 	}
