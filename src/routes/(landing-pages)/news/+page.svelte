@@ -2,7 +2,12 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { pageState } from '$lib/stores';
 	import { marked } from 'marked';
-	import { STUDIO_NEWS, type NewsMainTab, type StudioNewsAction, type StudioNewsCategory } from '$lib/news/updates';
+	import {
+		STUDIO_NEWS,
+		type NewsMainTab,
+		type StudioNewsAction,
+		type StudioNewsCategory
+	} from '$lib/news/updates';
 	import { parseChangelogSummaries } from '$lib/news/site-changelog';
 
 	// Read the CHANGELOG.md content
@@ -34,7 +39,10 @@
 	let showFullChangelog = false;
 
 	function stripOuterQuotes(text: string): string {
-		return text.replace(/^["'“”]+/, '').replace(/["'“”]+$/, '').trim();
+		return text
+			.replace(/^["'“”]+/, '')
+			.replace(/["'“”]+$/, '')
+			.trim();
 	}
 
 	function getStudioHref(entry: (typeof STUDIO_NEWS)[number]): string | null {
@@ -77,7 +85,13 @@
 	const siteSummaries = parseChangelogSummaries(changelog);
 
 	function isMainTab(value: string | null): value is NewsMainTab {
-		return value === 'about' || value === 'studio' || value === 'career' || value === 'blog' || value === 'site';
+		return (
+			value === 'about' ||
+			value === 'studio' ||
+			value === 'career' ||
+			value === 'blog' ||
+			value === 'site'
+		);
 	}
 
 	function isStudioFilter(value: string | null): value is 'all' | StudioNewsCategory {
@@ -109,7 +123,11 @@
 
 	function formatDate(isoDate: string): string {
 		const d = new Date(`${isoDate}T00:00:00`);
-		return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(d);
+		return new Intl.DateTimeFormat('en-US', {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric'
+		}).format(d);
 	}
 
 	$: studioEntries =
@@ -190,14 +208,16 @@
 						{#if href}
 							<a
 								class="entry entry--link entry--studio"
-								href={href}
+								{href}
 								aria-label={`${studioActionLabel(action)} • ${categoryLabel}: ${title}`}
 							>
 								<div class="entry-left">
 									<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
 									<div class="entry-meta" aria-hidden="true">
 										<span class="entry-category">{categoryLabel}</span>
-										<span class={`pill pill--action pill--${action}`}>{studioActionLabel(action)}</span>
+										<span class={`pill pill--action pill--${action}`}
+											>{studioActionLabel(action)}</span
+										>
 									</div>
 								</div>
 								<div class="entry-body">
@@ -210,7 +230,9 @@
 									<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
 									<div class="entry-meta" aria-hidden="true">
 										<span class="entry-category">{categoryLabel}</span>
-										<span class={`pill pill--action pill--${action}`}>{studioActionLabel(action)}</span>
+										<span class={`pill pill--action pill--${action}`}
+											>{studioActionLabel(action)}</span
+										>
 									</div>
 								</div>
 								<div class="entry-body">
@@ -298,21 +320,21 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
+		margin: 0 auto 1.25rem;
 		width: 100%;
 		max-width: 800px;
-		margin: 0 auto 1.25rem;
 	}
 
 	.tab-button {
+		transition: filter 0.15s ease;
+		cursor: pointer;
 		border: 1px solid rgba(114, 106, 18, 0.25);
-		background: rgba(255, 255, 255, 0.7);
-		color: #4b460d;
-		padding: 0.5rem 0.75rem;
 		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.7);
+		padding: 0.5rem 0.75rem;
+		color: #4b460d;
 		font-weight: 500;
 		letter-spacing: 0.01em;
-		cursor: pointer;
-		transition: filter 0.15s ease;
 
 		&:hover {
 			filter: brightness(0.9);
@@ -320,8 +342,8 @@
 	}
 
 	.tab-button.active {
-		background: rgba(114, 106, 18, 0.12);
 		border-color: rgba(114, 106, 18, 0.5);
+		background: rgba(114, 106, 18, 0.12);
 		color: #3d390b;
 	}
 
@@ -344,14 +366,14 @@
 	}
 
 	.subtab-button {
-		border: 1px solid rgba(114, 106, 18, 0.18);
-		background: rgba(255, 255, 255, 0.55);
-		color: rgba(75, 70, 13, 0.95);
-		padding: 0.4rem 0.65rem;
-		border-radius: 999px;
-		font-weight: 450;
-		cursor: pointer;
 		transition: filter 0.15s ease;
+		cursor: pointer;
+		border: 1px solid rgba(114, 106, 18, 0.18);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.55);
+		padding: 0.4rem 0.65rem;
+		color: rgba(75, 70, 13, 0.95);
+		font-weight: 450;
 
 		&:hover {
 			filter: brightness(0.9);
@@ -359,8 +381,8 @@
 	}
 
 	.subtab-button.active {
-		background: rgba(114, 106, 18, 0.1);
 		border-color: rgba(114, 106, 18, 0.45);
+		background: rgba(114, 106, 18, 0.1);
 	}
 
 	.entries {
@@ -373,10 +395,10 @@
 		display: grid;
 		grid-template-columns: 140px 1fr;
 		gap: 1rem;
-		padding: 0.75rem 0.75rem;
 		border: 1px solid rgba(114, 106, 18, 0.12);
-		background: rgba(255, 255, 255, 0.5);
 		border-radius: 12px;
+		background: rgba(255, 255, 255, 0.5);
+		padding: 0.75rem 0.75rem;
 	}
 
 	.entry--studio {
@@ -385,14 +407,14 @@
 	}
 
 	.entry--link {
-		text-decoration: none;
-		color: inherit;
-		cursor: pointer;
 		transition:
 			background 160ms ease,
 			border-color 160ms ease,
 			transform 160ms ease,
 			box-shadow 160ms ease;
+		cursor: pointer;
+		color: inherit;
+		text-decoration: none;
 	}
 
 	/* hover affordance without “link styling” */
@@ -403,32 +425,32 @@
 	}
 
 	.entry--link.entry--studio::after {
-		content: '→';
 		position: absolute;
-		right: 0.9rem;
 		top: 50%;
+		right: 0.9rem;
 		transform: translateY(-50%) translateX(-4px);
 		opacity: 0;
-		color: rgba(75, 70, 13, 0.55);
-		font-size: 1.25rem;
 		transition:
 			opacity 160ms ease,
 			transform 160ms ease,
 			color 160ms ease;
 		pointer-events: none;
+		content: '→';
+		color: rgba(75, 70, 13, 0.55);
+		font-size: 1.25rem;
 	}
 
 	.entry--link:hover {
-		background: rgba(255, 255, 255, 0.72);
-		border-color: rgba(114, 106, 18, 0.22);
 		transform: translateY(-1px);
-		box-shadow: 0 10px 22px rgba(18, 16, 0, 0.06);
 		filter: none;
+		box-shadow: 0 10px 22px rgba(18, 16, 0, 0.06);
+		border-color: rgba(114, 106, 18, 0.22);
+		background: rgba(255, 255, 255, 0.72);
 	}
 
 	.entry--link.entry--studio:hover::after {
-		opacity: 1;
 		transform: translateY(-50%) translateX(0);
+		opacity: 1;
 		color: rgba(75, 70, 13, 0.75);
 	}
 
@@ -438,8 +460,8 @@
 	}
 
 	.entry--link.entry--studio:focus-visible::after {
-		opacity: 1;
 		transform: translateY(-50%) translateX(0);
+		opacity: 1;
 		color: rgba(75, 70, 13, 0.75);
 	}
 
@@ -479,20 +501,20 @@
 	}
 
 	.entry-category {
-		font-size: 0.92rem;
-		font-weight: 600;
-		letter-spacing: 0.01em;
 		color: rgba(75, 70, 13, 0.78);
+		font-weight: 600;
+		font-size: 0.92rem;
 		line-height: 1.2;
+		letter-spacing: 0.01em;
 	}
 
 	.pill {
 		display: inline-flex;
 		align-items: center;
-		padding: 0.18rem 0.5rem;
-		border-radius: 999px;
 		border: 1px solid rgba(114, 106, 18, 0.16);
+		border-radius: 999px;
 		background: rgba(255, 255, 255, 0.55);
+		padding: 0.18rem 0.5rem;
 		color: rgba(75, 70, 13, 0.82);
 		font-size: 0.78rem;
 		letter-spacing: 0.02em;
@@ -504,31 +526,31 @@
 	}
 
 	.pill--added {
-		background: rgba(46, 125, 50, 0.08);
 		border-color: rgba(46, 125, 50, 0.22);
+		background: rgba(46, 125, 50, 0.08);
 		color: rgba(46, 90, 45, 0.95);
 	}
 
 	.pill--edited {
-		background: rgba(25, 118, 210, 0.08);
 		border-color: rgba(25, 118, 210, 0.22);
+		background: rgba(25, 118, 210, 0.08);
 		color: rgba(18, 74, 132, 0.95);
 	}
 
 	.pill--removed {
-		background: rgba(211, 47, 47, 0.08);
 		border-color: rgba(211, 47, 47, 0.22);
+		background: rgba(211, 47, 47, 0.08);
 		color: rgba(132, 21, 21, 0.95);
 	}
 
 	.entry-heading {
 		margin: 0;
+		color: rgba(25, 30, 40, 0.92);
+		font-weight: 500;
 		font-size: 1.45rem;
 		line-height: 1.35;
-		color: rgba(25, 30, 40, 0.92);
-		word-break: break-word;
 		font-family: 'Spectral', serif;
-		font-weight: 500;
+		word-break: break-word;
 	}
 
 	.entry-text-line {
@@ -547,11 +569,11 @@
 
 	/* Inline code in the Site tab cards (generated from `parseChangelogSummaries`) */
 	.entry-text :global(code) {
-		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
+		border-radius: 4px;
 		background-color: rgba(31, 41, 55, 0.08);
 		padding: 0.12rem 0.3rem;
-		border-radius: 4px;
 		font-size: 0.95em;
+		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
 		word-break: break-word;
 	}
 
@@ -595,26 +617,26 @@
 
 	/* Markdown code styling (CHANGELOG.md renders via `marked` → <code>/<pre>) */
 	.changelog-content :global(code) {
-		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
+		border-radius: 4px;
 		background-color: rgba(31, 41, 55, 0.08);
 		padding: 0.15rem 0.35rem;
-		border-radius: 4px;
 		font-size: 0.95em;
+		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
 		word-break: break-word;
 	}
 
 	.changelog-content :global(pre) {
+		margin: 1rem 0 1.5rem;
+		border-radius: 10px;
 		background-color: rgba(31, 41, 55, 0.08);
 		padding: 1rem;
-		border-radius: 10px;
 		overflow-x: auto;
-		margin: 1rem 0 1.5rem;
 	}
 
 	.changelog-content :global(pre code) {
+		border-radius: 0;
 		background: none;
 		padding: 0;
-		border-radius: 0;
 		font-size: 0.95em;
 		white-space: pre;
 		word-break: normal;
@@ -625,14 +647,14 @@
 	}
 
 	.toggle-full {
+		cursor: pointer;
 		border: none;
 		background: transparent;
+		padding: 0;
 		color: rgba(75, 70, 13, 0.95);
+		font-weight: 500;
 		text-decoration: underline;
 		text-underline-offset: 3px;
-		cursor: pointer;
-		padding: 0;
-		font-weight: 500;
 	}
 
 	@media (max-width: 640px) {

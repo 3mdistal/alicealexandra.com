@@ -36,7 +36,6 @@
 		rotations[index] = rotation;
 		return rotation;
 	}
-
 </script>
 
 <svelte:head>

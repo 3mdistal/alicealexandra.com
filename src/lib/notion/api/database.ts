@@ -96,27 +96,27 @@ export function extractBlogPosts(results: PageObjectResponse[]): BlogPost[] {
 				? properties['Published Date'].date?.start || ''
 				: '';
 
-        const coverImage =
-            properties['Cover Image']?.type === 'url'
-                ? properties['Cover Image'].url || undefined
-                : undefined;
+		const coverImage =
+			properties['Cover Image']?.type === 'url'
+				? properties['Cover Image'].url || undefined
+				: undefined;
 
 		const tags =
 			properties.Tags?.type === 'multi_select'
 				? properties.Tags.multi_select.map((tag) => tag.name)
 				: [];
 
-        const base = {
-            id: page.id,
-            slug,
-            title,
-            description,
-            publishedDate,
-            lastEditedTime: page.last_edited_time,
-            tags
-        } satisfies Omit<BlogPost, 'coverImage'>;
+		const base = {
+			id: page.id,
+			slug,
+			title,
+			description,
+			publishedDate,
+			lastEditedTime: page.last_edited_time,
+			tags
+		} satisfies Omit<BlogPost, 'coverImage'>;
 
-        return coverImage ? { ...base, coverImage } : base;
+		return coverImage ? { ...base, coverImage } : base;
 	});
 }
 
@@ -143,27 +143,30 @@ export function extractPostcards(results: PageObjectResponse[]): Array<{
 				: 'Untitled';
 
 		const slug =
-			properties.Slug?.type === 'url' ? properties.Slug.url || '' :
-			properties.Slug?.type === 'rich_text' ? properties.Slug.rich_text[0]?.plain_text || '' : '';
+			properties.Slug?.type === 'url'
+				? properties.Slug.url || ''
+				: properties.Slug?.type === 'rich_text'
+					? properties.Slug.rich_text[0]?.plain_text || ''
+					: '';
 
 		const description =
 			properties.Description?.type === 'rich_text'
 				? properties.Description.rich_text[0]?.plain_text || ''
 				: '';
 
-        const heroImage =
-            properties['Hero Image']?.type === 'url'
-                ? properties['Hero Image'].url || undefined
-                : undefined;
+		const heroImage =
+			properties['Hero Image']?.type === 'url'
+				? properties['Hero Image'].url || undefined
+				: undefined;
 
-        const base = {
-            id: page.id,
-            slug,
-            title,
-            description,
-            lastEditedTime: page.last_edited_time
-        } as const;
+		const base = {
+			id: page.id,
+			slug,
+			title,
+			description,
+			lastEditedTime: page.last_edited_time
+		} as const;
 
-        return heroImage ? { ...base, heroImage } : base;
+		return heroImage ? { ...base, heroImage } : base;
 	});
 }

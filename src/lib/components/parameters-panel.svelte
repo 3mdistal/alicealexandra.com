@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { defaultPhysicsParams, parameterRanges, physicsParams, type PhysicsParams } from '$lib/arcade/physics-params';
+	import {
+		defaultPhysicsParams,
+		parameterRanges,
+		physicsParams,
+		type PhysicsParams
+	} from '$lib/arcade/physics-params';
 
 	export let isOpen: boolean = false;
 
@@ -61,7 +66,10 @@
 		return tooltips[key];
 	}
 
-	const parameterEntries = Object.entries(parameterRanges) as [keyof PhysicsParams, ParameterRange][];
+	const parameterEntries = Object.entries(parameterRanges) as [
+		keyof PhysicsParams,
+		ParameterRange
+	][];
 </script>
 
 <div class="parameters-panel" class:open={isOpen}>
@@ -88,7 +96,8 @@
 						max={range.max}
 						step={range.step}
 						value={currentParams[key]}
-						on:input={(e) => updateParam(key, parseFloat((e.currentTarget as HTMLInputElement).value))}
+						on:input={(e) =>
+							updateParam(key, parseFloat((e.currentTarget as HTMLInputElement).value))}
 						class="parameter-slider"
 					/>
 					<span class="parameter-value">{formatValue(key, currentParams[key])}</span>
@@ -99,18 +108,18 @@
 </div>
 
 <style>
-		.parameters-panel {
+	.parameters-panel {
 		position: fixed;
 		top: 50%;
 		left: -320px;
 		transform: translateY(-50%);
-		width: 300px;
-		background: rgba(0, 0, 0, 0.9);
-		border: 2px solid #333;
-		border-radius: 8px;
-		padding: 20px;
 		z-index: 1000;
 		transition: left 0.3s ease-in-out;
+		border: 2px solid #333;
+		border-radius: 8px;
+		background: rgba(0, 0, 0, 0.9);
+		padding: 20px;
+		width: 300px;
 		color: white;
 		font-family: monospace;
 	}
@@ -128,23 +137,23 @@
 		padding-bottom: 10px;
 	}
 
-		.panel-header h3 {
+	.panel-header h3 {
 		margin: 0;
 		color: #fff;
 		font-size: 16px;
 		font-family: monospace;
 	}
 
-		.reset-button {
-		background: #333;
-		color: white;
-		border: 1px solid #555;
-		padding: 4px 8px;
-		border-radius: 4px;
+	.reset-button {
+		transition: background 0.2s;
 		cursor: pointer;
+		border: 1px solid #555;
+		border-radius: 4px;
+		background: #333;
+		padding: 4px 8px;
+		color: white;
 		font-size: 12px;
 		font-family: monospace;
-		transition: background 0.2s;
 	}
 
 	.reset-button:hover {
@@ -157,7 +166,7 @@
 		gap: 15px;
 	}
 
-		.parameter-group {
+	.parameter-group {
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
@@ -170,31 +179,31 @@
 	}
 
 	.parameter-group label {
-		font-size: 12px;
 		color: #ccc;
-		text-transform: capitalize;
+		font-size: 12px;
 		font-family: monospace;
+		text-transform: capitalize;
 	}
 
 	.info-container {
-		position: relative;
 		display: inline-block;
+		position: relative;
 	}
 
 	.info-icon {
 		display: inline-flex;
-		align-items: center;
 		justify-content: center;
+		align-items: center;
+		transition: background 0.2s;
+		cursor: help;
+		border-radius: 50%;
+		background: #555;
 		width: 14px;
 		height: 14px;
-		background: #555;
 		color: #ccc;
-		border-radius: 50%;
+		font-style: italic;
 		font-size: 10px;
 		font-family: monospace;
-		font-style: italic;
-		cursor: help;
-		transition: background 0.2s;
 	}
 
 	.info-icon:hover {
@@ -202,36 +211,38 @@
 		color: #fff;
 	}
 
-		.tooltip {
-		visibility: hidden;
-		opacity: 0;
+	.tooltip {
 		position: absolute;
 		bottom: 120%;
 		left: 50%;
 		transform: translateX(-50%);
-		background: rgba(0, 0, 0, 0.95);
-		color: white;
-		padding: 8px 12px;
+		visibility: hidden;
+		opacity: 0;
+		z-index: 1002;
+		transition:
+			opacity 0.2s,
+			visibility 0.2s;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+		border: 1px solid #555;
 		border-radius: 6px;
+		background: rgba(0, 0, 0, 0.95);
+		padding: 8px 12px;
+		width: 200px;
+		color: white;
 		font-size: 11px;
 		font-family: monospace;
-		z-index: 1002;
-		border: 1px solid #555;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-		transition: opacity 0.2s, visibility 0.2s;
-				width: 200px;
 		text-align: left;
 		word-wrap: break-word;
 	}
 
 	.tooltip::after {
-		content: "";
 		position: absolute;
 		top: 100%;
 		left: 50%;
 		transform: translateX(-50%);
 		border: 4px solid transparent;
 		border-top-color: rgba(0, 0, 0, 0.95);
+		content: '';
 	}
 
 	.info-container:hover .tooltip {
@@ -247,38 +258,38 @@
 
 	.parameter-slider {
 		flex: 1;
-		height: 4px;
-		background: #333;
-		border-radius: 2px;
-		outline: none;
 		cursor: pointer;
+		outline: none;
+		border-radius: 2px;
+		background: #333;
+		height: 4px;
 	}
 
 	.parameter-slider::-webkit-slider-thumb {
 		appearance: none;
-		width: 16px;
-		height: 16px;
-		background: white;
-		border-radius: 50%;
 		cursor: pointer;
 		box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+		border-radius: 50%;
+		background: white;
+		width: 16px;
+		height: 16px;
 	}
 
 	.parameter-slider::-moz-range-thumb {
+		cursor: pointer;
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+		border: none;
+		border-radius: 50%;
+		background: white;
 		width: 16px;
 		height: 16px;
-		background: white;
-		border-radius: 50%;
-		cursor: pointer;
-		border: none;
-		box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 	}
 
-		.parameter-value {
-		font-size: 12px;
-		color: #fff;
+	.parameter-value {
 		min-width: 40px;
-		text-align: right;
+		color: #fff;
+		font-size: 12px;
 		font-family: monospace;
+		text-align: right;
 	}
 </style>

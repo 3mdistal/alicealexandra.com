@@ -50,7 +50,7 @@
 	<h2 bind:this={heading} style="color: {accent}">
 		<slot name="heading" />
 	</h2>
-				<div class="content" style="--flex-direction: {flexDirection}">
+	<div class="content" style="--flex-direction: {flexDirection}">
 		<div class="text" bind:this={text}>
 			<slot name="text" style="color: {accent}" />
 			<div class="button-container">
@@ -58,7 +58,7 @@
 			</div>
 		</div>
 
-						<div class="image-container" bind:this={image}>
+		<div class="image-container" bind:this={image}>
 			{#if typeof imageSource === 'string' && (imageSource.startsWith('http') || imageSource.startsWith('//'))}
 				<img src={imageSource} alt={imageAlt} />
 			{:else}
@@ -69,7 +69,7 @@
 </div>
 
 <style>
-				.container {
+	.container {
 		margin-right: auto;
 		margin-left: auto;
 		width: 75%;
@@ -89,7 +89,7 @@
 		color: inherit;
 	}
 
-			.content {
+	.content {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -120,46 +120,43 @@
 		margin-top: 3em;
 	}
 
-			.image-container {
+	.image-container {
 		margin-right: auto;
 		margin-left: auto;
 		height: 50vh;
 		min-height: 300px;
 	}
 
-				
-
-					.image-container img,
+	.image-container img,
 	.image-container :global(img) {
 		display: block;
+		filter: grayscale(0.1);
 		border-radius: 1.5rem;
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
 		object-fit: cover;
 		object-position: center;
-				overflow: hidden;
-		filter: grayscale(0.1);
-												
 	}
 
-				@media (min-width: 1024px) {
+	@media (min-width: 1024px) {
 		h2 {
 			text-align: center;
 		}
 
 		.content {
-			gap: 3em;
 			flex-direction: var(--flex-direction, row-reverse) !important;
+			gap: 3em;
 		}
 
 		.image-container {
 			position: sticky;
 			top: 7.5vh;
-			height: 85vh;
 			max-width: 50%;
+			height: 85vh;
 		}
 
-				.image-container {
+		.image-container {
 			max-width: 50%;
 		}
 	}

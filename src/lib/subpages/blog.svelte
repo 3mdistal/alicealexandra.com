@@ -117,12 +117,12 @@
 	}
 
 	.post-title-link {
+		transition: color 0.15s ease;
 		color: white;
 		font-weight: 500;
 		font-size: var(--blog-heading-medium);
 		line-height: 1;
 		font-family: 'Spectral', serif;
-		transition: color 0.15s ease;
 
 		@media (max-width: 768px) {
 			font-size: 1.75rem;

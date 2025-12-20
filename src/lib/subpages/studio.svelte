@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CarouselLi from '$lib/subpages/studio/carousel-li.svelte';
 	import { onMount } from 'svelte';
-		import gsap from 'gsap';
+	import gsap from 'gsap';
 	import { loadScrollTrigger } from '$lib/partials/load-scroll-trigger';
 	import type { ScrollTriggerStatic } from '$lib/types/gsap';
 
@@ -18,7 +18,7 @@
 	let container: HTMLDivElement;
 	let carousel: HTMLUListElement;
 
-		function scrollAnimate(scrollTriggerInstance: ScrollTriggerStatic) {
+	function scrollAnimate(scrollTriggerInstance: ScrollTriggerStatic) {
 		gsap.registerPlugin(scrollTriggerInstance);
 		if (window.innerWidth > 768) {
 			gsap.to(carousel, {

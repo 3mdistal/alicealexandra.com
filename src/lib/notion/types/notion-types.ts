@@ -103,7 +103,6 @@ export interface BlogPost {
 	tags: string[];
 }
 
-
 /**
  * Subscriber data
  */

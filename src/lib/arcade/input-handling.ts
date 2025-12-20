@@ -39,7 +39,7 @@ export class InputHandler {
 		this.#listenKeyUp();
 	}
 
-				#listenKeyDown() {
+	#listenKeyDown() {
 		document.addEventListener('keydown', (event) => {
 			const action = this.possibleInputs[event.key];
 			if (!action) return;
@@ -56,7 +56,7 @@ export class InputHandler {
 		});
 	}
 
-				#listenKeyUp() {
+	#listenKeyUp() {
 		document.addEventListener('keyup', (event) => {
 			const action = this.possibleInputs[event.key];
 			if (!action) return;
@@ -72,11 +72,11 @@ export class InputHandler {
 		});
 	}
 
-		handleInputs() {
+	handleInputs() {
 		return this.currentInputs;
 	}
 
-				canJump() {
+	canJump() {
 		return !this.jumpConsumed && (this.jumpPressed || this.jumpBuffered);
 	}
 
@@ -85,7 +85,9 @@ export class InputHandler {
 	}
 
 	isJumpBuffered(bufferTimeMs: number) {
-		return this.jumpBuffered && !this.jumpConsumed && Date.now() - this.jumpBufferTime <= bufferTimeMs;
+		return (
+			this.jumpBuffered && !this.jumpConsumed && Date.now() - this.jumpBufferTime <= bufferTimeMs
+		);
 	}
 
 	getJumpHoldRatio(maxHoldTimeMs: number) {

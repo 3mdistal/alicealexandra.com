@@ -20,7 +20,9 @@
 	let currentShape: SidebarShapeId = sidebarShapes[0].id;
 
 	const sidebarCanvases: Array<HTMLCanvasElement | null> = Array(sidebarShapes.length).fill(null);
-	const sidebarContexts: Array<CanvasRenderingContext2D | null> = Array(sidebarShapes.length).fill(null);
+	const sidebarContexts: Array<CanvasRenderingContext2D | null> = Array(sidebarShapes.length).fill(
+		null
+	);
 
 	const audioContext = new AudioContext();
 

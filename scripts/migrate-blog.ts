@@ -281,9 +281,7 @@ function blockToMarkdown(block: any): string {
 			} else if (block.image.type === 'file') {
 				imageUrl = block.image.file.url;
 			}
-			const caption = block.image.caption?.length
-				? richTextToPlain(block.image.caption)
-				: 'Image';
+			const caption = block.image.caption?.length ? richTextToPlain(block.image.caption) : 'Image';
 			return `![${caption}](${imageUrl})`;
 
 		case 'callout':

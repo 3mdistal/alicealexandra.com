@@ -3,24 +3,24 @@
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-    interface Props {
+	interface Props {
 		title: string;
 		description?: string;
-        heroImage?: string | undefined;
+		heroImage?: string | undefined;
 		href: string;
 		initialRotation?: number;
-        slug?: string;
+		slug?: string;
 		onclick?: (e: MouseEvent) => void;
 	}
 
-    let { title, description, heroImage, href, initialRotation = 0, onclick }: Props = $props();
+	let { title, description, heroImage, href, initialRotation = 0, onclick }: Props = $props();
 
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
 	let scrollTriggerInstance: ScrollTrigger;
 	let currentRotation = initialRotation;
 
-    onMount(() => {
+	onMount(() => {
 		// Register GSAP plugins
 		gsap.registerPlugin(ScrollTrigger);
 
@@ -121,26 +121,20 @@
 			cardElement.addEventListener('mouseenter', handleMouseEnter);
 			cardElement.addEventListener('mouseleave', handleMouseLeave);
 
-        // Cleanup function
-        return () => {
+			// Cleanup function
+			return () => {
 				cardElement.removeEventListener('mouseenter', handleMouseEnter);
 				cardElement.removeEventListener('mouseleave', handleMouseLeave);
 				if (scrollTriggerInstance) {
 					scrollTriggerInstance.kill();
 				}
 			};
-        }
-        return () => {};
-    });
+		}
+		return () => {};
+	});
 </script>
 
-<a
-	{href}
-	class="postcard-link"
-	bind:this={cardElement}
-	onclick={onclick}
-	data-sveltekit-preload-data
->
+<a {href} class="postcard-link" bind:this={cardElement} {onclick} data-sveltekit-preload-data>
 	<article class="postcard">
 		<div class="image-container">
 			<div
@@ -163,9 +157,9 @@
 <style>
 	.postcard-link {
 		display: block;
-		text-decoration: none;
-		color: inherit;
 		width: 100%;
+		color: inherit;
+		text-decoration: none;
 
 		&:hover {
 			filter: none;
@@ -174,26 +168,26 @@
 
 	.postcard {
 		position: relative;
-		width: 100%;
-		aspect-ratio: 3 / 2;
-		border-radius: 16px;
-		overflow: hidden;
 		cursor: pointer;
-		background: #000;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		border-radius: 16px;
+		background: #000;
+		aspect-ratio: 3 / 2;
+		width: 100%;
+		overflow: hidden;
 	}
 
 	.postcard::before {
-		content: '';
 		position: absolute;
 		top: -2px;
-		left: -2px;
 		right: -2px;
 		bottom: -2px;
+		left: -2px;
+		z-index: -1;
 		border: 2px dotted rgba(0, 0, 0, 0.5);
 		border-radius: 18px;
-		z-index: -1;
 		pointer-events: none;
+		content: '';
 	}
 
 	.image-container {
@@ -206,21 +200,24 @@
 	}
 
 	.background-image {
+		transform: scale(1.15);
+		will-change: transform;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
 		width: 100%;
 		height: 100%;
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-		will-change: transform;
-		transform: scale(1.15);
 	}
 
 	.postcard-overlay {
+		display: flex;
 		position: absolute;
 		top: 0;
-		left: 0;
 		right: 0;
 		bottom: 0;
+		left: 0;
+		align-items: flex-end;
+		z-index: 2;
 		background: linear-gradient(
 			180deg,
 			rgba(240, 240, 240, 0.1) 0%,
@@ -228,32 +225,29 @@
 			rgba(240, 240, 240, 0.7) 70%,
 			rgba(240, 240, 240, 0.95) 100%
 		);
-		display: flex;
-		align-items: flex-end;
 		padding: 2rem;
-		z-index: 2;
 	}
 
 	.postcard-content {
-		color: #333;
 		width: 100%;
+		color: #333;
 	}
 
 	h2 {
 		margin: 0 0 1rem 0;
-		font-size: 1.8rem;
-		font-weight: 600;
-		line-height: 1.2;
 		color: #333;
+		font-weight: 600;
+		font-size: 1.8rem;
+		line-height: 1.2;
 	}
 
 	.description {
-		color: #555;
-		margin: 0;
-		line-height: 1.5;
-		font-size: 1rem;
 		display: -webkit-box;
+		margin: 0;
 		-webkit-line-clamp: 3;
+		color: #555;
+		font-size: 1rem;
+		line-height: 1.5;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}
@@ -268,8 +262,8 @@
 		}
 
 		.description {
-			font-size: 0.9rem;
 			-webkit-line-clamp: 2;
+			font-size: 0.9rem;
 		}
 	}
 

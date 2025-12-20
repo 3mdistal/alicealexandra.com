@@ -592,12 +592,12 @@
 	}
 
 	.poem-link {
-		padding: 1rem;
-		background: none;
+		cursor: pointer;
 		border: 0;
+		background: none;
+		padding: 1rem;
 		color: inherit;
 		font: inherit;
-		cursor: pointer;
 
 		&:hover {
 			text-decoration: none;

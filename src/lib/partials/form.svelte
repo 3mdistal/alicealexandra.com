@@ -20,7 +20,7 @@
 			loadingDisplay = false;
 			submittedDisplay = true;
 		}, 1000);
-		
+
 		/* 
 		// Original code for when database endpoint is restored:
 		const response = await fetch('/career', {
@@ -73,7 +73,8 @@
 			Thank you, <span class="highlight">{client}</span>, for your submission!
 		</p>
 		<p class="message">
-			Note: This is currently a demo form. For real inquiries, please reach out through other channels.
+			Note: This is currently a demo form. For real inquiries, please reach out through other
+			channels.
 		</p>
 	</div>
 {:else if errorDisplay}

@@ -3,7 +3,7 @@ import { browser } from '$app/environment';
 /**
  * Triggers ISR revalidation for a specific route in the background.
  * This is meant to be called after page load to refresh content for the next visitor.
- * 
+ *
  * @param route - The route to revalidate (e.g., '/studio', '/blog')
  * @param options - Optional configuration
  */
@@ -46,7 +46,7 @@ export async function triggerRevalidation(
 /**
  * Creates a revalidation function for a specific route.
  * Useful for pages that always revalidate the same route.
- * 
+ *
  * @param route - The route to revalidate
  * @returns A function that triggers revalidation for the specified route
  */
@@ -57,7 +57,7 @@ export function createRevalidationTrigger(route: string) {
 /**
  * Hook for triggering revalidation on component mount.
  * Best practice: Call this in onMount to trigger background revalidation.
- * 
+ *
  * @param route - The route to revalidate
  * @param options - Optional configuration
  */

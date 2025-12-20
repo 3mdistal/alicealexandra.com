@@ -340,9 +340,9 @@
 	.header-label span {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
 		flex: 1 0 0;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-on-surface-1);
 		color: rgba(92, 92, 92, 1);
@@ -389,9 +389,9 @@
 	.cell-label {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
 		flex: 1 0 0;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-on-surface-1);
 		font-style: normal;
@@ -429,9 +429,9 @@
 	.cell-link span {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
 		flex: 1 0 0;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-accent-2);
 		color: rgba(2, 80, 217, 1);
