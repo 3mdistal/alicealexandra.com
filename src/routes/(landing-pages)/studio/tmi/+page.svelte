@@ -12,16 +12,16 @@
 	/>
 </svelte:head>
 
-<ComingSoon>
-	<svelte:fragment slot="title">these makeshift idiotika</svelte:fragment>
+{#snippet title()}these makeshift idiotika{/snippet}
 
-	<svelte:fragment slot="subtitle">
-		a sprawling world of lovers & fiends torn by an ever-tilting landscape
-	</svelte:fragment>
+{#snippet subtitle()}
+	a sprawling world of lovers & fiends torn by an ever-tilting landscape
+{/snippet}
 
-	<svelte:fragment slot="summary">You'll meet some characters very soon.</svelte:fragment>
+{#snippet summary()}You'll meet some characters very soon.{/snippet}
 
-	<svelte:fragment slot="text">
-		<ComingSoonTMI />
-	</svelte:fragment>
-</ComingSoon>
+{#snippet text()}
+	<ComingSoonTMI />
+{/snippet}
+
+<ComingSoon {title} {subtitle} {summary} {text} />

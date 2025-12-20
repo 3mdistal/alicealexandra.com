@@ -12,16 +12,16 @@
 	/>
 </svelte:head>
 
-<ComingSoon>
-	<svelte:fragment slot="title">jukebox</svelte:fragment>
+{#snippet title()}jukebox{/snippet}
 
-	<svelte:fragment slot="subtitle">attempts at taming the cacophany of noise</svelte:fragment>
+{#snippet subtitle()}attempts at taming the cacophany of noise{/snippet}
 
-	<svelte:fragment slot="summary">
-		I write music. Will be publishing here and to streaming services soon.
-	</svelte:fragment>
+{#snippet summary()}
+	I write music. Will be publishing here and to streaming services soon.
+{/snippet}
 
-	<svelte:fragment slot="text">
-		<ComingSoonJukebox />
-	</svelte:fragment>
-</ComingSoon>
+{#snippet text()}
+	<ComingSoonJukebox />
+{/snippet}
+
+<ComingSoon {title} {subtitle} {summary} {text} />
