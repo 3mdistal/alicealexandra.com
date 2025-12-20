@@ -1,40 +1,27 @@
-# Agent Instructions
+# Agent Guide (alicealexandra.com)
 
-This project uses **bd** (beads) for issue tracking. Run `bd onboard` to get started.
+IMPORTANT: Read `Beads.md` first (task tracking rules). Use bd for ALL issue tracking; do not use markdown TODOs.
 
-## Quick Reference
+Commands (pnpm, Node >= 24.12)
 
-```bash
-bd ready              # Find available work
-bd show <id>          # View issue details
-bd update <id> --status in_progress  # Claim work
-bd close <id>         # Complete work
-bd sync               # Sync with git
-```
+- Install: `pnpm install`
+- Dev: `pnpm dev`
+- Typecheck: `pnpm check`
+- Lint/format: `pnpm lint` ; `pnpm format`
+- Build/preview: `pnpm build` ; `pnpm preview` ; Vercel: `pnpm vercel-build`
+- Tests: `pnpm test` (Playwright + Vitest)
+- Single unit test (Vitest): `pnpm test:unit -- src/index.test.ts` or `pnpm test:unit -- -t "name"`
+- Single integration test (Playwright): `pnpm test:integration -- tests/foo.spec.ts` or `pnpm test:integration -- -g "name"`
 
-## Landing the Plane (Session Completion)
+Code Style
 
-**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
+- Prettier: tabs, single quotes, printWidth 100, no trailing commas (`.prettierrc`).
+- Imports: ESM; group/sort; prefer `import type { ... }` for types.
+- TypeScript: keep `strict`; avoid `any`; handle `undefined`; no unused locals/params.
+- Naming: `camelCase` vars/functions, `PascalCase` components/types; follow existing SvelteKit route conventions.
+- Errors/logging: throw `Error` with context; don’t swallow; keep console output intentional.
 
-**MANDATORY WORKFLOW:**
+Other rules
 
-1. **File issues for remaining work** - Create issues for anything that needs follow-up
-2. **Run quality gates** (if code changed) - Tests, linters, builds
-3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
-   ```bash
-   git pull --rebase
-   bd sync
-   git push
-   git status  # MUST show "up to date with origin"
-   ```
-5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
-7. **Hand off** - Provide context for next session
-
-**CRITICAL RULES:**
-
-- Work is NOT complete until `git push` succeeds
-- NEVER stop before pushing - that leaves work stranded locally
-- NEVER say "ready to push when you are" - YOU must push
-- If push fails, resolve and retry until it succeeds
+- Cursor/Copilot rules: none found (`.cursor/rules/`, `.cursorrules`, `.github/copilot-instructions.md`).
+- Builder.io: consult `.builderrules` when editing Builder-related pages.
