@@ -137,6 +137,16 @@ history/
 Run `bd <command> --help` to see all available flags for any command.
 For example: `bd create --help` shows `--parent`, `--deps`, `--assignee`, etc.
 
+### Worktree & Sync Rules
+
+This repo uses git worktrees. The Beads daemon is **disabled** to prevent sync conflicts.
+
+- ✅ **ALWAYS run `bd sync` at session end** (before switching branches/worktrees)
+- ✅ **ALWAYS run `bd sync` at session start** (to pick up remote changes)
+- ✅ If you see "out of sync" errors, run `bd doctor --fix`
+- ✅ Preferred workflow: Work from the **main repo**, not `.git/beads-worktrees/`
+- ❌ Do NOT rely on the daemon for auto-sync — it's disabled
+
 ### Important Rules
 
 - ✅ Use bd for ALL task tracking
