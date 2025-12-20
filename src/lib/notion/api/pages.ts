@@ -1,5 +1,5 @@
+import { env } from '$env/dynamic/private';
 import { notionClient, withErrorHandling } from './client';
-import { SUBSCRIBERS_DB } from '$env/static/private';
 import type { PageObjectResponse } from '../types/notion-types';
 import type { Subscriber } from '../types/notion-types';
 
@@ -67,7 +67,8 @@ export async function addSubscriber(
 	subscriberOrEmail: Subscriber | string
 ): Promise<PageObjectResponse> {
 	return withErrorHandling(async () => {
-		if (!SUBSCRIBERS_DB) {
+		const subscribersDb = env.SUBSCRIBERS_DB;
+		if (!subscribersDb) {
 			throw new Error('Missing required environment variables for subscribers');
 		}
 
@@ -85,7 +86,7 @@ export async function addSubscriber(
 		const response = await notionClient.pages.create({
 			parent: {
 				type: 'data_source_id',
-				data_source_id: SUBSCRIBERS_DB
+				data_source_id: subscribersDb
 			},
 			properties: {
 				Email: {

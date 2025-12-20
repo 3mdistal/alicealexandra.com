@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client';
-import { NOTION_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 /**
  * Custom error class for Notion API errors
@@ -31,7 +31,7 @@ export class NotionAPIError extends Error {
  * @throws {NotionAPIError} If any required environment variables are missing
  */
 export function validateEnvironmentVariables(): void {
-	if (!NOTION_KEY) {
+	if (!env.NOTION_KEY) {
 		throw new NotionAPIError(
 			'Missing required NOTION_KEY environment variable. Please configure your Notion API credentials in the environment variables.'
 		);
@@ -42,7 +42,7 @@ export function validateEnvironmentVariables(): void {
  * The Notion client instance for making API calls
  */
 export const notionClient = new Client({
-	auth: NOTION_KEY,
+	...(env.NOTION_KEY ? { auth: env.NOTION_KEY } : {}),
 	notionVersion: '2025-09-03'
 });
 

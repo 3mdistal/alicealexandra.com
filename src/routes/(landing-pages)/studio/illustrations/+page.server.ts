@@ -1,28 +1,38 @@
 import { queryDatabase } from '$lib/notion/api/database';
-import { BYPASS_TOKEN, ILLUSTRATIONS_DB } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { DataSourceQueryParameters } from '$lib/notion/types/notion-types';
 
-const queryParams: DataSourceQueryParameters = {
-	data_source_id: ILLUSTRATIONS_DB,
-	filter: {
-		and: [
-			{
-				property: 'Published',
-				checkbox: {
-					equals: true
-				}
-			}
-		]
-	},
-	sorts: [
-		{
-			direction: 'ascending',
-			property: 'Order'
-		}
-	]
-};
+const bypassToken = env.BYPASS_TOKEN;
+const illustrationsDb = env.ILLUSTRATIONS_DB;
 
 export async function load() {
+	if (!illustrationsDb) {
+		// Return empty array as fallback when Notion is not configured
+		return {
+			illustrations: { results: [] }
+		};
+	}
+
+	const queryParams: DataSourceQueryParameters = {
+		data_source_id: illustrationsDb,
+		filter: {
+			and: [
+				{
+					property: 'Published',
+					checkbox: {
+						equals: true
+					}
+				}
+			]
+		},
+		sorts: [
+			{
+				direction: 'ascending',
+				property: 'Order'
+			}
+		]
+	};
+
 	try {
 		return {
 			illustrations: await queryDatabase(queryParams)
@@ -36,9 +46,6 @@ export async function load() {
 }
 
 export const config = {
-	isr: {
-		expiration: false,
-		bypassToken: BYPASS_TOKEN
-	},
+	...(bypassToken ? { isr: { expiration: false, bypassToken } } : {}),
 	runtime: 'nodejs20.x'
 };
