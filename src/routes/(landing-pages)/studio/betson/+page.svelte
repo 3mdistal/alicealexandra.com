@@ -12,18 +12,18 @@
 	/>
 </svelte:head>
 
-<ComingSoon>
-	<svelte:fragment slot="title">betson, ohio</svelte:fragment>
+{#snippet title()}betson, ohio{/snippet}
 
-	<svelte:fragment slot="subtitle">
-		in the backwoods tangled undergrowth dictates creatures & canopies
-	</svelte:fragment>
+{#snippet subtitle()}
+	in the backwoods tangled undergrowth dictates creatures & canopies
+{/snippet}
 
-	<svelte:fragment slot="summary">
-		Interconnected short stories getting published here soon.
-	</svelte:fragment>
+{#snippet summary()}
+	Interconnected short stories getting published here soon.
+{/snippet}
 
-	<svelte:fragment slot="text">
-		<ComingSoonBetson />
-	</svelte:fragment>
-</ComingSoon>
+{#snippet text()}
+	<ComingSoonBetson />
+{/snippet}
+
+<ComingSoon {title} {subtitle} {summary} {text} />

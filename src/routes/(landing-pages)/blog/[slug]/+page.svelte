@@ -278,11 +278,11 @@
 
 		:global(> p:first-of-type::first-letter),
 		:global(> h2 + p::first-letter) {
-			initial-letter: 2;
 			margin-right: 0.5rem;
 			color: var(--blog-heading);
 			font-weight: 300;
 			font-family: 'Spectral', serif;
+			initial-letter: 2;
 		}
 	}
 
@@ -368,8 +368,8 @@
 			color: var(--blog-heading);
 			font-weight: 400;
 			font-size: 2rem;
-			font-family: 'Spectral', serif;
 			line-height: 1.3;
+			font-family: 'Spectral', serif;
 			text-align: center;
 
 			@media (min-width: 768px) {
@@ -396,10 +396,11 @@
 		:global(.notion-container ol),
 		:global(.notion-container ul) {
 			margin-left: 2em;
+		}
 
-			li {
-				color: inherit;
-			}
+		:global(.notion-container ol li),
+		:global(.notion-container ul li) {
+			color: inherit;
 		}
 
 		:global(.notion-container hr) {
@@ -453,7 +454,8 @@
 			}
 		}
 
-		:global(.notion-container p, li) {
+		:global(.notion-container p),
+		:global(.notion-container li) {
 			color: var(--blog-accent);
 		}
 

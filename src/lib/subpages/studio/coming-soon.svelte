@@ -1,36 +1,39 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import { fade } from 'svelte/transition';
+
+	let {
+		title,
+		subtitle,
+		summary,
+		text
+	}: {
+		title: Snippet;
+		subtitle: Snippet;
+		summary: Snippet;
+		text: Snippet;
+	} = $props();
 </script>
 
-<div in:fade={{ duration: 500 }} out:fade={{ duration: 500 }}>
-	<h1>
-		<slot name="title" />
-	</h1>
+<div class="coming-soon" in:fade={{ duration: 500 }} out:fade={{ duration: 500 }}>
+	<h1>{@render title()}</h1>
 	<p>
-		<em>
-			<slot name="subtitle" />
-		</em>
+		<em>{@render subtitle()}</em>
 	</p>
 	<hr />
 	<p>
 		<em class="tl-dr">tl;dr</em>
-		<slot name="summary" />
+		{@render summary()}
 	</p>
 	<hr />
-	<div>
-		<slot name="text" />
-	</div>
+	<div class="coming-soon__text">{@render text()}</div>
 	<p>
 		<a href="/studio#works">back.</a>
 	</p>
 </div>
 
 <style>
-	* {
-		color: #e1e1e1;
-	}
-
-	div {
+	.coming-soon {
 		background-color: black;
 		padding: 2.5rem 1rem;
 		height: 100%;
@@ -39,7 +42,7 @@
 		letter-spacing: 0.025em;
 	}
 
-	div * {
+	.coming-soon * {
 		color: inherit;
 	}
 
@@ -68,17 +71,17 @@
 		font-weight: 500;
 	}
 
-	div > div {
+	.coming-soon__text {
 		max-width: 60ch;
 		font-size: 1.25rem;
 		line-height: 1.75rem;
 	}
 
-	div > div * {
+	:global(.coming-soon__text *) {
 		color: inherit;
 	}
 
-	div > div p {
+	:global(.coming-soon__text p) {
 		margin-bottom: 1em;
 	}
 
@@ -95,7 +98,7 @@
 	}
 
 	@media (min-width: 640px) {
-		div {
+		.coming-soon {
 			padding-right: 2.5rem;
 			padding-left: 2.5rem;
 		}
@@ -119,7 +122,7 @@
 	}
 
 	@media (min-width: 1024px) {
-		div > div {
+		.coming-soon__text {
 			font-size: 1.5rem;
 			line-height: 2rem;
 		}
