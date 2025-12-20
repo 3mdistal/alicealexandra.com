@@ -2,3 +2,11 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Non-code / generated / external sources
+content/
+.beads/
+archived/
+
+# Beads export/snapshots (if present)
+.beads.*
