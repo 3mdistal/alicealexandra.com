@@ -1,18 +1,28 @@
 import { queryDatabase } from '$lib/notion/api/database';
-import { BYPASS_TOKEN, PROFESSIONAL_DB } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { DataSourceQueryParameters, TextRichTextItem } from '$lib/notion/types/notion-types';
 
-const queryParams: DataSourceQueryParameters = {
-	data_source_id: PROFESSIONAL_DB,
-	sorts: [
-		{
-			direction: 'descending',
-			property: 'Date'
-		}
-	]
-};
+const bypassToken = env.BYPASS_TOKEN;
+const professionalDb = env.PROFESSIONAL_DB;
 
 export async function load() {
+	if (!professionalDb) {
+		// Return empty array as fallback when Notion is not configured
+		return {
+			publicationList: { results: [] }
+		};
+	}
+
+	const queryParams: DataSourceQueryParameters = {
+		data_source_id: professionalDb,
+		sorts: [
+			{
+				direction: 'descending',
+				property: 'Date'
+			}
+		]
+	};
+
 	try {
 		return {
 			publicationList: await queryDatabase(queryParams)
@@ -26,10 +36,7 @@ export async function load() {
 }
 
 export const config = {
-	isr: {
-		expiration: false,
-		bypassToken: BYPASS_TOKEN
-	},
+	...(bypassToken ? { isr: { expiration: false, bypassToken } } : {}),
 	runtime: 'nodejs20.x'
 };
 

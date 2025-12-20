@@ -1,5 +1,5 @@
 import { json, error } from '@sveltejs/kit';
-import { BYPASS_TOKEN } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { RequestHandler } from './$types';
 
 // Allowed routes for revalidation to prevent abuse
@@ -29,6 +29,11 @@ export const POST: RequestHandler = async ({ request, url, fetch: serverFetch })
 			throw error(403, `Route '${route}' is not allowed for revalidation`);
 		}
 
+		const bypassToken = env.BYPASS_TOKEN;
+		if (!bypassToken) {
+			throw error(500, 'Missing required BYPASS_TOKEN environment variable');
+		}
+
 		// Construct the full URL for the route
 		const targetUrl = new URL(route, url.origin);
 
@@ -36,7 +41,7 @@ export const POST: RequestHandler = async ({ request, url, fetch: serverFetch })
 		const response = await serverFetch(targetUrl, {
 			method: 'HEAD',
 			headers: {
-				'x-prerender-revalidate': BYPASS_TOKEN
+				'x-prerender-revalidate': bypassToken
 			}
 		});
 
