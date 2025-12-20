@@ -1,5 +1,5 @@
 import { queryDatabase } from '$lib/notion/api/database';
-import { BYPASS_TOKEN, PROFESSIONAL_DB } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { DataSourceQueryParameters, TextRichTextItem } from '$lib/notion/types/notion-types';
 
 const bypassToken = env.BYPASS_TOKEN;
