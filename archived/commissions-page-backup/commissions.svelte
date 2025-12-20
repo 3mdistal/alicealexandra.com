@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Form from '../partials/form.svelte';
 
-		import gsap from 'gsap';
+	import gsap from 'gsap';
 	import { loadScrollTrigger } from '$lib/partials/load-scroll-trigger';
 	import { onMount } from 'svelte';
 	import type { ScrollTriggerStatic } from '$lib/types/gsap';
@@ -105,7 +105,7 @@
 		});
 	}
 
-		async function animateAll(sti: ScrollTriggerStatic) {
+	async function animateAll(sti: ScrollTriggerStatic) {
 		gsap.registerPlugin(sti);
 		heroAnimation();
 		headerAnimation();

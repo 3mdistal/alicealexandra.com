@@ -53,9 +53,9 @@
 	}
 
 	a:hover {
+		filter: none;
 		background-color: var(--accent);
 		color: var(--background);
-		filter: none;
 	}
 
 	@media (min-width: 1024px) {

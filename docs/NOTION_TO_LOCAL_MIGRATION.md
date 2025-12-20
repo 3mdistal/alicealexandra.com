@@ -65,39 +65,39 @@ const OUTPUT_DIR = '../teenylilcontent/[content-type]';
 
 // Key function: Convert Notion rich text to markdown
 function richTextToMarkdown(richText: any[]): string {
-  return richText
-    .map((item) => {
-      let text = item.plain_text;
-      
-      // Apply formatting
-      if (item.annotations?.bold) text = `**${text}**`;
-      if (item.annotations?.italic) text = `*${text}*`;
-      if (item.annotations?.code) text = `\`${text}\``;
-      if (item.annotations?.strikethrough) text = `~~${text}~~`;
-      if (item.href) text = `[${text}](${item.href})`;
-      
-      return text;
-    })
-    .join('');
+	return richText
+		.map((item) => {
+			let text = item.plain_text;
+
+			// Apply formatting
+			if (item.annotations?.bold) text = `**${text}**`;
+			if (item.annotations?.italic) text = `*${text}*`;
+			if (item.annotations?.code) text = `\`${text}\``;
+			if (item.annotations?.strikethrough) text = `~~${text}~~`;
+			if (item.href) text = `[${text}](${item.href})`;
+
+			return text;
+		})
+		.join('');
 }
 
 async function migrate() {
-  // 1. Fetch from Notion database
-  const response = await notion.databases.query({
-    database_id: process.env.YOUR_DATABASE_ID!,
-  });
+	// 1. Fetch from Notion database
+	const response = await notion.databases.query({
+		database_id: process.env.YOUR_DATABASE_ID!
+	});
 
-  // 2. For each item, fetch block content and convert
-  for (const page of response.results) {
-    // Extract properties
-    const title = getTitle(page);
-    const blocks = await notion.blocks.children.list({ block_id: page.id });
-    
-    // Convert blocks to markdown
-    const content = blocksToMarkdown(blocks.results);
-    
-    // 3. Write markdown file with frontmatter
-    const markdown = `---
+	// 2. For each item, fetch block content and convert
+	for (const page of response.results) {
+		// Extract properties
+		const title = getTitle(page);
+		const blocks = await notion.blocks.children.list({ block_id: page.id });
+
+		// Convert blocks to markdown
+		const content = blocksToMarkdown(blocks.results);
+
+		// 3. Write markdown file with frontmatter
+		const markdown = `---
 title: "${title}"
 notionId: "${page.id}"
 # Add other metadata as needed
@@ -105,9 +105,9 @@ notionId: "${page.id}"
 
 ${content}`;
 
-    const filename = slugify(title) + '.md';
-    await fs.writeFile(path.join(OUTPUT_DIR, filename), markdown);
-  }
+		const filename = slugify(title) + '.md';
+		await fs.writeFile(path.join(OUTPUT_DIR, filename), markdown);
+	}
 }
 ```
 
@@ -115,12 +115,12 @@ Add the script to package.json:
 
 ```json
 {
-  "scripts": {
-    "migrate:[content-type]": "npx tsx scripts/migrate-[content-type].ts"
-  },
-  "devDependencies": {
-    "dotenv": "^16.x"
-  }
+	"scripts": {
+		"migrate:[content-type]": "npx tsx scripts/migrate-[content-type].ts"
+	},
+	"devDependencies": {
+		"dotenv": "^16.x"
+	}
 }
 ```
 
@@ -137,65 +137,65 @@ const PROJECT_ROOT = process.cwd();
 const CONTENT_PATH = path.join(PROJECT_ROOT, 'content', '[content-type]');
 
 interface ContentItem {
-  id: string;
-  title: string;
-  content: string;
-  // ... other fields from frontmatter
+	id: string;
+	title: string;
+	content: string;
+	// ... other fields from frontmatter
 }
 
 function parseFrontmatter(content: string): { frontmatter: any; body: string } {
-  const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
-  const match = content.match(frontmatterRegex);
+	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
+	const match = content.match(frontmatterRegex);
 
-  if (!match) {
-    throw new Error('No frontmatter found in markdown file');
-  }
+	if (!match) {
+		throw new Error('No frontmatter found in markdown file');
+	}
 
-  const frontmatterStr = match[1];
-  const body = content.slice(match[0].length);
+	const frontmatterStr = match[1];
+	const body = content.slice(match[0].length);
 
-  // Parse YAML-like frontmatter
-  const frontmatter: Record<string, any> = {};
-  for (const line of frontmatterStr.split('\n')) {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.slice(0, colonIndex).trim();
-      let value: any = line.slice(colonIndex + 1).trim();
+	// Parse YAML-like frontmatter
+	const frontmatter: Record<string, any> = {};
+	for (const line of frontmatterStr.split('\n')) {
+		const colonIndex = line.indexOf(':');
+		if (colonIndex > 0) {
+			const key = line.slice(0, colonIndex).trim();
+			let value: any = line.slice(colonIndex + 1).trim();
 
-      // Remove quotes, parse booleans/numbers
-      if (value.startsWith('"') && value.endsWith('"')) {
-        value = value.slice(1, -1);
-      } else if (value === 'true') value = true;
-      else if (value === 'false') value = false;
-      else if (!isNaN(Number(value))) value = Number(value);
+			// Remove quotes, parse booleans/numbers
+			if (value.startsWith('"') && value.endsWith('"')) {
+				value = value.slice(1, -1);
+			} else if (value === 'true') value = true;
+			else if (value === 'false') value = false;
+			else if (!isNaN(Number(value))) value = Number(value);
 
-      frontmatter[key] = value;
-    }
-  }
+			frontmatter[key] = value;
+		}
+	}
 
-  return { frontmatter, body: body.trim() };
+	return { frontmatter, body: body.trim() };
 }
 
 export async function loadAllContent(): Promise<ContentItem[]> {
-  const files = await fs.readdir(CONTENT_PATH);
-  const mdFiles = files.filter((f) => f.endsWith('.md'));
+	const files = await fs.readdir(CONTENT_PATH);
+	const mdFiles = files.filter((f) => f.endsWith('.md'));
 
-  const items: ContentItem[] = [];
+	const items: ContentItem[] = [];
 
-  for (const file of mdFiles) {
-    const filePath = path.join(CONTENT_PATH, file);
-    const fileContent = await fs.readFile(filePath, 'utf-8');
-    const { frontmatter, body } = parseFrontmatter(fileContent);
+	for (const file of mdFiles) {
+		const filePath = path.join(CONTENT_PATH, file);
+		const fileContent = await fs.readFile(filePath, 'utf-8');
+		const { frontmatter, body } = parseFrontmatter(fileContent);
 
-    items.push({
-      id: frontmatter.notionId,
-      title: frontmatter.title,
-      content: body,
-      // Map other frontmatter fields
-    });
-  }
+		items.push({
+			id: frontmatter.notionId,
+			title: frontmatter.title,
+			content: body
+			// Map other frontmatter fields
+		});
+	}
 
-  return items;
+	return items;
 }
 ```
 
@@ -211,18 +211,18 @@ import { loadAllContent } from '$lib/content/[content-type]';
 export const prerender = true;
 
 export async function load() {
-  try {
-    const content = await loadAllContent();
+	try {
+		const content = await loadAllContent();
 
-    return {
-      props: {
-        content
-      }
-    };
-  } catch (error) {
-    console.error('Failed to load content:', error);
-    throw error; // Let build fail if content missing
-  }
+		return {
+			props: {
+				content
+			}
+		};
+	} catch (error) {
+		console.error('Failed to load content:', error);
+		throw error; // Let build fail if content missing
+	}
 }
 ```
 
@@ -233,14 +233,14 @@ Simplify the Svelte component to use preloaded data:
 ```svelte
 <!-- +page.svelte -->
 <script lang="ts">
-  export let data;
-  
-  // Content is already loaded - no need for onMount fetching
-  const { content } = data.props;
+	export let data;
+
+	// Content is already loaded - no need for onMount fetching
+	const { content } = data.props;
 </script>
 
 {#each content as item}
-  <!-- Render your content -->
+	<!-- Render your content -->
 {/each}
 ```
 
@@ -285,10 +285,10 @@ Add the vercel-build script:
 
 ```json
 {
-  "scripts": {
-    "build": "vite build",
-    "vercel-build": "bash scripts/fetch-content.sh && vite build"
-  }
+	"scripts": {
+		"build": "vite build",
+		"vercel-build": "bash scripts/fetch-content.sh && vite build"
+	}
 }
 ```
 
@@ -308,6 +308,7 @@ In your Vercel project settings, add:
 - `GITHUB_TOKEN`: A personal access token with `repo` scope
 
 To create a token:
+
 1. Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
 2. Generate new token with `repo` scope
 3. Copy and add to Vercel environment variables
@@ -349,28 +350,30 @@ content/
 ```
 
 **sections.json:**
+
 ```json
 [
-  {
-    "id": "section-uuid",
-    "name": "remembrance's folly",
-    "quote": "Who will be lost...",
-    "quoteAuthor": "Ocean Vuong",
-    "act": "act i",
-    "coverImage": "https://imagekit.io/...",
-    "sequence": 1
-  }
+	{
+		"id": "section-uuid",
+		"name": "remembrance's folly",
+		"quote": "Who will be lost...",
+		"quoteAuthor": "Ocean Vuong",
+		"act": "act i",
+		"coverImage": "https://imagekit.io/...",
+		"sequence": 1
+	}
 ]
 ```
 
 **poem.md:**
+
 ```markdown
 ---
-title: "friction"
-section: "narcissus and calliope"
+title: 'friction'
+section: 'narcissus and calliope'
 sequence: 4
 notLineated: false
-notionId: "original-notion-uuid"
+notionId: 'original-notion-uuid'
 ---
 
 1. the rubbing of one object or surface against another
@@ -424,6 +427,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 ### Prerendering fails
 
 If prerendering fails, the error will be visible in Vercel build logs. Common issues:
+
 - Missing content files
 - Malformed frontmatter
 - Path resolution issues
@@ -433,11 +437,11 @@ Add detailed logging to catch issues:
 ```typescript
 console.log('Loading content from:', CONTENT_PATH);
 try {
-  const content = await loadAllContent();
-  console.log('Loaded', content.length, 'items');
+	const content = await loadAllContent();
+	console.log('Loaded', content.length, 'items');
 } catch (error) {
-  console.error('Failed to load:', error);
-  throw error; // Re-throw to fail build
+	console.error('Failed to load:', error);
+	throw error; // Re-throw to fail build
 }
 ```
 
@@ -458,4 +462,3 @@ try {
 - `scripts/migrate-poems.ts` - HFC migration script (reference)
 - `src/lib/content/poems.ts` - HFC content loader
 - `src/routes/(landing-pages)/studio/hfc/+page.server.ts` - HFC page server
-

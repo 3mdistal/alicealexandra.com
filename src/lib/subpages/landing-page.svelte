@@ -113,7 +113,11 @@
 		box-sizing: border-box;
 		border-left: 4px solid;
 		border-radius: 0 1rem 1rem 0;
-		background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.15) 0%,
+			rgba(255, 255, 255, 0.05) 100%
+		);
 		padding: 5rem 2.5rem;
 	}
 
@@ -164,9 +168,9 @@
 		}
 	}
 
-		.image-wrapper.no-padding {
-		margin-left: -1.25rem;
+	.image-wrapper.no-padding {
 		margin-right: -1.25rem;
+		margin-left: -1.25rem;
 	}
 
 	@media (min-width: 768px) {
@@ -181,16 +185,16 @@
 		}
 	}
 
-		.image-wrapper img {
+	.image-wrapper img {
 		object-fit: contain;
 	}
 
-		@media (max-width: 767px) {
+	@media (max-width: 767px) {
 		.image-wrapper.no-padding img {
-			width: 100vw;
 			position: relative;
 			left: 50%;
 			transform: translateX(-50%);
+			width: 100vw;
 			object-fit: cover;
 		}
 	}

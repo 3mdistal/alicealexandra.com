@@ -57,25 +57,25 @@
 
 <style>
 	.hero-image {
-		width: 100vw;
-		aspect-ratio: 3 / 2;
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
 		position: relative;
-		left: 50%;
 		right: 50%;
-		margin-left: -50vw;
+		left: 50%;
 		margin-right: -50vw;
+		margin-left: -50vw;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		aspect-ratio: 3 / 2;
+		width: 100vw;
 	}
 
 	main {
-		max-width: 800px;
 		margin: 0 auto;
-		padding: 2rem;
-		line-height: 1.6;
 		background-color: #e8e8e8;
+		padding: 2rem;
+		max-width: 800px;
 		min-height: 100vh;
+		line-height: 1.6;
 	}
 
 	header {
@@ -84,16 +84,16 @@
 	}
 
 	h1 {
-		font-size: 2.5rem;
 		margin-bottom: 1rem;
 		color: #333;
+		font-size: 2.5rem;
 	}
 
 	.description {
-		font-size: 1.2rem;
-		color: #666;
 		margin-bottom: 2rem;
+		color: #666;
 		font-style: italic;
+		font-size: 1.2rem;
 	}
 
 	.postcard-content {
@@ -110,40 +110,40 @@
 	}
 
 	.notion-container :global(h2) {
-		font-size: 1.8rem;
 		margin-top: 2rem;
 		margin-bottom: 1rem;
 		color: #333;
+		font-size: 1.8rem;
 	}
 
 	.notion-container :global(h3) {
-		font-size: 1.4rem;
 		margin-top: 1.5rem;
 		margin-bottom: 0.75rem;
 		color: #333;
+		font-size: 1.4rem;
 	}
 
 	.notion-container :global(blockquote) {
+		margin: 1.5rem 0;
 		border-left: 3px solid #ddd;
 		padding-left: 1rem;
-		margin: 1.5rem 0;
-		font-style: italic;
 		color: #666;
+		font-style: italic;
 	}
 
 	.notion-container :global(code) {
+		border-radius: 3px;
 		background-color: #f4f4f4;
 		padding: 0.2rem 0.4rem;
-		border-radius: 3px;
 		font-family: 'Monaco', 'Courier New', monospace;
 	}
 
 	.notion-container :global(pre) {
+		margin: 1rem 0;
+		border-radius: 6px;
 		background-color: #f4f4f4;
 		padding: 1rem;
-		border-radius: 6px;
 		overflow-x: auto;
-		margin: 1rem 0;
 	}
 
 	.notion-container :global(pre code) {
@@ -152,18 +152,18 @@
 	}
 
 	.back-link {
-		text-align: center;
 		margin-top: 9rem;
+		text-align: center;
 	}
 
 	.back-link a {
-		color: #666;
-		text-decoration: none;
-		font-size: 1.1rem;
-		padding: 0.5rem 1rem;
+		transition: background-color 0.2s;
 		border: 1px solid #ddd;
 		border-radius: 4px;
-		transition: background-color 0.2s;
+		padding: 0.5rem 1rem;
+		color: #666;
+		font-size: 1.1rem;
+		text-decoration: none;
 	}
 
 	.back-link a:hover {
@@ -171,8 +171,8 @@
 	}
 
 	.not-found {
-		text-align: center;
 		margin-top: 4rem;
+		text-align: center;
 	}
 
 	.not-found h1 {
@@ -180,18 +180,18 @@
 	}
 
 	.not-found p {
-		color: #999;
 		margin-bottom: 2rem;
+		color: #999;
 	}
 
 	.not-found a {
-		color: #666;
-		text-decoration: none;
-		font-size: 1.1rem;
-		padding: 0.5rem 1rem;
+		transition: background-color 0.2s;
 		border: 1px solid #ddd;
 		border-radius: 4px;
-		transition: background-color 0.2s;
+		padding: 0.5rem 1rem;
+		color: #666;
+		font-size: 1.1rem;
+		text-decoration: none;
 	}
 
 	.not-found a:hover {

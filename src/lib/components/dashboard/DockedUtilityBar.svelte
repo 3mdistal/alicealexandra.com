@@ -93,8 +93,8 @@
 	.tab-label span {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-on-surface-1);
 		color: rgba(92, 92, 92, 1);

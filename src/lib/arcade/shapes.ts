@@ -74,8 +74,6 @@ class SVGToImage extends Shape {
 	}
 }
 
-
-
 export class MovingShape extends Shape {
 	dx: number;
 	dy: number;
@@ -96,7 +94,7 @@ export class MovingShape extends Shape {
 		this.jumpStartTime = 0;
 	}
 
-			move(inputHandler: InputHandler, deltaTime: number) {
+	move(inputHandler: InputHandler, deltaTime: number) {
 		const inputs = inputHandler.handleInputs();
 		const adjustedDeltaTime = deltaTime * 0.01;
 
@@ -131,7 +129,7 @@ export class MovingShape extends Shape {
 			this.y = this.size / 2;
 		}
 
-				if (this.y + this.size / 2 > canvas.height) {
+		if (this.y + this.size / 2 > canvas.height) {
 			this.y = canvas.height - this.size / 2;
 			this.velocityY = 0;
 			this.grounded = true;
@@ -141,13 +139,13 @@ export class MovingShape extends Shape {
 		}
 	}
 
-		#handleGravity(adjustedDeltaTime: number) {
+	#handleGravity(adjustedDeltaTime: number) {
 		const params = get(physicsParams);
 		this.velocityY += params.gravity * adjustedDeltaTime;
 		this.y += this.velocityY * adjustedDeltaTime;
 	}
 
-								#handleJump(inputHandler: InputHandler, deltaTime: number) {
+	#handleJump(inputHandler: InputHandler, deltaTime: number) {
 		const params = get(physicsParams);
 
 		// Start jump immediately when button is first pressed
@@ -159,11 +157,11 @@ export class MovingShape extends Shape {
 			inputHandler.consumeJump();
 		}
 
-								// Continue applying upward force while jump is held (variable jump height)
+		// Continue applying upward force while jump is held (variable jump height)
 		if (this.isJumping && inputHandler.jumpPressed && this.velocityY < 0) {
 			const jumpDuration = Date.now() - this.jumpStartTime;
 			if (jumpDuration < params.jumpHoldTime) {
-																																								// Apply additional force at a rate controlled by jumpHoldTime
+				// Apply additional force at a rate controlled by jumpHoldTime
 				// Shorter jumpHoldTime = faster to reach max, Longer = slower to reach max
 				if (this.velocityY < 0) {
 					const totalAdditionalForce = params.maxJumpForce - params.minJumpForce;
@@ -196,7 +194,7 @@ export class MovingShape extends Shape {
 		}
 	}
 
-					#handleMove(adjustedDeltaTime: number) {
+	#handleMove(adjustedDeltaTime: number) {
 		const params = get(physicsParams);
 
 		// Calculate target velocity based on input
@@ -212,7 +210,7 @@ export class MovingShape extends Shape {
 			this.velocityX = this.#lerp(this.velocityX, targetVelocityX, params.movementLerp);
 		} else if (this.grounded) {
 			// Apply friction only when on the ground
-			this.velocityX *= (1 - params.friction);
+			this.velocityX *= 1 - params.friction;
 		}
 
 		this.x += this.velocityX * adjustedDeltaTime;

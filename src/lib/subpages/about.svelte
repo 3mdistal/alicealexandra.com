@@ -70,8 +70,8 @@
 	<div class="about-footer-content">
 		<div class="about-footer-text">
 			<p>
-				Feel free to reach out to me on any of my socials. I'd love to hear from you. I'll get
-				back to you as I'm able.
+				Feel free to reach out to me on any of my socials. I'd love to hear from you. I'll get back
+				to you as I'm able.
 			</p>
 			<div class="socials-container">
 				<Socials />

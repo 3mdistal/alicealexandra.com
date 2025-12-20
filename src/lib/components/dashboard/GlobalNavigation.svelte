@@ -326,9 +326,9 @@
 	.app-name {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
 		flex: 1 0 0;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-on-surface-3);
 		font-style: normal;
@@ -391,8 +391,8 @@
 	.tab-label span {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-on-surface-3);
 		color: rgba(3, 35, 77, 1);

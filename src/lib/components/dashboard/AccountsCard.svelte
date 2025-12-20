@@ -505,8 +505,8 @@
 	.contact-name span {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-accent-2);
 		color: rgba(2, 80, 217, 1);
@@ -562,8 +562,8 @@
 	.field-label span {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-on-surface-3);
 		color: rgba(3, 35, 77, 1);
@@ -597,9 +597,9 @@
 	.field-value {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
 		position: relative;
 		align-self: stretch;
+		-webkit-line-clamp: 1;
 		overflow: hidden;
 		color: var(--slds-g-color-on-surface-3);
 		font-style: normal;

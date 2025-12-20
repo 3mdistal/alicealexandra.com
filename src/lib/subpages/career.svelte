@@ -30,12 +30,10 @@
 
 		<div class="section">
 			<h2 class="accent-color">Coming Soon</h2>
+			<p>This space will house technical notes, code explorations, and digital experiments.</p>
 			<p>
-				This space will house technical notes, code explorations, and digital experiments.
-			</p>
-			<p>
-				From development techniques to creative coding experiments, this will be a place
-				for sharing the process behind the work.
+				From development techniques to creative coding experiments, this will be a place for sharing
+				the process behind the work.
 			</p>
 		</div>
 	</div>
@@ -43,9 +41,9 @@
 
 <style>
 	.career-container {
+		background-color: var(--bg-color, transparent);
 		max-width: 100vw;
 		overflow: hidden;
-		background-color: var(--bg-color, transparent);
 	}
 
 	.accent-color {
@@ -71,41 +69,43 @@
 		padding: 3em;
 
 		& p {
+			margin: 0;
 			font-size: clamp(1.5rem, 3vw, 3rem);
 			font-family: 'Spectral', serif;
-			margin: 0;
 		}
 	}
 
 	.content {
-		padding: 4rem 2rem;
-		max-width: 800px;
 		margin: 0 auto;
 		background-color: var(--bg-color, transparent);
+		padding: 4rem 2rem;
+		max-width: 800px;
 	}
 
 	.section {
 		margin-bottom: 3rem;
 
 		& h2 {
-			font-size: 2rem;
 			margin-bottom: 1rem;
+			font-size: 2rem;
 		}
 
 		& p {
+			margin-bottom: 1.5rem;
 			font-size: 1.125rem;
 			line-height: 1.6;
-			margin-bottom: 1.5rem;
 		}
 	}
 
 	.work-link {
-		background-color: #f4efea;
-		border-radius: 10px;
-		padding: 2rem;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
 		margin-bottom: 2rem;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
 		border: 2px solid transparent;
+		border-radius: 10px;
+		background-color: #f4efea;
+		padding: 2rem;
 	}
 
 	.work-link:hover {
@@ -115,15 +115,15 @@
 	}
 
 	.work-link a {
-		text-decoration: none;
 		display: block;
+		text-decoration: none;
 	}
 
 	.work-link h3 {
-		font-size: 1.5rem;
-		font-weight: 500;
-		margin-bottom: 0.5rem;
 		transition: color 0.2s ease;
+		margin-bottom: 0.5rem;
+		font-weight: 500;
+		font-size: 1.5rem;
 	}
 
 	.work-link:hover h3 {
@@ -131,8 +131,8 @@
 	}
 
 	.work-link p {
-		color: #666;
 		margin: 0;
+		color: #666;
 		font-style: italic;
 	}
 
@@ -144,11 +144,11 @@
 		.content {
 			padding: 6rem 4rem;
 		}
-		
+
 		.section h2 {
 			font-size: 2.5rem;
 		}
-		
+
 		.section p {
 			font-size: 1.25rem;
 		}

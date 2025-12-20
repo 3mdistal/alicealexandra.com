@@ -138,5 +138,3 @@ export function parseChangelogSummaries(markdown: string): SiteUpdateSummary[] {
 
 	return summaries.sort((a, b) => b.dateIso.localeCompare(a.dateIso));
 }
-
-

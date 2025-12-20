@@ -3,8 +3,13 @@ import { readable, writable, type Writable, type Readable } from 'svelte/store';
 
 export const pageState = writable('home');
 
-export const names: Readable<Array<'about' | 'studio' | 'career' | 'blog' | 'news'>> =
-	readable(['about', 'studio', 'career', 'blog', 'news']);
+export const names: Readable<Array<'about' | 'studio' | 'career' | 'blog' | 'news'>> = readable([
+	'about',
+	'studio',
+	'career',
+	'blog',
+	'news'
+]);
 
 export const accentColors: Readable<
 	Record<'about' | 'studio' | 'career' | 'blog' | 'news', string>

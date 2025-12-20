@@ -1,9 +1,6 @@
 import { queryDatabase } from '$lib/notion/api/database';
 import { BYPASS_TOKEN, PROFESSIONAL_DB } from '$env/static/private';
-import type {
-	DataSourceQueryParameters,
-	TextRichTextItem
-} from '$lib/notion/types/notion-types';
+import type { DataSourceQueryParameters, TextRichTextItem } from '$lib/notion/types/notion-types';
 
 const queryParams: DataSourceQueryParameters = {
 	data_source_id: PROFESSIONAL_DB,
