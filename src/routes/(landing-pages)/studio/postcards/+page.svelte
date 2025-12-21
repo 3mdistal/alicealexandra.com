@@ -171,7 +171,7 @@
 		grid-template-columns: 1fr;
 		gap: 2.5rem;
 		margin: 0 auto;
-		padding: 0 2rem;
+		padding: 0 2rem 4rem 2rem;
 		max-width: 600px;
 	}
 
@@ -181,6 +181,7 @@
 			grid-template-columns: 1fr 1fr;
 			align-items: start;
 			gap: 3rem 4rem;
+			padding-bottom: 6rem;
 			max-width: 1200px;
 		}
 
