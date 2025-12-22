@@ -40,7 +40,7 @@
 	const markdownContent = contentResponse?.markdownContent || '';
 
 	// Convert markdown to HTML
-	const htmlContent = marked(markdownContent) as string;
+	const htmlContent = marked.parse(markdownContent);
 
 	// Type guards for Notion properties
 	function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {

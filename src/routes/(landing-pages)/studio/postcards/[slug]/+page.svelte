@@ -4,7 +4,7 @@
 	let { data } = $props();
 
 	const postcard = data.postcard;
-	const htmlContent = marked(postcard.content) as string;
+	const htmlContent = marked.parse(postcard.content);
 </script>
 
 <svelte:head>
