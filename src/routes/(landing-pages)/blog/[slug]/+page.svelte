@@ -403,6 +403,11 @@
 			color: inherit;
 		}
 
+		:global(.notion-container ol li::marker),
+		:global(.notion-container ul li::marker) {
+			color: var(--blog-accent);
+		}
+
 		:global(.notion-container hr) {
 			opacity: 0.8;
 			margin: var(--blog-spacing-xl) auto;
