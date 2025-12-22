@@ -400,7 +400,12 @@
 
 		:global(.notion-container ol li),
 		:global(.notion-container ul li) {
-			color: inherit;
+			color: var(--blog-accent);
+		}
+
+		:global(.notion-container ol li::marker),
+		:global(.notion-container ul li::marker) {
+			color: var(--blog-accent);
 		}
 
 		:global(.notion-container hr) {
