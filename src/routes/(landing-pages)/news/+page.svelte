@@ -78,7 +78,7 @@
 	}
 
 	// Parse markdown to HTML
-	const changelogHtml = marked(linkifyGithubPrRefs(changelog));
+	const changelogHtml = marked.parse(linkifyGithubPrRefs(changelog));
 
 	// Summaries should be plain text (no linkified markdown artifacts).
 	// Full changelog rendering below keeps linkification.
