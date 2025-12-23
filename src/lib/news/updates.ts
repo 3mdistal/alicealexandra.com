@@ -485,7 +485,19 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			action: 'edited',
 			segments: [
 				{ type: 'text', text: 'Edited hymn: ' },
-				{ type: 'link', text: '“a reminder to breathe”', href: '/studio/hfc' },
+				{ type: 'link', text: '"a reminder to breathe"', href: '/studio/hfc' },
+				{ type: 'text', text: '' }
+			]
+		},
+		{
+			id: 'studio-hfc-2025-12-23-portrait-of-the-body-as-a-failed-industry',
+			date: '2025-12-23',
+			area: 'studio',
+			category: 'hfc',
+			action: 'edited',
+			segments: [
+				{ type: 'text', text: 'Edited hymn: ' },
+				{ type: 'link', text: '"portrait of the body as a failed industry"', href: '/studio/hfc' },
 				{ type: 'text', text: '' }
 			]
 		}
