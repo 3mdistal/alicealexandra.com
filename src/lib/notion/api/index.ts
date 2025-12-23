@@ -8,22 +8,10 @@
 export { notionClient, withErrorHandling, NotionAPIError } from './client';
 
 // Export database operations
-export {
-	queryDatabase,
-	queryDatabasePaginated,
-	retrieveDatabase,
-	extractBlogPosts
-} from './database';
+export { queryDatabase, queryDatabasePaginated } from './database';
 
 // Export block operations
-export {
-	retrieveBlock,
-	listBlockChildren,
-	listAllBlockChildren,
-	updateBlock,
-	deleteBlock,
-	appendBlockChildren
-} from './blocks';
+export { retrieveBlock, listBlockChildren, listAllBlockChildren } from './blocks';
 
 // Export page operations
-export { retrievePage, createPage, updatePage, addSubscriber } from './pages';
+export { retrievePage } from './pages';

@@ -245,6 +245,7 @@
 		display: -webkit-box;
 		margin: 0;
 		-webkit-line-clamp: 3;
+		line-clamp: 3;
 		color: #555;
 		font-size: 1rem;
 		line-height: 1.5;
@@ -263,6 +264,7 @@
 
 		.description {
 			-webkit-line-clamp: 2;
+			line-clamp: 2;
 			font-size: 0.9rem;
 		}
 	}
