@@ -38,29 +38,12 @@
 	let activeStudioFilter: 'all' | StudioNewsCategory = 'all';
 	let showFullChangelog = false;
 
-	function stripOuterQuotes(text: string): string {
-		return text
-			.replace(/^["'“”]+/, '')
-			.replace(/["'“”]+$/, '')
-			.trim();
-	}
-
 	function getStudioHref(entry: (typeof STUDIO_NEWS)[number]): string | null {
-		const link = entry.segments.find((s) => s.type === 'link');
-		return link && link.type === 'link' ? link.href : null;
+		return entry.href || null;
 	}
 
 	function getStudioTitle(entry: (typeof STUDIO_NEWS)[number]): string {
-		const link = entry.segments.find((s) => s.type === 'link');
-		if (link && link.type === 'link') return stripOuterQuotes(link.text);
-		const title = entry.segments.find((s) => s.type === 'title');
-		if (title && title.type === 'title') return stripOuterQuotes(title.text);
-		// fallback: join text segments
-		return entry.segments
-			.filter((s) => s.type === 'text')
-			.map((s) => (s.type === 'text' ? s.text : ''))
-			.join('')
-			.trim();
+		return entry.title;
 	}
 
 	function studioActionLabel(action: StudioNewsAction): string {
