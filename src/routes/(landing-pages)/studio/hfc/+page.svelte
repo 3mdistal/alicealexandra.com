@@ -158,14 +158,14 @@
 
 	function toggleOpen(poemId: string) {
 		const isOpening = !open[poemId];
-		
+
 		// Close all other poems first
 		for (const id of Object.keys(open)) {
 			if (id !== poemId) {
 				open[id] = false;
 			}
 		}
-		
+
 		open[poemId] = isOpening;
 		lastToggledPoemId = isOpening ? poemId : null;
 
@@ -251,7 +251,10 @@
 					<a
 						class="section-link"
 						href={`#${section.id}`}
-						on:click|preventDefault={() => scroll(section.id, 'smooth')}
+						onclick={(e) => {
+							e.preventDefault();
+							scroll(section.id, 'smooth');
+						}}
 					>
 						<p class="section-act">
 							{#if section.properties['Act'] && section.properties['Act'].type === 'rich_text'}
@@ -294,7 +297,7 @@
 								type="button"
 								aria-expanded={open[poem.id] === true}
 								aria-controls={`poem-${poem.id}`}
-								on:click={() => toggleOpen(poem.id)}
+								onclick={() => toggleOpen(poem.id)}
 							>
 								<h3 class="poem-title">
 									{poem.properties.Name.title[0].plain_text}
@@ -313,7 +316,8 @@
 										</p>
 									{/each}
 									<a
-										on:click|preventDefault={() => {
+										onclick={(e) => {
+											e.preventDefault();
 											toggleOpen(poem.id);
 										}}
 										href="/studio/hfc"

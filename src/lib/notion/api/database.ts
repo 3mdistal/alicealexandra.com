@@ -4,7 +4,7 @@ import type {
 	PageObjectResponse,
 	DataSourceQueryParameters
 } from '../types/notion-types';
-import type { BlogPost, PaginatedResponse } from '../types/notion-types';
+import type { PaginatedResponse } from '../types/notion-types';
 // Note: environment constants are imported where needed per-route
 
 /**
@@ -51,72 +51,6 @@ export async function queryDatabasePaginated<T = PageObjectResponse>(
 			hasMore: response.has_more,
 			nextCursor: response.next_cursor
 		};
-	});
-}
-
-/**
- * Retrieve a data source by its ID
- * @param dataSourceId - The ID of the data source to retrieve
- * @returns The database object
- */
-export async function retrieveDatabase(dataSourceId: string) {
-	return withErrorHandling(async () => {
-		const response = await notionClient.dataSources.retrieve({
-			data_source_id: dataSourceId
-		});
-		return response;
-	});
-}
-
-/**
- * Extract blog posts from database query results
- * @param results - The results from a database query
- * @returns Array of blog post objects with extracted metadata
- */
-export function extractBlogPosts(results: PageObjectResponse[]): BlogPost[] {
-	return results.map((page) => {
-		const properties = page.properties;
-
-		// These property names should match your Notion database structure
-		const title =
-			properties.Title?.type === 'title'
-				? properties.Title.title[0]?.plain_text || 'Untitled'
-				: 'Untitled';
-
-		const slug =
-			properties.Slug?.type === 'rich_text' ? properties.Slug.rich_text[0]?.plain_text || '' : '';
-
-		const description =
-			properties.Description?.type === 'rich_text'
-				? properties.Description.rich_text[0]?.plain_text || ''
-				: '';
-
-		const publishedDate =
-			properties['Published Date']?.type === 'date'
-				? properties['Published Date'].date?.start || ''
-				: '';
-
-		const coverImage =
-			properties['Cover Image']?.type === 'url'
-				? properties['Cover Image'].url || undefined
-				: undefined;
-
-		const tags =
-			properties.Tags?.type === 'multi_select'
-				? properties.Tags.multi_select.map((tag) => tag.name)
-				: [];
-
-		const base = {
-			id: page.id,
-			slug,
-			title,
-			description,
-			publishedDate,
-			lastEditedTime: page.last_edited_time,
-			tags
-		} satisfies Omit<BlogPost, 'coverImage'>;
-
-		return coverImage ? { ...base, coverImage } : base;
 	});
 }
 
