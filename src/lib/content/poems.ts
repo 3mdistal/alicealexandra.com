@@ -139,6 +139,28 @@ export async function loadPoemContent(slug: string): Promise<string> {
 }
 
 /**
+ * Load a single poem by its slug (filename without .md extension)
+ */
+export async function loadPoemBySlug(slug: string): Promise<Poem | null> {
+	try {
+		const filePath = path.join(CONTENT_PATH, `${slug}.md`);
+		const fileContent = await fs.readFile(filePath, 'utf-8');
+		const { frontmatter, body } = parseFrontmatter(fileContent);
+
+		return {
+			id: slug,
+			title: frontmatter.title,
+			sectionName: frontmatter.section,
+			notLineated: frontmatter.notLineated,
+			sequence: frontmatter.sequence,
+			content: body
+		};
+	} catch {
+		return null;
+	}
+}
+
+/**
  * Load all poems with their content
  */
 export async function loadAllPoems(): Promise<Poem[]> {

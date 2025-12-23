@@ -1,7 +1,10 @@
 <script lang="ts">
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
-	export let data: Data;
+	import { pushState, replaceState } from '$app/navigation';
+	import { page } from '$app/state';
+
+	let { data }: { data: Data } = $props();
 
 	type PoemResults = {
 		id: string;
@@ -151,8 +154,36 @@
 	}
 
 	function toggleOpen(poemId: string) {
-		open[poemId] = !open[poemId];
+		const isOpening = !open[poemId];
+		open[poemId] = isOpening;
+
+		if (isOpening) {
+			// Update URL when opening a poem (shallow routing)
+			pushState(`/studio/hfc/${poemId}`, { openPoemId: poemId });
+		} else {
+			// Reset URL when closing
+			replaceState('/studio/hfc', {});
+		}
 	}
+
+	// Handle browser back/forward navigation
+	$effect(() => {
+		const stateOpenPoemId = (page.state as any)?.openPoemId as string | undefined;
+
+		if (stateOpenPoemId) {
+			// Open the poem from state if not already open
+			if (!open[stateOpenPoemId]) {
+				open[stateOpenPoemId] = true;
+				// Scroll to the poem after a brief delay to allow render
+				setTimeout(() => scroll(`poem-${stateOpenPoemId}`, 'smooth'), 100);
+			}
+		} else {
+			// Close all poems when navigating back to base URL
+			for (const id of Object.keys(open)) {
+				open[id] = false;
+			}
+		}
+	});
 
 	// eslint-disable-next-line
 	function scroll(id: string, behavior: ScrollBehavior) {

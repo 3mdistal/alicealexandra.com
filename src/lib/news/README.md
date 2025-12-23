@@ -11,6 +11,7 @@ Studio updates (Hymns for Calliope, Postcards) are tracked in `updates.ts`.
 When you add or edit content in `content/poems/` or `content/postcards/`, add a corresponding entry to `STUDIO_NEWS` in `src/lib/news/updates.ts`.
 
 Entry structure:
+
 ```ts
 {
   id: 'studio-{category}-{YYYY-MM-DD}-{slugified-title}',
@@ -26,6 +27,7 @@ Entry structure:
 ### Examples
 
 **Adding a new hymn:**
+
 ```ts
 {
   id: 'studio-hfc-2025-12-23-my-new-poem',
@@ -39,6 +41,7 @@ Entry structure:
 ```
 
 **Editing an existing hymn:**
+
 ```ts
 {
   id: 'studio-hfc-2025-12-23-portrait-of-the-body-as-a-failed-industry',
@@ -52,6 +55,7 @@ Entry structure:
 ```
 
 **Adding a new postcard:**
+
 ```ts
 {
   id: 'studio-postcards-2025-12-23-my-postcard',
