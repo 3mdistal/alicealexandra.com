@@ -1,3 +1,10 @@
+## 23 Dec 2025
+
+**Refactors**
+
+- Simplified studio news schema: replaced `segments` array with direct `title`/`href` fields. (#43)
+- Added `README.md` documenting changelog entry process for AI agents.
+
 ## 16 Dec 2025
 
 **Patches**
