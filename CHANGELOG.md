@@ -1,3 +1,11 @@
+## 23 Dec 2025 (2)
+
+**Features**
+
+- Added linkable individual poem routes to HFC (`/studio/hfc/[slug]`). (#44)
+- Poems now have shareable URLs that can be directly linked to.
+- Shallow routing on the main HFC page updates the URL when poems are expanded.
+
 ## 23 Dec 2025
 
 **Refactors**
