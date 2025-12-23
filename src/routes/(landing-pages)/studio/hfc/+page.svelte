@@ -1,7 +1,10 @@
 <script lang="ts">
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
-	export let data: Data;
+	import { pushState, replaceState } from '$app/navigation';
+	import { page } from '$app/state';
+
+	let { data }: { data: Data } = $props();
 
 	type PoemResults = {
 		id: string;
@@ -78,7 +81,7 @@
 		}
 	} = data;
 
-	let open: Record<string, boolean> = {};
+	let open: Record<string, boolean> = $state({});
 
 	type ParagraphBlock = {
 		type: 'paragraph';
@@ -150,9 +153,57 @@
 		};
 	}
 
+	// Track which poem was opened via toggleOpen to avoid effect conflicts
+	let lastToggledPoemId: string | null = $state(null);
+
 	function toggleOpen(poemId: string) {
-		open[poemId] = !open[poemId];
+		const isOpening = !open[poemId];
+		
+		// Close all other poems first
+		for (const id of Object.keys(open)) {
+			if (id !== poemId) {
+				open[id] = false;
+			}
+		}
+		
+		open[poemId] = isOpening;
+		lastToggledPoemId = isOpening ? poemId : null;
+
+		if (isOpening) {
+			// Update URL when opening a poem (shallow routing)
+			pushState(`/studio/hfc/${poemId}`, { openPoemId: poemId });
+		} else {
+			// Reset URL when closing
+			replaceState('/studio/hfc', {});
+		}
 	}
+
+	// Handle browser back/forward navigation
+	$effect(() => {
+		const stateOpenPoemId = (page.state as any)?.openPoemId as string | undefined;
+
+		// Skip if this state change was triggered by our own toggleOpen
+		if (stateOpenPoemId === lastToggledPoemId) {
+			return;
+		}
+
+		if (stateOpenPoemId) {
+			// Open the poem from state (browser navigation)
+			for (const id of Object.keys(open)) {
+				open[id] = false;
+			}
+			open[stateOpenPoemId] = true;
+			lastToggledPoemId = stateOpenPoemId;
+			// Scroll to the poem after a brief delay to allow render
+			setTimeout(() => scroll(`poem-${stateOpenPoemId}`, 'smooth'), 100);
+		} else {
+			// Close all poems when navigating back to base URL
+			for (const id of Object.keys(open)) {
+				open[id] = false;
+			}
+			lastToggledPoemId = null;
+		}
+	});
 
 	// eslint-disable-next-line
 	function scroll(id: string, behavior: ScrollBehavior) {
