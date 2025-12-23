@@ -140,7 +140,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'edited',
 			title: 'portrait of the body as a failed industry',
-			href: '/studio/hfc'
+			href: '/studio/hfc/portrait-of-the-body-as-a-failed-industry'
 		},
 		{
 			id: 'studio-hfc-2025-12-11-a-reminder-to-breathe',
@@ -149,7 +149,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'edited',
 			title: 'a reminder to breathe',
-			href: '/studio/hfc'
+			href: '/studio/hfc/a-reminder-to-breathe'
 		},
 		{
 			id: 'studio-hfc-2025-11-21-the-death-of-baldur',
@@ -158,7 +158,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'the death of baldur',
-			href: '/studio/hfc'
+			href: '/studio/hfc/the-death-of-baldur'
 		},
 		{
 			id: 'studio-hfc-2025-11-19-portrait-of-the-body-as-a-failed-industry',
@@ -167,7 +167,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'portrait of the body as a failed industry',
-			href: '/studio/hfc'
+			href: '/studio/hfc/portrait-of-the-body-as-a-failed-industry'
 		},
 		{
 			id: 'studio-hfc-2025-07-27-twelve-hymns-for-calliope',
@@ -176,7 +176,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'edited',
 			title: 'twelve hymns for calliope',
-			href: '/studio/hfc'
+			href: '/studio/hfc/twelve-hymns-for-calliope'
 		},
 		{
 			id: 'studio-hfc-2023-04-02-i-used-to-think-the-roots-of-all-the-corn-on-earth',
@@ -185,7 +185,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'edited',
 			title: 'i used to think the roots of all the corn on earth',
-			href: '/studio/hfc'
+			href: '/studio/hfc/i-used-to-think-the-roots-of-all-the-corn-on-earth'
 		},
 		{
 			id: 'studio-hfc-2023-03-26-a-reminder-to-breathe',
@@ -194,7 +194,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'a reminder to breathe',
-			href: '/studio/hfc'
+			href: '/studio/hfc/a-reminder-to-breathe'
 		},
 		{
 			id: 'studio-hfc-2021-08-25-pyriscence',
@@ -203,7 +203,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'pyriscence',
-			href: '/studio/hfc'
+			href: '/studio/hfc/pyriscence'
 		},
 		{
 			id: 'studio-hfc-2021-07-29-dimensions-zero-to-five',
@@ -212,7 +212,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'edited',
 			title: 'dimensions zero to five',
-			href: '/studio/hfc'
+			href: '/studio/hfc/dimensions-zero-to-five'
 		},
 		{
 			id: 'studio-hfc-2018-12-04-paradise-ablaze',
@@ -221,7 +221,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'paradise ablaze',
-			href: '/studio/hfc'
+			href: '/studio/hfc/paradise-ablaze'
 		},
 		{
 			id: 'studio-hfc-2018-10-12-ornithonyssus-bacoti',
@@ -230,7 +230,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'ornithonyssus bacoti',
-			href: '/studio/hfc'
+			href: '/studio/hfc/ornithonyssus-bacoti'
 		},
 		{
 			id: 'studio-hfc-2018-06-13-twelve-hymns-for-calliope',
@@ -239,7 +239,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'twelve hymns for calliope',
-			href: '/studio/hfc'
+			href: '/studio/hfc/twelve-hymns-for-calliope'
 		},
 		{
 			id: 'studio-hfc-2017-12-10-demodex-folliculorum-36-balloons',
@@ -248,7 +248,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'demodex folliculorum (36 balloons)',
-			href: '/studio/hfc'
+			href: '/studio/hfc/demodex-folliculorum-36-balloons'
 		},
 		{
 			id: 'studio-hfc-2017-11-12-dimensions-zero-to-five',
@@ -257,7 +257,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'dimensions zero to five',
-			href: '/studio/hfc'
+			href: '/studio/hfc/dimensions-zero-to-five'
 		},
 		{
 			id: 'studio-hfc-2017-10-04-dehiscence',
@@ -266,7 +266,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'dehiscence',
-			href: '/studio/hfc'
+			href: '/studio/hfc/dehiscence'
 		},
 		{
 			id: 'studio-hfc-2017-10-01-dear-mr-barker',
@@ -275,7 +275,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'dear Mr. Barker',
-			href: '/studio/hfc'
+			href: '/studio/hfc/dear-mr-barker'
 		},
 		{
 			id: 'studio-hfc-2017-09-20-i-used-to-think-the-roots-of-all-the-corn-on-earth',
@@ -284,7 +284,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'i used to think the roots of all the corn on earth',
-			href: '/studio/hfc'
+			href: '/studio/hfc/i-used-to-think-the-roots-of-all-the-corn-on-earth'
 		},
 		{
 			id: 'studio-hfc-2017-08-21-on-watching-another-family-watch-the-solar-eclipse',
@@ -293,7 +293,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'on watching another family watch the solar eclipse',
-			href: '/studio/hfc'
+			href: '/studio/hfc/on-watching-another-family-watch-the-solar-eclipse'
 		},
 		{
 			id: 'studio-hfc-2016-12-20-a-working-theory-of-moving',
@@ -302,7 +302,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'a working theory of moving',
-			href: '/studio/hfc'
+			href: '/studio/hfc/a-working-theory-of-moving'
 		},
 		{
 			id: 'studio-hfc-2014-03-13-cymothoa-exigua',
@@ -311,7 +311,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'cymothoa exigua',
-			href: '/studio/hfc'
+			href: '/studio/hfc/cymothoa-exigua'
 		},
 		{
 			id: 'studio-hfc-2013-10-15-friction',
@@ -320,7 +320,7 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			category: 'hfc',
 			action: 'added',
 			title: 'friction',
-			href: '/studio/hfc'
+			href: '/studio/hfc/friction'
 		}
 	] satisfies NewsEntry[]
 ).sort((a, b) => b.date.localeCompare(a.date));
