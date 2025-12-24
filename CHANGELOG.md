@@ -1,3 +1,12 @@
+## 23 Dec 2025 (3)
+
+**Enhancements**
+
+- Improved poem centering on HFC pages using `width: fit-content` with flexbox layout.
+- Added horizontal scrolling for lineated poems on mobile to preserve intentional line breaks.
+- Prose poems (not lineated) now have `max-width: 60ch` for comfortable reading width.
+- Individual poem pages (`/studio/hfc/[slug]`) now display with section background images and darkening overlay, matching the main HFC page aesthetic.
+
 ## 23 Dec 2025 (2)
 
 **Features**

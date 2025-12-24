@@ -310,7 +310,9 @@
 											class="poem-stanza"
 											style="white-space: {poem.properties.NotLineated.checkbox === false
 												? 'pre'
-												: ''}"
+												: ''}; max-width: {poem.properties.NotLineated.checkbox === true
+												? '60ch'
+												: 'none'}"
 										>
 											<TextMacro type={stanza.paragraph} />
 										</p>
@@ -679,12 +681,12 @@
 	}
 
 	.poem-content {
+		width: fit-content;
 		margin-top: -3rem;
 	}
 
 	.poem-stanza {
 		margin-bottom: 2rem;
-		max-width: 60ch;
 		color: white;
 		font-size: 0.875rem;
 

@@ -4,6 +4,7 @@
 
 	let { data } = $props();
 	const poem = data.poem;
+	const backgroundImage = data.backgroundImage;
 
 	type ParagraphBlock = {
 		type: 'paragraph';
@@ -79,7 +80,8 @@
 	/>
 </svelte:head>
 
-<div class="page-container">
+<div class="page-container" style="background-image: {backgroundImage ? `url(${backgroundImage})` : 'none'};">
+	<div class="page-overlay"></div>
 	<main>
 		<header>
 			<p class="collection-name">hymns for calliope</p>
@@ -89,7 +91,7 @@
 
 		<article class="poem-content">
 			{#each poemBlocks as stanza}
-				<p class="poem-stanza" style="white-space: {poem.notLineated === false ? 'pre' : ''}">
+				<p class="poem-stanza" style="white-space: {poem.notLineated === false ? 'pre' : ''}; max-width: {poem.notLineated === true ? '60ch' : 'none'}">
 					<TextMacro type={stanza.paragraph} />
 				</p>
 			{/each}
@@ -103,17 +105,34 @@
 
 <style>
 	.page-container {
+		position: relative;
 		background-color: black;
+		background-position: center;
+		background-size: cover;
 		min-height: 100vh;
 	}
 
+	.page-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0.8;
+		background-color: black;
+		width: 100%;
+		height: 100%;
+	}
+
 	main {
-		margin: 0 auto;
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		padding: 3rem 1.5rem 6rem;
-		max-width: 60ch;
 	}
 
 	header {
+		max-width: 60ch;
 		margin-bottom: 4rem;
 		text-align: center;
 	}
@@ -140,7 +159,10 @@
 	}
 
 	.poem-content {
+		width: fit-content;
+		max-width: 100%;
 		margin-bottom: 6rem;
+		overflow-x: auto;
 	}
 
 	.poem-stanza {
@@ -166,6 +188,10 @@
 	}
 
 	@media (min-width: 640px) {
+		.page-container {
+			background-attachment: fixed;
+		}
+
 		main {
 			padding: 4rem 2rem 8rem;
 		}
