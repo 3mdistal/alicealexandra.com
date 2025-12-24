@@ -23,3 +23,4 @@ vite.config.ts.timestamp-*
 
 # Content (now tracked as a git submodule)
 # NOTE: keep this un-ignored so the submodule gitlink can be committed.
+content/
