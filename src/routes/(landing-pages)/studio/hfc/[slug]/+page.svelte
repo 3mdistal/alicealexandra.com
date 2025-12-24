@@ -3,8 +3,8 @@
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
 
 	let { data } = $props();
-	const poem = data.poem;
-	const backgroundImage = data.backgroundImage;
+	const poem = $derived(data.poem);
+	const backgroundImage = $derived(data.backgroundImage);
 
 	type ParagraphBlock = {
 		type: 'paragraph';

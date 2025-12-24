@@ -74,12 +74,8 @@
 		};
 	};
 
-	const {
-		props: {
-			sections: { results: sections },
-			poems: { results: poems }
-		}
-	} = data;
+	const sections = $derived(data.props.sections.results);
+	const poems = $derived(data.props.poems.results);
 
 	let open: Record<string, boolean> = $state({});
 
