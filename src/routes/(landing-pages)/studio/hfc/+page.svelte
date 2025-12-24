@@ -84,11 +84,14 @@
 		paragraph: { rich_text: RichTextItemResponse[] };
 	};
 
-	// Pre-parse all poem content from markdown to block format at load time
-	let poemContent: Record<string, ParagraphBlock[]> = {};
-	for (const poem of poems) {
-		poemContent[poem.id] = parseMarkdownToBlocks(poem.content);
-	}
+	// Pre-parse all poem content from markdown to block format reactively
+	const poemContent = $derived.by(() => {
+		const content: Record<string, ParagraphBlock[]> = {};
+		for (const poem of poems) {
+			content[poem.id] = parseMarkdownToBlocks(poem.content);
+		}
+		return content;
+	});
 
 	let Piano =
 		'https://ik.imagekit.io/tempoimmaterial/tr:w-1500/hymns%20for%20calliope/ruined%20piano?updatedAt=1694350822403';
