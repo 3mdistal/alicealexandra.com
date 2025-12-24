@@ -145,6 +145,7 @@
 		width: fit-content;
 		max-width: 100%;
 		margin-bottom: 6rem;
+		overflow-x: auto;
 	}
 
 	.poem-stanza {
