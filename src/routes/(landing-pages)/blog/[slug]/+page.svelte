@@ -1,8 +1,17 @@
 <script lang="ts">
 	import BlogHeader from '$lib/components/blog-header.svelte';
-	import LightCodeTheme from 'svelte-highlight/styles/github';
 	import { onMount, tick } from 'svelte';
-	import { marked } from 'marked';
+	import { Marked } from 'marked';
+	import { markedHighlight } from 'marked-highlight';
+	import hljs from 'highlight.js/lib/core';
+	import typescript from 'highlight.js/lib/languages/typescript';
+	import javascript from 'highlight.js/lib/languages/javascript';
+	import plaintext from 'highlight.js/lib/languages/plaintext';
+
+	// Register languages
+	hljs.registerLanguage('typescript', typescript);
+	hljs.registerLanguage('javascript', javascript);
+	hljs.registerLanguage('plaintext', plaintext);
 	import { subAndSuper, createTOC } from '$lib/notion/utils/blog-helpers';
 	import type {
 		PageObjectResponse,
@@ -38,6 +47,18 @@
 
 	// Get markdown content
 	const markdownContent = contentResponse?.markdownContent || '';
+
+	// Configure marked with syntax highlighting
+	const marked = new Marked(
+		markedHighlight({
+			emptyLangClass: 'hljs',
+			langPrefix: 'hljs language-',
+			highlight(code, lang) {
+				const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+				return hljs.highlight(code, { language }).value;
+			}
+		})
+	);
 
 	// Convert markdown to HTML
 	const htmlContent = marked.parse(markdownContent);
@@ -168,7 +189,17 @@
 		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
 	/>
 
-	{@html LightCodeTheme}
+	<!-- Highlight.js themes - auto-switch based on color scheme -->
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+		media="(prefers-color-scheme: light)"
+	/>
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+		media="(prefers-color-scheme: dark)"
+	/>
 </svelte:head>
 
 <div class="page-wrapper">
@@ -339,6 +370,13 @@
 
 		:global(.notion-container pre) {
 			margin-bottom: var(--blog-spacing-md);
+		}
+
+		/* Override highlight.js background in dark mode for better contrast */
+		@media (prefers-color-scheme: dark) {
+			:global(.notion-container pre code.hljs) {
+				background-color: #1e1e1e;
+			}
 		}
 
 		:global(.notion-container blockquote) {
