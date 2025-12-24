@@ -49,7 +49,7 @@
 	},
 	"prepare": "svelte-kit sync",
 	"type": "module",
-	"packageManager":
+	"packageManager": "pnpm@10.26.0",
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"esbuild",
