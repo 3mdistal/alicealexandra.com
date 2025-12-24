@@ -108,12 +108,14 @@
 	}
 
 	main {
-		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		padding: 3rem 1.5rem 6rem;
-		max-width: 60ch;
 	}
 
 	header {
+		max-width: 60ch;
 		margin-bottom: 4rem;
 		text-align: center;
 	}
@@ -141,7 +143,8 @@
 
 	.poem-content {
 		width: fit-content;
-		margin: 0 auto 6rem;
+		max-width: 100%;
+		margin-bottom: 6rem;
 	}
 
 	.poem-stanza {
