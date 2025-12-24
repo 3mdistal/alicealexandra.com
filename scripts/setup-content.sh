@@ -105,16 +105,12 @@ if [ -d "$CONTENT_DIR" ]; then
         exit 0
     else
         # Content exists but is NOT a git repo (e.g., from fetch-content.sh)
-        if [ "$FORCE" = true ]; then
-            echo "  Content exists but is not a git repo. Replacing..."
+        # Always replace with a proper git clone so we can push changes
+        if [ "$FORCE" = true ] || [ "$PULL" = true ] || ! is_interactive; then
+            echo "  Content exists but is not a git repo. Replacing with proper clone..."
             rm -rf "$CONTENT_DIR"
             clone_repo
-        elif [ "$PULL" = true ]; then
-            # Can't pull from non-git, but content exists - just use it
-            echo "  Content exists (not a git repo). Using existing content."
-            echo "✓ Content ready!"
-            exit 0
-        elif is_interactive; then
+        else
             echo ""
             echo "  ⚠️  Content exists but is not a git repo."
             echo "  (This happens when content was fetched by vercel-build)"
@@ -127,13 +123,9 @@ if [ -d "$CONTENT_DIR" ]; then
                 clone_repo
             else
                 echo "  Skipping. You won't be able to push changes."
+                exit 0
             fi
-        else
-            # Non-interactive: content exists, use it (can't push but can read)
-            echo "  Non-interactive mode: using existing content (read-only)."
-            echo "✓ Content ready!"
         fi
-        exit 0
     fi
 else
     # Content doesn't exist - just clone
