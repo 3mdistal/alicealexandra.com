@@ -310,7 +310,9 @@
 											class="poem-stanza"
 											style="white-space: {poem.properties.NotLineated.checkbox === false
 												? 'pre'
-												: ''}"
+												: ''}; max-width: {poem.properties.NotLineated.checkbox === true
+												? '60ch'
+												: 'none'}"
 										>
 											<TextMacro type={stanza.paragraph} />
 										</p>

@@ -89,7 +89,7 @@
 
 		<article class="poem-content">
 			{#each poemBlocks as stanza}
-				<p class="poem-stanza" style="white-space: {poem.notLineated === false ? 'pre' : ''}">
+				<p class="poem-stanza" style="white-space: {poem.notLineated === false ? 'pre' : ''}; max-width: {poem.notLineated === true ? '60ch' : 'none'}">
 					<TextMacro type={stanza.paragraph} />
 				</p>
 			{/each}
