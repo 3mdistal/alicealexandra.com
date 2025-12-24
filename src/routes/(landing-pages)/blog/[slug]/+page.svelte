@@ -370,6 +370,13 @@
 			margin-bottom: var(--blog-spacing-md);
 		}
 
+		/* Override highlight.js background in dark mode for better contrast */
+		@media (prefers-color-scheme: dark) {
+			:global(.notion-container pre code.hljs) {
+				background-color: #1e1e1e;
+			}
+		}
+
 		:global(.notion-container blockquote) {
 			margin-top: var(--blog-spacing-lg);
 			margin-left: 2em;
