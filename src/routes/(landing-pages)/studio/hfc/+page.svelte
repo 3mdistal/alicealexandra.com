@@ -679,12 +679,12 @@
 	}
 
 	.poem-content {
+		width: fit-content;
 		margin-top: -3rem;
 	}
 
 	.poem-stanza {
 		margin-bottom: 2rem;
-		max-width: 60ch;
 		color: white;
 		font-size: 0.875rem;
 
