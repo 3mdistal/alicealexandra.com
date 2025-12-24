@@ -71,21 +71,24 @@ export function extractPostcards(results: PageObjectResponse[]): Array<{
 		const properties = page.properties;
 
 		// Property names should match your Notion database structure
+		const titleProp = properties['Title'];
 		const title =
-			properties.Title?.type === 'title'
-				? properties.Title.title[0]?.plain_text || 'Untitled'
+			titleProp?.type === 'title'
+				? titleProp.title[0]?.plain_text || 'Untitled'
 				: 'Untitled';
 
+		const slugProp = properties['Slug'];
 		const slug =
-			properties.Slug?.type === 'url'
-				? properties.Slug.url || ''
-				: properties.Slug?.type === 'rich_text'
-					? properties.Slug.rich_text[0]?.plain_text || ''
+			slugProp?.type === 'url'
+				? slugProp.url || ''
+				: slugProp?.type === 'rich_text'
+					? slugProp.rich_text[0]?.plain_text || ''
 					: '';
 
+		const descriptionProp = properties['Description'];
 		const description =
-			properties.Description?.type === 'rich_text'
-				? properties.Description.rich_text[0]?.plain_text || ''
+			descriptionProp?.type === 'rich_text'
+				? descriptionProp.rich_text[0]?.plain_text || ''
 				: '';
 
 		const heroImage =

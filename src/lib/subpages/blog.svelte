@@ -56,25 +56,29 @@
 <h1 class="posts-title" style="color: {accent}">Posts</h1>
 {#each results as page}
 	{#if isPageObjectResponse(page)}
-		{@const slug = isUrlProperty(page.properties.Slug) ? page.properties.Slug.url : ''}
+		{@const slugProp = page.properties['Slug']}
+		{@const slug = isUrlProperty(slugProp) ? slugProp.url : ''}
+		{@const nameProp = page.properties['Name']}
 		{@const titleItem =
-			isRichTextProperty(page.properties.Name) && page.properties.Name.title[0]
-				? page.properties.Name.title[0]
+			isRichTextProperty(nameProp) && nameProp.title[0]
+				? nameProp.title[0]
 				: null}
 		{@const titleText =
 			titleItem && isTextRichTextItem(titleItem) ? titleItem.text.content : 'Untitled'}
-		{@const subtitleProp = page.properties.Subtitle}
+		{@const subtitleProp = page.properties['Subtitle']}
 		{@const subtitle =
 			isRichTextProperty2(subtitleProp) &&
 			subtitleProp.rich_text[0] &&
 			isTextRichTextItem(subtitleProp.rich_text[0])
 				? subtitleProp.rich_text[0].text.content
 				: ''}
-		{@const category = isSelectProperty(page.properties.Category)
-			? page.properties.Category.select.name
+		{@const categoryProp = page.properties['Category']}
+		{@const category = isSelectProperty(categoryProp)
+			? categoryProp.select.name
 			: ''}
-		{@const date = isFormulaProperty(page.properties.FormattedPublicationDate)
-			? page.properties.FormattedPublicationDate.formula.string
+		{@const dateProp = page.properties['FormattedPublicationDate']}
+		{@const date = isFormulaProperty(dateProp)
+			? dateProp.formula.string
 			: ''}
 
 		<div class="post-item">

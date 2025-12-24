@@ -11,16 +11,21 @@
 	const { blogPost, category = '', publishedDate = '', readTime = '' }: Props = $props();
 
 	// Helper function to safely get text content from Notion properties
-	function getTextContent(prop: any) {
-		if (prop?.type === 'title') {
-			return prop.title?.[0]?.plain_text || '';
+	function getTextContent(prop: unknown) {
+		if (prop && typeof prop === 'object' && 'type' in prop) {
+			if (prop.type === 'title' && 'title' in prop && Array.isArray(prop.title)) {
+				return (prop.title[0] as { plain_text?: string } | undefined)?.plain_text || '';
+			}
+			if ('rich_text' in prop && Array.isArray(prop.rich_text)) {
+				return (prop.rich_text[0] as { plain_text?: string } | undefined)?.plain_text || '';
+			}
 		}
-		return prop?.rich_text?.[0]?.plain_text || '';
+		return '';
 	}
 
-	// Get the blog post data
-	const title = getTextContent(blogPost?.properties?.Name);
-	const subtitle = getTextContent(blogPost?.properties?.Subtitle);
+	// Get the blog post data reactively
+	const title = $derived(getTextContent(blogPost?.properties?.['Name']));
+	const subtitle = $derived(getTextContent(blogPost?.properties?.['Subtitle']));
 </script>
 
 <div class="blog-header">

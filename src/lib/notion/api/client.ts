@@ -13,7 +13,7 @@ export class NotionAPIError extends Error {
 		this.name = 'NotionAPIError';
 	}
 
-	toString(): string {
+	override toString(): string {
 		return `${this.name}: ${this.message}`;
 	}
 

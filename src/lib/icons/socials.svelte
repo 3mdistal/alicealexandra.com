@@ -70,7 +70,8 @@
 </div>
 
 <style>
-	img {
+	/* enhanced:img renders as <picture><img></picture>, use :global for nested img */
+	#container :global(img) {
 		transition: transform 0.5s cubic-bezier(0.43, -0.74, 0.43, 2);
 		object-fit: contain;
 	}
@@ -79,7 +80,7 @@
 		filter: none;
 	}
 
-	a:hover img {
+	a:hover :global(img) {
 		transform: scale(1.1);
 	}
 

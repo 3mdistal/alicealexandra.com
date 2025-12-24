@@ -3,8 +3,8 @@
 
 	let { data } = $props();
 
-	const postcard = data.postcard;
-	const htmlContent = marked.parse(postcard.content);
+	const postcard = $derived(data.postcard);
+	const htmlContent = $derived(marked.parse(postcard.content));
 </script>
 
 <svelte:head>
