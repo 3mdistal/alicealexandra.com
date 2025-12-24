@@ -18,7 +18,8 @@
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
 	let scrollTriggerInstance: ScrollTrigger;
-	let currentRotation = initialRotation;
+	// Initialize with prop value - intentionally capturing initial value
+	let currentRotation = $state(initialRotation);
 
 	onMount(() => {
 		// Register GSAP plugins
