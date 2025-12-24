@@ -4,7 +4,7 @@
 # Keeps .git directory so you can push changes back
 #
 # Usage:
-#   pnpm setup:content           # Interactive mode
+#   pnpm setup:content           # Interactive mode (or auto-mode if no TTY)
 #   pnpm setup:content --force   # Non-interactive, replaces existing content
 #   pnpm setup:content --pull    # Non-interactive, pulls if exists
 
@@ -27,6 +27,11 @@ for arg in "$@"; do
             ;;
     esac
 done
+
+# Check if we're in an interactive terminal
+is_interactive() {
+    [ -t 0 ]
+}
 
 echo "📦 Setting up content for local development..."
 
@@ -66,7 +71,7 @@ if [ -d "$CONTENT_DIR" ]; then
             echo "  Force mode: removing and re-cloning..."
             rm -rf "$CONTENT_DIR"
             clone_repo
-        else
+        elif is_interactive; then
             echo ""
             echo "  Options:"
             echo "    1) Pull latest changes"
@@ -92,15 +97,24 @@ if [ -d "$CONTENT_DIR" ]; then
                     echo "  Skipping. Content left as-is."
                     ;;
             esac
-            exit 0
+        else
+            # Non-interactive: just use existing content
+            echo "  Non-interactive mode: using existing content."
+            echo "✓ Content ready!"
         fi
+        exit 0
     else
         # Content exists but is NOT a git repo (e.g., from fetch-content.sh)
-        if [ "$FORCE" = true ] || [ "$PULL" = true ]; then
+        if [ "$FORCE" = true ]; then
             echo "  Content exists but is not a git repo. Replacing..."
             rm -rf "$CONTENT_DIR"
             clone_repo
-        else
+        elif [ "$PULL" = true ]; then
+            # Can't pull from non-git, but content exists - just use it
+            echo "  Content exists (not a git repo). Using existing content."
+            echo "✓ Content ready!"
+            exit 0
+        elif is_interactive; then
             echo ""
             echo "  ⚠️  Content exists but is not a git repo."
             echo "  (This happens when content was fetched by vercel-build)"
@@ -114,8 +128,12 @@ if [ -d "$CONTENT_DIR" ]; then
             else
                 echo "  Skipping. You won't be able to push changes."
             fi
-            exit 0
+        else
+            # Non-interactive: content exists, use it (can't push but can read)
+            echo "  Non-interactive mode: using existing content (read-only)."
+            echo "✓ Content ready!"
         fi
+        exit 0
     fi
 else
     # Content doesn't exist - just clone
