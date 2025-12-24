@@ -19,8 +19,8 @@
 	}
 
 	// Get the blog post data
-	const title = getTextContent(blogPost?.properties?.Name);
-	const subtitle = getTextContent(blogPost?.properties?.Subtitle);
+	const title = getTextContent(blogPost?.properties?.['Name']);
+	const subtitle = getTextContent(blogPost?.properties?.['Subtitle']);
 </script>
 
 <div class="blog-header">
