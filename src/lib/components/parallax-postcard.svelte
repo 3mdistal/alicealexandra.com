@@ -18,6 +18,7 @@
 	let cardElement: HTMLElement;
 	let imageElement: HTMLElement;
 	let scrollTriggerInstance: ScrollTrigger;
+	// svelte-ignore state_referenced_locally
 	// Initialize with prop value - intentionally capturing initial value
 	let currentRotation = $state(initialRotation);
 
