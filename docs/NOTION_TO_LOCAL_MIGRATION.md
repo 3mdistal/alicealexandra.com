@@ -163,16 +163,30 @@ pnpm setup:content
 pnpm dev
 ```
 
+### Script Options
+
+```bash
+# Interactive mode (default) - prompts for choices
+pnpm setup:content
+
+# Pull mode - non-interactive, pulls if content exists
+pnpm setup:content --pull
+
+# Force mode - non-interactive, replaces existing content
+pnpm setup:content --force
+```
+
 The script will:
 - Clone the `teenylilcontent` repo into `content/`
 - Use SSH if available, otherwise fall back to HTTPS
 - Keep the `.git` directory so you can push changes back
+- Handle the case where content exists but isn't a git repo (from Vercel builds)
 
-To update content later:
+### Updating Content
 
 ```bash
-# Option 1: Run setup again (it will offer to pull)
-pnpm setup:content
+# Option 1: Run setup with --pull flag
+pnpm setup:content --pull
 
 # Option 2: Pull manually
 cd content && git pull
