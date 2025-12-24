@@ -67,7 +67,7 @@
 		};
 	}
 
-	const poemBlocks = parseMarkdownToBlocks(poem.content);
+	const poemBlocks = $derived(parseMarkdownToBlocks(poem.content));
 </script>
 
 <svelte:head>
