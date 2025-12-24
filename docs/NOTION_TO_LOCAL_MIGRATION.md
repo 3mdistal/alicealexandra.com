@@ -153,14 +153,29 @@ notionId: "original-notion-uuid"
 
 ## Local Development
 
-For local development, clone the content repository:
+Use the setup command to clone the content repository:
 
 ```bash
-# From the main project directory
-git clone https://github.com/3mdistal/teenylilcontent.git content
+# Setup content (clones teenylilcontent repo)
+pnpm setup:content
 
 # Run the dev server
 pnpm dev
+```
+
+The script will:
+- Clone the `teenylilcontent` repo into `content/`
+- Use SSH if available, otherwise fall back to HTTPS
+- Keep the `.git` directory so you can push changes back
+
+To update content later:
+
+```bash
+# Option 1: Run setup again (it will offer to pull)
+pnpm setup:content
+
+# Option 2: Pull manually
+cd content && git pull
 ```
 
 The `content/` directory is in `.gitignore` and will be populated by `fetch-content.sh` during Vercel builds.
