@@ -4,6 +4,7 @@
 
 	let { data } = $props();
 	const poem = data.poem;
+	const backgroundImage = data.backgroundImage;
 
 	type ParagraphBlock = {
 		type: 'paragraph';
@@ -79,7 +80,8 @@
 	/>
 </svelte:head>
 
-<div class="page-container">
+<div class="page-container" style="background-image: {backgroundImage ? `url(${backgroundImage})` : 'none'};">
+	<div class="page-overlay"></div>
 	<main>
 		<header>
 			<p class="collection-name">hymns for calliope</p>
@@ -103,11 +105,26 @@
 
 <style>
 	.page-container {
+		position: relative;
 		background-color: black;
+		background-position: center;
+		background-size: cover;
 		min-height: 100vh;
 	}
 
+	.page-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0.8;
+		background-color: black;
+		width: 100%;
+		height: 100%;
+	}
+
 	main {
+		position: relative;
+		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -171,6 +188,10 @@
 	}
 
 	@media (min-width: 640px) {
+		.page-container {
+			background-attachment: fixed;
+		}
+
 		main {
 			padding: 4rem 2rem 8rem;
 		}
