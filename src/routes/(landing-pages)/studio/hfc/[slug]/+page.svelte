@@ -140,7 +140,8 @@
 	}
 
 	.poem-content {
-		margin-bottom: 6rem;
+		width: fit-content;
+		margin: 0 auto 6rem;
 	}
 
 	.poem-stanza {
