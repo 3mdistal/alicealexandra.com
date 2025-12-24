@@ -6,10 +6,12 @@
 	import hljs from 'highlight.js/lib/core';
 	import typescript from 'highlight.js/lib/languages/typescript';
 	import javascript from 'highlight.js/lib/languages/javascript';
+	import plaintext from 'highlight.js/lib/languages/plaintext';
 
 	// Register languages
 	hljs.registerLanguage('typescript', typescript);
 	hljs.registerLanguage('javascript', javascript);
+	hljs.registerLanguage('plaintext', plaintext);
 	import { subAndSuper, createTOC } from '$lib/notion/utils/blog-helpers';
 	import type {
 		PageObjectResponse,
