@@ -1,4 +1,4 @@
-import { loadPoemBySlug, loadPoemsMeta } from '$lib/content/poems';
+import { loadPoemBySlug, loadPoemsMeta, loadSections } from '$lib/content/poems';
 import { error } from '@sveltejs/kit';
 
 // Prerender all poems at build time
@@ -11,10 +11,15 @@ export async function entries() {
 }
 
 export async function load({ params }: { params: { slug: string } }) {
-	const poem = await loadPoemBySlug(params.slug);
+	const [poem, sections] = await Promise.all([loadPoemBySlug(params.slug), loadSections()]);
+
 	if (!poem) {
 		throw error(404, 'Poem not found');
 	}
 
-	return { poem };
+	// Find the section that matches this poem's sectionName
+	const section = sections.find((s) => s.name === poem.sectionName);
+	const backgroundImage = section?.secondaryImage || null;
+
+	return { poem, backgroundImage };
 }
