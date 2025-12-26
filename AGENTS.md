@@ -30,19 +30,12 @@ Package manager is pnpm (see `package.json#packageManager`).
 
 ### Tests
 
-- `pnpm test` (runs integration then unit)
-- `pnpm test:unit` (Vitest)
-- `pnpm test:integration` (Playwright; uses `npm run build && npm run preview` via `playwright.config.ts`)
+- `pnpm test` (Vitest)
 
 Run a single unit test:
 
 - `pnpm vitest src/index.test.ts`
 - `pnpm vitest -t "<test name substring>"`
-
-Run a single Playwright test:
-
-- `pnpm playwright test tests/<file>.spec.ts`
-- `pnpm playwright test -g "<test name substring>"`
 
 ### Content fetch (Vercel/build)
 
