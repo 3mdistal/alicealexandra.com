@@ -1,17 +1,10 @@
 <script lang="ts">
-	import type { QueryDataSourceResponse } from '$lib/notion/types/notion-types';
+	import type { BlogPostMeta } from '$lib/content/blog';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
-	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
-	import type {
-		RichTextItemResponse,
-		TextRichTextItemResponse
-	} from '$lib/notion/types/notion-types';
 
 	export let accent: string;
-	export let data: { post: QueryDataSourceResponse };
-
-	let { post: { results = [] } = {} } = data;
+	export let posts: BlogPostMeta[];
 
 	onMount(async () => {
 		// Set accent color based on URL
@@ -21,81 +14,24 @@
 			}
 		});
 	});
-
-	// Type guard for PageObjectResponse
-	function isPageObjectResponse(page: any): page is PageObjectResponse {
-		return page && typeof page === 'object' && page.properties !== undefined;
-	}
-
-	// Type guards for Notion properties
-	function isUrlProperty(property: any): property is { url: string } {
-		return property && typeof property.url === 'string';
-	}
-
-	function isRichTextProperty(property: any): property is { title: RichTextItemResponse[] } {
-		return property && Array.isArray(property.title);
-	}
-
-	function isTextRichTextItem(item: any): item is TextRichTextItemResponse {
-		return item && item.type === 'text' && typeof item.text === 'object';
-	}
-
-	function isSelectProperty(property: any): property is { select: { name: string } } {
-		return property && property.select && typeof property.select.name === 'string';
-	}
-
-	function isFormulaProperty(property: any): property is { formula: { string: string } } {
-		return property && property.formula && typeof property.formula.string === 'string';
-	}
-
-	function isRichTextProperty2(property: any): property is { rich_text: RichTextItemResponse[] } {
-		return property && Array.isArray(property.rich_text);
-	}
 </script>
 
 <h1 class="posts-title" style="color: {accent}">Posts</h1>
-{#each results as page}
-	{#if isPageObjectResponse(page)}
-		{@const slugProp = page.properties['Slug']}
-		{@const slug = isUrlProperty(slugProp) ? slugProp.url : ''}
-		{@const nameProp = page.properties['Name']}
-		{@const titleItem =
-			isRichTextProperty(nameProp) && nameProp.title[0]
-				? nameProp.title[0]
-				: null}
-		{@const titleText =
-			titleItem && isTextRichTextItem(titleItem) ? titleItem.text.content : 'Untitled'}
-		{@const subtitleProp = page.properties['Subtitle']}
-		{@const subtitle =
-			isRichTextProperty2(subtitleProp) &&
-			subtitleProp.rich_text[0] &&
-			isTextRichTextItem(subtitleProp.rich_text[0])
-				? subtitleProp.rich_text[0].text.content
-				: ''}
-		{@const categoryProp = page.properties['Category']}
-		{@const category = isSelectProperty(categoryProp)
-			? categoryProp.select.name
-			: ''}
-		{@const dateProp = page.properties['FormattedPublicationDate']}
-		{@const date = isFormulaProperty(dateProp)
-			? dateProp.formula.string
-			: ''}
-
-		<div class="post-item">
-			<p class="post-title-wrapper">
-				<a href="/blog/{slug}" class="post-title-link">
-					{titleText}
-				</a>
-			</p>
-			{#if subtitle}
-				<p class="post-subtitle">{subtitle}</p>
-			{/if}
-			<p class="post-date">{date}</p>
-			<div class="post-category-wrapper">
-				<p class="post-category">{category}</p>
-			</div>
+{#each posts as post}
+	<div class="post-item">
+		<p class="post-title-wrapper">
+			<a href="/blog/{post.slug}" class="post-title-link">
+				{post.title}
+			</a>
+		</p>
+		{#if post.subtitle}
+			<p class="post-subtitle">{post.subtitle}</p>
+		{/if}
+		<p class="post-date">{post.formattedPublicationDate}</p>
+		<div class="post-category-wrapper">
+			<p class="post-category">{post.category}</p>
 		</div>
-	{/if}
+	</div>
 {/each}
 
 <style>
