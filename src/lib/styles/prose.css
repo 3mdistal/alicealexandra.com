@@ -21,12 +21,14 @@
 
 /* Drop caps */
 .prose > p:first-of-type,
-.prose > h2 + p {
+.prose > h2 + p,
+.prose > hr + p {
 	overflow: hidden;
 }
 
 .prose > p:first-of-type::first-letter,
-.prose > h2 + p::first-letter {
+.prose > h2 + p::first-letter,
+.prose > hr + p::first-letter {
 	margin-right: 0.5rem;
 	color: var(--prose-heading);
 	font-weight: 300;
