@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '$lib/styles/prose.css';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { page } from '$app/state';
@@ -331,7 +332,7 @@
 
 				<article class="modal-content-area">
 					{#if htmlContent}
-						<div class="notion-container">
+						<div class="prose">
 							{@html htmlContent}
 						</div>
 					{:else}
@@ -446,56 +447,7 @@
 		max-width: 800px;
 	}
 
-	.notion-container {
-		font-size: 1.1rem;
-		line-height: 1.7;
-	}
-
-	.notion-container :global(p) {
-		margin-bottom: 1.5rem;
-	}
-
-	.notion-container :global(h2) {
-		margin-top: 2rem;
-		margin-bottom: 1rem;
-		color: #333;
-		font-size: 1.8rem;
-	}
-
-	.notion-container :global(h3) {
-		margin-top: 1.5rem;
-		margin-bottom: 0.75rem;
-		color: #333;
-		font-size: 1.4rem;
-	}
-
-	.notion-container :global(blockquote) {
-		margin: 1.5rem 0;
-		border-left: 3px solid #ddd;
-		padding-left: 1rem;
-		color: #666;
-		font-style: italic;
-	}
-
-	.notion-container :global(code) {
-		border-radius: 3px;
-		background-color: #f4f4f4;
-		padding: 0.2rem 0.4rem;
-		font-family: 'Monaco', 'Courier New', monospace;
-	}
-
-	.notion-container :global(pre) {
-		margin: 1rem 0;
-		border-radius: 6px;
-		background-color: #f4f4f4;
-		padding: 1rem;
-		overflow-x: auto;
-	}
-
-	.notion-container :global(pre code) {
-		background: none;
-		padding: 0;
-	}
+	/* Prose styles are now imported from $lib/styles/prose.css */
 
 	.not-found {
 		padding: 4rem 2rem;
