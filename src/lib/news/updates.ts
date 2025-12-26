@@ -134,6 +134,15 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			href: '/studio/postcards/old-caboose'
 		},
 		{
+			id: 'studio-hfc-2025-12-25-pandemonium',
+			date: '2025-12-25',
+			area: 'studio',
+			category: 'hfc',
+			action: 'added',
+			title: 'pandemonium',
+			href: '/studio/hfc/pandemonium'
+		},
+		{
 			id: 'studio-hfc-2025-12-23-portrait-of-the-body-as-a-failed-industry',
 			date: '2025-12-23',
 			area: 'studio',
