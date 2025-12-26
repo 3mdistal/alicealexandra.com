@@ -1,18 +1,13 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import StudioCard from './studio-card.svelte';
 	import gsap from 'gsap';
 	import { pageState } from '$lib/stores';
-	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
-	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
+	import type { StudioCard as StudioCardType } from '$lib/content/studio';
 
 	export let data;
 
-	function isPageObjectResponse(card: any): card is PageObjectResponse {
-		return card && typeof card === 'object' && 'parent' in card && 'properties' in card;
-	}
-
-	const cards = (data.cards?.results ?? []).filter(isPageObjectResponse) as PageObjectResponse[];
+	const cards: StudioCardType[] = data.cards ?? [];
 
 	function populate(_node: HTMLElement) {
 		const tl = gsap.timeline();
@@ -31,11 +26,6 @@
 			}
 		};
 	}
-
-	onMount(() => {
-		// Trigger background revalidation for future visitors
-		useBackgroundRevalidation('/studio');
-	});
 
 	onDestroy(() => {
 		pageState.set('home');

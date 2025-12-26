@@ -80,7 +80,10 @@
 	/>
 </svelte:head>
 
-<div class="page-container" style="background-image: {backgroundImage ? `url(${backgroundImage})` : 'none'};">
+<div
+	class="page-container"
+	style="background-image: {backgroundImage ? `url(${backgroundImage})` : 'none'};"
+>
 	<div class="page-overlay"></div>
 	<main>
 		<header>
@@ -91,7 +94,12 @@
 
 		<article class="poem-content">
 			{#each poemBlocks as stanza}
-				<p class="poem-stanza" style="white-space: {poem.notLineated === false ? 'pre' : ''}; max-width: {poem.notLineated === true ? '60ch' : 'none'}">
+				<p
+					class="poem-stanza"
+					style="white-space: {poem.notLineated === false
+						? 'pre'
+						: ''}; max-width: {poem.notLineated === true ? '60ch' : 'none'}"
+				>
 					<TextMacro type={stanza.paragraph} />
 				</p>
 			{/each}
@@ -106,9 +114,9 @@
 <style>
 	.page-container {
 		position: relative;
-		background-color: black;
 		background-position: center;
 		background-size: cover;
+		background-color: black;
 		min-height: 100vh;
 	}
 
@@ -123,17 +131,17 @@
 	}
 
 	main {
-		position: relative;
-		z-index: 1;
 		display: flex;
+		position: relative;
 		flex-direction: column;
 		align-items: center;
+		z-index: 1;
 		padding: 3rem 1.5rem 6rem;
 	}
 
 	header {
-		max-width: 60ch;
 		margin-bottom: 4rem;
+		max-width: 60ch;
 		text-align: center;
 	}
 
@@ -159,9 +167,9 @@
 	}
 
 	.poem-content {
+		margin-bottom: 6rem;
 		width: fit-content;
 		max-width: 100%;
-		margin-bottom: 6rem;
 		overflow-x: auto;
 	}
 

@@ -4,65 +4,20 @@
 	import { accentColors, backgroundColors } from '$lib/stores';
 	import Button from '$lib/icons/button.svelte';
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
-	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
+	import type { StudioCard } from '$lib/content/studio';
 
 	// Card Data
-	export let card: PageObjectResponse;
+	export let card: StudioCard;
 
-	let {
-		properties: {
-			Title: {
-				title: [{ plain_text: title }]
-			},
-			Subtitle: subtitle,
-			'Shortened Logo Text': logo,
-			Image: { url: src },
-			ImageAlt: {
-				rich_text: [
-					{
-						text: { content: alt }
-					}
-				]
-			},
-			Description: description,
-			ButtonText: {
-				rich_text: [
-					{
-						text: { content: buttonText }
-					}
-				]
-			},
-			Destination: { url }
-		}
-	} = card as unknown as {
-		properties: {
-			Title: {
-				title: [{ plain_text: string }];
-			};
-			// eslint-disable-next-line
-			Subtitle: any;
-			// eslint-disable-next-line
-			'Shortened Logo Text': any;
-			Image: { url: string };
-			ImageAlt: {
-				rich_text: [
-					{
-						text: { content: string };
-					}
-				];
-			};
-			// eslint-disable-next-line
-			Description: any;
-			ButtonText: {
-				rich_text: [
-					{
-						text: { content: string };
-					}
-				];
-			};
-			Destination: { url: string };
-		};
-	};
+	// Extract fields from local content type
+	const title = card.title;
+	const subtitle = card.subtitle;
+	const logo = card.logoText;
+	const src = card.imageUrl;
+	const alt = card.imageAlt;
+	const description = card.description;
+	const buttonText = card.buttonText;
+	const url = card.destinationUrl;
 
 	// UI Elements
 	let front: HTMLDivElement;

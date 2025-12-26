@@ -1,82 +1,29 @@
 <script lang="ts">
 	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import { fade, scale } from 'svelte/transition';
-
-	import type { PageObjectResponse, RichTextItemResponse } from '$lib/notion/types/notion-types';
+	import type { Illustration } from '$lib/content/studio';
 
 	// Props
 	export let data;
-	const results = data?.illustrations?.results ?? [];
-
-	function isPageObjectResponse(page: any): page is PageObjectResponse {
-		return page && typeof page === 'object' && 'properties' in page;
-	}
-
-	const paintings = results.filter(isPageObjectResponse) as PageObjectResponse[];
-
-	type UrlProperty = { type: 'url'; url: string | null };
-	type TitleProperty = { type: 'title'; title: Array<{ plain_text?: string }> };
-	type FormulaStringProperty = {
-		type: 'formula';
-		formula: { type: 'string'; string: string | null };
-	};
-	type RichTextProperty = { type: 'rich_text'; rich_text: RichTextItemResponse[] };
-
-	function isUrlProperty(prop: any): prop is UrlProperty {
-		return prop?.type === 'url';
-	}
-
-	function isTitleProperty(prop: any): prop is TitleProperty {
-		return prop?.type === 'title' && Array.isArray(prop.title);
-	}
-
-	function isFormulaStringProperty(prop: any): prop is FormulaStringProperty {
-		return prop?.type === 'formula' && prop.formula?.type === 'string';
-	}
-
-	function isRichTextProperty(prop: any): prop is RichTextProperty {
-		return prop?.type === 'rich_text' && Array.isArray(prop.rich_text);
-	}
-
-	function getPaintingImageUrl(painting: PageObjectResponse): string {
-		const prop = (painting.properties as any).Image;
-		return isUrlProperty(prop) ? (prop.url ?? '') : '';
-	}
-
-	function getPaintingName(painting: PageObjectResponse): string {
-		const prop = (painting.properties as any).Name;
-		return isTitleProperty(prop) ? (prop.title?.[0]?.plain_text ?? '') : '';
-	}
-
-	function getPaintingDate(painting: PageObjectResponse): string {
-		const prop = (painting.properties as any).Date;
-		return isFormulaStringProperty(prop) ? (prop.formula.string ?? '') : '';
-	}
-
-	function getPaintingDescription(painting: PageObjectResponse): {
-		rich_text: RichTextItemResponse[];
-	} {
-		const prop = (painting.properties as any).Description;
-		return isRichTextProperty(prop) ? prop : { rich_text: [] };
-	}
+	const paintings: Illustration[] = data?.illustrations ?? [];
 
 	// Image quality parameters
 	const lowQualityParams = '?tr=f-webp,w-800,q-40';
 	const highQualityParams = '?tr=f-webp,w-1600,q-85';
 
 	// State
-	let selectedPainting: PageObjectResponse | null = null;
+	let selectedPainting: Illustration | null = null;
 	let modalOpen = false;
 	let highResImageLoaded = false;
 
-	function openModal(painting: PageObjectResponse) {
+	function openModal(painting: Illustration) {
 		selectedPainting = painting;
 		modalOpen = true;
 		highResImageLoaded = false;
 		document.body.style.overflow = 'hidden';
 
 		// Preload high-res image
-		const highResSrc = getPaintingImageUrl(painting);
+		const highResSrc = painting.imageUrl;
 		if (highResSrc) {
 			const highResImage = new Image();
 			highResImage.src = highResSrc + highQualityParams;
@@ -149,9 +96,9 @@
 <div class="background">
 	<div class="art-grid">
 		{#each paintings as painting, i}
-			{@const imageUrl = getPaintingImageUrl(painting)}
-			{@const name = getPaintingName(painting)}
-			{@const date = getPaintingDate(painting)}
+			{@const imageUrl = painting.imageUrl}
+			{@const name = painting.name}
+			{@const date = painting.date}
 			<button
 				type="button"
 				class="grid-item"
@@ -182,10 +129,10 @@
 	</div>
 
 	{#if modalOpen && selectedPainting}
-		{@const selectedImageUrl = getPaintingImageUrl(selectedPainting)}
-		{@const selectedName = getPaintingName(selectedPainting)}
-		{@const selectedDate = getPaintingDate(selectedPainting)}
-		{@const selectedDescription = getPaintingDescription(selectedPainting)}
+		{@const selectedImageUrl = selectedPainting.imageUrl}
+		{@const selectedName = selectedPainting.name}
+		{@const selectedDate = selectedPainting.date}
+		{@const selectedDescription = selectedPainting.description}
 		<div class="modal-overlay" transition:fade={{ duration: 300 }}>
 			<button type="button" class="modal-backdrop" on:click={closeModal} aria-label="Close modal"
 			></button>

@@ -1,28 +1,13 @@
 <script lang="ts">
 	import PublicationsSection from './publications-section.svelte';
-	import type { ProfessionalPublications } from './+page.server';
-	import { onMount } from 'svelte';
-	import { useBackgroundRevalidation } from '$lib/utils/revalidation';
+	import type { Publication } from '$lib/content/career';
 
-	export let data: Data;
+	export let data: { publications: Publication[] };
 
-	type Data = {
-		publicationList: {
-			results: Array<ProfessionalPublications>;
-		};
-	};
-
-	const {
-		publicationList: { results: publications }
-	} = data;
+	const { publications } = data;
 
 	const accent = '#642e1a';
 	const background = '#dcc9c6';
-
-	onMount(() => {
-		// Trigger background revalidation for future visitors
-		useBackgroundRevalidation('/career/vercel');
-	});
 </script>
 
 <svelte:head>
