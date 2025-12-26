@@ -1,3 +1,19 @@
+## 26 Dec 2025 (2)
+
+**Features**
+
+- Migrated Studio Cards, Illustrations, and Publications from Notion to local JSON content. (#54)
+
+**Refactors**
+
+- Created content loaders (`src/lib/content/studio.ts`, `src/lib/content/career.ts`) for build-time static content.
+- Removed Notion API modules: `client.ts`, `database.ts`, `blocks.ts`, `pages.ts`, `NotionPageParser.svelte`, `NotionImage.svelte`.
+- Studio and Career routes now use prerendering instead of ISR.
+
+**Patches**
+
+- Fixed `.gitignore` pattern `content/` → `/content/` to allow `src/lib/content/` files to be tracked.
+
 ## 26 Dec 2025
 
 **Refactors**
