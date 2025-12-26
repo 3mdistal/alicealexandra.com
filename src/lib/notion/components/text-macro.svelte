@@ -39,19 +39,19 @@
 	}
 
 	a {
-		color: var(--blog-link);
+		color: var(--prose-link);
 		text-decoration: underline;
 
 		&:hover {
-			color: var(--blog-link-hover);
+			color: var(--prose-link-hover);
 		}
 	}
 
 	code {
-		border-radius: var(--blog-border-radius-sm);
-		background-color: var(--blog-inline-code-bg);
+		border-radius: var(--prose-border-radius-sm);
+		background-color: var(--prose-inline-code-bg);
 		padding: 0.1em 0.3em;
-		font-size: var(--blog-code);
+		font-size: var(--prose-code);
 		font-family: monospace;
 	}
 
@@ -61,12 +61,12 @@
 		}
 
 		&.mention {
-			color: var(--blog-mention);
+			color: var(--prose-mention);
 			font-weight: 500;
 		}
 
 		&.equation {
-			color: var(--blog-equation);
+			color: var(--prose-equation);
 			font-style: italic;
 		}
 	}

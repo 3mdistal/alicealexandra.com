@@ -37,12 +37,12 @@
 
 <style>
 	img {
-		border-radius: var(--blog-border-radius);
+		border-radius: var(--prose-border-radius);
 		max-width: 100%;
 	}
 
 	.error {
-		color: var(--blog-text);
+		color: var(--prose-text);
 		font-style: italic;
 	}
 </style>

@@ -1,4 +1,4 @@
-import { loadPostsMeta, loadPostBySlug, transformPostToNotionFormat } from '$lib/content/blog';
+import { loadPostsMeta, loadPostBySlug } from '$lib/content/blog';
 import { error, redirect } from '@sveltejs/kit';
 
 // Permanent redirects for old slugs
@@ -28,7 +28,5 @@ export async function load({ params }: { params: { slug: string } }) {
 		throw error(404, 'Blog post not found');
 	}
 
-	return {
-		post: transformPostToNotionFormat(post)
-	};
+	return { post };
 }

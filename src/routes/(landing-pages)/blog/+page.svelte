@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Blog from '$lib/subpages/blog.svelte';
-	import type { QueryDataSourceResponse } from '$lib/notion/types/notion-types';
+	import type { BlogPostMeta } from '$lib/content/blog';
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
 	import { pageState } from '$lib/stores';
 	import Bird from '../../../cms/images/blog/bird.webp?enhanced';
 
-	export let data: { post: QueryDataSourceResponse };
+	export let data: { posts: BlogPostMeta[] };
 
 	const accent = '#d1dce7';
 
@@ -38,7 +38,7 @@
 <div class="opacity-0 blog-page">
 	<div class="blog-content">
 		<div class="blog-wrapper">
-			<Blog {accent} {data} />
+			<Blog {accent} posts={data.posts} />
 		</div>
 	</div>
 	<div class="background-container">
@@ -53,16 +53,16 @@
 </div>
 
 <style>
-	/* Override blog colors for white text hierarchy on listing page only */
+	/* Override prose colors for white text hierarchy on listing page only */
 	:global(.blog-wrapper) {
-		--blog-text: #ffffff;
-		--blog-heading: #ffffff;
-		--blog-accent: #e5e7eb;
-		--blog-secondary: #d1d5db;
-		--blog-link: #ffffff;
-		--blog-link-hover: #e5e7eb;
-		--blog-heading-dark: #ffffff;
-		--blog-secondary-dark: #d1d5db;
+		--prose-text: #ffffff;
+		--prose-heading: #ffffff;
+		--prose-accent: #e5e7eb;
+		--prose-secondary: #d1d5db;
+		--prose-link: #ffffff;
+		--prose-link-hover: #e5e7eb;
+		--prose-heading-dark: #ffffff;
+		--prose-secondary-dark: #d1d5db;
 	}
 
 	.blog-page {

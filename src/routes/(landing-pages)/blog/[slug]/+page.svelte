@@ -1,5 +1,7 @@
 <script lang="ts">
+	import '$lib/styles/prose.css';
 	import BlogHeader from '$lib/components/blog-header.svelte';
+	import type { BlogPost } from '$lib/content/blog';
 	import { onMount, tick } from 'svelte';
 	import { Marked } from 'marked';
 	import { markedHighlight } from 'marked-highlight';
@@ -13,14 +15,6 @@
 	hljs.registerLanguage('javascript', javascript);
 	hljs.registerLanguage('plaintext', plaintext);
 	import { subAndSuper, createTOC } from '$lib/notion/utils/blog-helpers';
-	import type {
-		PageObjectResponse,
-		UrlPropertyItemObjectResponse,
-		SelectPropertyItemObjectResponse,
-		FormulaPropertyItemObjectResponse,
-		FilesPropertyItemObjectResponse,
-		QueryDataSourceResponse
-	} from '$lib/notion/types/notion-types';
 
 	let context: HTMLElement;
 
@@ -32,21 +26,9 @@
 		}
 	};
 
-	export let data: {
-		post: {
-			queryResponse: QueryDataSourceResponse | null;
-			contentResponse: { results: any[]; markdownContent?: string } | null;
-		};
-	};
+	export let data: { post: BlogPost };
 
-	const { queryResponse, contentResponse } = data.post || {};
-
-	const blogPost = queryResponse?.results?.[0] as PageObjectResponse | undefined;
-
-	const pageCover = blogPost?.cover;
-
-	// Get markdown content
-	const markdownContent = contentResponse?.markdownContent || '';
+	const { post } = data;
 
 	// Configure marked with syntax highlighting
 	const marked = new Marked(
@@ -61,102 +43,10 @@
 	);
 
 	// Convert markdown to HTML
-	const htmlContent = marked.parse(markdownContent);
+	const htmlContent = marked.parse(post.content);
 
-	// Type guards for Notion properties
-	function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {
-		return prop?.type === 'url';
-	}
-
-	function isSelectProperty(prop: any): prop is SelectPropertyItemObjectResponse {
-		return prop?.type === 'select';
-	}
-
-	function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
-		return prop?.type === 'formula';
-	}
-
-	function isFilesProperty(prop: any): prop is FilesPropertyItemObjectResponse {
-		return prop?.type === 'files';
-	}
-
-	const {
-		Name: title,
-		OGDescription: ogDescription,
-		ReadTime: readingTime,
-		Category: category,
-		'Publication Date': publicationDate,
-		Slug: slug
-	} = blogPost?.properties || {};
-
-	// Extract data for the header
-	const categoryName = getCategory(category);
-	const publishedDate = formatDate(publicationDate);
-	const readTime = formatReadingTime(readingTime);
-
-	// Helper function to safely get text content
-	function getTextContent(prop: any) {
-		if (prop?.type === 'title') {
-			return prop.title?.[0]?.plain_text || '';
-		}
-		return prop?.rich_text?.[0]?.plain_text || '';
-	}
-
-	// Helper function to format reading time
-	function formatReadingTime(prop: any) {
-		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
-			const time = prop.formula.string;
-			return time === '1 minutes' ? '1 minute' : time;
-		}
-		return '5 min read';
-	}
-
-	// Helper function to format date
-	function formatDate(prop: any) {
-		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
-			return prop.formula.string;
-		}
-		return '';
-	}
-
-	// Helper function to get category
-	function getCategory(prop: any) {
-		if (isSelectProperty(prop)) {
-			return prop.select?.name || 'Article';
-		}
-		return 'Article';
-	}
-
-	// Helper function to get URL from URL property
-	function getUrl(prop: any) {
-		// Handle page cover object
-		if (prop && (prop.type === 'external' || prop.type === 'file')) {
-			if (prop.type === 'external' && prop.external?.url) {
-				return prop.external.url;
-			}
-			if (prop.type === 'file' && prop.file?.url) {
-				return prop.file.url;
-			}
-		}
-
-		// Handle regular properties if not a page cover
-		if (isUrlProperty(prop)) {
-			return prop.url;
-		}
-		if (isFilesProperty(prop)) {
-			const first = prop.files?.[0];
-			if (first?.type === 'file') {
-				return first.file.url;
-			}
-			if (first?.type === 'external') {
-				return first.external.url;
-			}
-		}
-		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
-			return prop.formula.string;
-		}
-		return '';
-	}
+	// Format reading time (handle "1 minutes" -> "1 minute")
+	const formattedReadTime = post.readTime === '1 minutes' ? '1 minute' : post.readTime;
 
 	onMount(() => {
 		runBlogHelpers();
@@ -164,16 +54,16 @@
 </script>
 
 <svelte:head>
-	<title>{getTextContent(title) || 'Blog'}</title>
-	<meta name="og:title" content={getTextContent(title) || 'Blog'} />
-	<meta name="description" content={getTextContent(ogDescription)} />
+	<title>{post.title || 'Blog'}</title>
+	<meta name="og:title" content={post.title || 'Blog'} />
+	<meta name="description" content={post.ogDescription} />
 
 	<!-- Facebook Meta Tags -->
-	<meta property="og:url" content="https://www.alicealexandra.com/blog/{getUrl(slug)}" />
+	<meta property="og:url" content="https://www.alicealexandra.com/blog/{post.slug}" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Blog - {getTextContent(title) || 'Blog'}" />
-	<meta property="og:description" content={getTextContent(ogDescription)} />
-	<meta property="og:image" content={getUrl(pageCover) || 'https://unsplash.it/1200/600'} />
+	<meta property="og:title" content="Blog - {post.title || 'Blog'}" />
+	<meta property="og:description" content={post.ogDescription} />
+	<meta property="og:image" content={post.coverImage || 'https://unsplash.it/1200/600'} />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -181,12 +71,12 @@
 	<meta name="twitter:creator" content="@tempoimmaterial" />
 	<meta name="twitter:domain" content="alicealexandra.com" />
 	<meta name="twitter:url" content="https://www.alicealexandra.com/blog" />
-	<meta name="twitter:title" content="Blog - {getTextContent(title) || 'Blog'}" />
-	<meta name="twitter:description" content={getTextContent(ogDescription)} />
-	<meta name="twitter:image" content={getUrl(pageCover) || 'https://unsplash.it/1200/600'} />
+	<meta name="twitter:title" content="Blog - {post.title || 'Blog'}" />
+	<meta name="twitter:description" content={post.ogDescription} />
+	<meta name="twitter:image" content={post.coverImage || 'https://unsplash.it/1200/600'} />
 	<meta
 		name="twitter:image:alt"
-		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
+		content="Open graph representation of this blog article, {post.title || 'Blog'}."
 	/>
 
 	<!-- Highlight.js themes - auto-switch based on color scheme -->
@@ -203,18 +93,17 @@
 </svelte:head>
 
 <div class="page-wrapper">
-	{#if blogPost}
-		<BlogHeader
-			{blogPost}
-			category={categoryName ?? 'Article'}
-			publishedDate={publishedDate ?? ''}
-			readTime={readTime ?? ''}
-		/>
-	{/if}
+	<BlogHeader
+		title={post.title}
+		subtitle={post.subtitle}
+		category={post.category || 'Article'}
+		publishedDate={post.formattedPublicationDate}
+		readTime={formattedReadTime}
+	/>
 
 	<div class="blog-container">
 		{#if htmlContent}
-			<div class="notion-container" bind:this={context}>
+			<div class="prose" bind:this={context}>
 				{@html htmlContent}
 			</div>
 		{:else}
@@ -230,7 +119,7 @@
 	:global(html),
 	:global(body) {
 		margin: 0;
-		background-color: var(--blog-bg) !important;
+		background-color: var(--prose-bg) !important;
 		padding: 0;
 		min-height: 100vh;
 	}
@@ -238,290 +127,68 @@
 	.page-wrapper {
 		position: relative;
 		z-index: 1;
-		background-color: var(--blog-bg);
+		background-color: var(--prose-bg);
 		min-height: 100vh;
 	}
 
 	.blog-container {
 		margin: 0 auto;
-		background-color: var(--blog-bg);
-		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
+		background-color: var(--prose-bg);
+		padding: var(--prose-spacing-lg) var(--prose-spacing-sm);
 		max-width: 900px;
-		color: var(--blog-text);
+		color: var(--prose-text);
 
 		@media (min-width: 640px) {
-			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
+			padding: var(--prose-spacing-lg) var(--prose-spacing-md);
 		}
 
 		@media (min-width: 768px) {
-			padding: var(--blog-spacing-lg) var(--blog-spacing-xl);
+			padding: var(--prose-spacing-lg) var(--prose-spacing-xl);
 		}
 
 		@media (min-width: 1280px) {
-			padding: var(--blog-spacing-xl) var(--blog-spacing-xl);
+			padding: var(--prose-spacing-xl) var(--prose-spacing-xl);
 		}
 
 		@media (min-width: 1536px) {
-			padding: var(--blog-spacing-xl) var(--blog-spacing-lg);
+			padding: var(--prose-spacing-xl) var(--prose-spacing-lg);
 		}
 
 		@media (min-width: 1920px) {
-			padding: var(--blog-spacing-xl) 25vw;
-		}
-
-		:global(sub),
-		:global(sup) {
-			color: inherit;
+			padding: var(--prose-spacing-xl) 25vw;
 		}
 	}
 
-	/* Styles for constraining top sections and back-link */
-	.blog-container > div:not(.notion-container) {
+	/* Styles for constraining non-prose sections */
+	.blog-container > div:not(.prose) {
 		margin: 0 auto;
 		width: 100%;
 		max-width: 900px;
-		font-size: var(--blog-body);
+		font-size: var(--prose-body);
 
 		@media (min-width: 1024px) {
-			font-size: var(--blog-body-large);
-		}
-	}
-
-	.notion-container {
-		margin: 0 auto;
-		max-width: 900px;
-		font-size: var(--blog-body);
-		line-height: 1.75rem;
-
-		@media (min-width: 1024px) {
-			font-size: var(--blog-body-large);
-			line-height: 2rem;
-		}
-
-		:global(p) {
-			margin-bottom: 1em;
-		}
-
-		:global(> p:first-of-type),
-		:global(> h2 + p) {
-			overflow: hidden;
-		}
-
-		:global(> p:first-of-type::first-letter),
-		:global(> h2 + p::first-letter) {
-			margin-right: 0.5rem;
-			color: var(--blog-heading);
-			font-weight: 300;
-			font-family: 'Spectral', serif;
-			initial-letter: 2;
+			font-size: var(--prose-body-large);
 		}
 	}
 
 	.back-link {
 		margin-top: 4em;
 		width: 100%;
-		max-width: var(--blog-content-width);
+		max-width: var(--prose-content-width);
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		text-align: right;
 
 		@media (min-width: 768px) {
-			font-size: var(--blog-heading-large);
+			font-size: var(--prose-heading-large);
 			line-height: 1;
 		}
 
 		a {
 			display: inline-block;
-			padding: var(--blog-spacing-md);
-			color: var(--blog-text);
+			padding: var(--prose-spacing-md);
+			color: var(--prose-text);
 			font-family: 'Spectral', serif;
-		}
-	}
-
-	/* Styles from blog-post.css */
-	.blog-container {
-		:global(.notion-container .toc) {
-			margin-top: 2em;
-			margin-bottom: 2em;
-		}
-
-		:global(.notion-container a) {
-			color: var(--blog-link);
-			font-weight: 500;
-
-			&:hover {
-				text-decoration: underline;
-			}
-		}
-
-		:global(.notion-container code) {
-			border-radius: var(--blog-border-radius-sm);
-			background-color: var(--blog-code-bg);
-			padding: 0.2em 0.4em;
-			color: var(--blog-link);
-		}
-
-		:global(.notion-container pre code) {
-			display: block;
-			border-radius: var(--blog-border-radius);
-			padding: 1em;
-			overflow-x: auto;
-		}
-
-		:global(.notion-container pre) {
-			margin-bottom: var(--blog-spacing-md);
-		}
-
-		/* Override highlight.js background in dark mode for better contrast */
-		@media (prefers-color-scheme: dark) {
-			:global(.notion-container pre code.hljs) {
-				background-color: #1e1e1e;
-			}
-		}
-
-		:global(.notion-container blockquote) {
-			margin-top: var(--blog-spacing-lg);
-			margin-left: 2em;
-			max-width: var(--blog-blockquote-width);
-			color: var(--blog-callout);
-			font-style: italic;
-		}
-
-		:global(.notion-container img) {
-			margin-top: 2em;
-			margin-bottom: 2em;
-			border-radius: 1.5rem;
-			width: 100%;
-			height: auto;
-			object-fit: contain;
-
-			@media (min-width: 1024px) {
-				object-position: left;
-			}
-		}
-
-		:global(.notion-container h2) {
-			margin-top: 3.5em;
-			margin-bottom: 2em;
-			color: var(--blog-heading);
-			font-weight: 400;
-			font-size: 2rem;
-			line-height: 1.3;
-			font-family: 'Spectral', serif;
-			text-align: center;
-
-			@media (min-width: 768px) {
-				font-size: 2.5rem;
-			}
-
-			@media (min-width: 1024px) {
-				font-size: 3rem;
-			}
-		}
-
-		:global(.notion-container h3) {
-			margin-top: 1.5em;
-			margin-bottom: 1em;
-			color: var(--blog-heading);
-			font-weight: 500;
-			font-size: var(--blog-heading-small);
-
-			@media (min-width: 768px) {
-				font-size: var(--blog-heading-medium);
-			}
-		}
-
-		:global(.notion-container ol),
-		:global(.notion-container ul) {
-			margin-left: 2em;
-		}
-
-		:global(.notion-container ol li),
-		:global(.notion-container ul li) {
-			color: var(--blog-accent);
-		}
-
-		:global(.notion-container ol li::marker),
-		:global(.notion-container ul li::marker) {
-			color: var(--blog-accent);
-		}
-
-		:global(.notion-container hr) {
-			opacity: 0.8;
-			margin: var(--blog-spacing-xl) auto;
-			border: none;
-			border-top: 1px solid var(--blog-border);
-			width: auto;
-			max-width: var(--blog-content-width);
-			height: 1px;
-		}
-
-		:global(ol) {
-			list-style-type: decimal;
-		}
-
-		:global(ul) {
-			list-style-type: disc;
-		}
-
-		:global(div.callout) {
-			display: flex;
-			align-items: flex-start;
-			gap: 1rem;
-			margin-top: var(--blog-spacing-lg);
-			margin-bottom: var(--blog-spacing-md);
-			border-radius: 0.5rem;
-			background-color: var(--blog-callout);
-			padding: var(--blog-spacing-lg) var(--blog-spacing-sm) var(--blog-spacing-md);
-
-			@media (min-width: 768px) {
-				gap: var(--blog-spacing-lg);
-				padding-right: 5rem;
-				padding-left: 5rem;
-			}
-
-			& > :first-child {
-				font-size: var(--blog-heading-small);
-
-				@media (min-width: 768px) {
-					font-size: var(--blog-heading-medium);
-				}
-			}
-
-			& > :last-child {
-				font-size: var(--blog-body-small);
-
-				@media (min-width: 768px) {
-					font-size: var(--blog-body);
-				}
-			}
-		}
-
-		:global(.notion-container p),
-		:global(.notion-container li) {
-			color: var(--blog-accent);
-		}
-
-		/* Ensure italic and bold text inherit color and have proper styling */
-		:global(.notion-container em),
-		:global(.notion-container i) {
-			color: inherit;
-		}
-
-		:global(.notion-container strong),
-		:global(.notion-container b) {
-			color: inherit;
-			font-weight: 600;
-		}
-	}
-
-	.blog-container {
-		:global(.notion-container code) {
-			font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
-		}
-
-		:global(.notion-container pre code *) {
-			font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
 		}
 	}
 </style>
