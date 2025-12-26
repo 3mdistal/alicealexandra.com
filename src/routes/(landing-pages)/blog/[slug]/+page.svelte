@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '$lib/styles/prose.css';
 	import BlogHeader from '$lib/components/blog-header.svelte';
 	import type { BlogPost } from '$lib/content/blog';
 	import { onMount, tick } from 'svelte';
@@ -102,7 +103,7 @@
 
 	<div class="blog-container">
 		{#if htmlContent}
-			<div class="notion-container" bind:this={context}>
+			<div class="prose" bind:this={context}>
 				{@html htmlContent}
 			</div>
 		{:else}
@@ -118,7 +119,7 @@
 	:global(html),
 	:global(body) {
 		margin: 0;
-		background-color: var(--blog-bg) !important;
+		background-color: var(--prose-bg) !important;
 		padding: 0;
 		min-height: 100vh;
 	}
@@ -126,290 +127,68 @@
 	.page-wrapper {
 		position: relative;
 		z-index: 1;
-		background-color: var(--blog-bg);
+		background-color: var(--prose-bg);
 		min-height: 100vh;
 	}
 
 	.blog-container {
 		margin: 0 auto;
-		background-color: var(--blog-bg);
-		padding: var(--blog-spacing-lg) var(--blog-spacing-sm);
+		background-color: var(--prose-bg);
+		padding: var(--prose-spacing-lg) var(--prose-spacing-sm);
 		max-width: 900px;
-		color: var(--blog-text);
+		color: var(--prose-text);
 
 		@media (min-width: 640px) {
-			padding: var(--blog-spacing-lg) var(--blog-spacing-md);
+			padding: var(--prose-spacing-lg) var(--prose-spacing-md);
 		}
 
 		@media (min-width: 768px) {
-			padding: var(--blog-spacing-lg) var(--blog-spacing-xl);
+			padding: var(--prose-spacing-lg) var(--prose-spacing-xl);
 		}
 
 		@media (min-width: 1280px) {
-			padding: var(--blog-spacing-xl) var(--blog-spacing-xl);
+			padding: var(--prose-spacing-xl) var(--prose-spacing-xl);
 		}
 
 		@media (min-width: 1536px) {
-			padding: var(--blog-spacing-xl) var(--blog-spacing-lg);
+			padding: var(--prose-spacing-xl) var(--prose-spacing-lg);
 		}
 
 		@media (min-width: 1920px) {
-			padding: var(--blog-spacing-xl) 25vw;
-		}
-
-		:global(sub),
-		:global(sup) {
-			color: inherit;
+			padding: var(--prose-spacing-xl) 25vw;
 		}
 	}
 
-	/* Styles for constraining top sections and back-link */
-	.blog-container > div:not(.notion-container) {
+	/* Styles for constraining non-prose sections */
+	.blog-container > div:not(.prose) {
 		margin: 0 auto;
 		width: 100%;
 		max-width: 900px;
-		font-size: var(--blog-body);
+		font-size: var(--prose-body);
 
 		@media (min-width: 1024px) {
-			font-size: var(--blog-body-large);
-		}
-	}
-
-	.notion-container {
-		margin: 0 auto;
-		max-width: 900px;
-		font-size: var(--blog-body);
-		line-height: 1.75rem;
-
-		@media (min-width: 1024px) {
-			font-size: var(--blog-body-large);
-			line-height: 2rem;
-		}
-
-		:global(p) {
-			margin-bottom: 1em;
-		}
-
-		:global(> p:first-of-type),
-		:global(> h2 + p) {
-			overflow: hidden;
-		}
-
-		:global(> p:first-of-type::first-letter),
-		:global(> h2 + p::first-letter) {
-			margin-right: 0.5rem;
-			color: var(--blog-heading);
-			font-weight: 300;
-			font-family: 'Spectral', serif;
-			initial-letter: 2;
+			font-size: var(--prose-body-large);
 		}
 	}
 
 	.back-link {
 		margin-top: 4em;
 		width: 100%;
-		max-width: var(--blog-content-width);
+		max-width: var(--prose-content-width);
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		text-align: right;
 
 		@media (min-width: 768px) {
-			font-size: var(--blog-heading-large);
+			font-size: var(--prose-heading-large);
 			line-height: 1;
 		}
 
 		a {
 			display: inline-block;
-			padding: var(--blog-spacing-md);
-			color: var(--blog-text);
+			padding: var(--prose-spacing-md);
+			color: var(--prose-text);
 			font-family: 'Spectral', serif;
-		}
-	}
-
-	/* Styles from blog-post.css */
-	.blog-container {
-		:global(.notion-container .toc) {
-			margin-top: 2em;
-			margin-bottom: 2em;
-		}
-
-		:global(.notion-container a) {
-			color: var(--blog-link);
-			font-weight: 500;
-
-			&:hover {
-				text-decoration: underline;
-			}
-		}
-
-		:global(.notion-container code) {
-			border-radius: var(--blog-border-radius-sm);
-			background-color: var(--blog-code-bg);
-			padding: 0.2em 0.4em;
-			color: var(--blog-link);
-		}
-
-		:global(.notion-container pre code) {
-			display: block;
-			border-radius: var(--blog-border-radius);
-			padding: 1em;
-			overflow-x: auto;
-		}
-
-		:global(.notion-container pre) {
-			margin-bottom: var(--blog-spacing-md);
-		}
-
-		/* Override highlight.js background in dark mode for better contrast */
-		@media (prefers-color-scheme: dark) {
-			:global(.notion-container pre code.hljs) {
-				background-color: #1e1e1e;
-			}
-		}
-
-		:global(.notion-container blockquote) {
-			margin-top: var(--blog-spacing-lg);
-			margin-left: 2em;
-			max-width: var(--blog-blockquote-width);
-			color: var(--blog-callout);
-			font-style: italic;
-		}
-
-		:global(.notion-container img) {
-			margin-top: 2em;
-			margin-bottom: 2em;
-			border-radius: 1.5rem;
-			width: 100%;
-			height: auto;
-			object-fit: contain;
-
-			@media (min-width: 1024px) {
-				object-position: left;
-			}
-		}
-
-		:global(.notion-container h2) {
-			margin-top: 3.5em;
-			margin-bottom: 2em;
-			color: var(--blog-heading);
-			font-weight: 400;
-			font-size: 2rem;
-			line-height: 1.3;
-			font-family: 'Spectral', serif;
-			text-align: center;
-
-			@media (min-width: 768px) {
-				font-size: 2.5rem;
-			}
-
-			@media (min-width: 1024px) {
-				font-size: 3rem;
-			}
-		}
-
-		:global(.notion-container h3) {
-			margin-top: 1.5em;
-			margin-bottom: 1em;
-			color: var(--blog-heading);
-			font-weight: 500;
-			font-size: var(--blog-heading-small);
-
-			@media (min-width: 768px) {
-				font-size: var(--blog-heading-medium);
-			}
-		}
-
-		:global(.notion-container ol),
-		:global(.notion-container ul) {
-			margin-left: 2em;
-		}
-
-		:global(.notion-container ol li),
-		:global(.notion-container ul li) {
-			color: var(--blog-accent);
-		}
-
-		:global(.notion-container ol li::marker),
-		:global(.notion-container ul li::marker) {
-			color: var(--blog-accent);
-		}
-
-		:global(.notion-container hr) {
-			opacity: 0.8;
-			margin: var(--blog-spacing-xl) auto;
-			border: none;
-			border-top: 1px solid var(--blog-border);
-			width: auto;
-			max-width: var(--blog-content-width);
-			height: 1px;
-		}
-
-		:global(ol) {
-			list-style-type: decimal;
-		}
-
-		:global(ul) {
-			list-style-type: disc;
-		}
-
-		:global(div.callout) {
-			display: flex;
-			align-items: flex-start;
-			gap: 1rem;
-			margin-top: var(--blog-spacing-lg);
-			margin-bottom: var(--blog-spacing-md);
-			border-radius: 0.5rem;
-			background-color: var(--blog-callout);
-			padding: var(--blog-spacing-lg) var(--blog-spacing-sm) var(--blog-spacing-md);
-
-			@media (min-width: 768px) {
-				gap: var(--blog-spacing-lg);
-				padding-right: 5rem;
-				padding-left: 5rem;
-			}
-
-			& > :first-child {
-				font-size: var(--blog-heading-small);
-
-				@media (min-width: 768px) {
-					font-size: var(--blog-heading-medium);
-				}
-			}
-
-			& > :last-child {
-				font-size: var(--blog-body-small);
-
-				@media (min-width: 768px) {
-					font-size: var(--blog-body);
-				}
-			}
-		}
-
-		:global(.notion-container p),
-		:global(.notion-container li) {
-			color: var(--blog-accent);
-		}
-
-		/* Ensure italic and bold text inherit color and have proper styling */
-		:global(.notion-container em),
-		:global(.notion-container i) {
-			color: inherit;
-		}
-
-		:global(.notion-container strong),
-		:global(.notion-container b) {
-			color: inherit;
-			font-weight: 600;
-		}
-	}
-
-	.blog-container {
-		:global(.notion-container code) {
-			font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
-		}
-
-		:global(.notion-container pre code *) {
-			font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
 		}
 	}
 </style>
