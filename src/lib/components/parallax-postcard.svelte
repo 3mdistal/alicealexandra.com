@@ -264,11 +264,11 @@
 			font-size: 1.5rem;
 		}
 
-	.description {
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
-		font-size: 0.9rem;
-	}
+		.description {
+			-webkit-line-clamp: 2;
+			line-clamp: 2;
+			font-size: 0.9rem;
+		}
 	}
 
 	@media (max-width: 480px) {

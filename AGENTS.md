@@ -66,39 +66,29 @@ This is a SvelteKit app (Svelte 5) built with Vite.
 - Page-level layout glue lives in `src/routes/+layout.svelte` and route-group layouts like `src/routes/(landing-pages)/+layout.svelte`.
 - Most “page body” components are in `src/lib/subpages/` and then composed by the route components.
 
-### Two content sources: local markdown vs Notion
+### Content sources: local markdown and JSON (build-time)
 
-The site pulls content from two different systems depending on the area:
-
-1. Local, repo-fetched markdown content (build-time)
+All content is sourced from the private `teenylilcontent` repo (cloned to `content/` at build time):
 
 - The `content/` directory is expected to exist at build time.
 - Loaders live in `src/lib/content/`:
   - `src/lib/content/blog.ts` reads `content/blog/posts.json` and `content/blog/<slug>.md`.
   - `src/lib/content/poems.ts` reads `content/poems/sections.json` and `content/poems/*.md`.
   - `src/lib/content/postcards.ts` reads `content/postcards/metadata.json` and `content/postcards/<slug>.md`.
-- These loaders parse simple YAML-like frontmatter and return typed objects.
-- Several loaders also provide `transform*ToNotionFormat(...)` helpers: route code and/or components were originally written against Notion’s response shapes, and these helpers keep the UI compatible while sourcing from markdown.
+  - `src/lib/content/studio.ts` reads `content/studio/cards.json` and `content/studio/illustrations.json`.
+  - `src/lib/content/career.ts` reads `content/career/publications.json`.
+- These loaders parse frontmatter/JSON and return typed objects.
+- All content-heavy pages are **prerendered** at build time.
 
-2. Notion-backed data sources (runtime + ISR)
+### Notion types (historical)
 
-- Notion wrapper code is under `src/lib/notion/` (see `src/lib/notion/API_DOCUMENTATION.md`).
-- The core client and error handling are in `src/lib/notion/api/client.ts`.
-- Runtime pages query Notion in their `+page.server.ts` and usually include an ISR config:
-  - Example: `src/routes/(landing-pages)/studio/+page.server.ts` (cards)
-  - Example: `src/routes/(landing-pages)/studio/illustrations/+page.server.ts` (illustrations)
-  - Example: `src/routes/(landing-pages)/career/vercel/+page.server.ts` (publications)
+The `src/lib/notion/` directory contains:
 
-Practical implication when editing:
+- `types/` - Type definitions like `RichTextItemResponse` still used for rich text rendering
+- `components/text-macro.svelte` - Renders Notion-style rich text arrays (used by poems, studio cards, illustrations)
+- `utils/blog-helpers.ts` - Helper functions for blog post rendering
 
-- If you’re changing “studio cards / illustrations / professional publications”, you’re likely touching Notion queries + the corresponding page components.
-- If you’re changing “blog / poems / postcards content”, you’re likely touching the `content/` repo shape and the loaders in `src/lib/content/`.
-
-### Revalidation / ISR
-
-- `src/routes/api/revalidate/+server.ts` triggers background revalidation for a small allowlist of routes.
-  - It sends a `HEAD` request to the target route with `x-prerender-revalidate` set to `BYPASS_TOKEN`.
-- Client helpers for triggering this after page load live in `src/lib/utils/revalidation.ts`.
+The Notion API client and database operations have been removed after migrating all content to local files.
 
 ### mdsvex / markdown rendering
 
@@ -112,21 +102,10 @@ Practical implication when editing:
 
 ## Environment variables
 
-See `.env.example` for local setup (and note that the codebase currently references more vars than the example file lists).
+See `.env.example` for local setup.
 
 Commonly referenced variables:
 
-- `NOTION_KEY` (required for any Notion calls)
-- Notion data source IDs used by server routes:
-  - `STUDIO_DB`
-  - `ILLUSTRATIONS_DB`
-  - `PROFESSIONAL_DB`
-  - `SUBSCRIBERS_DB` (used by `src/lib/notion/api/pages.ts`)
-- ISR bypass:
-  - `BYPASS_TOKEN` (used by ISR config and `/api/revalidate`)
+- `GITHUB_TOKEN` (used by `scripts/fetch-content.sh` to clone the private content repo at build time)
 
-Build-time content fetching:
-
-- `GITHUB_TOKEN` (used by `scripts/fetch-content.sh` when `content/` is not already present)
-
-If you’re working in the `content/` subtree (fetched/embedded content), also see `content/WARP.md` for its domain-specific conventions.
+If you're working in the `content/` subtree (fetched/embedded content), also see `content/WARP.md` for its domain-specific conventions.

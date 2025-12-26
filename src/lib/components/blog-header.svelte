@@ -7,7 +7,13 @@
 		readTime?: string;
 	}
 
-	const { title, subtitle = '', category = '', publishedDate = '', readTime = '' }: Props = $props();
+	const {
+		title,
+		subtitle = '',
+		category = '',
+		publishedDate = '',
+		readTime = ''
+	}: Props = $props();
 </script>
 
 <div class="blog-header">

@@ -11,7 +11,7 @@ Content for blog posts, poems, and postcards is stored in a private GitHub repos
 3. **Reliability**: No dependency on external API availability
 4. **Version Control**: Full git history for content changes
 
-> **Note**: Studio, Career, and Illustrations pages still use the Notion API at runtime for dynamic content.
+> **Note**: All content is now sourced from local files. The Notion API is no longer used.
 
 ## Architecture
 
@@ -62,18 +62,18 @@ Edit markdown files in `teenylilcontent/blog/`:
 
 ```yaml
 ---
-title: "Post Title"
-slug: "post-slug"
-subtitle: "A subtitle"
-summary: "Brief summary for lists"
-ogDescription: "Description for social sharing"
-category: "Life"
-publicationDate: "2024-01-15"
-formattedPublicationDate: "January 15, 2024"
-readTime: "5 minutes"
-coverImage: "https://example.com/image.jpg"
-coverImageCaption: "Photo credit"
-notionId: "original-notion-uuid"
+title: 'Post Title'
+slug: 'post-slug'
+subtitle: 'A subtitle'
+summary: 'Brief summary for lists'
+ogDescription: 'Description for social sharing'
+category: 'Life'
+publicationDate: '2024-01-15'
+formattedPublicationDate: 'January 15, 2024'
+readTime: '5 minutes'
+coverImage: 'https://example.com/image.jpg'
+coverImageCaption: 'Photo credit'
+notionId: 'original-notion-uuid'
 ---
 ```
 
@@ -85,11 +85,11 @@ Edit markdown files in `teenylilcontent/poems/`:
 
 ```yaml
 ---
-title: "Poem Title"
-section: "section-name"
+title: 'Poem Title'
+section: 'section-name'
 sequence: 1
 notLineated: false
-notionId: "original-notion-uuid"
+notionId: 'original-notion-uuid'
 ---
 ```
 
@@ -97,15 +97,15 @@ Update `sections.json` for section metadata:
 
 ```json
 [
-  {
-    "id": "section-uuid",
-    "name": "section name",
-    "quote": "An epigraph quote...",
-    "quoteAuthor": "Author Name",
-    "act": "act i",
-    "coverImage": "https://imagekit.io/...",
-    "sequence": 1
-  }
+	{
+		"id": "section-uuid",
+		"name": "section name",
+		"quote": "An epigraph quote...",
+		"quoteAuthor": "Author Name",
+		"act": "act i",
+		"coverImage": "https://imagekit.io/...",
+		"sequence": 1
+	}
 ]
 ```
 
@@ -117,12 +117,12 @@ Edit markdown files in `teenylilcontent/postcards/`:
 
 ```yaml
 ---
-title: "Postcard Title"
-slug: "postcard-slug"
-description: "Brief description"
-heroImage: "https://example.com/image.jpg"
-lastEditedTime: "2024-01-15T12:00:00.000Z"
-notionId: "original-notion-uuid"
+title: 'Postcard Title'
+slug: 'postcard-slug'
+description: 'Brief description'
+heroImage: 'https://example.com/image.jpg'
+lastEditedTime: '2024-01-15T12:00:00.000Z'
+notionId: 'original-notion-uuid'
 ---
 ```
 
@@ -177,6 +177,7 @@ pnpm setup:content --force
 ```
 
 The script will:
+
 - Clone the `teenylilcontent` repo into `content/`
 - Use SSH if available, otherwise fall back to HTTPS
 - Keep the `.git` directory so you can push changes back
@@ -224,6 +225,7 @@ git clone https://github.com/3mdistal/teenylilcontent.git content
 ### Prerendering fails
 
 Check for:
+
 - Missing content files
 - Malformed frontmatter (check YAML syntax)
 - Missing required frontmatter fields
@@ -241,6 +243,7 @@ The content is loaded by these modules:
 The content was originally migrated from Notion using migration scripts. These scripts have been archived to `archived/` and are no longer needed since content is now managed directly in the `teenylilcontent` repository.
 
 Archived migration scripts:
+
 - `archived/migrate-blog.ts`
 - `archived/migrate-poems.ts`
 - `archived/migrate-postcards.ts`

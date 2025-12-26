@@ -680,8 +680,8 @@
 	}
 
 	.poem-content {
-		width: fit-content;
 		margin-top: -3rem;
+		width: fit-content;
 	}
 
 	.poem-stanza {

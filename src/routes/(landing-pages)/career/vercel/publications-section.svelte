@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProfessionalPublications } from './+page.server';
+	import type { Publication } from '$lib/content/career';
 
 	type PublicationTypes =
 		| 'Landing Page'
@@ -9,7 +9,7 @@
 		| 'Enterprise Resource'
 		| 'Product Feature';
 
-	export let publications: Array<ProfessionalPublications>;
+	export let publications: Publication[];
 	export let title: string;
 	export let subtitle: string;
 	export let type: PublicationTypes;
@@ -21,16 +21,15 @@
 	<p class="subtitle">{subtitle}</p>
 	<ul>
 		{#each publications as publication}
-			{#if publication.properties.Type.select.name === type}
-				{@const descriptionItem = publication.properties.Description.rich_text[0]}
+			{#if publication.type === type}
 				<li>
-					<a href={publication.properties.Link.url} target="_blank" rel="noopener noreferrer">
+					<a href={publication.link} target="_blank" rel="noopener noreferrer">
 						<h3 class="item-title">
-							{publication.properties.Name.title[0].plain_text}
+							{publication.name}
 						</h3>
 					</a>
-					{#if descriptionItem?.type === 'text'}
-						<p class="description">{descriptionItem.text.content}</p>
+					{#if publication.description}
+						<p class="description">{publication.description}</p>
 					{/if}
 				</li>
 			{/if}
