@@ -93,7 +93,9 @@ function parseFrontmatter(content: string): { frontmatter: BlogFrontmatter; body
 export async function loadPostsMeta(): Promise<BlogPostMeta[]> {
 	const postsPath = path.join(CONTENT_PATH, 'posts.json');
 	const content = await fs.readFile(postsPath, 'utf-8');
-	return JSON.parse(content);
+	const parsed = JSON.parse(content);
+	// Support both array format and { data: [...] } format (with optional $schema)
+	return Array.isArray(parsed) ? parsed : parsed.data;
 }
 
 /**
