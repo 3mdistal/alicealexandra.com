@@ -1,3 +1,35 @@
+## 26 Dec 2025
+
+**Refactors**
+
+- Created shared prose styling system (`prose-variables.css`, `prose.css`) consolidating duplicate blog/postcard styles. (#53)
+- Blog posts now support dark mode through shared prose variables.
+- Postcards temporarily override dark mode colors (awaiting future dark mode design).
+- Removed unused Notion transformation functions from blog loader.
+
+## 24 Dec 2025
+
+**Features**
+
+- Added `pnpm setup:content` script for local development content management. (#49)
+
+**Enhancements**
+
+- Implemented highlight.js with GitHub light/dark themes for TypeScript syntax highlighting in blog posts. (#51)
+- Enabled strict TypeScript configuration with proper type narrowing and Svelte 5 runes. (#50)
+- Added blog slug redirect: `/blog/thinking-in-quantum` → `/blog/the-shady-side-of-the-hill`. (#52)
+
+**Refactors**
+
+- Upgraded vitest from v3.2.4 to v4.0.16. (#48)
+- Removed unused files: orphaned builder-test page, unused CMS content, notion-list-items component, and 3800+ lines of unused Notion API functions. (#45)
+- Resolved Svelte 5 CSS deprecation warnings (line-clamp) and event handler warnings. (#46)
+
+**Patches**
+
+- Fixed Vercel build warnings for tsconfig and Node version (added `svelte-kit sync`, `.nvmrc`). (#52)
+- Removed content submodule in favor of gitignored content directory with setup script.
+
 ## 23 Dec 2025 (3)
 
 **Enhancements**
