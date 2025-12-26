@@ -1,5 +1,6 @@
 <script lang="ts">
 	import BlogHeader from '$lib/components/blog-header.svelte';
+	import type { BlogPost } from '$lib/content/blog';
 	import { onMount, tick } from 'svelte';
 	import { Marked } from 'marked';
 	import { markedHighlight } from 'marked-highlight';
@@ -13,14 +14,6 @@
 	hljs.registerLanguage('javascript', javascript);
 	hljs.registerLanguage('plaintext', plaintext);
 	import { subAndSuper, createTOC } from '$lib/notion/utils/blog-helpers';
-	import type {
-		PageObjectResponse,
-		UrlPropertyItemObjectResponse,
-		SelectPropertyItemObjectResponse,
-		FormulaPropertyItemObjectResponse,
-		FilesPropertyItemObjectResponse,
-		QueryDataSourceResponse
-	} from '$lib/notion/types/notion-types';
 
 	let context: HTMLElement;
 
@@ -32,21 +25,9 @@
 		}
 	};
 
-	export let data: {
-		post: {
-			queryResponse: QueryDataSourceResponse | null;
-			contentResponse: { results: any[]; markdownContent?: string } | null;
-		};
-	};
+	export let data: { post: BlogPost };
 
-	const { queryResponse, contentResponse } = data.post || {};
-
-	const blogPost = queryResponse?.results?.[0] as PageObjectResponse | undefined;
-
-	const pageCover = blogPost?.cover;
-
-	// Get markdown content
-	const markdownContent = contentResponse?.markdownContent || '';
+	const { post } = data;
 
 	// Configure marked with syntax highlighting
 	const marked = new Marked(
@@ -61,102 +42,10 @@
 	);
 
 	// Convert markdown to HTML
-	const htmlContent = marked.parse(markdownContent);
+	const htmlContent = marked.parse(post.content);
 
-	// Type guards for Notion properties
-	function isUrlProperty(prop: any): prop is UrlPropertyItemObjectResponse {
-		return prop?.type === 'url';
-	}
-
-	function isSelectProperty(prop: any): prop is SelectPropertyItemObjectResponse {
-		return prop?.type === 'select';
-	}
-
-	function isFormulaProperty(prop: any): prop is FormulaPropertyItemObjectResponse {
-		return prop?.type === 'formula';
-	}
-
-	function isFilesProperty(prop: any): prop is FilesPropertyItemObjectResponse {
-		return prop?.type === 'files';
-	}
-
-	const {
-		Name: title,
-		OGDescription: ogDescription,
-		ReadTime: readingTime,
-		Category: category,
-		'Publication Date': publicationDate,
-		Slug: slug
-	} = blogPost?.properties || {};
-
-	// Extract data for the header
-	const categoryName = getCategory(category);
-	const publishedDate = formatDate(publicationDate);
-	const readTime = formatReadingTime(readingTime);
-
-	// Helper function to safely get text content
-	function getTextContent(prop: any) {
-		if (prop?.type === 'title') {
-			return prop.title?.[0]?.plain_text || '';
-		}
-		return prop?.rich_text?.[0]?.plain_text || '';
-	}
-
-	// Helper function to format reading time
-	function formatReadingTime(prop: any) {
-		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
-			const time = prop.formula.string;
-			return time === '1 minutes' ? '1 minute' : time;
-		}
-		return '5 min read';
-	}
-
-	// Helper function to format date
-	function formatDate(prop: any) {
-		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
-			return prop.formula.string;
-		}
-		return '';
-	}
-
-	// Helper function to get category
-	function getCategory(prop: any) {
-		if (isSelectProperty(prop)) {
-			return prop.select?.name || 'Article';
-		}
-		return 'Article';
-	}
-
-	// Helper function to get URL from URL property
-	function getUrl(prop: any) {
-		// Handle page cover object
-		if (prop && (prop.type === 'external' || prop.type === 'file')) {
-			if (prop.type === 'external' && prop.external?.url) {
-				return prop.external.url;
-			}
-			if (prop.type === 'file' && prop.file?.url) {
-				return prop.file.url;
-			}
-		}
-
-		// Handle regular properties if not a page cover
-		if (isUrlProperty(prop)) {
-			return prop.url;
-		}
-		if (isFilesProperty(prop)) {
-			const first = prop.files?.[0];
-			if (first?.type === 'file') {
-				return first.file.url;
-			}
-			if (first?.type === 'external') {
-				return first.external.url;
-			}
-		}
-		if (isFormulaProperty(prop) && prop.formula.type === 'string') {
-			return prop.formula.string;
-		}
-		return '';
-	}
+	// Format reading time (handle "1 minutes" -> "1 minute")
+	const formattedReadTime = post.readTime === '1 minutes' ? '1 minute' : post.readTime;
 
 	onMount(() => {
 		runBlogHelpers();
@@ -164,16 +53,16 @@
 </script>
 
 <svelte:head>
-	<title>{getTextContent(title) || 'Blog'}</title>
-	<meta name="og:title" content={getTextContent(title) || 'Blog'} />
-	<meta name="description" content={getTextContent(ogDescription)} />
+	<title>{post.title || 'Blog'}</title>
+	<meta name="og:title" content={post.title || 'Blog'} />
+	<meta name="description" content={post.ogDescription} />
 
 	<!-- Facebook Meta Tags -->
-	<meta property="og:url" content="https://www.alicealexandra.com/blog/{getUrl(slug)}" />
+	<meta property="og:url" content="https://www.alicealexandra.com/blog/{post.slug}" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Blog - {getTextContent(title) || 'Blog'}" />
-	<meta property="og:description" content={getTextContent(ogDescription)} />
-	<meta property="og:image" content={getUrl(pageCover) || 'https://unsplash.it/1200/600'} />
+	<meta property="og:title" content="Blog - {post.title || 'Blog'}" />
+	<meta property="og:description" content={post.ogDescription} />
+	<meta property="og:image" content={post.coverImage || 'https://unsplash.it/1200/600'} />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -181,12 +70,12 @@
 	<meta name="twitter:creator" content="@tempoimmaterial" />
 	<meta name="twitter:domain" content="alicealexandra.com" />
 	<meta name="twitter:url" content="https://www.alicealexandra.com/blog" />
-	<meta name="twitter:title" content="Blog - {getTextContent(title) || 'Blog'}" />
-	<meta name="twitter:description" content={getTextContent(ogDescription)} />
-	<meta name="twitter:image" content={getUrl(pageCover) || 'https://unsplash.it/1200/600'} />
+	<meta name="twitter:title" content="Blog - {post.title || 'Blog'}" />
+	<meta name="twitter:description" content={post.ogDescription} />
+	<meta name="twitter:image" content={post.coverImage || 'https://unsplash.it/1200/600'} />
 	<meta
 		name="twitter:image:alt"
-		content="Open graph representation of this blog article, {getTextContent(title) || 'Blog'}."
+		content="Open graph representation of this blog article, {post.title || 'Blog'}."
 	/>
 
 	<!-- Highlight.js themes - auto-switch based on color scheme -->
@@ -203,14 +92,13 @@
 </svelte:head>
 
 <div class="page-wrapper">
-	{#if blogPost}
-		<BlogHeader
-			{blogPost}
-			category={categoryName ?? 'Article'}
-			publishedDate={publishedDate ?? ''}
-			readTime={readTime ?? ''}
-		/>
-	{/if}
+	<BlogHeader
+		title={post.title}
+		subtitle={post.subtitle}
+		category={post.category || 'Article'}
+		publishedDate={post.formattedPublicationDate}
+		readTime={formattedReadTime}
+	/>
 
 	<div class="blog-container">
 		{#if htmlContent}
