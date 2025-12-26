@@ -53,16 +53,16 @@
 </div>
 
 <style>
-	/* Override blog colors for white text hierarchy on listing page only */
+	/* Override prose colors for white text hierarchy on listing page only */
 	:global(.blog-wrapper) {
-		--blog-text: #ffffff;
-		--blog-heading: #ffffff;
-		--blog-accent: #e5e7eb;
-		--blog-secondary: #d1d5db;
-		--blog-link: #ffffff;
-		--blog-link-hover: #e5e7eb;
-		--blog-heading-dark: #ffffff;
-		--blog-secondary-dark: #d1d5db;
+		--prose-text: #ffffff;
+		--prose-heading: #ffffff;
+		--prose-accent: #e5e7eb;
+		--prose-secondary: #d1d5db;
+		--prose-link: #ffffff;
+		--prose-link-hover: #e5e7eb;
+		--prose-heading-dark: #ffffff;
+		--prose-secondary-dark: #d1d5db;
 	}
 
 	.blog-page {
