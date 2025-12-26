@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Blog from '$lib/subpages/blog.svelte';
-	import type { QueryDataSourceResponse } from '$lib/notion/types/notion-types';
+	import type { BlogPostMeta } from '$lib/content/blog';
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
 	import { pageState } from '$lib/stores';
 	import Bird from '../../../cms/images/blog/bird.webp?enhanced';
 
-	export let data: { post: QueryDataSourceResponse };
+	export let data: { posts: BlogPostMeta[] };
 
 	const accent = '#d1dce7';
 
@@ -38,7 +38,7 @@
 <div class="opacity-0 blog-page">
 	<div class="blog-content">
 		<div class="blog-wrapper">
-			<Blog {accent} {data} />
+			<Blog {accent} posts={data.posts} />
 		</div>
 	</div>
 	<div class="background-container">
