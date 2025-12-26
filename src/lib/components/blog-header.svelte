@@ -1,31 +1,13 @@
 <script lang="ts">
-	import type { PageObjectResponse } from '$lib/notion/types/notion-types';
-
 	interface Props {
-		blogPost: PageObjectResponse;
+		title: string;
+		subtitle?: string;
 		category?: string;
 		publishedDate?: string;
 		readTime?: string;
 	}
 
-	const { blogPost, category = '', publishedDate = '', readTime = '' }: Props = $props();
-
-	// Helper function to safely get text content from Notion properties
-	function getTextContent(prop: unknown) {
-		if (prop && typeof prop === 'object' && 'type' in prop) {
-			if (prop.type === 'title' && 'title' in prop && Array.isArray(prop.title)) {
-				return (prop.title[0] as { plain_text?: string } | undefined)?.plain_text || '';
-			}
-			if ('rich_text' in prop && Array.isArray(prop.rich_text)) {
-				return (prop.rich_text[0] as { plain_text?: string } | undefined)?.plain_text || '';
-			}
-		}
-		return '';
-	}
-
-	// Get the blog post data reactively
-	const title = $derived(getTextContent(blogPost?.properties?.['Name']));
-	const subtitle = $derived(getTextContent(blogPost?.properties?.['Subtitle']));
+	const { title, subtitle = '', category = '', publishedDate = '', readTime = '' }: Props = $props();
 </script>
 
 <div class="blog-header">
