@@ -1,6 +1,6 @@
 # AGENTS.md
 
-IMPORTANT: This project uses bd (beads) for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods. Full Beads/bd rules are in `Beads.md`.
+IMPORTANT: This project uses bd (beads) for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods. Full Beads/bd rules are in `.beads/README.md`.
 
 This file provides guidance to WARP (warp.dev) when working with code in this repository.
 
