@@ -21,6 +21,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .env*.local
 
-# Content (now tracked as a git submodule)
-# NOTE: keep this un-ignored so the submodule gitlink can be committed.
-content/
+# Content (cloned from private repo during build)
+# NOTE: This only ignores the top-level content/ directory, not src/lib/content/
+/content/
