@@ -1,3 +1,9 @@
+## 26 Dec 2025 (3)
+
+**Refactors**
+
+- Removed unused Playwright integration testing infrastructure. (#56)
+
 ## 26 Dec 2025 (2)
 
 **Features**
