@@ -1,12 +1,6 @@
-/**
- * Utilities for loading blog content from local markdown files
- */
-
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-// Use process.cwd() which works during SvelteKit build
-// This points to project root during both local dev and Vercel build
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'blog');
 
 export interface BlogPostMeta {
@@ -44,9 +38,6 @@ interface BlogFrontmatter {
 	notionId: string;
 }
 
-/**
- * Parse frontmatter from markdown content
- */
 function parseFrontmatter(content: string): { frontmatter: BlogFrontmatter; body: string } {
 	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
 	const match = content.match(frontmatterRegex);
@@ -58,7 +49,6 @@ function parseFrontmatter(content: string): { frontmatter: BlogFrontmatter; body
 	const frontmatterStr: string = match[1];
 	const body = content.slice(match[0].length);
 
-	// Parse YAML-like frontmatter (simple key: value pairs)
 	const frontmatter: Record<string, any> = {};
 	for (const line of frontmatterStr.split('\n')) {
 		const colonIndex = line.indexOf(':');
@@ -66,15 +56,12 @@ function parseFrontmatter(content: string): { frontmatter: BlogFrontmatter; body
 			const key = line.slice(0, colonIndex).trim();
 			let value: any = line.slice(colonIndex + 1).trim();
 
-			// Remove wrapping quotes from strings
 			if (
 				(value.startsWith('"') && value.endsWith('"')) ||
 				(value.startsWith("'") && value.endsWith("'"))
 			) {
 				value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
-			}
-			// Parse booleans
-			else if (value === 'true') value = true;
+			} else if (value === 'true') value = true;
 			else if (value === 'false') value = false;
 
 			frontmatter[key] = value;
@@ -87,20 +74,13 @@ function parseFrontmatter(content: string): { frontmatter: BlogFrontmatter; body
 	};
 }
 
-/**
- * Load all posts metadata from posts.json (for listing page)
- */
 export async function loadPostsMeta(): Promise<BlogPostMeta[]> {
 	const postsPath = path.join(CONTENT_PATH, 'posts.json');
 	const content = await fs.readFile(postsPath, 'utf-8');
 	const parsed = JSON.parse(content);
-	// Support both array format and { data: [...] } format (with optional $schema)
 	return Array.isArray(parsed) ? parsed : parsed.data;
 }
 
-/**
- * Load a single blog post by slug (for detail page)
- */
 export async function loadPostBySlug(slug: string): Promise<BlogPost | null> {
 	try {
 		const filePath = path.join(CONTENT_PATH, `${slug}.md`);
@@ -128,9 +108,6 @@ export async function loadPostBySlug(slug: string): Promise<BlogPost | null> {
 	}
 }
 
-/**
- * Load all blog posts with their content
- */
 export async function loadAllPosts(): Promise<BlogPost[]> {
 	const files = await fs.readdir(CONTENT_PATH);
 	const mdFiles = files.filter((f) => f.endsWith('.md'));
@@ -160,16 +137,11 @@ export async function loadAllPosts(): Promise<BlogPost[]> {
 		});
 	}
 
-	// Sort by publication date (newest first)
 	return posts.sort(
 		(a, b) => new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime()
 	);
 }
 
-/**
- * Transform posts metadata to match the Notion API response format
- * (for compatibility with existing page component)
- */
 export function transformPostsToNotionFormat(posts: BlogPostMeta[]) {
 	return {
 		results: posts.map((post) => ({
@@ -222,10 +194,6 @@ export function transformPostsToNotionFormat(posts: BlogPostMeta[]) {
 	};
 }
 
-/**
- * Transform a single blog post to match the Notion API response format
- * (for compatibility with existing detail page component)
- */
 export function transformPostToNotionFormat(post: BlogPost) {
 	return {
 		queryResponse: {
@@ -299,8 +267,6 @@ export function transformPostToNotionFormat(post: BlogPost) {
 				}
 			]
 		},
-		// The content is now markdown, not Notion blocks
-		// The component will need to be updated to render markdown
 		contentResponse: {
 			results: [],
 			markdownContent: post.content
