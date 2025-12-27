@@ -1,3 +1,8 @@
+## 27 Dec 2025
+
+**Docs**
+
+- Updated `README.md` to reflect current architecture, content sources, and build/deploy workflow. (alicealexandra.com-1h0)
 ## 26 Dec 2025 (3)
 
 **Refactors**

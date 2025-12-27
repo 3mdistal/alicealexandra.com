@@ -1,16 +1,47 @@
-# Welcome to Tempo Immaterial, the studio of Alice Alexandra Moore
+# Tempo Immaterial — studio of Alice Alexandra Moore
 
-Although my actual studio is far better viewed on the live version of the site, this repo is for anyone curious about my design implementations.
+This SvelteKit (Svelte 5) site is the public home for my studio work. The repo is here for folks curious about how the design and content systems are implemented.
 
-While I'm not looking for contributions to the codebase, **please feel free to leave issues if you notice any bugs or have an idea of how something can be refactored.** I work in public in order to learn (and teach where I can).
+While I’m not seeking code contributions, feel free to open issues for bugs or refactor ideas—I work in public to learn and share.
 
-I also hope to clean up and make usable some of the most unique components of this project. These include:
+## Stack at a glance
+- SvelteKit + Vite, pnpm-managed.
+- mdsvex enabled for Markdown routes/components.
+- Content lives in `content/` (cloned from a private repo during build or pre-populated locally).
+- Site is mostly prerendered; dynamic bits are limited to interactive “arcade” pages and small UI flourishes.
 
-- Homepage / landing page design with sections determined by SVG clip paths.
-- Animations and transitions, many of which are dynamically calculated by container.
-- Notion CMS logic.
-- General content design.
+## Local development
+```bash
+pnpm install
+pnpm dev       # Vite dev server
+pnpm build
+pnpm preview
+```
 
-In the meantime, enjoy the mess that's here. Lots of components are in-between implementations (half one thing, half another). I hope to refactor everything to be more consistent one day, but right now, well, at least it works.
+## Quality checks
+```bash
+pnpm lint      # Prettier check + ESLint
+pnpm format    # Prettier write
+pnpm check     # SvelteKit/TypeScript type checks
+pnpm test      # Vitest
+```
 
-_Last updated 20 Jan 2025._
+## Content architecture
+- Blog: `content/blog/posts.json` + `content/blog/<slug>.md`
+- Poems: `content/poems/sections.json` + `content/poems/*.md`
+- Postcards: `content/postcards/metadata.json` + `content/postcards/<slug>.md`
+- Studio cards & illustrations: `content/studio/cards.json`, `content/studio/illustrations.json`
+- Career/publications: `content/career/publications.json`
+Loaders in `src/lib/content/` parse these sources at build time.
+
+## App structure highlights
+- Routes: `src/routes/`, with main pages grouped under `src/routes/(landing-pages)/`.
+- Shared layout glue: `src/routes/+layout.svelte` and group layouts.
+- Page bodies: `src/lib/subpages/`.
+- Arcade mini-apps: `src/routes/(landing-pages)/studio/arcade/...` with logic in `src/lib/arcade/`.
+- Notion API code has been removed; only historical types/render helpers remain in `src/lib/notion/`.
+
+## Build & deploy
+- `pnpm vercel-build` runs content fetch (if `GITHUB_TOKEN` is set) then `vite build`. Vercel uses this script.
+
+_Last updated 27 Dec 2025._
