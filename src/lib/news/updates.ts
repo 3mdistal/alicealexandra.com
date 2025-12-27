@@ -17,6 +17,15 @@ export interface NewsEntry {
 export const STUDIO_NEWS: NewsEntry[] = (
 	[
 		{
+			id: 'studio-postcards-2025-12-26-the-goat-hunters',
+			date: '2025-12-26',
+			area: 'studio',
+			category: 'postcards',
+			action: 'edited',
+			title: 'The Goat Hunters',
+			href: '/studio/postcards/the-goat-hunters'
+		},
+		{
 			id: 'studio-postcards-2025-12-01-procedure-for-the-extraction-of-a-pulmonary-haunting',
 			date: '2025-12-01',
 			area: 'studio',
