@@ -193,6 +193,7 @@
 	border-radius: 0.5rem;
 	background-color: var(--prose-callout);
 	padding: var(--prose-spacing-lg) var(--prose-spacing-sm) var(--prose-spacing-md);
+	color: var(--prose-text);
 }
 
 @media (min-width: 768px) {
