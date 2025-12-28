@@ -529,7 +529,7 @@
 
 		.modal-hero-overlay {
 			padding: 1.5rem;
-			padding-bottom: 3rem;
+			padding-bottom: 5rem;
 		}
 
 		.modal-hero-content h1 {
@@ -558,7 +558,7 @@
 
 		.modal-hero-overlay {
 			padding: 1rem;
-			padding-bottom: 2.5rem;
+			padding-bottom: 4rem;
 		}
 
 		.modal-hero-content h1 {
