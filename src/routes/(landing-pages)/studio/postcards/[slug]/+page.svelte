@@ -138,6 +138,10 @@
 		.hero-content .description {
 			font-size: 1.2rem;
 		}
+
+		main {
+			margin-top: -8rem;
+		}
 	}
 
 	@media (max-width: 480px) {
@@ -152,6 +156,10 @@
 
 		.hero-content .description {
 			font-size: 1rem;
+		}
+
+		main {
+			margin-top: -6rem;
 		}
 	}
 
