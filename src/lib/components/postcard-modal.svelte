@@ -320,15 +320,18 @@
 
 			{#if postcard}
 				{#if postcard.heroImage}
-					<div class="modal-hero" style="background-image: url('{postcard.heroImage}')"></div>
+					<div class="modal-hero-container">
+						<div class="modal-hero" style="background-image: url('{postcard.heroImage}')"></div>
+						<div class="modal-hero-overlay">
+							<div class="modal-hero-content">
+								<h1 id="modal-title">{postcard.title}</h1>
+								{#if postcard.description}
+									<p class="description">{postcard.description}</p>
+								{/if}
+							</div>
+						</div>
+					</div>
 				{/if}
-
-				<header class="modal-header">
-					<h1 id="modal-title">{postcard.title}</h1>
-					{#if postcard.description}
-						<p class="description">{postcard.description}</p>
-					{/if}
-				</header>
 
 				<article class="modal-content-area">
 					{#if htmlContent}
@@ -374,12 +377,69 @@
 		overflow: hidden;
 	}
 
+	.modal-hero-container {
+		position: relative;
+		width: 100%;
+	}
+
 	.modal-hero {
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
 		aspect-ratio: 3 / 2;
 		width: 100%;
+	}
+
+	.modal-hero-overlay {
+		display: flex;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		align-items: flex-end;
+		justify-content: center;
+		background: linear-gradient(
+			180deg,
+			rgba(232, 232, 232, 0) 0%,
+			rgba(232, 232, 232, 0.2) 40%,
+			rgba(232, 232, 232, 0.6) 70%,
+			#e8e8e8 100%
+		);
+		padding: 2rem;
+		padding-bottom: 10rem;
+	}
+
+	.modal-hero-content {
+		max-width: 800px;
+		text-align: center;
+	}
+
+	.modal-hero-content h1 {
+		margin: 0 0 0.5rem 0;
+		color: #1a1a1a;
+		font-weight: 500;
+		font-size: 3rem;
+		font-family: 'Spectral', serif;
+		line-height: 1.1;
+		letter-spacing: 0.05em;
+		text-shadow:
+			0 0 25px rgba(232, 232, 232, 0.7),
+			0 0 50px rgba(232, 232, 232, 0.4),
+			0 2px 4px rgba(232, 232, 232, 0.25);
+	}
+
+	.modal-hero-content .description {
+		margin: 0;
+		color: #444;
+		font-style: italic;
+		font-size: 1.3rem;
+		font-family: 'Spectral', serif;
+		line-height: 1.4;
+		letter-spacing: 0.05em;
+		text-shadow:
+			0 0 20px rgba(232, 232, 232, 0.7),
+			0 0 40px rgba(232, 232, 232, 0.4);
 	}
 
 	.modal-body {
@@ -421,29 +481,11 @@
 		background: white;
 	}
 
-	.modal-header {
-		flex-shrink: 0;
-		margin: 0 auto;
-		padding: 2rem 2rem 1rem;
-		max-width: 800px;
-	}
-
-	h1 {
-		margin-bottom: 1rem;
-		color: #333;
-		font-size: 2.5rem;
-	}
-
-	.description {
-		margin-bottom: 2rem;
-		color: #666;
-		font-style: italic;
-		font-size: 1.2rem;
-	}
-
 	.modal-content-area {
-		margin: 0 auto;
-		padding: 0 2rem 3rem;
+		position: relative;
+		z-index: 1;
+		margin: -6rem auto 0;
+		padding: 0 2rem 18rem;
 		max-width: 800px;
 	}
 
@@ -485,20 +527,22 @@
 			--modal-margin: 20px;
 		}
 
-		.modal-header {
-			padding: 1.5rem 1.5rem 1rem;
+		.modal-hero-overlay {
+			padding: 1.5rem;
+			padding-bottom: 7rem;
+		}
+
+		.modal-hero-content h1 {
+			font-size: 2.2rem;
+		}
+
+		.modal-hero-content .description {
+			font-size: 1.1rem;
 		}
 
 		.modal-content-area {
+			margin-top: -4rem;
 			padding: 0 1.5rem 1.5rem;
-		}
-
-		h1 {
-			font-size: 2rem;
-		}
-
-		.description {
-			font-size: 1.1rem;
 		}
 	}
 
@@ -510,6 +554,23 @@
 
 		.modal-content {
 			border-radius: 16px;
+		}
+
+		.modal-hero-overlay {
+			padding: 1rem;
+			padding-bottom: 5rem;
+		}
+
+		.modal-hero-content h1 {
+			font-size: 1.8rem;
+		}
+
+		.modal-hero-content .description {
+			font-size: 1rem;
+		}
+
+		.modal-content-area {
+			margin-top: -3rem;
 		}
 	}
 </style>

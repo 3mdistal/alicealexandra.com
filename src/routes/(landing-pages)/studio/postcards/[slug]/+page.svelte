@@ -19,20 +19,24 @@
 </svelte:head>
 
 {#if postcard && postcard.heroImage}
-	<div
-		class="hero-image"
-		style="background-image: url('{postcard.heroImage}'); view-transition-name: postcard-hero-{postcard.slug}"
-	></div>
+	<div class="hero-container">
+		<div
+			class="hero-image"
+			style="background-image: url('{postcard.heroImage}'); view-transition-name: postcard-hero-{postcard.slug}"
+		></div>
+		<div class="hero-overlay">
+			<div class="hero-content">
+				<h1>{postcard.title}</h1>
+				{#if postcard.description}
+					<p class="description">{postcard.description}</p>
+				{/if}
+			</div>
+		</div>
+	</div>
 {/if}
 
 <main>
 	{#if postcard}
-		<header>
-			<h1>{postcard.title}</h1>
-			{#if postcard.description}
-				<p class="description">{postcard.description}</p>
-			{/if}
-		</header>
 
 		<article class="postcard-content">
 			{#if htmlContent}
@@ -57,44 +61,123 @@
 </main>
 
 <style>
-	.hero-image {
+	.hero-container {
 		position: relative;
 		right: 50%;
 		left: 50%;
 		margin-right: -50vw;
 		margin-left: -50vw;
+		width: 100vw;
+	}
+
+	.hero-image {
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
 		aspect-ratio: 3 / 2;
-		width: 100vw;
+		width: 100%;
+		height: 100%;
+	}
+
+	.hero-overlay {
+		display: flex;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		align-items: flex-end;
+		justify-content: center;
+		background: linear-gradient(
+			180deg,
+			rgba(232, 232, 232, 0) 0%,
+			rgba(232, 232, 232, 0.2) 40%,
+			rgba(232, 232, 232, 0.6) 70%,
+			#e8e8e8 100%
+		);
+		padding: 3rem;
+		padding-bottom: 14rem;
+	}
+
+	.hero-content {
+		max-width: 800px;
+		text-align: center;
+	}
+
+	.hero-content h1 {
+		margin: 0 0 0.75rem 0;
+		color: #1a1a1a;
+		font-weight: 500;
+		font-size: 4.4rem;
+		font-family: 'Spectral', serif;
+		line-height: 1.1;
+		letter-spacing: 0.05em;
+		text-shadow:
+			0 0 25px rgba(232, 232, 232, 0.7),
+			0 0 50px rgba(232, 232, 232, 0.4),
+			0 2px 4px rgba(232, 232, 232, 0.25);
+	}
+
+	.hero-content .description {
+		margin: 0;
+		color: #444;
+		font-style: italic;
+		font-size: 1.75rem;
+		font-family: 'Spectral', serif;
+		line-height: 1.4;
+		letter-spacing: 0.05em;
+		text-shadow:
+			0 0 20px rgba(232, 232, 232, 0.7),
+			0 0 40px rgba(232, 232, 232, 0.4);
+	}
+
+	@media (max-width: 768px) {
+		.hero-overlay {
+			padding: 2rem;
+			padding-bottom: 10rem;
+		}
+
+		.hero-content h1 {
+			font-size: 3rem;
+		}
+
+		.hero-content .description {
+			font-size: 1.4rem;
+		}
+
+		main {
+			margin-top: -8rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-overlay {
+			padding: 1.5rem;
+			padding-bottom: 8rem;
+		}
+
+		.hero-content h1 {
+			font-size: 2.2rem;
+		}
+
+		.hero-content .description {
+			font-size: 1.1rem;
+		}
+
+		main {
+			margin-top: -6rem;
+		}
 	}
 
 	main {
-		margin: 0 auto;
-		background-color: #e8e8e8;
+		position: relative;
+		z-index: 1;
+		margin: -10rem auto 0;
+		background-color: transparent;
 		padding: 2rem;
 		max-width: 800px;
 		min-height: 100vh;
 		line-height: 1.6;
-	}
-
-	header {
-		margin-bottom: 3rem;
-		padding-top: 2rem;
-	}
-
-	h1 {
-		margin-bottom: 1rem;
-		color: #333;
-		font-size: 2.5rem;
-	}
-
-	.description {
-		margin-bottom: 2rem;
-		color: #666;
-		font-style: italic;
-		font-size: 1.2rem;
 	}
 
 	.postcard-content {
