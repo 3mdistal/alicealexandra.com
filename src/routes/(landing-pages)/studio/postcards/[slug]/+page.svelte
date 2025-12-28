@@ -108,7 +108,7 @@
 		margin: 0 0 0.75rem 0;
 		color: #1a1a1a;
 		font-weight: 500;
-		font-size: 5.25rem;
+		font-size: 4.4rem;
 		font-family: 'Spectral', serif;
 		line-height: 1.1;
 		letter-spacing: 0.05em;
@@ -122,7 +122,7 @@
 		margin: 0;
 		color: #444;
 		font-style: italic;
-		font-size: 2.1rem;
+		font-size: 1.75rem;
 		font-family: 'Spectral', serif;
 		line-height: 1.4;
 		letter-spacing: 0.05em;
@@ -138,11 +138,11 @@
 		}
 
 		.hero-content h1 {
-			font-size: 3.5rem;
+			font-size: 3rem;
 		}
 
 		.hero-content .description {
-			font-size: 1.5rem;
+			font-size: 1.4rem;
 		}
 
 		main {
@@ -157,7 +157,7 @@
 		}
 
 		.hero-content h1 {
-			font-size: 2.5rem;
+			font-size: 2.2rem;
 		}
 
 		.hero-content .description {
