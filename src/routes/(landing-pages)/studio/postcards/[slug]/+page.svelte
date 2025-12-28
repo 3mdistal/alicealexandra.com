@@ -96,6 +96,7 @@
 			#e8e8e8 100%
 		);
 		padding: 3rem;
+		padding-bottom: 6rem;
 	}
 
 	.hero-content {
