@@ -111,7 +111,7 @@
 		font-size: 3.5rem;
 		font-family: 'Spectral', serif;
 		line-height: 1.1;
-		letter-spacing: -0.01em;
+		letter-spacing: 0.05em;
 		text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
 	}
 
