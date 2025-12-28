@@ -119,6 +119,30 @@
 		line-height: 1.5;
 	}
 
+	@media (max-width: 768px) {
+		.hero-overlay {
+			padding: 1.5rem;
+		}
+
+		.hero-content h1 {
+			font-size: 2rem;
+		}
+
+		.hero-content .description {
+			font-size: 1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-overlay {
+			padding: 1.25rem;
+		}
+
+		.hero-content h1 {
+			font-size: 1.6rem;
+		}
+	}
+
 	main {
 		margin: 0 auto;
 		background-color: #e8e8e8;
