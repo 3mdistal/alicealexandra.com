@@ -106,10 +106,13 @@
 
 	.hero-content h1 {
 		margin: 0 0 0.75rem 0;
-		color: #222;
-		font-weight: 600;
+		color: #1a1a1a;
+		font-weight: 500;
 		font-size: 3.5rem;
+		font-family: 'Spectral', serif;
 		line-height: 1.1;
+		letter-spacing: -0.01em;
+		text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
 	}
 
 	.hero-content .description {
@@ -117,7 +120,9 @@
 		color: #444;
 		font-style: italic;
 		font-size: 1.4rem;
+		font-family: 'Spectral', serif;
 		line-height: 1.4;
+		text-shadow: 0 1px 10px rgba(255, 255, 255, 0.5);
 	}
 
 	@media (max-width: 768px) {
