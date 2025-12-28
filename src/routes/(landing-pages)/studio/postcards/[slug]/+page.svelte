@@ -100,7 +100,7 @@
 	}
 
 	.hero-content {
-		max-width: 600px;
+		max-width: 800px;
 		text-align: center;
 	}
 
