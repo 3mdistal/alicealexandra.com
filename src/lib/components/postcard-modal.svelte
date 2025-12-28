@@ -485,7 +485,7 @@
 		position: relative;
 		z-index: 1;
 		margin: -6rem auto 0;
-		padding: 0 2rem 3rem;
+		padding: 0 2rem 6rem;
 		max-width: 800px;
 	}
 
