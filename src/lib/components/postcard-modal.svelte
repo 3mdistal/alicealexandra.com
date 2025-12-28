@@ -484,7 +484,7 @@
 	.modal-content-area {
 		position: relative;
 		z-index: 1;
-		margin: -3rem auto 0;
+		margin: -6rem auto 0;
 		padding: 0 2rem 3rem;
 		max-width: 800px;
 	}
@@ -541,7 +541,7 @@
 		}
 
 		.modal-content-area {
-			margin-top: -2rem;
+			margin-top: -4rem;
 			padding: 0 1.5rem 1.5rem;
 		}
 	}
@@ -570,7 +570,7 @@
 		}
 
 		.modal-content-area {
-			margin-top: -1.5rem;
+			margin-top: -3rem;
 		}
 	}
 </style>
