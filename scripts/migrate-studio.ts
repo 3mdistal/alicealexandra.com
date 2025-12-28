@@ -41,44 +41,7 @@ const notion = new Client({
 	notionVersion: '2025-09-03'
 });
 
-// Types for rich text (Notion-compatible format for TextMacro)
-interface RichTextItem {
-	type: 'text';
-	text: { content: string; link?: { url: string } | null };
-	annotations: {
-		bold: boolean;
-		italic: boolean;
-		strikethrough: boolean;
-		underline: boolean;
-		code: boolean;
-		color: string;
-	};
-	plain_text: string;
-	href: string | null;
-}
-
-// Utility: Convert Notion rich_text array to our format (preserve for TextMacro compatibility)
-function convertRichText(richText: any[]): RichTextItem[] {
-	return richText.map((item) => ({
-		type: 'text',
-		text: {
-			content: item.text?.content || item.plain_text || '',
-			link: item.text?.link || null
-		},
-		annotations: {
-			bold: item.annotations?.bold || false,
-			italic: item.annotations?.italic || false,
-			strikethrough: item.annotations?.strikethrough || false,
-			underline: item.annotations?.underline || false,
-			code: item.annotations?.code || false,
-			color: item.annotations?.color || 'default'
-		},
-		plain_text: item.plain_text || '',
-		href: item.href || null
-	}));
-}
-
-// Utility: Extract plain text from rich_text array
+// Utility: Extract plain text from Notion rich_text arrays
 function richTextToPlain(richText: any[]): string {
 	return richText.map((item) => item.plain_text || '').join('');
 }
@@ -88,11 +51,11 @@ function richTextToPlain(richText: any[]): string {
 interface StudioCard {
 	id: string;
 	title: string;
-	subtitle: { rich_text: RichTextItem[] };
-	logoText: { rich_text: RichTextItem[] };
+	subtitle: string;
+	logoText: string;
 	imageUrl: string;
 	imageAlt: string;
-	description: { rich_text: RichTextItem[] };
+	description: string;
 	buttonText: string;
 	destinationUrl: string;
 	order: number;
@@ -134,11 +97,11 @@ async function fetchStudioCards(): Promise<StudioCard[]> {
 		return {
 			id: page.id,
 			title: props['Title']?.title?.[0]?.plain_text || 'Untitled',
-			subtitle: { rich_text: convertRichText(props['Subtitle']?.rich_text || []) },
-			logoText: { rich_text: convertRichText(props['Shortened Logo Text']?.rich_text || []) },
+			subtitle: richTextToPlain(props['Subtitle']?.rich_text || []),
+			logoText: richTextToPlain(props['Shortened Logo Text']?.rich_text || []),
 			imageUrl: props['Image']?.url || '',
 			imageAlt: richTextToPlain(props['ImageAlt']?.rich_text || []),
-			description: { rich_text: convertRichText(props['Description']?.rich_text || []) },
+			description: richTextToPlain(props['Description']?.rich_text || []),
 			buttonText: richTextToPlain(props['ButtonText']?.rich_text || []),
 			destinationUrl: props['Destination']?.url || '',
 			order: props['Order']?.number ?? index
@@ -153,7 +116,7 @@ interface Illustration {
 	name: string;
 	imageUrl: string;
 	date: string;
-	description: { rich_text: RichTextItem[] };
+	description: string;
 	order: number;
 }
 
@@ -203,7 +166,7 @@ async function fetchIllustrations(): Promise<Illustration[]> {
 			name: props['Name']?.title?.[0]?.plain_text || 'Untitled',
 			imageUrl: props['Image']?.url || '',
 			date,
-			description: { rich_text: convertRichText(props['Description']?.rich_text || []) },
+			description: richTextToPlain(props['Description']?.rich_text || []),
 			order: props['Order']?.number ?? index
 		};
 	});

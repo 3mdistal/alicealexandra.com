@@ -1,5 +1,4 @@
 <script lang="ts">
-	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import { fade, scale } from 'svelte/transition';
 	import type { Illustration } from '$lib/content/studio';
 
@@ -152,7 +151,7 @@
 				<div class="modal-info">
 					<h2>{selectedName}</h2>
 					<p class="date"><em>{selectedDate}</em></p>
-					<p class="description"><TextMacro type={selectedDescription} /></p>
+					<p class="description">{selectedDescription}</p>
 				</div>
 				<button class="close-button" on:click={closeModal}>×</button>
 			</div>
@@ -365,6 +364,7 @@
 		color: rgba(255, 255, 255, 0.9);
 		line-height: 1.6;
 		text-align: left;
+		white-space: pre-line;
 	}
 
 	.close-button {

@@ -1,24 +1,18 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
 
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'studio');
-
-// Rich text wrapper type (matches Notion format for TextMacro compatibility)
-export interface RichTextWrapper {
-	rich_text: RichTextItemResponse[];
-}
 
 // ==================== STUDIO CARDS ====================
 
 export interface StudioCard {
 	id: string;
 	title: string;
-	subtitle: RichTextWrapper;
-	logoText: RichTextWrapper;
+	subtitle: string;
+	logoText: string;
 	imageUrl: string;
 	imageAlt: string;
-	description: RichTextWrapper;
+	description: string;
 	buttonText: string;
 	destinationUrl: string;
 	order: number;
@@ -48,7 +42,7 @@ export interface Illustration {
 	name: string;
 	imageUrl: string;
 	date: string;
-	description: RichTextWrapper;
+	description: string;
 	order: number;
 }
 

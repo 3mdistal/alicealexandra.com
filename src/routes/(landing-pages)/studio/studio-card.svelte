@@ -3,7 +3,6 @@
 	import gsap from 'gsap';
 	import { accentColors, backgroundColors } from '$lib/stores';
 	import Button from '$lib/icons/button.svelte';
-	import TextMacro from '$lib/notion/components/text-macro.svelte';
 	import type { StudioCard } from '$lib/content/studio';
 
 	// Card Data
@@ -167,11 +166,11 @@
 	<!-- Front of Card -->
 	<div class="card-front" bind:this={front}>
 		<div class="logo-container">
-			<p class="logo-text"><TextMacro type={logo} /></p>
+			<p class="logo-text">{logo}</p>
 		</div>
 		<div class="title-container">
 			<h2>{title}</h2>
-			<p><em><TextMacro type={subtitle} /></em></p>
+			<p><em>{subtitle}</em></p>
 		</div>
 		<img {src} {alt} class="background-image" />
 		<div class="gradient-overlay"></div>
@@ -180,7 +179,7 @@
 	<!-- Back of Card -->
 	<div class="card-back" bind:this={back} aria-labelledby="popover" aria-expanded="true">
 		<p bind:this={backText} class="description">
-			<em><TextMacro type={description} /></em>
+			<em>{description}</em>
 		</p>
 
 		{#if loading}
