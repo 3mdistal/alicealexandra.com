@@ -407,7 +407,7 @@
 			#e8e8e8 100%
 		);
 		padding: 2rem;
-		padding-bottom: 7rem;
+		padding-bottom: 10rem;
 	}
 
 	.modal-hero-content {
@@ -529,7 +529,7 @@
 
 		.modal-hero-overlay {
 			padding: 1.5rem;
-			padding-bottom: 5rem;
+			padding-bottom: 7rem;
 		}
 
 		.modal-hero-content h1 {
@@ -558,7 +558,7 @@
 
 		.modal-hero-overlay {
 			padding: 1rem;
-			padding-bottom: 4rem;
+			padding-bottom: 5rem;
 		}
 
 		.modal-hero-content h1 {
