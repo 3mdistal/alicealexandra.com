@@ -122,6 +122,7 @@
 	@media (max-width: 768px) {
 		.hero-overlay {
 			padding: 2rem;
+			padding-bottom: 4rem;
 		}
 
 		.hero-content h1 {
@@ -136,6 +137,7 @@
 	@media (max-width: 480px) {
 		.hero-overlay {
 			padding: 1.5rem;
+			padding-bottom: 3rem;
 		}
 
 		.hero-content h1 {
