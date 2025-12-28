@@ -527,20 +527,22 @@
 			--modal-margin: 20px;
 		}
 
-		.modal-header {
-			padding: 1.5rem 1.5rem 1rem;
+		.modal-hero-overlay {
+			padding: 1.5rem;
+			padding-bottom: 3rem;
+		}
+
+		.modal-hero-content h1 {
+			font-size: 2.2rem;
+		}
+
+		.modal-hero-content .description {
+			font-size: 1.1rem;
 		}
 
 		.modal-content-area {
+			margin-top: -2rem;
 			padding: 0 1.5rem 1.5rem;
-		}
-
-		h1 {
-			font-size: 2rem;
-		}
-
-		.description {
-			font-size: 1.1rem;
 		}
 	}
 
@@ -552,6 +554,23 @@
 
 		.modal-content {
 			border-radius: 16px;
+		}
+
+		.modal-hero-overlay {
+			padding: 1rem;
+			padding-bottom: 2.5rem;
+		}
+
+		.modal-hero-content h1 {
+			font-size: 1.8rem;
+		}
+
+		.modal-hero-content .description {
+			font-size: 1rem;
+		}
+
+		.modal-content-area {
+			margin-top: -1.5rem;
 		}
 	}
 </style>
