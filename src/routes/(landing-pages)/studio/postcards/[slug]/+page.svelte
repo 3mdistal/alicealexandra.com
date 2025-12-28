@@ -96,7 +96,7 @@
 			#e8e8e8 100%
 		);
 		padding: 3rem;
-		padding-bottom: 8rem;
+		padding-bottom: 14rem;
 	}
 
 	.hero-content {
@@ -128,7 +128,7 @@
 	@media (max-width: 768px) {
 		.hero-overlay {
 			padding: 2rem;
-			padding-bottom: 6rem;
+			padding-bottom: 10rem;
 		}
 
 		.hero-content h1 {
@@ -143,7 +143,7 @@
 	@media (max-width: 480px) {
 		.hero-overlay {
 			padding: 1.5rem;
-			padding-bottom: 4rem;
+			padding-bottom: 8rem;
 		}
 
 		.hero-content h1 {
@@ -156,7 +156,9 @@
 	}
 
 	main {
-		margin: -2rem auto 0;
+		position: relative;
+		z-index: 1;
+		margin: -10rem auto 0;
 		background-color: #e8e8e8;
 		padding: 2rem;
 		max-width: 800px;
