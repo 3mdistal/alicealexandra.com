@@ -87,7 +87,7 @@
 		bottom: 0;
 		left: 0;
 		align-items: flex-end;
-		justify-content: flex-start;
+		justify-content: center;
 		background: linear-gradient(
 			180deg,
 			rgba(232, 232, 232, 0) 0%,
@@ -101,6 +101,7 @@
 
 	.hero-content {
 		max-width: 600px;
+		text-align: center;
 	}
 
 	.hero-content h1 {
