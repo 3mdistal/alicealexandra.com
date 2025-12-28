@@ -113,9 +113,9 @@
 		line-height: 1.1;
 		letter-spacing: 0.05em;
 		text-shadow:
-			0 0 30px rgba(255, 255, 255, 0.8),
-			0 0 60px rgba(255, 255, 255, 0.5),
-			0 2px 4px rgba(255, 255, 255, 0.3);
+			0 0 25px rgba(232, 232, 232, 0.7),
+			0 0 50px rgba(232, 232, 232, 0.4),
+			0 2px 4px rgba(232, 232, 232, 0.25);
 	}
 
 	.hero-content .description {
@@ -127,8 +127,8 @@
 		line-height: 1.4;
 		letter-spacing: 0.05em;
 		text-shadow:
-			0 0 20px rgba(255, 255, 255, 0.6),
-			0 0 40px rgba(255, 255, 255, 0.3);
+			0 0 20px rgba(232, 232, 232, 0.7),
+			0 0 40px rgba(232, 232, 232, 0.4);
 	}
 
 	@media (max-width: 768px) {
