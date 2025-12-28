@@ -167,7 +167,7 @@
 		position: relative;
 		z-index: 1;
 		margin: -10rem auto 0;
-		background-color: #e8e8e8;
+		background-color: transparent;
 		padding: 2rem;
 		max-width: 800px;
 		min-height: 100vh;
