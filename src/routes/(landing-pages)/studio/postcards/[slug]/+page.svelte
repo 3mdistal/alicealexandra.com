@@ -61,17 +61,62 @@
 </main>
 
 <style>
-	.hero-image {
+	.hero-container {
 		position: relative;
 		right: 50%;
 		left: 50%;
 		margin-right: -50vw;
 		margin-left: -50vw;
+		width: 100vw;
+	}
+
+	.hero-image {
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
 		aspect-ratio: 3 / 2;
-		width: 100vw;
+		width: 100%;
+		height: 100%;
+	}
+
+	.hero-overlay {
+		display: flex;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		align-items: flex-end;
+		background: linear-gradient(
+			180deg,
+			rgba(240, 240, 240, 0.1) 0%,
+			rgba(240, 240, 240, 0.3) 30%,
+			rgba(240, 240, 240, 0.7) 70%,
+			rgba(240, 240, 240, 0.95) 100%
+		);
+		padding: 2rem;
+	}
+
+	.hero-content {
+		margin: 0 auto;
+		max-width: 800px;
+		width: 100%;
+	}
+
+	.hero-content h1 {
+		margin: 0 0 1rem 0;
+		color: #333;
+		font-weight: 600;
+		font-size: 2.5rem;
+		line-height: 1.2;
+	}
+
+	.hero-content .description {
+		margin: 0;
+		color: #555;
+		font-style: italic;
+		font-size: 1.2rem;
+		line-height: 1.5;
 	}
 
 	main {
@@ -81,24 +126,6 @@
 		max-width: 800px;
 		min-height: 100vh;
 		line-height: 1.6;
-	}
-
-	header {
-		margin-bottom: 3rem;
-		padding-top: 2rem;
-	}
-
-	h1 {
-		margin-bottom: 1rem;
-		color: #333;
-		font-size: 2.5rem;
-	}
-
-	.description {
-		margin-bottom: 2rem;
-		color: #666;
-		font-style: italic;
-		font-size: 1.2rem;
 	}
 
 	.postcard-content {
