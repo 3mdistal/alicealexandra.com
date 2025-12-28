@@ -125,7 +125,10 @@
 		font-size: 1.4rem;
 		font-family: 'Spectral', serif;
 		line-height: 1.4;
-		text-shadow: 0 1px 10px rgba(255, 255, 255, 0.5);
+		letter-spacing: 0.05em;
+		text-shadow:
+			0 0 20px rgba(255, 255, 255, 0.6),
+			0 0 40px rgba(255, 255, 255, 0.3);
 	}
 
 	@media (max-width: 768px) {
