@@ -19,20 +19,24 @@
 </svelte:head>
 
 {#if postcard && postcard.heroImage}
-	<div
-		class="hero-image"
-		style="background-image: url('{postcard.heroImage}'); view-transition-name: postcard-hero-{postcard.slug}"
-	></div>
+	<div class="hero-container">
+		<div
+			class="hero-image"
+			style="background-image: url('{postcard.heroImage}'); view-transition-name: postcard-hero-{postcard.slug}"
+		></div>
+		<div class="hero-overlay">
+			<div class="hero-content">
+				<h1>{postcard.title}</h1>
+				{#if postcard.description}
+					<p class="description">{postcard.description}</p>
+				{/if}
+			</div>
+		</div>
+	</div>
 {/if}
 
 <main>
 	{#if postcard}
-		<header>
-			<h1>{postcard.title}</h1>
-			{#if postcard.description}
-				<p class="description">{postcard.description}</p>
-			{/if}
-		</header>
 
 		<article class="postcard-content">
 			{#if htmlContent}
