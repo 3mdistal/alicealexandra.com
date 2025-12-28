@@ -407,7 +407,7 @@
 			#e8e8e8 100%
 		);
 		padding: 2rem;
-		padding-bottom: 4rem;
+		padding-bottom: 7rem;
 	}
 
 	.modal-hero-content {
