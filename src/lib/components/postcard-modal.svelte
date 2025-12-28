@@ -320,15 +320,18 @@
 
 			{#if postcard}
 				{#if postcard.heroImage}
-					<div class="modal-hero" style="background-image: url('{postcard.heroImage}')"></div>
+					<div class="modal-hero-container">
+						<div class="modal-hero" style="background-image: url('{postcard.heroImage}')"></div>
+						<div class="modal-hero-overlay">
+							<div class="modal-hero-content">
+								<h1 id="modal-title">{postcard.title}</h1>
+								{#if postcard.description}
+									<p class="description">{postcard.description}</p>
+								{/if}
+							</div>
+						</div>
+					</div>
 				{/if}
-
-				<header class="modal-header">
-					<h1 id="modal-title">{postcard.title}</h1>
-					{#if postcard.description}
-						<p class="description">{postcard.description}</p>
-					{/if}
-				</header>
 
 				<article class="modal-content-area">
 					{#if htmlContent}
