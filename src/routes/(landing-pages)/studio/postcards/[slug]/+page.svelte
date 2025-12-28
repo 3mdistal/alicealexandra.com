@@ -87,39 +87,52 @@
 		bottom: 0;
 		left: 0;
 		align-items: flex-end;
+		justify-content: flex-start;
 		background: linear-gradient(
 			180deg,
-			rgba(240, 240, 240, 0.1) 0%,
-			rgba(240, 240, 240, 0.3) 30%,
-			rgba(240, 240, 240, 0.7) 70%,
-			rgba(240, 240, 240, 0.95) 100%
+			rgba(232, 232, 232, 0) 0%,
+			rgba(232, 232, 232, 0.2) 40%,
+			rgba(232, 232, 232, 0.6) 70%,
+			#e8e8e8 100%
 		);
-		padding: 2rem;
+		padding: 3rem;
 	}
 
 	.hero-content {
-		margin: 0 auto;
-		max-width: 800px;
-		width: 100%;
+		max-width: 600px;
 	}
 
 	.hero-content h1 {
-		margin: 0 0 1rem 0;
-		color: #333;
+		margin: 0 0 0.75rem 0;
+		color: #222;
 		font-weight: 600;
-		font-size: 2.5rem;
-		line-height: 1.2;
+		font-size: 3.5rem;
+		line-height: 1.1;
 	}
 
 	.hero-content .description {
 		margin: 0;
-		color: #555;
+		color: #444;
 		font-style: italic;
-		font-size: 1.2rem;
-		line-height: 1.5;
+		font-size: 1.4rem;
+		line-height: 1.4;
 	}
 
 	@media (max-width: 768px) {
+		.hero-overlay {
+			padding: 2rem;
+		}
+
+		.hero-content h1 {
+			font-size: 2.5rem;
+		}
+
+		.hero-content .description {
+			font-size: 1.2rem;
+		}
+	}
+
+	@media (max-width: 480px) {
 		.hero-overlay {
 			padding: 1.5rem;
 		}
@@ -130,16 +143,6 @@
 
 		.hero-content .description {
 			font-size: 1rem;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.hero-overlay {
-			padding: 1.25rem;
-		}
-
-		.hero-content h1 {
-			font-size: 1.6rem;
 		}
 	}
 
