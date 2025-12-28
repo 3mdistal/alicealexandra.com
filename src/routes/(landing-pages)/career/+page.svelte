@@ -1,7 +1,7 @@
 <script>
 	import Button from '$lib/icons/button.svelte';
-	import Career from '$lib/subpages/career.svelte';
-	import LandingPage from '$lib/subpages/landing-page.svelte';
+	import Career from './career.svelte';
+	import LandingPage from '$lib/components/landing-page.svelte';
 	import Rabbit from '../../../cms/images/technotes/rabbit-in-hat.webp';
 
 	const accent = '#642e1a';

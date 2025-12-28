@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Blog from '$lib/subpages/blog.svelte';
+	import Blog from './blog.svelte';
 	import type { BlogPostMeta } from '$lib/content/blog';
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
