@@ -1,9 +1,33 @@
+## 28 Dec 2025
+
+**Enhancements**
+
+- Postcard titles now overlay the hero image with a gradient background and text glow effect. (#58)
+
+**Refactors**
+
+- Simplified Studio cards/illustrations text fields from Notion-style `rich_text` wrappers to plain strings. (#60)
+- Removed ~2,600 lines of dead code: archived migration scripts, old commissions page backup, stale beads backup file. (#61)
+- Deleted orphaned studio routes (`/studio/betson`, `/studio/tmi`, `/studio/jukebox`) - these now link externally.
+- Removed unused carousel components (`coming-soon.svelte`, `studio.svelte`, `carousel-li.svelte`).
+- Moved page-specific components to their route folders (`about.svelte`, `blog.svelte`, `career.svelte`).
+- Moved shared `landing-page.svelte` to `src/lib/components/`.
+
+**Patches**
+
+- Fixed postcards H2 font inheritance in prose content. (#59)
+
 ## 27 Dec 2025
 
 **Docs**
 
 - Updated `README.md` to reflect current architecture, content sources, and build/deploy workflow. (alicealexandra.com-1h0)
+
 ## 26 Dec 2025 (3)
+
+**Enhancements**
+
+- Extended drop-cap effect to paragraphs following `<hr>` elements in prose content. (#55)
 
 **Refactors**
 
