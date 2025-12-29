@@ -46,6 +46,15 @@ Run a single unit test:
 
 - If `GITHUB_TOKEN` is set, it clones a private content repo into `content/` and then removes `content/.git`.
 - If `GITHUB_TOKEN` is not set, it expects `content/` to already exist (typical local dev).
+- `CONTENT_REF` env var controls which branch/tag to fetch (default: `main`).
+
+### Coordinated content + site changes
+
+When making changes that span both `alicealexandra.com` and `teenylilcontent`:
+
+1. Create matching branch names in both repos (e.g., `feature/my-change`)
+2. For Vercel preview deployments, set `CONTENT_REF` to match the branch name
+3. In Vercel project settings, you can set `CONTENT_REF=$VERCEL_GIT_COMMIT_REF` to auto-match branch names
 
 ## Architecture (big picture)
 
@@ -100,5 +109,6 @@ See `.env.example` for local setup.
 Commonly referenced variables:
 
 - `GITHUB_TOKEN` (used by `scripts/fetch-content.sh` to clone the private content repo at build time)
+- `CONTENT_REF` (branch/tag of `teenylilcontent` to fetch; default: `main`)
 
 If you're working in the `content/` subtree (fetched/embedded content), also see `content/WARP.md` for its domain-specific conventions.
