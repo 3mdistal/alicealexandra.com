@@ -56,7 +56,7 @@ When making changes that span both `alicealexandra.com` and `teenylilcontent`:
 2. For Vercel preview deployments, set `CONTENT_REF` to match the branch name
 3. In Vercel project settings, you can set `CONTENT_REF=$VERCEL_GIT_COMMIT_REF` to auto-match branch names
 
-**Recommended Vercel setup:** Set `CONTENT_REF=$VERCEL_GIT_COMMIT_REF` once in project settings. Then:
+**Recommended Vercel setup:** Ensure "Automatically expose System Environment Variables" is enabled in Project → Settings → Environment Variables. The script will automatically use `VERCEL_GIT_COMMIT_REF` to match branches. Then:
 
 - **Site-only changes:** Just push to `alicealexandra.com`. The build will fall back to `main` content with a warning in the build log.
 - **Coordinated changes:** Create matching branch names in both repos. The build will automatically use the matching content branch.

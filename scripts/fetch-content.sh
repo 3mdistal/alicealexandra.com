@@ -13,7 +13,8 @@ set -e
 
 REPO_URL="https://github.com/3mdistal/teenylilcontent.git"
 CONTENT_DIR="content"
-CONTENT_REF="${CONTENT_REF:-main}"
+# Use VERCEL_GIT_COMMIT_REF if available (Vercel builds), fall back to CONTENT_REF, then main
+CONTENT_REF="${VERCEL_GIT_COMMIT_REF:-${CONTENT_REF:-main}}"
 
 echo "📦 Fetching private content..."
 echo "   ref: $CONTENT_REF"
