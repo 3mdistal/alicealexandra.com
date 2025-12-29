@@ -39,13 +39,23 @@ fi
 
 # Clone using HTTPS with token authentication
 echo "  Cloning from private repository..."
-git clone --depth 1 --branch "$CONTENT_REF" "https://${GITHUB_TOKEN}@github.com/3mdistal/teenylilcontent.git" "$CONTENT_DIR"
+if git clone --depth 1 --branch "$CONTENT_REF" "https://${GITHUB_TOKEN}@github.com/3mdistal/teenylilcontent.git" "$CONTENT_DIR" 2>/dev/null; then
+	echo "  ✓ Cloned ref: $CONTENT_REF"
+else
+	# Ref doesn't exist - fall back to main
+	if [ "$CONTENT_REF" != "main" ]; then
+		echo ""
+		echo "  ⚠️  WARNING: Branch '$CONTENT_REF' not found in teenylilcontent"
+		echo "  ⚠️  Falling back to 'main' branch"
+		echo ""
+	fi
+	git clone --depth 1 --branch main "https://${GITHUB_TOKEN}@github.com/3mdistal/teenylilcontent.git" "$CONTENT_DIR"
 
-# Verify clone succeeded (git clone with --branch will fail if ref doesn't exist)
-if [ ! -d "$CONTENT_DIR" ]; then
-	echo "❌ Error: Failed to clone ref '$CONTENT_REF'"
-	echo "   Ensure the branch/tag exists in teenylilcontent"
-	exit 1
+	if [ ! -d "$CONTENT_DIR" ]; then
+		echo "❌ Error: Failed to clone teenylilcontent (even main branch)"
+		exit 1
+	fi
+	CONTENT_REF="main (fallback)"
 fi
 
 # Remove .git directory to save space (we don't need git history)
