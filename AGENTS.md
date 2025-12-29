@@ -14,9 +14,16 @@ Package manager is pnpm (see `package.json#packageManager`).
 
 ### Run locally
 
+- `pnpm setup:content` (clones `teenylilcontent` repo for local dev; keeps `.git` so you can push changes)
 - `pnpm dev` (Vite dev server)
 - `pnpm build`
 - `pnpm preview` (serves the built site)
+
+To set up content pointing to a specific branch:
+
+```bash
+CONTENT_REF=feature/my-branch pnpm setup:content --force
+```
 
 ### Typecheck
 
@@ -53,14 +60,8 @@ Run a single unit test:
 When making changes that span both `alicealexandra.com` and `teenylilcontent`:
 
 1. Create matching branch names in both repos (e.g., `feature/my-change`)
-2. For Vercel preview deployments, set `CONTENT_REF` to match the branch name
-3. In Vercel project settings, you can set `CONTENT_REF=$VERCEL_GIT_COMMIT_REF` to auto-match branch names
-
-**Recommended Vercel setup:** Ensure "Automatically expose System Environment Variables" is enabled in Project → Settings → Environment Variables. The script will automatically use `VERCEL_GIT_COMMIT_REF` to match branches. Then:
-
-- **Site-only changes:** Just push to `alicealexandra.com`. The build will fall back to `main` content with a warning in the build log.
-- **Coordinated changes:** Create matching branch names in both repos. The build will automatically use the matching content branch.
-- **Production:** Both repos merge to `main`, so production always uses `main` content.
+2. Vercel preview deployments automatically fetch the matching content branch
+3. If the content branch doesn't exist, the build falls back to `main` with a warning
 
 ## Architecture (big picture)
 
