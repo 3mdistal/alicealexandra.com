@@ -56,6 +56,12 @@ When making changes that span both `alicealexandra.com` and `teenylilcontent`:
 2. For Vercel preview deployments, set `CONTENT_REF` to match the branch name
 3. In Vercel project settings, you can set `CONTENT_REF=$VERCEL_GIT_COMMIT_REF` to auto-match branch names
 
+**Recommended Vercel setup:** Set `CONTENT_REF=$VERCEL_GIT_COMMIT_REF` once in project settings. Then:
+
+- **Site-only changes:** Just push to `alicealexandra.com`. The build will fall back to `main` content with a warning in the build log.
+- **Coordinated changes:** Create matching branch names in both repos. The build will automatically use the matching content branch.
+- **Production:** Both repos merge to `main`, so production always uses `main` content.
+
 ## Architecture (big picture)
 
 This is a SvelteKit app (Svelte 5) built with Vite.
