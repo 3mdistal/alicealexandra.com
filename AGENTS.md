@@ -14,9 +14,16 @@ Package manager is pnpm (see `package.json#packageManager`).
 
 ### Run locally
 
+- `pnpm setup:content` (clones `teenylilcontent` repo for local dev; keeps `.git` so you can push changes)
 - `pnpm dev` (Vite dev server)
 - `pnpm build`
 - `pnpm preview` (serves the built site)
+
+To set up content pointing to a specific branch:
+
+```bash
+CONTENT_REF=feature/my-branch pnpm setup:content --force
+```
 
 ### Typecheck
 
@@ -46,6 +53,15 @@ Run a single unit test:
 
 - If `GITHUB_TOKEN` is set, it clones a private content repo into `content/` and then removes `content/.git`.
 - If `GITHUB_TOKEN` is not set, it expects `content/` to already exist (typical local dev).
+- `CONTENT_REF` env var controls which branch/tag to fetch (default: `main`).
+
+### Coordinated content + site changes
+
+When making changes that span both `alicealexandra.com` and `teenylilcontent`:
+
+1. Create matching branch names in both repos (e.g., `feature/my-change`)
+2. Vercel preview deployments automatically fetch the matching content branch
+3. If the content branch doesn't exist, the build falls back to `main` with a warning
 
 ## Architecture (big picture)
 
@@ -100,5 +116,6 @@ See `.env.example` for local setup.
 Commonly referenced variables:
 
 - `GITHUB_TOKEN` (used by `scripts/fetch-content.sh` to clone the private content repo at build time)
+- `CONTENT_REF` (branch/tag of `teenylilcontent` to fetch; default: `main`)
 
 If you're working in the `content/` subtree (fetched/embedded content), also see `content/WARP.md` for its domain-specific conventions.
