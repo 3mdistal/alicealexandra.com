@@ -2,8 +2,9 @@
 	import Button from '$lib/icons/button.svelte';
 	import Career from './career.svelte';
 	import LandingPage from '$lib/components/landing-page.svelte';
-	import Rabbit from '../../../cms/images/technotes/rabbit-in-hat.webp';
 
+	const Rabbit =
+		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/rabbit-in-hat.webp';
 	const accent = '#642e1a';
 	const background = '#dcc9c6';
 </script>

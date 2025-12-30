@@ -4,10 +4,10 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
 	import { pageState } from '$lib/stores';
-	import Bird from '../../../cms/images/blog/bird.webp?enhanced';
 
 	export let data: { posts: BlogPostMeta[] };
 
+	const Bird = 'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bird.webp';
 	const accent = '#d1dce7';
 
 	function fadeIn() {
@@ -43,11 +43,7 @@
 	</div>
 	<div class="background-container">
 		<div>
-			<enhanced:img
-				src={Bird}
-				alt="A painting of a colorful bird in flight."
-				class="background-image"
-			/>
+			<img src={Bird} alt="A painting of a colorful bird in flight." class="background-image" />
 		</div>
 	</div>
 </div>

@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	const InstagramBear =
+		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/instagram-bear.webp';
+	const BskySquirrel =
+		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bsky-squirrel.webp';
+	const SoundcloudRabbit =
+		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/soundcloud-rabbit.webp';
+	const GithubCat =
+		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/github-cat.webp';
+
 	let container: HTMLDivElement;
 
 	function assignIndex() {
@@ -22,9 +31,9 @@
 			rel="noreferrer"
 			aria-label="Visit Alice Alexandra Moore on Instagram"
 		>
-			<enhanced:img
-				src="../../cms/images/social-media/instagram-bear.webp"
-				alt="Link to Instagram in the form of an illustrated polar bear taking a selfie. Painted dby Alice Alexandra Moore."
+			<img
+				src={InstagramBear}
+				alt="Link to Instagram in the form of an illustrated polar bear taking a selfie. Painted by Alice Alexandra Moore."
 			/>
 		</a>
 	</div>
@@ -35,8 +44,8 @@
 			rel="noreferrer"
 			aria-label="Visit Alice Alexandra Moore on Bluesky"
 		>
-			<enhanced:img
-				src="../../cms/images/social-media/bsky-squirrel.webp"
+			<img
+				src={BskySquirrel}
 				alt="Link to Bluesky in the form of a squirrel drinking its morning coffee. Painted by Alice Alexandra Moore."
 			/>
 		</a>
@@ -48,8 +57,8 @@
 			rel="noreferrer"
 			aria-label="Visit Alice Alexandra Moore on SoundCloud"
 		>
-			<enhanced:img
-				src="../../cms/images/social-media/soundcloud-rabbit.webp"
+			<img
+				src={SoundcloudRabbit}
 				alt="Link to Soundcloud in the form of an illustrated rabbit wearing headphones. Painted by Alice Alexandra Moore."
 			/>
 		</a>
@@ -61,8 +70,8 @@
 			rel="noreferrer"
 			aria-label="View Alice Alexandra Moore's portfolio code on GitHub"
 		>
-			<enhanced:img
-				src="../../cms/images/social-media/github-cat.webp"
+			<img
+				src={GithubCat}
 				alt="Link to GitHub in the form of a cat. Painted by Alice Alexandra Moore."
 			/>
 		</a>
@@ -70,8 +79,7 @@
 </div>
 
 <style>
-	/* enhanced:img renders as <picture><img></picture>, use :global for nested img */
-	#container :global(img) {
+	#container img {
 		transition: transform 0.5s cubic-bezier(0.43, -0.74, 0.43, 2);
 		object-fit: contain;
 	}
@@ -80,7 +88,7 @@
 		filter: none;
 	}
 
-	a:hover :global(img) {
+	a:hover img {
 		transform: scale(1.1);
 	}
 

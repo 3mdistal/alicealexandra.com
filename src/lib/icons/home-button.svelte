@@ -1,7 +1,8 @@
 <script lang="ts">
-	import Logo from '../../cms/images/logo/logo.png';
-	import PlainCircle from '../../cms/images/logo/plain-circle.svg';
 	import { onMount } from 'svelte';
+
+	const Logo = '/images/logo/logo.png';
+	const PlainCircle = '/images/logo/plain-circle.svg';
 	import gsap from 'gsap';
 
 	let button: HTMLAnchorElement;

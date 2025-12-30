@@ -1,8 +1,9 @@
 <script>
-	import Hand from '../../../cms/images/about/flowers-in-hand.webp';
 	import About from './about.svelte';
 	import LandingPage from '$lib/components/landing-page.svelte';
 
+	const Hand =
+		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/flowers-in-hand.webp';
 	const accent = '#271647';
 	const background = '#beb5ca';
 </script>
