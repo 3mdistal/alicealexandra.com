@@ -288,39 +288,45 @@
 		flex-direction: column;
 		align-items: center;
 		background-color: #eeeded;
-		padding: 5rem 1rem;
+		padding: 6rem 1rem 8rem;
 		min-height: 100lvh;
 	}
 
 	h1 {
-		margin-bottom: 2rem;
+		margin-bottom: 2.5rem;
 		color: #726a12;
 		font-weight: 500;
-		font-size: 3rem;
+		font-size: 3.5rem;
+		letter-spacing: -0.02em;
+		text-align: center;
 	}
 
 	.tabs {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: 0.5rem;
-		margin: 0 auto 1.25rem;
+		margin: 0 auto 2rem;
 		width: 100%;
 		max-width: 800px;
 	}
 
 	.tab-button {
-		transition: filter 0.15s ease;
+		transition: all 0.2s ease;
 		cursor: pointer;
 		border: 1px solid rgba(114, 106, 18, 0.25);
 		border-radius: 999px;
 		background: rgba(255, 255, 255, 0.7);
-		padding: 0.5rem 0.75rem;
+		backdrop-filter: blur(8px);
+		padding: 0.6rem 1rem;
 		color: #4b460d;
 		font-weight: 500;
 		letter-spacing: 0.01em;
 
 		&:hover {
-			filter: brightness(0.9);
+			filter: brightness(0.95);
+			transform: translateY(-1px);
+			box-shadow: 0 4px 12px rgba(114, 106, 18, 0.08);
 		}
 	}
 
@@ -344,8 +350,9 @@
 	.subtabs {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: 0.5rem;
-		margin: 0 0 1.25rem;
+		margin: 0 0 1.5rem;
 	}
 
 	.subtab-button {
@@ -377,11 +384,12 @@
 	.entry {
 		display: grid;
 		grid-template-columns: 140px 1fr;
-		gap: 1rem;
+		gap: 1.25rem;
 		border: 1px solid rgba(114, 106, 18, 0.12);
-		border-radius: 12px;
-		background: rgba(255, 255, 255, 0.5);
-		padding: 0.75rem 0.75rem;
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.6);
+		padding: 1.25rem;
+		transition: all 0.2s ease;
 	}
 
 	.entry--studio {
@@ -424,11 +432,11 @@
 	}
 
 	.entry--link:hover {
-		transform: translateY(-1px);
+		transform: translateY(-2px);
 		filter: none;
-		box-shadow: 0 10px 22px rgba(18, 16, 0, 0.06);
-		border-color: rgba(114, 106, 18, 0.22);
-		background: rgba(255, 255, 255, 0.72);
+		box-shadow: 0 12px 24px rgba(18, 16, 0, 0.06);
+		border-color: rgba(114, 106, 18, 0.25);
+		background: rgba(255, 255, 255, 0.85);
 	}
 
 	.entry--link.entry--studio:hover::after {
@@ -565,10 +573,14 @@
 	}
 
 	.coming-soon {
-		margin: 0;
-		padding: 1rem 0;
+		margin: 2rem 0;
+		padding: 2rem;
+		border-radius: 12px;
+		background: rgba(255, 255, 255, 0.3);
 		color: rgba(75, 70, 13, 0.75);
 		line-height: 1.6;
+		text-align: center;
+		font-style: italic;
 	}
 
 	.changelog-content {
