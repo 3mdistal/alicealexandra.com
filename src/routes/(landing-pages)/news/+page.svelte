@@ -356,17 +356,18 @@
 	}
 
 	.subtab-button {
-		transition: filter 0.15s ease;
+		transition: all 0.2s ease;
 		cursor: pointer;
 		border: 1px solid rgba(114, 106, 18, 0.18);
 		border-radius: 999px;
 		background: rgba(255, 255, 255, 0.55);
-		padding: 0.4rem 0.65rem;
+		padding: 0.4rem 0.8rem;
 		color: rgba(75, 70, 13, 0.95);
 		font-weight: 450;
 
 		&:hover {
-			filter: brightness(0.9);
+			filter: brightness(0.95);
+			background: rgba(255, 255, 255, 0.8);
 		}
 	}
 
@@ -459,6 +460,7 @@
 	.entry-date {
 		color: rgba(75, 70, 13, 0.7);
 		font-size: 0.95rem;
+		font-variant-numeric: tabular-nums;
 	}
 
 	.entry-left {
@@ -538,7 +540,7 @@
 		margin: 0;
 		color: rgba(25, 30, 40, 0.92);
 		font-weight: 500;
-		font-size: 1.45rem;
+		font-size: 1.5rem;
 		line-height: 1.35;
 		font-family: 'Spectral', serif;
 		word-break: break-word;
