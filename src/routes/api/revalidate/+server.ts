@@ -29,7 +29,7 @@ export const POST: RequestHandler = async ({ request, url, fetch: serverFetch })
 			throw error(403, `Route '${route}' is not allowed for revalidation`);
 		}
 
-		const bypassToken = env.BYPASS_TOKEN;
+		const bypassToken = env['BYPASS_TOKEN'];
 		if (!bypassToken) {
 			throw error(500, 'Missing required BYPASS_TOKEN environment variable');
 		}
