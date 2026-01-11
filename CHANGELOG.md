@@ -160,7 +160,7 @@
 **Enhancements**
 
 - Added build-time private content fetch for Vercel via `scripts/fetch-content.sh` and `vercel-build`.
-- Added `docs/NOTION_TO_LOCAL_MIGRATION.md` with a full migration blueprint.
+- Added `docs/product/CONTENT_MANAGEMENT.md` with content management notes.
 - Updated `@notionhq/client` to v5.3.0.
 
 **Refactors**
