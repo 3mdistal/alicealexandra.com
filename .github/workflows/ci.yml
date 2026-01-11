@@ -1,0 +1,148 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Stub content (CI)
+        run: |
+          mkdir -p content/blog content/poems content/postcards content/studio content/career
+
+          cat > content/blog/posts.json <<'EOF'
+          [
+            {
+              "id": "ci-test",
+              "slug": "ci-test",
+              "title": "CI Test Post",
+              "subtitle": "Placeholder",
+              "category": "CI",
+              "publicationDate": "2026-01-01",
+              "formattedPublicationDate": "Jan 1, 2026",
+              "readTime": "1 min",
+              "coverImage": "/images/placeholder.jpg"
+            }
+          ]
+          EOF
+
+          cat > content/blog/ci-test.md <<'EOF'
+          ---
+          title: "CI Test Post"
+          slug: "ci-test"
+          subtitle: "Placeholder"
+          summary: "Placeholder"
+          ogDescription: "Placeholder"
+          category: "CI"
+          publicationDate: "2026-01-01"
+          formattedPublicationDate: "Jan 1, 2026"
+          readTime: "1 min"
+          coverImage: "/images/placeholder.jpg"
+          coverImageCaption: "Placeholder"
+          notionId: "ci-test"
+          ---
+          Hello from CI.
+          EOF
+
+          cat > content/poems/sections.json <<'EOF'
+          [
+            {
+              "id": "ci-section",
+              "name": "CI",
+              "quote": "",
+              "quoteAuthor": "",
+              "act": "",
+              "coverImage": "",
+              "secondaryImage": "",
+              "sequence": 1
+            }
+          ]
+          EOF
+
+          cat > content/poems/ci-test.md <<'EOF'
+          ---
+          title: "CI Poem"
+          section: "CI"
+          sequence: 1
+          notLineated: true
+          ---
+          Hello from CI.
+          EOF
+
+          cat > content/postcards/metadata.json <<'EOF'
+          [
+            {
+              "id": "ci-test",
+              "slug": "ci-test",
+              "title": "CI Postcard",
+              "description": "Placeholder",
+              "lastEditedTime": "2026-01-01"
+            }
+          ]
+          EOF
+
+          cat > content/postcards/ci-test.md <<'EOF'
+          ---
+          title: "CI Postcard"
+          slug: "ci-test"
+          description: "Placeholder"
+          heroImage: ""
+          lastEditedTime: "2026-01-01"
+          notionId: "ci-test"
+          ---
+          Hello from CI.
+          EOF
+
+          cat > content/studio/cards.json <<'EOF'
+          { "data": [] }
+          EOF
+
+          cat > content/studio/illustrations.json <<'EOF'
+          { "data": [] }
+          EOF
+
+          cat > content/career/publications.json <<'EOF'
+          { "data": [] }
+          EOF
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Check
+        run: pnpm check
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build

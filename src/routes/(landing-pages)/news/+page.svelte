@@ -312,20 +312,20 @@
 	}
 
 	.tab-button {
+		backdrop-filter: blur(8px);
 		transition: all 0.2s ease;
 		cursor: pointer;
 		border: 1px solid rgba(114, 106, 18, 0.25);
 		border-radius: 999px;
 		background: rgba(255, 255, 255, 0.7);
-		backdrop-filter: blur(8px);
 		padding: 0.6rem 1rem;
 		color: #4b460d;
 		font-weight: 500;
 		letter-spacing: 0.01em;
 
 		&:hover {
-			filter: brightness(0.95);
 			transform: translateY(-1px);
+			filter: brightness(0.95);
 			box-shadow: 0 4px 12px rgba(114, 106, 18, 0.08);
 		}
 	}
@@ -386,11 +386,11 @@
 		display: grid;
 		grid-template-columns: 140px 1fr;
 		gap: 1.25rem;
+		transition: all 0.2s ease;
 		border: 1px solid rgba(114, 106, 18, 0.12);
 		border-radius: 16px;
 		background: rgba(255, 255, 255, 0.6);
 		padding: 1.25rem;
-		transition: all 0.2s ease;
 	}
 
 	.entry--studio {
@@ -576,13 +576,13 @@
 
 	.coming-soon {
 		margin: 2rem 0;
-		padding: 2rem;
 		border-radius: 12px;
 		background: rgba(255, 255, 255, 0.3);
+		padding: 2rem;
 		color: rgba(75, 70, 13, 0.75);
+		font-style: italic;
 		line-height: 1.6;
 		text-align: center;
-		font-style: italic;
 	}
 
 	.changelog-content {

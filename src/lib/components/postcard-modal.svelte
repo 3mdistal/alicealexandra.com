@@ -397,8 +397,8 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		align-items: flex-end;
 		justify-content: center;
+		align-items: flex-end;
 		background: linear-gradient(
 			180deg,
 			rgba(232, 232, 232, 0) 0%,
@@ -420,8 +420,8 @@
 		color: #1a1a1a;
 		font-weight: 500;
 		font-size: 3rem;
-		font-family: 'Spectral', serif;
 		line-height: 1.1;
+		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
 		text-shadow:
 			0 0 25px rgba(232, 232, 232, 0.7),
@@ -434,8 +434,8 @@
 		color: #444;
 		font-style: italic;
 		font-size: 1.3rem;
-		font-family: 'Spectral', serif;
 		line-height: 1.4;
+		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
 		text-shadow:
 			0 0 20px rgba(232, 232, 232, 0.7),
