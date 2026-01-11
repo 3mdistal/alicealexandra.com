@@ -7,7 +7,7 @@
 **Refactors**
 
 - Simplified Studio cards/illustrations text fields from Notion-style `rich_text` wrappers to plain strings. (#60)
-- Removed ~2,600 lines of dead code: archived migration scripts, old commissions page backup, stale beads backup file. (#61)
+- Removed ~2,600 lines of dead code: archived migration scripts, old commissions page backup, stale backup file. (#61)
 - Deleted orphaned studio routes (`/studio/betson`, `/studio/tmi`, `/studio/jukebox`) - these now link externally.
 - Removed unused carousel components (`coming-soon.svelte`, `studio.svelte`, `carousel-li.svelte`).
 - Moved page-specific components to their route folders (`about.svelte`, `blog.svelte`, `career.svelte`).
@@ -113,10 +113,6 @@
 
 ## 14 Dec 2025
 
-**Features**
-
-- Added Beads (`bd`) issue/task management to the repo (new `.beads/` config + documentation).
-
 **Enhancements**
 
 - Converted `content/` into a git submodule.
@@ -125,7 +121,7 @@
 **Patches**
 
 - Fixed a batch of TypeScript errors across pages, server routes, and shared utilities.
-- Updated repo agent/project docs (`Warp.md`, `Beads.md`).
+- Updated repo agent/project docs (`Warp.md`).
 
 **Breaking changes**
 

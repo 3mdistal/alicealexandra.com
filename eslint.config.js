@@ -27,7 +27,7 @@ export default tseslint.config(
 		}
 	},
 	{
-		ignores: ['build/', '.svelte-kit/', 'dist/', 'content/', '.beads/', 'archived/']
+		ignores: ['build/', '.svelte-kit/', 'dist/', 'content/', 'archived/']
 	},
 	// Keep `pnpm lint` usable as a quality gate by not failing on known/intentional patterns
 	{

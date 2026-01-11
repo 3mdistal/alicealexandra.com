@@ -1,6 +1,6 @@
 # AGENTS.md
 
-IMPORTANT: This project uses bd (beads) for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods. Full Beads/bd rules are in `.beads/README.md`.
+IMPORTANT: This project uses GitHub Issues for all issue tracking. Use `gh issue list/view/create/edit` (and PRs via `gh pr ...`) instead of any repo-local issue tracker.
 
 This file provides guidance to WARP (warp.dev) when working with code in this repository.
 
