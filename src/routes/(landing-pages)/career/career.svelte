@@ -15,7 +15,7 @@
 		<div class="section">
 			<h2 class="accent-color">Featured Work</h2>
 			<div class="work-link">
-				<a href="/career/builderio">
+				<a href="/career/builder">
 					<h3 class="accent-color">Work from Builder.io →</h3>
 					<p>Content and technical writing from my current role at Builder.io (2025-present)</p>
 				</a>

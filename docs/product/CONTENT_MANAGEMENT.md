@@ -126,6 +126,20 @@ notionId: 'original-notion-uuid'
 ---
 ```
 
+### Builder.io Career Posts
+
+Builder.io blog posts authored by Alice are captured in a committed dataset.
+
+To update the dataset:
+
+```bash
+pnpm scrape:builder
+```
+
+This script fetches the Builder.io sitemap, filters blog posts authored by "Alice Moore", and writes the data to:
+
+- `src/lib/content/data/builder-posts.json`
+
 ## Adding New Content
 
 ### New Blog Post
@@ -237,3 +251,4 @@ The content is loaded by these modules:
 - `src/lib/content/blog.ts` - Blog post loader
 - `src/lib/content/poems.ts` - Poems loader
 - `src/lib/content/postcards.ts` - Postcards loader
+- `src/lib/content/builder.ts` - Builder.io career posts loader

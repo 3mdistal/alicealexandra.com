@@ -1,3 +1,9 @@
+## 27 Jan 2026
+
+**Features**
+
+- Added `/career/builder` page sourced from a Builder.io blog dataset with a redirect from `/career/builderio`. (#65)
+
 ## 28 Dec 2025
 
 **Enhancements**
