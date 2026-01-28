@@ -1,3 +1,9 @@
+## 28 Jan 2026
+
+**Patches**
+
+- Fixed blog post layout collapsing at ultrawide breakpoints by removing large `vw`-based horizontal padding. (#87)
+
 ## 28 Dec 2025
 
 **Enhancements**

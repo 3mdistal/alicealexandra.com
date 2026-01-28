@@ -153,10 +153,6 @@
 		@media (min-width: 1536px) {
 			padding: var(--prose-spacing-xl) var(--prose-spacing-lg);
 		}
-
-		@media (min-width: 1920px) {
-			padding: var(--prose-spacing-xl) 25vw;
-		}
 	}
 
 	/* Styles for constraining non-prose sections */
