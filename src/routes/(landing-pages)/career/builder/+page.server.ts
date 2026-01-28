@@ -1,10 +1,10 @@
-import { loadBuilderPosts, type BuilderPost } from '$lib/content/builder';
+import { loadBuilderSnapshot, type BuilderSnapshot } from '$lib/content/builder';
 
-export function load() {
-	const posts = loadBuilderPosts();
-	return { posts };
+export async function load() {
+	const snapshot = await loadBuilderSnapshot();
+	return { snapshot };
 }
 
 export const prerender = true;
 
-export type { BuilderPost };
+export type { BuilderSnapshot };

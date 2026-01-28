@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { BuilderPost } from './+page.server';
+	import type { BuilderSnapshot } from './+page.server';
 
-	export let data: { posts: BuilderPost[] };
+	export let data: { snapshot: BuilderSnapshot };
 
-	const posts: BuilderPost[] = data.posts ?? [];
+	const snapshot = data.snapshot;
+	const posts = snapshot?.data ?? [];
 
 	const accent = '#642e1a';
 	const background = '#dcc9c6';
@@ -14,13 +15,19 @@
 		day: 'numeric'
 	});
 
-	const formatDate = (value: string) => {
+	const formatDate = (value?: string) => {
+		if (!value) {
+			return '';
+		}
 		const date = new Date(value);
 		if (Number.isNaN(date.getTime())) {
 			return '';
 		}
 		return formatter.format(date);
 	};
+
+	const lastUpdated = formatDate(snapshot?.dataUpdatedAt);
+	const scrapedOn = formatDate(snapshot?.generatedAt);
 </script>
 
 <svelte:head>
@@ -44,7 +51,18 @@
 	<div class="content">
 		<section class="posts-section">
 			<h2 class="section-title">Builder.io Blog Posts</h2>
+			{#if lastUpdated}
+				<p class="freshness">
+					Last updated {lastUpdated}
+					{#if scrapedOn && scrapedOn !== lastUpdated}
+						· Scraped {scrapedOn}
+					{/if}
+				</p>
+			{/if}
 			<p class="section-subtitle">Selected writing published on Builder.io&apos;s blog.</p>
+			<p class="disclaimer">
+				This list is updated manually and may not include every post.
+			</p>
 			{#if posts.length === 0}
 				<p class="empty-state">Posts are being gathered. Please check back soon.</p>
 			{:else}
@@ -57,8 +75,8 @@
 							{#if post.description}
 								<p class="description">{post.description}</p>
 							{/if}
-							{#if formatDate(post.datePublished)}
-								<p class="meta">{formatDate(post.datePublished)}</p>
+							{#if formatDate(post.publishedAt)}
+								<p class="meta">{formatDate(post.publishedAt)}</p>
 							{/if}
 						</li>
 					{/each}
@@ -143,6 +161,20 @@
 		color: #666;
 		font-style: italic;
 		font-size: 1.125rem;
+		line-height: 1.6;
+	}
+
+	.freshness {
+		margin: 0 0 0.75rem;
+		color: #555;
+		font-size: 1rem;
+	}
+
+	.disclaimer {
+		margin: -1.5rem 0 2.5rem;
+		color: #666;
+		font-style: italic;
+		font-size: 1rem;
 		line-height: 1.6;
 	}
 

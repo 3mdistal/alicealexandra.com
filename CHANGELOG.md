@@ -2,7 +2,8 @@
 
 **Features**
 
-- Added `/career/builder` page sourced from a Builder.io blog dataset with a redirect from `/career/builderio`. (#65)
+- Added `/career/builder` page with Builder.io blog post snapshots and freshness disclosure. (#65)
+- Added Builder.io scraper tool to generate `content/career/builder.json` snapshots. (#65)
 
 ## 28 Dec 2025
 
