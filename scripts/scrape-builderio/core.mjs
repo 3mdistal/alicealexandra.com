@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { parse as parseHtml } from 'node-html-parser';
 import { XMLParser } from 'fast-xml-parser';
 
