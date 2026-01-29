@@ -128,12 +128,12 @@ notionId: 'original-notion-uuid'
 
 ### External scraped snapshots (Builder.io)
 
-Builder.io blog posts authored by Alice are captured as a static snapshot and committed in the
-private `teenylilcontent` repo to preserve build-time reliability.
+Builder.io blog posts authored by Alice are captured as a static snapshot and committed in this
+repo to preserve build-time reliability.
 
 **Snapshot location**
 
-- `content/career/builder.json`
+- `data-snapshots/career/builder-posts.json`
 
 **Update cadence**
 
@@ -151,7 +151,7 @@ pnpm scrape:builder
 ```
 
 This script fetches Builder.io RSS (fallback to sitemap), filters blog posts authored by
-Alice, and writes the snapshot to `content/career/builder.json`. The list is a curated
+Alice, and writes the snapshot to `data-snapshots/career/builder-posts.json`. The list is a curated
 snapshot and may not be exhaustive.
 
 ## Adding New Content

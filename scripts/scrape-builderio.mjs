@@ -8,9 +8,9 @@ import {
 	normalizeCanonicalUrl
 } from './scrape-builderio/core.mjs';
 
-const DEFAULT_OUTPUT = 'content/career/builder.json';
+const DEFAULT_OUTPUT = 'data-snapshots/career/builder-posts.json';
 const AUTHOR_ALLOWLIST = ['Alice Moore', 'Alice Alexandra Moore'];
-const RSS_URL = 'https://www.builder.io/blog/rss.xml';
+const RSS_URL = 'https://www.builder.io/blog/feed.xml';
 const SITEMAP_URL = 'https://www.builder.io/sitemap.xml';
 
 const args = parseArgs(process.argv.slice(2));
@@ -73,10 +73,11 @@ try {
 	});
 
 	const previousSnapshot = await readPreviousSnapshot(outputPath);
+	const dataChanged = !hasSameData(previousSnapshot?.data, data);
 	const generatedAt = new Date().toISOString();
-	const dataUpdatedAt = hasSameData(previousSnapshot?.data, data)
-		? (previousSnapshot?.dataUpdatedAt ?? generatedAt)
-		: generatedAt;
+	const dataUpdatedAt = dataChanged
+		? generatedAt
+		: (previousSnapshot?.dataUpdatedAt ?? generatedAt);
 
 	const payload = {
 		version: 1,
@@ -93,8 +94,12 @@ try {
 	};
 
 	if (!args.dryRun) {
-		await fs.mkdir(path.dirname(outputPath), { recursive: true });
-		await fs.writeFile(outputPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+		if (!dataChanged && previousSnapshot) {
+			console.log('Builder scraper: No data changes; snapshot not updated.');
+		} else {
+			await fs.mkdir(path.dirname(outputPath), { recursive: true });
+			await fs.writeFile(outputPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+		}
 	}
 
 	console.log('Builder scraper: Done');
@@ -119,12 +124,11 @@ try {
 }
 
 async function getCandidateUrls() {
+	let rssUrls = [];
 	try {
 		const rssXml = await fetchText(RSS_URL);
 		const items = extractRssItems(rssXml);
-		if (items.length > 0) {
-			return [...new Set(items.map((item) => item.url))];
-		}
+		rssUrls = items.map((item) => item.url);
 	} catch (error) {
 		console.warn(
 			`Builder scraper: RSS fetch failed (${RSS_URL}) - ${error instanceof Error ? error.message : error}`
@@ -132,7 +136,8 @@ async function getCandidateUrls() {
 	}
 
 	const sitemapXml = await fetchText(SITEMAP_URL);
-	return extractSitemapUrls(sitemapXml);
+	const sitemapUrls = extractSitemapUrls(sitemapXml);
+	return [...new Set([...rssUrls, ...sitemapUrls])];
 }
 
 function parseArgs(cliArgs) {
@@ -240,7 +245,7 @@ function normalizeDate(value) {
 	if (!value) return null;
 	const parsed = new Date(value);
 	if (Number.isNaN(parsed.getTime())) return null;
-	return parsed.toISOString();
+	return parsed.toISOString().slice(0, 10);
 }
 
 function dedupePosts(posts) {

@@ -20,7 +20,7 @@ describe('builder snapshot parsing', () => {
 					title: 'Test Post',
 					description: 'Short summary.',
 					url: 'https://www.builder.io/blog/test-post',
-					publishedAt: '2026-01-20T00:00:00.000Z'
+					publishedAt: '2026-01-20'
 				}
 			]
 		});
@@ -47,10 +47,10 @@ describe('builder snapshot parsing', () => {
 						id: 'bad',
 						title: 'Bad',
 						description: 'Nope',
-						url: 'ftp://builder.io/blog/test'
+						url: 'https://example.com/blog/test'
 					}
 				]
 			})
-		).toThrow(/Builder snapshot:/);
+		).toThrow(/Expected https builder.io\/blog URL/);
 	});
 });

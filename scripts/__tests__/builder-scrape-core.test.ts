@@ -43,7 +43,7 @@ describe('builder scrape core', () => {
 		expect(meta?.authorName).toBe('Alice Moore');
 		expect(meta?.title).toBe('Builder.io Example Post');
 		expect(meta?.description).toBe('A short description for testing.');
-		expect(meta?.publishedAt).toBe('2025-12-19T17:00:00.000Z');
+		expect(meta?.publishedAt).toBe('2025-12-19');
 	});
 
 	it('normalizes canonical URLs', () => {

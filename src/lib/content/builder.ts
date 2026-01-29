@@ -1,8 +1,8 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-const CONTENT_PATH = path.join(process.cwd(), 'content', 'career');
-const SNAPSHOT_FILE = 'content/career/builder.json';
+const SNAPSHOT_FILE = 'data-snapshots/career/builder-posts.json';
+const SNAPSHOT_PATH = path.join(process.cwd(), 'data-snapshots', 'career', 'builder-posts.json');
 
 export interface BuilderPost {
 	id: string;
@@ -41,21 +41,22 @@ const emptySnapshot: BuilderSnapshot = {
 };
 
 export async function loadBuilderSnapshot(): Promise<BuilderSnapshot> {
+	const isCi = Boolean(process.env.CI || process.env.VERCEL);
 	try {
-		const filePath = path.join(CONTENT_PATH, 'builder.json');
-		const content = await fs.readFile(filePath, 'utf-8');
+		const content = await fs.readFile(SNAPSHOT_PATH, 'utf-8');
 		const parsed = JSON.parse(content) as unknown;
-		return parseBuilderSnapshotFile(parsed);
+		const snapshot = parseBuilderSnapshotFile(parsed);
+		if (snapshot.data.length === 0) {
+			return handleSnapshotFailure(isCi, 'Snapshot contains no posts');
+		}
+		return snapshot;
 	} catch (error: any) {
 		if (error?.code === 'ENOENT') {
-			console.warn(`Builder snapshot: ${SNAPSHOT_FILE} not found. Returning empty snapshot.`);
-			return emptySnapshot;
+			return handleSnapshotFailure(isCi, `${SNAPSHOT_FILE} not found`);
 		}
-		if (error instanceof Error && error.message.startsWith('Builder snapshot:')) {
-			throw error;
-		}
-		throw new Error(
-			`Builder snapshot: Failed to load ${SNAPSHOT_FILE}. ${error instanceof Error ? error.message : String(error)}`
+		return handleSnapshotFailure(
+			isCi,
+			error instanceof Error ? error.message : 'Unknown error while loading snapshot'
 		);
 	}
 }
@@ -114,11 +115,11 @@ export function parseBuilderSnapshotFile(value: unknown): BuilderSnapshot {
 		const id = requireNonEmptyString(entry['id'], `data[${index}].id`);
 		const title = requireNonEmptyString(entry['title'], `data[${index}].title`);
 		const description = requireNonEmptyString(entry['description'], `data[${index}].description`);
-		const url = requireUrl(entry['url'], `data[${index}].url`);
+		const url = requireBuilderBlogUrl(entry['url'], `data[${index}].url`);
 		const publishedAtValue = entry['publishedAt'];
 		let publishedAt: string | undefined;
 		if (typeof publishedAtValue !== 'undefined') {
-			publishedAt = requireIsoDate(publishedAtValue, `data[${index}].publishedAt`);
+			publishedAt = requireDateOnly(publishedAtValue, `data[${index}].publishedAt`);
 		}
 
 		return {
@@ -129,6 +130,9 @@ export function parseBuilderSnapshotFile(value: unknown): BuilderSnapshot {
 			...(publishedAt ? { publishedAt } : {})
 		};
 	});
+
+	assertUniqueUrls(data);
+	assertSortedByDate(data);
 
 	return {
 		version,
@@ -167,21 +171,78 @@ function requireIsoDate(value: unknown, label: string): string {
 	return value;
 }
 
-function requireUrl(value: unknown, label: string): string {
+function requireDateOnly(value: unknown, label: string): string {
+	if (typeof value !== 'string' || !value.trim()) {
+		return fail(`Expected YYYY-MM-DD string in ${label}`);
+	}
+	if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+		return fail(`Expected YYYY-MM-DD string in ${label}`);
+	}
+	return value;
+}
+
+function requireBuilderBlogUrl(value: unknown, label: string): string {
 	if (typeof value !== 'string' || !value.trim()) {
 		return fail(`Expected string URL in ${label}`);
 	}
 	try {
 		const parsed = new URL(value);
-		if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
-			return fail(`Expected http(s) URL in ${label}`);
+		if (parsed.protocol !== 'https:') {
+			return fail(`Expected https URL in ${label}`);
+		}
+		if (!['www.builder.io', 'builder.io'].includes(parsed.hostname)) {
+			return fail(`Expected builder.io URL in ${label}`);
+		}
+		if (!parsed.pathname.startsWith('/blog/')) {
+			return fail(`Expected /blog URL in ${label}`);
 		}
 	} catch {
-		return fail(`Expected http(s) URL in ${label}`);
+		return fail(`Expected https builder.io/blog URL in ${label}`);
 	}
 	return value;
 }
 
 function fail(message: string): never {
-	throw new Error(`Builder snapshot: ${message} (${SNAPSHOT_FILE})`);
+	throw new Error(message);
+}
+
+function assertUniqueUrls(data: BuilderPost[]) {
+	const seen = new Set<string>();
+	for (const post of data) {
+		if (seen.has(post.url)) {
+			return fail(`Duplicate url detected: ${post.url}`);
+		}
+		seen.add(post.url);
+	}
+}
+
+function assertSortedByDate(data: BuilderPost[]) {
+	for (let index = 1; index < data.length; index += 1) {
+		const prev = data[index - 1];
+		const next = data[index];
+		if (!prev || !next) continue;
+		if (comparePosts(prev, next) > 0) {
+			return fail('Expected data sorted by publishedAt descending with undated posts last');
+		}
+	}
+}
+
+function comparePosts(a: BuilderPost, b: BuilderPost): number {
+	const aDate = a.publishedAt ?? '';
+	const bDate = b.publishedAt ?? '';
+	if (!aDate && !bDate) return 0;
+	if (!aDate) return 1;
+	if (!bDate) return -1;
+	if (aDate === bDate) return 0;
+	return aDate > bDate ? -1 : 1;
+}
+
+function handleSnapshotFailure(isCi: boolean, reason: string): BuilderSnapshot {
+	if (isCi) {
+		throw new Error('Builder snapshot missing/invalid. Run script to regenerate.');
+	}
+	console.warn(
+		`Builder snapshot invalid: ${reason}. Run \`node scripts/scrape-builderio.mjs\``
+	);
+	return emptySnapshot;
 }

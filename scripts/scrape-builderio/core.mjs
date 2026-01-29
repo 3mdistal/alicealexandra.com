@@ -80,7 +80,7 @@ export function extractBlogMetadata(html) {
 	const jsonLdMeta = pickJsonLdMetadata(jsonLdObjects);
 
 	const title = jsonLdMeta?.title ?? ogTitle ?? pageTitle ?? '';
-	const description = metaDescription ?? ogDescription ?? jsonLdMeta?.description ?? '';
+	const description = jsonLdMeta?.description ?? metaDescription ?? ogDescription ?? '';
 	const authorName = jsonLdMeta?.authorName ?? authorMeta ?? '';
 	const publishedAt = jsonLdMeta?.datePublished ?? publishedMeta;
 
