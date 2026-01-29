@@ -76,7 +76,7 @@ try {
 	const previousSnapshot = await readPreviousSnapshot(outputPath);
 	const generatedAt = new Date().toISOString();
 	const dataUpdatedAt = hasSameData(previousSnapshot?.data, data)
-		? previousSnapshot?.dataUpdatedAt ?? generatedAt
+		? (previousSnapshot?.dataUpdatedAt ?? generatedAt)
 		: generatedAt;
 
 	const payload = {

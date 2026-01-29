@@ -5,10 +5,7 @@
 
 <svelte:head>
 	<title>Builder.io Work | Career</title>
-	<meta
-		name="description"
-		content="This page has moved to the Builder.io career archive."
-	/>
+	<meta name="description" content="This page has moved to the Builder.io career archive." />
 	<link rel="canonical" href="https://alicealexandra.com/career/builder" />
 </svelte:head>
 

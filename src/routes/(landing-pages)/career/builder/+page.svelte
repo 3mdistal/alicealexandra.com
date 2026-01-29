@@ -60,9 +60,7 @@
 				</p>
 			{/if}
 			<p class="section-subtitle">Selected writing published on Builder.io&apos;s blog.</p>
-			<p class="disclaimer">
-				This list is updated manually and may not include every post.
-			</p>
+			<p class="disclaimer">This list is updated manually and may not include every post.</p>
 			{#if posts.length === 0}
 				<p class="empty-state">Posts are being gathered. Please check back soon.</p>
 			{:else}
