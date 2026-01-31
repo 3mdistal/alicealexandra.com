@@ -38,6 +38,7 @@ CONTENT_REF=feature/my-branch pnpm setup:content --force
 ### Tests
 
 - `pnpm test` (Vitest)
+- `pnpm test:e2e` (Playwright end-to-end tests)
 
 Run a single unit test:
 
