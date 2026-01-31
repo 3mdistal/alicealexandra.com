@@ -27,7 +27,7 @@ export default defineConfig({
 		// CI should stub content before this runs.
 		// Use the dev server for reliability in CI.
 		// Use strictPort to avoid silently picking a different port.
-		command: 'pnpm dev -- --host 127.0.0.1 --port 4173 --strictPort',
+		command: 'pnpm dev --host 127.0.0.1 --port 4173 --strictPort',
 		url: 'http://127.0.0.1:4173',
 		reuseExistingServer: !isCI,
 		timeout: 120000
