@@ -146,6 +146,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Build
+        run: pnpm build
+
       - name: Install Playwright browsers (CI)
         run: pnpm exec playwright install --with-deps chromium
 
