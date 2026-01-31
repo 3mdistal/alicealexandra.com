@@ -24,3 +24,8 @@ vite.config.ts.timestamp-*
 # Content (cloned from private repo during build)
 # NOTE: This only ignores the top-level content/ directory, not src/lib/content/
 /content/
+
+# Playwright
+/playwright-report/
+/test-results/
+/blob-report/
