@@ -5,26 +5,27 @@
 
 <svelte:head>
 	<title>Builder.io Work | Career</title>
-	<meta
-		name="description"
-		content="Work and content from Alice Alexandra Moore's time at Builder.io."
-	/>
+	<meta name="description" content="This page has moved to the Builder.io career archive." />
+	<link rel="canonical" href="https://alicealexandra.com/career/builder" />
 </svelte:head>
 
 <main class="career-detail-surface" style="--bg-color: {background}; --accent-color: {accent}">
 	<div class="hero">
 		<div class="hero-content">
 			<h1 class="accent-color">
-				Work from <span class="highlight">Builder.io</span>
+				Builder.io work moved to <span class="highlight">/career/builder</span>
 			</h1>
-			<p class="subtitle">Content coming soon from my current role at Builder.io (2025-present).</p>
+			<p class="subtitle">Use the updated page for the latest Builder.io posts and writing.</p>
 		</div>
 	</div>
 
 	<div class="content">
 		<div class="placeholder">
-			<h2 class="accent-color">Coming Soon</h2>
-			<p>This page will showcase content and technical writing from my work at Builder.io.</p>
+			<p>
+				The Builder.io archive now lives at
+				<a class="inline-link" href="/career/builder">/career/builder</a>.
+			</p>
+			<a href="/career/builder" class="primary-link">Go to Builder.io work →</a>
 		</div>
 	</div>
 
@@ -61,7 +62,7 @@
 	h1 {
 		margin-bottom: 1rem;
 		font-weight: 500;
-		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-size: clamp(2rem, 5vw, 3.25rem);
 		line-height: 1.2;
 	}
 
@@ -81,26 +82,46 @@
 	.content {
 		margin: 0 auto;
 		padding: 4rem 2rem;
-		max-width: 1200px;
+		max-width: 900px;
 	}
 
 	.placeholder {
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 		border-radius: 10px;
 		background-color: #f4efea;
-		padding: 3rem;
+		padding: 2.5rem;
 		text-align: center;
 	}
 
-	.placeholder h2 {
-		margin-bottom: 1rem;
-		font-size: 2rem;
+	.placeholder p {
+		margin-bottom: 1.5rem;
+		color: #555;
+		font-size: 1.125rem;
+		line-height: 1.6;
 	}
 
-	.placeholder p {
-		margin: 0;
-		color: #666;
-		font-size: 1.125rem;
+	.inline-link {
+		color: #642e1a;
+		font-weight: 600;
+		text-decoration: underline;
+	}
+
+	.primary-link {
+		display: inline-block;
+		transition: all 0.2s ease;
+		border: 2px solid #642e1a;
+		border-radius: 8px;
+		background-color: #f4efea;
+		padding: 0.6rem 1.2rem;
+		color: #642e1a;
+		font-weight: 500;
+		text-decoration: none;
+	}
+
+	.primary-link:hover {
+		transform: translateY(-2px);
+		background-color: #642e1a;
+		color: white;
 	}
 
 	.footer {
@@ -139,21 +160,7 @@
 		}
 
 		.placeholder {
-			padding: 4rem;
-		}
-
-		.placeholder h2 {
-			font-size: 2.5rem;
-		}
-
-		.placeholder p {
-			font-size: 1.25rem;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.content {
-			padding: 8rem 6rem;
+			padding: 3.5rem;
 		}
 	}
 </style>
