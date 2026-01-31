@@ -25,7 +25,8 @@ export default defineConfig({
 
 	webServer: {
 		// CI should stub content before this runs.
-		command: 'pnpm preview -- --host 127.0.0.1 --port 4173',
+		// Use strictPort to avoid silently picking a different port in CI.
+		command: 'pnpm preview -- --host 127.0.0.1 --port 4173 --strictPort',
 		url: 'http://127.0.0.1:4173',
 		reuseExistingServer: !isCI,
 		timeout: 120000
