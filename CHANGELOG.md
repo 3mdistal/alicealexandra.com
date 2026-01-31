@@ -1,3 +1,9 @@
+## 31 Jan 2026
+
+**Docs**
+
+- Updated `README.md` to reflect the current static content architecture and repo philosophy. (#71)
+
 ## 28 Jan 2026
 
 **Patches**
