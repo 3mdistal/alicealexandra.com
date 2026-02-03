@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import { accentColors, backgroundColors } from '$lib/stores';
 	import Button from '$lib/icons/button.svelte';
 	import type { StudioCard } from '$lib/content/studio';
 
@@ -161,7 +160,6 @@
 	aria-live="polite"
 	aria-expanded="false"
 	class="studio-card"
-	style={`--studio-bg-color: ${$accentColors.studio}; --studio-accent-color: ${$backgroundColors.studio}`}
 >
 	<!-- Front of Card -->
 	<div class="card-front" bind:this={front}>
@@ -183,17 +181,11 @@
 		</p>
 
 		{#if loading}
-			<Button
-				text="please hold..."
-				accent={$accentColors.studio}
-				background={$backgroundColors.studio}
-			/>
+			<Button text="please hold..." />
 		{:else}
 			<Button
 				{url}
 				text={buttonText}
-				accent={$backgroundColors.studio}
-				background={$accentColors.studio}
 				on:clickMessage={handleClickMessage}
 				on:focusMessage={handleFocusMessage}
 			/>
@@ -209,6 +201,7 @@
 
 <style>
 	.studio-card {
+		--studio-card-bg: var(--color-accent);
 		display: flex;
 		position: relative;
 		justify-content: center;
@@ -221,6 +214,12 @@
 		overflow: hidden;
 	}
 
+	@media (prefers-color-scheme: dark) {
+		.studio-card {
+			--studio-card-bg: var(--color-bg);
+		}
+	}
+
 	.card-front,
 	.card-back {
 		display: flex;
@@ -229,7 +228,7 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 1.5rem;
-		background-color: var(--studio-bg-color);
+		background-color: var(--studio-card-bg);
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
@@ -257,7 +256,7 @@
 		z-index: 10;
 		border: 2px solid white;
 		border-radius: 50%;
-		background-color: var(--studio-bg-color);
+		background-color: var(--studio-card-bg);
 		width: 4.5rem;
 		height: 4.5rem;
 	}
@@ -301,7 +300,11 @@
 	.gradient-overlay {
 		position: absolute;
 		opacity: 0.8;
-		background: linear-gradient(to top, var(--studio-bg-color), transparent);
+		background: linear-gradient(
+			to top,
+			color-mix(in srgb, var(--studio-card-bg) 92%, black),
+			transparent
+		);
 		width: 100%;
 		height: 100%;
 	}
@@ -325,7 +328,7 @@
 	}
 
 	.pole {
-		background-color: var(--studio-bg-color);
+		background-color: var(--studio-card-bg);
 		width: 0.25rem;
 		height: 5%;
 	}
