@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 
-	export let accent: string;
+	export let accent: string = 'var(--color-accent)';
 	export let posts: BlogPostMeta[];
 
 	onMount(async () => {

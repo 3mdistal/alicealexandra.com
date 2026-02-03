@@ -137,6 +137,8 @@
 	});
 </script>
 
+<svelte:body data-theme="news" />
+
 <svelte:head>
 	<title>News</title>
 	<meta name="description" content="Recent changes and updates to Tempo Immaterial." />
@@ -287,14 +289,14 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background-color: #eeeded;
+		background-color: var(--color-bg);
 		padding: 6rem 1rem 8rem;
 		min-height: 100lvh;
 	}
 
 	h1 {
 		margin-bottom: 2.5rem;
-		color: #726a12;
+		color: var(--color-accent);
 		font-weight: 500;
 		font-size: 3.5rem;
 		letter-spacing: -0.02em;

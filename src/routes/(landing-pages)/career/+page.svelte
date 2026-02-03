@@ -5,9 +5,9 @@
 
 	const Rabbit =
 		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/rabbit-in-hat.webp';
-	const accent = '#642e1a';
-	const background = '#dcc9c6';
 </script>
+
+<svelte:body data-theme="career" />
 
 <svelte:head>
 	<title>Career</title>
@@ -17,22 +17,21 @@
 	/>
 </svelte:head>
 
-<div class="career-page-surface" style="--bg-color: {background}; --accent-color: {accent}">
+<div class="career-page-surface">
 	<LandingPage
 		header="let's get technical."
 		description="A digital notebook for all my tech advice and ramblings,
                 from both my professional life and my wonky experiments."
 		src={Rabbit}
 		alt="A painting of a rabbit coming out of a hat."
-		{accent}
 	>
-		<Button slot="button" text="Explore." url="#content" {accent} {background} />
+		<Button slot="button" text="Explore." url="#content" />
 	</LandingPage>
-	<Career {accent} {background} />
+	<Career />
 </div>
 
 <style>
 	.career-page-surface {
-		background-color: var(--bg-color);
+		background-color: var(--color-bg);
 	}
 </style>

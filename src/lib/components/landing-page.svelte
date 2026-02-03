@@ -10,8 +10,8 @@
 	export let description = '';
 	export let noPadding = false;
 	export let flexReverse = false;
-	export let accent = '';
-	export let background = '';
+	export let accent = 'var(--color-accent)';
+	export let background = 'var(--color-bg)';
 	export let textWhite = false;
 
 	let container: HTMLDivElement;
@@ -42,10 +42,18 @@
 	});
 </script>
 
-<div bind:this={container} class="container" style="background-color: {background}">
+<div
+	bind:this={container}
+	class="container"
+	style={background ? `--landing-bg: ${background}` : ''}
+>
 	<div class="content-wrapper" class:no-padding={noPadding} class:flex-reverse={flexReverse}>
-		<div bind:this={bordered} class="bordered-content" style="border-color: {accent}">
-			<h2 bind:this={topHeading} style="color: {accent}">
+		<div
+			bind:this={bordered}
+			class="bordered-content"
+			style={accent ? `--landing-accent: ${accent}` : ''}
+		>
+			<h2 bind:this={topHeading}>
 				{header}
 			</h2>
 
@@ -74,6 +82,7 @@
 
 <style>
 	.container {
+		background-color: var(--landing-bg, var(--color-bg));
 		padding-top: 10rem;
 	}
 
@@ -111,7 +120,7 @@
 
 	.bordered-content {
 		box-sizing: border-box;
-		border-left: 4px solid;
+		border-left: 4px solid var(--landing-accent, var(--color-accent));
 		border-radius: 0 1rem 1rem 0;
 		background: linear-gradient(
 			135deg,
@@ -141,6 +150,7 @@
 
 	.bordered-content h2 {
 		margin-bottom: 1.25rem;
+		color: var(--landing-accent, var(--color-accent));
 		font-size: 2.5rem;
 	}
 

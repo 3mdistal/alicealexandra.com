@@ -5,8 +5,8 @@
 	export let text = '';
 	export let target = '';
 	export let type = '';
-	export let accent = '';
-	export let background = '';
+	export let accent = 'var(--color-accent)';
+	export let background = 'var(--color-surface)';
 
 	const dispatch = createEventDispatcher();
 

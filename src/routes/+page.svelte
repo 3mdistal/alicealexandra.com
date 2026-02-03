@@ -10,6 +10,8 @@
 	});
 </script>
 
+<svelte:body data-theme="home" />
+
 <svelte:head>
 	<title>Tempo Immaterial</title>
 	<meta
@@ -54,7 +56,7 @@
 
 <style>
 	.homepage {
-		background-color: #fafafa;
+		background-color: var(--color-bg);
 	}
 
 	.main-container {

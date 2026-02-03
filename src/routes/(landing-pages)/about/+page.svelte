@@ -4,9 +4,9 @@
 
 	const Hand =
 		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/flowers-in-hand.webp';
-	const accent = '#271647';
-	const background = '#beb5ca';
 </script>
+
+<svelte:body data-theme="about" />
 
 <svelte:head>
 	<title>hymns for calliope</title>
@@ -16,7 +16,8 @@
 	/>
 </svelte:head>
 
-<div style="background-color: {background}">
+
+<div>
 	<LandingPage
 		header="i'm alice, a digital creator."
 		description="Welcome to Tempo Immaterial, a place that both showcases my
@@ -25,8 +26,7 @@
                 the heart to elevate new and unique projects."
 		src={Hand}
 		alt="A painted hand holding out flowers."
-		{accent}
 		noPadding
 	/>
-	<About {accent} />
+	<About />
 </div>

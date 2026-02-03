@@ -32,6 +32,8 @@
 	});
 </script>
 
+<svelte:body data-theme="studio" />
+
 <svelte:head>
 	<title>Studio</title>
 	<meta
@@ -97,7 +99,7 @@
 <style>
 	.studio-container {
 		position: relative;
-		background-color: #d6ddf0;
+		background-color: var(--color-bg);
 		min-height: 100lvh;
 		overflow: hidden;
 	}

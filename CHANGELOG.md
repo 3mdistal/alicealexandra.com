@@ -1,3 +1,9 @@
+## 03 Feb 2026
+
+**Enhancements**
+
+- Added a site-wide design token system with theme mappings for home/about/studio/career/blog/news pages. (#76)
+
 ## 28 Jan 2026
 
 **Patches**
