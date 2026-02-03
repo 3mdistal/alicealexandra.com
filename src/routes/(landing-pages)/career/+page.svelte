@@ -15,7 +15,7 @@
 	/>
 </svelte:head>
 
-<div class="career-page-surface" data-theme="career">
+<div class="career-page-surface">
 	<LandingPage
 		header="let's get technical."
 		description="A digital notebook for all my tech advice and ramblings,

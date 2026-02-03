@@ -25,9 +25,6 @@
 
 	function animateOut() {
 		if (!gsap) {
-			if (typeof document !== 'undefined') {
-				document.body.style.backgroundColor = background;
-			}
 			navigate();
 			return;
 		}
@@ -39,14 +36,6 @@
 			ease: 'power4.in',
 			duration: 0.75
 		});
-		tl.to(
-			document.body,
-			{
-				backgroundColor: background,
-				delay: 0.25
-			},
-			'<'
-		);
 	}
 
 	function handleMouseEnter() {

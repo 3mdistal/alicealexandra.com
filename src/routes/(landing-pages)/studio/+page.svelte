@@ -74,7 +74,7 @@
 	<meta name="twitter:image:alt" content="The studio page of alicealexandra.com." />
 </svelte:head>
 
-<div class="studio-container" use:populate data-theme="studio">
+<div class="studio-container" use:populate>
 	<h1 class="studio-title">studio</h1>
 
 	<img

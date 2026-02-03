@@ -42,7 +42,7 @@
 	<meta name="twitter:image:alt" content="The homepage of alicealexandra.com." />
 </svelte:head>
 
-<div class="main-container homepage" data-theme="home">
+<div class="main-container homepage">
 	<!-- SVG clipPath defs must exist before homepage sections render to avoid a flash of unclipped blocks -->
 	<Svgs />
 	<SiteTitle />

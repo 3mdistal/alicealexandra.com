@@ -142,7 +142,7 @@
 	<meta name="description" content="Recent changes and updates to Tempo Immaterial." />
 </svelte:head>
 
-<div class="container" data-theme="news">
+<div class="container">
 	<h1>News</h1>
 	<div class="tabs" role="tablist" aria-label="News sections">
 		{#each MAIN_TABS as tab (tab.id)}
@@ -313,31 +313,31 @@
 
 	.tab-button {
 		backdrop-filter: blur(8px);
-		transition: all 0.2s ease;
+		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
-		border: 1px solid rgba(114, 106, 18, 0.25);
+		border: 1px solid var(--color-border);
 		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.7);
+		background: var(--color-surface);
 		padding: 0.6rem 1rem;
-		color: #4b460d;
+		color: var(--color-text-muted);
 		font-weight: 500;
 		letter-spacing: 0.01em;
 
 		&:hover {
 			transform: translateY(-1px);
-			filter: brightness(0.95);
-			box-shadow: 0 4px 12px rgba(114, 106, 18, 0.08);
+			filter: none;
+			box-shadow: var(--shadow-1);
 		}
 	}
 
 	.tab-button.active {
-		border-color: rgba(114, 106, 18, 0.5);
-		background: rgba(114, 106, 18, 0.12);
-		color: #3d390b;
+		border-color: var(--color-border);
+		background: var(--color-surface-muted);
+		color: var(--color-text);
 	}
 
 	.tab-button:focus-visible {
-		outline: 2px solid rgba(114, 106, 18, 0.7);
+		outline: 2px solid var(--color-accent);
 		outline-offset: 2px;
 	}
 
@@ -356,24 +356,24 @@
 	}
 
 	.subtab-button {
-		transition: all 0.2s ease;
+		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
-		border: 1px solid rgba(114, 106, 18, 0.18);
+		border: 1px solid var(--color-border);
 		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.55);
+		background: var(--color-surface-muted);
 		padding: 0.4rem 0.8rem;
-		color: rgba(75, 70, 13, 0.95);
+		color: var(--color-text-muted);
 		font-weight: 450;
 
 		&:hover {
-			filter: brightness(0.95);
-			background: rgba(255, 255, 255, 0.8);
+			filter: none;
+			background: var(--color-surface);
 		}
 	}
 
 	.subtab-button.active {
-		border-color: rgba(114, 106, 18, 0.45);
-		background: rgba(114, 106, 18, 0.1);
+		border-color: var(--color-border);
+		background: color-mix(in srgb, var(--color-accent) 18%, var(--color-surface-muted));
 	}
 
 	.entries {
@@ -386,10 +386,10 @@
 		display: grid;
 		grid-template-columns: 140px 1fr;
 		gap: 1.25rem;
-		transition: all 0.2s ease;
-		border: 1px solid rgba(114, 106, 18, 0.12);
+		transition: all var(--duration-base) var(--ease-standard);
+		border: 1px solid var(--color-border);
 		border-radius: 16px;
-		background: rgba(255, 255, 255, 0.6);
+		background: var(--color-surface);
 		padding: 1.25rem;
 	}
 
@@ -428,37 +428,37 @@
 			color 160ms ease;
 		pointer-events: none;
 		content: '→';
-		color: rgba(75, 70, 13, 0.55);
+		color: var(--color-text-muted);
 		font-size: 1.25rem;
 	}
 
 	.entry--link:hover {
 		transform: translateY(-2px);
 		filter: none;
-		box-shadow: 0 12px 24px rgba(18, 16, 0, 0.06);
-		border-color: rgba(114, 106, 18, 0.25);
-		background: rgba(255, 255, 255, 0.85);
+		box-shadow: var(--shadow-2);
+		border-color: var(--color-border);
+		background: var(--color-surface);
 	}
 
 	.entry--link.entry--studio:hover::after {
 		transform: translateY(-50%) translateX(0);
 		opacity: 1;
-		color: rgba(75, 70, 13, 0.75);
+		color: var(--color-text);
 	}
 
 	.entry--link:focus-visible {
-		outline: 2px solid rgba(114, 106, 18, 0.7);
+		outline: 2px solid var(--color-accent);
 		outline-offset: 3px;
 	}
 
 	.entry--link.entry--studio:focus-visible::after {
 		transform: translateY(-50%) translateX(0);
 		opacity: 1;
-		color: rgba(75, 70, 13, 0.75);
+		color: var(--color-text);
 	}
 
 	.entry-date {
-		color: rgba(75, 70, 13, 0.7);
+		color: var(--color-text-muted);
 		font-size: 0.95rem;
 		font-variant-numeric: tabular-nums;
 	}
@@ -494,7 +494,7 @@
 	}
 
 	.entry-category {
-		color: rgba(75, 70, 13, 0.78);
+		color: var(--color-text-muted);
 		font-weight: 600;
 		font-size: 0.92rem;
 		line-height: 1.2;
@@ -504,11 +504,11 @@
 	.pill {
 		display: inline-flex;
 		align-items: center;
-		border: 1px solid rgba(114, 106, 18, 0.16);
+		border: 1px solid var(--color-border);
 		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.55);
+		background: var(--color-surface-muted);
 		padding: 0.18rem 0.5rem;
-		color: rgba(75, 70, 13, 0.82);
+		color: var(--color-text-muted);
 		font-size: 0.78rem;
 		letter-spacing: 0.02em;
 		white-space: nowrap;

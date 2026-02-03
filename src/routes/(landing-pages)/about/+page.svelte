@@ -14,8 +14,7 @@
 	/>
 </svelte:head>
 
-
-<div data-theme="about">
+<div>
 	<LandingPage
 		header="i'm alice, a digital creator."
 		description="Welcome to Tempo Immaterial, a place that both showcases my

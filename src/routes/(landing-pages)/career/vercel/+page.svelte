@@ -5,7 +5,6 @@
 	export let data: { publications: Publication[] };
 
 	const { publications } = data;
-
 </script>
 
 <svelte:head>
@@ -13,7 +12,7 @@
 	<meta name="description" content="The work accomplished at Vercel by Alice Alexandra Moore." />
 </svelte:head>
 
-<main class="career-detail-surface" data-theme="career">
+<main class="career-detail-surface">
 	<div class="hero">
 		<div class="hero-content">
 			<h1 class="accent-color">

@@ -6,7 +6,7 @@
 	/>
 </svelte:head>
 
-<main class="career-detail-surface" data-theme="career">
+<main class="career-detail-surface">
 	<div class="hero">
 		<div class="hero-content">
 			<h1 class="accent-color">

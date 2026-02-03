@@ -34,7 +34,7 @@
 	/>
 </svelte:head>
 
-<div class="opacity-0 blog-page" data-theme="blog">
+<div class="opacity-0 blog-page">
 	<div class="blog-content">
 		<div class="blog-wrapper">
 			<Blog posts={data.posts} />
