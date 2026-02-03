@@ -31,6 +31,41 @@ interface PostcardFrontmatter {
 	notionId: string;
 }
 
+export function normalizeHeroImage(value: unknown): string | undefined {
+	if (typeof value !== 'string') return undefined;
+	let trimmed = value.trim();
+	if (!trimmed) return undefined;
+
+	if (
+		(trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+		(trimmed.startsWith("'") && trimmed.endsWith("'"))
+	) {
+		trimmed = trimmed.slice(1, -1).trim();
+	}
+
+	const match = trimmed.match(/https?:\/\/\S+/);
+	if (!match) return undefined;
+
+	let url = match[0].trim();
+	const secondMatch = Array.from(url.matchAll(/https?:\/\//g));
+	const nextUrlMatch = secondMatch[1];
+	if (nextUrlMatch?.index !== undefined) {
+		url = url.slice(0, nextUrlMatch.index);
+	}
+
+	if (!url) return undefined;
+	if (/[\s'")]/.test(url)) return undefined;
+
+	try {
+		const parsed = new URL(url);
+		if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return undefined;
+	} catch {
+		return undefined;
+	}
+
+	return url;
+}
+
 function parseFrontmatter(content: string): { frontmatter: PostcardFrontmatter; body: string } {
 	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
 	const match = content.match(frontmatterRegex);
@@ -75,7 +110,15 @@ export async function loadPostcardsMeta(): Promise<PostcardMeta[]> {
 	const metadataPath = path.join(CONTENT_PATH, 'metadata.json');
 	try {
 		const content = await fs.readFile(metadataPath, 'utf-8');
-		return JSON.parse(content);
+		const metadata = JSON.parse(content) as PostcardMeta[];
+		return metadata.map((postcard) => {
+			const heroImage = normalizeHeroImage(postcard.heroImage);
+			if (!heroImage) {
+				const { heroImage: _heroImage, ...rest } = postcard;
+				return rest;
+			}
+			return { ...postcard, heroImage };
+		});
 	} catch (err: any) {
 		// If the postcards folder hasn't been added to teenylilcontent yet, don't fail the build.
 		// This keeps the /studio/postcards page working (it will show the empty state).
@@ -88,10 +131,11 @@ export async function loadPostcardsMeta(): Promise<PostcardMeta[]> {
  * Load a single postcard by slug (for detail page)
  */
 export async function loadPostcardBySlug(slug: string): Promise<Postcard | null> {
+	const filePath = path.join(CONTENT_PATH, `${slug}.md`);
 	try {
-		const filePath = path.join(CONTENT_PATH, `${slug}.md`);
 		const fileContent = await fs.readFile(filePath, 'utf-8');
 		const { frontmatter, body } = parseFrontmatter(fileContent);
+		const heroImage = normalizeHeroImage(frontmatter.heroImage);
 
 		const base: Postcard = {
 			id: frontmatter.notionId,
@@ -103,8 +147,10 @@ export async function loadPostcardBySlug(slug: string): Promise<Postcard | null>
 			content: body
 		};
 
-		return frontmatter.heroImage ? { ...base, heroImage: frontmatter.heroImage } : base;
-	} catch {
-		return null;
+		return heroImage ? { ...base, heroImage } : base;
+	} catch (err: any) {
+		if (err?.code === 'ENOENT') return null;
+		const message = err instanceof Error ? err.message : String(err);
+		throw new Error(`Failed to load postcard "${slug}" from ${filePath}: ${message}`);
 	}
 }
