@@ -103,7 +103,7 @@
 	}
 
 	[data-theme='home'] {
-		--color-bg: #0b0f1a;
+		--color-bg: #0b0b0b;
 		--color-surface: rgba(255, 255, 255, 0.06);
 		--color-surface-muted: rgba(255, 255, 255, 0.09);
 		--color-text: #f3f4f6;
@@ -112,11 +112,11 @@
 		--color-accent-strong: #cbd5e1;
 		--color-border: rgba(226, 232, 240, 0.22);
 
-		--home-about-bg: #2a1f3a;
-		--home-studio-bg: #121a2c;
-		--home-career-bg: #2a1c19;
-		--home-blog-bg: #1a1f2c;
-		--home-news-bg: #1d1b12;
+		--home-about-bg: #130b1e;
+		--home-studio-bg: #193339;
+		--home-career-bg: #532f13;
+		--home-blog-bg: #686b78;
+		--home-news-bg: #3a171a;
 
 		--home-about-label: rgba(243, 244, 246, 0.86);
 		--home-studio-label: rgba(243, 244, 246, 0.88);
@@ -126,52 +126,57 @@
 	}
 
 	[data-theme='about'] {
-		--color-bg: #1c1524;
-		--color-surface: #241b2f;
-		--color-text: #f0edf5;
-		--color-text-muted: #c6bfd5;
-		--color-accent: #d4c5ff;
-		--color-accent-strong: #bca8ff;
-		--color-border: rgba(212, 197, 255, 0.25);
+		--color-bg: #130b1e;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
 	}
 
 	[data-theme='studio'] {
-		--color-bg: #121a2c;
-		--color-surface: #1a2338;
-		--color-text: #eef2ff;
-		--color-text-muted: #c7d2fe;
-		--color-accent: #a5b4fc;
-		--color-accent-strong: #818cf8;
-		--color-border: rgba(129, 140, 248, 0.3);
+		--color-bg: #193339;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
 	}
 
 	[data-theme='career'] {
-		--color-bg: #201513;
-		--color-surface: #2a1c19;
-		--color-text: #f1e9e5;
-		--color-text-muted: #d2c1b8;
-		--color-accent: #f0b28d;
-		--color-accent-strong: #f4c1a0;
-		--color-border: rgba(240, 178, 141, 0.25);
+		--color-bg: #532f13;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
 	}
 
 	[data-theme='blog'] {
-		--color-bg: #1a1f2c;
-		--color-surface: rgba(255, 255, 255, 0.08);
-		--color-text: #f8fafc;
-		--color-text-muted: #e2e8f0;
-		--color-accent: #e0e7ff;
-		--color-accent-strong: #c7d2fe;
-		--color-border: rgba(199, 210, 254, 0.3);
+		--color-bg: #686b78;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
 	}
 
 	[data-theme='news'] {
-		--color-bg: #1d1b12;
-		--color-surface: rgba(255, 255, 255, 0.08);
-		--color-text: #f7f3e5;
-		--color-text-muted: rgba(247, 243, 229, 0.7);
-		--color-accent: #f5e08b;
-		--color-accent-strong: #f2d66b;
-		--color-border: rgba(245, 224, 139, 0.3);
+		--color-bg: #3a171a;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
 	}
 }
