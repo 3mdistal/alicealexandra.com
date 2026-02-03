@@ -8,14 +8,12 @@
 
 </script>
 
-<svelte:body data-theme="career" />
-
 <svelte:head>
 	<title>Vercel Work | Career</title>
 	<meta name="description" content="The work accomplished at Vercel by Alice Alexandra Moore." />
 </svelte:head>
 
-<main class="career-detail-surface">
+<main class="career-detail-surface" data-theme="career">
 	<div class="hero">
 		<div class="hero-content">
 			<h1 class="accent-color">

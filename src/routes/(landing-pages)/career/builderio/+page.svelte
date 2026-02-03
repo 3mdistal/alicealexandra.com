@@ -1,5 +1,3 @@
-<svelte:body data-theme="career" />
-
 <svelte:head>
 	<title>Builder.io Work | Career</title>
 	<meta
@@ -8,7 +6,7 @@
 	/>
 </svelte:head>
 
-<main class="career-detail-surface">
+<main class="career-detail-surface" data-theme="career">
 	<div class="hero">
 		<div class="hero-content">
 			<h1 class="accent-color">

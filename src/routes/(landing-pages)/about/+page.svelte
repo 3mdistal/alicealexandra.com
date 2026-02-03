@@ -6,8 +6,6 @@
 		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/flowers-in-hand.webp';
 </script>
 
-<svelte:body data-theme="about" />
-
 <svelte:head>
 	<title>hymns for calliope</title>
 	<meta
@@ -17,7 +15,7 @@
 </svelte:head>
 
 
-<div>
+<div data-theme="about">
 	<LandingPage
 		header="i'm alice, a digital creator."
 		description="Welcome to Tempo Immaterial, a place that both showcases my

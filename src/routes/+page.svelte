@@ -10,8 +10,6 @@
 	});
 </script>
 
-<svelte:body data-theme="home" />
-
 <svelte:head>
 	<title>Tempo Immaterial</title>
 	<meta
@@ -44,7 +42,7 @@
 	<meta name="twitter:image:alt" content="The homepage of alicealexandra.com." />
 </svelte:head>
 
-<div class="main-container homepage">
+<div class="main-container homepage" data-theme="home">
 	<!-- SVG clipPath defs must exist before homepage sections render to avoid a flash of unclipped blocks -->
 	<Svgs />
 	<SiteTitle />

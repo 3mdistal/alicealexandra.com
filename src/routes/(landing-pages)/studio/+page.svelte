@@ -32,8 +32,6 @@
 	});
 </script>
 
-<svelte:body data-theme="studio" />
-
 <svelte:head>
 	<title>Studio</title>
 	<meta
@@ -76,7 +74,7 @@
 	<meta name="twitter:image:alt" content="The studio page of alicealexandra.com." />
 </svelte:head>
 
-<div class="studio-container" use:populate>
+<div class="studio-container" use:populate data-theme="studio">
 	<h1 class="studio-title">studio</h1>
 
 	<img

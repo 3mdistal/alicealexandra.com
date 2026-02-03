@@ -26,8 +26,6 @@
 	});
 </script>
 
-<svelte:body data-theme="blog" />
-
 <svelte:head>
 	<title>Blog</title>
 	<meta
@@ -36,7 +34,7 @@
 	/>
 </svelte:head>
 
-<div class="opacity-0 blog-page">
+<div class="opacity-0 blog-page" data-theme="blog">
 	<div class="blog-content">
 		<div class="blog-wrapper">
 			<Blog posts={data.posts} />

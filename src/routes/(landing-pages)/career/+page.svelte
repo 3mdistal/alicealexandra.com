@@ -7,8 +7,6 @@
 		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/rabbit-in-hat.webp';
 </script>
 
-<svelte:body data-theme="career" />
-
 <svelte:head>
 	<title>Career</title>
 	<meta
@@ -17,7 +15,7 @@
 	/>
 </svelte:head>
 
-<div class="career-page-surface">
+<div class="career-page-surface" data-theme="career">
 	<LandingPage
 		header="let's get technical."
 		description="A digital notebook for all my tech advice and ramblings,

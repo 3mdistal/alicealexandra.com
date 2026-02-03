@@ -137,14 +137,12 @@
 	});
 </script>
 
-<svelte:body data-theme="news" />
-
 <svelte:head>
 	<title>News</title>
 	<meta name="description" content="Recent changes and updates to Tempo Immaterial." />
 </svelte:head>
 
-<div class="container">
+<div class="container" data-theme="news">
 	<h1>News</h1>
 	<div class="tabs" role="tablist" aria-label="News sections">
 		{#each MAIN_TABS as tab (tab.id)}
