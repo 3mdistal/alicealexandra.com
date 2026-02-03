@@ -40,12 +40,17 @@ li {
 }
 
 body {
-	background-color: var(--color-bg);
+	background-color: var(--color-neutral-50);
 	overflow-x: hidden;
-	color: var(--color-text);
 	font-weight: var(--font-weight-light);
 	line-height: var(--line-height-body);
 	font-family: var(--font-sans);
+}
+
+.app {
+	background-color: var(--color-bg);
+	min-height: 100vh;
+	color: var(--color-text);
 }
 
 img {

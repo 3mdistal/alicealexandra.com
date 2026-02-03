@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { page } from '$app/state';
+	import { page } from '$app/stores';
 
 	function themeFromPathname(
 		pathname: string
@@ -16,11 +16,7 @@
 
 	let theme: 'home' | 'about' | 'studio' | 'career' | 'blog' | 'news' = 'home';
 
-	$: theme = themeFromPathname(page.url.pathname);
-
-	$: if (typeof document !== 'undefined') {
-		document.body.dataset['theme'] = theme;
-	}
+	$: theme = themeFromPathname($page.url.pathname);
 </script>
 
 <svelte:head>
@@ -29,6 +25,11 @@
 	<meta name="viewport" content="width=device-width" />
 </svelte:head>
 
-<div data-sveltekit-preload-data="hover" data-sveltekit-preload-code="eager">
+<div
+	class="app"
+	data-theme={theme}
+	data-sveltekit-preload-data="hover"
+	data-sveltekit-preload-code="eager"
+>
 	<slot />
 </div>
