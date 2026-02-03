@@ -44,8 +44,8 @@ body {
 	overflow-x: hidden;
 	color: var(--color-text);
 	font-weight: var(--font-weight-light);
-	font-family: var(--font-sans);
 	line-height: var(--line-height-body);
+	font-family: var(--font-sans);
 }
 
 img {
@@ -56,6 +56,7 @@ img {
 
 a {
 	transition: color var(--duration-fast) var(--ease-standard);
+	color: inherit;
 	text-decoration: none;
 
 	&:hover {

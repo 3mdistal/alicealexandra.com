@@ -538,11 +538,11 @@
 
 	.entry-heading {
 		margin: 0;
-		color: rgba(25, 30, 40, 0.92);
+		color: var(--color-text);
 		font-weight: 500;
 		font-size: 1.5rem;
 		line-height: 1.35;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 		word-break: break-word;
 	}
 
@@ -563,10 +563,10 @@
 	/* Inline code in the Site tab cards (generated from `parseChangelogSummaries`) */
 	.entry-text :global(code) {
 		border-radius: 4px;
-		background-color: rgba(31, 41, 55, 0.08);
+		background-color: var(--color-surface-muted);
 		padding: 0.12rem 0.3rem;
 		font-size: 0.95em;
-		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
+		font-family: var(--font-mono);
 		word-break: break-word;
 	}
 
