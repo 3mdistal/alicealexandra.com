@@ -5,7 +5,6 @@
 
 	type Gsap = typeof import('gsap').gsap;
 
-	export let background: string;
 	export let name: 'about' | 'studio' | 'career' | 'blog' | 'news';
 	export let transitionOutWrapper: () => void;
 
@@ -67,7 +66,6 @@
 	href={name}
 	title={name}
 	class="homepage-section {name}"
-	style:background
 	bind:this={section}
 	on:mouseenter={handleMouseEnter}
 	on:mouseleave={handleMouseLeave}
@@ -83,8 +81,10 @@
 	.homepage-section {
 		position: absolute;
 		bottom: 0;
+		background: var(--home-section-bg);
 		width: 100%;
 		height: 100%;
+		color: var(--home-section-label);
 	}
 
 	.homepage-section:hover {
@@ -102,24 +102,34 @@
 
 	.homepage-section {
 		&.about {
+			--home-section-bg: var(--home-about-bg);
+			--home-section-label: var(--home-about-label);
 			clip-path: url(#about-path);
 		}
 
 		&.studio {
+			--home-section-bg: var(--home-studio-bg);
+			--home-section-label: var(--home-studio-label);
 			clip-path: url(#studio-path);
 		}
 
 		&.career {
+			--home-section-bg: var(--home-career-bg);
+			--home-section-label: var(--home-career-label);
 			clip-path: url(#career-path);
 			height: 82%;
 		}
 
 		&.blog {
+			--home-section-bg: var(--home-blog-bg);
+			--home-section-label: var(--home-blog-label);
 			clip-path: url(#blog-path);
 			height: 75%;
 		}
 
 		&.news {
+			--home-section-bg: var(--home-news-bg);
+			--home-section-label: var(--home-news-label);
 			clip-path: url(#news-path);
 			height: 50%;
 		}
@@ -146,10 +156,6 @@
 		&.blog {
 			top: 22%;
 			right: 20%;
-
-			& h2 {
-				color: #fafafa;
-			}
 		}
 
 		&.news {

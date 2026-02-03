@@ -47,7 +47,7 @@
 		place-items: center;
 		gap: 2.5rem;
 		box-sizing: border-box;
-		background-color: #bfdbfe;
+		background-color: var(--color-bg);
 		padding: 2.5rem;
 		width: 100%;
 		min-height: 100vh;
@@ -75,8 +75,8 @@
 		gap: 2.5rem;
 	}
 
-	.links p {
-		color: #3b82f6;
+	.links a {
+		color: var(--color-accent);
 	}
 
 	.links a:hover p {
