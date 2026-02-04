@@ -110,17 +110,19 @@
 					easing: (t) => t * (2 - t)
 				}}
 			>
-				<div class="image-wrapper">
-					<img
-						src={imageUrl + lowQualityParams}
-						alt={name}
-						class="grid-image"
-						loading="lazy"
-						on:load={handleImageLoad}
-					/>
-					<div class="image-overlay">
-						<h3>{name}</h3>
-						<p class="date">{date}</p>
+				<div class="image-shell">
+					<div class="image-clip">
+						<img
+							src={imageUrl + lowQualityParams}
+							alt={name}
+							class="grid-image"
+							loading="lazy"
+							on:load={handleImageLoad}
+						/>
+						<div class="image-overlay">
+							<h3>{name}</h3>
+							<p class="date">{date}</p>
+						</div>
 					</div>
 				</div>
 			</button>
@@ -201,20 +203,25 @@
 		outline: none;
 	}
 
-	.grid-item:focus-visible .image-wrapper {
+	.grid-item:focus-visible .image-shell {
 		transform: translate3d(0, -4px, 0) scale(1.02);
 		box-shadow:
 			0 0 0 2px rgba(255, 255, 255, 0.6),
 			0 4px 6px rgba(0, 0, 0, 0.1);
 	}
 
-	.image-wrapper {
+	.image-shell {
 		position: relative;
 		transform: translate3d(0, 0, 0);
 		backface-visibility: hidden;
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		will-change: transform;
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		border-radius: 8px;
+	}
+
+	.image-clip {
+		position: relative;
 		border-radius: 8px;
 		overflow: hidden;
 	}
@@ -244,11 +251,11 @@
 			z-index: 1;
 		}
 
-		.image-wrapper:hover {
+		.image-shell:hover {
 			transform: translate3d(0, -4px, 0) scale(1.02);
 		}
 
-		.image-wrapper:hover .image-overlay {
+		.image-shell:hover .image-overlay {
 			transform: translate3d(0, 0, 0);
 		}
 	}
