@@ -151,12 +151,26 @@
 	.bordered-content h2 {
 		margin-bottom: 1.25rem;
 		color: var(--landing-accent, var(--color-accent));
-		font-size: 2.5rem;
+		font-weight: var(--font-weight-light);
+		font-size: var(--font-size-3xl);
+		line-height: var(--line-height-tight);
 	}
 
 	@media (min-width: 768px) {
 		.bordered-content h2 {
 			font-size: 3rem;
+		}
+	}
+
+	.bordered-content p {
+		max-width: 50ch;
+		font-size: var(--font-size-lg);
+		line-height: 1.75;
+	}
+
+	@media (min-width: 1024px) {
+		.bordered-content p {
+			font-size: var(--font-size-xl);
 		}
 	}
 

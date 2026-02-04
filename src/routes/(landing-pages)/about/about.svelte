@@ -111,6 +111,16 @@
 		line-height: var(--line-height-tight);
 	}
 
+	@media (min-width: 1024px) {
+		.about-footer-heading {
+			font-size: var(--font-size-3xl);
+		}
+
+		p {
+			font-size: var(--font-size-xl);
+		}
+	}
+
 	.about-footer-content {
 		display: flex;
 		flex-wrap: wrap;
