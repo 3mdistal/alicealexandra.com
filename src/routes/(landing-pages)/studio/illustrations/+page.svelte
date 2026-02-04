@@ -222,6 +222,7 @@
 	.grid-image {
 		display: block;
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		border-radius: 8px;
 		width: 100%;
 		height: auto;
 	}
@@ -233,6 +234,7 @@
 		left: 0;
 		transform: translate3d(0, 100%, 0);
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		border-radius: 8px;
 		background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 		padding: 1.5rem;
 	}
