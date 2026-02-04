@@ -60,11 +60,6 @@
 </main>
 
 <style>
-	:global(.app) {
-		background-color: var(--color-content-bg);
-		color: var(--color-content-text);
-	}
-
 	.hero-container {
 		position: relative;
 		right: 50%;

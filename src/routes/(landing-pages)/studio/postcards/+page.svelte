@@ -112,11 +112,6 @@
 {/if}
 
 <style>
-	:global(.app) {
-		background-color: var(--color-content-bg);
-		color: var(--color-content-text);
-	}
-
 	main {
 		position: relative;
 		right: 50%;

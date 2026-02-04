@@ -50,12 +50,32 @@
 		// GSAP hover animations
 		if (cardElement) {
 			const postcard = cardElement.querySelector('.postcard');
-			const postcardStyles = postcard ? getComputedStyle(postcard) : null;
-			const shadowRest = postcardStyles?.getPropertyValue('--postcard-shadow').trim() || undefined;
-			const shadowHover =
-				postcardStyles?.getPropertyValue('--postcard-shadow-hover').trim() ||
-				shadowRest ||
-				undefined;
+
+			const readShadows = () => {
+				const el = postcard instanceof HTMLElement ? postcard : null;
+				if (!el) return { rest: undefined, hover: undefined };
+				const styles = getComputedStyle(el);
+				const rest = styles.getPropertyValue('--postcard-shadow').trim() || undefined;
+				const hover =
+					styles.getPropertyValue('--postcard-shadow-hover').trim() || rest || undefined;
+				return { rest, hover };
+			};
+
+			const clearInlineShadow = () => {
+				const el = postcard instanceof HTMLElement ? postcard : null;
+				if (!el) return;
+				gsap.killTweensOf(el, 'boxShadow');
+				el.style.boxShadow = '';
+			};
+
+			const schemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+			const handleSchemeChange = () => clearInlineShadow();
+			if ('addEventListener' in schemeMedia) {
+				schemeMedia.addEventListener('change', handleSchemeChange);
+			} else {
+				// @ts-expect-error - Safari < 14
+				schemeMedia.addListener(handleSchemeChange);
+			}
 
 			// Function to generate a new random rotation
 			const generateNewRotation = () => {
@@ -71,15 +91,16 @@
 			};
 
 			const handleMouseEnter = () => {
+				const { hover } = readShadows();
 				gsap.to(postcard, {
 					y: -8,
 					scale: 1.02,
 					duration: 0.4,
 					ease: 'back.out(1.7)'
 				});
-				if (shadowHover) {
+				if (hover) {
 					gsap.to(postcard, {
-						boxShadow: shadowHover,
+						boxShadow: hover,
 						duration: 0.4,
 						ease: 'power2.out'
 					});
@@ -102,6 +123,7 @@
 				// Generate a new random rotation for this card
 				const newRotation = generateNewRotation();
 				currentRotation = newRotation;
+				const { rest } = readShadows();
 
 				gsap.to(postcard, {
 					y: 0,
@@ -109,9 +131,9 @@
 					duration: 0.6,
 					ease: 'power3.out'
 				});
-				if (shadowRest) {
+				if (rest) {
 					gsap.to(postcard, {
-						boxShadow: shadowRest,
+						boxShadow: rest,
 						duration: 0.6,
 						ease: 'power2.out'
 					});
@@ -137,6 +159,12 @@
 			return () => {
 				cardElement.removeEventListener('mouseenter', handleMouseEnter);
 				cardElement.removeEventListener('mouseleave', handleMouseLeave);
+				if ('removeEventListener' in schemeMedia) {
+					schemeMedia.removeEventListener('change', handleSchemeChange);
+				} else {
+					// @ts-expect-error - Safari < 14
+					schemeMedia.removeListener(handleSchemeChange);
+				}
 				if (scrollTriggerInstance) {
 					scrollTriggerInstance.kill();
 				}
