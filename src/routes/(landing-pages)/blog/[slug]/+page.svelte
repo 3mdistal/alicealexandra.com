@@ -119,7 +119,7 @@
 	:global(html),
 	:global(body) {
 		margin: 0;
-		background-color: var(--prose-bg) !important;
+		background-color: var(--color-content-bg) !important;
 		padding: 0;
 		min-height: 100vh;
 	}
@@ -127,31 +127,31 @@
 	.page-wrapper {
 		position: relative;
 		z-index: 1;
-		background-color: var(--prose-bg);
+		background-color: var(--color-content-bg);
 		min-height: 100vh;
 	}
 
 	.blog-container {
 		margin: 0 auto;
-		background-color: var(--prose-bg);
-		padding: var(--prose-spacing-lg) var(--prose-spacing-sm);
+		background-color: var(--color-content-bg);
+		padding: var(--content-space-lg) var(--content-space-sm);
 		max-width: 900px;
-		color: var(--prose-text);
+		color: var(--color-content-text);
 
 		@media (min-width: 640px) {
-			padding: var(--prose-spacing-lg) var(--prose-spacing-md);
+			padding: var(--content-space-lg) var(--content-space-md);
 		}
 
 		@media (min-width: 768px) {
-			padding: var(--prose-spacing-lg) var(--prose-spacing-xl);
+			padding: var(--content-space-lg) var(--content-space-xl);
 		}
 
 		@media (min-width: 1280px) {
-			padding: var(--prose-spacing-xl) var(--prose-spacing-xl);
+			padding: var(--content-space-xl) var(--content-space-xl);
 		}
 
 		@media (min-width: 1536px) {
-			padding: var(--prose-spacing-xl) var(--prose-spacing-lg);
+			padding: var(--content-space-xl) var(--content-space-lg);
 		}
 	}
 
@@ -160,31 +160,31 @@
 		margin: 0 auto;
 		width: 100%;
 		max-width: 900px;
-		font-size: var(--prose-body);
+		font-size: var(--content-font-size-body);
 
 		@media (min-width: 1024px) {
-			font-size: var(--prose-body-large);
+			font-size: var(--content-font-size-body-lg);
 		}
 	}
 
 	.back-link {
 		margin-top: 4em;
 		width: 100%;
-		max-width: var(--prose-content-width);
+		max-width: var(--content-measure);
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		text-align: right;
 
 		@media (min-width: 768px) {
-			font-size: var(--prose-heading-large);
+			font-size: var(--content-font-size-heading-lg);
 			line-height: 1;
 		}
 
 		a {
 			display: inline-block;
-			padding: var(--prose-spacing-md);
-			color: var(--prose-text);
-			font-family: 'Spectral', serif;
+			padding: var(--content-space-md);
+			color: var(--color-content-text);
+			font-family: var(--font-serif);
 		}
 	}
 </style>

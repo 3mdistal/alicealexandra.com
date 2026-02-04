@@ -12,7 +12,7 @@
 }
 
 [data-theme='home'] {
-	--color-bg: var(--color-neutral-50);
+	--color-bg: var(--color-content-bg);
 	--color-surface: var(--color-neutral-0);
 	--color-surface-muted: var(--color-neutral-100);
 	--color-text: var(--color-neutral-900);
@@ -103,7 +103,7 @@
 	}
 
 	[data-theme='home'] {
-		--color-bg: #0b0b0b;
+		--color-bg: var(--color-content-bg);
 		--color-surface: rgba(255, 255, 255, 0.06);
 		--color-surface-muted: rgba(255, 255, 255, 0.09);
 		--color-text: #f3f4f6;
@@ -179,4 +179,14 @@
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
 	}
+}
+
+/* Neutral paper/ink surface override for selected routes */
+[data-surface='content'] {
+	--color-bg: var(--color-content-bg);
+	--color-text: var(--color-content-text);
+	--color-text-muted: var(--color-content-secondary);
+	--color-border: var(--color-content-border);
+	--color-accent: var(--color-content-heading);
+	--color-accent-strong: var(--color-content-link);
 }

@@ -14,9 +14,17 @@
 		return 'home';
 	}
 
+	function surfaceFromPathname(pathname: string): 'default' | 'content' {
+		if (pathname.startsWith('/studio/postcards')) return 'content';
+		if (pathname.startsWith('/studio/illustrations')) return 'content';
+		return 'default';
+	}
+
 	let theme: 'home' | 'about' | 'studio' | 'career' | 'blog' | 'news' = 'home';
+	let surface: 'default' | 'content' = 'default';
 
 	$: theme = themeFromPathname($page.url.pathname);
+	$: surface = surfaceFromPathname($page.url.pathname);
 </script>
 
 <svelte:head>
@@ -28,6 +36,7 @@
 <div
 	class="app"
 	data-theme={theme}
+	data-surface={surface}
 	data-sveltekit-preload-data="hover"
 	data-sveltekit-preload-code="eager"
 >
