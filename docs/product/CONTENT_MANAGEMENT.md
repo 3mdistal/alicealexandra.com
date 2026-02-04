@@ -126,6 +126,34 @@ notionId: 'original-notion-uuid'
 ---
 ```
 
+### External scraped snapshots (Builder.io)
+
+Builder.io blog posts authored by Alice are captured as a static snapshot and committed in the
+private `teenylilcontent` repo to preserve build-time reliability.
+
+**Snapshot location**
+
+- `content/career/builder.json`
+
+**Update cadence**
+
+- Manual updates (run when a new Builder.io post ships).
+
+**Timestamps**
+
+- `generatedAt`: when the scraper was last run.
+- `dataUpdatedAt`: when the list last changed (this is the value surfaced in the UI as "Last updated").
+
+**How to update**
+
+```bash
+pnpm scrape:builder
+```
+
+This script fetches Builder.io RSS (fallback to sitemap), filters blog posts authored by
+Alice, and writes the snapshot to `content/career/builder.json`. The list is a curated
+snapshot and may not be exhaustive.
+
 ## Adding New Content
 
 ### New Blog Post
@@ -237,3 +265,4 @@ The content is loaded by these modules:
 - `src/lib/content/blog.ts` - Blog post loader
 - `src/lib/content/poems.ts` - Poems loader
 - `src/lib/content/postcards.ts` - Postcards loader
+- `src/lib/content/builder.ts` - Builder.io career posts loader

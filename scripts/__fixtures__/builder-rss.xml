@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Builder.io Blog</title>
+    <item>
+      <title>First Post</title>
+      <link>https://www.builder.io/blog/first-post</link>
+      <description>First description.</description>
+      <pubDate>Mon, 20 Jan 2026 12:00:00 GMT</pubDate>
+      <author>Alice Moore</author>
+    </item>
+    <item>
+      <title>Second Post</title>
+      <link>https://www.builder.io/blog/second-post</link>
+      <description>Second description.</description>
+      <pubDate>Mon, 13 Jan 2026 12:00:00 GMT</pubDate>
+      <author>Alice Alexandra Moore</author>
+    </item>
+  </channel>
+</rss>

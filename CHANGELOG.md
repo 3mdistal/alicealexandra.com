@@ -4,11 +4,24 @@
 
 - Added a site-wide design token system with theme mappings for home/about/studio/career/blog/news pages. (#76)
 
+## 31 Jan 2026
+
+**Docs**
+
+- Updated `README.md` to reflect the current static content architecture and repo philosophy. (#71)
+
 ## 28 Jan 2026
 
 **Patches**
 
 - Fixed blog post layout collapsing at ultrawide breakpoints by removing large `vw`-based horizontal padding. (#87)
+
+## 27 Jan 2026
+
+**Features**
+
+- Added `/career/builder` page with Builder.io blog post snapshots and freshness disclosure. (#65)
+- Added Builder.io scraper tool to generate `content/career/builder.json` snapshots. (#65)
 
 ## 28 Dec 2025
 
