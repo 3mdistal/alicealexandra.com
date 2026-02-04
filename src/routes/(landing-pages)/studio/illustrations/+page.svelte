@@ -178,15 +178,20 @@
 
 	.grid-item {
 		display: block;
+		position: relative;
 		break-inside: avoid;
+		-webkit-column-break-inside: avoid;
+		page-break-inside: avoid;
 		transform-origin: center;
 		opacity: 0;
 		animation: fadeIn 0.5s ease forwards;
 		animation-delay: var(--delay);
 		cursor: pointer;
+		contain: paint;
 		margin-bottom: 1.5rem;
 		border: none;
 		background: transparent;
+		isolation: isolate;
 		padding: 0;
 		width: 100%;
 		text-align: left;
@@ -197,7 +202,7 @@
 	}
 
 	.grid-item:focus-visible .image-wrapper {
-		transform: translateY(-4px) scale(1.02);
+		transform: translateY(-4px);
 		box-shadow:
 			0 0 0 2px rgba(255, 255, 255, 0.6),
 			0 4px 6px rgba(0, 0, 0, 0.1);
@@ -209,10 +214,6 @@
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 		border-radius: 8px;
 		overflow: hidden;
-	}
-
-	.image-wrapper:hover {
-		transform: translateY(-4px) scale(1.02);
 	}
 
 	.grid-image {
@@ -233,8 +234,18 @@
 		padding: 1.5rem;
 	}
 
-	.image-wrapper:hover .image-overlay {
-		transform: translateY(0);
+	@media (hover: hover) and (pointer: fine) {
+		.grid-item:hover {
+			z-index: 1;
+		}
+
+		.image-wrapper:hover {
+			transform: translateY(-4px);
+		}
+
+		.image-wrapper:hover .image-overlay {
+			transform: translateY(0);
+		}
 	}
 
 	.image-overlay h3 {
