@@ -222,6 +222,10 @@
 
 	.image-clip {
 		position: relative;
+		clip-path: inset(0 round 8px);
+		-webkit-mask-image: -webkit-radial-gradient(white, black);
+		-webkit-mask-size: 100% 100%;
+		-webkit-mask-repeat: no-repeat;
 		border-radius: 8px;
 		overflow: hidden;
 	}
