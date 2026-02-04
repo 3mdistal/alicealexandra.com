@@ -1,3 +1,9 @@
+## 04 Feb 2026
+
+**Enhancements**
+
+- Added ImageKit → R2 migration tooling with mapping + manual rewrite script. (#70)
+
 ## 31 Jan 2026
 
 **Docs**

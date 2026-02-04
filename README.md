@@ -16,6 +16,8 @@ Tempo Immaterial is a personal portfolio/studio: writing, art, experiments, and 
 ## Where things live
 
 - `scripts/fetch-content.sh` and `pnpm vercel-build`: build-time content fetch and filesystem setup (imperative shell).
+- `scripts/upload-images.sh`: scan/download/upload ImageKit assets to R2 and emit a URL mapping.
+- `scripts/rewrite-image-urls.mjs`: manual mapping-driven URL rewrite tool (run after verification).
 - `src/lib/content/*`: parsing/typing for markdown and JSON content (functional-ish core).
 - `src/routes/**/+page.server.ts`: orchestration + prerender configuration.
 - `src/lib/notion/*`: legacy render helpers and types.
