@@ -6,9 +6,6 @@
 	const snapshot = data.snapshot;
 	const posts = snapshot?.data ?? [];
 
-	const accent = '#642e1a';
-	const background = '#dcc9c6';
-
 	const formatter = new Intl.DateTimeFormat('en-US', {
 		year: 'numeric',
 		month: 'long',
@@ -38,7 +35,7 @@
 	/>
 </svelte:head>
 
-<main class="career-detail-surface" style="--bg-color: {background}; --accent-color: {accent}">
+<main class="career-detail-surface">
 	<div class="hero">
 		<div class="hero-content">
 			<h1 class="accent-color">
@@ -90,17 +87,17 @@
 
 <style>
 	.career-detail-surface {
-		background-color: var(--bg-color);
+		background-color: var(--color-bg);
 		min-height: 100vh;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 	}
 
 	.accent-color {
-		color: var(--accent-color);
+		color: var(--color-accent);
 	}
 
 	.hero {
-		background: linear-gradient(135deg, #642e1a 0%, #8b4513 100%);
+		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
 		padding: 6rem 2rem 4rem;
 		text-align: center;
 	}
@@ -108,7 +105,7 @@
 	.hero-content {
 		margin: 0 auto;
 		border-radius: 15px;
-		background-color: #f4efea;
+		background-color: var(--color-surface);
 		padding: 3rem;
 		max-width: 800px;
 	}
@@ -121,14 +118,14 @@
 	}
 
 	.highlight {
-		color: #642e1a;
+		color: var(--color-accent);
 		font-weight: 500;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 	}
 
 	.subtitle {
 		margin: 0;
-		color: #555;
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: clamp(1.1rem, 2.5vw, 1.4rem);
 	}
@@ -140,23 +137,23 @@
 	}
 
 	.posts-section {
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+		box-shadow: var(--shadow-1);
 		border-radius: 10px;
-		background-color: #f4efea;
+		background-color: var(--color-surface);
 		padding: 2.5rem;
 	}
 
 	.section-title {
 		margin-bottom: 1rem;
-		color: var(--accent-color);
+		color: var(--color-accent);
 		font-weight: 500;
 		font-size: 2rem;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 	}
 
 	.section-subtitle {
 		margin-bottom: 2.5rem;
-		color: #666;
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.125rem;
 		line-height: 1.6;
@@ -164,13 +161,13 @@
 
 	.freshness {
 		margin: 0 0 0.75rem;
-		color: #555;
+		color: var(--color-text-muted);
 		font-size: 1rem;
 	}
 
 	.disclaimer {
 		margin: -1.5rem 0 2.5rem;
-		color: #666;
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1rem;
 		line-height: 1.6;
@@ -184,7 +181,7 @@
 
 	.post-item {
 		margin-bottom: 2rem;
-		border-bottom: 1px solid rgba(100, 46, 26, 0.2);
+		border-bottom: 1px solid var(--color-border);
 		padding-bottom: 1.5rem;
 	}
 
@@ -206,10 +203,10 @@
 	.item-title {
 		transition: color 0.2s ease;
 		margin-bottom: 0.5rem;
-		color: var(--accent-color);
+		color: var(--color-accent);
 		font-weight: 500;
 		font-size: 1.25rem;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 	}
 
 	.post-item a:hover .item-title {
@@ -219,7 +216,7 @@
 
 	.description {
 		margin: 0 0 0.5rem;
-		color: #555;
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1rem;
 		line-height: 1.5;
@@ -227,19 +224,19 @@
 
 	.meta {
 		margin: 0;
-		color: #777;
+		color: var(--color-text-muted);
 		font-size: 0.95rem;
 	}
 
 	.empty-state {
 		margin: 0;
-		color: #666;
+		color: var(--color-text-muted);
 		font-style: italic;
 	}
 
 	.footer {
 		margin-top: 2rem;
-		border-top: 1px solid rgba(100, 46, 26, 0.2);
+		border-top: 1px solid var(--color-border);
 		padding: 2rem;
 		text-align: center;
 	}
@@ -247,11 +244,11 @@
 	.back-link {
 		display: inline-block;
 		transition: all 0.2s ease;
-		border: 2px solid #642e1a;
+		border: 2px solid var(--color-accent);
 		border-radius: 8px;
-		background-color: #f4efea;
+		background-color: var(--color-surface);
 		padding: 0.5rem 1rem;
-		color: #642e1a;
+		color: var(--color-accent);
 		font-weight: 500;
 		font-size: 1rem;
 		text-decoration: none;
@@ -259,8 +256,8 @@
 
 	.back-link:hover {
 		transform: translateX(-2px);
-		background-color: #642e1a;
-		color: white;
+		background-color: var(--color-accent);
+		color: var(--color-surface);
 	}
 
 	@media (min-width: 640px) {
