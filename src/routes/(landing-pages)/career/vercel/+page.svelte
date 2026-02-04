@@ -5,9 +5,6 @@
 	export let data: { publications: Publication[] };
 
 	const { publications } = data;
-
-	const accent = '#642e1a';
-	const background = '#dcc9c6';
 </script>
 
 <svelte:head>
@@ -15,7 +12,7 @@
 	<meta name="description" content="The work accomplished at Vercel by Alice Alexandra Moore." />
 </svelte:head>
 
-<main class="career-detail-surface" style="--bg-color: {background}; --accent-color: {accent}">
+<main class="career-detail-surface">
 	<div class="hero">
 		<div class="hero-content">
 			<h1 class="accent-color">
@@ -31,35 +28,30 @@
 			title="Technical Blogs"
 			subtitle="Articles that I've written to offer developers guidance on Vercel's product."
 			type="Technical Blog"
-			{accent}
 		/>
 		<PublicationsSection
 			{publications}
 			title="Technical Guides"
 			subtitle="In-depth technical guides and tutorials for developers."
 			type="Technical Guide"
-			{accent}
 		/>
 		<PublicationsSection
 			{publications}
 			title="Enterprise Resources"
 			subtitle="Deep dives I've targeted at specific industries of enterprise buyers."
 			type="Enterprise Resource"
-			{accent}
 		/>
 		<PublicationsSection
 			{publications}
 			title="Product Features"
 			subtitle="Announcements and feature highlights I've collaborated with company leaders to ghostwrite."
 			type="Product Feature"
-			{accent}
 		/>
 		<PublicationsSection
 			{publications}
 			title="Customer Stories"
 			subtitle="My profiles of customers who have experienced big wins with Vercel."
 			type="Customer Story"
-			{accent}
 		/>
 	</div>
 
@@ -70,17 +62,17 @@
 
 <style>
 	.career-detail-surface {
-		background-color: var(--bg-color);
+		background-color: var(--color-bg);
 		min-height: 100vh;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 	}
 
 	.accent-color {
-		color: var(--accent-color);
+		color: var(--color-accent);
 	}
 
 	.hero {
-		background: linear-gradient(135deg, #642e1a 0%, #8b4513 100%);
+		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
 		padding: 6rem 2rem 4rem;
 		text-align: center;
 	}
@@ -88,7 +80,7 @@
 	.hero-content {
 		margin: 0 auto;
 		border-radius: 15px;
-		background-color: #f4efea;
+		background-color: var(--color-surface);
 		padding: 3rem;
 		max-width: 800px;
 	}
@@ -101,20 +93,20 @@
 	}
 
 	.highlight {
-		color: #642e1a;
+		color: var(--color-accent);
 		font-weight: 500;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 	}
 
 	.back-link {
 		display: inline-block;
 		transition: all 0.2s ease;
 		margin-bottom: 1.5rem;
-		border: 2px solid #642e1a;
+		border: 2px solid var(--color-accent);
 		border-radius: 8px;
-		background-color: #f4efea;
+		background-color: var(--color-surface);
 		padding: 0.5rem 1rem;
-		color: #642e1a;
+		color: var(--color-accent);
 		font-weight: 500;
 		font-size: 1rem;
 		text-decoration: none;
@@ -122,13 +114,13 @@
 
 	.back-link:hover {
 		transform: translateX(-2px);
-		background-color: #642e1a;
-		color: white;
+		background-color: var(--color-accent);
+		color: var(--color-surface);
 	}
 
 	.subtitle {
 		margin: 0;
-		color: #555;
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: clamp(1.1rem, 2.5vw, 1.4rem);
 	}
@@ -141,7 +133,7 @@
 
 	.footer {
 		margin-top: 2rem;
-		border-top: 1px solid rgba(100, 46, 26, 0.2);
+		border-top: 1px solid var(--color-border);
 		padding: 2rem;
 		text-align: center;
 	}

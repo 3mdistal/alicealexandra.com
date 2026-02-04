@@ -11,7 +11,7 @@
 	import { onDestroy } from 'svelte';
 	import { pageState } from '$lib/stores';
 
-	export let accent = '';
+	export let accent = 'var(--color-accent)';
 
 	onDestroy(() => {
 		pageState.set('home');

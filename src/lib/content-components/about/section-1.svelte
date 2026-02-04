@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let accent: string;
+	export let accent: string = 'var(--color-accent)';
 </script>
 
 <p><strong style="color: {accent}">I needed a place for everything.</strong></p>

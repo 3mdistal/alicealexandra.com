@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let accent: string;
+	export let accent: string = 'var(--color-accent)';
 
 	let formDisplay = true;
 	let loadingDisplay = false;

@@ -1,0 +1,182 @@
+:root {
+	color-scheme: light dark;
+	--color-bg: var(--color-neutral-50);
+	--color-surface: var(--color-neutral-0);
+	--color-surface-muted: var(--color-neutral-100);
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-600);
+	--color-accent: var(--color-neutral-900);
+	--color-accent-strong: var(--color-neutral-700);
+	--color-border: var(--color-neutral-200);
+	--color-shadow: rgba(15, 23, 42, 0.12);
+}
+
+[data-theme='home'] {
+	--color-bg: var(--color-neutral-50);
+	--color-surface: var(--color-neutral-0);
+	--color-surface-muted: var(--color-neutral-100);
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-600);
+	--color-accent: var(--color-neutral-900);
+	--color-accent-strong: var(--color-neutral-700);
+	--color-border: var(--color-neutral-200);
+
+	--home-about-bg: var(--color-mauve-400);
+	--home-studio-bg: #d6ddf0;
+	--home-career-bg: var(--color-warm-200);
+	--home-blog-bg: var(--color-steel-500);
+	--home-news-bg: #eeeded;
+
+	--home-about-label: var(--color-neutral-900);
+	--home-studio-label: var(--color-neutral-900);
+	--home-career-label: var(--color-neutral-900);
+	--home-blog-label: var(--color-neutral-50);
+	--home-news-label: var(--color-neutral-900);
+}
+
+[data-theme='about'] {
+	--color-bg: var(--color-mauve-400);
+	--color-surface: var(--color-neutral-0);
+	--color-surface-muted: var(--color-neutral-100);
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-700);
+	--color-accent: var(--color-violet-800);
+	--color-accent-strong: var(--color-violet-800);
+	--color-border: rgba(39, 22, 71, 0.2);
+}
+
+[data-theme='studio'] {
+	--color-bg: #d6ddf0;
+	--color-surface: var(--color-neutral-0);
+	--color-surface-muted: #eef1f8;
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-700);
+	--color-accent: var(--color-indigo-800);
+	--color-accent-strong: #1a2a5f;
+	--color-border: rgba(36, 50, 105, 0.2);
+}
+
+[data-theme='career'] {
+	--color-bg: var(--color-warm-200);
+	--color-surface: var(--color-warm-50);
+	--color-surface-muted: #efe5dd;
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: #665f5b;
+	--color-accent: var(--color-clay-700);
+	--color-accent-strong: var(--color-clay-600);
+	--color-border: rgba(100, 46, 26, 0.2);
+}
+
+[data-theme='blog'] {
+	--color-bg: var(--color-steel-500);
+	--color-surface: rgba(20, 23, 35, 0.35);
+	--color-surface-muted: rgba(255, 255, 255, 0.08);
+	--color-text: #f8fafc;
+	--color-text-muted: #e2e8f0;
+	--color-accent: var(--color-cloud-200);
+	--color-accent-strong: #f0f4fb;
+	--color-border: rgba(226, 232, 240, 0.35);
+}
+
+[data-theme='news'] {
+	--color-bg: #eeeded;
+	--color-surface: rgba(255, 255, 255, 0.75);
+	--color-surface-muted: rgba(255, 255, 255, 0.55);
+	--color-text: #2b2b2b;
+	--color-text-muted: rgba(75, 70, 13, 0.8);
+	--color-accent: var(--color-olive-700);
+	--color-accent-strong: var(--color-olive-800);
+	--color-border: rgba(114, 106, 18, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-bg: #0f172a;
+		--color-surface: #111827;
+		--color-surface-muted: #1f2937;
+		--color-text: #f3f4f6;
+		--color-text-muted: #cbd5f5;
+		--color-accent: #e5e7eb;
+		--color-accent-strong: #94a3b8;
+		--color-border: #334155;
+		--color-shadow: rgba(15, 23, 42, 0.6);
+	}
+
+	[data-theme='home'] {
+		--color-bg: #0b0b0b;
+		--color-surface: rgba(255, 255, 255, 0.06);
+		--color-surface-muted: rgba(255, 255, 255, 0.09);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: #e5e7eb;
+		--color-accent-strong: #cbd5e1;
+		--color-border: rgba(226, 232, 240, 0.22);
+
+		--home-about-bg: #1d1629;
+		--home-studio-bg: #1f3139;
+		--home-career-bg: #513f31;
+		--home-blog-bg: #71737d;
+		--home-news-bg: #232114;
+
+		--home-about-label: rgba(243, 244, 246, 0.86);
+		--home-studio-label: rgba(243, 244, 246, 0.88);
+		--home-career-label: rgba(243, 244, 246, 0.86);
+		--home-blog-label: rgba(243, 244, 246, 0.92);
+		--home-news-label: rgba(243, 244, 246, 0.86);
+	}
+
+	[data-theme='about'] {
+		--color-bg: #1d1629;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
+	}
+
+	[data-theme='studio'] {
+		--color-bg: #1f3139;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
+	}
+
+	[data-theme='career'] {
+		--color-bg: #513f31;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
+	}
+
+	[data-theme='blog'] {
+		--color-bg: #71737d;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
+	}
+
+	[data-theme='news'] {
+		--color-bg: #232114;
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
+		--color-text: #f3f4f6;
+		--color-text-muted: rgba(243, 244, 246, 0.72);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
+		--color-border: rgba(243, 244, 246, 0.18);
+	}
+}

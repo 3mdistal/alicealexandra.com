@@ -8,7 +8,6 @@
 	export let data: { posts: BlogPostMeta[] };
 
 	const Bird = 'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bird.webp';
-	const accent = '#d1dce7';
 
 	function fadeIn() {
 		gsap.to('.opacity-0', {
@@ -38,7 +37,7 @@
 <div class="opacity-0 blog-page">
 	<div class="blog-content">
 		<div class="blog-wrapper">
-			<Blog {accent} posts={data.posts} />
+			<Blog posts={data.posts} />
 		</div>
 	</div>
 	<div class="background-container">
@@ -62,7 +61,7 @@
 	}
 
 	.blog-page {
-		background-color: #838391;
+		background-color: var(--color-bg);
 		min-height: 100vh;
 	}
 

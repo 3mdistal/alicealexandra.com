@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 
 	export let flexDirection = 'row-reverse';
-	export let accent = '';
+	export let accent = 'var(--color-accent)';
 	export let imageSource;
 	export let imageAlt = '';
 
