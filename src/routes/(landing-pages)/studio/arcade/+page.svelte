@@ -55,8 +55,9 @@
 	}
 
 	h1 {
+		width: 100%;
 		font-size: 2.25rem;
-		text-align: center;
+		text-align: left;
 	}
 
 	.content {

@@ -82,6 +82,10 @@
 	}
 
 	h2 {
+		margin-bottom: var(--space-5);
+		font-weight: var(--font-weight-medium);
+		font-size: var(--font-size-2xl);
+		line-height: var(--line-height-tight);
 		text-align: left;
 	}
 
@@ -99,6 +103,8 @@
 
 	.text {
 		max-width: min(60ch, 50%);
+		font-size: var(--font-size-lg);
+		line-height: 1.75;
 		text-align: left;
 
 		@media screen and (max-width: 1024px) {
@@ -141,12 +147,17 @@
 
 	@media (min-width: 1024px) {
 		h2 {
+			font-size: var(--font-size-3xl);
 			text-align: center;
 		}
 
 		.content {
 			flex-direction: var(--flex-direction, row-reverse) !important;
 			gap: 3em;
+		}
+
+		.text {
+			font-size: var(--font-size-xl);
 		}
 
 		.image-container {
