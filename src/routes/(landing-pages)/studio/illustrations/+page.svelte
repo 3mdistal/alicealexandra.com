@@ -160,6 +160,11 @@
 </div>
 
 <style>
+	:global(.app) {
+		background-color: var(--color-content-bg);
+		color: var(--color-content-text);
+	}
+
 	.background {
 		background-color: var(--color-content-bg);
 		padding: 1rem;

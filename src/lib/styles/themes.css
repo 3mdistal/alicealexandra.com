@@ -12,7 +12,7 @@
 }
 
 [data-theme='home'] {
-	--color-bg: var(--color-neutral-50);
+	--color-bg: var(--color-content-bg);
 	--color-surface: var(--color-neutral-0);
 	--color-surface-muted: var(--color-neutral-100);
 	--color-text: var(--color-neutral-900);
@@ -103,7 +103,7 @@
 	}
 
 	[data-theme='home'] {
-		--color-bg: #0b0b0b;
+		--color-bg: var(--color-content-bg);
 		--color-surface: rgba(255, 255, 255, 0.06);
 		--color-surface-muted: rgba(255, 255, 255, 0.09);
 		--color-text: #f3f4f6;

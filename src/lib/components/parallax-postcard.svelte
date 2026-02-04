@@ -50,6 +50,12 @@
 		// GSAP hover animations
 		if (cardElement) {
 			const postcard = cardElement.querySelector('.postcard');
+			const postcardStyles = postcard ? getComputedStyle(postcard) : null;
+			const shadowRest = postcardStyles?.getPropertyValue('--postcard-shadow').trim() || undefined;
+			const shadowHover =
+				postcardStyles?.getPropertyValue('--postcard-shadow-hover').trim() ||
+				shadowRest ||
+				undefined;
 
 			// Function to generate a new random rotation
 			const generateNewRotation = () => {
@@ -71,11 +77,13 @@
 					duration: 0.4,
 					ease: 'back.out(1.7)'
 				});
-				gsap.to(postcard, {
-					boxShadow: '0 25px 50px rgba(0, 0, 0, 0.25)',
-					duration: 0.4,
-					ease: 'power2.out'
-				});
+				if (shadowHover) {
+					gsap.to(postcard, {
+						boxShadow: shadowHover,
+						duration: 0.4,
+						ease: 'power2.out'
+					});
+				}
 				// Scale background image to 100% and center it
 				gsap.to(imageElement, {
 					scale: 1,
@@ -101,11 +109,13 @@
 					duration: 0.6,
 					ease: 'power3.out'
 				});
-				gsap.to(postcard, {
-					boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-					duration: 0.6,
-					ease: 'power2.out'
-				});
+				if (shadowRest) {
+					gsap.to(postcard, {
+						boxShadow: shadowRest,
+						duration: 0.6,
+						ease: 'power2.out'
+					});
+				}
 				// Scale background image back to 1.15 for parallax room
 				gsap.to(imageElement, {
 					scale: 1.15,
@@ -164,6 +174,8 @@
 		--postcard-ink: var(--color-content-text);
 		--postcard-ink-muted: var(--color-content-secondary);
 		--postcard-border: var(--color-content-border);
+		--postcard-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		--postcard-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.25);
 		color: inherit;
 		text-decoration: none;
 
@@ -175,12 +187,21 @@
 	.postcard {
 		position: relative;
 		cursor: pointer;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		box-shadow: var(--postcard-shadow);
 		border-radius: 16px;
 		background: var(--postcard-paper);
 		aspect-ratio: 3 / 2;
 		width: 100%;
 		overflow: hidden;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.postcard-link {
+			--postcard-shadow: 0 18px 55px rgba(0, 0, 0, 0.7);
+			--postcard-shadow-hover:
+				0 30px 80px rgba(0, 0, 0, 0.8),
+				0 0 0 1px color-mix(in srgb, var(--postcard-border) 65%, transparent);
+		}
 	}
 
 	.postcard::before {
