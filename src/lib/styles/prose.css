@@ -64,16 +64,16 @@
 /* Code blocks */
 .prose pre {
 	margin-bottom: var(--content-space-md);
-	border-radius: var(--content-radius);
-	background-color: var(--color-content-code-bg);
-	padding: 1em;
-	overflow-x: auto;
+	background-color: transparent;
+	padding: 0;
 }
 
 .prose pre code {
 	display: block;
-	background-color: transparent;
-	padding: 0;
+	border-radius: var(--content-radius);
+	background-color: var(--color-content-code-bg);
+	padding: 1em;
+	overflow-x: auto;
 }
 
 .prose pre code,
