@@ -53,40 +53,38 @@
 }
 
 /* Inline code */
-.prose code {
+.prose :not(pre) > code {
 	border-radius: var(--content-radius-sm);
-	background-color: var(--color-content-code-bg);
+	background-color: var(--color-content-inline-code-bg);
 	padding: 0.2em 0.4em;
 	color: var(--color-content-link);
 	font-family: var(--font-mono);
 }
 
 /* Code blocks */
-.prose pre code {
-	display: block;
+.prose pre {
+	margin-bottom: var(--content-space-md);
 	border-radius: var(--content-radius);
+	background-color: var(--color-content-code-bg);
 	padding: 1em;
 	overflow-x: auto;
 }
 
+.prose pre code {
+	display: block;
+	background-color: transparent;
+	padding: 0;
+}
+
+.prose pre code,
 .prose pre code * {
 	font-family: var(--font-mono);
-}
-
-.prose pre {
-	margin-bottom: var(--content-space-md);
-}
-
-/* Override highlight.js background in dark mode for better contrast */
-@media (prefers-color-scheme: dark) {
-	.prose pre code.hljs {
-		background-color: var(--color-content-code-bg);
-	}
 }
 
 /* Blockquotes */
 .prose blockquote {
 	margin-top: var(--content-space-lg);
+	margin-bottom: var(--content-space-lg);
 	margin-left: 2em;
 	max-width: var(--content-measure-blockquote);
 	color: var(--color-content-secondary);
@@ -151,7 +149,29 @@
 /* Lists */
 .prose ol,
 .prose ul {
+	margin-bottom: 1.25em;
 	margin-left: 2em;
+}
+
+.prose li {
+	margin-bottom: 0.5em;
+}
+
+.prose li:last-child {
+	margin-bottom: 0;
+}
+
+.prose li > ul,
+.prose li > ol {
+	margin-top: 0.5em;
+	margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+	.prose p,
+	.prose li {
+		line-height: 1.75;
+	}
 }
 
 .prose ol li,
