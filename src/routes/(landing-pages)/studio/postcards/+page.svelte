@@ -112,13 +112,9 @@
 {/if}
 
 <style>
-	:global(body) {
-		background-color: #e8e8e8 !important;
-		color: #333;
-	}
-
-	:global(html) {
-		background-color: #e8e8e8 !important;
+	:global(.app) {
+		background-color: var(--color-content-bg);
+		color: var(--color-content-text);
 	}
 
 	main {
@@ -128,11 +124,11 @@
 		margin: 0;
 		margin-right: -50vw;
 		margin-left: -50vw;
-		background-color: #e8e8e8;
+		background-color: var(--color-content-bg);
 		padding: 0;
 		width: 100vw;
 		min-height: 100vh;
-		color: #333;
+		color: var(--color-content-text);
 	}
 
 	header {
@@ -153,13 +149,13 @@
 
 	h1 {
 		margin-bottom: 0.5rem;
-		color: #333;
+		color: var(--color-content-text);
 		font-size: 2.5rem;
 	}
 
 	.subtitle {
 		margin-top: 0.5rem;
-		color: #666;
+		color: var(--color-content-secondary);
 		font-style: italic;
 		font-weight: 300;
 		font-size: 1.3rem;
@@ -211,7 +207,7 @@
 
 	.no-postcards {
 		margin-top: 4rem;
-		color: #666;
+		color: var(--color-content-secondary);
 		font-style: italic;
 		font-size: 1.1rem;
 		text-align: center;

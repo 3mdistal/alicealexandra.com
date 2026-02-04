@@ -160,6 +160,10 @@
 	.postcard-link {
 		display: block;
 		width: 100%;
+		--postcard-paper: var(--color-content-bg);
+		--postcard-ink: var(--color-content-text);
+		--postcard-ink-muted: var(--color-content-secondary);
+		--postcard-border: var(--color-content-border);
 		color: inherit;
 		text-decoration: none;
 
@@ -173,7 +177,7 @@
 		cursor: pointer;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 		border-radius: 16px;
-		background: #000;
+		background: var(--postcard-paper);
 		aspect-ratio: 3 / 2;
 		width: 100%;
 		overflow: hidden;
@@ -186,7 +190,7 @@
 		bottom: -2px;
 		left: -2px;
 		z-index: -1;
-		border: 2px dotted rgba(0, 0, 0, 0.5);
+		border: 2px dotted color-mix(in srgb, var(--postcard-border) 70%, transparent);
 		border-radius: 18px;
 		pointer-events: none;
 		content: '';
@@ -222,22 +226,22 @@
 		z-index: 2;
 		background: linear-gradient(
 			180deg,
-			rgba(240, 240, 240, 0.1) 0%,
-			rgba(240, 240, 240, 0.3) 30%,
-			rgba(240, 240, 240, 0.7) 70%,
-			rgba(240, 240, 240, 0.95) 100%
+			color-mix(in srgb, transparent 90%, var(--postcard-paper)) 0%,
+			color-mix(in srgb, transparent 70%, var(--postcard-paper)) 30%,
+			color-mix(in srgb, transparent 25%, var(--postcard-paper)) 70%,
+			var(--postcard-paper) 100%
 		);
 		padding: 2rem;
 	}
 
 	.postcard-content {
 		width: 100%;
-		color: #333;
+		color: var(--postcard-ink);
 	}
 
 	h2 {
 		margin: 0 0 1rem 0;
-		color: #333;
+		color: var(--postcard-ink);
 		font-weight: 600;
 		font-size: 1.8rem;
 		line-height: 1.2;
@@ -248,7 +252,7 @@
 		margin: 0;
 		-webkit-line-clamp: 3;
 		line-clamp: 3;
-		color: #555;
+		color: var(--postcard-ink-muted);
 		font-size: 1rem;
 		line-height: 1.5;
 		-webkit-box-orient: vertical;
