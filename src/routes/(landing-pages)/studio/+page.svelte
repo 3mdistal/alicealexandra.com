@@ -101,7 +101,7 @@
 <style>
 	.studio-container {
 		position: relative;
-		--ink-target-opacity: 0.35;
+		--ink-target-opacity: 0.4;
 		background-color: var(--color-bg);
 		min-height: 100lvh;
 		overflow: hidden;
@@ -119,8 +119,6 @@
 		left: 0;
 		opacity: 0;
 		z-index: 0;
-		mix-blend-mode: multiply;
-		filter: grayscale(1) contrast(1.1);
 		width: 100%;
 		height: 100vh;
 		object-fit: cover;
