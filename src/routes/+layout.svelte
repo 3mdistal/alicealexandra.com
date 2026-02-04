@@ -25,6 +25,13 @@
 
 	$: theme = themeFromPathname($page.url.pathname);
 	$: surface = surfaceFromPathname($page.url.pathname);
+
+	$: {
+		if (typeof document !== 'undefined') {
+			document.documentElement.dataset['theme'] = theme;
+			document.documentElement.dataset['surface'] = surface;
+		}
+	}
 </script>
 
 <svelte:head>

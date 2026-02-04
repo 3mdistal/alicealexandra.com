@@ -13,6 +13,11 @@
 	padding: 0;
 }
 
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 h1,
 h2,
 h3 {
@@ -20,33 +25,10 @@ h3 {
 	text-wrap: balance;
 }
 
-h1,
-h3 {
-	font-weight: var(--font-weight-light);
-}
-
-h2 {
-	margin-bottom: 1.5em;
-	font-weight: var(--font-weight-medium);
-	font-size: 2rem;
-}
-
-p {
-	font-size: 1.25rem;
-}
-
-li {
-	margin-bottom: 1em;
-	font-size: 1.25rem;
-}
-
-.spacer {
-	height: 100px;
-}
-
 body {
-	background-color: var(--color-neutral-50);
+	background-color: var(--color-bg);
 	overflow-x: hidden;
+	color: var(--color-text);
 	font-weight: var(--font-weight-light);
 	line-height: var(--line-height-body);
 	font-family: var(--font-sans);
@@ -58,10 +40,17 @@ body {
 	color: var(--color-text);
 }
 
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
 img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+	height: auto;
 }
 
 a {
@@ -71,30 +60,5 @@ a {
 
 	&:hover {
 		filter: brightness(0.8);
-	}
-}
-
-@media (min-width: 768px) {
-	h2 {
-		font-size: 1.875rem;
-	}
-}
-
-@media (min-width: 1024px) {
-	h2 {
-		font-size: 2.25rem;
-	}
-
-	p,
-	li {
-		font-size: 1.5rem;
-		line-height: 1.75;
-		text-wrap: pretty;
-	}
-}
-
-@media (hover: none) {
-	*:hover {
-		animation: none;
 	}
 }

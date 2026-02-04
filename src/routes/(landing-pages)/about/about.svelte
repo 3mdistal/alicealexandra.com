@@ -93,6 +93,8 @@
 
 	p {
 		margin-bottom: 1.5em;
+		font-size: var(--font-size-lg);
+		line-height: 1.75;
 	}
 
 	.about-footer {
@@ -102,7 +104,11 @@
 	}
 
 	.about-footer-heading {
+		margin-bottom: var(--space-4);
 		max-width: 80%;
+		font-weight: var(--font-weight-medium);
+		font-size: var(--font-size-2xl);
+		line-height: var(--line-height-tight);
 	}
 
 	.about-footer-content {
