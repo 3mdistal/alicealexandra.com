@@ -489,23 +489,6 @@
 		max-width: 800px;
 	}
 
-	/*
-	 * TEMPORARY EXCEPTION: Force light mode prose colors for postcards.
-	 * Dark mode for postcards has not been designed/implemented yet.
-	 * TODO: Remove this override once postcards dark mode is built.
-	 */
-	.prose {
-		--prose-text: #111827;
-		--prose-heading: #111827;
-		--prose-accent: #374151;
-		--prose-secondary: #6b7280;
-		--prose-link: #31676c;
-		--prose-link-hover: #1e4042;
-		--prose-callout: #d1d5db;
-		--prose-code-bg: #d1d5db;
-		--prose-border: #939599;
-	}
-
 	.not-found {
 		padding: 4rem 2rem;
 		text-align: center;

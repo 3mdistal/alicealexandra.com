@@ -67,25 +67,25 @@
 	.blog-header {
 		margin: 0 auto;
 		margin-top: 80px; /* More space from top */
-		padding: var(--prose-spacing-lg) var(--prose-spacing-sm);
+		padding: var(--content-space-lg) var(--content-space-sm);
 		width: 100%;
 		max-width: 900px;
-		color: var(--prose-text);
+		color: var(--color-content-text);
 
 		@media (min-width: 640px) {
-			padding: var(--prose-spacing-lg) var(--prose-spacing-md);
+			padding: var(--content-space-lg) var(--content-space-md);
 		}
 
 		@media (min-width: 768px) {
-			padding: var(--prose-spacing-lg) var(--prose-spacing-xl);
+			padding: var(--content-space-lg) var(--content-space-xl);
 		}
 
 		@media (min-width: 1280px) {
-			padding: var(--prose-spacing-xl) var(--prose-spacing-xl);
+			padding: var(--content-space-xl) var(--content-space-xl);
 		}
 
 		@media (min-width: 1536px) {
-			padding: var(--prose-spacing-xl) var(--prose-spacing-lg);
+			padding: var(--content-space-xl) var(--content-space-lg);
 		}
 	}
 
@@ -94,21 +94,21 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		margin-bottom: var(--prose-spacing-md);
-		color: var(--prose-secondary);
-		font-size: var(--prose-body-small);
+		margin-bottom: var(--content-space-md);
+		color: var(--color-content-secondary);
+		font-size: var(--content-font-size-body-sm);
 	}
 
 	.breadcrumb-link {
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--prose-secondary) !important;
+		color: var(--color-content-secondary) !important;
 		font-weight: 500;
 		text-decoration: none;
 
 		&:hover {
-			color: var(--prose-link) !important;
+			color: var(--color-content-link) !important;
 			text-decoration: underline;
 		}
 	}
@@ -130,22 +130,22 @@
 	}
 
 	.breadcrumb-separator {
-		color: var(--prose-secondary);
+		color: var(--color-content-secondary);
 	}
 
 	.breadcrumb-category {
-		color: var(--prose-secondary);
+		color: var(--color-content-secondary);
 		font-weight: 500;
 	}
 
 	/* Title */
 	.blog-title {
-		margin: 0 0 var(--prose-spacing-sm) 0;
-		color: var(--prose-heading);
+		margin: 0 0 var(--content-space-sm) 0;
+		color: var(--color-content-heading);
 		font-weight: 500;
 		font-size: 2.25rem;
 		line-height: 2.5rem;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 
 		@media (min-width: 640px) {
 			font-size: 3rem;
@@ -153,7 +153,7 @@
 		}
 
 		@media (min-width: 768px) {
-			font-size: var(--prose-heading-large);
+			font-size: var(--content-font-size-heading-lg);
 			line-height: 1;
 		}
 
@@ -165,16 +165,16 @@
 
 	/* Subtitle */
 	.blog-subtitle {
-		margin: 0 0 var(--prose-spacing-lg) 0;
-		max-width: var(--prose-subtitle-width);
-		color: var(--prose-accent);
+		margin: 0 0 var(--content-space-lg) 0;
+		max-width: var(--content-measure-subtitle);
+		color: var(--color-content-accent);
 		font-style: italic;
-		font-size: var(--prose-body);
+		font-size: var(--content-font-size-body);
 		line-height: 1.75rem;
 		text-wrap: balance;
 
 		@media (min-width: 768px) {
-			font-size: var(--prose-body-large);
+			font-size: var(--content-font-size-body-lg);
 			line-height: 2.25rem;
 		}
 	}
@@ -184,18 +184,18 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--prose-spacing-md);
-		margin-bottom: var(--prose-spacing-md);
-		border-bottom: 1px solid var(--prose-border);
-		padding-bottom: var(--prose-spacing-md);
+		gap: var(--content-space-md);
+		margin-bottom: var(--content-space-md);
+		border-bottom: 1px solid var(--color-content-border);
+		padding-bottom: var(--content-space-md);
 	}
 
 	.reading-time {
 		display: flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--prose-secondary) !important;
-		font-size: var(--prose-body-small);
+		color: var(--color-content-secondary) !important;
+		font-size: var(--content-font-size-body-sm);
 	}
 
 	.reading-time span {
@@ -215,8 +215,8 @@
 	}
 
 	.publish-date {
-		color: var(--prose-secondary);
-		font-size: var(--prose-body-small);
+		color: var(--color-content-secondary);
+		font-size: var(--content-font-size-body-sm);
 	}
 
 	/* Responsive Design */
@@ -228,7 +228,7 @@
 		.article-metadata {
 			flex-direction: column;
 			align-items: flex-start;
-			gap: var(--prose-spacing-xs);
+			gap: var(--content-space-xs);
 		}
 	}
 </style>

@@ -48,18 +48,6 @@
 </div>
 
 <style>
-	/* Override prose colors for white text hierarchy on listing page only */
-	:global(.blog-wrapper) {
-		--prose-text: #ffffff;
-		--prose-heading: #ffffff;
-		--prose-accent: #e5e7eb;
-		--prose-secondary: #d1d5db;
-		--prose-link: #ffffff;
-		--prose-link-hover: #e5e7eb;
-		--prose-heading-dark: #ffffff;
-		--prose-secondary-dark: #d1d5db;
-	}
-
 	.blog-page {
 		background-color: var(--color-bg);
 		min-height: 100vh;
