@@ -110,19 +110,17 @@
 					easing: (t) => t * (2 - t)
 				}}
 			>
-				<div class="image-shell">
-					<div class="image-clip">
-						<img
-							src={imageUrl + lowQualityParams}
-							alt={name}
-							class="grid-image"
-							loading="lazy"
-							on:load={handleImageLoad}
-						/>
-						<div class="image-overlay">
-							<h3>{name}</h3>
-							<p class="date">{date}</p>
-						</div>
+				<div class="image-wrapper">
+					<img
+						src={imageUrl + lowQualityParams}
+						alt={name}
+						class="grid-image"
+						loading="lazy"
+						on:load={handleImageLoad}
+					/>
+					<div class="image-overlay">
+						<h3>{name}</h3>
+						<p class="date">{date}</p>
 					</div>
 				</div>
 			</button>
@@ -203,29 +201,17 @@
 		outline: none;
 	}
 
-	.grid-item:focus-visible .image-shell {
-		transform: translate3d(0, -4px, 0) scale(1.02);
+	.grid-item:focus-visible .image-wrapper {
+		transform: translateY(-4px);
 		box-shadow:
 			0 0 0 2px rgba(255, 255, 255, 0.6),
 			0 4px 6px rgba(0, 0, 0, 0.1);
 	}
 
-	.image-shell {
+	.image-wrapper {
 		position: relative;
-		transform: translate3d(0, 0, 0);
-		backface-visibility: hidden;
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		will-change: transform;
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		border-radius: 8px;
-	}
-
-	.image-clip {
-		position: relative;
-		clip-path: inset(0 round 8px);
-		-webkit-mask-image: -webkit-radial-gradient(white, black);
-		-webkit-mask-size: 100% 100%;
-		-webkit-mask-repeat: no-repeat;
 		border-radius: 8px;
 		overflow: hidden;
 	}
@@ -233,7 +219,6 @@
 	.grid-image {
 		display: block;
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		border-radius: 8px;
 		width: 100%;
 		height: auto;
 	}
@@ -243,9 +228,8 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		transform: translate3d(0, 100%, 0);
+		transform: translateY(100%);
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		border-radius: 8px;
 		background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 		padding: 1.5rem;
 	}
@@ -255,12 +239,12 @@
 			z-index: 1;
 		}
 
-		.image-shell:hover {
-			transform: translate3d(0, -4px, 0) scale(1.02);
+		.image-wrapper:hover {
+			transform: translateY(-4px);
 		}
 
-		.image-shell:hover .image-overlay {
-			transform: translate3d(0, 0, 0);
+		.image-wrapper:hover .image-overlay {
+			transform: translateY(0);
 		}
 	}
 
