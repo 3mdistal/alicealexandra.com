@@ -1,0 +1,62 @@
+:root {
+	-webkit-tap-highlight-color: transparent;
+}
+
+@supports selector(:focus-visible) {
+	:where(
+		a[href],
+		button,
+		input,
+		select,
+		textarea,
+		summary,
+		[role='button'],
+		[tabindex]:not([tabindex='-1'])
+	):focus {
+		outline: none;
+	}
+}
+
+:where(
+	a[href],
+	button,
+	input,
+	select,
+	textarea,
+	summary,
+	[role='button'],
+	[tabindex]:not([tabindex='-1'])
+):focus-visible {
+	outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
+	outline-offset: var(--a11y-focus-offset);
+}
+
+:where(a[href]):focus-visible {
+	text-decoration: underline;
+	text-decoration-thickness: max(2px, 0.12em);
+	text-underline-offset: 0.2em;
+}
+
+:where(
+	button,
+	input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']),
+	select,
+	textarea
+) {
+	min-block-size: var(--a11y-hit-target);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 1ms !important;
+		animation-iteration-count: 1 !important;
+		transition-delay: 0ms !important;
+		transition-duration: 1ms !important;
+	}
+}
