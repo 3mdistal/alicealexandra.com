@@ -11,6 +11,7 @@
 	let section: HTMLAnchorElement;
 	let hover = true;
 	let gsap: Gsap | null = null;
+	let hasActivated = false;
 
 	onMount(async () => {
 		const mod = await import('gsap');
@@ -53,7 +54,9 @@
 		goto(name);
 	}
 
-	function handleClick() {
+	function activate() {
+		if (hasActivated) return;
+		hasActivated = true;
 		pageState.set(name);
 		hover = false;
 		ease(0);
@@ -69,8 +72,8 @@
 	bind:this={section}
 	on:mouseenter={handleMouseEnter}
 	on:mouseleave={handleMouseLeave}
-	on:mousedown={handleClick}
-	on:click|preventDefault
+	on:pointerdown={activate}
+	on:click|preventDefault={activate}
 >
 	<div class="homepage-section-menu-link {name}">
 		<h2>{name}</h2>
