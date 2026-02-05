@@ -94,8 +94,15 @@
 		filter: brightness(0.95) hue-rotate(5deg) saturate(1.5);
 	}
 
-	.homepage-section:focus {
-		filter: brightness(0.85) hue-rotate(10deg) saturate(1.75);
+	.homepage-section:focus-visible {
+		outline: none;
+	}
+
+	.homepage-section:focus-visible .homepage-section-menu-link {
+		box-shadow: 0 0 0 4px var(--a11y-focus-color);
+		border-radius: var(--radius-pill);
+		background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+		padding: 0.35rem 0.75rem;
 	}
 
 	.homepage-section-menu-link h2 {
