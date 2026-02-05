@@ -193,7 +193,8 @@
 	}
 
 	.grid-item:focus-visible {
-		outline: none;
+		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
+		outline-offset: calc(var(--a11y-focus-offset) + 2px);
 	}
 
 	.grid-item:focus-visible .image-wrapper {
@@ -313,7 +314,7 @@
 	}
 
 	.modal-backdrop:focus-visible {
-		outline: 2px solid color-mix(in srgb, var(--color-content-text) 55%, transparent);
+		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
 		outline-offset: -4px;
 	}
 

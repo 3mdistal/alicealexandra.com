@@ -337,8 +337,8 @@
 	}
 
 	.tab-button:focus-visible {
-		outline: 2px solid var(--color-accent);
-		outline-offset: 2px;
+		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
+		outline-offset: var(--a11y-focus-offset);
 	}
 
 	.panel {
@@ -447,8 +447,8 @@
 	}
 
 	.entry--link:focus-visible {
-		outline: 2px solid var(--color-accent);
-		outline-offset: 3px;
+		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
+		outline-offset: var(--a11y-focus-offset);
 	}
 
 	.entry--link.entry--studio:focus-visible::after {

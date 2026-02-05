@@ -63,4 +63,10 @@
 	--color-olive-800: #4b460d;
 	--color-clay-700: #642e1a;
 	--color-clay-600: #8b4513;
+
+	/* A11y */
+	--a11y-focus-color: #0ea5e9;
+	--a11y-focus-width: 2px;
+	--a11y-focus-offset: 3px;
+	--a11y-hit-target: 44px;
 }
