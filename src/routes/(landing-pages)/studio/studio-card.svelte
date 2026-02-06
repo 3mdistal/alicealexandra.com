@@ -187,6 +187,7 @@
 				on:click={handleClickMessage}
 				on:focus={handleFocusMessage}
 				on:blur={handleFocusMessage}
+				size="lg"
 			>
 				{buttonText}
 			</LinkButton>

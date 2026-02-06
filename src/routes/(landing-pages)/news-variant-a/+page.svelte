@@ -140,12 +140,12 @@
 </script>
 
 <svelte:head>
-	<title>News</title>
+	<title>News (Variant A)</title>
 	<meta name="description" content="Recent changes and updates to Tempo Immaterial." />
 </svelte:head>
 
 <div class="container">
-	<h1>News</h1>
+	<h1>News (Variant A)</h1>
 	<div class="tabs" role="tablist" aria-label="News sections">
 		{#each MAIN_TABS as tab (tab.id)}
 			<button
@@ -287,8 +287,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background-color: var(--color-bg);
-		padding: 5.5rem 1.25rem 8rem;
+		background: radial-gradient(
+			1200px 800px at 50% 0%,
+			color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)),
+			var(--color-bg)
+		);
+		padding: 6rem 1rem 8rem;
 		min-height: 100lvh;
 	}
 
@@ -296,7 +300,7 @@
 		margin-bottom: 2.5rem;
 		color: var(--color-accent);
 		font-weight: 500;
-		font-size: clamp(2.6rem, 4vw, 3.75rem);
+		font-size: clamp(2.7rem, 4.2vw, 4rem);
 		letter-spacing: -0.02em;
 		text-align: center;
 	}
@@ -308,16 +312,16 @@
 		gap: 0.5rem;
 		margin: 0 auto 2rem;
 		width: 100%;
-		max-width: 960px;
+		max-width: 980px;
 	}
 
 	.tab-button {
 		backdrop-filter: blur(8px);
 		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
-		border: 1px solid var(--color-border);
+		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: 999px;
-		background: var(--color-surface);
+		background: color-mix(in srgb, var(--color-surface) 92%, white);
 		padding: 0.6rem 1rem;
 		color: var(--color-text-muted);
 		font-weight: 500;
@@ -344,7 +348,7 @@
 	.panel {
 		margin: 0 auto;
 		width: 100%;
-		max-width: 960px;
+		max-width: 980px;
 	}
 
 	.subtabs {
@@ -358,7 +362,7 @@
 	.subtab-button {
 		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
-		border: 1px solid var(--color-border);
+		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: 999px;
 		background: var(--color-surface-muted);
 		padding: 0.4rem 0.8rem;
@@ -367,7 +371,7 @@
 
 		&:hover {
 			filter: none;
-			background: var(--color-surface);
+			background: color-mix(in srgb, var(--color-surface) 92%, white);
 		}
 	}
 
@@ -384,12 +388,14 @@
 
 	:global(.entry) {
 		display: grid;
-		grid-template-columns: 170px 1fr;
-		gap: 1.25rem;
+		grid-template-columns: 190px 1fr;
+		gap: 1.5rem;
+		box-shadow: 0 12px 30px -22px rgba(0, 0, 0, 0.35);
+		border-radius: 18px;
 	}
 
 	:global(.entry--studio) {
-		grid-template-columns: 190px 1fr;
+		grid-template-columns: 160px 1fr;
 		align-items: start;
 	}
 
@@ -485,7 +491,7 @@
 		margin: 0;
 		color: var(--color-text);
 		font-weight: 500;
-		font-size: clamp(1.25rem, 1.35vw, 1.6rem);
+		font-size: 1.5rem;
 		line-height: 1.35;
 		font-family: var(--font-serif);
 		word-break: break-word;
@@ -529,7 +535,7 @@
 	.changelog-content {
 		margin: 0 auto;
 		width: 100%;
-		max-width: 960px;
+		max-width: 980px;
 		line-height: 1.6;
 	}
 

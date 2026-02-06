@@ -23,7 +23,7 @@
 		src={Rabbit}
 		alt="A painting of a rabbit coming out of a hat."
 	>
-		<LinkButton slot="button" href="#content">Explore.</LinkButton>
+		<LinkButton slot="button" href="#content" size="lg">Explore.</LinkButton>
 	</LandingPage>
 	<Career />
 </div>
