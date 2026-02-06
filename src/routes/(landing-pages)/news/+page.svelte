@@ -287,8 +287,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background-color: var(--color-bg);
-		padding: 5.5rem 1.25rem 8rem;
+		background: radial-gradient(
+			1200px 800px at 50% 0%,
+			color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)),
+			var(--color-bg)
+		);
+		padding: 6rem 1.25rem 8rem;
 		min-height: 100lvh;
 	}
 
@@ -296,7 +300,7 @@
 		margin-bottom: 2.5rem;
 		color: var(--color-accent);
 		font-weight: 500;
-		font-size: clamp(2.6rem, 4vw, 3.75rem);
+		font-size: clamp(3rem, 4.4vw, 4.25rem);
 		letter-spacing: -0.02em;
 		text-align: center;
 	}
@@ -308,19 +312,20 @@
 		gap: 0.5rem;
 		margin: 0 auto 2rem;
 		width: 100%;
-		max-width: 960px;
+		max-width: 980px;
 	}
 
 	.tab-button {
 		backdrop-filter: blur(8px);
 		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
-		border: 1px solid var(--color-border);
+		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: 999px;
-		background: var(--color-surface);
-		padding: 0.6rem 1rem;
+		background: color-mix(in srgb, var(--color-surface) 92%, white);
+		padding: 0.72rem 1.2rem;
 		color: var(--color-text-muted);
 		font-weight: 500;
+		font-size: 1.04rem;
 		letter-spacing: 0.01em;
 
 		&:hover {
@@ -344,7 +349,7 @@
 	.panel {
 		margin: 0 auto;
 		width: 100%;
-		max-width: 960px;
+		max-width: 980px;
 	}
 
 	.subtabs {
@@ -358,16 +363,17 @@
 	.subtab-button {
 		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
-		border: 1px solid var(--color-border);
+		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: 999px;
 		background: var(--color-surface-muted);
-		padding: 0.4rem 0.8rem;
+		padding: 0.5rem 0.95rem;
 		color: var(--color-text-muted);
 		font-weight: 450;
+		font-size: 0.98rem;
 
 		&:hover {
 			filter: none;
-			background: var(--color-surface);
+			background: color-mix(in srgb, var(--color-surface) 92%, white);
 		}
 	}
 
@@ -384,12 +390,14 @@
 
 	:global(.entry) {
 		display: grid;
-		grid-template-columns: 170px 1fr;
-		gap: 1.25rem;
+		grid-template-columns: 190px 1fr;
+		gap: 1.5rem;
+		box-shadow: 0 12px 30px -22px rgba(0, 0, 0, 0.35);
+		border-radius: 18px;
 	}
 
 	:global(.entry--studio) {
-		grid-template-columns: 190px 1fr;
+		grid-template-columns: 170px 1fr;
 		align-items: start;
 	}
 
@@ -439,7 +447,7 @@
 
 	.entry-date {
 		color: var(--color-text-muted);
-		font-size: 0.95rem;
+		font-size: 1.05rem;
 		font-variant-numeric: tabular-nums;
 	}
 
@@ -451,6 +459,7 @@
 
 	/* Used by the Site tab summary layout */
 	.entry-text {
+		font-size: 1.06rem;
 		line-height: 1.65;
 	}
 
@@ -476,7 +485,7 @@
 	.entry-category {
 		color: var(--color-text-muted);
 		font-weight: 600;
-		font-size: 0.92rem;
+		font-size: 1rem;
 		line-height: 1.2;
 		letter-spacing: 0.01em;
 	}
@@ -485,7 +494,7 @@
 		margin: 0;
 		color: var(--color-text);
 		font-weight: 500;
-		font-size: clamp(1.25rem, 1.35vw, 1.6rem);
+		font-size: clamp(1.45rem, 1.6vw, 1.9rem);
 		line-height: 1.35;
 		font-family: var(--font-serif);
 		word-break: break-word;
@@ -503,6 +512,7 @@
 
 	.entry-bullets li {
 		margin: 0.25rem 0;
+		font-size: 1.04rem;
 	}
 
 	/* Inline code in the Site tab cards (generated from `parseChangelogSummaries`) */
@@ -522,6 +532,7 @@
 		padding: 2rem;
 		color: rgba(75, 70, 13, 0.75);
 		font-style: italic;
+		font-size: 1.12rem;
 		line-height: 1.6;
 		text-align: center;
 	}
@@ -529,8 +540,9 @@
 	.changelog-content {
 		margin: 0 auto;
 		width: 100%;
-		max-width: 960px;
-		line-height: 1.6;
+		max-width: 980px;
+		font-size: 1.06rem;
+		line-height: 1.7;
 	}
 
 	.changelog-content :global(h2) {
@@ -591,6 +603,7 @@
 		padding: 0;
 		color: rgba(75, 70, 13, 0.95);
 		font-weight: 500;
+		font-size: 1.03rem;
 		text-decoration: underline;
 		text-underline-offset: 3px;
 	}
