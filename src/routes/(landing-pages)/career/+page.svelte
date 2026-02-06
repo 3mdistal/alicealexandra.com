@@ -1,5 +1,5 @@
 <script>
-	import Button from '$lib/icons/button.svelte';
+	import LinkButton from '$lib/components/ui/link-button.svelte';
 	import Career from './career.svelte';
 	import LandingPage from '$lib/components/landing-page.svelte';
 
@@ -23,7 +23,7 @@
 		src={Rabbit}
 		alt="A painting of a rabbit coming out of a hat."
 	>
-		<Button slot="button" text="Explore." url="#content" />
+		<LinkButton slot="button" href="#content">Explore.</LinkButton>
 	</LandingPage>
 	<Career />
 </div>

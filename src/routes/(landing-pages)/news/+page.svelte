@@ -2,6 +2,8 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { pageState } from '$lib/stores';
 	import { marked } from 'marked';
+	import Card from '$lib/components/ui/card.svelte';
+	import Pill from '$lib/components/ui/pill.svelte';
 	import {
 		STUDIO_NEWS,
 		type NewsMainTab,
@@ -189,8 +191,10 @@
 						{@const categoryLabel = STUDIO_CATEGORY_LABEL[entry.category]}
 
 						{#if href}
-							<a
-								class="entry entry--link entry--studio"
+							<Card
+								as="a"
+								className="entry entry--link entry--studio"
+								interactive
 								{href}
 								aria-label={`${studioActionLabel(action)} • ${categoryLabel}: ${title}`}
 							>
@@ -198,30 +202,26 @@
 									<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
 									<div class="entry-meta" aria-hidden="true">
 										<span class="entry-category">{categoryLabel}</span>
-										<span class={`pill pill--action pill--${action}`}
-											>{studioActionLabel(action)}</span
-										>
+										<Pill tone={action} strong>{studioActionLabel(action)}</Pill>
 									</div>
 								</div>
 								<div class="entry-body">
 									<p class="entry-heading">{title}</p>
 								</div>
-							</a>
+							</Card>
 						{:else}
-							<article class="entry entry--studio">
+							<Card as="article" className="entry entry--studio">
 								<div class="entry-left">
 									<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
 									<div class="entry-meta" aria-hidden="true">
 										<span class="entry-category">{categoryLabel}</span>
-										<span class={`pill pill--action pill--${action}`}
-											>{studioActionLabel(action)}</span
-										>
+										<Pill tone={action} strong>{studioActionLabel(action)}</Pill>
 									</div>
 								</div>
 								<div class="entry-body">
 									<p class="entry-heading">{title}</p>
 								</div>
-							</article>
+							</Card>
 						{/if}
 					{/each}
 				{/if}
@@ -240,7 +240,7 @@
 					<p class="coming-soon">No site updates yet.</p>
 				{:else}
 					{#each siteSummaries as item (item.id)}
-						<article class="entry">
+						<Card as="article" className="entry">
 							<time class="entry-date" datetime={item.dateIso}>{formatDate(item.dateIso)}</time>
 							<div class="entry-text">
 								{#if item.summary}
@@ -254,7 +254,7 @@
 									</ul>
 								{/if}
 							</div>
-						</article>
+						</Card>
 					{/each}
 				{/if}
 			</section>
@@ -382,41 +382,29 @@
 		gap: 0.75rem;
 	}
 
-	.entry {
+	:global(.entry) {
 		display: grid;
 		grid-template-columns: 140px 1fr;
 		gap: 1.25rem;
-		transition: all var(--duration-base) var(--ease-standard);
-		border: 1px solid var(--color-border);
-		border-radius: 16px;
-		background: var(--color-surface);
-		padding: 1.25rem;
 	}
 
-	.entry--studio {
+	:global(.entry--studio) {
 		grid-template-columns: 160px 1fr;
 		align-items: start;
 	}
 
-	.entry--link {
-		transition:
-			background 160ms ease,
-			border-color 160ms ease,
-			transform 160ms ease,
-			box-shadow 160ms ease;
-		cursor: pointer;
+	:global(.entry--link) {
 		color: inherit;
-		text-decoration: none;
 	}
 
 	/* hover affordance without “link styling” */
-	.entry--link.entry--studio {
+	:global(.entry--link.entry--studio) {
 		position: relative;
 		/* leave room for the hover chevron */
 		padding-right: 2.5rem;
 	}
 
-	.entry--link.entry--studio::after {
+	:global(.entry--link.entry--studio)::after {
 		position: absolute;
 		top: 50%;
 		right: 0.9rem;
@@ -432,26 +420,18 @@
 		font-size: 1.25rem;
 	}
 
-	.entry--link:hover {
-		transform: translateY(-2px);
-		filter: none;
-		box-shadow: var(--shadow-2);
-		border-color: var(--color-border);
-		background: var(--color-surface);
-	}
-
-	.entry--link.entry--studio:hover::after {
+	:global(.entry--link.entry--studio:hover)::after {
 		transform: translateY(-50%) translateX(0);
 		opacity: 1;
 		color: var(--color-text);
 	}
 
-	.entry--link:focus-visible {
+	:global(.entry--link:focus-visible) {
 		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
 		outline-offset: var(--a11y-focus-offset);
 	}
 
-	.entry--link.entry--studio:focus-visible::after {
+	:global(.entry--link.entry--studio:focus-visible)::after {
 		transform: translateY(-50%) translateX(0);
 		opacity: 1;
 		color: var(--color-text);
@@ -482,7 +462,7 @@
 	}
 
 	/* Studio cards: center the title vertically against the left meta column */
-	.entry--studio .entry-body {
+	:global(.entry--studio) .entry-body {
 		align-self: center;
 	}
 
@@ -499,41 +479,6 @@
 		font-size: 0.92rem;
 		line-height: 1.2;
 		letter-spacing: 0.01em;
-	}
-
-	.pill {
-		display: inline-flex;
-		align-items: center;
-		border: 1px solid var(--color-border);
-		border-radius: 999px;
-		background: var(--color-surface-muted);
-		padding: 0.18rem 0.5rem;
-		color: var(--color-text-muted);
-		font-size: 0.78rem;
-		letter-spacing: 0.02em;
-		white-space: nowrap;
-	}
-
-	.pill--action {
-		font-weight: 600;
-	}
-
-	.pill--added {
-		border-color: rgba(46, 125, 50, 0.22);
-		background: rgba(46, 125, 50, 0.08);
-		color: rgba(46, 90, 45, 0.95);
-	}
-
-	.pill--edited {
-		border-color: rgba(25, 118, 210, 0.22);
-		background: rgba(25, 118, 210, 0.08);
-		color: rgba(18, 74, 132, 0.95);
-	}
-
-	.pill--removed {
-		border-color: rgba(211, 47, 47, 0.22);
-		background: rgba(211, 47, 47, 0.08);
-		color: rgba(132, 21, 21, 0.95);
 	}
 
 	.entry-heading {
@@ -568,10 +513,6 @@
 		font-size: 0.95em;
 		font-family: var(--font-mono);
 		word-break: break-word;
-	}
-
-	.entry-title {
-		font-style: italic;
 	}
 
 	.coming-soon {
@@ -655,12 +596,12 @@
 	}
 
 	@media (max-width: 640px) {
-		.entry {
+		:global(.entry) {
 			grid-template-columns: 1fr;
 			gap: 0.25rem;
 		}
 
-		.entry--studio {
+		:global(.entry--studio) {
 			gap: 0.6rem;
 		}
 	}
