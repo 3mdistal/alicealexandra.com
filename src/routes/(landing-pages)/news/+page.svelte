@@ -337,7 +337,7 @@
 
 	.tab-button.active {
 		border-color: var(--color-border);
-		background: var(--color-surface-muted);
+		background: color-mix(in srgb, var(--color-accent) 18%, var(--color-surface-muted));
 		color: var(--color-text);
 	}
 
