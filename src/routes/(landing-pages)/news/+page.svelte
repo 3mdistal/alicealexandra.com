@@ -311,6 +311,11 @@
 		justify-content: center;
 		gap: 0.5rem;
 		margin: 0 auto 2rem;
+		box-shadow: 0 8px 24px -20px rgba(0, 0, 0, 0.32);
+		border: 1px solid color-mix(in srgb, var(--color-border) 45%, transparent);
+		border-radius: 16px;
+		background: color-mix(in srgb, var(--color-surface) 82%, white);
+		padding: 0.55rem;
 		width: 100%;
 		max-width: 980px;
 	}
