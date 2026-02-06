@@ -89,10 +89,10 @@
 		align-items: flex-end;
 		background: linear-gradient(
 			180deg,
-			rgba(232, 232, 232, 0) 0%,
-			rgba(232, 232, 232, 0.2) 40%,
-			rgba(232, 232, 232, 0.6) 70%,
-			#e8e8e8 100%
+			color-mix(in srgb, transparent 100%, var(--color-content-bg)) 0%,
+			color-mix(in srgb, transparent 80%, var(--color-content-bg)) 40%,
+			color-mix(in srgb, transparent 35%, var(--color-content-bg)) 70%,
+			var(--color-content-bg) 100%
 		);
 		padding: 3rem;
 		padding-bottom: 14rem;
@@ -105,29 +105,29 @@
 
 	.hero-content h1 {
 		margin: 0 0 0.75rem 0;
-		color: #1a1a1a;
+		color: var(--color-content-text);
 		font-weight: 500;
 		font-size: 4.4rem;
 		line-height: 1.1;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
 		text-shadow:
-			0 0 25px rgba(232, 232, 232, 0.7),
-			0 0 50px rgba(232, 232, 232, 0.4),
-			0 2px 4px rgba(232, 232, 232, 0.25);
+			0 0 25px color-mix(in srgb, var(--color-content-bg) 70%, transparent),
+			0 0 50px color-mix(in srgb, var(--color-content-bg) 40%, transparent),
+			0 2px 4px color-mix(in srgb, var(--color-content-bg) 25%, transparent);
 	}
 
 	.hero-content .description {
 		margin: 0;
-		color: #444;
+		color: var(--color-content-secondary);
 		font-style: italic;
 		font-size: 1.75rem;
 		line-height: 1.4;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
 		text-shadow:
-			0 0 20px rgba(232, 232, 232, 0.7),
-			0 0 40px rgba(232, 232, 232, 0.4);
+			0 0 20px color-mix(in srgb, var(--color-content-bg) 70%, transparent),
+			0 0 40px color-mix(in srgb, var(--color-content-bg) 40%, transparent);
 	}
 
 	@media (max-width: 768px) {
@@ -183,23 +183,6 @@
 		margin-bottom: 3rem;
 	}
 
-	/*
-	 * TEMPORARY EXCEPTION: Force light mode prose colors for postcards.
-	 * Dark mode for postcards has not been designed/implemented yet.
-	 * TODO: Remove this override once postcards dark mode is built.
-	 */
-	.prose {
-		--prose-text: #111827;
-		--prose-heading: #111827;
-		--prose-accent: #374151;
-		--prose-secondary: #6b7280;
-		--prose-link: #31676c;
-		--prose-link-hover: #1e4042;
-		--prose-callout: #d1d5db;
-		--prose-code-bg: #d1d5db;
-		--prose-border: #939599;
-	}
-
 	.back-link {
 		margin-top: 9rem;
 		text-align: center;
@@ -207,16 +190,16 @@
 
 	.back-link a {
 		transition: background-color 0.2s;
-		border: 1px solid #ddd;
+		border: 1px solid var(--color-content-border);
 		border-radius: 4px;
 		padding: 0.5rem 1rem;
-		color: #666;
+		color: var(--color-content-secondary);
 		font-size: 1.1rem;
 		text-decoration: none;
 	}
 
 	.back-link a:hover {
-		background-color: #f8f8f8;
+		background-color: color-mix(in srgb, var(--color-content-bg) 88%, var(--color-content-text));
 	}
 
 	.not-found {
@@ -225,25 +208,25 @@
 	}
 
 	.not-found h1 {
-		color: #666;
+		color: var(--color-content-secondary);
 	}
 
 	.not-found p {
 		margin-bottom: 2rem;
-		color: #999;
+		color: var(--color-content-secondary);
 	}
 
 	.not-found a {
 		transition: background-color 0.2s;
-		border: 1px solid #ddd;
+		border: 1px solid var(--color-content-border);
 		border-radius: 4px;
 		padding: 0.5rem 1rem;
-		color: #666;
+		color: var(--color-content-secondary);
 		font-size: 1.1rem;
 		text-decoration: none;
 	}
 
 	.not-found a:hover {
-		background-color: #f8f8f8;
+		background-color: color-mix(in srgb, var(--color-content-bg) 88%, var(--color-content-text));
 	}
 </style>

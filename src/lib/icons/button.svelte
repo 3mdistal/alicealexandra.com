@@ -1,12 +1,13 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import LinkButton from '$lib/components/ui/link-button.svelte';
 
 	export let url = '';
 	export let text = '';
 	export let target = '';
 	export let type = '';
-	export let accent = '';
-	export let background = '';
+	export let accent = 'var(--color-accent)';
+	export let background = 'var(--color-surface)';
 
 	const dispatch = createEventDispatcher();
 
@@ -23,43 +24,29 @@
 	}
 </script>
 
-<a
+<LinkButton
 	href={url}
 	{target}
-	{type}
-	style="--accent: {accent}; --background: {background}"
+	rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+	style={`--_button-accent: ${accent}; --_button-bg: ${background};`}
+	className="legacy-icon-button"
+	aria-busy={type === 'loading' ? 'true' : undefined}
 	on:click={handleClick}
 	on:focus={handleFocus}
 	on:blur={handleBlur}
 >
 	{text}
-</a>
+</LinkButton>
 
 <style>
-	a {
-		cursor: pointer;
-		box-sizing: content-box;
+	:global(.legacy-icon-button) {
 		border-width: 2px;
-		border-style: solid;
-		border-color: var(--accent);
 		border-radius: 0.75rem;
-		background-color: var(--background);
-		padding: 1em;
-		color: var(--accent);
-		font-weight: 400;
-		font-size: 1rem;
-		text-align: center;
-		text-decoration: none;
-	}
-
-	a:hover {
-		filter: none;
-		background-color: var(--accent);
-		color: var(--background);
+		font-weight: var(--font-weight-regular);
 	}
 
 	@media (min-width: 1024px) {
-		a {
+		:global(.legacy-icon-button) {
 			font-size: 1.25rem;
 		}
 	}

@@ -1,0 +1,19 @@
+:root {
+	--ui-control-border-width: 1px;
+	--ui-control-radius: var(--radius-3);
+	--ui-control-gap: var(--space-2);
+	--ui-control-font-size: var(--font-size-base);
+	--ui-control-font-weight: var(--font-weight-medium);
+	--ui-control-padding-y: 0.6rem;
+	--ui-control-padding-x: 1rem;
+
+	--ui-surface-radius: var(--radius-4);
+	--ui-surface-border: var(--ui-control-border-width) solid var(--color-border);
+	--ui-surface-background: var(--color-surface);
+	--ui-surface-muted-background: var(--color-surface-muted);
+	--ui-surface-shadow: var(--shadow-1);
+
+	--ui-pill-font-size: var(--font-size-xs);
+	--ui-pill-padding-y: 0.18rem;
+	--ui-pill-padding-x: 0.5rem;
+}

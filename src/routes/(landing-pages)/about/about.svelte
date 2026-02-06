@@ -11,7 +11,7 @@
 	import { onDestroy } from 'svelte';
 	import { pageState } from '$lib/stores';
 
-	export let accent = '';
+	export let accent = 'var(--color-accent)';
 
 	onDestroy(() => {
 		pageState.set('home');
@@ -93,6 +93,8 @@
 
 	p {
 		margin-bottom: 1.5em;
+		font-size: var(--font-size-lg);
+		line-height: 1.75;
 	}
 
 	.about-footer {
@@ -102,7 +104,21 @@
 	}
 
 	.about-footer-heading {
+		margin-bottom: var(--space-4);
 		max-width: 80%;
+		font-weight: var(--font-weight-medium);
+		font-size: var(--font-size-2xl);
+		line-height: var(--line-height-tight);
+	}
+
+	@media (min-width: 1024px) {
+		.about-footer-heading {
+			font-size: var(--font-size-3xl);
+		}
+
+		p {
+			font-size: var(--font-size-xl);
+		}
 	}
 
 	.about-footer-content {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import HomepageSection from '$lib/homepage/homepage-section.svelte';
-	import { backgroundColors, names } from '../stores';
+	import { names } from '../stores';
 	import { onMount } from 'svelte';
 
 	type Gsap = typeof import('gsap').gsap;
@@ -50,7 +50,7 @@
 
 <nav bind:this={homepageWrapper}>
 	{#each $names as name}
-		<HomepageSection background={$backgroundColors[name]} {name} {transitionOutWrapper} />
+		<HomepageSection {name} {transitionOutWrapper} />
 	{/each}
 </nav>
 

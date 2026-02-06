@@ -370,9 +370,9 @@
 	.modal-content {
 		position: relative;
 		box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-		border: 2px dotted rgba(0, 0, 0, 0.5);
+		border: 2px dotted color-mix(in srgb, var(--color-content-border) 70%, transparent);
 		border-radius: 20px;
-		background: #e8e8e8;
+		background: var(--color-content-bg);
 		/* Remove CSS sizing - let GSAP handle dimensions */
 		overflow: hidden;
 	}
@@ -401,10 +401,10 @@
 		align-items: flex-end;
 		background: linear-gradient(
 			180deg,
-			rgba(232, 232, 232, 0) 0%,
-			rgba(232, 232, 232, 0.2) 40%,
-			rgba(232, 232, 232, 0.6) 70%,
-			#e8e8e8 100%
+			color-mix(in srgb, transparent 100%, var(--color-content-bg)) 0%,
+			color-mix(in srgb, transparent 80%, var(--color-content-bg)) 40%,
+			color-mix(in srgb, transparent 35%, var(--color-content-bg)) 70%,
+			var(--color-content-bg) 100%
 		);
 		padding: 2rem;
 		padding-bottom: 10rem;
@@ -417,29 +417,29 @@
 
 	.modal-hero-content h1 {
 		margin: 0 0 0.5rem 0;
-		color: #1a1a1a;
+		color: var(--color-content-text);
 		font-weight: 500;
 		font-size: 3rem;
 		line-height: 1.1;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
 		text-shadow:
-			0 0 25px rgba(232, 232, 232, 0.7),
-			0 0 50px rgba(232, 232, 232, 0.4),
-			0 2px 4px rgba(232, 232, 232, 0.25);
+			0 0 25px color-mix(in srgb, var(--color-content-bg) 70%, transparent),
+			0 0 50px color-mix(in srgb, var(--color-content-bg) 40%, transparent),
+			0 2px 4px color-mix(in srgb, var(--color-content-bg) 25%, transparent);
 	}
 
 	.modal-hero-content .description {
 		margin: 0;
-		color: #444;
+		color: var(--color-content-secondary);
 		font-style: italic;
 		font-size: 1.3rem;
 		line-height: 1.4;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
 		text-shadow:
-			0 0 20px rgba(232, 232, 232, 0.7),
-			0 0 40px rgba(232, 232, 232, 0.4);
+			0 0 20px color-mix(in srgb, var(--color-content-bg) 70%, transparent),
+			0 0 40px color-mix(in srgb, var(--color-content-bg) 40%, transparent);
 	}
 
 	.modal-body {
@@ -469,16 +469,16 @@
 		cursor: pointer;
 		border: none;
 		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.9);
+		background: color-mix(in srgb, var(--color-content-bg) 88%, transparent);
 		width: 40px;
 		height: 40px;
 		pointer-events: auto;
-		color: #333;
+		color: var(--color-content-text);
 		text-decoration: none;
 	}
 
 	.close-button:hover {
-		background: white;
+		background: var(--color-content-bg);
 	}
 
 	.modal-content-area {
@@ -487,23 +487,6 @@
 		margin: -6rem auto 0;
 		padding: 0 2rem 18rem;
 		max-width: 800px;
-	}
-
-	/*
-	 * TEMPORARY EXCEPTION: Force light mode prose colors for postcards.
-	 * Dark mode for postcards has not been designed/implemented yet.
-	 * TODO: Remove this override once postcards dark mode is built.
-	 */
-	.prose {
-		--prose-text: #111827;
-		--prose-heading: #111827;
-		--prose-accent: #374151;
-		--prose-secondary: #6b7280;
-		--prose-link: #31676c;
-		--prose-link-hover: #1e4042;
-		--prose-callout: #d1d5db;
-		--prose-code-bg: #d1d5db;
-		--prose-border: #939599;
 	}
 
 	.not-found {

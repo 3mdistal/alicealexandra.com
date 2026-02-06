@@ -51,6 +51,32 @@
 		if (cardElement) {
 			const postcard = cardElement.querySelector('.postcard');
 
+			const readShadows = () => {
+				const el = postcard instanceof HTMLElement ? postcard : null;
+				if (!el) return { rest: undefined, hover: undefined };
+				const styles = getComputedStyle(el);
+				const rest = styles.getPropertyValue('--postcard-shadow').trim() || undefined;
+				const hover =
+					styles.getPropertyValue('--postcard-shadow-hover').trim() || rest || undefined;
+				return { rest, hover };
+			};
+
+			const clearInlineShadow = () => {
+				const el = postcard instanceof HTMLElement ? postcard : null;
+				if (!el) return;
+				gsap.killTweensOf(el, 'boxShadow');
+				el.style.boxShadow = '';
+			};
+
+			const schemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+			const handleSchemeChange = () => clearInlineShadow();
+			if ('addEventListener' in schemeMedia) {
+				schemeMedia.addEventListener('change', handleSchemeChange);
+			} else {
+				// @ts-expect-error - Safari < 14
+				schemeMedia.addListener(handleSchemeChange);
+			}
+
 			// Function to generate a new random rotation
 			const generateNewRotation = () => {
 				let newRotation: number;
@@ -65,17 +91,20 @@
 			};
 
 			const handleMouseEnter = () => {
+				const { hover } = readShadows();
 				gsap.to(postcard, {
 					y: -8,
 					scale: 1.02,
 					duration: 0.4,
 					ease: 'back.out(1.7)'
 				});
-				gsap.to(postcard, {
-					boxShadow: '0 25px 50px rgba(0, 0, 0, 0.25)',
-					duration: 0.4,
-					ease: 'power2.out'
-				});
+				if (hover) {
+					gsap.to(postcard, {
+						boxShadow: hover,
+						duration: 0.4,
+						ease: 'power2.out'
+					});
+				}
 				// Scale background image to 100% and center it
 				gsap.to(imageElement, {
 					scale: 1,
@@ -94,6 +123,7 @@
 				// Generate a new random rotation for this card
 				const newRotation = generateNewRotation();
 				currentRotation = newRotation;
+				const { rest } = readShadows();
 
 				gsap.to(postcard, {
 					y: 0,
@@ -101,11 +131,13 @@
 					duration: 0.6,
 					ease: 'power3.out'
 				});
-				gsap.to(postcard, {
-					boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-					duration: 0.6,
-					ease: 'power2.out'
-				});
+				if (rest) {
+					gsap.to(postcard, {
+						boxShadow: rest,
+						duration: 0.6,
+						ease: 'power2.out'
+					});
+				}
 				// Scale background image back to 1.15 for parallax room
 				gsap.to(imageElement, {
 					scale: 1.15,
@@ -127,6 +159,12 @@
 			return () => {
 				cardElement.removeEventListener('mouseenter', handleMouseEnter);
 				cardElement.removeEventListener('mouseleave', handleMouseLeave);
+				if ('removeEventListener' in schemeMedia) {
+					schemeMedia.removeEventListener('change', handleSchemeChange);
+				} else {
+					// @ts-expect-error - Safari < 14
+					schemeMedia.removeListener(handleSchemeChange);
+				}
 				if (scrollTriggerInstance) {
 					scrollTriggerInstance.kill();
 				}
@@ -160,6 +198,12 @@
 	.postcard-link {
 		display: block;
 		width: 100%;
+		--postcard-paper: var(--color-content-bg);
+		--postcard-ink: var(--color-content-text);
+		--postcard-ink-muted: var(--color-content-secondary);
+		--postcard-border: var(--color-content-border);
+		--postcard-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		--postcard-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.25);
 		color: inherit;
 		text-decoration: none;
 
@@ -171,12 +215,21 @@
 	.postcard {
 		position: relative;
 		cursor: pointer;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		box-shadow: var(--postcard-shadow);
 		border-radius: 16px;
-		background: #000;
+		background: var(--postcard-paper);
 		aspect-ratio: 3 / 2;
 		width: 100%;
 		overflow: hidden;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.postcard-link {
+			--postcard-shadow: 0 18px 55px rgba(0, 0, 0, 0.7);
+			--postcard-shadow-hover:
+				0 30px 80px rgba(0, 0, 0, 0.8),
+				0 0 0 1px color-mix(in srgb, var(--postcard-border) 65%, transparent);
+		}
 	}
 
 	.postcard::before {
@@ -186,7 +239,7 @@
 		bottom: -2px;
 		left: -2px;
 		z-index: -1;
-		border: 2px dotted rgba(0, 0, 0, 0.5);
+		border: 2px dotted color-mix(in srgb, var(--postcard-border) 70%, transparent);
 		border-radius: 18px;
 		pointer-events: none;
 		content: '';
@@ -222,22 +275,22 @@
 		z-index: 2;
 		background: linear-gradient(
 			180deg,
-			rgba(240, 240, 240, 0.1) 0%,
-			rgba(240, 240, 240, 0.3) 30%,
-			rgba(240, 240, 240, 0.7) 70%,
-			rgba(240, 240, 240, 0.95) 100%
+			color-mix(in srgb, transparent 90%, var(--postcard-paper)) 0%,
+			color-mix(in srgb, transparent 70%, var(--postcard-paper)) 30%,
+			color-mix(in srgb, transparent 25%, var(--postcard-paper)) 70%,
+			var(--postcard-paper) 100%
 		);
 		padding: 2rem;
 	}
 
 	.postcard-content {
 		width: 100%;
-		color: #333;
+		color: var(--postcard-ink);
 	}
 
 	h2 {
 		margin: 0 0 1rem 0;
-		color: #333;
+		color: var(--postcard-ink);
 		font-weight: 600;
 		font-size: 1.8rem;
 		line-height: 1.2;
@@ -248,7 +301,7 @@
 		margin: 0;
 		-webkit-line-clamp: 3;
 		line-clamp: 3;
-		color: #555;
+		color: var(--postcard-ink-muted);
 		font-size: 1rem;
 		line-height: 1.5;
 		-webkit-box-orient: vertical;

@@ -54,7 +54,7 @@
 
 <style>
 	.homepage {
-		background-color: #fafafa;
+		background-color: var(--color-bg);
 	}
 
 	.main-container {

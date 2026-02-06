@@ -2,6 +2,8 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { pageState } from '$lib/stores';
 	import { marked } from 'marked';
+	import Card from '$lib/components/ui/card.svelte';
+	import Pill from '$lib/components/ui/pill.svelte';
 	import {
 		STUDIO_NEWS,
 		type NewsMainTab,
@@ -189,8 +191,10 @@
 						{@const categoryLabel = STUDIO_CATEGORY_LABEL[entry.category]}
 
 						{#if href}
-							<a
-								class="entry entry--link entry--studio"
+							<Card
+								as="a"
+								className="entry entry--link entry--studio"
+								interactive
 								{href}
 								aria-label={`${studioActionLabel(action)} • ${categoryLabel}: ${title}`}
 							>
@@ -198,30 +202,26 @@
 									<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
 									<div class="entry-meta" aria-hidden="true">
 										<span class="entry-category">{categoryLabel}</span>
-										<span class={`pill pill--action pill--${action}`}
-											>{studioActionLabel(action)}</span
-										>
+										<Pill tone={action} strong>{studioActionLabel(action)}</Pill>
 									</div>
 								</div>
 								<div class="entry-body">
 									<p class="entry-heading">{title}</p>
 								</div>
-							</a>
+							</Card>
 						{:else}
-							<article class="entry entry--studio">
+							<Card as="article" className="entry entry--studio">
 								<div class="entry-left">
 									<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
 									<div class="entry-meta" aria-hidden="true">
 										<span class="entry-category">{categoryLabel}</span>
-										<span class={`pill pill--action pill--${action}`}
-											>{studioActionLabel(action)}</span
-										>
+										<Pill tone={action} strong>{studioActionLabel(action)}</Pill>
 									</div>
 								</div>
 								<div class="entry-body">
 									<p class="entry-heading">{title}</p>
 								</div>
-							</article>
+							</Card>
 						{/if}
 					{/each}
 				{/if}
@@ -240,7 +240,7 @@
 					<p class="coming-soon">No site updates yet.</p>
 				{:else}
 					{#each siteSummaries as item (item.id)}
-						<article class="entry">
+						<Card as="article" className="entry">
 							<time class="entry-date" datetime={item.dateIso}>{formatDate(item.dateIso)}</time>
 							<div class="entry-text">
 								{#if item.summary}
@@ -254,7 +254,7 @@
 									</ul>
 								{/if}
 							</div>
-						</article>
+						</Card>
 					{/each}
 				{/if}
 			</section>
@@ -287,16 +287,20 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background-color: #eeeded;
-		padding: 6rem 1rem 8rem;
+		background: radial-gradient(
+			1200px 800px at 50% 0%,
+			color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)),
+			var(--color-bg)
+		);
+		padding: 6rem 1.25rem 8rem;
 		min-height: 100lvh;
 	}
 
 	h1 {
 		margin-bottom: 2.5rem;
-		color: #726a12;
+		color: var(--color-accent);
 		font-weight: 500;
-		font-size: 3.5rem;
+		font-size: clamp(3rem, 4.4vw, 4.25rem);
 		letter-spacing: -0.02em;
 		text-align: center;
 	}
@@ -308,43 +312,44 @@
 		gap: 0.5rem;
 		margin: 0 auto 2rem;
 		width: 100%;
-		max-width: 800px;
+		max-width: 980px;
 	}
 
 	.tab-button {
 		backdrop-filter: blur(8px);
-		transition: all 0.2s ease;
+		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
-		border: 1px solid rgba(114, 106, 18, 0.25);
+		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.7);
-		padding: 0.6rem 1rem;
-		color: #4b460d;
+		background: color-mix(in srgb, var(--color-surface) 92%, white);
+		padding: 0.72rem 1.2rem;
+		color: var(--color-text-muted);
 		font-weight: 500;
+		font-size: 1.04rem;
 		letter-spacing: 0.01em;
 
 		&:hover {
 			transform: translateY(-1px);
-			filter: brightness(0.95);
-			box-shadow: 0 4px 12px rgba(114, 106, 18, 0.08);
+			filter: none;
+			box-shadow: var(--shadow-1);
 		}
 	}
 
 	.tab-button.active {
-		border-color: rgba(114, 106, 18, 0.5);
-		background: rgba(114, 106, 18, 0.12);
-		color: #3d390b;
+		border-color: var(--color-border);
+		background: color-mix(in srgb, var(--color-accent) 18%, var(--color-surface-muted));
+		color: var(--color-text);
 	}
 
 	.tab-button:focus-visible {
-		outline: 2px solid rgba(114, 106, 18, 0.7);
-		outline-offset: 2px;
+		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
+		outline-offset: var(--a11y-focus-offset);
 	}
 
 	.panel {
 		margin: 0 auto;
 		width: 100%;
-		max-width: 800px;
+		max-width: 980px;
 	}
 
 	.subtabs {
@@ -356,24 +361,25 @@
 	}
 
 	.subtab-button {
-		transition: all 0.2s ease;
+		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
-		border: 1px solid rgba(114, 106, 18, 0.18);
+		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.55);
-		padding: 0.4rem 0.8rem;
-		color: rgba(75, 70, 13, 0.95);
+		background: var(--color-surface-muted);
+		padding: 0.5rem 0.95rem;
+		color: var(--color-text-muted);
 		font-weight: 450;
+		font-size: 0.98rem;
 
 		&:hover {
-			filter: brightness(0.95);
-			background: rgba(255, 255, 255, 0.8);
+			filter: none;
+			background: color-mix(in srgb, var(--color-surface) 92%, white);
 		}
 	}
 
 	.subtab-button.active {
-		border-color: rgba(114, 106, 18, 0.45);
-		background: rgba(114, 106, 18, 0.1);
+		border-color: var(--color-border);
+		background: color-mix(in srgb, var(--color-accent) 18%, var(--color-surface-muted));
 	}
 
 	.entries {
@@ -382,41 +388,31 @@
 		gap: 0.75rem;
 	}
 
-	.entry {
+	:global(.entry) {
 		display: grid;
-		grid-template-columns: 140px 1fr;
-		gap: 1.25rem;
-		transition: all 0.2s ease;
-		border: 1px solid rgba(114, 106, 18, 0.12);
-		border-radius: 16px;
-		background: rgba(255, 255, 255, 0.6);
-		padding: 1.25rem;
+		grid-template-columns: 190px 1fr;
+		gap: 1.5rem;
+		box-shadow: 0 12px 30px -22px rgba(0, 0, 0, 0.35);
+		border-radius: 18px;
 	}
 
-	.entry--studio {
-		grid-template-columns: 160px 1fr;
+	:global(.entry--studio) {
+		grid-template-columns: 170px 1fr;
 		align-items: start;
 	}
 
-	.entry--link {
-		transition:
-			background 160ms ease,
-			border-color 160ms ease,
-			transform 160ms ease,
-			box-shadow 160ms ease;
-		cursor: pointer;
+	:global(.entry--link) {
 		color: inherit;
-		text-decoration: none;
 	}
 
 	/* hover affordance without “link styling” */
-	.entry--link.entry--studio {
+	:global(.entry--link.entry--studio) {
 		position: relative;
 		/* leave room for the hover chevron */
 		padding-right: 2.5rem;
 	}
 
-	.entry--link.entry--studio::after {
+	:global(.entry--link.entry--studio)::after {
 		position: absolute;
 		top: 50%;
 		right: 0.9rem;
@@ -428,38 +424,30 @@
 			color 160ms ease;
 		pointer-events: none;
 		content: '→';
-		color: rgba(75, 70, 13, 0.55);
+		color: var(--color-text-muted);
 		font-size: 1.25rem;
 	}
 
-	.entry--link:hover {
-		transform: translateY(-2px);
-		filter: none;
-		box-shadow: 0 12px 24px rgba(18, 16, 0, 0.06);
-		border-color: rgba(114, 106, 18, 0.25);
-		background: rgba(255, 255, 255, 0.85);
-	}
-
-	.entry--link.entry--studio:hover::after {
+	:global(.entry--link.entry--studio:hover)::after {
 		transform: translateY(-50%) translateX(0);
 		opacity: 1;
-		color: rgba(75, 70, 13, 0.75);
+		color: var(--color-text);
 	}
 
-	.entry--link:focus-visible {
-		outline: 2px solid rgba(114, 106, 18, 0.7);
-		outline-offset: 3px;
+	:global(.entry--link:focus-visible) {
+		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
+		outline-offset: var(--a11y-focus-offset);
 	}
 
-	.entry--link.entry--studio:focus-visible::after {
+	:global(.entry--link.entry--studio:focus-visible)::after {
 		transform: translateY(-50%) translateX(0);
 		opacity: 1;
-		color: rgba(75, 70, 13, 0.75);
+		color: var(--color-text);
 	}
 
 	.entry-date {
-		color: rgba(75, 70, 13, 0.7);
-		font-size: 0.95rem;
+		color: var(--color-text-muted);
+		font-size: 1.05rem;
 		font-variant-numeric: tabular-nums;
 	}
 
@@ -471,6 +459,7 @@
 
 	/* Used by the Site tab summary layout */
 	.entry-text {
+		font-size: 1.06rem;
 		line-height: 1.65;
 	}
 
@@ -482,7 +471,7 @@
 	}
 
 	/* Studio cards: center the title vertically against the left meta column */
-	.entry--studio .entry-body {
+	:global(.entry--studio) .entry-body {
 		align-self: center;
 	}
 
@@ -494,55 +483,20 @@
 	}
 
 	.entry-category {
-		color: rgba(75, 70, 13, 0.78);
+		color: var(--color-text-muted);
 		font-weight: 600;
-		font-size: 0.92rem;
+		font-size: 1rem;
 		line-height: 1.2;
 		letter-spacing: 0.01em;
 	}
 
-	.pill {
-		display: inline-flex;
-		align-items: center;
-		border: 1px solid rgba(114, 106, 18, 0.16);
-		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.55);
-		padding: 0.18rem 0.5rem;
-		color: rgba(75, 70, 13, 0.82);
-		font-size: 0.78rem;
-		letter-spacing: 0.02em;
-		white-space: nowrap;
-	}
-
-	.pill--action {
-		font-weight: 600;
-	}
-
-	.pill--added {
-		border-color: rgba(46, 125, 50, 0.22);
-		background: rgba(46, 125, 50, 0.08);
-		color: rgba(46, 90, 45, 0.95);
-	}
-
-	.pill--edited {
-		border-color: rgba(25, 118, 210, 0.22);
-		background: rgba(25, 118, 210, 0.08);
-		color: rgba(18, 74, 132, 0.95);
-	}
-
-	.pill--removed {
-		border-color: rgba(211, 47, 47, 0.22);
-		background: rgba(211, 47, 47, 0.08);
-		color: rgba(132, 21, 21, 0.95);
-	}
-
 	.entry-heading {
 		margin: 0;
-		color: rgba(25, 30, 40, 0.92);
+		color: var(--color-text);
 		font-weight: 500;
-		font-size: 1.5rem;
+		font-size: clamp(1.45rem, 1.6vw, 1.9rem);
 		line-height: 1.35;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 		word-break: break-word;
 	}
 
@@ -558,20 +512,17 @@
 
 	.entry-bullets li {
 		margin: 0.25rem 0;
+		font-size: 1.04rem;
 	}
 
 	/* Inline code in the Site tab cards (generated from `parseChangelogSummaries`) */
 	.entry-text :global(code) {
 		border-radius: 4px;
-		background-color: rgba(31, 41, 55, 0.08);
+		background-color: var(--color-surface-muted);
 		padding: 0.12rem 0.3rem;
 		font-size: 0.95em;
-		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
+		font-family: var(--font-mono);
 		word-break: break-word;
-	}
-
-	.entry-title {
-		font-style: italic;
 	}
 
 	.coming-soon {
@@ -581,6 +532,7 @@
 		padding: 2rem;
 		color: rgba(75, 70, 13, 0.75);
 		font-style: italic;
+		font-size: 1.12rem;
 		line-height: 1.6;
 		text-align: center;
 	}
@@ -588,8 +540,9 @@
 	.changelog-content {
 		margin: 0 auto;
 		width: 100%;
-		max-width: 800px;
-		line-height: 1.6;
+		max-width: 980px;
+		font-size: 1.06rem;
+		line-height: 1.7;
 	}
 
 	.changelog-content :global(h2) {
@@ -650,17 +603,18 @@
 		padding: 0;
 		color: rgba(75, 70, 13, 0.95);
 		font-weight: 500;
+		font-size: 1.03rem;
 		text-decoration: underline;
 		text-underline-offset: 3px;
 	}
 
 	@media (max-width: 640px) {
-		.entry {
+		:global(.entry) {
 			grid-template-columns: 1fr;
 			gap: 0.25rem;
 		}
 
-		.entry--studio {
+		:global(.entry--studio) {
 			gap: 0.6rem;
 		}
 	}

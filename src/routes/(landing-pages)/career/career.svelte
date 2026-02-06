@@ -1,10 +1,5 @@
-<script lang="ts">
-	export let accent: string;
-	export let background: string;
-</script>
-
 <div class="spacer"></div>
-<div class="career-container" style="--bg-color: {background}; --accent-color: {accent}">
+<div class="career-container">
 	<div class="hero">
 		<div class="hero-text">
 			<p class="accent-color">Developer notes and explorations.</p>
@@ -41,13 +36,13 @@
 
 <style>
 	.career-container {
-		background-color: var(--bg-color, transparent);
+		background-color: var(--color-bg);
 		max-width: 100vw;
 		overflow: hidden;
 	}
 
 	.accent-color {
-		color: var(--accent-color);
+		color: var(--color-accent);
 	}
 
 	.hero {
@@ -55,7 +50,7 @@
 		position: relative;
 		justify-content: center;
 		align-items: center;
-		background: linear-gradient(135deg, #642e1a 0%, #8b4513 100%);
+		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
 		width: 100%;
 		height: 60vh;
 		overflow: hidden;
@@ -65,19 +60,19 @@
 		z-index: 100;
 		margin: 0 2em;
 		border-radius: 10px;
-		background-color: #f4efea;
+		background-color: var(--color-surface);
 		padding: 3em;
 
 		& p {
 			margin: 0;
 			font-size: clamp(1.5rem, 3vw, 3rem);
-			font-family: 'Spectral', serif;
+			font-family: var(--font-serif);
 		}
 	}
 
 	.content {
 		margin: 0 auto;
-		background-color: var(--bg-color, transparent);
+		background-color: var(--color-bg);
 		padding: 4rem 2rem;
 		max-width: 800px;
 	}
@@ -104,14 +99,14 @@
 		margin-bottom: 2rem;
 		border: 2px solid transparent;
 		border-radius: 10px;
-		background-color: #f4efea;
+		background-color: var(--color-surface);
 		padding: 2rem;
 	}
 
 	.work-link:hover {
 		transform: translateY(-2px);
-		box-shadow: 0 8px 25px rgba(100, 46, 26, 0.15);
-		border-color: rgba(100, 46, 26, 0.2);
+		box-shadow: var(--shadow-2);
+		border-color: var(--color-border);
 	}
 
 	.work-link a {
@@ -132,7 +127,7 @@
 
 	.work-link p {
 		margin: 0;
-		color: #666;
+		color: var(--color-text-muted);
 		font-style: italic;
 	}
 
