@@ -1,9 +1,5 @@
-<script>
-	export let accent = 'var(--color-accent)';
-</script>
-
 <p>
-	<strong style="color: {accent}">I expect myself to be a specific version of excellent.</strong>
+	<strong class="accent-text">I expect myself to be a specific version of excellent.</strong>
 </p>
 
 <p>
@@ -21,7 +17,7 @@
 <p>That each idea, once explored, is revealed to be a multitude of uncharted worlds.</p>
 
 <p>
-	<strong style="color: {accent}"
+	<strong class="accent-text"
 		>If art is to be mimesis, must it not, as life, remain incomplete?</strong
 	>
 </p>
@@ -33,9 +29,7 @@
 </p>
 
 <p>
-	<strong style="color: {accent}"
-		>How arrogant to think I'd be the only voice to ask & answer.</strong
-	>
+	<strong class="accent-text">How arrogant to think I'd be the only voice to ask & answer.</strong>
 </p>
 
 <p>
@@ -44,4 +38,10 @@
 	posture myself into the shape of a question mark:
 </p>
 
-<p><strong style="color: {accent}">Will you teach me what you know?</strong></p>
+<p><strong class="accent-text">Will you teach me what you know?</strong></p>
+
+<style>
+	.accent-text {
+		color: var(--color-accent);
+	}
+</style>

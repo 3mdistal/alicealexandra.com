@@ -13,53 +13,52 @@
 	export let title: string;
 	export let subtitle: string;
 	export let type: PublicationTypes;
-	export let accent: string = 'var(--color-accent)';
+	let filteredPublications: Publication[] = [];
+
+	$: filteredPublications = publications.filter((publication) => publication.type === type);
 </script>
 
-<section class="publications-section" style={accent ? `--publication-accent: ${accent}` : ''}>
+<section class="publications-section">
 	<h2 class="section-title">{title}</h2>
 	<p class="subtitle">{subtitle}</p>
 	<ul>
-		{#each publications as publication}
-			{#if publication.type === type}
-				<li>
-					<a href={publication.link} target="_blank" rel="noopener noreferrer">
-						<h3 class="item-title">
-							{publication.name}
-						</h3>
-					</a>
-					{#if publication.description}
-						<p class="description">{publication.description}</p>
-					{/if}
-				</li>
-			{/if}
+		{#each filteredPublications as publication}
+			<li>
+				<a href={publication.link} target="_blank" rel="noopener noreferrer">
+					<h3 class="item-title">
+						{publication.name}
+					</h3>
+				</a>
+				{#if publication.description}
+					<p class="description">{publication.description}</p>
+				{/if}
+			</li>
 		{/each}
 	</ul>
 </section>
 
 <style>
 	.publications-section {
-		margin-bottom: 5rem;
+		margin-bottom: var(--space-9);
 		box-shadow: var(--shadow-1);
-		border-radius: 10px;
+		border-radius: var(--radius-3);
 		background-color: var(--color-surface);
-		padding: 2.5rem;
+		padding: var(--space-7);
 	}
 
 	.section-title {
-		margin-bottom: 1rem;
-		color: var(--publication-accent, var(--color-accent));
-		font-weight: 500;
+		margin-bottom: var(--space-4);
+		color: var(--color-accent);
+		font-weight: var(--font-weight-medium);
 		font-size: 2rem;
-		font-family: var(--font-serif);
 	}
 
 	.subtitle {
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-7);
 		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.125rem;
-		line-height: 1.6;
+		line-height: var(--line-height-body);
 	}
 
 	ul {
@@ -69,9 +68,9 @@
 	}
 
 	li {
-		margin-bottom: 2rem;
+		margin-bottom: var(--space-6);
 		border-bottom: 1px solid var(--color-border);
-		padding-bottom: 1.5rem;
+		padding-bottom: var(--space-5);
 	}
 
 	li:last-child {
@@ -81,21 +80,20 @@
 
 	a {
 		display: block;
-		transition: transform 0.2s ease;
+		transition: transform var(--duration-base) var(--ease-standard);
 		text-decoration: none;
 	}
 
 	a:hover {
-		transform: translateX(5px);
+		transform: translateX(var(--space-2));
 	}
 
 	.item-title {
-		transition: color 0.2s ease;
-		margin-bottom: 0.5rem;
-		color: var(--publication-accent, var(--color-accent));
-		font-weight: 500;
+		transition: color var(--duration-base) var(--ease-standard);
+		margin-bottom: var(--space-2);
+		color: var(--color-accent);
+		font-weight: var(--font-weight-medium);
 		font-size: 1.25rem;
-		font-family: var(--font-serif);
 	}
 
 	a:hover .item-title {
@@ -108,7 +106,7 @@
 		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1rem;
-		line-height: 1.5;
+		line-height: var(--line-height-body);
 	}
 
 	@media (min-width: 640px) {

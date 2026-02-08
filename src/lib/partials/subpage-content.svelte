@@ -4,7 +4,6 @@
 	import { onMount } from 'svelte';
 
 	export let flexDirection = 'row-reverse';
-	export let accent = 'var(--color-accent)';
 	export let imageSource;
 	export let imageAlt = '';
 
@@ -47,12 +46,12 @@
 </script>
 
 <div class="container" bind:this={container}>
-	<h2 bind:this={heading} style="color: {accent}">
+	<h2 bind:this={heading}>
 		<slot name="heading" />
 	</h2>
 	<div class="content" style="--flex-direction: {flexDirection}">
 		<div class="text" bind:this={text}>
-			<slot name="text" style="color: {accent}" />
+			<slot name="text" />
 			<div class="button-container">
 				<slot name="button" class="button" />
 			</div>
@@ -83,6 +82,7 @@
 
 	h2 {
 		margin-bottom: var(--space-5);
+		color: var(--color-accent);
 		font-weight: var(--font-weight-medium);
 		font-size: var(--font-size-2xl);
 		line-height: var(--line-height-tight);
@@ -98,7 +98,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-start;
-		gap: 2em;
+		gap: var(--space-6);
 	}
 
 	.text {
@@ -113,7 +113,7 @@
 	}
 
 	.text :global(*) {
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-7);
 	}
 
 	.text :global(*:last-child) {
@@ -123,7 +123,7 @@
 	.button-container {
 		display: flex;
 		justify-content: center;
-		margin-top: 3em;
+		margin-top: var(--space-8);
 	}
 
 	.image-container {
@@ -137,7 +137,7 @@
 	.image-container :global(img) {
 		display: block;
 		filter: grayscale(0.1);
-		border-radius: 1.5rem;
+		border-radius: var(--radius-4);
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
@@ -153,7 +153,7 @@
 
 		.content {
 			flex-direction: var(--flex-direction, row-reverse) !important;
-			gap: 3em;
+			gap: var(--space-7);
 		}
 
 		.text {

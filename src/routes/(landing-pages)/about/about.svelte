@@ -11,8 +11,6 @@
 	import { onDestroy } from 'svelte';
 	import { pageState } from '$lib/stores';
 
-	export let accent = 'var(--color-accent)';
-
 	onDestroy(() => {
 		pageState.set('home');
 	});
@@ -21,7 +19,6 @@
 <div class="spacer"></div>
 
 <SubpageContent
-	{accent}
 	imageSource={Owl}
 	imageAlt="A painting of a Screech Owl staring eerily at the viewer. Painting by Alice Alexandra Moore."
 >
@@ -30,18 +27,13 @@
 		<em>to dream of perpetual insufficiency.</em>
 	</svelte:fragment>
 	<svelte:fragment slot="text">
-		<AboutSection1 {accent} />
+		<AboutSection1 />
 	</svelte:fragment>
 </SubpageContent>
 
 <div class="spacer"></div>
 
-<SubpageContent
-	flexDirection="row"
-	{accent}
-	imageSource={AuthorPhoto}
-	imageAlt="Alice Alexandra Moore"
->
+<SubpageContent flexDirection="row" imageSource={AuthorPhoto} imageAlt="Alice Alexandra Moore">
 	<svelte:fragment slot="heading">
 		i grew up in a backwoods town, just above the Ohio River.
 	</svelte:fragment>
@@ -53,20 +45,19 @@
 <div class="spacer"></div>
 
 <SubpageContent
-	{accent}
 	imageSource={Mirror}
 	imageAlt="Painting of a person sitting, holding a mirror. By Alice Alexandra Moore."
 >
 	<svelte:fragment slot="heading">why do i limit my definition of meaningful?</svelte:fragment>
 	<svelte:fragment slot="text">
-		<AboutSection3 {accent} />
+		<AboutSection3 />
 	</svelte:fragment>
 </SubpageContent>
 
 <div class="spacer"></div>
 
 <div class="about-footer" id="connect">
-	<h2 class="about-footer-heading" style="color: {accent}">have thoughts to share?</h2>
+	<h2 class="about-footer-heading accent-color">have thoughts to share?</h2>
 	<div class="about-footer-content">
 		<div class="about-footer-text">
 			<p>
@@ -111,6 +102,10 @@
 		line-height: var(--line-height-tight);
 	}
 
+	.accent-color {
+		color: var(--color-accent);
+	}
+
 	@media (min-width: 1024px) {
 		.about-footer-heading {
 			font-size: var(--font-size-3xl);
@@ -134,7 +129,7 @@
 	}
 
 	.socials-container {
-		margin-top: 1rem;
+		margin-top: var(--space-4);
 	}
 
 	@media (min-width: 768px) {
