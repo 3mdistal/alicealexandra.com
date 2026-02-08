@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { get } from 'svelte/store';
+	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
 
 	interface Props {
 		title: string;
@@ -23,6 +25,8 @@
 	let currentRotation = $state(initialRotation);
 
 	onMount(() => {
+		const reducedMotion = get(prefersReducedMotion);
+
 		// Register GSAP plugins
 		gsap.registerPlugin(ScrollTrigger);
 
@@ -32,8 +36,20 @@
 			currentRotation = initialRotation;
 		}
 
+		if (reducedMotion) {
+			if (imageElement) {
+				gsap.set(imageElement, { yPercent: 0, scale: 1 });
+			}
+
+			if (cardElement && initialRotation !== 0) {
+				gsap.set(cardElement, { rotation: initialRotation });
+			}
+
+			return () => {};
+		}
+
 		// Create parallax effect for the background image with reduced range
-		if (imageElement && cardElement) {
+		if (imageElement && cardElement && !reducedMotion) {
 			scrollTriggerInstance = ScrollTrigger.create({
 				trigger: cardElement,
 				start: 'top bottom',
@@ -91,6 +107,7 @@
 			};
 
 			const handleMouseEnter = () => {
+				if (reducedMotion) return;
 				const { hover } = readShadows();
 				gsap.to(postcard, {
 					y: -8,
@@ -120,6 +137,7 @@
 			};
 
 			const handleMouseLeave = () => {
+				if (reducedMotion) return;
 				// Generate a new random rotation for this card
 				const newRotation = generateNewRotation();
 				currentRotation = newRotation;
