@@ -25,6 +25,9 @@ vite.config.ts.timestamp-*
 # NOTE: This only ignores the top-level content/ directory, not src/lib/content/
 /content/
 
+# Image migration artifacts
+.image-migration/
+
 # Playwright
 /playwright-report/
 /test-results/
