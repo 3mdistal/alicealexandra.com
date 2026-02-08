@@ -70,7 +70,7 @@
 		padding: var(--content-space-lg) var(--content-space-sm);
 		width: 100%;
 		max-width: 900px;
-		color: var(--color-content-text);
+		color: var(--color-text);
 
 		@media (min-width: 640px) {
 			padding: var(--content-space-lg) var(--content-space-md);
@@ -95,7 +95,7 @@
 		align-items: center;
 		gap: 6px;
 		margin-bottom: var(--content-space-md);
-		color: var(--color-content-secondary);
+		color: var(--color-text-muted);
 		font-size: var(--content-font-size-body-sm);
 	}
 
@@ -103,12 +103,12 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--color-content-secondary) !important;
+		color: var(--color-text-muted) !important;
 		font-weight: 500;
 		text-decoration: none;
 
 		&:hover {
-			color: var(--color-content-link) !important;
+			color: var(--color-link) !important;
 			text-decoration: underline;
 		}
 	}
@@ -130,18 +130,18 @@
 	}
 
 	.breadcrumb-separator {
-		color: var(--color-content-secondary);
+		color: var(--color-text-muted);
 	}
 
 	.breadcrumb-category {
-		color: var(--color-content-secondary);
+		color: var(--color-text-muted);
 		font-weight: 500;
 	}
 
 	/* Title */
 	.blog-title {
 		margin: 0 0 var(--content-space-sm) 0;
-		color: var(--color-content-heading);
+		color: var(--color-heading);
 		font-weight: 500;
 		font-size: 2.25rem;
 		line-height: 2.5rem;
@@ -167,7 +167,7 @@
 	.blog-subtitle {
 		margin: 0 0 var(--content-space-lg) 0;
 		max-width: var(--content-measure-subtitle);
-		color: var(--color-content-accent);
+		color: var(--color-accent);
 		font-style: italic;
 		font-size: var(--content-font-size-body);
 		line-height: 1.75rem;
@@ -186,7 +186,7 @@
 		align-items: center;
 		gap: var(--content-space-md);
 		margin-bottom: var(--content-space-md);
-		border-bottom: 1px solid var(--color-content-border);
+		border-bottom: 1px solid var(--color-border);
 		padding-bottom: var(--content-space-md);
 	}
 
@@ -194,7 +194,7 @@
 		display: flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--color-content-secondary) !important;
+		color: var(--color-text-muted) !important;
 		font-size: var(--content-font-size-body-sm);
 	}
 
@@ -215,7 +215,7 @@
 	}
 
 	.publish-date {
-		color: var(--color-content-secondary);
+		color: var(--color-text-muted);
 		font-size: var(--content-font-size-body-sm);
 	}
 

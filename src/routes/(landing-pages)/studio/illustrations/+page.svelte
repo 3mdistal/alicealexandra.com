@@ -161,10 +161,10 @@
 
 <style>
 	.background {
-		background-color: var(--color-content-bg);
+		background-color: var(--color-bg);
 		padding: 1rem;
 		min-height: 100vh;
-		color: var(--color-content-text);
+		color: var(--color-text);
 	}
 
 	.art-grid {
@@ -200,7 +200,7 @@
 	.grid-item:focus-visible .image-wrapper {
 		transform: translateY(-4px) scale(1.02);
 		box-shadow:
-			0 0 0 2px color-mix(in srgb, var(--color-content-text) 55%, transparent),
+			0 0 0 2px color-mix(in srgb, var(--color-text) 55%, transparent),
 			0 4px 6px rgba(0, 0, 0, 0.1);
 	}
 
@@ -326,11 +326,11 @@
 		z-index: 1;
 		backdrop-filter: blur(10px);
 		border-radius: 12px;
-		background-color: var(--color-content-bg);
+		background-color: var(--color-bg);
 		padding: 2rem;
 		max-width: 90vw;
 		max-height: 90vh;
-		color: var(--color-content-text);
+		color: var(--color-text);
 	}
 
 	.modal-image {
@@ -350,20 +350,20 @@
 
 	.modal-info h2 {
 		margin-bottom: 0.5rem;
-		color: var(--color-content-text);
+		color: var(--color-text);
 		font-size: 1.75rem;
 	}
 
 	.modal-info .date em {
 		opacity: 0.9;
 		margin: 1rem 0;
-		color: var(--color-content-secondary);
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.1rem;
 	}
 
 	.modal-info .description {
-		color: var(--color-content-text);
+		color: var(--color-text);
 		line-height: 1.6;
 		text-align: left;
 		white-space: pre-line;
@@ -380,14 +380,14 @@
 		cursor: pointer;
 		border: none;
 		border-radius: 50%;
-		background-color: color-mix(in srgb, var(--color-content-bg) 90%, transparent);
+		background-color: color-mix(in srgb, var(--color-bg) 90%, transparent);
 		width: 2.5rem;
 		height: 2.5rem;
-		color: var(--color-content-text);
+		color: var(--color-text);
 		font-size: 1.5rem;
 	}
 
 	.close-button:hover {
-		background-color: color-mix(in srgb, var(--color-content-bg) 82%, transparent);
+		background-color: color-mix(in srgb, var(--color-bg) 82%, transparent);
 	}
 </style>

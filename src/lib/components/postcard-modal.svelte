@@ -370,9 +370,9 @@
 	.modal-content {
 		position: relative;
 		box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-		border: 2px dotted color-mix(in srgb, var(--color-content-border) 70%, transparent);
+		border: 2px dotted color-mix(in srgb, var(--color-border) 70%, transparent);
 		border-radius: 20px;
-		background: var(--color-content-bg);
+		background: var(--color-bg);
 		/* Remove CSS sizing - let GSAP handle dimensions */
 		overflow: hidden;
 	}
@@ -401,10 +401,10 @@
 		align-items: flex-end;
 		background: linear-gradient(
 			180deg,
-			color-mix(in srgb, transparent 100%, var(--color-content-bg)) 0%,
-			color-mix(in srgb, transparent 80%, var(--color-content-bg)) 40%,
-			color-mix(in srgb, transparent 35%, var(--color-content-bg)) 70%,
-			var(--color-content-bg) 100%
+			color-mix(in srgb, transparent 100%, var(--color-bg)) 0%,
+			color-mix(in srgb, transparent 80%, var(--color-bg)) 40%,
+			color-mix(in srgb, transparent 35%, var(--color-bg)) 70%,
+			var(--color-bg) 100%
 		);
 		padding: 2rem;
 		padding-bottom: 10rem;
@@ -417,29 +417,29 @@
 
 	.modal-hero-content h1 {
 		margin: 0 0 0.5rem 0;
-		color: var(--color-content-text);
+		color: var(--color-text);
 		font-weight: 500;
 		font-size: 3rem;
 		line-height: 1.1;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
 		text-shadow:
-			0 0 25px color-mix(in srgb, var(--color-content-bg) 70%, transparent),
-			0 0 50px color-mix(in srgb, var(--color-content-bg) 40%, transparent),
-			0 2px 4px color-mix(in srgb, var(--color-content-bg) 25%, transparent);
+			0 0 25px color-mix(in srgb, var(--color-bg) 70%, transparent),
+			0 0 50px color-mix(in srgb, var(--color-bg) 40%, transparent),
+			0 2px 4px color-mix(in srgb, var(--color-bg) 25%, transparent);
 	}
 
 	.modal-hero-content .description {
 		margin: 0;
-		color: var(--color-content-secondary);
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.3rem;
 		line-height: 1.4;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
 		text-shadow:
-			0 0 20px color-mix(in srgb, var(--color-content-bg) 70%, transparent),
-			0 0 40px color-mix(in srgb, var(--color-content-bg) 40%, transparent);
+			0 0 20px color-mix(in srgb, var(--color-bg) 70%, transparent),
+			0 0 40px color-mix(in srgb, var(--color-bg) 40%, transparent);
 	}
 
 	.modal-body {
@@ -469,16 +469,16 @@
 		cursor: pointer;
 		border: none;
 		border-radius: 50%;
-		background: color-mix(in srgb, var(--color-content-bg) 88%, transparent);
+		background: color-mix(in srgb, var(--color-bg) 88%, transparent);
 		width: 40px;
 		height: 40px;
 		pointer-events: auto;
-		color: var(--color-content-text);
+		color: var(--color-text);
 		text-decoration: none;
 	}
 
 	.close-button:hover {
-		background: var(--color-content-bg);
+		background: var(--color-bg);
 	}
 
 	.modal-content-area {

@@ -39,17 +39,17 @@
 	}
 
 	a {
-		color: var(--color-content-link);
+		color: var(--color-link);
 		text-decoration: underline;
 
 		&:hover {
-			color: var(--color-content-link-hover);
+			color: var(--color-link-hover);
 		}
 	}
 
 	code {
 		border-radius: var(--content-radius-sm);
-		background-color: var(--color-content-inline-code-bg);
+		background-color: var(--color-inline-code-bg);
 		padding: 0.1em 0.3em;
 		font-size: var(--content-font-size-code);
 		font-family: var(--font-mono);
@@ -61,12 +61,12 @@
 		}
 
 		&.mention {
-			color: var(--color-content-mention);
+			color: var(--color-mention);
 			font-weight: 500;
 		}
 
 		&.equation {
-			color: var(--color-content-equation);
+			color: var(--color-equation);
 			font-style: italic;
 		}
 	}

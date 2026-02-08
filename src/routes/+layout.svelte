@@ -15,6 +15,7 @@
 	}
 
 	function surfaceFromPathname(pathname: string): 'default' | 'content' {
+		if (pathname.startsWith('/blog')) return 'content';
 		if (pathname.startsWith('/studio/postcards')) return 'content';
 		if (pathname.startsWith('/studio/illustrations')) return 'content';
 		return 'default';

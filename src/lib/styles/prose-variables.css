@@ -1,24 +1,7 @@
 /* src/lib/styles/prose-variables.css */
-/* Global content/prose tokens (replaces legacy prose namespace) */
+/* Global longform typography and layout tokens */
 
 :root {
-	/* Content colors - Light mode */
-	--color-content-text: #111827;
-	--color-content-bg: #e5e7eb;
-	--color-content-link: #31676c;
-	--color-content-link-hover: #1e4042;
-	--color-content-accent: #374151;
-	--color-content-secondary: #6b7280;
-	--color-content-heading: #111827;
-	--color-content-callout-bg: #d1d5db;
-	--color-content-quote-bg: #f3f4f6;
-	--color-content-code-bg: #d1d5db;
-	--color-content-inline-code-bg: #e5e7eb;
-	--color-content-divider: #6b7280;
-	--color-content-mention: #0f766e;
-	--color-content-equation: #4b5563;
-	--color-content-border: #939599;
-
 	/* Content typography */
 	--content-font-size-heading-lg: 3.75rem;
 	--content-font-size-heading-md: 2.25rem;
@@ -41,25 +24,4 @@
 	--content-measure-blockquote: 40ch;
 	--content-radius: calc(var(--radius-1) + 2px);
 	--content-radius-sm: var(--radius-1);
-}
-
-/* Content colors - Dark mode */
-@media (prefers-color-scheme: dark) {
-	:root {
-		--color-content-text: #e5e7eb;
-		--color-content-bg: #141414;
-		--color-content-link: #67e8f9;
-		--color-content-link-hover: #a5f3fc;
-		--color-content-accent: #d1d5db;
-		--color-content-secondary: #d1d5db;
-		--color-content-heading: #f3f4f6;
-		--color-content-callout-bg: #1f2937;
-		--color-content-quote-bg: #1f2937;
-		--color-content-code-bg: #1e1e1e;
-		--color-content-inline-code-bg: #1f2937;
-		--color-content-divider: #4b5563;
-		--color-content-mention: #34d399;
-		--color-content-equation: #d1d5db;
-		--color-content-border: #686a6c;
-	}
 }

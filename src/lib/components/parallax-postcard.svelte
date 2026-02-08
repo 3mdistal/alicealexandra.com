@@ -198,10 +198,10 @@
 	.postcard-link {
 		display: block;
 		width: 100%;
-		--postcard-paper: var(--color-content-bg);
-		--postcard-ink: var(--color-content-text);
-		--postcard-ink-muted: var(--color-content-secondary);
-		--postcard-border: var(--color-content-border);
+		--postcard-paper: var(--color-bg);
+		--postcard-ink: var(--color-text);
+		--postcard-ink-muted: var(--color-text-muted);
+		--postcard-border: var(--color-border);
 		--postcard-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 		--postcard-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.25);
 		color: inherit;

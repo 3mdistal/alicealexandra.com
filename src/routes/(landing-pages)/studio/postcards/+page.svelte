@@ -119,11 +119,11 @@
 		margin: 0;
 		margin-right: -50vw;
 		margin-left: -50vw;
-		background-color: var(--color-content-bg);
+		background-color: var(--color-bg);
 		padding: 0;
 		width: 100vw;
 		min-height: 100vh;
-		color: var(--color-content-text);
+		color: var(--color-text);
 	}
 
 	header {
@@ -144,13 +144,13 @@
 
 	h1 {
 		margin-bottom: 0.5rem;
-		color: var(--color-content-text);
+		color: var(--color-text);
 		font-size: 2.5rem;
 	}
 
 	.subtitle {
 		margin-top: 0.5rem;
-		color: var(--color-content-secondary);
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-weight: 300;
 		font-size: 1.3rem;
@@ -202,7 +202,7 @@
 
 	.no-postcards {
 		margin-top: 4rem;
-		color: var(--color-content-secondary);
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.1rem;
 		text-align: center;

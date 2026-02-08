@@ -116,27 +116,19 @@
 </div>
 
 <style>
-	:global(html),
-	:global(body) {
-		margin: 0;
-		background-color: var(--color-content-bg) !important;
-		padding: 0;
-		min-height: 100vh;
-	}
-
 	.page-wrapper {
 		position: relative;
 		z-index: 1;
-		background-color: var(--color-content-bg);
+		background-color: var(--color-bg);
 		min-height: 100vh;
 	}
 
 	.blog-container {
 		margin: 0 auto;
-		background-color: var(--color-content-bg);
+		background-color: var(--color-bg);
 		padding: var(--content-space-lg) var(--content-space-sm);
 		max-width: 900px;
-		color: var(--color-content-text);
+		color: var(--color-text);
 
 		@media (min-width: 640px) {
 			padding: var(--content-space-lg) var(--content-space-md);
@@ -183,7 +175,7 @@
 		a {
 			display: inline-block;
 			padding: var(--content-space-md);
-			color: var(--color-content-text);
+			color: var(--color-text);
 			font-family: var(--font-serif);
 		}
 	}
