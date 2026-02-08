@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 
-	export let accent: string;
+	export let accent: string = 'var(--color-accent)';
 	export let posts: BlogPostMeta[];
 
 	onMount(async () => {
@@ -58,22 +58,22 @@
 
 	.post-title-link {
 		transition: color 0.15s ease;
-		color: white;
+		color: var(--color-text);
 		font-weight: 500;
-		font-size: var(--prose-heading-medium);
+		font-size: var(--content-font-size-heading-md);
 		line-height: 1;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 
 		@media (max-width: 768px) {
 			font-size: 1.75rem;
 		}
 
 		&:hover {
-			color: var(--prose-heading-dark);
+			color: var(--color-accent-strong);
 		}
 
 		&:active {
-			color: var(--prose-secondary-dark);
+			color: var(--color-text-muted);
 		}
 	}
 
@@ -81,17 +81,17 @@
 		grid-row-start: 2;
 		grid-column: span 2;
 		margin-bottom: 0.5em;
-		max-width: var(--prose-subtitle-width);
-		color: var(--prose-heading-dark);
+		max-width: var(--content-measure-subtitle);
+		color: var(--color-text);
 		font-style: italic;
-		font-size: var(--prose-body);
+		font-size: var(--content-font-size-body);
 		line-height: 1;
 		text-wrap: balance;
 	}
 
 	.post-date {
 		grid-row-start: 3;
-		color: var(--prose-heading-dark);
+		color: var(--color-text-muted);
 
 		@media (min-width: 768px) {
 			grid-row-start: 1;
@@ -111,7 +111,7 @@
 	}
 
 	.post-category {
-		color: var(--prose-heading-dark);
+		color: var(--color-text-muted);
 
 		@media (max-width: 768px) {
 			display: none;

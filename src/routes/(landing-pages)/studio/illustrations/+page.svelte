@@ -161,10 +161,10 @@
 
 <style>
 	.background {
-		background-color: #111827;
+		background-color: var(--color-content-bg);
 		padding: 1rem;
 		min-height: 100vh;
-		color: white;
+		color: var(--color-content-text);
 	}
 
 	.art-grid {
@@ -193,13 +193,14 @@
 	}
 
 	.grid-item:focus-visible {
-		outline: none;
+		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
+		outline-offset: calc(var(--a11y-focus-offset) + 2px);
 	}
 
 	.grid-item:focus-visible .image-wrapper {
 		transform: translateY(-4px) scale(1.02);
 		box-shadow:
-			0 0 0 2px rgba(255, 255, 255, 0.6),
+			0 0 0 2px color-mix(in srgb, var(--color-content-text) 55%, transparent),
 			0 4px 6px rgba(0, 0, 0, 0.1);
 	}
 
@@ -313,7 +314,7 @@
 	}
 
 	.modal-backdrop:focus-visible {
-		outline: 2px solid rgba(255, 255, 255, 0.6);
+		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
 		outline-offset: -4px;
 	}
 
@@ -325,10 +326,11 @@
 		z-index: 1;
 		backdrop-filter: blur(10px);
 		border-radius: 12px;
-		background-color: rgba(17, 24, 39, 0.8);
+		background-color: var(--color-content-bg);
 		padding: 2rem;
 		max-width: 90vw;
 		max-height: 90vh;
+		color: var(--color-content-text);
 	}
 
 	.modal-image {
@@ -348,20 +350,20 @@
 
 	.modal-info h2 {
 		margin-bottom: 0.5rem;
-		color: #ffffff;
+		color: var(--color-content-text);
 		font-size: 1.75rem;
 	}
 
 	.modal-info .date em {
 		opacity: 0.9;
 		margin: 1rem 0;
-		color: #ffffff;
+		color: var(--color-content-secondary);
 		font-style: italic;
 		font-size: 1.1rem;
 	}
 
 	.modal-info .description {
-		color: rgba(255, 255, 255, 0.9);
+		color: var(--color-content-text);
 		line-height: 1.6;
 		text-align: left;
 		white-space: pre-line;
@@ -378,14 +380,14 @@
 		cursor: pointer;
 		border: none;
 		border-radius: 50%;
-		background-color: rgba(255, 255, 255, 0.1);
+		background-color: color-mix(in srgb, var(--color-content-bg) 90%, transparent);
 		width: 2.5rem;
 		height: 2.5rem;
-		color: white;
+		color: var(--color-content-text);
 		font-size: 1.5rem;
 	}
 
 	.close-button:hover {
-		background-color: rgba(255, 255, 255, 0.2);
+		background-color: color-mix(in srgb, var(--color-content-bg) 82%, transparent);
 	}
 </style>

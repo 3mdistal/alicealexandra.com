@@ -1,5 +1,5 @@
 <script>
-	export let accent = '';
+	export let accent = 'var(--color-accent)';
 </script>
 
 <p>

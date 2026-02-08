@@ -13,10 +13,10 @@
 	export let title: string;
 	export let subtitle: string;
 	export let type: PublicationTypes;
-	export let accent: string = '#642e1a';
+	export let accent: string = 'var(--color-accent)';
 </script>
 
-<section class="publications-section" style="--accent-color: {accent}">
+<section class="publications-section" style={accent ? `--publication-accent: ${accent}` : ''}>
 	<h2 class="section-title">{title}</h2>
 	<p class="subtitle">{subtitle}</p>
 	<ul>
@@ -40,23 +40,23 @@
 <style>
 	.publications-section {
 		margin-bottom: 5rem;
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+		box-shadow: var(--shadow-1);
 		border-radius: 10px;
-		background-color: #f4efea;
+		background-color: var(--color-surface);
 		padding: 2.5rem;
 	}
 
 	.section-title {
 		margin-bottom: 1rem;
-		color: var(--accent-color);
+		color: var(--publication-accent, var(--color-accent));
 		font-weight: 500;
 		font-size: 2rem;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 	}
 
 	.subtitle {
 		margin-bottom: 2.5rem;
-		color: #666;
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.125rem;
 		line-height: 1.6;
@@ -70,7 +70,7 @@
 
 	li {
 		margin-bottom: 2rem;
-		border-bottom: 1px solid rgba(100, 46, 26, 0.2);
+		border-bottom: 1px solid var(--color-border);
 		padding-bottom: 1.5rem;
 	}
 
@@ -92,10 +92,10 @@
 	.item-title {
 		transition: color 0.2s ease;
 		margin-bottom: 0.5rem;
-		color: var(--accent-color);
+		color: var(--publication-accent, var(--color-accent));
 		font-weight: 500;
 		font-size: 1.25rem;
-		font-family: 'Spectral', serif;
+		font-family: var(--font-serif);
 	}
 
 	a:hover .item-title {
@@ -105,7 +105,7 @@
 
 	.description {
 		margin: 0;
-		color: #555;
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1rem;
 		line-height: 1.5;

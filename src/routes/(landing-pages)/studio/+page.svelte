@@ -10,6 +10,10 @@
 	const cards: StudioCardType[] = data.cards ?? [];
 
 	function populate(_node: HTMLElement) {
+		const cssOpacity = getComputedStyle(_node).getPropertyValue('--ink-target-opacity').trim();
+		const targetOpacity = Number.parseFloat(cssOpacity);
+		const finalOpacity = Number.isFinite(targetOpacity) ? targetOpacity : 0.4;
+
 		const tl = gsap.timeline();
 		tl.to('.card-div', { opacity: 1, duration: 0.5 })
 			.fromTo(
@@ -17,7 +21,7 @@
 				{ opacity: 0 },
 				{ opacity: 1, duration: 0.4, ease: 'power2.inOut' }
 			)
-			.to('.studio-background', { opacity: 0.4, duration: 0.8, ease: 'power2.inOut' })
+			.to('.studio-background', { opacity: finalOpacity, duration: 0.8, ease: 'power2.inOut' })
 			.fromTo('.card-div > *', { opacity: 0 }, { opacity: 1, stagger: 0.1 }, '<');
 
 		return {
@@ -97,7 +101,8 @@
 <style>
 	.studio-container {
 		position: relative;
-		background-color: #d6ddf0;
+		--ink-target-opacity: 0.4;
+		background-color: var(--color-bg);
 		min-height: 100lvh;
 		overflow: hidden;
 	}
@@ -118,6 +123,17 @@
 		height: 100vh;
 		object-fit: cover;
 		pointer-events: none;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.studio-container {
+			--ink-target-opacity: 0.16;
+		}
+
+		.studio-background {
+			mix-blend-mode: screen;
+			filter: grayscale(1) invert(1) contrast(1.15);
+		}
 	}
 
 	.break {

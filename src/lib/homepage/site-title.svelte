@@ -101,6 +101,7 @@
 	.site-title {
 		opacity: 0;
 		margin-bottom: 0.5em;
+		font-weight: 300;
 		font-size: clamp(1.5rem, 4vw, 3rem);
 		letter-spacing: 0.4em;
 		text-align: center;
@@ -108,6 +109,7 @@
 
 	.subtitle {
 		opacity: 0;
+		font-weight: 300;
 		font-size: clamp(1rem, 2.5vw, 1.8rem);
 		letter-spacing: 0.15em;
 		text-align: center;

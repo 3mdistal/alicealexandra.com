@@ -4,6 +4,12 @@
 
 - Added ImageKit → R2 migration tooling with mapping + manual rewrite script. (#70)
 
+## 03 Feb 2026
+
+**Enhancements**
+
+- Added a site-wide design token system with theme mappings for home/about/studio/career/blog/news pages. (#76)
+
 ## 31 Jan 2026
 
 **Docs**

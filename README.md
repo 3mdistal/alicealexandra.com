@@ -4,16 +4,17 @@ This SvelteKit (Svelte 5) site is the public home for my studio work. I keep the
 
 ## Overview
 
-Tempo Immaterial is a personal portfolio/studio: writing, art, experiments, and interactive pieces. The site is mostly prerendered static output, with a few interactive "arcade" pages and UI flourishes layered on top.
+Tempo Immaterial is a personal portfolio/studio for writing, art, experiments, and interactive pieces. The site is mostly prerendered static output, with a few interactive "arcade" pages and UI flourishes layered on top.
 
-## Architecture invariants
+## Architecture
 
-- Content lives in a private `teenylilcontent` repo and is fetched at build time into `content/`.
-- Content-heavy pages are prerendered; there are no runtime CMS/API calls for blog/poems/postcards/studio/career.
-- Loaders in `src/lib/content/` parse markdown/JSON into typed data.
-- Notion code is legacy-only: types and render helpers, no API client/networking.
+- Content lives in a private `teenylilcontent` repo and is fetched at build time into `content/` via `scripts/fetch-content.sh`.
+- Build-time fetch selects `VERCEL_GIT_COMMIT_REF` (if present), then `CONTENT_REF`, then `main`, and removes `content/.git` after cloning.
+- Loaders in `src/lib/content/` parse markdown/JSON for blog, poems, postcards, studio cards/illustrations, and career publications.
+- Content-heavy pages are prerendered; there are no runtime CMS/API calls for core sections.
+- Notion API code is removed; only historical types/render helpers remain in `src/lib/notion/`.
 
-## Where things live
+## Key Features
 
 - `scripts/fetch-content.sh` and `pnpm vercel-build`: build-time content fetch and filesystem setup (imperative shell).
 - `scripts/upload-images.sh`: scan/download/upload ImageKit assets to R2 and emit a URL mapping.
@@ -21,18 +22,24 @@ Tempo Immaterial is a personal portfolio/studio: writing, art, experiments, and 
 - `src/lib/content/*`: parsing/typing for markdown and JSON content (functional-ish core).
 - `src/routes/**/+page.server.ts`: orchestration + prerender configuration.
 - `src/lib/notion/*`: legacy render helpers and types.
-
-## Key features
-
 - Prerendered content sections across blog, poems, postcards, studio, and career.
 - A tabbed News page for studio + site updates.
+- Career routes like `/career/vercel` and `/career/builderio`.
+- Individual poem routes under `/studio/hfc/[slug]`.
 - Interactive arcade mini-apps for playful experiments.
+
+## Notable Implementation Decisions
+
+- Built on Svelte 5 (runes) with strict TypeScript settings.
+- Shared prose styling system (no Tailwind).
+- Syntax highlighting via `highlight.js` for blog posts.
+- Social links are Bluesky-first (no Twitter-specific integration).
 
 ## Philosophy
 
 This site is always evolving. It's a place to tinker, learn in public, and share what I'm making. Think of this repo as a reference for how the site works, not a reusable product.
 
-## Docs pointers
+## Further Reading
 
-- `AGENTS.md`: operational workflow and commands for repo agents.
-- `docs/product/CONTENT_MANAGEMENT.md`: content pipeline details and ownership boundaries.
+- `docs/product/vision.md`: the product vision and experience principles.
+- `docs/product/CONTENT_MANAGEMENT.md`: the content pipeline and content repo structure.

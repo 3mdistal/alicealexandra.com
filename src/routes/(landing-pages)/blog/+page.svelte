@@ -8,7 +8,6 @@
 	export let data: { posts: BlogPostMeta[] };
 
 	const Bird = 'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bird.webp';
-	const accent = '#d1dce7';
 
 	function fadeIn() {
 		gsap.to('.opacity-0', {
@@ -38,7 +37,7 @@
 <div class="opacity-0 blog-page">
 	<div class="blog-content">
 		<div class="blog-wrapper">
-			<Blog {accent} posts={data.posts} />
+			<Blog posts={data.posts} />
 		</div>
 	</div>
 	<div class="background-container">
@@ -49,20 +48,8 @@
 </div>
 
 <style>
-	/* Override prose colors for white text hierarchy on listing page only */
-	:global(.blog-wrapper) {
-		--prose-text: #ffffff;
-		--prose-heading: #ffffff;
-		--prose-accent: #e5e7eb;
-		--prose-secondary: #d1d5db;
-		--prose-link: #ffffff;
-		--prose-link-hover: #e5e7eb;
-		--prose-heading-dark: #ffffff;
-		--prose-secondary-dark: #d1d5db;
-	}
-
 	.blog-page {
-		background-color: #838391;
+		background-color: var(--color-bg);
 		min-height: 100vh;
 	}
 

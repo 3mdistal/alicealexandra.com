@@ -39,20 +39,20 @@
 	}
 
 	a {
-		color: var(--prose-link);
+		color: var(--color-content-link);
 		text-decoration: underline;
 
 		&:hover {
-			color: var(--prose-link-hover);
+			color: var(--color-content-link-hover);
 		}
 	}
 
 	code {
-		border-radius: var(--prose-border-radius-sm);
-		background-color: var(--prose-inline-code-bg);
+		border-radius: var(--content-radius-sm);
+		background-color: var(--color-content-inline-code-bg);
 		padding: 0.1em 0.3em;
-		font-size: var(--prose-code);
-		font-family: monospace;
+		font-size: var(--content-font-size-code);
+		font-family: var(--font-mono);
 	}
 
 	span {
@@ -61,12 +61,12 @@
 		}
 
 		&.mention {
-			color: var(--prose-mention);
+			color: var(--color-content-mention);
 			font-weight: 500;
 		}
 
 		&.equation {
-			color: var(--prose-equation);
+			color: var(--color-content-equation);
 			font-style: italic;
 		}
 	}

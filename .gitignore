@@ -27,3 +27,8 @@ vite.config.ts.timestamp-*
 
 # Image migration artifacts
 .image-migration/
+
+# Playwright
+/playwright-report/
+/test-results/
+/blob-report/
