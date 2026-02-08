@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { pageState } from '$lib/stores';
+	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 
@@ -19,11 +20,16 @@
 	});
 
 	function ease(yPos: number) {
-		if (!gsap) return;
+		if (!gsap || $prefersReducedMotion) return;
 		gsap.to(section, { y: yPos, ease: 'elastic.out', duration: 2 });
 	}
 
 	function animateOut() {
+		if ($prefersReducedMotion) {
+			navigate();
+			return;
+		}
+
 		if (!gsap) {
 			navigate();
 			return;
@@ -98,14 +104,19 @@
 		filter: brightness(0.95) hue-rotate(5deg) saturate(1.5);
 	}
 
+	@media (prefers-reduced-motion: reduce) {
+		.homepage-section:hover {
+			filter: none;
+		}
+	}
+
 	.homepage-section-link:focus-visible {
-		outline: none;
-		box-shadow: 0 0 0 4px var(--a11y-focus-color);
-		border-radius: var(--radius-pill);
 		background: color-mix(in srgb, var(--color-surface) 88%, transparent);
 	}
 
 	.homepage-section-link {
+		--a11y-focus-offset-local: calc(var(--a11y-focus-offset) + 1px);
+		--a11y-focus-radius-local: var(--radius-pill);
 		display: inline-block;
 		position: absolute;
 		border-radius: var(--radius-pill);

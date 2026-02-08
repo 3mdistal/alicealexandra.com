@@ -2,6 +2,8 @@
 	import { fade } from 'svelte/transition';
 	import { cubicIn } from 'svelte/easing';
 	import { onMount } from 'svelte';
+	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
+	import { get } from 'svelte/store';
 	import { pageState } from '$lib/stores';
 
 	type Gsap = typeof import('gsap').gsap;
@@ -11,6 +13,10 @@
 	let siteTitle: HTMLParagraphElement | null = $state(null);
 	let subtitle: HTMLParagraphElement | null = $state(null);
 
+	function reducedMotionEnabled(): boolean {
+		return get(prefersReducedMotion);
+	}
+
 	onMount(async () => {
 		const mod = await import('gsap');
 		gsap = mod.gsap;
@@ -18,7 +24,16 @@
 	});
 
 	function inAnimation() {
-		if (!gsap || !logo || !siteTitle || !subtitle) return;
+		if (!logo || !siteTitle || !subtitle) return;
+
+		if (reducedMotionEnabled()) {
+			logo.style.opacity = '1';
+			siteTitle.style.opacity = '1';
+			subtitle.style.opacity = '1';
+			return;
+		}
+
+		if (!gsap) return;
 
 		const tl = gsap.timeline();
 
@@ -69,13 +84,25 @@
 			src="images/logos/logo.svg"
 			alt="The logo for Tempo Immaterial."
 			class="logo"
-			out:flyRotate={{ duration: 750, x: -400, rotation: -360 * 1.5 }}
+			out:flyRotate={{
+				duration: reducedMotionEnabled() ? 1 : 750,
+				x: reducedMotionEnabled() ? 0 : -400,
+				rotation: reducedMotionEnabled() ? 0 : -360 * 1.5
+			}}
 		/>
 		<div>
-			<h1 bind:this={siteTitle} class="site-title" out:fade={{ duration: 500 }}>
+			<h1
+				bind:this={siteTitle}
+				class="site-title"
+				out:fade={{ duration: reducedMotionEnabled() ? 1 : 500 }}
+			>
 				tempo immaterial
 			</h1>
-			<p bind:this={subtitle} class="subtitle" out:fade={{ duration: 500 }}>
+			<p
+				bind:this={subtitle}
+				class="subtitle"
+				out:fade={{ duration: reducedMotionEnabled() ? 1 : 500 }}
+			>
 				work by alice alexandra moore
 			</p>
 		</div>

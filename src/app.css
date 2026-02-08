@@ -59,8 +59,11 @@ a {
 	transition: color var(--duration-fast) var(--ease-standard);
 	color: inherit;
 	text-decoration: none;
+	text-decoration-thickness: max(2px, 0.12em);
+	text-underline-offset: 0.2em;
 
 	&:hover {
-		filter: brightness(0.8);
+		filter: brightness(0.9);
+		text-decoration: underline;
 	}
 }

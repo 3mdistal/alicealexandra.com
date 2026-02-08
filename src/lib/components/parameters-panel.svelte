@@ -257,17 +257,12 @@
 	}
 
 	.parameter-slider {
+		--a11y-focus-offset-local: calc(var(--a11y-focus-offset) + 2px);
 		flex: 1;
 		cursor: pointer;
-		outline: none;
 		border-radius: 2px;
 		background: #333;
 		height: 4px;
-	}
-
-	.parameter-slider:focus-visible {
-		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
-		outline-offset: calc(var(--a11y-focus-offset) + 2px);
 	}
 
 	.parameter-slider::-webkit-slider-thumb {
