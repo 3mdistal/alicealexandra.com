@@ -19,6 +19,7 @@ Tempo Immaterial is a personal portfolio/studio for writing, art, experiments, a
 - `scripts/fetch-content.sh` and `pnpm vercel-build`: build-time content fetch and filesystem setup (imperative shell).
 - `scripts/upload-images.sh`: scan/download/upload ImageKit assets to R2 and emit a URL mapping.
 - `scripts/rewrite-image-urls.mjs`: manual mapping-driven URL rewrite tool (run after verification).
+- `scripts/assert-no-imagekit-urls.mjs`: verifies migrated scopes no longer reference ImageKit URLs.
 - `src/lib/content/*`: parsing/typing for markdown and JSON content (functional-ish core).
 - `src/routes/**/+page.server.ts`: orchestration + prerender configuration.
 - `src/lib/notion/*`: legacy render helpers and types.
@@ -43,3 +44,29 @@ This site is always evolving. It's a place to tinker, learn in public, and share
 
 - `docs/product/vision.md`: the product vision and experience principles.
 - `docs/product/CONTENT_MANAGEMENT.md`: the content pipeline and content repo structure.
+
+## Image Migration Workflow (ImageKit -> R2)
+
+1. Scan and plan (plus optional download/upload):
+
+```bash
+pnpm upload:images --emit-mapping --public-base-url https://images.alicealexandra.com
+```
+
+2. Review `.image-migration/mapping.json` and then rewrite references manually:
+
+```bash
+pnpm rewrite:image-urls --mapping .image-migration/mapping.json --write
+```
+
+3. Optionally include app source files (`src/`) in the rewrite pass:
+
+```bash
+pnpm rewrite:image-urls --mapping .image-migration/mapping.json --include-src --write
+```
+
+4. Verify no ImageKit URLs remain in migrated scope:
+
+```bash
+pnpm verify:image-hosts
+```

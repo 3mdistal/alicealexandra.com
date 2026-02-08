@@ -7,6 +7,7 @@ yarn.lock
 content/
 .beads/
 .opencode/
+.ralph/
 archived/
 
 # Beads export/snapshots (if present)

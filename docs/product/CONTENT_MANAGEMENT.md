@@ -191,6 +191,24 @@ pnpm setup:content
 pnpm dev
 ```
 
+## Image Host Migration (ImageKit -> R2)
+
+When migrating existing ImageKit URLs to Cloudflare R2, use the scripts in this repo:
+
+```bash
+# scan + plan + emit mapping (and optionally --download / --upload)
+pnpm upload:images --emit-mapping --public-base-url https://images.alicealexandra.com
+
+# apply mapping once reviewed
+pnpm rewrite:image-urls --mapping .image-migration/mapping.json --write
+
+# verify migrated scopes no longer reference ImageKit
+pnpm verify:image-hosts
+```
+
+Add `--include-src` to `rewrite:image-urls` when you intentionally want to rewrite `src/` files
+in addition to `content/`.
+
 ### Script Options
 
 ```bash
