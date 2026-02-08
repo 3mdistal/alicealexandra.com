@@ -68,15 +68,6 @@
 				el.style.boxShadow = '';
 			};
 
-			const schemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-			const handleSchemeChange = () => clearInlineShadow();
-			if ('addEventListener' in schemeMedia) {
-				schemeMedia.addEventListener('change', handleSchemeChange);
-			} else {
-				// @ts-expect-error - Safari < 14
-				schemeMedia.addListener(handleSchemeChange);
-			}
-
 			// Function to generate a new random rotation
 			const generateNewRotation = () => {
 				let newRotation: number;
@@ -159,12 +150,7 @@
 			return () => {
 				cardElement.removeEventListener('mouseenter', handleMouseEnter);
 				cardElement.removeEventListener('mouseleave', handleMouseLeave);
-				if ('removeEventListener' in schemeMedia) {
-					schemeMedia.removeEventListener('change', handleSchemeChange);
-				} else {
-					// @ts-expect-error - Safari < 14
-					schemeMedia.removeListener(handleSchemeChange);
-				}
+				clearInlineShadow();
 				if (scrollTriggerInstance) {
 					scrollTriggerInstance.kill();
 				}
@@ -198,12 +184,20 @@
 	.postcard-link {
 		display: block;
 		width: 100%;
-		--postcard-paper: var(--color-content-bg);
-		--postcard-ink: var(--color-content-text);
-		--postcard-ink-muted: var(--color-content-secondary);
-		--postcard-border: var(--color-content-border);
-		--postcard-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-		--postcard-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.25);
+		--postcard-paper: var(--color-bg);
+		--postcard-ink: var(--color-text);
+		--postcard-ink-muted: var(--color-text-muted);
+		--postcard-border: var(--color-border);
+		--postcards-card-shadow-color: color-mix(in srgb, var(--color-neutral-900) 15%, transparent);
+		--postcards-card-shadow-hover-color: color-mix(
+			in srgb,
+			var(--color-neutral-900) 26%,
+			transparent
+		);
+		--postcard-shadow: 0 4px 12px var(--postcards-card-shadow-color);
+		--postcard-shadow-hover:
+			0 25px 50px var(--postcards-card-shadow-hover-color),
+			0 0 0 1px color-mix(in srgb, var(--postcard-border) 65%, transparent);
 		color: inherit;
 		text-decoration: none;
 
@@ -221,15 +215,6 @@
 		aspect-ratio: 3 / 2;
 		width: 100%;
 		overflow: hidden;
-	}
-
-	@media (prefers-color-scheme: dark) {
-		.postcard-link {
-			--postcard-shadow: 0 18px 55px rgba(0, 0, 0, 0.7);
-			--postcard-shadow-hover:
-				0 30px 80px rgba(0, 0, 0, 0.8),
-				0 0 0 1px color-mix(in srgb, var(--postcard-border) 65%, transparent);
-		}
 	}
 
 	.postcard::before {
