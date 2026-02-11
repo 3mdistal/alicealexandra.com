@@ -18,6 +18,7 @@ test('chrome follows route theme and stays navigable', async ({ page }) => {
 	await page.goto('/about');
 	await expect(page.locator('html')).toHaveAttribute('data-theme', 'about');
 
+	await page.locator('.site-chrome').hover();
 	const blogLink = page.locator('.site-chrome__link', { hasText: 'Blog' });
 	await expect(blogLink).toBeVisible();
 	await blogLink.focus();
