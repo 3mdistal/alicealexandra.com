@@ -1,30 +1,13 @@
 <script lang="ts">
 	import '../app.css';
 	import { page } from '$app/stores';
+	import { getSurface, getTheme, type SiteSurface, type SiteTheme } from '$lib/theme/route-theme';
 
-	function themeFromPathname(
-		pathname: string
-	): 'home' | 'about' | 'studio' | 'career' | 'blog' | 'news' {
-		if (pathname === '/' || pathname === '') return 'home';
-		if (pathname.startsWith('/about')) return 'about';
-		if (pathname.startsWith('/studio')) return 'studio';
-		if (pathname.startsWith('/career')) return 'career';
-		if (pathname.startsWith('/blog')) return 'blog';
-		if (pathname.startsWith('/news')) return 'news';
-		return 'home';
-	}
+	let theme: SiteTheme = 'home';
+	let surface: SiteSurface = 'default';
 
-	function surfaceFromPathname(pathname: string): 'default' | 'content' {
-		if (pathname.startsWith('/studio/postcards')) return 'content';
-		if (pathname.startsWith('/studio/illustrations')) return 'content';
-		return 'default';
-	}
-
-	let theme: 'home' | 'about' | 'studio' | 'career' | 'blog' | 'news' = 'home';
-	let surface: 'default' | 'content' = 'default';
-
-	$: theme = themeFromPathname($page.url.pathname);
-	$: surface = surfaceFromPathname($page.url.pathname);
+	$: theme = getTheme($page.url.pathname);
+	$: surface = getSurface($page.url.pathname);
 
 	$: {
 		if (typeof document !== 'undefined') {
@@ -47,5 +30,8 @@
 	data-sveltekit-preload-data="hover"
 	data-sveltekit-preload-code="eager"
 >
-	<slot />
+	<a class="skip-link" href="#content">Skip to content</a>
+	<div id="content" tabindex="-1">
+		<slot />
+	</div>
 </div>

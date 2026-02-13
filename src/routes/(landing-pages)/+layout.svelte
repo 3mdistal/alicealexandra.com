@@ -1,6 +1,6 @@
 <script>
-	import HomeButton from '$lib/icons/home-button.svelte';
+	import SiteChrome from '$lib/components/site-chrome.svelte';
 </script>
 
-<HomeButton />
+<SiteChrome />
 <slot />
