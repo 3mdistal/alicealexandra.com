@@ -125,13 +125,14 @@
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	gap: var(--space-2);
-	transform: translateX(0.5rem) scaleX(0.92);
+	transform: translateX(0.75rem) scaleX(0.92);
 	transform-origin: top right;
 	opacity: 0;
 	backdrop-filter: blur(8px);
 	transition:
-		opacity var(--duration-fast) var(--ease-standard),
-		transform var(--duration-fast) var(--ease-standard);
+		opacity 220ms var(--ease-standard),
+		transform 260ms var(--ease-standard);
+	transition-delay: 0ms;
 	box-shadow: var(--chrome-shadow);
 	border: 1px solid var(--chrome-border);
 	border-radius: var(--radius-pill);
@@ -144,6 +145,7 @@
 .site-chrome:focus-within .site-chrome__surface {
 	transform: translateX(0) scaleX(1);
 	opacity: 1;
+	transition-delay: 430ms;
 	pointer-events: auto;
 }
 
