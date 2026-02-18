@@ -9,6 +9,17 @@
 	--color-accent-strong: var(--color-neutral-700);
 	--color-border: var(--color-neutral-200);
 	--color-shadow: rgba(15, 23, 42, 0.12);
+
+	--chrome-bg: color-mix(in srgb, var(--color-neutral-50) 82%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 90%, transparent);
+	--chrome-text: var(--color-neutral-900);
+	--chrome-text-muted: var(--color-neutral-700);
+	--chrome-border: color-mix(in srgb, var(--color-neutral-900) 12%, transparent);
+	--chrome-accent: var(--color-neutral-900);
+	--chrome-accent-strong: var(--color-neutral-700);
+	--chrome-shadow: 0 14px 40px rgba(15, 23, 42, 0.18);
+	--chrome-logo-text: var(--color-neutral-0);
+	--chrome-mobile-bg: var(--color-bg);
 }
 
 [data-theme='home'] {
@@ -20,6 +31,15 @@
 	--color-accent: var(--color-neutral-900);
 	--color-accent-strong: var(--color-neutral-700);
 	--color-border: var(--color-neutral-200);
+
+	--chrome-bg: color-mix(in srgb, var(--color-content-bg) 70%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 88%, transparent);
+	--chrome-text: var(--color-neutral-900);
+	--chrome-text-muted: var(--color-neutral-700);
+	--chrome-border: color-mix(in srgb, var(--color-neutral-900) 14%, transparent);
+	--chrome-accent: var(--color-neutral-900);
+	--chrome-accent-strong: var(--color-neutral-700);
+	--chrome-shadow: 0 14px 40px rgba(15, 23, 42, 0.18);
 
 	--home-about-bg: var(--color-mauve-400);
 	--home-studio-bg: #d6ddf0;
@@ -43,6 +63,15 @@
 	--color-accent: var(--color-violet-800);
 	--color-accent-strong: var(--color-violet-800);
 	--color-border: rgba(39, 22, 71, 0.2);
+
+	--chrome-bg: color-mix(in srgb, #b2a6c6 58%, transparent);
+	--chrome-surface: color-mix(in srgb, #ffffff 84%, transparent);
+	--chrome-text: #211536;
+	--chrome-text-muted: #3f2d5e;
+	--chrome-border: rgba(39, 22, 71, 0.25);
+	--chrome-accent: #271647;
+	--chrome-accent-strong: #190f2e;
+	--chrome-shadow: 0 14px 40px rgba(39, 22, 71, 0.25);
 }
 
 [data-theme='studio'] {
@@ -54,6 +83,15 @@
 	--color-accent: var(--color-indigo-800);
 	--color-accent-strong: #1a2a5f;
 	--color-border: rgba(36, 50, 105, 0.2);
+
+	--chrome-bg: color-mix(in srgb, #b9c6e4 60%, transparent);
+	--chrome-surface: color-mix(in srgb, #ffffff 82%, transparent);
+	--chrome-text: #1d2a52;
+	--chrome-text-muted: #32457d;
+	--chrome-border: rgba(36, 50, 105, 0.25);
+	--chrome-accent: #243269;
+	--chrome-accent-strong: #1a2a5f;
+	--chrome-shadow: 0 14px 40px rgba(36, 50, 105, 0.24);
 }
 
 [data-theme='career'] {
@@ -65,6 +103,15 @@
 	--color-accent: var(--color-clay-700);
 	--color-accent-strong: var(--color-clay-600);
 	--color-border: rgba(100, 46, 26, 0.2);
+
+	--chrome-bg: color-mix(in srgb, #dbc4b5 60%, transparent);
+	--chrome-surface: color-mix(in srgb, #f7efe9 84%, transparent);
+	--chrome-text: #4a2417;
+	--chrome-text-muted: #6a3f2e;
+	--chrome-border: rgba(100, 46, 26, 0.25);
+	--chrome-accent: #642e1a;
+	--chrome-accent-strong: #8b4513;
+	--chrome-shadow: 0 14px 40px rgba(100, 46, 26, 0.24);
 }
 
 [data-theme='blog'] {
@@ -76,6 +123,15 @@
 	--color-accent: var(--color-cloud-200);
 	--color-accent-strong: #f0f4fb;
 	--color-border: rgba(226, 232, 240, 0.35);
+
+	--chrome-bg: color-mix(in srgb, #5f6272 68%, transparent);
+	--chrome-surface: color-mix(in srgb, #1c1f2f 66%, transparent);
+	--chrome-text: #f8fafc;
+	--chrome-text-muted: #d7dee9;
+	--chrome-border: rgba(226, 232, 240, 0.35);
+	--chrome-accent: #d1dce7;
+	--chrome-accent-strong: #f0f4fb;
+	--chrome-shadow: 0 14px 40px rgba(12, 15, 24, 0.45);
 }
 
 [data-theme='news'] {
@@ -87,6 +143,15 @@
 	--color-accent: var(--color-olive-700);
 	--color-accent-strong: var(--color-olive-800);
 	--color-border: rgba(114, 106, 18, 0.2);
+
+	--chrome-bg: color-mix(in srgb, #d6d2bf 66%, transparent);
+	--chrome-surface: color-mix(in srgb, #ffffff 78%, transparent);
+	--chrome-text: #3c3911;
+	--chrome-text-muted: #5e591f;
+	--chrome-border: rgba(114, 106, 18, 0.24);
+	--chrome-accent: #726a12;
+	--chrome-accent-strong: #4b460d;
+	--chrome-shadow: 0 14px 40px rgba(66, 61, 22, 0.28);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -101,6 +166,17 @@
 		--color-border: #334155;
 		--color-shadow: rgba(15, 23, 42, 0.6);
 		--a11y-focus-color: #38bdf8;
+
+		--chrome-bg: color-mix(in srgb, #0f172a 82%, transparent);
+		--chrome-surface: color-mix(in srgb, #111827 82%, transparent);
+		--chrome-text: #f3f4f6;
+		--chrome-text-muted: #cbd5e1;
+		--chrome-border: rgba(148, 163, 184, 0.35);
+		--chrome-accent: #e5e7eb;
+		--chrome-accent-strong: #cbd5e1;
+		--chrome-shadow: 0 18px 48px rgba(2, 6, 23, 0.6);
+		--chrome-logo-text: var(--color-neutral-0);
+		--chrome-mobile-bg: var(--color-bg);
 	}
 
 	[data-theme='home'] {
@@ -112,6 +188,15 @@
 		--color-accent: #e5e7eb;
 		--color-accent-strong: #cbd5e1;
 		--color-border: rgba(226, 232, 240, 0.22);
+
+		--chrome-bg: color-mix(in srgb, #141414 80%, transparent);
+		--chrome-surface: color-mix(in srgb, #222831 72%, transparent);
+		--chrome-text: #f3f4f6;
+		--chrome-text-muted: #d8dde5;
+		--chrome-border: rgba(226, 232, 240, 0.28);
+		--chrome-accent: #f3f4f6;
+		--chrome-accent-strong: #d8dee9;
+		--chrome-shadow: 0 18px 48px rgba(2, 6, 23, 0.65);
 
 		--home-about-bg: #1d1629;
 		--home-studio-bg: #1f3139;
@@ -135,6 +220,15 @@
 		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
+
+		--chrome-bg: color-mix(in srgb, #1d1629 78%, transparent);
+		--chrome-surface: color-mix(in srgb, #34254a 70%, transparent);
+		--chrome-text: #f3f4f6;
+		--chrome-text-muted: #ded1f2;
+		--chrome-border: rgba(243, 244, 246, 0.28);
+		--chrome-accent: #f3f4f6;
+		--chrome-accent-strong: #e9def8;
+		--chrome-shadow: 0 18px 48px rgba(11, 8, 18, 0.62);
 	}
 
 	[data-theme='studio'] {
@@ -146,6 +240,15 @@
 		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
+
+		--chrome-bg: color-mix(in srgb, #1f3139 78%, transparent);
+		--chrome-surface: color-mix(in srgb, #2f4d58 70%, transparent);
+		--chrome-text: #f3f4f6;
+		--chrome-text-muted: #d6e6ec;
+		--chrome-border: rgba(243, 244, 246, 0.28);
+		--chrome-accent: #f3f4f6;
+		--chrome-accent-strong: #dce9f4;
+		--chrome-shadow: 0 18px 48px rgba(5, 15, 20, 0.62);
 	}
 
 	[data-theme='career'] {
@@ -157,6 +260,15 @@
 		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
+
+		--chrome-bg: color-mix(in srgb, #513f31 78%, transparent);
+		--chrome-surface: color-mix(in srgb, #6a533f 70%, transparent);
+		--chrome-text: #f3f4f6;
+		--chrome-text-muted: #f2deca;
+		--chrome-border: rgba(243, 244, 246, 0.28);
+		--chrome-accent: #f3f4f6;
+		--chrome-accent-strong: #ead8ca;
+		--chrome-shadow: 0 18px 48px rgba(21, 12, 7, 0.62);
 	}
 
 	[data-theme='blog'] {
@@ -168,6 +280,15 @@
 		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
+
+		--chrome-bg: color-mix(in srgb, #71737d 78%, transparent);
+		--chrome-surface: color-mix(in srgb, #3f4351 74%, transparent);
+		--chrome-text: #f3f4f6;
+		--chrome-text-muted: #e2e8f0;
+		--chrome-border: rgba(243, 244, 246, 0.28);
+		--chrome-accent: #f3f4f6;
+		--chrome-accent-strong: #e2e8f0;
+		--chrome-shadow: 0 18px 48px rgba(8, 10, 16, 0.62);
 	}
 
 	[data-theme='news'] {
@@ -179,6 +300,15 @@
 		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
+
+		--chrome-bg: color-mix(in srgb, #232114 78%, transparent);
+		--chrome-surface: color-mix(in srgb, #3a361f 72%, transparent);
+		--chrome-text: #f3f4f6;
+		--chrome-text-muted: #efe7b8;
+		--chrome-border: rgba(243, 244, 246, 0.28);
+		--chrome-accent: #f3f4f6;
+		--chrome-accent-strong: #efe7b8;
+		--chrome-shadow: 0 18px 48px rgba(16, 14, 4, 0.62);
 	}
 }
 
