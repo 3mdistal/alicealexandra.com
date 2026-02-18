@@ -49,9 +49,7 @@
 	isolation: isolate;
 	z-index: var(--chrome-z-index);
 	max-width: min(92vw, 44rem);
-	border: 1px solid var(--chrome-border);
 	border-radius: 999px;
-	background: color-mix(in srgb, var(--chrome-surface) 75%, transparent);
 	padding: 1rem;
 	transition: border-radius 260ms var(--ease-standard);
 	color: var(--chrome-text);
