@@ -55,11 +55,17 @@
 .site-chrome::before {
 	content: '';
 	position: absolute;
-	inset: 0;
+	top: 0;
+	right: 0;
+	width: var(--chrome-button-size);
+	height: var(--chrome-button-size);
 	border-radius: 999px;
 	background: color-mix(in srgb, var(--chrome-surface) 55%, transparent);
 	transition:
-		inset 260ms var(--ease-standard),
+		width 260ms var(--ease-standard),
+		height 260ms var(--ease-standard),
+		right 260ms var(--ease-standard),
+		top 260ms var(--ease-standard),
 		border-radius 260ms var(--ease-standard);
 	pointer-events: none;
 	z-index: 0;
@@ -170,7 +176,10 @@
 .site-chrome:hover::before,
 .site-chrome:focus-within::before,
 .site-chrome--mobile-open::before {
-	inset: -2rem;
+	top: -2rem;
+	right: -2rem;
+	width: calc(100% + 4rem);
+	height: calc(100% + 4rem);
 	border-radius: calc(var(--radius-pill) + 2rem);
 }
 
