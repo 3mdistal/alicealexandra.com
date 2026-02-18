@@ -44,7 +44,7 @@
 	top: calc(var(--chrome-safe-area-top) - 1rem);
 	right: calc(var(--chrome-safe-area-right) - 1rem);
 	flex-direction: row-reverse;
-	align-items: flex-start;
+	align-items: center;
 	gap: 0;
 	isolation: isolate;
 	z-index: var(--chrome-z-index);
@@ -134,7 +134,12 @@
 	transform: translateX(0.75rem) scaleX(0.92);
 	transform-origin: top right;
 	opacity: 0;
+	width: 0;
+	height: 0;
+	min-width: 0;
+	min-height: 0;
 	max-width: 0;
+	max-height: 0;
 	overflow: hidden;
 	backdrop-filter: blur(8px);
 	transition:
@@ -166,7 +171,10 @@
 .site-chrome:focus-within .site-chrome__surface {
 	transform: translateX(0) scaleX(1);
 	opacity: 1;
+	width: auto;
+	height: auto;
 	max-width: min(92vw, 44rem);
+	max-height: none;
 	padding: var(--space-2);
 	border-width: 1px;
 	transition-delay: 100ms;
