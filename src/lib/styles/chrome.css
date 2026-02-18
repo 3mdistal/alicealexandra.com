@@ -177,11 +177,11 @@
 .site-chrome:hover::before,
 .site-chrome:focus-within::before,
 .site-chrome--mobile-open::before {
-	top: -2rem;
-	right: -2rem;
-	width: calc(100% + 4rem);
-	height: calc(100% + 4rem);
-	border-radius: calc(var(--radius-pill) + 2rem);
+	top: -1rem;
+	right: -1rem;
+	width: calc(100% + 2rem);
+	height: calc(100% + 2rem);
+	border-radius: calc(var(--radius-pill) + 1rem);
 }
 
 .site-chrome:hover .site-chrome__surface,
