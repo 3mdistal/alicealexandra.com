@@ -41,40 +41,24 @@
 	display: inline-flex;
 
 	position: fixed;
-	top: var(--chrome-safe-area-top);
-	right: var(--chrome-safe-area-right);
+	top: calc(var(--chrome-safe-area-top) - 1rem);
+	right: calc(var(--chrome-safe-area-right) - 1rem);
 	flex-direction: row-reverse;
 	align-items: flex-start;
 	gap: 0;
 	isolation: isolate;
 	z-index: var(--chrome-z-index);
 	max-width: min(92vw, 44rem);
-	color: var(--chrome-text);
-}
-
-.site-chrome::before {
-	content: '';
-	position: absolute;
-	top: -1rem;
-	right: -1rem;
-	width: calc(var(--chrome-button-size) + 2rem);
-	height: calc(var(--chrome-button-size) + 2rem);
+	border: 1px solid var(--chrome-border);
 	border-radius: 999px;
 	background: color-mix(in srgb, var(--chrome-surface) 75%, transparent);
-	border: 1px solid var(--chrome-border);
-	transition:
-		width 260ms var(--ease-standard),
-		height 260ms var(--ease-standard),
-		right 260ms var(--ease-standard),
-		top 260ms var(--ease-standard),
-		border-radius 260ms var(--ease-standard);
-	pointer-events: none;
-	z-index: 0;
+	padding: 1rem;
+	transition: border-radius 260ms var(--ease-standard);
+	color: var(--chrome-text);
 }
 
 .site-chrome__home {
 	position: relative;
-	z-index: 1;
 	flex-shrink: 0;
 	transform: translateZ(0);
 	transition: transform 300ms var(--ease-standard);
@@ -144,8 +128,6 @@
 
 .site-chrome__surface {
 	display: inline-flex;
-	position: relative;
-	z-index: 1;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	gap: var(--space-2);
@@ -174,13 +156,9 @@
 	gap: var(--space-2);
 }
 
-.site-chrome:hover::before,
-.site-chrome:focus-within::before,
-.site-chrome--mobile-open::before {
-	top: -1rem;
-	right: -1rem;
-	width: calc(100% + 2rem);
-	height: calc(100% + 2rem);
+.site-chrome:hover,
+.site-chrome:focus-within,
+.site-chrome--mobile-open {
 	border-radius: calc(var(--radius-pill) + 1rem);
 }
 
