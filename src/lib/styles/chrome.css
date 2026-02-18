@@ -55,10 +55,10 @@
 .site-chrome::before {
 	content: '';
 	position: absolute;
-	top: 0;
-	right: 0;
-	width: var(--chrome-button-size);
-	height: var(--chrome-button-size);
+	top: -1rem;
+	right: -1rem;
+	width: calc(var(--chrome-button-size) + 2rem);
+	height: calc(var(--chrome-button-size) + 2rem);
 	border-radius: 999px;
 	background: color-mix(in srgb, var(--chrome-surface) 75%, transparent);
 	border: 1px solid var(--chrome-border);
