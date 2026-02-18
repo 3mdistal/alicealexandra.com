@@ -44,7 +44,7 @@
 	top: var(--chrome-safe-area-top);
 	right: var(--chrome-safe-area-right);
 	flex-direction: row-reverse;
-	align-items: center;
+	align-items: flex-start;
 	gap: 0;
 	isolation: isolate;
 	z-index: var(--chrome-z-index);
@@ -57,7 +57,7 @@
 	position: absolute;
 	inset: 0;
 	border-radius: 999px;
-	background: color-mix(in srgb, var(--chrome-surface) 35%, transparent);
+	background: color-mix(in srgb, var(--chrome-surface) 55%, transparent);
 	transition:
 		inset 260ms var(--ease-standard),
 		border-radius 260ms var(--ease-standard);
