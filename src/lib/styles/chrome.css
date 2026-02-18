@@ -254,6 +254,7 @@
 }
 
 .site-chrome-mobile {
+	--chrome-bg: var(--color-bg);
 	display: none;
 	position: fixed;
 	justify-content: center;
