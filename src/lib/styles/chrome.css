@@ -145,7 +145,7 @@
 .site-chrome:focus-within .site-chrome__surface {
 	transform: translateX(0) scaleX(1);
 	opacity: 1;
-	transition-delay: 430ms;
+	transition-delay: 200ms;
 	pointer-events: auto;
 }
 
