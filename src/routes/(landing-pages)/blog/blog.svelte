@@ -80,7 +80,7 @@
 	.post-subtitle {
 		grid-row-start: 2;
 		grid-column: span 2;
-		margin: 7px 0 19px;
+		margin: var(--space-3) 0 var(--space-4);
 		max-width: var(--content-measure-subtitle);
 		color: var(--color-text);
 		font-style: italic;
