@@ -105,6 +105,7 @@
 	class="site-chrome-mobile"
 	class:site-chrome-mobile--open={mobileMenuOpen}
 	aria-hidden={!mobileMenuOpen}
+	inert={!mobileMenuOpen}
 >
 	<div class="site-chrome-mobile__surface">
 		{#each navItems as item}
