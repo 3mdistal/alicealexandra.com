@@ -2,6 +2,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'blog');
+const BLOG_READING_SPEED_WORDS_PER_MINUTE = 225;
 
 export interface BlogPostMeta {
 	id: string;
@@ -74,6 +75,12 @@ function parseFrontmatter(content: string): { frontmatter: BlogFrontmatter; body
 	};
 }
 
+function calculateReadTimeFromContent(content: string): string {
+	const wordCount = content.match(/\b[\w'-]+\b/g)?.length ?? 0;
+	const minutes = Math.max(1, Math.ceil(wordCount / BLOG_READING_SPEED_WORDS_PER_MINUTE));
+	return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
+}
+
 export async function loadPostsMeta(): Promise<BlogPostMeta[]> {
 	const postsPath = path.join(CONTENT_PATH, 'posts.json');
 	const content = await fs.readFile(postsPath, 'utf-8');
@@ -97,7 +104,7 @@ export async function loadPostBySlug(slug: string): Promise<BlogPost | null> {
 			category: frontmatter.category,
 			publicationDate: frontmatter.publicationDate,
 			formattedPublicationDate: frontmatter.formattedPublicationDate,
-			readTime: frontmatter.readTime,
+			readTime: calculateReadTimeFromContent(body),
 			coverImage: frontmatter.coverImage,
 			coverImageCaption: frontmatter.coverImageCaption,
 			notionId: frontmatter.notionId,
@@ -129,7 +136,7 @@ export async function loadAllPosts(): Promise<BlogPost[]> {
 			category: frontmatter.category,
 			publicationDate: frontmatter.publicationDate,
 			formattedPublicationDate: frontmatter.formattedPublicationDate,
-			readTime: frontmatter.readTime,
+			readTime: calculateReadTimeFromContent(body),
 			coverImage: frontmatter.coverImage,
 			coverImageCaption: frontmatter.coverImageCaption,
 			notionId: frontmatter.notionId,
