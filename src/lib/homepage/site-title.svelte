@@ -144,11 +144,4 @@
 			width: 12rem;
 		}
 	}
-
-	@media (prefers-color-scheme: dark) {
-		.logo {
-			filter: invert(1) hue-rotate(220deg) brightness(0.85) contrast(1.1);
-			opacity: 0.9;
-		}
-	}
 </style>
