@@ -76,6 +76,24 @@
 	}
 }
 
+.site-chrome--intro-spin .site-chrome__home {
+	animation: chrome-home-arrival-spin 640ms var(--ease-standard) 1;
+}
+
+@keyframes chrome-home-arrival-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	70% {
+		transform: rotate(320deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .site-chrome__home-button {
 	cursor: pointer;
 	border: 0;
@@ -325,6 +343,10 @@
 		max-width: none;
 	}
 
+	.site-chrome--intro-spin .site-chrome__home {
+		animation: none;
+	}
+
 	.site-chrome__surface {
 		display: none;
 	}
@@ -336,5 +358,11 @@
 	.site-chrome-mobile--open {
 		opacity: 1;
 		pointer-events: auto;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.site-chrome--intro-spin .site-chrome__home {
+		animation: none;
 	}
 }
