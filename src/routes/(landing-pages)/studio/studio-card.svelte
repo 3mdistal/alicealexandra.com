@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import Button from '$lib/icons/button.svelte';
+	import Button from '$lib/components/ui/button.svelte';
+	import LinkButton from '$lib/components/ui/link-button.svelte';
 	import type { StudioCard } from '$lib/content/studio';
 
 	// Card Data
@@ -131,16 +132,14 @@
 		return;
 	}
 
-	function handleClickMessage(e: CustomEvent<{ click: boolean }>) {
-		// Handle click events from the button
-		loading = e.detail.click;
+	function handleClickMessage() {
+		loading = true;
 	}
 
-	function handleFocusMessage(e: CustomEvent<{ focus: boolean }>) {
-		// Handle focus events from the button
-		if (e.detail.focus === true) {
+	function handleFocusMessage(event: Event) {
+		if (event.type === 'focus') {
 			seeBack();
-		} else if (e.detail.focus === false) {
+		} else if (event.type === 'blur') {
 			hideBack();
 		}
 	}
@@ -181,14 +180,17 @@
 		</p>
 
 		{#if loading}
-			<Button text="please hold..." />
+			<Button disabled>please hold...</Button>
 		{:else}
-			<Button
-				{url}
-				text={buttonText}
-				on:clickMessage={handleClickMessage}
-				on:focusMessage={handleFocusMessage}
-			/>
+			<LinkButton
+				href={url}
+				on:click={handleClickMessage}
+				on:focus={handleFocusMessage}
+				on:blur={handleFocusMessage}
+				size="lg"
+			>
+				{buttonText}
+			</LinkButton>
 		{/if}
 	</div>
 

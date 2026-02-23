@@ -3,6 +3,7 @@
 @import '$lib/styles/motion.css';
 @import '$lib/styles/a11y.css';
 @import '$lib/styles/chrome.css';
+@import '$lib/styles/components.css';
 @import '$lib/styles/prose-variables.css';
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');

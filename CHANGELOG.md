@@ -1,3 +1,10 @@
+## 05 Feb 2026
+
+**Enhancements**
+
+- Added reusable UI primitives for button/link, surface/card, and pill components, and centralized their token-driven defaults in `src/lib/styles/components.css`. (#80)
+- Adopted the new primitives on Career hero CTA, Studio card actions, and News entries/pills to improve cross-page consistency while preserving existing page personality. (#80)
+
 ## 04 Feb 2026
 
 **Enhancements**
