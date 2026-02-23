@@ -45,9 +45,6 @@
 	// Convert markdown to HTML
 	const htmlContent = marked.parse(post.content);
 
-	// Format reading time (handle "1 minutes" -> "1 minute")
-	const formattedReadTime = post.readTime === '1 minutes' ? '1 minute' : post.readTime;
-
 	onMount(() => {
 		runBlogHelpers();
 	});
@@ -98,7 +95,7 @@
 		subtitle={post.subtitle}
 		category={post.category || 'Article'}
 		publishedDate={post.formattedPublicationDate}
-		readTime={formattedReadTime}
+		readTime={post.readTime}
 	/>
 
 	<div class="blog-container">

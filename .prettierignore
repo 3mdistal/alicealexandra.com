@@ -6,6 +6,7 @@ yarn.lock
 # Non-code / generated / external sources
 content/
 .beads/
+.opencode/
 archived/
 
 # Beads export/snapshots (if present)
