@@ -198,11 +198,11 @@
 		--chrome-accent-strong: #d8dee9;
 		--chrome-shadow: 0 18px 48px rgba(2, 6, 23, 0.65);
 
-		--home-about-bg: #1d1629;
-		--home-studio-bg: #1f3139;
-		--home-career-bg: #513f31;
-		--home-blog-bg: #71737d;
-		--home-news-bg: #232114;
+		--home-about-bg: #4f425b;
+		--home-studio-bg: #2d3844;
+		--home-career-bg: #5a4548;
+		--home-blog-bg: #1c1f2b;
+		--home-news-bg: #3b3529;
 
 		--home-about-label: rgba(243, 244, 246, 0.86);
 		--home-studio-label: rgba(243, 244, 246, 0.88);
@@ -212,7 +212,7 @@
 	}
 
 	[data-theme='about'] {
-		--color-bg: #1d1629;
+		--color-bg: #4f425b;
 		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
 		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
 		--color-text: #f3f4f6;
@@ -232,7 +232,7 @@
 	}
 
 	[data-theme='studio'] {
-		--color-bg: #1f3139;
+		--color-bg: #2d3844;
 		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
 		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
 		--color-text: #f3f4f6;
@@ -252,7 +252,7 @@
 	}
 
 	[data-theme='career'] {
-		--color-bg: #513f31;
+		--color-bg: #5a4548;
 		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
 		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
 		--color-text: #f3f4f6;
@@ -272,7 +272,7 @@
 	}
 
 	[data-theme='blog'] {
-		--color-bg: #71737d;
+		--color-bg: #1c1f2b;
 		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
 		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
 		--color-text: #f3f4f6;
@@ -292,7 +292,7 @@
 	}
 
 	[data-theme='news'] {
-		--color-bg: #232114;
+		--color-bg: #3b3529;
 		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
 		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
 		--color-text: #f3f4f6;
