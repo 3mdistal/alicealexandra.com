@@ -221,8 +221,8 @@
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
 
-		--chrome-bg: color-mix(in srgb, #1d1629 78%, transparent);
-		--chrome-surface: color-mix(in srgb, #34254a 70%, transparent);
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
 		--chrome-text: #f3f4f6;
 		--chrome-text-muted: #ded1f2;
 		--chrome-border: rgba(243, 244, 246, 0.28);
@@ -241,8 +241,8 @@
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
 
-		--chrome-bg: color-mix(in srgb, #1f3139 78%, transparent);
-		--chrome-surface: color-mix(in srgb, #2f4d58 70%, transparent);
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
 		--chrome-text: #f3f4f6;
 		--chrome-text-muted: #d6e6ec;
 		--chrome-border: rgba(243, 244, 246, 0.28);
@@ -261,8 +261,8 @@
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
 
-		--chrome-bg: color-mix(in srgb, #513f31 78%, transparent);
-		--chrome-surface: color-mix(in srgb, #6a533f 70%, transparent);
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
 		--chrome-text: #f3f4f6;
 		--chrome-text-muted: #f2deca;
 		--chrome-border: rgba(243, 244, 246, 0.28);
@@ -281,8 +281,8 @@
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
 
-		--chrome-bg: color-mix(in srgb, #71737d 78%, transparent);
-		--chrome-surface: color-mix(in srgb, #3f4351 74%, transparent);
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 74%, transparent);
 		--chrome-text: #f3f4f6;
 		--chrome-text-muted: #e2e8f0;
 		--chrome-border: rgba(243, 244, 246, 0.28);
@@ -301,8 +301,8 @@
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
 		--color-border: rgba(243, 244, 246, 0.18);
 
-		--chrome-bg: color-mix(in srgb, #232114 78%, transparent);
-		--chrome-surface: color-mix(in srgb, #3a361f 72%, transparent);
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 72%, transparent);
 		--chrome-text: #f3f4f6;
 		--chrome-text-muted: #efe7b8;
 		--chrome-border: rgba(243, 244, 246, 0.28);
