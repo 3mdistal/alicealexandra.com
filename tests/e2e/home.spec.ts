@@ -9,6 +9,15 @@ test('keyboard focus is visible on homepage links', async ({ page }) => {
 	await page.goto('/');
 	await page.keyboard.press('Tab');
 
+	const skipLinkFocused = await page.evaluate(() => {
+		const active = document.activeElement;
+		return Boolean(active && active.matches('a.skip-link'));
+	});
+
+	if (skipLinkFocused) {
+		await page.keyboard.press('Tab');
+	}
+
 	const activeLink = page.locator('a.homepage-section-link:focus-visible').first();
 	await expect(activeLink).toBeVisible();
 
