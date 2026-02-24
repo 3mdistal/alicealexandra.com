@@ -8,6 +8,7 @@
 
 	let mobileMenuOpen = false;
 	let isMobile = false;
+	let playIntroSpin = false;
 
 	$: pathname = $page.url.pathname;
 
@@ -27,6 +28,11 @@
 
 	onMount(() => {
 		const query = window.matchMedia('(max-width: 767px)');
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+		if (!prefersReducedMotion.matches) {
+			playIntroSpin = true;
+		}
 
 		const syncViewportState = (matches: boolean) => {
 			isMobile = matches;
@@ -58,7 +64,12 @@
 	});
 </script>
 
-<nav class="site-chrome" class:site-chrome--mobile-open={mobileMenuOpen} aria-label="Primary">
+<nav
+	class="site-chrome"
+	class:site-chrome--mobile-open={mobileMenuOpen}
+	class:site-chrome--intro-spin={playIntroSpin}
+	aria-label="Primary"
+>
 	{#if isMobile}
 		<button
 			type="button"
