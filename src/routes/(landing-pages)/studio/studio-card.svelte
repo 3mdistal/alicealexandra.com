@@ -3,6 +3,7 @@
 	import gsap from 'gsap';
 	import Button from '$lib/components/ui/button.svelte';
 	import LinkButton from '$lib/components/ui/link-button.svelte';
+	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
 	import type { StudioCard } from '$lib/content/studio';
 
 	// Card Data
@@ -88,7 +89,6 @@
 	}
 
 	// Event Handlers
-	let prefersReducedMotion: MediaQueryList;
 
 	function reset() {
 		// Reset the card to its initial state
@@ -107,7 +107,7 @@
 
 		if (loading === true) return;
 
-		if (prefersReducedMotion.matches) {
+		if ($prefersReducedMotion) {
 			seeBackTimelineMotionReduced().play();
 			return;
 		}
@@ -123,7 +123,7 @@
 
 		if (loading === true) return;
 
-		if (prefersReducedMotion.matches) {
+		if ($prefersReducedMotion) {
 			hideBackTimelineMotionReduced().play();
 			return;
 		}
@@ -146,20 +146,11 @@
 
 	// Lifecycle Events
 	onMount(() => {
-		prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 		reset().play();
 	});
 </script>
 
-<div
-	on:mouseenter={seeBack}
-	on:mouseleave={hideBack}
-	role="button"
-	tabindex="0"
-	aria-live="polite"
-	aria-expanded="false"
-	class="studio-card"
->
+<div on:mouseenter={seeBack} on:mouseleave={hideBack} role="presentation" class="studio-card">
 	<!-- Front of Card -->
 	<div class="card-front" bind:this={front}>
 		<div class="logo-container">
@@ -174,7 +165,7 @@
 	</div>
 
 	<!-- Back of Card -->
-	<div class="card-back" bind:this={back} aria-labelledby="popover" aria-expanded="true">
+	<div class="card-back" bind:this={back}>
 		<p bind:this={backText} class="description">
 			<em>{description}</em>
 		</p>

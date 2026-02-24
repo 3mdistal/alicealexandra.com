@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { fade, scale } from 'svelte/transition';
 	import type { Illustration } from '$lib/content/studio';
+	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
 
 	// Props
 	export let data;
@@ -48,6 +49,10 @@
 	function handleImageLoad(event: Event) {
 		const img = event.target as HTMLImageElement;
 		img.style.opacity = '1';
+	}
+
+	function transitionDuration(duration: number): number {
+		return $prefersReducedMotion ? 1 : duration;
 	}
 </script>
 
@@ -105,7 +110,7 @@
 				aria-label={name ? `Open ${name}` : 'Open artwork'}
 				style="--delay: {i * 0.1}s"
 				in:scale={{
-					duration: 800,
+					duration: transitionDuration(800),
 					delay: i * 100,
 					easing: (t) => t * (2 - t)
 				}}
@@ -132,7 +137,7 @@
 		{@const selectedName = selectedPainting.name}
 		{@const selectedDate = selectedPainting.date}
 		{@const selectedDescription = selectedPainting.description}
-		<div class="modal-overlay" transition:fade={{ duration: 300 }}>
+		<div class="modal-overlay" transition:fade={{ duration: transitionDuration(300) }}>
 			<button type="button" class="modal-backdrop" on:click={closeModal} aria-label="Close modal"
 			></button>
 			<div
@@ -140,7 +145,7 @@
 				role="dialog"
 				aria-modal="true"
 				aria-label={selectedName}
-				transition:scale={{ duration: 300 }}
+				transition:scale={{ duration: transitionDuration(300) }}
 			>
 				<img
 					src={selectedImageUrl + (highResImageLoaded ? highQualityParams : lowQualityParams)}
@@ -177,6 +182,7 @@
 	}
 
 	.grid-item {
+		--a11y-focus-offset-local: calc(var(--a11y-focus-offset) + 2px);
 		display: block;
 		position: relative;
 		break-inside: avoid;
@@ -195,11 +201,6 @@
 		padding: 0;
 		width: 100%;
 		text-align: left;
-	}
-
-	.grid-item:focus-visible {
-		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
-		outline-offset: calc(var(--a11y-focus-offset) + 2px);
 	}
 
 	.grid-item:focus-visible .image-wrapper {
@@ -313,6 +314,7 @@
 	}
 
 	.modal-backdrop {
+		--a11y-focus-offset-local: -4px;
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -322,11 +324,6 @@
 		border: none;
 		background: transparent;
 		padding: 0;
-	}
-
-	.modal-backdrop:focus-visible {
-		outline: var(--a11y-focus-width) solid var(--a11y-focus-color);
-		outline-offset: -4px;
 	}
 
 	.modal-content {
