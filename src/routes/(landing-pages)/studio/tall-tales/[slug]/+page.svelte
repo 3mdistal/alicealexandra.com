@@ -95,6 +95,7 @@
 		background-image: var(--bg-image);
 		background-position: center;
 		background-size: cover;
+		background-attachment: inherit;
 		content: '';
 	}
 
