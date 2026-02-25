@@ -120,6 +120,24 @@
 		font-size: var(--font-size-lg);
 		line-height: var(--line-height-body);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+		color: var(--text-color);
+	}
+
+	/* Override prose.css global theme variables to strictly use our section textColor */
+	.section-content :global(p),
+	.section-content :global(li),
+	.section-content :global(h1),
+	.section-content :global(h2),
+	.section-content :global(h3),
+	.section-content :global(a),
+	.section-content :global(strong),
+	.section-content :global(em),
+	.section-content :global(blockquote) {
+		color: var(--text-color) !important;
+	}
+
+	.section-content :global(p::first-letter) {
+		color: var(--text-color) !important;
 	}
 
 	.section-content :global(p) {
