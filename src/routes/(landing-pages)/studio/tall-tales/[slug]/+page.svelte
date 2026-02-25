@@ -67,10 +67,21 @@
 		position: relative;
 		right: 50%;
 		left: 50%;
+		display: flex;
 		margin-right: -50vw;
 		margin-left: -50vw;
 		background: var(--color-bg);
 		width: 100vw;
+		height: 100vh;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+	}
+
+	.tall-tale-wrapper > :global(*) {
+		flex: 0 0 100vw;
+		scroll-snap-align: start;
 	}
 
 	.tall-tale-section {
@@ -81,10 +92,21 @@
 		align-items: center;
 		box-sizing: border-box;
 		padding: var(--space-9) var(--space-6);
-		min-height: 100vh;
-		overflow: hidden;
+		height: 100vh;
+		overflow-y: auto;
+		overflow-x: hidden;
 		color: var(--text-color, var(--color-neutral-0));
 		background-color: var(--bg-color, transparent);
+		scrollbar-width: thin;
+	}
+
+	.tall-tale-section::-webkit-scrollbar {
+		width: 0.5rem;
+	}
+
+	.tall-tale-section::-webkit-scrollbar-thumb {
+		border-radius: 999px;
+		background-color: color-mix(in srgb, var(--text-color) 30%, transparent);
 	}
 
 	.tall-tale-section::before {
