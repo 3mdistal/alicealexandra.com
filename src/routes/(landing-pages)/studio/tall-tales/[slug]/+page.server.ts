@@ -6,8 +6,13 @@ export const prerender = true;
 
 // Generate all tall tale routes at build time
 export async function entries() {
-	const tales = await loadTallTalesMeta();
-	return tales.map((t) => ({ slug: t.slug }));
+	try {
+		const tales = await loadTallTalesMeta();
+		return tales.map((t) => ({ slug: t.slug }));
+	} catch (e) {
+		console.warn('Could not load tall tales for prerendering', e);
+		return [];
+	}
 }
 
 export async function load({ params }: { params: { slug: string } }) {
