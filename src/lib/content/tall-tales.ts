@@ -9,7 +9,11 @@ const CONTENT_PATH = path.join(process.cwd(), 'content', 'tall-tales');
 
 export interface SectionTheme {
 	backgroundImage: string;
+	backgroundImageOpacity?: number;
+	backgroundColor?: string;
+	overlayColor?: string;
 	textColor: string;
+	fontFamily?: string;
 }
 
 export interface TallTaleMeta {
@@ -170,7 +174,11 @@ function parseFrontmatterAndSections(content: string) {
 	const sections = frontmatter.sections.map((theme: any, index: number) => ({
 		theme: {
 			backgroundImage: normalizeHeroImage(theme.backgroundImage) || '',
-			textColor: theme.textColor || '#ffffff'
+			backgroundImageOpacity: theme.backgroundImageOpacity !== undefined ? Number(theme.backgroundImageOpacity) : undefined,
+			backgroundColor: theme.backgroundColor,
+			overlayColor: theme.overlayColor,
+			textColor: theme.textColor || '#ffffff',
+			fontFamily: theme.fontFamily
 		},
 		content: rawSections[index]?.trim() || ''
 	}));

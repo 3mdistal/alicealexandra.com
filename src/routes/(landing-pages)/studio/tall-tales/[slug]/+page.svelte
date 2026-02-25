@@ -31,10 +31,16 @@
 		{#each sectionsHTML as section}
 			<section
 				class="tall-tale-section parallax"
-				style="--bg-image: url('{section.theme.backgroundImage}'); --text-color: {section.theme
-					.textColor};"
+				style="
+					--bg-image: url('{section.theme.backgroundImage}');
+					--bg-opacity: {section.theme.backgroundImageOpacity ?? 0.4};
+					--bg-color: {section.theme.backgroundColor ?? 'transparent'};
+					--overlay-color: {section.theme.overlayColor ?? 'rgba(0, 0, 0, 0.6)'};
+					--text-color: {section.theme.textColor};
+					--font-family: {section.theme.fontFamily ?? 'var(--font-serif)'};
+				"
 			>
-				<div class="section-content prose">
+				<div class="section-content prose" style="font-family: var(--font-family);">
 					{@html section.htmlContent}
 				</div>
 			</section>
@@ -70,15 +76,13 @@
 		min-height: 100vh;
 		overflow: hidden;
 		color: var(--text-color, var(--color-neutral-0));
+		background-color: var(--bg-color, transparent);
 	}
 
 	.tall-tale-section::before {
 		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		opacity: 0.4;
+		inset: 0;
+		opacity: var(--bg-opacity, 0.4);
 		z-index: -2;
 		background-image: var(--bg-image);
 		background-position: center;
@@ -88,13 +92,10 @@
 
 	.tall-tale-section::after {
 		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
+		inset: 0;
 		z-index: -1;
 		mix-blend-mode: multiply;
-		background-color: rgba(0, 0, 0, 0.6);
+		background-color: var(--overlay-color, rgba(0, 0, 0, 0.6));
 		content: '';
 	}
 
@@ -109,7 +110,6 @@
 		max-width: 700px;
 		font-size: var(--font-size-lg);
 		line-height: var(--line-height-body);
-		font-family: var(--font-serif);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 	}
 
