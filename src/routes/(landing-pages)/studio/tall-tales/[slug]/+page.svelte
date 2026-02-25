@@ -122,7 +122,7 @@
 		font-size: var(--content-font-size-body);
 		line-height: 1.75rem;
 		font-family: var(--font-family);
-		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+		text-shadow: none;
 	}
 
 	@media (min-width: 1024px) {
