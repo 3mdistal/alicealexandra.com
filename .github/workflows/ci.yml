@@ -40,7 +40,7 @@ jobs:
 
       - name: Stub content (CI)
         run: |
-          mkdir -p content/blog content/poems content/postcards content/studio content/career
+          mkdir -p content/blog content/poems content/postcards content/studio content/career content/tall-tales
 
           cat > content/blog/posts.json <<'EOF'
           [
@@ -121,6 +121,32 @@ jobs:
           heroImage: ""
           lastEditedTime: "2026-01-01"
           notionId: "ci-test"
+          ---
+          Hello from CI.
+          EOF
+
+
+          cat > content/tall-tales/metadata.json <<'EOF'
+          [
+            {
+              "slug": "ci-test",
+              "title": "CI Tall Tale",
+              "description": "Placeholder",
+              "coverImage": ""
+            }
+          ]
+          EOF
+
+          cat > content/tall-tales/ci-test.md <<'EOF'
+          ---
+          title: "CI Tall Tale"
+          slug: "ci-test"
+          description: "Placeholder"
+          coverImage: ""
+          sectionDivider: "hr"
+          sections:
+            - backgroundImage: ""
+              textColor: "#fff"
           ---
           Hello from CI.
           EOF
