@@ -161,7 +161,12 @@
 			<h2>{title}</h2>
 			<p><em>{subtitle}</em></p>
 		</div>
-		<OptimizedImage {src} {alt} class="background-image" sizes="(min-width: 1024px) 316px, (min-width: 768px) 50vw, 100vw" />
+		<OptimizedImage
+			{src}
+			{alt}
+			class="background-image"
+			sizes="(min-width: 1024px) 316px, (min-width: 768px) 50vw, 100vw"
+		/>
 		<div class="gradient-overlay"></div>
 	</div>
 

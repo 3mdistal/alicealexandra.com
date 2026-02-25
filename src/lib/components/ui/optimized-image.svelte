@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { generateSrcSet, getOptimizedImageUrl, CLOUDFLARE_IMAGE_VARIANTS } from '$lib/utils/images';
+	import {
+		generateSrcSet,
+		getOptimizedImageUrl,
+		CLOUDFLARE_IMAGE_VARIANTS
+	} from '$lib/utils/images';
 
 	export let src: string;
 	export let alt: string;

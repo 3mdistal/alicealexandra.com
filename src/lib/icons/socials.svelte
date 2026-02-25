@@ -1,14 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	const InstagramBear =
-		'https://images.alicealexandra.com/site/images/instagram-bear.webp';
-	const BskySquirrel =
-		'https://images.alicealexandra.com/site/images/bsky-squirrel.webp';
-	const SoundcloudRabbit =
-		'https://images.alicealexandra.com/site/images/soundcloud-rabbit.webp';
-	const GithubCat =
-		'https://images.alicealexandra.com/site/images/github-cat.webp';
+	const InstagramBear = 'https://images.alicealexandra.com/site/images/instagram-bear.webp';
+	const BskySquirrel = 'https://images.alicealexandra.com/site/images/bsky-squirrel.webp';
+	const SoundcloudRabbit = 'https://images.alicealexandra.com/site/images/soundcloud-rabbit.webp';
+	const GithubCat = 'https://images.alicealexandra.com/site/images/github-cat.webp';
 
 	let container: HTMLDivElement;
 

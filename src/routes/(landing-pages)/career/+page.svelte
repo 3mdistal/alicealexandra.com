@@ -3,8 +3,7 @@
 	import Career from './career.svelte';
 	import LandingPage from '$lib/components/landing-page.svelte';
 
-	const Rabbit =
-		'https://images.alicealexandra.com/site/images/rabbit-in-hat.webp';
+	const Rabbit = 'https://images.alicealexandra.com/site/images/rabbit-in-hat.webp';
 </script>
 
 <svelte:head>

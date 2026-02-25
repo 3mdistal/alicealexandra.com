@@ -93,8 +93,7 @@
 		return content;
 	});
 
-	let Piano =
-		'https://images.alicealexandra.com/hymns%20for%20calliope/ruined%20piano.jpg';
+	let Piano = 'https://images.alicealexandra.com/hymns%20for%20calliope/ruined%20piano.jpg';
 
 	// Parse markdown content into block format for TextMacro component
 	function parseMarkdownToBlocks(content: string): ParagraphBlock[] {

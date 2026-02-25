@@ -8,9 +8,11 @@ export const IMAGE_DOMAIN = 'images.alicealexandra.com';
 export function getOptimizedImageUrl(srcUrl: string, width: number): string {
 	if (!srcUrl) return srcUrl;
 	if (!srcUrl.includes(IMAGE_DOMAIN)) return srcUrl;
-	
-	const w = CLOUDFLARE_IMAGE_VARIANTS.includes(width) ? width : Math.max(...CLOUDFLARE_IMAGE_VARIANTS);
-	
+
+	const w = CLOUDFLARE_IMAGE_VARIANTS.includes(width)
+		? width
+		: Math.max(...CLOUDFLARE_IMAGE_VARIANTS);
+
 	try {
 		const url = new URL(srcUrl);
 		return `https://${IMAGE_DOMAIN}/cdn-cgi/image/width=${w},format=auto${url.pathname}`;
@@ -24,8 +26,8 @@ export function getOptimizedImageUrl(srcUrl: string, width: number): string {
  */
 export function generateSrcSet(srcUrl: string): string | undefined {
 	if (!srcUrl || !srcUrl.includes(IMAGE_DOMAIN)) return undefined;
-	
-	return CLOUDFLARE_IMAGE_VARIANTS
-		.map((w) => `${getOptimizedImageUrl(srcUrl, w)} ${w}w`)
-		.join(', ');
+
+	return CLOUDFLARE_IMAGE_VARIANTS.map((w) => `${getOptimizedImageUrl(srcUrl, w)} ${w}w`).join(
+		', '
+	);
 }

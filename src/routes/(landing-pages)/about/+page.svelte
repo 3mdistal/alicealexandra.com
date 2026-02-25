@@ -2,8 +2,7 @@
 	import About from './about.svelte';
 	import LandingPage from '$lib/components/landing-page.svelte';
 
-	const Hand =
-		'https://images.alicealexandra.com/site/images/flowers-in-hand.webp';
+	const Hand = 'https://images.alicealexandra.com/site/images/flowers-in-hand.webp';
 </script>
 
 <svelte:head>
