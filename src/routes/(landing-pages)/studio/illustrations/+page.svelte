@@ -74,7 +74,7 @@
 	/>
 	<meta
 		property="og:image"
-		content="https://ik.imagekit.io/tempoimmaterial/studio/illustrations/still%20across%20the%20waters?tr=w-750"
+		content="https://images.alicealexandra.com/studio/illustrations/still%20across%20the%20waters.jpg"
 	/>
 
 	<!-- Twitter Meta Tags -->
@@ -90,7 +90,7 @@
 	/>
 	<meta
 		name="twitter:image"
-		content="https://ik.imagekit.io/tempoimmaterial/studio/illustrations/still%20across%20the%20waters?tr=w-750"
+		content="https://images.alicealexandra.com/studio/illustrations/still%20across%20the%20waters.jpg"
 	/>
 	<meta name="twitter:image:alt" content="The illustrations page of alicealexandra.com." />
 </svelte:head>

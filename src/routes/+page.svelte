@@ -25,7 +25,7 @@
 		property="og:description"
 		content="The studio of Alice Alexandra Moore. Creative work, ramblings, career and more."
 	/>
-	<meta property="og:image" content="https://ik.imagekit.io/tempoimmaterial/ogimage.webp" />
+	<meta property="og:image" content="https://images.alicealexandra.com/ogimage.webp" />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -38,7 +38,7 @@
 		name="twitter:description"
 		content="The studio of Alice Alexandra Moore. Creative work, ramblings, collabs, and more."
 	/>
-	<meta name="twitter:image" content="https://ik.imagekit.io/tempoimmaterial/ogimage.webp" />
+	<meta name="twitter:image" content="https://images.alicealexandra.com/ogimage.webp" />
 	<meta name="twitter:image:alt" content="The homepage of alicealexandra.com." />
 </svelte:head>
 

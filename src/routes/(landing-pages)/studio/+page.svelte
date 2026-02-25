@@ -57,7 +57,7 @@
 	/>
 	<meta
 		property="og:image"
-		content="https://ik.imagekit.io/tempoimmaterial/studio/studioog?tr=w-750"
+		content="https://images.alicealexandra.com/studio/studioog.jpg"
 	/>
 
 	<!-- Twitter Meta Tags -->
@@ -73,7 +73,7 @@
 	/>
 	<meta
 		name="twitter:image"
-		content="https://ik.imagekit.io/tempoimmaterial/studio/studioog?tr=w-750"
+		content="https://images.alicealexandra.com/studio/studioog.jpg"
 	/>
 	<meta name="twitter:image:alt" content="The studio page of alicealexandra.com." />
 </svelte:head>
@@ -82,7 +82,7 @@
 	<h1 class="studio-title">studio</h1>
 
 	<img
-		src="https://ik.imagekit.io/tempoimmaterial/studio/ink.png?updatedAt=1694604654601"
+		src="https://images.alicealexandra.com/studio/ink.png694604654601"
 		alt=""
 		class="studio-background"
 	/>

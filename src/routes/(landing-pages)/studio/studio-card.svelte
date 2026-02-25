@@ -5,6 +5,7 @@
 	import LinkButton from '$lib/components/ui/link-button.svelte';
 	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
 	import type { StudioCard } from '$lib/content/studio';
+	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
 
 	// Card Data
 	export let card: StudioCard;
@@ -160,7 +161,7 @@
 			<h2>{title}</h2>
 			<p><em>{subtitle}</em></p>
 		</div>
-		<img {src} {alt} class="background-image" />
+		<OptimizedImage {src} {alt} class="background-image" sizes="(min-width: 1024px) 316px, (min-width: 768px) 50vw, 100vw" />
 		<div class="gradient-overlay"></div>
 	</div>
 
@@ -283,7 +284,7 @@
 		color: white;
 	}
 
-	.background-image {
+	:global(.background-image) {
 		position: absolute;
 		opacity: 0.8;
 		width: 100%;

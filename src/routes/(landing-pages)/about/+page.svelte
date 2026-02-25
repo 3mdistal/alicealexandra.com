@@ -3,7 +3,7 @@
 	import LandingPage from '$lib/components/landing-page.svelte';
 
 	const Hand =
-		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/flowers-in-hand.webp';
+		'https://images.alicealexandra.com/site/images/flowers-in-hand.webp';
 </script>
 
 <svelte:head>
