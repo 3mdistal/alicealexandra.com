@@ -43,19 +43,19 @@
 				<div class="section-content prose">
 					{#if index === 0}
 						<header class="tale-hero">
-						<nav class="tale-breadcrumb">
-							<a href="/studio/tall-tales" class="tale-breadcrumb-link">
-								<svg class="tale-back-icon" viewBox="0 0 16 16" width="16" height="16">
-									<path
-										fill-rule="evenodd"
-										clip-rule="evenodd"
-										d="M6.46966 13.7803L6.99999 14.3107L8.06065 13.25L7.53032 12.7197L3.56065 8.75001H14.25H15V7.25001H14.25H3.56065L7.53032 3.28034L8.06065 2.75001L6.99999 1.68935L6.46966 2.21968L1.39644 7.2929C1.00592 7.68342 1.00592 8.31659 1.39644 8.70711L6.46966 13.7803Z"
-										fill="currentColor"
-									/>
-								</svg>
-								<span>Tall Tales</span>
-							</a>
-						</nav>
+							<nav class="tale-breadcrumb">
+								<a href="/studio/tall-tales" class="tale-breadcrumb-link">
+									<svg class="tale-back-icon" viewBox="0 0 16 16" width="16" height="16">
+										<path
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M6.46966 13.7803L6.99999 14.3107L8.06065 13.25L7.53032 12.7197L3.56065 8.75001H14.25H15V7.25001H14.25H3.56065L7.53032 3.28034L8.06065 2.75001L6.99999 1.68935L6.46966 2.21968L1.39644 7.2929C1.00592 7.68342 1.00592 8.31659 1.39644 8.70711L6.46966 13.7803Z"
+											fill="currentColor"
+										/>
+									</svg>
+									<span>Tall Tales</span>
+								</a>
+							</nav>
 							<h1 class="tale-title">{tale.title}</h1>
 							{#if tale.description}
 								<p class="tale-description">{tale.description}</p>
@@ -177,11 +177,11 @@
 		align-items: center;
 		gap: 6px;
 		opacity: 0.7;
+		transition: opacity 0.2s;
 		color: var(--text-color);
 		font-weight: 500;
 		font-size: var(--content-font-size-body-sm);
 		text-decoration: none;
-		transition: opacity 0.2s;
 	}
 
 	.tale-breadcrumb-link:hover {
