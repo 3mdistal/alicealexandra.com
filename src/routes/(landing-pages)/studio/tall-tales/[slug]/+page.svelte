@@ -1,12 +1,10 @@
 <script lang="ts">
 	import '$lib/styles/prose.css';
 	import { marked } from 'marked';
-	import { onMount } from 'svelte';
 	import AudioPlayer from '$lib/components/audio-player.svelte';
 	import LinkButton from '$lib/components/ui/link-button.svelte';
 
 	let { data } = $props();
-	let wrapper: HTMLDivElement | null = $state(null);
 	const tale = $derived(data.tale);
 
 	const sectionsHTML = $derived(
@@ -15,42 +13,6 @@
 			htmlContent: marked.parse(s.content)
 		})) || []
 	);
-
-	onMount(() => {
-		if (!wrapper) return;
-
-		const handleWheel = (event: WheelEvent) => {
-			if (!wrapper) return;
-			if (event.deltaY === 0) return;
-
-			const sections = Array.from(wrapper.querySelectorAll<HTMLElement>('.tall-tale-section'));
-			if (!sections.length) return;
-
-			const sectionWidth = wrapper.clientWidth;
-			const currentIndex = Math.round(wrapper.scrollLeft / sectionWidth);
-			const currentSection = sections[currentIndex];
-			if (!currentSection) return;
-
-			const maxScrollTop = currentSection.scrollHeight - currentSection.clientHeight;
-			const canScrollVertically = maxScrollTop > 1;
-			const isAtBottom = currentSection.scrollTop >= maxScrollTop - 1;
-			const isAtTop = currentSection.scrollTop <= 1;
-
-			if (event.deltaY > 0 && (!canScrollVertically || isAtBottom)) {
-				event.preventDefault();
-				wrapper.scrollBy({ left: event.deltaY, behavior: 'smooth' });
-				return;
-			}
-
-			if (event.deltaY < 0 && (!canScrollVertically || isAtTop)) {
-				event.preventDefault();
-				wrapper.scrollBy({ left: event.deltaY, behavior: 'smooth' });
-			}
-		};
-
-		wrapper.addEventListener('wheel', handleWheel, { passive: false });
-		return () => wrapper?.removeEventListener('wheel', handleWheel);
-	});
 </script>
 
 <svelte:head>
@@ -63,7 +25,7 @@
 	{/if}
 </svelte:head>
 
-<div class="tall-tale-wrapper" bind:this={wrapper}>
+<div class="tall-tale-wrapper">
 	{#if tale}
 		<AudioPlayer src={tale.audio?.src} loop={tale.audio?.loop} />
 		{#each sectionsHTML as section, index}
@@ -105,21 +67,10 @@
 		position: relative;
 		right: 50%;
 		left: 50%;
-		display: flex;
 		margin-right: -50vw;
 		margin-left: -50vw;
 		background: var(--color-bg);
 		width: 100vw;
-		height: 100vh;
-		overflow-x: auto;
-		overflow-y: hidden;
-		scroll-snap-type: x mandatory;
-		scroll-behavior: smooth;
-	}
-
-	.tall-tale-wrapper > :global(*) {
-		flex: 0 0 100vw;
-		scroll-snap-align: start;
 	}
 
 	.tall-tale-section {
@@ -130,21 +81,10 @@
 		align-items: center;
 		box-sizing: border-box;
 		padding: var(--space-9) var(--space-6);
-		height: 100vh;
-		overflow-y: auto;
-		overflow-x: hidden;
+		min-height: 100vh;
+		overflow: hidden;
 		color: var(--text-color, var(--color-neutral-0));
 		background-color: var(--bg-color, transparent);
-		scrollbar-width: thin;
-	}
-
-	.tall-tale-section::-webkit-scrollbar {
-		width: 0.5rem;
-	}
-
-	.tall-tale-section::-webkit-scrollbar-thumb {
-		border-radius: 999px;
-		background-color: color-mix(in srgb, var(--text-color) 30%, transparent);
 	}
 
 	.tall-tale-section::before {
