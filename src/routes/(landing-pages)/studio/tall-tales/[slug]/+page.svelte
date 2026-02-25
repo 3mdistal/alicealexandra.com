@@ -1,10 +1,12 @@
 <script lang="ts">
 	import '$lib/styles/prose.css';
 	import { marked } from 'marked';
+	import { onMount } from 'svelte';
 	import AudioPlayer from '$lib/components/audio-player.svelte';
 	import LinkButton from '$lib/components/ui/link-button.svelte';
 
 	let { data } = $props();
+	let wrapper: HTMLDivElement | null = $state(null);
 	const tale = $derived(data.tale);
 
 	const sectionsHTML = $derived(
@@ -13,6 +15,42 @@
 			htmlContent: marked.parse(s.content)
 		})) || []
 	);
+
+	onMount(() => {
+		if (!wrapper) return;
+
+		const handleWheel = (event: WheelEvent) => {
+			if (!wrapper) return;
+			if (event.deltaY === 0) return;
+
+			const sections = Array.from(wrapper.querySelectorAll<HTMLElement>('.tall-tale-section'));
+			if (!sections.length) return;
+
+			const sectionWidth = wrapper.clientWidth;
+			const currentIndex = Math.round(wrapper.scrollLeft / sectionWidth);
+			const currentSection = sections[currentIndex];
+			if (!currentSection) return;
+
+			const maxScrollTop = currentSection.scrollHeight - currentSection.clientHeight;
+			const canScrollVertically = maxScrollTop > 1;
+			const isAtBottom = currentSection.scrollTop >= maxScrollTop - 1;
+			const isAtTop = currentSection.scrollTop <= 1;
+
+			if (event.deltaY > 0 && (!canScrollVertically || isAtBottom)) {
+				event.preventDefault();
+				wrapper.scrollBy({ left: event.deltaY, behavior: 'smooth' });
+				return;
+			}
+
+			if (event.deltaY < 0 && (!canScrollVertically || isAtTop)) {
+				event.preventDefault();
+				wrapper.scrollBy({ left: event.deltaY, behavior: 'smooth' });
+			}
+		};
+
+		wrapper.addEventListener('wheel', handleWheel, { passive: false });
+		return () => wrapper?.removeEventListener('wheel', handleWheel);
+	});
 </script>
 
 <svelte:head>
@@ -25,7 +63,7 @@
 	{/if}
 </svelte:head>
 
-<div class="tall-tale-wrapper">
+<div class="tall-tale-wrapper" bind:this={wrapper}>
 	{#if tale}
 		<AudioPlayer src={tale.audio?.src} loop={tale.audio?.loop} />
 		{#each sectionsHTML as section, index}
