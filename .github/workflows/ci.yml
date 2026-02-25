@@ -125,7 +125,7 @@ jobs:
           Hello from CI.
           EOF
 
-          
+
           cat > content/tall-tales/metadata.json <<'EOF'
           [
             {
