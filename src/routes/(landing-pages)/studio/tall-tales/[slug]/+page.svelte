@@ -116,7 +116,7 @@
 		position: relative;
 		z-index: 2;
 		width: 100%;
-		max-width: 900px;
+		max-width: 700px;
 		color: var(--text-color);
 		font-weight: var(--font-weight-light);
 		font-size: var(--content-font-size-body);
