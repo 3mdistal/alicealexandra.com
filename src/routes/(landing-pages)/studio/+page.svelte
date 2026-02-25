@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import StudioCard from './studio-card.svelte';
+	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
 	import gsap from 'gsap';
 	import { pageState } from '$lib/stores';
 	import type { StudioCard as StudioCardType } from '$lib/content/studio';
@@ -75,10 +76,10 @@
 <div class="studio-container" use:populate>
 	<h1 class="studio-title">studio</h1>
 
-	<img
-		src="https://images.alicealexandra.com/studio/ink.png694604654601"
+	<OptimizedImage
+		src="https://images.alicealexandra.com/studio/ink.png"
 		alt=""
-		class="studio-background"
+		class="studio-background" sizes="100vw"
 	/>
 
 	<div class="break"></div>
@@ -107,7 +108,7 @@
 		opacity: 0;
 	}
 
-	.studio-background {
+	:global(.studio-background) {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -124,7 +125,7 @@
 			--ink-target-opacity: 0.16;
 		}
 
-		.studio-background {
+		:global(.studio-background) {
 			mix-blend-mode: screen;
 			filter: grayscale(1) invert(1) contrast(1.15);
 		}
