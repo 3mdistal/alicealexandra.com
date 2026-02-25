@@ -119,9 +119,9 @@
 		max-width: 700px;
 		color: var(--text-color);
 		font-weight: var(--font-weight-light);
-		font-family: var(--font-family);
 		font-size: var(--content-font-size-body);
 		line-height: 1.75rem;
+		font-family: var(--font-family);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 	}
 
@@ -157,7 +157,7 @@
 		margin-bottom: var(--space-8);
 		border-bottom: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
 		padding-bottom: var(--space-6);
-		text-align: center;
+		text-align: left;
 	}
 
 	.tale-title {
@@ -190,6 +190,7 @@
 	}
 
 	.tale-description {
+		opacity: 0.85;
 		margin: 0 0 var(--content-space-lg) 0;
 		max-width: var(--content-measure-subtitle);
 		color: var(--text-color);
@@ -197,7 +198,6 @@
 		font-size: var(--content-font-size-body);
 		line-height: 1.75rem;
 		text-wrap: balance;
-		opacity: 0.85;
 	}
 
 	@media (min-width: 768px) {
