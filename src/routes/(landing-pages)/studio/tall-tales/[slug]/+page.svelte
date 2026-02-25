@@ -119,9 +119,9 @@
 		max-width: 700px;
 		color: var(--text-color);
 		font-weight: var(--font-weight-light);
-		font-family: var(--font-family);
 		font-size: var(--content-font-size-body);
 		line-height: 1.75rem;
+		font-family: var(--font-family);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 	}
 
