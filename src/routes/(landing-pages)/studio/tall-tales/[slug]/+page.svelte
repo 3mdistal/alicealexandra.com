@@ -28,11 +28,11 @@
 <div class="tall-tale-wrapper">
 	{#if tale}
 		<AudioPlayer src={tale.audio?.src} loop={tale.audio?.loop} />
-		{#each sectionsHTML as section}
+		{#each sectionsHTML as section, index}
 			<section
 				class="tall-tale-section parallax"
 				style="
-					--bg-image: url('{section.theme.backgroundImage}');
+					{section.theme.backgroundImage ? `--bg-image: url('${section.theme.backgroundImage}');` : ''}
 					--bg-opacity: {section.theme.backgroundImageOpacity ?? 0.4};
 					--bg-color: {section.theme.backgroundColor ?? 'transparent'};
 					--overlay-color: {section.theme.overlayColor ?? 'rgba(0, 0, 0, 0.6)'};
@@ -41,6 +41,14 @@
 				"
 			>
 				<div class="section-content prose" style="font-family: var(--font-family);">
+					{#if index === 0}
+						<header class="tale-hero">
+							<h1 class="tale-title">{tale.title}</h1>
+							{#if tale.description}
+								<p class="tale-description">{tale.description}</p>
+							{/if}
+						</header>
+					{/if}
 					{@html section.htmlContent}
 				</div>
 			</section>
@@ -115,6 +123,28 @@
 
 	.section-content :global(p) {
 		margin-bottom: var(--space-5);
+	}
+
+	.tale-hero {
+		text-align: center;
+		margin-bottom: var(--space-8);
+		padding-bottom: var(--space-6);
+		border-bottom: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+	}
+
+	.tale-title {
+		font-size: 3rem;
+		line-height: 1.1;
+		margin-bottom: var(--space-4);
+		font-weight: normal;
+		color: var(--text-color);
+	}
+
+	.tale-description {
+		font-size: var(--font-size-xl);
+		opacity: 0.85;
+		margin: 0;
+		font-style: italic;
 	}
 
 	.not-found {
