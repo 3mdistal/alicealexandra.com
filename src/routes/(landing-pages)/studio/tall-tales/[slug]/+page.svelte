@@ -119,9 +119,9 @@
 		max-width: 700px;
 		color: var(--text-color);
 		font-weight: var(--font-weight-light);
+		font-family: var(--font-family);
 		font-size: var(--content-font-size-body);
 		line-height: 1.75rem;
-		font-family: var(--font-family);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 	}
 
@@ -161,18 +161,50 @@
 	}
 
 	.tale-title {
-		margin-bottom: var(--space-4);
+		margin: 0 0 var(--content-space-sm) 0;
 		color: var(--text-color);
-		font-weight: normal;
-		font-size: 3rem;
-		line-height: 1.1;
+		font-weight: 500;
+		font-size: 2.25rem;
+		line-height: 2.5rem;
+	}
+
+	@media (min-width: 640px) {
+		.tale-title {
+			font-size: 3rem;
+			line-height: 1;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.tale-title {
+			font-size: var(--content-font-size-heading-lg);
+			line-height: 1;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.tale-title {
+			font-size: 4.5rem;
+			line-height: 1;
+		}
 	}
 
 	.tale-description {
-		opacity: 0.85;
-		margin: 0;
+		margin: 0 0 var(--content-space-lg) 0;
+		max-width: var(--content-measure-subtitle);
+		color: var(--text-color);
 		font-style: italic;
-		font-size: var(--font-size-xl);
+		font-size: var(--content-font-size-body);
+		line-height: 1.75rem;
+		text-wrap: balance;
+		opacity: 0.85;
+	}
+
+	@media (min-width: 768px) {
+		.tale-description {
+			font-size: var(--content-font-size-body-lg);
+			line-height: 2.25rem;
+		}
 	}
 
 	.not-found {
