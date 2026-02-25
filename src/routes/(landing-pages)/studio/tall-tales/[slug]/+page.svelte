@@ -28,13 +28,27 @@
 <div class="tall-tale-wrapper">
 	{#if tale}
 		<AudioPlayer src={tale.audio?.src} loop={tale.audio?.loop} />
-		{#each sectionsHTML as section}
+		{#each sectionsHTML as section, index}
 			<section
 				class="tall-tale-section parallax"
-				style="--bg-image: url('{section.theme.backgroundImage}'); --text-color: {section.theme
-					.textColor};"
+				style="
+					{section.theme.backgroundImage ? `--bg-image: url('${section.theme.backgroundImage}');` : ''}
+					--bg-opacity: {section.theme.backgroundImageOpacity ?? 0.4};
+					--bg-color: {section.theme.backgroundColor ?? 'transparent'};
+					--overlay-color: {section.theme.overlayColor ?? 'rgba(0, 0, 0, 0.6)'};
+					--text-color: {section.theme.textColor};
+					--font-family: {section.theme.fontFamily ?? 'var(--font-serif)'};
+				"
 			>
-				<div class="section-content prose">
+				<div class="section-content prose" style="font-family: var(--font-family);">
+					{#if index === 0}
+						<header class="tale-hero">
+							<h1 class="tale-title">{tale.title}</h1>
+							{#if tale.description}
+								<p class="tale-description">{tale.description}</p>
+							{/if}
+						</header>
+					{/if}
 					{@html section.htmlContent}
 				</div>
 			</section>
@@ -66,6 +80,7 @@
 		justify-content: center;
 		align-items: center;
 		box-sizing: border-box;
+		background-color: var(--bg-color, transparent);
 		padding: var(--space-9) var(--space-6);
 		min-height: 100vh;
 		overflow: hidden;
@@ -74,27 +89,22 @@
 
 	.tall-tale-section::before {
 		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		opacity: 0.4;
-		z-index: -2;
+		opacity: var(--bg-opacity, 0.4);
+		z-index: 0;
+		inset: 0;
 		background-image: var(--bg-image);
 		background-position: center;
 		background-size: cover;
+		background-repeat: no-repeat;
 		content: '';
 	}
 
 	.tall-tale-section::after {
 		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: -1;
+		z-index: 1;
 		mix-blend-mode: multiply;
-		background-color: rgba(0, 0, 0, 0.6);
+		inset: 0;
+		background-color: var(--overlay-color, rgba(0, 0, 0, 0.6));
 		content: '';
 	}
 
@@ -104,17 +114,56 @@
 
 	.section-content {
 		position: relative;
-		z-index: 1;
+		z-index: 2;
 		width: 100%;
 		max-width: 700px;
+		color: var(--text-color);
 		font-size: var(--font-size-lg);
 		line-height: var(--line-height-body);
-		font-family: var(--font-serif);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+	}
+
+	/* Override prose.css global theme variables to strictly use our section textColor */
+	.section-content :global(p),
+	.section-content :global(li),
+	.section-content :global(h1),
+	.section-content :global(h2),
+	.section-content :global(h3),
+	.section-content :global(a),
+	.section-content :global(strong),
+	.section-content :global(em),
+	.section-content :global(blockquote) {
+		color: var(--text-color) !important;
+	}
+
+	.section-content :global(p::first-letter) {
+		color: var(--text-color) !important;
 	}
 
 	.section-content :global(p) {
 		margin-bottom: var(--space-5);
+	}
+
+	.tale-hero {
+		margin-bottom: var(--space-8);
+		border-bottom: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+		padding-bottom: var(--space-6);
+		text-align: center;
+	}
+
+	.tale-title {
+		margin-bottom: var(--space-4);
+		color: var(--text-color);
+		font-weight: normal;
+		font-size: 3rem;
+		line-height: 1.1;
+	}
+
+	.tale-description {
+		opacity: 0.85;
+		margin: 0;
+		font-style: italic;
+		font-size: var(--font-size-xl);
 	}
 
 	.not-found {
