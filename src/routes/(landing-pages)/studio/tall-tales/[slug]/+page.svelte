@@ -2,6 +2,7 @@
 	import '$lib/styles/prose.css';
 	import { marked } from 'marked';
 	import AudioPlayer from '$lib/components/audio-player.svelte';
+	import LinkButton from '$lib/components/ui/link-button.svelte';
 
 	let { data } = $props();
 	const tale = $derived(data.tale);
@@ -41,17 +42,12 @@
 	{:else}
 		<div class="not-found">
 			<h1>Story not found</h1>
-			<a href="/studio/tall-tales">← Back to Stories</a>
+			<LinkButton href="/studio/tall-tales" variant="solid" size="md">← Back to Stories</LinkButton>
 		</div>
 	{/if}
 </div>
 
 <style>
-	:global(body) {
-		margin: 0;
-		padding: 0;
-	}
-
 	.tall-tale-wrapper {
 		/* Reset margin from main layouts if necessary */
 		position: relative;
@@ -59,7 +55,7 @@
 		left: 50%;
 		margin-right: -50vw;
 		margin-left: -50vw;
-		background: #000;
+		background: var(--color-bg);
 		width: 100vw;
 	}
 
@@ -70,10 +66,10 @@
 		justify-content: center;
 		align-items: center;
 		box-sizing: border-box;
-		padding: 6rem 2rem;
+		padding: var(--space-9) var(--space-6);
 		min-height: 100vh;
 		overflow: hidden;
-		color: var(--text-color, #fff);
+		color: var(--text-color, var(--color-neutral-0));
 	}
 
 	.tall-tale-section::before {
@@ -111,14 +107,14 @@
 		z-index: 1;
 		width: 100%;
 		max-width: 700px;
-		font-size: 1.25rem;
-		line-height: 1.8;
-		font-family: 'Spectral', serif;
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-body);
+		font-family: var(--font-serif);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 	}
 
 	.section-content :global(p) {
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--space-5);
 	}
 
 	.not-found {
@@ -126,13 +122,8 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		gap: var(--space-4);
 		min-height: 100vh;
-		color: white;
-	}
-
-	.not-found a {
-		margin-top: 1rem;
-		color: white;
-		text-decoration: underline;
+		color: var(--color-text);
 	}
 </style>

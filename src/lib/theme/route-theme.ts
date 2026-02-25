@@ -15,6 +15,7 @@ export function getTheme(pathname: string): SiteTheme {
 export function getSurface(pathname: string): SiteSurface {
 	if (pathname.startsWith('/studio/postcards')) return 'content';
 	if (pathname.startsWith('/studio/illustrations')) return 'content';
+	if (pathname.startsWith('/studio/tall-tales')) return 'content';
 
 	return 'default';
 }

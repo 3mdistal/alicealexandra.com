@@ -1,4 +1,6 @@
 <script lang="ts">
+	import LinkButton from '$lib/components/ui/link-button.svelte';
+
 	let { data } = $props();
 	const tales = $derived(data.tales || []);
 
@@ -33,10 +35,11 @@
 				{#if expandedSlug === tale.slug}
 					<div class="details">
 						<p class="description">{tale.description}</p>
-						<a
+						<LinkButton
 							href="/studio/tall-tales/{tale.slug}"
-							class="read-button"
-							onclick={(e) => e.stopPropagation()}>Read Story</a
+							variant="solid"
+							size="lg"
+							on:click={(e: Event) => e.stopPropagation()}>Read Story</LinkButton
 						>
 					</div>
 				{/if}
@@ -53,11 +56,6 @@
 </div>
 
 <style>
-	:global(body) {
-		margin: 0;
-		padding: 0;
-	}
-
 	.ribbon-container {
 		display: flex;
 		/* Reset layout margins */
@@ -66,7 +64,7 @@
 		left: 50%;
 		margin-right: -50vw;
 		margin-left: -50vw;
-		background: #000;
+		background: var(--color-bg);
 		width: 100vw;
 		height: 100vh;
 	}
@@ -88,7 +86,7 @@
 		background-size: cover;
 		padding: 0;
 		overflow: hidden;
-		color: white;
+		color: var(--color-neutral-0);
 		text-align: left;
 	}
 
@@ -120,7 +118,7 @@
 	.ribbon-content {
 		position: relative;
 		z-index: 2;
-		padding: 3rem;
+		padding: var(--space-7);
 		min-width: 300px;
 	}
 
@@ -128,46 +126,23 @@
 		transform-origin: left bottom;
 		transition: transform 0.4s ease;
 		margin: 0;
-		font-size: 2.5rem;
-		line-height: 1.1;
-		font-family: 'Spectral', serif;
+		font-size: var(--font-size-3xl);
+		line-height: var(--line-height-tight);
+		font-family: var(--font-serif);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 	}
 
-	/* When not expanded, tilt the text if you want, but horizontal is fine too.
-	   Let's keep it horizontal for now. */
-
 	.details {
 		animation: fadeIn 0.6s ease forwards;
-		margin-top: 1rem;
+		margin-top: var(--space-4);
 	}
 
 	.description {
-		margin-bottom: 2rem;
+		margin-bottom: var(--space-6);
 		max-width: 500px;
-		font-size: 1.25rem;
-		line-height: 1.5;
-		font-family: 'Spectral', serif;
-	}
-
-	.read-button {
-		display: inline-block;
-		transition:
-			background-color 0.2s,
-			color 0.2s;
-		border-radius: 4px;
-		background: white;
-		padding: 0.75rem 2rem;
-		color: black;
-		font-weight: 600;
-		font-size: 0.875rem;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		text-transform: uppercase;
-	}
-
-	.read-button:hover {
-		background: #ccc;
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-body);
+		font-family: var(--font-serif);
 	}
 
 	@keyframes fadeIn {
@@ -187,7 +162,7 @@
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		color: white;
+		color: var(--color-text);
 	}
 
 	/* Responsive: stack vertically */
@@ -197,11 +172,11 @@
 		}
 
 		.ribbon-content {
-			padding: 2rem;
+			padding: var(--space-5);
 		}
 
 		.title {
-			font-size: 2rem;
+			font-size: var(--font-size-2xl);
 		}
 	}
 </style>
