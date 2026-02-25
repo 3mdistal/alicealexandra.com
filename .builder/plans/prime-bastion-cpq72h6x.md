@@ -1,6 +1,7 @@
 # Implementation Plan: Tall Tales
 
 ## Phase 1: Foundation & Content Setup
+
 1. **Content Schema & Migration (content repo updates)**
    - Create `content/tall-tales/` directory.
    - Move `the-goat-hunters.md` and `factory.md` from `content/postcards/` to `content/tall-tales/`, and remove them from `content/postcards/metadata.json`.
@@ -14,6 +15,7 @@
    - Implement a `parseSections()` helper to split the markdown content based on the configured `sectionDivider` (`hr` or `h2`) and map each text block to its corresponding section theme from the frontmatter.
 
 ## Phase 2: Core Reader Experience
+
 1. **Story Reader Route & Server Data**
    - Create `src/routes/(landing-pages)/studio/tall-tales/[slug]/+page.server.ts` to fetch story data via `loadTallTaleBySlug`.
 
@@ -27,6 +29,7 @@
    - Build a global/floating `<AudioPlayer>` component to play background music/ambience based on the story's frontmatter configuration.
 
 ## Phase 3: Landing Page
+
 1. **Listing Route & Server Data**
    - Create `src/routes/(landing-pages)/studio/tall-tales/+page.server.ts` to load `loadTallTalesMeta()`.
 
@@ -34,6 +37,7 @@
    - Implement the CSS-first accordion design for the landing page with vertical ribbons that expand on hover/click to reveal the story description and "Read" button.
 
 ## Phase 4: Final Polish
+
 1. **Refinement & Testing**
    - Ensure the accordion handles mobile screens gracefully (stacking vertically).
    - Test accessibility and read-time calculations.
