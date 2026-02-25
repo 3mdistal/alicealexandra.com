@@ -37,10 +37,10 @@
 					--bg-color: {section.theme.backgroundColor ?? 'transparent'};
 					--overlay-color: {section.theme.overlayColor ?? 'rgba(0, 0, 0, 0.6)'};
 					--text-color: {section.theme.textColor};
-					--font-family: {section.theme.fontFamily ?? 'var(--font-serif)'};
+					--font-family: {section.theme.fontFamily ?? 'var(--font-sans)'};
 				"
 			>
-				<div class="section-content prose" style="font-family: var(--font-family);">
+				<div class="section-content prose">
 					{#if index === 0}
 						<header class="tale-hero">
 							<h1 class="tale-title">{tale.title}</h1>
@@ -118,9 +118,18 @@
 		width: 100%;
 		max-width: 700px;
 		color: var(--text-color);
-		font-size: var(--font-size-lg);
-		line-height: var(--line-height-body);
+		font-weight: var(--font-weight-light);
+		font-family: var(--font-family);
+		font-size: var(--content-font-size-body);
+		line-height: 1.75rem;
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+	}
+
+	@media (min-width: 1024px) {
+		.section-content {
+			font-size: var(--content-font-size-body-lg);
+			line-height: 2rem;
+		}
 	}
 
 	/* Override prose.css global theme variables to strictly use our section textColor */
