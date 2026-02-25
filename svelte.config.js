@@ -17,6 +17,7 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
 		prerender: {
+			handleUnseenRoutes: 'ignore',
 			handleHttpError: ({ path, referrer, message }) => {
 				// Ignore 404s for internal links that may not exist yet
 				if (message.includes('404')) {
