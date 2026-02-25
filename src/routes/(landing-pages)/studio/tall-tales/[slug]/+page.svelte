@@ -91,7 +91,7 @@
 		position: absolute;
 		inset: 0;
 		opacity: var(--bg-opacity, 0.4);
-		z-index: -2;
+		z-index: 0;
 		background-image: var(--bg-image);
 		background-position: center;
 		background-size: cover;
@@ -102,7 +102,7 @@
 	.tall-tale-section::after {
 		position: absolute;
 		inset: 0;
-		z-index: -1;
+		z-index: 1;
 		mix-blend-mode: multiply;
 		background-color: var(--overlay-color, rgba(0, 0, 0, 0.6));
 		content: '';
@@ -114,7 +114,7 @@
 
 	.section-content {
 		position: relative;
-		z-index: 1;
+		z-index: 2;
 		width: 100%;
 		max-width: 700px;
 		font-size: var(--font-size-lg);
