@@ -37,12 +37,25 @@
 					--bg-color: {section.theme.backgroundColor ?? 'transparent'};
 					--overlay-color: {section.theme.overlayColor ?? 'rgba(0, 0, 0, 0.6)'};
 					--text-color: {section.theme.textColor};
-					--font-family: {section.theme.fontFamily ?? 'var(--font-serif)'};
+					--font-family: {section.theme.fontFamily ?? 'var(--font-sans)'};
 				"
 			>
-				<div class="section-content prose" style="font-family: var(--font-family);">
+				<div class="section-content prose">
 					{#if index === 0}
 						<header class="tale-hero">
+							<nav class="tale-breadcrumb">
+								<a href="/studio/tall-tales" class="tale-breadcrumb-link">
+									<svg class="tale-back-icon" viewBox="0 0 16 16" width="16" height="16">
+										<path
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M6.46966 13.7803L6.99999 14.3107L8.06065 13.25L7.53032 12.7197L3.56065 8.75001H14.25H15V7.25001H14.25H3.56065L7.53032 3.28034L8.06065 2.75001L6.99999 1.68935L6.46966 2.21968L1.39644 7.2929C1.00592 7.68342 1.00592 8.31659 1.39644 8.70711L6.46966 13.7803Z"
+											fill="currentColor"
+										/>
+									</svg>
+									<span>Tall Tales</span>
+								</a>
+							</nav>
 							<h1 class="tale-title">{tale.title}</h1>
 							{#if tale.description}
 								<p class="tale-description">{tale.description}</p>
@@ -116,11 +129,20 @@
 		position: relative;
 		z-index: 2;
 		width: 100%;
-		max-width: 700px;
+		max-width: 770px;
 		color: var(--text-color);
-		font-size: var(--font-size-lg);
-		line-height: var(--line-height-body);
-		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+		font-weight: var(--font-weight-light);
+		font-size: var(--content-font-size-body);
+		line-height: 1.75rem;
+		font-family: var(--font-family);
+		text-shadow: none;
+	}
+
+	@media (min-width: 1024px) {
+		.section-content {
+			font-size: var(--content-font-size-body-lg);
+			line-height: 2rem;
+		}
 	}
 
 	/* Override prose.css global theme variables to strictly use our section textColor */
@@ -144,26 +166,88 @@
 		margin-bottom: var(--space-5);
 	}
 
+	.tale-breadcrumb {
+		display: inline-flex;
+		align-items: center;
+		margin-bottom: var(--space-4);
+	}
+
+	.tale-breadcrumb-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		opacity: 0.7;
+		transition: opacity 0.2s;
+		color: var(--text-color);
+		font-weight: 500;
+		font-size: var(--content-font-size-body-sm);
+		text-decoration: none;
+	}
+
+	.tale-breadcrumb-link:hover {
+		opacity: 1;
+		text-decoration: underline;
+	}
+
+	.tale-back-icon {
+		width: 16px;
+		min-width: 16px;
+		height: 16px;
+		color: currentColor;
+	}
+
 	.tale-hero {
 		margin-bottom: var(--space-8);
 		border-bottom: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
 		padding-bottom: var(--space-6);
-		text-align: center;
+		text-align: left;
 	}
 
 	.tale-title {
-		margin-bottom: var(--space-4);
+		margin: 0 0 var(--content-space-sm) 0;
 		color: var(--text-color);
-		font-weight: normal;
-		font-size: 3rem;
-		line-height: 1.1;
+		font-weight: 500;
+		font-size: 2.25rem;
+		line-height: 2.5rem;
+	}
+
+	@media (min-width: 640px) {
+		.tale-title {
+			font-size: 3rem;
+			line-height: 1;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.tale-title {
+			font-size: var(--content-font-size-heading-lg);
+			line-height: 1;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.tale-title {
+			font-size: 4.5rem;
+			line-height: 1;
+		}
 	}
 
 	.tale-description {
 		opacity: 0.85;
-		margin: 0;
+		margin: 0 0 var(--content-space-lg) 0;
+		max-width: var(--content-measure-subtitle);
+		color: var(--text-color);
 		font-style: italic;
-		font-size: var(--font-size-xl);
+		font-size: var(--content-font-size-body);
+		line-height: 1.75rem;
+		text-wrap: balance;
+	}
+
+	@media (min-width: 768px) {
+		.tale-description {
+			font-size: var(--content-font-size-body-lg);
+			line-height: 2.25rem;
+		}
 	}
 
 	.not-found {
