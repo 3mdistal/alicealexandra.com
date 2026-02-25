@@ -1,7 +1,7 @@
 import { dev } from '$app/environment';
 
 export const CLOUDFLARE_IMAGE_VARIANTS = [320, 640, 960, 1200];
-export const IMAGE_DOMAIN = 'images.alicealexandra.com';
+export const IMAGE_DOMAIN = 'pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev';
 export const R2_PUBLIC_DOMAIN = 'pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev';
 
 /**

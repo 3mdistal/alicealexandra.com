@@ -7,7 +7,7 @@
 
 	export let data: { posts: BlogPostMeta[] };
 
-	const Bird = 'https://images.alicealexandra.com/site/images/bird.webp';
+	const Bird = 'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bird.webp';
 
 	function fadeIn() {
 		gsap.to('.opacity-0', {

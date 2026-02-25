@@ -230,6 +230,7 @@
 		background-color: var(--studio-card-bg);
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 		overflow: hidden;
 	}
 
@@ -294,6 +295,7 @@
 		opacity: 0.8;
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
 
 	.gradient-overlay {
@@ -306,6 +308,7 @@
 		);
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
 
 	.description {
@@ -324,6 +327,7 @@
 		position: relative;
 		z-index: -20;
 		height: 100%;
+		object-fit: cover;
 	}
 
 	.pole {
