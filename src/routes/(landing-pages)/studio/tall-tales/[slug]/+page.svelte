@@ -80,18 +80,18 @@
 		justify-content: center;
 		align-items: center;
 		box-sizing: border-box;
+		background-color: var(--bg-color, transparent);
 		padding: var(--space-9) var(--space-6);
 		min-height: 100vh;
 		overflow: hidden;
 		color: var(--text-color, var(--color-neutral-0));
-		background-color: var(--bg-color, transparent);
 	}
 
 	.tall-tale-section::before {
 		position: absolute;
-		inset: 0;
 		opacity: var(--bg-opacity, 0.4);
 		z-index: 0;
+		inset: 0;
 		background-image: var(--bg-image);
 		background-position: center;
 		background-size: cover;
@@ -101,9 +101,9 @@
 
 	.tall-tale-section::after {
 		position: absolute;
-		inset: 0;
 		z-index: 1;
 		mix-blend-mode: multiply;
+		inset: 0;
 		background-color: var(--overlay-color, rgba(0, 0, 0, 0.6));
 		content: '';
 	}
@@ -117,10 +117,10 @@
 		z-index: 2;
 		width: 100%;
 		max-width: 700px;
+		color: var(--text-color);
 		font-size: var(--font-size-lg);
 		line-height: var(--line-height-body);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-		color: var(--text-color);
 	}
 
 	/* Override prose.css global theme variables to strictly use our section textColor */
@@ -145,25 +145,25 @@
 	}
 
 	.tale-hero {
-		text-align: center;
 		margin-bottom: var(--space-8);
-		padding-bottom: var(--space-6);
 		border-bottom: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+		padding-bottom: var(--space-6);
+		text-align: center;
 	}
 
 	.tale-title {
+		margin-bottom: var(--space-4);
+		color: var(--text-color);
+		font-weight: normal;
 		font-size: 3rem;
 		line-height: 1.1;
-		margin-bottom: var(--space-4);
-		font-weight: normal;
-		color: var(--text-color);
 	}
 
 	.tale-description {
-		font-size: var(--font-size-xl);
 		opacity: 0.85;
 		margin: 0;
 		font-style: italic;
+		font-size: var(--font-size-xl);
 	}
 
 	.not-found {
