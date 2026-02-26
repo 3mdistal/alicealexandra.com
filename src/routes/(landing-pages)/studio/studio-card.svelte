@@ -230,8 +230,8 @@
 		background-color: var(--studio-card-bg);
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
 		overflow: hidden;
+		object-fit: cover;
 	}
 
 	.card-front {
