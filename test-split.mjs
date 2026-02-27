@@ -6,5 +6,5 @@ const body = content.slice(match[0].length);
 const rawSections = body.split('\n---\n');
 console.log('Number of sections:', rawSections.length);
 rawSections.forEach((s, i) => {
-  console.log(`Section ${i} starts with: ${s.trim().substring(0, 30)}`);
+	console.log(`Section ${i} starts with: ${s.trim().substring(0, 30)}`);
 });
