@@ -57,16 +57,11 @@
 
 <style>
 	.publications-section {
-		transition: box-shadow var(--duration-normal) var(--ease-standard);
 		margin-bottom: 5rem;
 		box-shadow: var(--shadow-2);
 		border-radius: var(--radius-3);
 		background-color: var(--color-surface);
 		padding: 2.5rem;
-	}
-
-	.publications-section:hover {
-		box-shadow: var(--shadow-3);
 	}
 
 	.section-title {

@@ -77,7 +77,7 @@
 
 	@media (prefers-color-scheme: light) {
 		.hero {
-			box-shadow: 0 8px 30px rgba(100, 46, 26, 0.15);
+			box-shadow: 0 16px 40px rgba(100, 46, 26, 0.25);
 		}
 	}
 
