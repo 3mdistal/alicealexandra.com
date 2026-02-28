@@ -12,7 +12,7 @@
 	} from '$lib/news/updates';
 	import { parseChangelogSummaries } from '$lib/news/site-changelog';
 
-	export let data: { blogEntries?: any[] };
+	export let data: { blogEntries?: any[]; careerEntries?: any[] };
 
 	// Read the CHANGELOG.md content
 	import changelog from '../../../../CHANGELOG.md?raw';
@@ -235,7 +235,33 @@
 				Coming soon. (Life events, books, movies, and other personal notes.)
 			</p>
 		{:else if activeTab === 'career'}
-			<p class="coming-soon">Coming soon.</p>
+			<section class="entries" aria-label="Career articles">
+				{#if !data.careerEntries || data.careerEntries.length === 0}
+					<p class="coming-soon">No career articles yet.</p>
+				{:else}
+					{#each data.careerEntries as entry (entry.id)}
+						<Card
+							as="a"
+							href={entry.href}
+							className="entry entry--link entry--studio"
+							aria-label={`Added • ${entry.category}: ${entry.title}`}
+							target={entry.external ? '_blank' : undefined}
+							rel={entry.external ? 'noopener noreferrer' : undefined}
+						>
+							<div class="entry-left">
+								<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
+								<div class="entry-meta" aria-hidden="true">
+									<span class="entry-category">{entry.category}</span>
+									<Pill tone="added" strong>Added</Pill>
+								</div>
+							</div>
+							<div class="entry-body">
+								<p class="entry-heading">{entry.title}</p>
+							</div>
+						</Card>
+					{/each}
+				{/if}
+			</section>
 		{:else if activeTab === 'blog'}
 			<section class="entries" aria-label="Blog posts">
 				{#if !data.blogEntries || data.blogEntries.length === 0}
