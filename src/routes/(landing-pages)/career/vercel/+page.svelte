@@ -75,6 +75,12 @@
 		text-align: center;
 	}
 
+	@media (prefers-color-scheme: light) {
+		.hero {
+			box-shadow: 0 8px 30px rgba(100, 46, 26, 0.15);
+		}
+	}
+
 	.hero::before {
 		position: absolute;
 		top: 0;
