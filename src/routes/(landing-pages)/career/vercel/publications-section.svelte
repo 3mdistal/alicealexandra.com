@@ -30,12 +30,7 @@
 		{#each publications as publication}
 			{#if publication.type === type}
 				<li class="publication-item">
-					<a
-						href={publication.link}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="publication-link"
-					>
+					<a href={publication.link} target="_blank" rel="noopener noreferrer" class="publication-link">
 						<div class="item-header">
 							<h3 class="item-title">
 								{publication.name}
@@ -57,16 +52,16 @@
 
 <style>
 	.publications-section {
-		transition: box-shadow var(--duration-normal) var(--ease-standard);
 		margin-bottom: 5rem;
-		box-shadow: var(--shadow-1);
+		box-shadow: var(--shadow-2);
 		border-radius: var(--radius-3);
 		background-color: var(--color-surface);
 		padding: 2.5rem;
+		transition: box-shadow var(--duration-normal) var(--ease-standard);
 	}
 
 	.publications-section:hover {
-		box-shadow: var(--shadow-2);
+		box-shadow: var(--shadow-3);
 	}
 
 	.section-title {
@@ -106,9 +101,9 @@
 	.publication-link {
 		display: block;
 		transition: all 0.3s ease;
-		margin: -1rem;
 		border-radius: var(--radius-2);
 		padding: 1rem;
+		margin: -1rem;
 		text-decoration: none;
 	}
 
@@ -130,8 +125,8 @@
 		color: var(--color-text);
 		font-weight: var(--font-weight-medium);
 		font-size: var(--font-size-lg);
-		line-height: var(--line-height-tight);
 		font-family: var(--font-serif);
+		line-height: var(--line-height-tight);
 	}
 
 	.publication-link:hover .item-title {
@@ -142,8 +137,8 @@
 		color: var(--color-text-muted);
 		font-size: var(--font-size-sm);
 		font-family: var(--font-mono);
-		letter-spacing: 0.05em;
 		text-transform: uppercase;
+		letter-spacing: 0.05em;
 	}
 
 	.description {
@@ -157,13 +152,13 @@
 	.read-more {
 		display: inline-flex;
 		align-items: center;
-		opacity: 0.8;
-		transition: opacity 0.2s ease;
 		color: var(--publication-accent, var(--color-accent));
 		font-weight: var(--font-weight-medium);
 		font-size: var(--font-size-sm);
-		letter-spacing: 0.05em;
 		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		opacity: 0.8;
+		transition: opacity 0.2s ease;
 	}
 
 	.publication-link:hover .read-more {
@@ -171,8 +166,8 @@
 	}
 
 	.arrow {
-		transition: transform 0.2s ease;
 		margin-left: 0.25rem;
+		transition: transform 0.2s ease;
 	}
 
 	.publication-link:hover .arrow {
