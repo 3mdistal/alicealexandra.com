@@ -67,7 +67,12 @@ export function extractRssItems(xml) {
 export function extractBlogMetadata(html) {
 	if (!html) return null;
 
-	const root = parseHtml(html);
+	// Optimization: Only parse up to </head> since all metadata is there.
+	// This avoids building a massive AST for the 1MB+ React/Builder body payload.
+	const headEnd = html.indexOf('</head>');
+	const headHtml = headEnd !== -1 ? html.slice(0, headEnd + 7) : html;
+
+	const root = parseHtml(headHtml);
 	const metaDescription = pickMeta(root, 'name', 'description');
 	const ogDescription = pickMeta(root, 'property', 'og:description');
 	const ogTitle = pickMeta(root, 'property', 'og:title');

@@ -34,6 +34,14 @@ try {
 	const results = await mapWithConcurrency(candidates, args.concurrency, async (url) => {
 		summary.postsFetched += 1;
 		const html = await fetchText(url);
+
+		// Fast path: skip parsing entirely if HTML text doesn't contain 'alice'
+		// Uses regex to avoid allocating a new string with toLowerCase()
+		if (!/alice/i.test(html)) {
+			bumpSkip('author mismatch (fast path)');
+			return null;
+		}
+
 		const metadata = extractBlogMetadata(html);
 		if (!metadata) {
 			bumpSkip('missing metadata');
