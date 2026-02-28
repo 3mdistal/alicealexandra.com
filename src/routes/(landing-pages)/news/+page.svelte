@@ -28,12 +28,14 @@
 	const STUDIO_TABS: Array<{ id: 'all' | StudioNewsCategory; label: string }> = [
 		{ id: 'all', label: 'All' },
 		{ id: 'hfc', label: 'Hymns for Calliope' },
-		{ id: 'postcards', label: 'Postcards' }
+		{ id: 'postcards', label: 'Postcards' },
+		{ id: 'tall-tales', label: 'Tall Tales' }
 	];
 
 	const STUDIO_CATEGORY_LABEL: Record<StudioNewsCategory, string> = {
 		hfc: 'Hymns for Calliope',
-		postcards: 'Postcards'
+		postcards: 'Postcards',
+		'tall-tales': 'Tall Tales'
 	};
 
 	let activeTab: NewsMainTab = 'studio';
@@ -80,7 +82,7 @@
 	}
 
 	function isStudioFilter(value: string | null): value is 'all' | StudioNewsCategory {
-		return value === 'all' || value === 'hfc' || value === 'postcards';
+		return value === 'all' || value === 'hfc' || value === 'postcards' || value === 'tall-tales';
 	}
 
 	function syncUrlParams() {
