@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import StudioCard from './studio-card.svelte';
+	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
 	import gsap from 'gsap';
 	import { pageState } from '$lib/stores';
 	import type { StudioCard as StudioCardType } from '$lib/content/studio';
@@ -57,7 +58,7 @@
 	/>
 	<meta
 		property="og:image"
-		content="https://ik.imagekit.io/tempoimmaterial/studio/studioog?tr=w-750"
+		content="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/studio/studioog.jpg"
 	/>
 
 	<!-- Twitter Meta Tags -->
@@ -73,7 +74,7 @@
 	/>
 	<meta
 		name="twitter:image"
-		content="https://ik.imagekit.io/tempoimmaterial/studio/studioog?tr=w-750"
+		content="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/studio/studioog.jpg"
 	/>
 	<meta name="twitter:image:alt" content="The studio page of alicealexandra.com." />
 </svelte:head>
@@ -81,10 +82,11 @@
 <div class="studio-container" use:populate>
 	<h1 class="studio-title">studio</h1>
 
-	<img
-		src="https://ik.imagekit.io/tempoimmaterial/studio/ink.png?updatedAt=1694604654601"
+	<OptimizedImage
+		src="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/studio/ink.png"
 		alt=""
 		class="studio-background"
+		sizes="100vw"
 	/>
 
 	<div class="break"></div>
@@ -113,7 +115,7 @@
 		opacity: 0;
 	}
 
-	.studio-background {
+	:global(.studio-background) {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -130,7 +132,7 @@
 			--ink-target-opacity: 0.16;
 		}
 
-		.studio-background {
+		:global(.studio-background) {
 			mix-blend-mode: screen;
 			filter: grayscale(1) invert(1) contrast(1.15);
 		}

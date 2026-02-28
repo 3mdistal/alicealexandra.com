@@ -94,7 +94,7 @@
 	});
 
 	let Piano =
-		'https://ik.imagekit.io/tempoimmaterial/tr:w-1500/hymns%20for%20calliope/ruined%20piano?updatedAt=1694350822403';
+		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/hymns%2520for%2520calliope/ruined%2520piano.jpg';
 
 	// Parse markdown content into block format for TextMacro component
 	function parseMarkdownToBlocks(content: string): ParagraphBlock[] {
