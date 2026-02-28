@@ -126,7 +126,7 @@ async function getCandidateUrls() {
 			return [...new Set(items.map((item) => item.url))];
 		}
 	} catch (error) {
-		console.warn(
+		console.log(
 			`Builder scraper: RSS fetch failed (${RSS_URL}) - ${error instanceof Error ? error.message : error}`
 		);
 	}
