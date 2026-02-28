@@ -18,7 +18,7 @@
 			<h1 class="accent-color">
 				Work from <span class="highlight">Vercel</span>
 			</h1>
-			<p class="subtitle">Content I published while working at Vercel (2022&ndash;2025).</p>
+			<p class="hero-subtitle">Content I published while working at Vercel (2022&ndash;2025).</p>
 		</div>
 	</div>
 
@@ -28,12 +28,6 @@
 			title="Technical Blogs"
 			subtitle="Articles that I've written to offer developers guidance on Vercel's product."
 			type="Technical Blog"
-		/>
-		<PublicationsSection
-			{publications}
-			title="Technical Guides"
-			subtitle="In-depth technical guides and tutorials for developers."
-			type="Technical Guide"
 		/>
 		<PublicationsSection
 			{publications}
@@ -59,98 +53,3 @@
 		<a href="/career" class="back-link">← Back to Career</a>
 	</div>
 </main>
-
-<style>
-	.career-detail-surface {
-		background-color: var(--color-bg);
-		min-height: 100vh;
-		font-family: var(--font-serif);
-	}
-
-	.accent-color {
-		color: var(--color-accent);
-	}
-
-	.hero {
-		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
-		padding: 6rem 2rem 4rem;
-		text-align: center;
-	}
-
-	.hero-content {
-		margin: 0 auto;
-		border-radius: 15px;
-		background-color: var(--color-surface);
-		padding: 3rem;
-		max-width: 800px;
-	}
-
-	h1 {
-		margin-bottom: 1rem;
-		font-weight: 500;
-		font-size: clamp(2rem, 5vw, 3.5rem);
-		line-height: 1.2;
-	}
-
-	.highlight {
-		color: var(--color-accent);
-		font-weight: 500;
-		font-family: var(--font-serif);
-	}
-
-	.back-link {
-		display: inline-block;
-		transition: all 0.2s ease;
-		margin-bottom: 1.5rem;
-		border: 2px solid var(--color-accent);
-		border-radius: 8px;
-		background-color: var(--color-surface);
-		padding: 0.5rem 1rem;
-		color: var(--color-accent);
-		font-weight: 500;
-		font-size: 1rem;
-		text-decoration: none;
-	}
-
-	.back-link:hover {
-		transform: translateX(-2px);
-		background-color: var(--color-accent);
-		color: var(--color-surface);
-	}
-
-	.subtitle {
-		margin: 0;
-		color: var(--color-text-muted);
-		font-style: italic;
-		font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-	}
-
-	.content {
-		margin: 0 auto;
-		padding: 4rem 2rem;
-		max-width: 1200px;
-	}
-
-	.footer {
-		margin-top: 2rem;
-		border-top: 1px solid var(--color-border);
-		padding: 2rem;
-		text-align: center;
-	}
-
-	@media (min-width: 768px) {
-		.hero {
-			padding: 8rem 4rem 6rem;
-		}
-
-		.content {
-			padding: 6rem 4rem;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.content {
-			padding: 8rem 6rem;
-		}
-	}
-</style>
