@@ -1,15 +1,10 @@
 import { loadPostsMeta } from '$lib/content/blog';
 import { loadPublications } from '$lib/content/career';
-import { loadBuilderSnapshot } from '$lib/content/builder';
 
 export const prerender = true;
 
 export async function load() {
-	const [blogPosts, publications, builderSnapshot] = await Promise.all([
-		loadPostsMeta(),
-		loadPublications(),
-		loadBuilderSnapshot()
-	]);
+	const [blogPosts, publications] = await Promise.all([loadPostsMeta(), loadPublications()]);
 
 	const blogEntries = blogPosts
 		.map((post) => ({
@@ -23,8 +18,8 @@ export async function load() {
 		}))
 		.sort((a, b) => b.date.localeCompare(a.date));
 
-	// Publications from Vercel work
-	const publicationEntries = publications.map((pub) => ({
+	// Publications from Vercel work (static, from content repo)
+	const staticCareerEntries = publications.map((pub) => ({
 		id: `career-pub-${pub.id}`,
 		date: pub.date,
 		area: 'career',
@@ -35,26 +30,8 @@ export async function load() {
 		external: true
 	}));
 
-	// Builder.io blog posts
-	const builderEntries = builderSnapshot.data
-		.filter((post) => post.publishedAt)
-		.map((post) => ({
-			id: `career-builder-${post.id}`,
-			date: post.publishedAt!.slice(0, 10),
-			area: 'career',
-			category: 'Builder.io Blog',
-			action: 'added',
-			title: post.title,
-			href: post.url,
-			external: true
-		}));
-
-	const careerEntries = [...publicationEntries, ...builderEntries].sort((a, b) =>
-		b.date.localeCompare(a.date)
-	);
-
 	return {
 		blogEntries,
-		careerEntries
+		staticCareerEntries
 	};
 }

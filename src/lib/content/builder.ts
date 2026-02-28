@@ -1,5 +1,6 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { XMLParser } from 'fast-xml-parser';
 
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'career');
 const SNAPSHOT_FILE = 'content/career/builder.json';
@@ -184,4 +185,97 @@ function requireUrl(value: unknown, label: string): string {
 
 function fail(message: string): never {
 	throw new Error(`Builder snapshot: ${message} (${SNAPSHOT_FILE})`);
+}
+
+// ==================== LIVE RSS FETCH ====================
+
+const BUILDER_RSS_URL = 'https://www.builder.io/blog/rss.xml';
+const AUTHOR_ALLOWLIST = ['alice moore', 'alice alexandra moore'];
+
+function parseRssItems(xml: string): Array<{ url: string; title: string; description: string; publishedAt: string; authorName: string }> {
+	const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' });
+	let parsed: unknown;
+	try {
+		parsed = parser.parse(xml);
+	} catch {
+		return [];
+	}
+
+	const rec = parsed as Record<string, unknown>;
+	const channel =
+		(rec?.['rss'] as Record<string, unknown>)?.['channel'] ??
+		rec?.['channel'] ??
+		rec?.['feed'];
+
+	if (!channel || typeof channel !== 'object') return [];
+	const ch = channel as Record<string, unknown>;
+	const rawItems = ch['item'] ?? ch['entry'];
+	const items = Array.isArray(rawItems) ? rawItems : rawItems ? [rawItems] : [];
+
+	const results: Array<{ url: string; title: string; description: string; publishedAt: string; authorName: string }> = [];
+
+	for (const item of items) {
+		if (!item || typeof item !== 'object') continue;
+		const it = item as Record<string, unknown>;
+		const linkVal = (it['link'] as Record<string, unknown>)?.['@_href'] ?? it['link'] ?? it['guid'];
+		const url = String(linkVal ?? '').trim();
+		if (!url || !url.startsWith('https://www.builder.io/blog/')) continue;
+
+		const title = it['title'] ? String(it['title']) : '';
+		if (!title) continue;
+
+		const description = it['description']
+			? String(it['description'])
+			: it['summary']
+				? String(it['summary'])
+				: '';
+
+		const publishedAtRaw = it['pubDate'] ? String(it['pubDate']) : it['published'] ? String(it['published']) : '';
+		const publishedAtDate = publishedAtRaw ? new Date(publishedAtRaw) : null;
+		const publishedAt = publishedAtDate && !isNaN(publishedAtDate.getTime())
+			? publishedAtDate.toISOString().slice(0, 10)
+			: '';
+
+		const authorName = it['author']
+			? String(it['author'])
+			: it['dc:creator']
+				? String(it['dc:creator'])
+				: '';
+
+		results.push({ url, title, description, publishedAt, authorName });
+	}
+
+	return results;
+}
+
+function matchesAuthor(name: string): boolean {
+	if (!name) return false;
+	const lower = name.toLowerCase();
+	return AUTHOR_ALLOWLIST.some((a) => lower.includes(a));
+}
+
+export async function fetchBuilderPostsLive(): Promise<BuilderPost[]> {
+	let xml: string;
+	try {
+		const res = await fetch(BUILDER_RSS_URL, {
+			headers: { 'User-Agent': 'alicealexandra.com/news' }
+		});
+		if (!res.ok) throw new Error(`RSS fetch failed: ${res.status}`);
+		xml = await res.text();
+	} catch (err) {
+		console.warn('fetchBuilderPostsLive: RSS fetch error', err);
+		return [];
+	}
+
+	const items = parseRssItems(xml).filter((item) => matchesAuthor(item.authorName));
+
+	return items
+		.map((item): BuilderPost => ({
+			id: item.url,
+			title: item.title,
+			description: item.description,
+			url: item.url,
+			...(item.publishedAt ? { publishedAt: item.publishedAt } : {})
+		}))
+		.sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''));
 }

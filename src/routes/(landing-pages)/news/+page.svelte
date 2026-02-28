@@ -12,7 +12,48 @@
 	} from '$lib/news/updates';
 	import { parseChangelogSummaries } from '$lib/news/site-changelog';
 
-	export let data: { blogEntries?: any[]; careerEntries?: any[] };
+	export let data: { blogEntries?: any[]; staticCareerEntries?: any[] };
+
+	type CareerEntry = {
+		id: string;
+		date: string;
+		area: string;
+		category: string;
+		action: string;
+		title: string;
+		href: string;
+		external?: boolean;
+	};
+
+	let builderEntries: CareerEntry[] = [];
+	let builderFetchState: 'idle' | 'loading' | 'done' | 'error' = 'idle';
+
+	async function loadBuilderPosts() {
+		if (builderFetchState !== 'idle') return;
+		builderFetchState = 'loading';
+		try {
+			const res = await fetch('/api/builder-posts');
+			if (!res.ok) throw new Error(`Failed: ${res.status}`);
+			const posts = await res.json();
+			builderEntries = posts.map((p: { id: string; title: string; url: string; publishedAt?: string }) => ({
+				id: `career-builder-${p.id}`,
+				date: p.publishedAt ? p.publishedAt.slice(0, 10) : '',
+				area: 'career',
+				category: 'Builder.io Blog',
+				action: 'added',
+				title: p.title,
+				href: p.url,
+				external: true
+			}));
+			builderFetchState = 'done';
+		} catch {
+			builderFetchState = 'error';
+		}
+	}
+
+	$: careerEntries = [...(data.staticCareerEntries ?? []), ...builderEntries].sort((a, b) =>
+		b.date.localeCompare(a.date)
+	);
 
 	// Read the CHANGELOG.md content
 	import changelog from '../../../../CHANGELOG.md?raw';
@@ -103,6 +144,7 @@
 		activeTab = tab;
 		if (tab !== 'site') showFullChangelog = false;
 		syncUrlParams();
+		if (tab === 'career') loadBuilderPosts();
 	}
 
 	function setStudioFilter(filter: 'all' | StudioNewsCategory) {
@@ -136,6 +178,8 @@
 
 		// Normalize (removes invalid params / ensures defaults are reflected)
 		syncUrlParams();
+
+		if (activeTab === 'career') loadBuilderPosts();
 	});
 
 	onDestroy(() => {
@@ -236,10 +280,10 @@
 			</p>
 		{:else if activeTab === 'career'}
 			<section class="entries" aria-label="Career articles">
-				{#if !data.careerEntries || data.careerEntries.length === 0}
+				{#if careerEntries.length === 0}
 					<p class="coming-soon">No career articles yet.</p>
 				{:else}
-					{#each data.careerEntries as entry (entry.id)}
+					{#each careerEntries as entry (entry.id)}
 						<Card
 							as="a"
 							href={entry.href}
