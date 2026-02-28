@@ -35,16 +35,18 @@
 			const res = await fetch('/api/builder-posts');
 			if (!res.ok) throw new Error(`Failed: ${res.status}`);
 			const posts = await res.json();
-			builderEntries = posts.map((p: { id: string; title: string; url: string; publishedAt?: string }) => ({
-				id: `career-builder-${p.id}`,
-				date: p.publishedAt ? p.publishedAt.slice(0, 10) : '',
-				area: 'career',
-				category: 'Builder.io Blog',
-				action: 'added',
-				title: p.title,
-				href: p.url,
-				external: true
-			}));
+			builderEntries = posts.map(
+				(p: { id: string; title: string; url: string; publishedAt?: string }) => ({
+					id: `career-builder-${p.id}`,
+					date: p.publishedAt ? p.publishedAt.slice(0, 10) : '',
+					area: 'career',
+					category: 'Builder.io Blog',
+					action: 'added',
+					title: p.title,
+					href: p.url,
+					external: true
+				})
+			);
 			builderFetchState = 'done';
 		} catch {
 			builderFetchState = 'error';
