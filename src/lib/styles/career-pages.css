@@ -1,0 +1,123 @@
+/* Shared styles for all career detail pages (Vercel, Builder.io, etc.) */
+
+.career-detail-surface {
+	background-color: var(--color-bg);
+	min-height: 100vh;
+	font-family: var(--font-serif);
+}
+
+.career-detail-surface .accent-color {
+	color: var(--color-accent);
+}
+
+.career-detail-surface .hero {
+	position: relative;
+	z-index: 10;
+	box-shadow: var(--chrome-shadow, 0 12px 40px var(--color-shadow));
+	background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
+	padding: 6rem 2rem 4rem;
+	overflow: hidden;
+	text-align: center;
+}
+
+@media (prefers-color-scheme: light) {
+	.career-detail-surface .hero {
+		box-shadow: 0 16px 40px rgba(100, 46, 26, 0.25);
+	}
+}
+
+.career-detail-surface .hero::before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0.15;
+	background-image: radial-gradient(var(--color-surface) 1px, transparent 1px);
+	background-size: 24px 24px;
+	pointer-events: none;
+	content: '';
+}
+
+.career-detail-surface .hero-content {
+	position: relative;
+	z-index: 1;
+	margin: 0 auto;
+	box-shadow: var(--shadow-2);
+	border-radius: var(--radius-4);
+	background-color: var(--color-surface);
+	padding: 3rem;
+	max-width: 800px;
+}
+
+.career-detail-surface h1 {
+	margin-bottom: 1rem;
+	font-weight: var(--font-weight-medium);
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	line-height: var(--line-height-tight);
+}
+
+.career-detail-surface .highlight {
+	color: var(--color-accent);
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-serif);
+}
+
+.career-detail-surface .hero-subtitle {
+	margin: 0;
+	color: var(--color-text-muted);
+	font-style: italic;
+	font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+}
+
+.career-detail-surface .content {
+	margin: 0 auto;
+	padding: 4rem 2rem;
+	max-width: 1200px;
+}
+
+.career-detail-surface .footer {
+	margin-top: 2rem;
+	border-top: 1px solid var(--color-border);
+	padding: 2rem;
+	text-align: center;
+}
+
+.career-detail-surface .back-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	transition: all var(--duration-fast) var(--ease-standard);
+	margin-bottom: 1.5rem;
+	border: 2px solid var(--color-accent);
+	border-radius: var(--radius-2);
+	background-color: transparent;
+	padding: 0.75rem 1.5rem;
+	color: var(--color-accent);
+	font-weight: var(--font-weight-medium);
+	font-size: var(--font-size-base);
+	text-decoration: none;
+}
+
+.career-detail-surface .back-link:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-1);
+	background-color: var(--color-accent);
+	color: var(--color-surface);
+}
+
+@media (min-width: 768px) {
+	.career-detail-surface .hero {
+		padding: 8rem 4rem 6rem;
+	}
+
+	.career-detail-surface .content {
+		padding: 6rem 4rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.career-detail-surface .content {
+		padding: 8rem 6rem;
+	}
+}
