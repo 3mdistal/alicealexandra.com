@@ -38,7 +38,9 @@
 			<h1 class="accent-color">
 				Work from <span class="highlight">Builder.io</span>
 			</h1>
-			<p class="subtitle">Blog posts and technical writing from my current role (2025&ndash;present).</p>
+			<p class="subtitle">
+				Blog posts and technical writing from my current role (2025&ndash;present).
+			</p>
 		</div>
 	</div>
 
