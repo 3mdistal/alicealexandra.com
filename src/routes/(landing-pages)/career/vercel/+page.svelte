@@ -69,32 +69,32 @@
 		position: relative;
 		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
 		padding: 6rem 2rem 4rem;
-		text-align: center;
 		overflow: hidden;
+		text-align: center;
 	}
 
 	.hero::before {
-		content: '';
 		position: absolute;
 		top: 0;
-		left: 0;
 		right: 0;
 		bottom: 0;
+		left: 0;
+		opacity: 0.15;
 		background-image: radial-gradient(var(--color-surface) 1px, transparent 1px);
 		background-size: 24px 24px;
-		opacity: 0.15;
 		pointer-events: none;
+		content: '';
 	}
 
 	.hero-content {
 		position: relative;
+		z-index: 1;
 		margin: 0 auto;
 		box-shadow: var(--shadow-2);
 		border-radius: var(--radius-4);
 		background-color: var(--color-surface);
 		padding: 3rem;
 		max-width: 800px;
-		z-index: 1;
 	}
 
 	h1 {
