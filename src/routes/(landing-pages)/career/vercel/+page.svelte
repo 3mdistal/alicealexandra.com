@@ -67,7 +67,9 @@
 
 	.hero {
 		position: relative;
+		z-index: 10;
 		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
+		box-shadow: var(--chrome-shadow, 0 12px 40px var(--color-shadow));
 		padding: 6rem 2rem 4rem;
 		overflow: hidden;
 		text-align: center;
