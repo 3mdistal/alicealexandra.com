@@ -14,6 +14,13 @@
 	export let subtitle: string;
 	export let type: PublicationTypes;
 	export let accent: string = 'var(--color-accent)';
+
+	// Helper to format date
+	const formatDate = (dateString: string) => {
+		if (!dateString) return '';
+		const date = new Date(dateString);
+		return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+	};
 </script>
 
 <section class="publications-section" style={accent ? `--publication-accent: ${accent}` : ''}>
@@ -22,15 +29,26 @@
 	<ul>
 		{#each publications as publication}
 			{#if publication.type === type}
-				<li>
-					<a href={publication.link} target="_blank" rel="noopener noreferrer">
-						<h3 class="item-title">
-							{publication.name}
-						</h3>
+				<li class="publication-item">
+					<a
+						href={publication.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="publication-link"
+					>
+						<div class="item-header">
+							<h3 class="item-title">
+								{publication.name}
+							</h3>
+							{#if publication.date}
+								<span class="item-date">{formatDate(publication.date)}</span>
+							{/if}
+						</div>
+						{#if publication.description}
+							<p class="description">{publication.description}</p>
+						{/if}
+						<div class="read-more">Read <span class="arrow">→</span></div>
 					</a>
-					{#if publication.description}
-						<p class="description">{publication.description}</p>
-					{/if}
 				</li>
 			{/if}
 		{/each}
@@ -40,8 +58,8 @@
 <style>
 	.publications-section {
 		margin-bottom: 5rem;
-		box-shadow: var(--shadow-1);
-		border-radius: 10px;
+		box-shadow: var(--shadow-2);
+		border-radius: var(--radius-3);
 		background-color: var(--color-surface);
 		padding: 2.5rem;
 	}
@@ -49,8 +67,8 @@
 	.section-title {
 		margin-bottom: 1rem;
 		color: var(--publication-accent, var(--color-accent));
-		font-weight: 500;
-		font-size: 2rem;
+		font-weight: var(--font-weight-medium);
+		font-size: var(--font-size-2xl);
 		font-family: var(--font-serif);
 	}
 
@@ -58,8 +76,8 @@
 		margin-bottom: 2.5rem;
 		color: var(--color-text-muted);
 		font-style: italic;
-		font-size: 1.125rem;
-		line-height: 1.6;
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-body);
 	}
 
 	ul {
@@ -68,47 +86,92 @@
 		list-style: none;
 	}
 
-	li {
-		margin-bottom: 2rem;
+	.publication-item {
+		margin-bottom: 1.5rem;
 		border-bottom: 1px solid var(--color-border);
 		padding-bottom: 1.5rem;
 	}
 
-	li:last-child {
+	.publication-item:last-child {
 		margin-bottom: 0;
 		border-bottom: none;
+		padding-bottom: 0;
 	}
 
-	a {
+	.publication-link {
 		display: block;
-		transition: transform 0.2s ease;
+		transition: all 0.3s ease;
+		margin: -1rem;
+		border-radius: var(--radius-2);
+		padding: 1rem;
 		text-decoration: none;
 	}
 
-	a:hover {
-		transform: translateX(5px);
+	.publication-link:hover {
+		transform: translateY(-2px);
+		background-color: var(--color-surface-muted);
+	}
+
+	.item-header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		margin-bottom: 0.5rem;
 	}
 
 	.item-title {
 		transition: color 0.2s ease;
-		margin-bottom: 0.5rem;
-		color: var(--publication-accent, var(--color-accent));
-		font-weight: 500;
-		font-size: 1.25rem;
+		margin: 0;
+		color: var(--color-text);
+		font-weight: var(--font-weight-medium);
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-tight);
 		font-family: var(--font-serif);
 	}
 
-	a:hover .item-title {
-		filter: brightness(1.2);
-		text-decoration: underline;
+	.publication-link:hover .item-title {
+		color: var(--publication-accent, var(--color-accent));
+	}
+
+	.item-date {
+		color: var(--color-text-muted);
+		font-size: var(--font-size-sm);
+		font-family: var(--font-mono);
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
 	}
 
 	.description {
-		margin: 0;
+		margin: 0 0 1rem 0;
 		color: var(--color-text-muted);
 		font-style: italic;
-		font-size: 1rem;
-		line-height: 1.5;
+		font-size: var(--font-size-base);
+		line-height: var(--line-height-body);
+	}
+
+	.read-more {
+		display: inline-flex;
+		align-items: center;
+		opacity: 0.8;
+		transition: opacity 0.2s ease;
+		color: var(--publication-accent, var(--color-accent));
+		font-weight: var(--font-weight-medium);
+		font-size: var(--font-size-sm);
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.publication-link:hover .read-more {
+		opacity: 1;
+	}
+
+	.arrow {
+		transition: transform 0.2s ease;
+		margin-left: 0.25rem;
+	}
+
+	.publication-link:hover .arrow {
+		transform: translateX(4px);
 	}
 
 	@media (min-width: 640px) {
@@ -116,30 +179,25 @@
 			padding: 3rem;
 		}
 
-		.section-title {
-			font-size: 2.25rem;
+		.item-header {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: baseline;
 		}
 
-		.subtitle {
-			font-size: 1.25rem;
-		}
-
-		.item-title {
-			font-size: 1.375rem;
-		}
-
-		.description {
-			font-size: 1.125rem;
+		.item-date {
+			flex-shrink: 0;
+			margin-left: 1rem;
 		}
 	}
 
 	@media (min-width: 768px) {
 		.section-title {
-			font-size: 2.5rem;
+			font-size: var(--font-size-3xl);
 		}
 
 		.item-title {
-			font-size: 1.5rem;
+			font-size: var(--font-size-xl);
 		}
 	}
 </style>
