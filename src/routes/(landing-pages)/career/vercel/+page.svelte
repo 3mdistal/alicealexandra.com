@@ -31,12 +31,6 @@
 		/>
 		<PublicationsSection
 			{publications}
-			title="Technical Guides"
-			subtitle="In-depth technical guides and tutorials for developers."
-			type="Technical Guide"
-		/>
-		<PublicationsSection
-			{publications}
 			title="Enterprise Resources"
 			subtitle="Deep dives I've targeted at specific industries of enterprise buyers."
 			type="Enterprise Resource"
