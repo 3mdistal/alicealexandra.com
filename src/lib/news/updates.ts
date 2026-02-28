@@ -1,6 +1,6 @@
 export type NewsMainTab = 'about' | 'studio' | 'career' | 'blog' | 'site';
 
-export type StudioNewsCategory = 'hfc' | 'postcards';
+export type StudioNewsCategory = 'hfc' | 'postcards' | 'tall-tales';
 
 export type StudioNewsAction = 'added' | 'edited' | 'removed';
 
@@ -17,13 +17,13 @@ export interface NewsEntry {
 export const STUDIO_NEWS: NewsEntry[] = (
 	[
 		{
-			id: 'studio-postcards-2025-12-26-the-goat-hunters',
+			id: 'studio-tall-tales-2025-12-26-the-goat-hunters',
 			date: '2025-12-26',
 			area: 'studio',
-			category: 'postcards',
+			category: 'tall-tales',
 			action: 'edited',
 			title: 'The Goat Hunters',
-			href: '/studio/postcards/the-goat-hunters'
+			href: '/studio/tall-tales/the-goat-hunters'
 		},
 		{
 			id: 'studio-postcards-2025-12-01-procedure-for-the-extraction-of-a-pulmonary-haunting',
@@ -62,22 +62,31 @@ export const STUDIO_NEWS: NewsEntry[] = (
 			href: '/studio/postcards/upper-limit'
 		},
 		{
-			id: 'studio-postcards-2021-03-16-factory',
+			id: 'studio-tall-tales-2021-03-16-factory',
 			date: '2021-03-16',
 			area: 'studio',
-			category: 'postcards',
+			category: 'tall-tales',
 			action: 'added',
 			title: 'Factory',
-			href: '/studio/postcards/factory'
+			href: '/studio/tall-tales/factory'
 		},
 		{
-			id: 'studio-postcards-2020-02-09-the-goat-hunters',
+			id: 'studio-tall-tales-2020-02-09-the-goat-hunters',
 			date: '2020-02-09',
 			area: 'studio',
-			category: 'postcards',
+			category: 'tall-tales',
 			action: 'added',
 			title: 'The Goat Hunters',
-			href: '/studio/postcards/the-goat-hunters'
+			href: '/studio/tall-tales/the-goat-hunters'
+		},
+		{
+			id: 'studio-tall-tales-2023-08-23-two-truths-and-a-lie',
+			date: '2023-08-23',
+			area: 'studio',
+			category: 'tall-tales',
+			action: 'added',
+			title: 'two truths and a lie',
+			href: '/studio/tall-tales/two-truths-and-a-lie'
 		},
 		{
 			id: 'studio-postcards-2018-09-13-good-neighbor',

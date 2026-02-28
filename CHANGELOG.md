@@ -1,3 +1,58 @@
+## 28 Feb 2026
+
+**Enhancements**
+
+- Migrated site images to Cloudflare R2 and integrated Vercel Image Optimization with R2 fallback. (#131)
+
+## 25 Feb 2026
+
+**Features**
+
+- Implemented Tall Tales landing page and horizontal scrolling reader, with customizable themes and hero headers per section. (#126, #127, #129, #130)
+- Added general subagent and `code-task-orchestrator` skill for multi-step tasks. (#127)
+- Added Exa MCP server configuration for web search capabilities. (#128)
+
+**Enhancements**
+
+- Added frontmatter, sections, and alignment fixes to Goat Hunters and Factory stories. (#126)
+
+## 23 Feb 2026
+
+**Enhancements**
+
+- Refined dark mode theme colors for better visual cohesion and increased separation across sections. (#120)
+- Synced homepage dark mode palette and derived dark chrome colors from theme background. (#121)
+
+**Patches**
+
+- Restored landing page chrome intro spin animation on arrival. (#124)
+
+## 19 Feb 2026
+
+**Enhancements**
+
+- Blog post read time is now automatically computed from word count at build time instead of hardcoded. (#119)
+
+## 18 Feb 2026
+
+**Patches**
+
+- Fixed site chrome hover flicker, refined translucent hover area, and improved button layout alignment. (#116)
+- Updated blog subtitle margins to align with design tokens. (#117)
+
+## 13 Feb 2026
+
+**Patches**
+
+- Fixed blog bird background image stretching and distortion. (#115)
+
+## 08 Feb 2026
+
+**Enhancements**
+
+- Applied design tokens to shared layout chrome and added a mobile full-screen menu flyout from the home button. (#111)
+- Implemented accessibility foundations for focus states and reduced motion preferences. (#113)
+
 ## 05 Feb 2026
 
 **Enhancements**

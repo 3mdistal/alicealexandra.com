@@ -12,6 +12,8 @@
 	} from '$lib/news/updates';
 	import { parseChangelogSummaries } from '$lib/news/site-changelog';
 
+	export let data: { blogEntries?: any[]; careerEntries?: any[] };
+
 	// Read the CHANGELOG.md content
 	import changelog from '../../../../CHANGELOG.md?raw';
 
@@ -28,12 +30,14 @@
 	const STUDIO_TABS: Array<{ id: 'all' | StudioNewsCategory; label: string }> = [
 		{ id: 'all', label: 'All' },
 		{ id: 'hfc', label: 'Hymns for Calliope' },
-		{ id: 'postcards', label: 'Postcards' }
+		{ id: 'postcards', label: 'Postcards' },
+		{ id: 'tall-tales', label: 'Tall Tales' }
 	];
 
 	const STUDIO_CATEGORY_LABEL: Record<StudioNewsCategory, string> = {
 		hfc: 'Hymns for Calliope',
-		postcards: 'Postcards'
+		postcards: 'Postcards',
+		'tall-tales': 'Tall Tales'
 	};
 
 	let activeTab: NewsMainTab = 'studio';
@@ -80,7 +84,7 @@
 	}
 
 	function isStudioFilter(value: string | null): value is 'all' | StudioNewsCategory {
-		return value === 'all' || value === 'hfc' || value === 'postcards';
+		return value === 'all' || value === 'hfc' || value === 'postcards' || value === 'tall-tales';
 	}
 
 	function syncUrlParams() {
@@ -231,9 +235,59 @@
 				Coming soon. (Life events, books, movies, and other personal notes.)
 			</p>
 		{:else if activeTab === 'career'}
-			<p class="coming-soon">Coming soon.</p>
+			<section class="entries" aria-label="Career articles">
+				{#if !data.careerEntries || data.careerEntries.length === 0}
+					<p class="coming-soon">No career articles yet.</p>
+				{:else}
+					{#each data.careerEntries as entry (entry.id)}
+						<Card
+							as="a"
+							href={entry.href}
+							className="entry entry--link entry--studio"
+							aria-label={`Added • ${entry.category}: ${entry.title}`}
+							target={entry.external ? '_blank' : undefined}
+							rel={entry.external ? 'noopener noreferrer' : undefined}
+						>
+							<div class="entry-left">
+								<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
+								<div class="entry-meta" aria-hidden="true">
+									<span class="entry-category">{entry.category}</span>
+									<Pill tone="added" strong>Added</Pill>
+								</div>
+							</div>
+							<div class="entry-body">
+								<p class="entry-heading">{entry.title}</p>
+							</div>
+						</Card>
+					{/each}
+				{/if}
+			</section>
 		{:else if activeTab === 'blog'}
-			<p class="coming-soon">Coming soon. (New posts and updates.)</p>
+			<section class="entries" aria-label="Blog posts">
+				{#if !data.blogEntries || data.blogEntries.length === 0}
+					<p class="coming-soon">No blog posts yet.</p>
+				{:else}
+					{#each data.blogEntries as entry (entry.id)}
+						<Card
+							as="a"
+							href={entry.href}
+							className="entry entry--link entry--studio"
+							aria-label={`Added • Blog: ${entry.title}`}
+						>
+							<div class="entry-left">
+								<time class="entry-date" datetime={entry.date}>{formatDate(entry.date)}</time>
+								<div class="entry-meta" aria-hidden="true">
+									<span class="entry-category">Blog Post</span>
+									<Pill tone="added" strong>Added</Pill>
+								</div>
+							</div>
+							<div class="entry-body">
+								<p class="entry-heading">{entry.title}</p>
+							</div>
+						</Card>
+					{/each}
+				{/if}
+			</section>
 		{:else if activeTab === 'site'}
 			<section class="entries" aria-label="Site updates">
 				{#if siteSummaries.length === 0}

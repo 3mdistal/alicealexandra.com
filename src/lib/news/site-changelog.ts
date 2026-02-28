@@ -112,6 +112,9 @@ export function parseChangelogSummaries(markdown: string): SiteUpdateSummary[] {
 		const refactorBullets = extractBullets(block, 'Refactors');
 		const patchBullets = extractBullets(block, 'Patches');
 		const bugfixBullets = extractBullets(block, 'Bugfixes');
+		const docsBullets = extractBullets(block, 'Docs');
+		const minorBullets = extractBullets(block, 'Minor');
+		const breakingBullets = extractBullets(block, 'Breaking changes');
 
 		// Prefer Features, then Enhancements, etc.
 		const bullets =
@@ -123,7 +126,13 @@ export function parseChangelogSummaries(markdown: string): SiteUpdateSummary[] {
 						? refactorBullets
 						: patchBullets.length > 0
 							? patchBullets
-							: bugfixBullets;
+							: bugfixBullets.length > 0
+								? bugfixBullets
+								: docsBullets.length > 0
+									? docsBullets
+									: minorBullets.length > 0
+										? minorBullets
+										: breakingBullets;
 
 		const items = buildSummaryItems(bullets);
 
