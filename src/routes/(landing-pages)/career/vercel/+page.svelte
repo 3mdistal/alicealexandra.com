@@ -18,7 +18,7 @@
 			<h1 class="accent-color">
 				Work from <span class="highlight">Vercel</span>
 			</h1>
-			<p class="subtitle">Content I published while working at Vercel (2022-2025).</p>
+			<p class="subtitle">Content I published while working at Vercel (2022&ndash;2025).</p>
 		</div>
 	</div>
 

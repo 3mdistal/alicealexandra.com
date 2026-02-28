@@ -398,4 +398,40 @@
 	.close-button:hover {
 		background-color: color-mix(in srgb, var(--color-content-bg) 82%, transparent);
 	}
+
+	@media (max-width: 639px) {
+		.modal-overlay {
+			padding: 0;
+		}
+
+		.modal-content {
+			justify-content: flex-start;
+			border-radius: 0;
+			padding: 3.5rem 0.5rem 1.5rem 0.5rem;
+			width: 100%;
+			max-width: 100vw;
+			height: 100%;
+			max-height: 100vh;
+			overflow-y: auto;
+		}
+
+		.modal-image {
+			margin-top: auto;
+			max-height: 65vh;
+		}
+
+		.close-button {
+			position: fixed;
+			top: 0.5rem;
+			right: 0.5rem;
+			z-index: 2;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			background-color: var(--color-content-bg);
+		}
+
+		.modal-info {
+			margin-bottom: auto;
+			padding: 0 0.5rem;
+		}
+	}
 </style>
