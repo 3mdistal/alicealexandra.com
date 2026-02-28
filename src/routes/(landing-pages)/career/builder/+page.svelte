@@ -44,12 +44,7 @@
 				<ul class="posts-list">
 					{#each posts as post}
 						<li class="post-item">
-							<a
-								href={post.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="post-link"
-							>
+							<a href={post.url} target="_blank" rel="noopener noreferrer" class="post-link">
 								<div class="post-header">
 									<h3 class="post-title">{post.title}</h3>
 									{#if formatDate(post.publishedAt)}
