@@ -143,6 +143,10 @@ fi
 echo ""
 echo "✓ Content setup complete!"
 echo ""
+echo "  Fetching latest Builder.io articles..."
+node scripts/scrape-builderio.mjs
+echo ""
+
 echo "Next steps:"
 echo "  1. Run 'pnpm dev' to start the dev server"
 echo "  2. Edit content in content/ directory"

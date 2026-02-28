@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"vercel-build": "bash scripts/fetch-content.sh && svelte-kit sync && vite build",
+		"vercel-build": "bash scripts/fetch-content.sh && pnpm scrape:builder --concurrency 3 && svelte-kit sync && vite build",
 		"setup:content": "bash scripts/setup-content.sh",
 		"scrape:builder": "node scripts/scrape-builderio.mjs",
 		"preview": "vite preview",
