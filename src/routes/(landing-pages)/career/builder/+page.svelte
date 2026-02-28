@@ -22,9 +22,6 @@
 		}
 		return formatter.format(date);
 	};
-
-	const lastUpdated = formatDate(snapshot?.dataUpdatedAt);
-	const scrapedOn = formatDate(snapshot?.generatedAt);
 </script>
 
 <svelte:head>
@@ -48,16 +45,7 @@
 	<div class="content">
 		<section class="posts-section">
 			<h2 class="section-title">Builder.io Blog Posts</h2>
-			{#if lastUpdated}
-				<p class="freshness">
-					Last updated {lastUpdated}
-					{#if scrapedOn && scrapedOn !== lastUpdated}
-						· Scraped {scrapedOn}
-					{/if}
-				</p>
-			{/if}
 			<p class="section-subtitle">Selected writing published on Builder.io&apos;s blog.</p>
-			<p class="disclaimer">This list is updated manually and may not include every post.</p>
 			{#if posts.length === 0}
 				<p class="empty-state">Posts are being gathered. Please check back soon.</p>
 			{:else}
@@ -156,20 +144,6 @@
 		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.125rem;
-		line-height: 1.6;
-	}
-
-	.freshness {
-		margin: 0 0 0.75rem;
-		color: var(--color-text-muted);
-		font-size: 1rem;
-	}
-
-	.disclaimer {
-		margin: -1.5rem 0 2.5rem;
-		color: var(--color-text-muted);
-		font-style: italic;
-		font-size: 1rem;
 		line-height: 1.6;
 	}
 
