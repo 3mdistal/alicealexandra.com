@@ -3,10 +3,10 @@
 	import AboutSection1 from '$lib/content-components/about/section-1.svelte';
 	import AboutSection2 from '$lib/content-components/about/section-2.svelte';
 	import AboutSection3 from '$lib/content-components/about/section-3.svelte';
-	const AuthorPhoto =
-		'https://cdn.builder.io/api/v1/image/assets%2F7055d8d0cc284adcbfeafeb0f4b74e06%2Fb073f806fad94af9be01b13f53ce53b3?format=webp&width=800';
-	const Mirror = 'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/mirror.webp';
-	const Owl = 'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/owl.webp';
+	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	const AuthorPhoto = `https://${IMAGE_DOMAIN}/site/images/author-photo.webp`;
+	const Mirror = `https://${IMAGE_DOMAIN}/site/images/mirror.webp`;
+	const Owl = `https://${IMAGE_DOMAIN}/site/images/owl.webp`;
 	import Socials from '$lib/icons/socials.svelte';
 	import { onDestroy } from 'svelte';
 	import { pageState } from '$lib/stores';
