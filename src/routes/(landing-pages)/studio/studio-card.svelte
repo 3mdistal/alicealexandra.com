@@ -246,6 +246,8 @@
 		opacity: 0;
 		box-sizing: border-box;
 		padding: 6rem 3rem;
+		--_button-accent: white;
+		--_button-bg: var(--studio-card-bg);
 	}
 
 	.logo-container {

@@ -35,15 +35,15 @@
 	}
 
 	.ui-button.outline {
-		border-color: var(--color-accent);
-		background: var(--color-surface);
-		color: var(--color-accent);
+		border-color: var(--_button-accent, var(--color-accent));
+		background: var(--_button-bg, var(--color-surface));
+		color: var(--_button-accent, var(--color-accent));
 	}
 
 	.ui-button.solid {
-		border-color: var(--color-accent);
-		background: var(--color-accent);
-		color: var(--color-bg);
+		border-color: var(--_button-accent, var(--color-accent));
+		background: var(--_button-accent, var(--color-accent));
+		color: var(--_button-bg, var(--color-bg));
 	}
 
 	.ui-button.ghost {
@@ -59,8 +59,8 @@
 	}
 
 	.ui-button.outline:hover:not(:disabled) {
-		background: var(--color-accent);
-		color: var(--color-surface);
+		background: var(--_button-accent, var(--color-accent));
+		color: var(--_button-bg, var(--color-surface));
 	}
 
 	.ui-button.ghost:hover:not(:disabled) {
