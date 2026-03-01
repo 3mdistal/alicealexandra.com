@@ -57,10 +57,7 @@
 		property="og:description"
 		content="The studio works of Alice Alexandra Moore. Enjoy fiction, film, fantasy, poetry, illustrations, music, essays, websites, and more."
 	/>
-	<meta
-		property="og:image"
-		content="https://{IMAGE_DOMAIN}/studio/studioog.jpg"
-	/>
+	<meta property="og:image" content="https://{IMAGE_DOMAIN}/studio/studioog.jpg" />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -73,10 +70,7 @@
 		name="twitter:description"
 		content="The studio works of Alice Alexandra Moore. Enjoy fiction, film, fantasy, poetry, illustrations, music, essays, websites, and more."
 	/>
-	<meta
-		name="twitter:image"
-		content="https://{IMAGE_DOMAIN}/studio/studioog.jpg"
-	/>
+	<meta name="twitter:image" content="https://{IMAGE_DOMAIN}/studio/studioog.jpg" />
 	<meta name="twitter:image:alt" content="The studio page of alicealexandra.com." />
 </svelte:head>
 

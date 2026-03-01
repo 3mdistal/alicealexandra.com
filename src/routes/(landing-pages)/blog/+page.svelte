@@ -44,7 +44,11 @@
 	</div>
 	<div class="background-container">
 		<div>
-			<OptimizedImage src={Bird} alt="A painting of a colorful bird in flight." class="background-image" />
+			<OptimizedImage
+				src={Bird}
+				alt="A painting of a colorful bird in flight."
+				class="background-image"
+			/>
 		</div>
 	</div>
 </div>
