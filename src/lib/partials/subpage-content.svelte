@@ -2,6 +2,7 @@
 	import gsap from 'gsap';
 	import { loadScrollTrigger } from '$lib/partials/load-scroll-trigger';
 	import { onMount } from 'svelte';
+	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
 
 	export let flexDirection = 'row-reverse';
 	export let accent = 'var(--color-accent)';
@@ -60,7 +61,7 @@
 
 		<div class="image-container" bind:this={image}>
 			{#if typeof imageSource === 'string' && (imageSource.startsWith('http') || imageSource.startsWith('//'))}
-				<img src={imageSource} alt={imageAlt} />
+				<OptimizedImage src={imageSource} alt={imageAlt} />
 			{:else}
 				<enhanced:img src={imageSource} alt={imageAlt} />
 			{/if}
@@ -133,7 +134,6 @@
 		min-height: 300px;
 	}
 
-	.image-container img,
 	.image-container :global(img) {
 		display: block;
 		filter: grayscale(0.1);
