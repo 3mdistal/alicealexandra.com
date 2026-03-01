@@ -4,10 +4,12 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { gsap } from 'gsap';
 	import { pageState } from '$lib/stores';
+	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
 
 	export let data: { posts: BlogPostMeta[] };
 
-	const Bird = 'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bird.webp';
+	const Bird = `https://${IMAGE_DOMAIN}/site/images/bird.webp`;
 
 	function fadeIn() {
 		gsap.to('.opacity-0', {
@@ -42,7 +44,7 @@
 	</div>
 	<div class="background-container">
 		<div>
-			<img src={Bird} alt="A painting of a colorful bird in flight." class="background-image" />
+			<OptimizedImage src={Bird} alt="A painting of a colorful bird in flight." class="background-image" />
 		</div>
 	</div>
 </div>
@@ -82,7 +84,7 @@
 		pointer-events: none;
 	}
 
-	.background-image {
+	.background-container :global(.background-image) {
 		position: absolute;
 		opacity: 0.1;
 		z-index: 10;
@@ -98,7 +100,7 @@
 			width: 60%;
 		}
 
-		.background-image {
+		.background-container :global(.background-image) {
 			object-position: 50% 35%;
 		}
 	}

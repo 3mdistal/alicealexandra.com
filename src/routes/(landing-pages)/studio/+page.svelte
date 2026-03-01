@@ -5,6 +5,7 @@
 	import gsap from 'gsap';
 	import { pageState } from '$lib/stores';
 	import type { StudioCard as StudioCardType } from '$lib/content/studio';
+	import { IMAGE_DOMAIN } from '$lib/utils/images';
 
 	export let data;
 
@@ -58,7 +59,7 @@
 	/>
 	<meta
 		property="og:image"
-		content="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/studio/studioog.jpg"
+		content="https://{IMAGE_DOMAIN}/studio/studioog.jpg"
 	/>
 
 	<!-- Twitter Meta Tags -->
@@ -74,7 +75,7 @@
 	/>
 	<meta
 		name="twitter:image"
-		content="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/studio/studioog.jpg"
+		content="https://{IMAGE_DOMAIN}/studio/studioog.jpg"
 	/>
 	<meta name="twitter:image:alt" content="The studio page of alicealexandra.com." />
 </svelte:head>
@@ -83,7 +84,7 @@
 	<h1 class="studio-title">studio</h1>
 
 	<OptimizedImage
-		src="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/studio/ink.png"
+		src="https://{IMAGE_DOMAIN}/studio/ink.png"
 		alt=""
 		class="studio-background"
 		sizes="100vw"

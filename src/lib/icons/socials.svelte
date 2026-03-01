@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
 
-	const InstagramBear =
-		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/instagram-bear.webp';
-	const BskySquirrel =
-		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bsky-squirrel.webp';
-	const SoundcloudRabbit =
-		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/soundcloud-rabbit.webp';
-	const GithubCat =
-		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/github-cat.webp';
+	const InstagramBear = `https://${IMAGE_DOMAIN}/site/images/instagram-bear.webp`;
+	const BskySquirrel = `https://${IMAGE_DOMAIN}/site/images/bsky-squirrel.webp`;
+	const SoundcloudRabbit = `https://${IMAGE_DOMAIN}/site/images/soundcloud-rabbit.webp`;
+	const GithubCat = `https://${IMAGE_DOMAIN}/site/images/github-cat.webp`;
 
 	let container: HTMLDivElement;
 
@@ -31,7 +29,7 @@
 			rel="noreferrer"
 			aria-label="Visit Alice Alexandra Moore on Instagram"
 		>
-			<img
+			<OptimizedImage
 				src={InstagramBear}
 				alt="Link to Instagram in the form of an illustrated polar bear taking a selfie. Painted by Alice Alexandra Moore."
 			/>
@@ -44,7 +42,7 @@
 			rel="noreferrer"
 			aria-label="Visit Alice Alexandra Moore on Bluesky"
 		>
-			<img
+			<OptimizedImage
 				src={BskySquirrel}
 				alt="Link to Bluesky in the form of a squirrel drinking its morning coffee. Painted by Alice Alexandra Moore."
 			/>
@@ -57,7 +55,7 @@
 			rel="noreferrer"
 			aria-label="Visit Alice Alexandra Moore on SoundCloud"
 		>
-			<img
+			<OptimizedImage
 				src={SoundcloudRabbit}
 				alt="Link to Soundcloud in the form of an illustrated rabbit wearing headphones. Painted by Alice Alexandra Moore."
 			/>
@@ -70,7 +68,7 @@
 			rel="noreferrer"
 			aria-label="View Alice Alexandra Moore's portfolio code on GitHub"
 		>
-			<img
+			<OptimizedImage
 				src={GithubCat}
 				alt="Link to GitHub in the form of a cat. Painted by Alice Alexandra Moore."
 			/>
@@ -79,7 +77,7 @@
 </div>
 
 <style>
-	#container img {
+	#container :global(img) {
 		transition: transform 0.5s cubic-bezier(0.43, -0.74, 0.43, 2);
 		object-fit: contain;
 	}
@@ -88,7 +86,7 @@
 		filter: none;
 	}
 
-	a:hover img {
+	a:hover :global(img) {
 		transform: scale(1.1);
 	}
 

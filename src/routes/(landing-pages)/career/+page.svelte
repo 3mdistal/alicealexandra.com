@@ -1,9 +1,9 @@
 <script>
 	import Career from './career.svelte';
 	import LandingPage from '$lib/components/landing-page.svelte';
+	import { IMAGE_DOMAIN } from '$lib/utils/images';
 
-	const Rabbit =
-		'https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/rabbit-in-hat.webp';
+	const Rabbit = `https://${IMAGE_DOMAIN}/site/images/rabbit-in-hat.webp`;
 </script>
 
 <svelte:head>

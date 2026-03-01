@@ -2,6 +2,7 @@
 	import { fade, scale } from 'svelte/transition';
 	import type { Illustration } from '$lib/content/studio';
 	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
+	import { IMAGE_DOMAIN } from '$lib/utils/images';
 
 	// Props
 	export let data;
@@ -74,7 +75,7 @@
 	/>
 	<meta
 		property="og:image"
-		content="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/studio/illustrations/still%2520across%2520the%2520waters.jpg"
+		content="https://{IMAGE_DOMAIN}/studio/illustrations/still%2520across%2520the%2520waters.jpg"
 	/>
 
 	<!-- Twitter Meta Tags -->
@@ -90,7 +91,7 @@
 	/>
 	<meta
 		name="twitter:image"
-		content="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/studio/illustrations/still%2520across%2520the%2520waters.jpg"
+		content="https://{IMAGE_DOMAIN}/studio/illustrations/still%2520across%2520the%2520waters.jpg"
 	/>
 	<meta name="twitter:image:alt" content="The illustrations page of alicealexandra.com." />
 </svelte:head>

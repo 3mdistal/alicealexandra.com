@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { onDestroy } from 'svelte';
 	import { pageState } from '../stores';
+	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
 
 	export let src = '';
 	export let alt = '';
@@ -68,7 +69,7 @@
 
 		{#if src}
 			<div bind:this={imageWrapper} class="image-wrapper" class:no-padding={noPadding}>
-				<img {src} {alt} />
+				<OptimizedImage {src} {alt} />
 			</div>
 		{:else}
 			<div bind:this={imageWrapper} class="slot-image-wrapper">
@@ -209,12 +210,12 @@
 		}
 	}
 
-	.image-wrapper img {
+	.image-wrapper :global(img) {
 		object-fit: contain;
 	}
 
 	@media (max-width: 767px) {
-		.image-wrapper.no-padding img {
+		.image-wrapper.no-padding :global(img) {
 			position: relative;
 			left: 50%;
 			transform: translateX(-50%);
