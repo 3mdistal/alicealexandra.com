@@ -1,16 +1,16 @@
 <p>
 	Something about the landscape has resided in me to this day, even as I've shed the backwards
 	ideologies of Southern Baptist cults threaded through my veins. As a closeted trans woman, I
-	learned not to discard the white supremacist neo-fascism, but to understand it—to learn how an
-	entire people can become so misled and to hope in art that resonates with the heart when so many
-	political discussions fall on deaf ears.
+	learned not to discard the white supremacist neo-fascism, but to empathize with the fears that
+	caused it—to learn how an entire people can become so misled—in hope that art can resonate with
+	the heart when so many political discussions fall on deaf ears.
 </p>
 
 <p>
-	After leaving Ohio, I stayed in the Midwest, pursuing postgraduate work in Muncie, Indiana, coming
-	out to myself as trans, and learning how to cope with the different ways adhd affects my everyday
-	life. These were some of the hardest times I ever experienced, but I grew through them, developing
-	an urge to participate in so many communities I'd been blind to.
+	After leaving Ohio, I stayed in the Midwest, pursuing postgraduate work in Muncie, Indiana,
+	getting involved in queer community, and learning how to live a life I was proud of. I then spent
+	a few years living in Egypt, the UK, and France, finding out who I am when my context is taken
+	away from me.
 </p>
 
 <p>
@@ -22,7 +22,7 @@
 </p>
 
 <p>
-	Currently, I'm working as a Content Engineer for Vercel, and continuing my various creative
-	projects. If you're interested in collaborating, please send me your idea, and we can brainstorm
-	together to make something extraordinary.
+	Currently, I'm working in Developer Experience at Builder.io, and I’m continuing my various
+	creative projects. If you're interested in building out more community around art, please send me
+	your idea, and we can brainstorm together to make something extraordinary.
 </p>
