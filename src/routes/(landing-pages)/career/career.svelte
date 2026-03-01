@@ -1,10 +1,4 @@
-<div class="spacer"></div>
-<div class="career-container">
-	<div class="hero">
-		<div class="hero-text">
-			<p class="accent-color">Developer notes and explorations.</p>
-		</div>
-	</div>
+<div class="career-container" id="content">
 	<div class="spacer"></div>
 	<div class="content">
 		<div class="section">
@@ -22,15 +16,6 @@
 				</a>
 			</div>
 		</div>
-
-		<div class="section">
-			<h2 class="accent-color">Coming Soon</h2>
-			<p>This space will house technical notes, code explorations, and digital experiments.</p>
-			<p>
-				From development techniques to creative coding experiments, this will be a place for sharing
-				the process behind the work.
-			</p>
-		</div>
 	</div>
 </div>
 
@@ -43,31 +28,6 @@
 
 	.accent-color {
 		color: var(--color-accent);
-	}
-
-	.hero {
-		display: flex;
-		position: relative;
-		justify-content: center;
-		align-items: center;
-		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
-		width: 100%;
-		height: 60vh;
-		overflow: hidden;
-	}
-
-	.hero-text {
-		z-index: 100;
-		margin: 0 2em;
-		border-radius: 10px;
-		background-color: var(--color-surface);
-		padding: 3em;
-
-		& p {
-			margin: 0;
-			font-size: clamp(1.5rem, 3vw, 3rem);
-			font-family: var(--font-serif);
-		}
 	}
 
 	.content {
