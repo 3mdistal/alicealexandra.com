@@ -21,8 +21,7 @@
                 from both my professional life and my wonky experiments."
 		src={Rabbit}
 		alt="A painting of a rabbit coming out of a hat."
-	>
-	</LandingPage>
+	></LandingPage>
 	<Career />
 </div>
 
