@@ -82,7 +82,7 @@
 		<img
 			bind:this={logo}
 			src="images/logos/logo.svg"
-			alt="The logo for Tempo Immaterial."
+			alt="The logo for hello James."
 			class="logo"
 			out:flyRotate={{
 				duration: reducedMotionEnabled() ? 1 : 750,
@@ -96,7 +96,7 @@
 				class="site-title"
 				out:fade={{ duration: reducedMotionEnabled() ? 1 : 500 }}
 			>
-				tempo immaterial
+				hello James
 			</h1>
 			<p
 				bind:this={subtitle}

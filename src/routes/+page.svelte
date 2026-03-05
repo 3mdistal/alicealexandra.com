@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-	<title>Tempo Immaterial</title>
+	<title>hello James</title>
 	<meta
 		name="description"
 		content="The studio of Alice Alexandra Moore. Creative work, ramblings, career and more."
@@ -21,7 +21,7 @@
 	<!-- Facebook Meta Tags -->
 	<meta property="og:url" content="https://www.alicealexandra.com" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Tempo Immaterial" />
+	<meta property="og:title" content="hello James" />
 	<meta
 		property="og:description"
 		content="The studio of Alice Alexandra Moore. Creative work, ramblings, career and more."
@@ -34,7 +34,7 @@
 	<meta name="twitter:creator" content="@tempoimmaterial" />
 	<meta name="twitter:domain" content="alicealexandra.com" />
 	<meta name="twitter:url" content="https://www.alicealexandra.com" />
-	<meta name="twitter:title" content="Tempo Immaterial" />
+	<meta name="twitter:title" content="hello James" />
 	<meta
 		name="twitter:description"
 		content="The studio of Alice Alexandra Moore. Creative work, ramblings, collabs, and more."

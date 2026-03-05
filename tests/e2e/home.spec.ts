@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test('homepage renders', async ({ page }) => {
 	await page.goto('/');
-	await expect(page).toHaveTitle('Tempo Immaterial');
+	await expect(page).toHaveTitle('hello James');
 });
 
 test('keyboard focus is visible on homepage links', async ({ page }) => {

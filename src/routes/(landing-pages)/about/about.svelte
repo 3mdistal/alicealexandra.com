@@ -26,7 +26,7 @@
 	imageAlt="A painting of a Screech Owl staring eerily at the viewer. Painting by Alice Alexandra Moore."
 >
 	<svelte:fragment slot="heading">
-		<strong>tempo immaterial</strong>, verb,
+		<strong>hello James</strong>, verb,
 		<em>to dream of perpetual insufficiency.</em>
 	</svelte:fragment>
 	<svelte:fragment slot="text">
