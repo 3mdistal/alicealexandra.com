@@ -101,6 +101,15 @@
 	object-fit: contain;
 }
 
+.prose .session-interlude-video {
+	display: block;
+	margin: 2em 0;
+	border-radius: 1.5rem;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
 @media (min-width: 1024px) {
 	.prose img {
 		object-position: left;
