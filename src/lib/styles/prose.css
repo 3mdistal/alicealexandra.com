@@ -120,7 +120,7 @@
 }
 
 .prose > h2:first-child {
-	margin-top: 1.75em;
+	margin-top: 0.875em;
 }
 
 @media (min-width: 768px) {
