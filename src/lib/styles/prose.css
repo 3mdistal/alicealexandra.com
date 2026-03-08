@@ -20,15 +20,15 @@
 }
 
 /* Drop caps */
-.prose > p:first-child,
-.prose > h2 + p,
-.prose > hr + p {
+.prose > p:first-child:not(.dropcap-opt-out),
+.prose > h2 + p:not(.dropcap-opt-out),
+.prose > hr + p:not(.dropcap-opt-out) {
 	overflow: hidden;
 }
 
-.prose > p:first-child::first-letter,
-.prose > h2 + p::first-letter,
-.prose > hr + p::first-letter {
+.prose > p:first-child:not(.dropcap-opt-out)::first-letter,
+.prose > h2 + p:not(.dropcap-opt-out)::first-letter,
+.prose > hr + p:not(.dropcap-opt-out)::first-letter {
 	margin-right: 0.5rem;
 	color: var(--color-content-heading);
 	font-weight: 300;
