@@ -20,13 +20,13 @@
 }
 
 /* Drop caps */
-.prose > p:first-of-type,
+.prose > p:first-child,
 .prose > h2 + p,
 .prose > hr + p {
 	overflow: hidden;
 }
 
-.prose > p:first-of-type::first-letter,
+.prose > p:first-child::first-letter,
 .prose > h2 + p::first-letter,
 .prose > hr + p::first-letter {
 	margin-right: 0.5rem;
