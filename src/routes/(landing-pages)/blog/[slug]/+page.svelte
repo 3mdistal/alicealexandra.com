@@ -40,6 +40,7 @@
 		}
 
 		videos.forEach((video) => {
+			video.controls = false;
 			video.muted = true;
 			video.loop = true;
 			video.playsInline = true;
