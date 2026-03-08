@@ -31,7 +31,9 @@
 			return () => {};
 		}
 
-		const videos = Array.from(context.querySelectorAll<HTMLVideoElement>('.session-interlude-video'));
+		const videos = Array.from(
+			context.querySelectorAll<HTMLVideoElement>('.session-interlude-video')
+		);
 
 		if (!videos.length) {
 			return () => {};
