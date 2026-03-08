@@ -26,6 +26,50 @@
 		}
 	};
 
+	const setupInlineVideos = () => {
+		if (!context || typeof IntersectionObserver === 'undefined') {
+			return () => {};
+		}
+
+		const videos = Array.from(
+			context.querySelectorAll<HTMLVideoElement>('.session-interlude-video')
+		);
+
+		if (!videos.length) {
+			return () => {};
+		}
+
+		videos.forEach((video) => {
+			video.controls = false;
+			video.muted = true;
+			video.loop = true;
+			video.playsInline = true;
+		});
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					const video = entry.target as HTMLVideoElement;
+
+					if (entry.isIntersecting) {
+						void video.play().catch(() => {});
+						return;
+					}
+
+					video.pause();
+				});
+			},
+			{ threshold: 0.5 }
+		);
+
+		videos.forEach((video) => observer.observe(video));
+
+		return () => {
+			observer.disconnect();
+			videos.forEach((video) => video.pause());
+		};
+	};
+
 	export let data: { post: BlogPost };
 
 	const { post } = data;
@@ -46,7 +90,16 @@
 	const htmlContent = marked.parse(post.content);
 
 	onMount(() => {
-		runBlogHelpers();
+		let cleanup = () => {};
+
+		void (async () => {
+			await runBlogHelpers();
+			cleanup = setupInlineVideos();
+		})();
+
+		return () => {
+			cleanup();
+		};
 	});
 </script>
 
