@@ -99,9 +99,7 @@
 
 		// Seed with an initial burst across the whole canvas
 		for (let i = 0; i < 300; i++) {
-			particles.push(
-				new Particle(Math.random() * canvas.width, Math.random() * canvas.height)
-			);
+			particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
 		}
 
 		requestAnimationFrame(animate);
@@ -111,21 +109,17 @@
 <svelte:window on:resize={handleResize} />
 
 <div class="scene">
-	<canvas
-		bind:this={canvas}
-		on:mousemove={handleMouseMove}
-		on:click={handleClick}
-	></canvas>
+	<canvas bind:this={canvas} on:mousemove={handleMouseMove} on:click={handleClick}></canvas>
 	<p class="hint">move your mouse &nbsp;·&nbsp; click to burst</p>
 </div>
 
 <style>
 	.scene {
 		position: relative;
+		background: rgb(8, 6, 18);
 		width: 100vw;
 		height: 100vh;
 		overflow: hidden;
-		background: rgb(8, 6, 18);
 	}
 
 	canvas {
@@ -137,10 +131,10 @@
 		bottom: 1.5rem;
 		left: 50%;
 		transform: translateX(-50%);
+		pointer-events: none;
 		color: rgba(255, 255, 255, 0.25);
 		font-size: 0.85rem;
 		letter-spacing: 0.08em;
-		pointer-events: none;
 		user-select: none;
 	}
 </style>
