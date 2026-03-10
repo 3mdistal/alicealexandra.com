@@ -36,6 +36,9 @@
 				<p>Project 3: Coding Toys for Three-Year-Olds Is Harder Than It Looks</p>
 			</a>
 			<a href="arcade/jump"><p>Project 4: Moving, Sliding, Jumping</p></a>
+			<a href="arcade/flow">
+				<p>Project 5: I Learned About Flow Fields and Now I Can't Stop Staring</p>
+			</a>
 		</div>
 	</div>
 </div>
