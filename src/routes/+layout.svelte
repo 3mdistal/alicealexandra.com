@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { getSurface, getTheme, type SiteSurface, type SiteTheme } from '$lib/theme/route-theme';
 
+	// hello world
 	let theme: SiteTheme = 'home';
 	let surface: SiteSurface = 'default';
 
