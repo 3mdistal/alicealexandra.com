@@ -6,6 +6,7 @@
 	import { onMount } from 'svelte';
 	import { IMAGE_DOMAIN } from '$lib/utils/images';
 
+	// hello world
 	onMount(() => {
 		pageState.set('home');
 	});
