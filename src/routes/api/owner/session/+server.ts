@@ -9,7 +9,6 @@ export const GET: RequestHandler = ({ locals }) => {
 		isOwner: locals.isOwner,
 		owner: locals.owner,
 		authConfigured: isOwnerAuthConfigured(),
-		publishConfigured: publishStatus.contentRepoConfigured,
-		deployConfigured: publishStatus.deployHookConfigured
+		publishConfigured: publishStatus.contentRepoConfigured
 	});
 };

@@ -14,7 +14,6 @@
 		} | null;
 		authConfigured: boolean;
 		publishConfigured: boolean;
-		deployConfigured: boolean;
 	};
 
 	type EditableBlogResponse = {
@@ -43,8 +42,7 @@
 		isOwner: false,
 		owner: null,
 		authConfigured: false,
-		publishConfigured: false,
-		deployConfigured: false
+		publishConfigured: false
 	};
 	let ownerStatusLoaded = false;
 	let editorDraft: EditorDraft | null = null;
@@ -210,9 +208,7 @@
 			};
 			editorChecksum = saveResult.checksum;
 			editorCommitUrl = saveResult.commitUrl;
-			editorNotice = saveResult.deployTriggered
-				? 'Saved to teenylilcontent and triggered a new Vercel deployment.'
-				: 'Saved to teenylilcontent. Add VERCEL_DEPLOY_HOOK_URL to auto-trigger a Vercel deploy after save.';
+			editorNotice = 'Saved to teenylilcontent. Your existing site deploy should publish it automatically.';
 		} catch (caughtError) {
 			editorError =
 				caughtError instanceof Error ? caughtError.message : 'Failed to save blog post.';

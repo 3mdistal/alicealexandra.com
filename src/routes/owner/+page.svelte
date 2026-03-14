@@ -10,7 +10,6 @@
 		} | null;
 		authConfigured: boolean;
 		publishConfigured: boolean;
-		deployConfigured: boolean;
 	};
 
 	let ownerStatus: OwnerStatus | null = null;
@@ -80,10 +79,6 @@
 				<p class="owner-status-row">
 					<span>Content publishing</span>
 					<strong>{ownerStatus.publishConfigured ? 'Ready' : 'Missing setup'}</strong>
-				</p>
-				<p class="owner-status-row">
-					<span>Vercel deploy hook</span>
-					<strong>{ownerStatus.deployConfigured ? 'Ready' : 'Optional / missing'}</strong>
 				</p>
 			</div>
 
