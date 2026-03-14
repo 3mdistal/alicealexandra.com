@@ -146,10 +146,15 @@
 		syncScrollPosition(editorSourceInput, editorPreviewScrollRegion);
 	}
 
-	async function syncPreviewToSource() {
+	async function syncPreviewToSource(contentSnapshot: string) {
 		await tick();
 
-		if (!editorSourceInput || !editorPreviewScrollRegion) {
+		if (
+			!editorSourceInput ||
+			!editorPreviewScrollRegion ||
+			!editorDraft ||
+			contentSnapshot !== editorDraft.content
+		) {
 			return;
 		}
 
@@ -182,8 +187,7 @@
 				};
 
 	$: if (isEditMode && editorDraft) {
-		editorDraft.content;
-		void syncPreviewToSource();
+		void syncPreviewToSource(editorDraft.content);
 	}
 
 	function replaceEditQuery(isEditing: boolean) {
@@ -781,10 +785,10 @@
 	}
 
 	.editor-preview-scroll-region {
-		overflow: auto;
+		padding-right: 0.35rem;
 		min-height: 32rem;
 		max-height: 70vh;
-		padding-right: 0.35rem;
+		overflow: auto;
 	}
 
 	.preview-pane :global(.editor-preview-content) {
