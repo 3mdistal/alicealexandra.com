@@ -22,7 +22,6 @@ interface ContentRepoConfig {
 
 interface PublishStatus {
 	contentRepoConfigured: boolean;
-	deployHookConfigured: boolean;
 }
 
 interface SaveBlogPostInput {
@@ -35,7 +34,6 @@ interface SaveBlogPostInput {
 export interface SaveBlogPostResult {
 	commitSha: string;
 	commitUrl: string;
-	deployTriggered: boolean;
 	checksum: string;
 	readTime: string;
 }
@@ -72,8 +70,7 @@ export function getBlogPublishStatus(): PublishStatus {
 			env['CONTENT_REPO_OWNER']?.trim() &&
 			env['CONTENT_REPO_NAME']?.trim() &&
 			(env['GITHUB_WRITE_TOKEN']?.trim() || env['GITHUB_TOKEN']?.trim())
-		),
-		deployHookConfigured: Boolean(env['VERCEL_DEPLOY_HOOK_URL']?.trim())
+		)
 	};
 }
 
@@ -227,20 +224,6 @@ async function createCommit(
 	return nextCommit;
 }
 
-async function triggerVercelDeploy(): Promise<boolean> {
-	const deployHookUrl = env['VERCEL_DEPLOY_HOOK_URL']?.trim();
-	if (!deployHookUrl) {
-		return false;
-	}
-
-	const response = await fetch(deployHookUrl, { method: 'POST' });
-	if (!response.ok) {
-		throw new PublishError(`Vercel deploy hook failed with status ${response.status}.`, 502);
-	}
-
-	return true;
-}
-
 function validateBlogDocument(input: SaveBlogPostInput): {
 	frontmatter: BlogFrontmatter;
 	source: string;
@@ -317,12 +300,9 @@ export async function saveBlogPost(input: SaveBlogPostInput): Promise<SaveBlogPo
 		`Edit blog post: ${frontmatter.slug}`
 	);
 
-	const deployTriggered = await triggerVercelDeploy();
-
 	return {
 		commitSha: commit.sha,
 		commitUrl: commit.html_url,
-		deployTriggered,
 		checksum: createBlogSourceChecksum(source),
 		readTime
 	};
