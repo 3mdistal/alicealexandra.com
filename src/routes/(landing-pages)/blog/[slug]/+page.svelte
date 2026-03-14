@@ -3,7 +3,7 @@
 	import BlogMarkdownContent from '$lib/components/blog-markdown-content.svelte';
 	import type { BlogPost } from '$lib/content/blog';
 	import type { BlogFrontmatter } from '$lib/content/blog-source';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	type OwnerStatus = {
 		isOwner: boolean;
@@ -52,6 +52,109 @@
 	let editorError = '';
 	let editorNotice = '';
 	let editorCommitUrl = '';
+	let editorSourceInput: HTMLTextAreaElement | null = null;
+	let editorPreviewScrollRegion: HTMLElement | null = null;
+	let previewContentResizeObserver: ResizeObserver | null = null;
+	let isProgrammaticScrollSync = false;
+	let scrollSyncResetFrame = 0;
+
+	function getScrollProgress(element: HTMLElement) {
+		const maxScrollTop = element.scrollHeight - element.clientHeight;
+		return maxScrollTop > 0 ? element.scrollTop / maxScrollTop : 0;
+	}
+
+	function setScrollProgress(element: HTMLElement, progress: number) {
+		const maxScrollTop = element.scrollHeight - element.clientHeight;
+		if (maxScrollTop <= 0) {
+			element.scrollTop = 0;
+			return;
+		}
+
+		element.scrollTop = Math.min(Math.max(progress, 0), 1) * maxScrollTop;
+	}
+
+	function runWithScrollSyncGuard(callback: () => void) {
+		if (typeof window === 'undefined') {
+			callback();
+			return;
+		}
+
+		isProgrammaticScrollSync = true;
+		callback();
+		window.cancelAnimationFrame(scrollSyncResetFrame);
+		scrollSyncResetFrame = window.requestAnimationFrame(() => {
+			isProgrammaticScrollSync = false;
+		});
+	}
+
+	function syncScrollPosition(source: HTMLElement, target: HTMLElement) {
+		runWithScrollSyncGuard(() => {
+			setScrollProgress(target, getScrollProgress(source));
+		});
+	}
+
+	function handleSourceScroll() {
+		if (isProgrammaticScrollSync || !editorSourceInput || !editorPreviewScrollRegion) {
+			return;
+		}
+
+		syncScrollPosition(editorSourceInput, editorPreviewScrollRegion);
+	}
+
+	function handlePreviewScroll() {
+		if (isProgrammaticScrollSync || !editorSourceInput || !editorPreviewScrollRegion) {
+			return;
+		}
+
+		syncScrollPosition(editorPreviewScrollRegion, editorSourceInput);
+	}
+
+	function clearPreviewResizeObserver() {
+		previewContentResizeObserver?.disconnect();
+		previewContentResizeObserver = null;
+	}
+
+	function teardownScrollSync() {
+		clearPreviewResizeObserver();
+		if (typeof window !== 'undefined') {
+			window.cancelAnimationFrame(scrollSyncResetFrame);
+		}
+		isProgrammaticScrollSync = false;
+	}
+
+	async function setupScrollSync() {
+		await tick();
+
+		if (!editorSourceInput || !editorPreviewScrollRegion) {
+			return;
+		}
+
+		clearPreviewResizeObserver();
+
+		const previewContent = editorPreviewScrollRegion.firstElementChild;
+		if (previewContent && typeof ResizeObserver !== 'undefined') {
+			previewContentResizeObserver = new ResizeObserver(() => {
+				if (!editorSourceInput || !editorPreviewScrollRegion) {
+					return;
+				}
+
+				syncScrollPosition(editorSourceInput, editorPreviewScrollRegion);
+			});
+			previewContentResizeObserver.observe(previewContent);
+		}
+
+		syncScrollPosition(editorSourceInput, editorPreviewScrollRegion);
+	}
+
+	async function syncPreviewToSource() {
+		await tick();
+
+		if (!editorSourceInput || !editorPreviewScrollRegion) {
+			return;
+		}
+
+		syncScrollPosition(editorSourceInput, editorPreviewScrollRegion);
+	}
 
 	function estimateReadTime(content: string): string {
 		const wordCount = content.match(/\b[\w'-]+\b/g)?.length ?? 0;
@@ -77,6 +180,11 @@
 					content: editorDraft.content,
 					readTime: estimateReadTime(editorDraft.content)
 				};
+
+	$: if (isEditMode && editorDraft) {
+		editorDraft.content;
+		void syncPreviewToSource();
+	}
 
 	function replaceEditQuery(isEditing: boolean) {
 		if (typeof window === 'undefined') {
@@ -133,6 +241,7 @@
 			editorChecksum = editablePost.checksum;
 			isEditMode = true;
 			replaceEditQuery(true);
+			await setupScrollSync();
 		} catch (caughtError) {
 			editorError =
 				caughtError instanceof Error ? caughtError.message : 'Failed to open the blog editor.';
@@ -142,6 +251,7 @@
 	}
 
 	function closeEditor() {
+		teardownScrollSync();
 		isEditMode = false;
 		editorError = '';
 		editorNotice = '';
@@ -228,6 +338,10 @@
 				await openEditor();
 			}
 		})();
+
+		return () => {
+			teardownScrollSync();
+		};
 	});
 </script>
 
@@ -402,7 +516,11 @@
 
 					<label class="editor-field editor-markdown-field">
 						<span class="editor-field-label">Markdown source</span>
-						<textarea bind:value={editorDraft.content} class="editor-textarea editor-markdown-input"
+						<textarea
+							bind:this={editorSourceInput}
+							bind:value={editorDraft.content}
+							class="editor-textarea editor-markdown-input"
+							on:scroll={handleSourceScroll}
 						></textarea>
 					</label>
 				</form>
@@ -414,10 +532,16 @@
 							This uses the same renderer and prose styles as the live post.
 						</p>
 					</div>
-					<BlogMarkdownContent
-						markdown={editorDraft.content}
-						contentClass="prose editor-preview-content"
-					/>
+					<div
+						class="editor-preview-scroll-region"
+						bind:this={editorPreviewScrollRegion}
+						on:scroll={handlePreviewScroll}
+					>
+						<BlogMarkdownContent
+							markdown={editorDraft.content}
+							contentClass="prose editor-preview-content"
+						/>
+					</div>
 				</section>
 			</div>
 		{:else}
@@ -651,6 +775,18 @@
 			Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 	}
 
+	.preview-pane {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.editor-preview-scroll-region {
+		overflow: auto;
+		min-height: 32rem;
+		max-height: 70vh;
+		padding-right: 0.35rem;
+	}
+
 	.preview-pane :global(.editor-preview-content) {
 		margin: 0;
 		max-width: none;
@@ -696,6 +832,10 @@
 		.preview-pane {
 			position: sticky;
 			top: 2rem;
+		}
+
+		.editor-preview-scroll-region {
+			max-height: calc(100vh - 8rem);
 		}
 	}
 
