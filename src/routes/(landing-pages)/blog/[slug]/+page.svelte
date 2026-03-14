@@ -208,7 +208,8 @@
 			};
 			editorChecksum = saveResult.checksum;
 			editorCommitUrl = saveResult.commitUrl;
-			editorNotice = 'Saved to teenylilcontent. Your existing site deploy should publish it automatically.';
+			editorNotice =
+				'Saved to teenylilcontent. Your existing site deploy should publish it automatically.';
 		} catch (caughtError) {
 			editorError =
 				caughtError instanceof Error ? caughtError.message : 'Failed to save blog post.';
