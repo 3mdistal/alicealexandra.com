@@ -1,6 +1,7 @@
 <script lang="ts">
 	import BlogHeader from '$lib/components/blog-header.svelte';
 	import BlogMarkdownContent from '$lib/components/blog-markdown-content.svelte';
+	import WritingEditorShell from '$lib/components/writing-editor-shell.svelte';
 	import type { BlogPost } from '$lib/content/blog';
 	import type { BlogFrontmatter } from '$lib/content/blog-source';
 	import { onMount, tick } from 'svelte';
@@ -231,7 +232,7 @@
 		editorNotice = '';
 
 		try {
-			const response = await fetch(`/api/content/blog/${post.slug}`);
+			const response = await fetch(`/api/content/writing/blog/${post.slug}`);
 			if (!response.ok) {
 				const failure = (await response.json().catch(() => null)) as { message?: string } | null;
 				throw new Error(failure?.message ?? 'Failed to load editable blog source.');
@@ -274,7 +275,7 @@
 		editorCommitUrl = '';
 
 		try {
-			const response = await fetch(`/api/content/blog/${post.slug}/save`, {
+			const response = await fetch(`/api/content/writing/blog/${post.slug}/save`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -396,61 +397,19 @@
 
 	<div class="blog-container">
 		{#if ownerStatusLoaded && ownerStatus.isOwner}
-			<div class="editor-toolbar">
-				<div class="editor-toolbar-copy">
-					<p class="editor-toolbar-kicker">Owner mode</p>
-					<p class="editor-toolbar-text">
-						{#if isEditMode}
-							Editing <strong>{post.slug}.md</strong> in teenylilcontent.
-						{:else}
-							Signed in as <strong>{ownerStatus.owner?.name || ownerStatus.owner?.login}</strong>.
-						{/if}
-					</p>
-				</div>
-				<div class="editor-toolbar-actions">
-					<a class="editor-action secondary" href="/owner">Owner</a>
-					{#if isEditMode}
-						<button
-							class="editor-action secondary"
-							type="button"
-							on:click={closeEditor}
-							disabled={isSaving}
-						>
-							Cancel
-						</button>
-						<button
-							class="editor-action primary"
-							type="button"
-							on:click={saveEditor}
-							disabled={isSaving}
-						>
-							{isSaving ? 'Saving…' : 'Save & publish'}
-						</button>
-					{:else}
-						<button
-							class="editor-action primary"
-							type="button"
-							on:click={openEditor}
-							disabled={isLoadingEditor}
-						>
-							{isLoadingEditor ? 'Loading…' : 'Edit'}
-						</button>
-					{/if}
-				</div>
-			</div>
-		{/if}
-
-		{#if editorError}
-			<div class="editor-feedback editor-feedback-error">{editorError}</div>
-		{/if}
-
-		{#if editorNotice}
-			<div class="editor-feedback editor-feedback-success">
-				<span>{editorNotice}</span>
-				{#if editorCommitUrl}
-					<a href={editorCommitUrl} target="_blank" rel="noreferrer">View commit</a>
-				{/if}
-			</div>
+			<WritingEditorShell
+				ownerName={ownerStatus.owner?.name || ownerStatus.owner?.login || 'owner'}
+				fileLabel={`${post.slug}.md`}
+				{isEditMode}
+				{isLoadingEditor}
+				{isSaving}
+				errorMessage={editorError}
+				noticeMessage={editorNotice}
+				commitUrl={editorCommitUrl}
+				on:open={openEditor}
+				on:close={closeEditor}
+				on:save={saveEditor}
+			/>
 		{/if}
 
 		{#if isEditMode && editorDraft}
@@ -548,7 +507,9 @@
 					</div>
 				</section>
 			</div>
-		{:else}
+		{/if}
+
+		{#if !isEditMode}
 			<BlogMarkdownContent markdown={post.content} />
 		{/if}
 
@@ -610,31 +571,6 @@
 		}
 	}
 
-	.editor-toolbar,
-	.editor-feedback {
-		margin: 0 auto 1.5rem;
-		border: 1px solid var(--color-content-border);
-		background: color-mix(in srgb, var(--color-content-bg) 92%, var(--color-content-text) 8%);
-		padding: 1rem;
-	}
-
-	.editor-toolbar {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.editor-toolbar-kicker {
-		margin: 0 0 0.25rem;
-		color: var(--color-content-secondary);
-		font-size: var(--content-font-size-body-sm);
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-	}
-
-	.editor-toolbar-text,
-	.editor-feedback,
 	.editor-pane-copy,
 	.editor-field-label,
 	.editor-readonly-row {
@@ -642,53 +578,8 @@
 		line-height: 1.5;
 	}
 
-	.editor-toolbar-text,
 	.editor-pane-copy {
 		margin: 0;
-	}
-
-	.editor-toolbar-actions {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-	}
-
-	.editor-action {
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		cursor: pointer;
-		border: 1px solid var(--color-content-border);
-		background: transparent;
-		padding: 0.7rem 1rem;
-		color: var(--color-content-text);
-		font: inherit;
-		text-decoration: none;
-	}
-
-	.editor-action.primary {
-		background: var(--color-content-text);
-		color: var(--color-content-bg);
-	}
-
-	.editor-action:disabled {
-		opacity: 0.6;
-		cursor: wait;
-	}
-
-	.editor-feedback {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.editor-feedback a {
-		color: inherit;
-	}
-
-	.editor-feedback-error {
-		border-color: var(--color-content-link);
 	}
 
 	.editor-layout {
@@ -840,22 +731,6 @@
 
 		.editor-preview-scroll-region {
 			max-height: calc(100vh - 8rem);
-		}
-	}
-
-	@media (max-width: 767px) {
-		.editor-toolbar,
-		.editor-feedback {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-
-		.editor-toolbar-actions {
-			width: 100%;
-		}
-
-		.editor-action {
-			flex: 1 1 auto;
 		}
 	}
 </style>

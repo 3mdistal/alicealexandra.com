@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { createHash } from 'node:crypto';
+import { type EditableMarkdownDocument, isValidContentSlug } from '$lib/content/editable-source';
+import { createContentSourceChecksum } from '$lib/content/editable-source.server';
 
 const BLOG_CONTENT_PATH = path.join(process.cwd(), 'content', 'blog');
 const BLOG_READING_SPEED_WORDS_PER_MINUTE = 225;
@@ -33,15 +34,10 @@ export interface BlogFrontmatter {
 	notionId: string;
 }
 
-export interface EditableBlogDocument {
-	frontmatter: BlogFrontmatter;
-	content: string;
-	rawSource: string;
-	checksum: string;
-}
+export type EditableBlogDocument = EditableMarkdownDocument<BlogFrontmatter>;
 
 export function isValidBlogSlug(slug: string): boolean {
-	return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug);
+	return isValidContentSlug(slug);
 }
 
 function createEmptyBlogFrontmatter(): BlogFrontmatter {
@@ -130,7 +126,7 @@ export function calculateBlogReadTimeFromContent(content: string): string {
 }
 
 export function createBlogSourceChecksum(source: string): string {
-	return createHash('sha1').update(source).digest('hex');
+	return createContentSourceChecksum(source);
 }
 
 export async function loadRawBlogMarkdownBySlug(slug: string): Promise<EditableBlogDocument | null> {

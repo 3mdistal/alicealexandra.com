@@ -58,10 +58,10 @@
 <div class="owner-page">
 	<div class="owner-card">
 		<p class="owner-kicker">Owner mode</p>
-		<h1 class="owner-title">Edit the site’s blog content from here.</h1>
+		<h1 class="owner-title">Edit the site’s writing from here.</h1>
 		<p class="owner-copy">
-			Sign in once with GitHub, then open any blog post and the inline edit button will appear for
-			your session.
+			Sign in once with GitHub, then open any blog post, poem, postcard, or tall tale and the inline
+			edit button will appear for your session.
 		</p>
 
 		{#if errorMessage}
@@ -88,6 +88,9 @@
 				</p>
 				<div class="owner-actions">
 					<a class="owner-button primary" href="/blog">Open the blog</a>
+					<a class="owner-button secondary" href="/studio/hfc">Open poems</a>
+					<a class="owner-button secondary" href="/studio/postcards">Open postcards</a>
+					<a class="owner-button secondary" href="/studio/tall-tales">Open tall tales</a>
 					<a class="owner-button secondary" href="/api/auth/logout?redirectTo=/owner">Sign out</a>
 				</div>
 			{:else}

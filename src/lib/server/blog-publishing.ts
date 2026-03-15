@@ -1,4 +1,3 @@
-import { env } from '$env/dynamic/private';
 import type { BlogPostMeta } from '$lib/content/blog';
 import {
 	calculateBlogReadTimeFromContent,
@@ -7,26 +6,52 @@ import {
 	isValidBlogSlug,
 	serializeBlogMarkdown
 } from '$lib/content/blog-source';
-
-interface GitHubContentFile {
-	sha: string;
-	content: string;
-}
-
-interface ContentRepoConfig {
-	owner: string;
-	repo: string;
-	branch: string;
-	token: string;
-}
-
-interface PublishStatus {
-	contentRepoConfigured: boolean;
-}
+import type { PoemFrontmatter } from '$lib/content/poems';
+import {
+	normalizeHeroImage as normalizePostcardHeroImage,
+	serializePostcardMarkdown
+} from '$lib/content/postcards';
+import type { PostcardFrontmatter, PostcardMeta } from '$lib/content/postcards';
+import { isValidContentSlug } from '$lib/content/editable-source';
+import { createContentSourceChecksum } from '$lib/content/editable-source.server';
+import {
+	type TallTaleFrontmatter,
+	type TallTaleMeta,
+	serializeTallTaleMarkdown
+} from '$lib/content/tall-tales';
+import {
+	createContentRepoCommit,
+	decodeGitHubContent,
+	getWritingPublishStatus,
+	loadGitHubFile,
+	PublishError
+} from '$lib/server/content-repo';
+import { normalizePoemFrontmatter, serializePoemMarkdown } from '$lib/content/poems';
 
 interface SaveBlogPostInput {
 	slug: string;
 	frontmatter: BlogFrontmatter;
+	content: string;
+	originalChecksum: string;
+}
+
+interface SavePoemInput {
+	slug: string;
+	frontmatter: PoemFrontmatter;
+	content: string;
+	originalChecksum: string;
+}
+
+interface SavePostcardInput {
+	slug: string;
+	frontmatter: PostcardFrontmatter;
+	content: string;
+	originalChecksum: string;
+}
+
+interface SaveTallTaleInput {
+	slug: string;
+	frontmatter: TallTaleFrontmatter;
 	content: string;
 	originalChecksum: string;
 }
@@ -38,91 +63,20 @@ export interface SaveBlogPostResult {
 	readTime: string;
 }
 
-export class PublishError extends Error {
-	status: number;
-
-	constructor(message: string, status = 500) {
-		super(message);
-		this.name = 'PublishError';
-		this.status = status;
-	}
+export interface SaveWritingDocumentResult {
+	commitSha: string;
+	commitUrl: string;
+	checksum: string;
 }
 
-function getContentRepoConfig(): ContentRepoConfig {
-	const owner = env['CONTENT_REPO_OWNER']?.trim() || '';
-	const repo = env['CONTENT_REPO_NAME']?.trim() || '';
-	const branch = env['CONTENT_REPO_BRANCH']?.trim() || 'main';
-	const token = env['GITHUB_WRITE_TOKEN']?.trim() || env['GITHUB_TOKEN']?.trim() || '';
-
-	if (!owner || !repo || !token) {
-		throw new PublishError(
-			'Content publishing is not configured. Set CONTENT_REPO_OWNER, CONTENT_REPO_NAME, and GITHUB_WRITE_TOKEN.',
-			500
-		);
-	}
-
-	return { owner, repo, branch, token };
+export interface SaveTimestampedWritingDocumentResult extends SaveWritingDocumentResult {
+	lastEditedTime: string;
 }
 
-export function getBlogPublishStatus(): PublishStatus {
-	return {
-		contentRepoConfigured: Boolean(
-			env['CONTENT_REPO_OWNER']?.trim() &&
-			env['CONTENT_REPO_NAME']?.trim() &&
-			(env['GITHUB_WRITE_TOKEN']?.trim() || env['GITHUB_TOKEN']?.trim())
-		)
-	};
-}
+export { PublishError };
 
-async function githubRequest<T>(
-	config: ContentRepoConfig,
-	path: string,
-	init?: RequestInit
-): Promise<T> {
-	const response = await fetch(`https://api.github.com${path}`, {
-		...init,
-		headers: {
-			Accept: 'application/vnd.github+json',
-			Authorization: `Bearer ${config.token}`,
-			'User-Agent': 'alicealexandra-owner-editor',
-			'Content-Type': 'application/json',
-			...init?.headers
-		}
-	});
-
-	if (!response.ok) {
-		const errorText = await response.text();
-		throw new PublishError(
-			`GitHub request failed (${response.status}): ${errorText}`,
-			response.status
-		);
-	}
-
-	return (await response.json()) as T;
-}
-
-function decodeGitHubContent(file: GitHubContentFile): string {
-	return Buffer.from(file.content.replace(/\n/g, ''), 'base64').toString('utf-8');
-}
-
-async function loadGitHubFile(
-	config: ContentRepoConfig,
-	filePath: string
-): Promise<GitHubContentFile> {
-	const encodedPath = filePath
-		.split('/')
-		.map((segment) => encodeURIComponent(segment))
-		.join('/');
-
-	const response = await githubRequest<{ sha: string; content: string }>(
-		config,
-		`/repos/${config.owner}/${config.repo}/contents/${encodedPath}?ref=${encodeURIComponent(config.branch)}`
-	);
-
-	return {
-		sha: response.sha,
-		content: response.content
-	};
+export function getBlogPublishStatus() {
+	return getWritingPublishStatus();
 }
 
 function updatePostsIndex(
@@ -164,64 +118,54 @@ function updatePostsIndex(
 	return `${JSON.stringify({ ...parsed, data: nextPosts }, null, 2)}\n`;
 }
 
-async function createCommit(
-	config: ContentRepoConfig,
-	files: Array<{ path: string; content: string }>,
-	message: string
-) {
-	const headRef = await githubRequest<{ object: { sha: string } }>(
-		config,
-		`/repos/${config.owner}/${config.repo}/git/ref/heads/${encodeURIComponent(config.branch)}`
-	);
-	const headSha = headRef.object.sha;
-	const headCommit = await githubRequest<{ tree: { sha: string } }>(
-		config,
-		`/repos/${config.owner}/${config.repo}/git/commits/${headSha}`
-	);
+function updatePostcardsIndex(
+	currentMetadataJson: string,
+	frontmatter: PostcardFrontmatter
+): string {
+	const metadata = JSON.parse(currentMetadataJson) as PostcardMeta[];
+	const heroImage = normalizePostcardHeroImage(frontmatter.heroImage);
+	const nextEntry: PostcardMeta = {
+		id: frontmatter.notionId,
+		slug: frontmatter.slug,
+		title: frontmatter.title,
+		description: frontmatter.description,
+		lastEditedTime: frontmatter.lastEditedTime,
+		...(heroImage ? { heroImage } : {})
+	};
+	const existingIndex = metadata.findIndex((postcard) => postcard.slug === frontmatter.slug);
+	const nextMetadata = [...metadata];
 
-	const nextTree = await githubRequest<{ sha: string }>(
-		config,
-		`/repos/${config.owner}/${config.repo}/git/trees`,
-		{
-			method: 'POST',
-			body: JSON.stringify({
-				base_tree: headCommit.tree.sha,
-				tree: files.map((file) => ({
-					path: file.path,
-					mode: '100644',
-					type: 'blob',
-					content: file.content
-				}))
-			})
-		}
-	);
+	if (existingIndex >= 0) {
+		nextMetadata[existingIndex] = nextEntry;
+	} else {
+		nextMetadata.unshift(nextEntry);
+	}
 
-	const nextCommit = await githubRequest<{ sha: string; html_url: string }>(
-		config,
-		`/repos/${config.owner}/${config.repo}/git/commits`,
-		{
-			method: 'POST',
-			body: JSON.stringify({
-				message,
-				tree: nextTree.sha,
-				parents: [headSha]
-			})
-		}
-	);
+	return `${JSON.stringify(nextMetadata, null, 2)}\n`;
+}
 
-	await githubRequest(
-		config,
-		`/repos/${config.owner}/${config.repo}/git/refs/heads/${encodeURIComponent(config.branch)}`,
-		{
-			method: 'PATCH',
-			body: JSON.stringify({
-				sha: nextCommit.sha,
-				force: false
-			})
-		}
-	);
+function updateTallTalesIndex(
+	currentMetadataJson: string,
+	frontmatter: TallTaleFrontmatter
+): string {
+	const metadata = JSON.parse(currentMetadataJson) as TallTaleMeta[];
+	const nextEntry: TallTaleMeta = {
+		slug: frontmatter.slug,
+		title: frontmatter.title,
+		description: frontmatter.description,
+		coverImage: frontmatter.heroImage,
+		...(frontmatter.audio?.src ? { audio: frontmatter.audio } : {})
+	};
+	const existingIndex = metadata.findIndex((tale) => tale.slug === frontmatter.slug);
+	const nextMetadata = [...metadata];
 
-	return nextCommit;
+	if (existingIndex >= 0) {
+		nextMetadata[existingIndex] = nextEntry;
+	} else {
+		nextMetadata.unshift(nextEntry);
+	}
+
+	return `${JSON.stringify(nextMetadata, null, 2)}\n`;
 }
 
 function validateBlogDocument(input: SaveBlogPostInput): {
@@ -266,16 +210,133 @@ function validateBlogDocument(input: SaveBlogPostInput): {
 	};
 }
 
+function validatePoemDocument(input: SavePoemInput): {
+	frontmatter: PoemFrontmatter;
+	source: string;
+} {
+	if (!isValidContentSlug(input.slug)) {
+		throw new PublishError('Invalid poem slug.', 400);
+	}
+
+	const body = input.content.trim();
+	const title = input.frontmatter.title.trim();
+	const section = input.frontmatter.section.trim();
+	const sequence = Math.max(1, Math.trunc(Number(input.frontmatter.sequence) || 1));
+	if (!title || !section || !body) {
+		throw new PublishError('Title, section, sequence, and poem content are required.', 400);
+	}
+
+	const frontmatter = normalizePoemFrontmatter({
+		...input.frontmatter,
+		title,
+		section,
+		sequence,
+		notionId: input.frontmatter.notionId.trim()
+	});
+
+	return {
+		frontmatter,
+		source: serializePoemMarkdown(frontmatter, body)
+	};
+}
+
+function validatePostcardDocument(input: SavePostcardInput): {
+	frontmatter: PostcardFrontmatter;
+	source: string;
+} {
+	if (!isValidContentSlug(input.slug)) {
+		throw new PublishError('Invalid postcard slug.', 400);
+	}
+
+	const body = input.content.trim();
+	const title = input.frontmatter.title.trim();
+	const notionId = input.frontmatter.notionId.trim();
+	if (!title || !body || !notionId) {
+		throw new PublishError('Title, notion ID, and postcard content are required.', 400);
+	}
+
+	const frontmatter: PostcardFrontmatter = {
+		...input.frontmatter,
+		title,
+		slug: input.slug,
+		description: input.frontmatter.description.trim(),
+		heroImage: input.frontmatter.heroImage.trim(),
+		lastEditedTime: new Date().toISOString(),
+		notionId
+	};
+
+	return {
+		frontmatter,
+		source: serializePostcardMarkdown(frontmatter, body)
+	};
+}
+
+function validateTallTaleDocument(input: SaveTallTaleInput): {
+	frontmatter: TallTaleFrontmatter;
+	source: string;
+} {
+	if (!isValidContentSlug(input.slug)) {
+		throw new PublishError('Invalid tall tale slug.', 400);
+	}
+
+	const body = input.content.trim();
+	const title = input.frontmatter.title.trim();
+	const notionId = input.frontmatter.notionId.trim();
+	if (!title || !body || !notionId || input.frontmatter.sections.length === 0) {
+		throw new PublishError(
+			'Title, notion ID, section metadata, and tall tale content are required.',
+			400
+		);
+	}
+
+	const normalizedSections = input.frontmatter.sections.map((section) => ({
+		backgroundImage: section.backgroundImage.trim(),
+		textColor: section.textColor.trim() || '#ffffff',
+		...(section.backgroundImageOpacity !== undefined &&
+		!Number.isNaN(Number(section.backgroundImageOpacity))
+			? { backgroundImageOpacity: Number(section.backgroundImageOpacity) }
+			: {}),
+		...(section.backgroundColor?.trim() ? { backgroundColor: section.backgroundColor.trim() } : {}),
+		...(section.overlayColor?.trim() ? { overlayColor: section.overlayColor.trim() } : {}),
+		...(section.fontFamily?.trim() ? { fontFamily: section.fontFamily.trim() } : {})
+	}));
+	const frontmatter: TallTaleFrontmatter = {
+		...input.frontmatter,
+		title,
+		slug: input.slug,
+		description: input.frontmatter.description.trim(),
+		heroImage: input.frontmatter.heroImage.trim(),
+		lastEditedTime: new Date().toISOString(),
+		notionId,
+		sectionDivider: input.frontmatter.sectionDivider === 'heading' ? 'heading' : 'hr',
+		...(input.frontmatter.audio?.src.trim()
+			? {
+					audio: {
+						src: input.frontmatter.audio.src.trim(),
+						...(input.frontmatter.audio.loop !== undefined
+							? { loop: input.frontmatter.audio.loop }
+							: {})
+					}
+				}
+			: {}),
+		sections: normalizedSections
+	};
+
+	return {
+		frontmatter,
+		source: serializeTallTaleMarkdown(frontmatter, body)
+	};
+}
+
 export async function saveBlogPost(input: SaveBlogPostInput): Promise<SaveBlogPostResult> {
-	const config = getContentRepoConfig();
 	const { frontmatter, source } = validateBlogDocument(input);
 	const readTime = calculateBlogReadTimeFromContent(input.content);
 	const markdownPath = `blog/${frontmatter.slug}.md`;
 	const postsIndexPath = 'blog/posts.json';
 
 	const [remoteMarkdown, remotePosts] = await Promise.all([
-		loadGitHubFile(config, markdownPath),
-		loadGitHubFile(config, postsIndexPath)
+		loadGitHubFile(markdownPath),
+		loadGitHubFile(postsIndexPath)
 	]);
 
 	const remoteMarkdownSource = decodeGitHubContent(remoteMarkdown);
@@ -291,8 +352,7 @@ export async function saveBlogPost(input: SaveBlogPostInput): Promise<SaveBlogPo
 		frontmatter,
 		input.content
 	);
-	const commit = await createCommit(
-		config,
+	const commit = await createContentRepoCommit(
 		[
 			{ path: markdownPath, content: source },
 			{ path: postsIndexPath, content: nextPostsJson }
@@ -305,5 +365,99 @@ export async function saveBlogPost(input: SaveBlogPostInput): Promise<SaveBlogPo
 		commitUrl: commit.html_url,
 		checksum: createBlogSourceChecksum(source),
 		readTime
+	};
+}
+
+export async function savePoem(input: SavePoemInput): Promise<SaveWritingDocumentResult> {
+	const { source } = validatePoemDocument(input);
+	const markdownPath = `poems/${input.slug}.md`;
+	const remoteMarkdown = await loadGitHubFile(markdownPath);
+	const remoteMarkdownSource = decodeGitHubContent(remoteMarkdown);
+	if (createContentSourceChecksum(remoteMarkdownSource) !== input.originalChecksum) {
+		throw new PublishError(
+			'This poem changed in the content repo since you opened the editor. Refresh to load the latest version before saving again.',
+			409
+		);
+	}
+
+	const commit = await createContentRepoCommit(
+		[{ path: markdownPath, content: source }],
+		`Edit poem: ${input.slug}`
+	);
+
+	return {
+		commitSha: commit.sha,
+		commitUrl: commit.html_url,
+		checksum: createContentSourceChecksum(source)
+	};
+}
+
+export async function savePostcard(
+	input: SavePostcardInput
+): Promise<SaveTimestampedWritingDocumentResult> {
+	const { frontmatter, source } = validatePostcardDocument(input);
+	const markdownPath = `postcards/${input.slug}.md`;
+	const metadataPath = 'postcards/metadata.json';
+	const [remoteMarkdown, remoteMetadata] = await Promise.all([
+		loadGitHubFile(markdownPath),
+		loadGitHubFile(metadataPath)
+	]);
+	const remoteMarkdownSource = decodeGitHubContent(remoteMarkdown);
+	if (createContentSourceChecksum(remoteMarkdownSource) !== input.originalChecksum) {
+		throw new PublishError(
+			'This postcard changed in the content repo since you opened the editor. Refresh to load the latest version before saving again.',
+			409
+		);
+	}
+
+	const nextMetadataJson = updatePostcardsIndex(decodeGitHubContent(remoteMetadata), frontmatter);
+	const commit = await createContentRepoCommit(
+		[
+			{ path: markdownPath, content: source },
+			{ path: metadataPath, content: nextMetadataJson }
+		],
+		`Edit postcard: ${input.slug}`
+	);
+
+	return {
+		commitSha: commit.sha,
+		commitUrl: commit.html_url,
+		checksum: createContentSourceChecksum(source),
+		lastEditedTime: frontmatter.lastEditedTime
+	};
+}
+
+export async function saveTallTale(
+	input: SaveTallTaleInput
+): Promise<SaveTimestampedWritingDocumentResult> {
+	const { frontmatter, source } = validateTallTaleDocument(input);
+	const markdownPath = `tall-tales/${input.slug}.md`;
+	const metadataPath = 'tall-tales/metadata.json';
+	const [remoteMarkdown, remoteMetadata] = await Promise.all([
+		loadGitHubFile(markdownPath),
+		loadGitHubFile(metadataPath)
+	]);
+	const remoteMarkdownSource = decodeGitHubContent(remoteMarkdown);
+	if (createContentSourceChecksum(remoteMarkdownSource) !== input.originalChecksum) {
+		throw new PublishError(
+			'This tall tale changed in the content repo since you opened the editor. Refresh to load the latest version before saving again.',
+			409
+		);
+	}
+
+	const nextMetadataJson = updateTallTalesIndex(decodeGitHubContent(remoteMetadata), frontmatter);
+	const commit = await createContentRepoCommit(
+		[
+			{ path: markdownPath, content: source },
+			{ path: metadataPath, content: nextMetadataJson }
+		],
+		`Edit tall tale: ${input.slug}`
+	);
+
+	return {
+		commitSha: commit.sha,
+		commitUrl: commit.html_url,
+		checksum: createContentSourceChecksum(source),
+		lastEditedTime: frontmatter.lastEditedTime
 	};
 }

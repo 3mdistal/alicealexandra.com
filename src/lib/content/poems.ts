@@ -4,10 +4,13 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { type EditableMarkdownDocument } from '$lib/content/editable-source';
+import { createContentSourceChecksum } from '$lib/content/editable-source.server';
 
 // Use process.cwd() which works during SvelteKit build
 // This points to project root during both local dev and Vercel build
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'poems');
+const POEM_FRONTMATTER_FIELDS = ['title', 'section', 'sequence', 'notLineated', 'notionId'] as const;
 
 export interface Section {
 	id: string;
@@ -32,18 +35,43 @@ export interface Poem extends PoemMeta {
 	content: string;
 }
 
-interface PoemFrontmatter {
+export interface PoemFrontmatter {
 	title: string;
 	section: string;
 	sequence: number;
 	notLineated: boolean;
+	notionId: string;
+}
+
+export type EditablePoemDocument = EditableMarkdownDocument<PoemFrontmatter>;
+
+function createEmptyPoemFrontmatter(): PoemFrontmatter {
+	return {
+		title: '',
+		section: '',
+		sequence: 1,
+		notLineated: false,
+		notionId: ''
+	};
+}
+
+export function normalizePoemFrontmatter(frontmatter: Partial<PoemFrontmatter>): PoemFrontmatter {
+	return {
+		...createEmptyPoemFrontmatter(),
+		...frontmatter,
+		sequence:
+			typeof frontmatter.sequence === 'number' && Number.isFinite(frontmatter.sequence)
+				? frontmatter.sequence
+				: createEmptyPoemFrontmatter().sequence,
+		notLineated: frontmatter.notLineated === true
+	};
 }
 
 /**
  * Parse frontmatter from markdown content
  */
-function parseFrontmatter(content: string): { frontmatter: PoemFrontmatter; body: string } {
-	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
+export function parsePoemMarkdown(content: string): { frontmatter: PoemFrontmatter; body: string } {
+	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n?/;
 	const match = content.match(frontmatterRegex);
 
 	if (!match || !match[1]) {
@@ -52,36 +80,83 @@ function parseFrontmatter(content: string): { frontmatter: PoemFrontmatter; body
 
 	const frontmatterStr: string = match[1];
 	const body = content.slice(match[0].length);
+	const frontmatter = createEmptyPoemFrontmatter();
 
-	// Parse YAML-like frontmatter (simple key: value pairs)
-	const frontmatter: Record<string, any> = {};
 	for (const line of frontmatterStr.split('\n')) {
 		const colonIndex = line.indexOf(':');
-		if (colonIndex > 0) {
-			const key = line.slice(0, colonIndex).trim();
-			let value: any = line.slice(colonIndex + 1).trim();
+		if (colonIndex <= 0) {
+			continue;
+		}
 
-			// Remove wrapping quotes from strings
-			if (
-				(value.startsWith('"') && value.endsWith('"')) ||
-				(value.startsWith("'") && value.endsWith("'"))
-			) {
-				value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
+		const key = line.slice(0, colonIndex).trim() as keyof PoemFrontmatter;
+		let value: string | number | boolean = line.slice(colonIndex + 1).trim();
+
+		if (
+			(typeof value === 'string' && value.startsWith('"') && value.endsWith('"')) ||
+			(typeof value === 'string' && value.startsWith("'") && value.endsWith("'"))
+		) {
+			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
+		} else if (value === 'true') {
+			value = true;
+		} else if (value === 'false') {
+			value = false;
+		} else if (!Number.isNaN(Number(value))) {
+			value = Number(value);
+		}
+
+		if (key in frontmatter) {
+			if (key === 'sequence') {
+				frontmatter.sequence = Number(value) || 1;
+				continue;
 			}
-			// Parse booleans
-			else if (value === 'true') value = true;
-			else if (value === 'false') value = false;
-			// Parse numbers
-			else if (!isNaN(Number(value))) value = Number(value);
 
-			frontmatter[key] = value;
+			if (key === 'notLineated') {
+				frontmatter.notLineated = value === true;
+				continue;
+			}
+
+			frontmatter[key] = String(value);
 		}
 	}
 
 	return {
-		frontmatter: frontmatter as PoemFrontmatter,
+		frontmatter,
 		body: body.trim()
 	};
+}
+
+export function serializePoemMarkdown(frontmatter: PoemFrontmatter, body: string): string {
+	const normalizedFrontmatter = normalizePoemFrontmatter(frontmatter);
+	const normalizedBody = body.trim();
+	const frontmatterValues: Record<(typeof POEM_FRONTMATTER_FIELDS)[number], string> = {
+		title: `"${normalizedFrontmatter.title.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`,
+		section: `"${normalizedFrontmatter.section.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`,
+		sequence: String(normalizedFrontmatter.sequence),
+		notLineated: normalizedFrontmatter.notLineated ? 'true' : 'false',
+		notionId: `"${normalizedFrontmatter.notionId.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`
+	};
+	const frontmatterLines = POEM_FRONTMATTER_FIELDS.filter(
+		(field) => field !== 'notionId' || normalizedFrontmatter.notionId.trim()
+	).map((field) => `${field}: ${frontmatterValues[field]}`);
+
+	return `---\n${frontmatterLines.join('\n')}\n---\n\n${normalizedBody}\n`;
+}
+
+export async function loadRawPoemMarkdownBySlug(slug: string): Promise<EditablePoemDocument | null> {
+	try {
+		const filePath = path.join(CONTENT_PATH, `${slug}.md`);
+		const rawSource = await fs.readFile(filePath, 'utf-8');
+		const { frontmatter, body } = parsePoemMarkdown(rawSource);
+
+		return {
+			frontmatter,
+			content: body,
+			rawSource,
+			checksum: createContentSourceChecksum(rawSource)
+		};
+	} catch {
+		return null;
+	}
 }
 
 /**
@@ -105,7 +180,7 @@ export async function loadPoemsMeta(): Promise<PoemMeta[]> {
 	for (const file of mdFiles) {
 		const filePath = path.join(CONTENT_PATH, file);
 		const content = await fs.readFile(filePath, 'utf-8');
-		const { frontmatter } = parseFrontmatter(content);
+		const { frontmatter } = parsePoemMarkdown(content);
 
 		// Use filename (without .md) as the unique ID
 		const slug = file.replace(/\.md$/, '');
@@ -131,7 +206,7 @@ export async function loadPoemContent(slug: string): Promise<string> {
 
 	try {
 		const content = await fs.readFile(filePath, 'utf-8');
-		const { body } = parseFrontmatter(content);
+		const { body } = parsePoemMarkdown(content);
 		return body;
 	} catch {
 		throw new Error(`Poem with slug "${slug}" not found`);
@@ -145,7 +220,7 @@ export async function loadPoemBySlug(slug: string): Promise<Poem | null> {
 	try {
 		const filePath = path.join(CONTENT_PATH, `${slug}.md`);
 		const fileContent = await fs.readFile(filePath, 'utf-8');
-		const { frontmatter, body } = parseFrontmatter(fileContent);
+		const { frontmatter, body } = parsePoemMarkdown(fileContent);
 
 		return {
 			id: slug,
@@ -172,7 +247,7 @@ export async function loadAllPoems(): Promise<Poem[]> {
 	for (const file of mdFiles) {
 		const filePath = path.join(CONTENT_PATH, file);
 		const fileContent = await fs.readFile(filePath, 'utf-8');
-		const { frontmatter, body } = parseFrontmatter(fileContent);
+		const { frontmatter, body } = parsePoemMarkdown(fileContent);
 
 		// Use filename (without .md) as the unique ID
 		const slug = file.replace(/\.md$/, '');
