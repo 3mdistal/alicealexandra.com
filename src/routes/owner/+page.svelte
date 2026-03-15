@@ -60,8 +60,8 @@
 		<p class="owner-kicker">Owner mode</p>
 		<h1 class="owner-title">Edit the site’s writing from here.</h1>
 		<p class="owner-copy">
-			Sign in once with GitHub, then open any blog post, poem, postcard, or tall tale and the
-			inline edit button will appear for your session.
+			Sign in once with GitHub, then open any blog post, poem, postcard, or tall tale and the inline
+			edit button will appear for your session.
 		</p>
 
 		{#if errorMessage}

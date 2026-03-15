@@ -265,12 +265,17 @@
 	<title>{displayedPoem.title} | hymns for calliope</title>
 	<meta name="description" content="A poem by Alice Alexandra Moore from hymns for calliope." />
 	<meta property="og:title" content="{displayedPoem.title} | hymns for calliope" />
-	<meta property="og:description" content="A poem by Alice Alexandra Moore from hymns for calliope." />
+	<meta
+		property="og:description"
+		content="A poem by Alice Alexandra Moore from hymns for calliope."
+	/>
 </svelte:head>
 
 <div
 	class="page-container"
-	style="background-image: {displayedBackgroundImage ? `url(${displayedBackgroundImage})` : 'none'};"
+	style="background-image: {displayedBackgroundImage
+		? `url(${displayedBackgroundImage})`
+		: 'none'};"
 >
 	<div class="page-overlay"></div>
 	<main>
@@ -278,9 +283,9 @@
 			<WritingEditorShell
 				ownerName={ownerStatus.owner?.name || ownerStatus.owner?.login || 'owner'}
 				fileLabel={`${poem.id}.md`}
-				isEditMode={isEditMode}
-				isLoadingEditor={isLoadingEditor}
-				isSaving={isSaving}
+				{isEditMode}
+				{isLoadingEditor}
+				{isSaving}
 				errorMessage={editorError}
 				noticeMessage={editorNotice}
 				commitUrl={editorCommitUrl}
@@ -319,7 +324,11 @@
 						</label>
 						<label class="editor-field editor-checkbox-field">
 							<span class="editor-field-label">Not lineated</span>
-							<input bind:checked={editorDraft.notLineated} class="editor-checkbox" type="checkbox" />
+							<input
+								bind:checked={editorDraft.notLineated}
+								class="editor-checkbox"
+								type="checkbox"
+							/>
 						</label>
 					</div>
 
@@ -330,7 +339,8 @@
 
 					<label class="editor-field editor-markdown-field">
 						<span class="editor-field-label">Markdown source</span>
-						<textarea bind:value={editorDraft.content} class="editor-textarea editor-markdown-input"></textarea>
+						<textarea bind:value={editorDraft.content} class="editor-textarea editor-markdown-input"
+						></textarea>
 					</label>
 				</form>
 
@@ -365,7 +375,9 @@
 
 			<article class="poem-content">
 				{#each poemBlocks as stanza}
-					<p class={`poem-stanza ${displayedPoem.notLineated ? 'poem-stanza-not-lineated' : 'poem-stanza-lineated'}`}>
+					<p
+						class={`poem-stanza ${displayedPoem.notLineated ? 'poem-stanza-not-lineated' : 'poem-stanza-lineated'}`}
+					>
 						<TextMacro type={stanza.paragraph} />
 					</p>
 				{/each}

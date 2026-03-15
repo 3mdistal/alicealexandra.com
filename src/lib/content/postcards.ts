@@ -43,7 +43,7 @@ export interface PostcardFrontmatter {
 	notionId: string;
 }
 
-export interface EditablePostcardDocument extends EditableMarkdownDocument<PostcardFrontmatter> {}
+export type EditablePostcardDocument = EditableMarkdownDocument<PostcardFrontmatter>;
 
 function createEmptyPostcardFrontmatter(): PostcardFrontmatter {
 	return {

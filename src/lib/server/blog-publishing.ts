@@ -7,7 +7,10 @@ import {
 	serializeBlogMarkdown
 } from '$lib/content/blog-source';
 import type { PoemFrontmatter } from '$lib/content/poems';
-import { normalizeHeroImage as normalizePostcardHeroImage, serializePostcardMarkdown } from '$lib/content/postcards';
+import {
+	normalizeHeroImage as normalizePostcardHeroImage,
+	serializePostcardMarkdown
+} from '$lib/content/postcards';
 import type { PostcardFrontmatter, PostcardMeta } from '$lib/content/postcards';
 import { createContentSourceChecksum, isValidContentSlug } from '$lib/content/editable-source';
 import {
@@ -15,7 +18,13 @@ import {
 	type TallTaleMeta,
 	serializeTallTaleMarkdown
 } from '$lib/content/tall-tales';
-import { createContentRepoCommit, decodeGitHubContent, getWritingPublishStatus, loadGitHubFile, PublishError } from '$lib/server/content-repo';
+import {
+	createContentRepoCommit,
+	decodeGitHubContent,
+	getWritingPublishStatus,
+	loadGitHubFile,
+	PublishError
+} from '$lib/server/content-repo';
 import { normalizePoemFrontmatter, serializePoemMarkdown } from '$lib/content/poems';
 
 interface SaveBlogPostInput {
@@ -108,7 +117,10 @@ function updatePostsIndex(
 	return `${JSON.stringify({ ...parsed, data: nextPosts }, null, 2)}\n`;
 }
 
-function updatePostcardsIndex(currentMetadataJson: string, frontmatter: PostcardFrontmatter): string {
+function updatePostcardsIndex(
+	currentMetadataJson: string,
+	frontmatter: PostcardFrontmatter
+): string {
 	const metadata = JSON.parse(currentMetadataJson) as PostcardMeta[];
 	const heroImage = normalizePostcardHeroImage(frontmatter.heroImage);
 	const nextEntry: PostcardMeta = {
@@ -131,7 +143,10 @@ function updatePostcardsIndex(currentMetadataJson: string, frontmatter: Postcard
 	return `${JSON.stringify(nextMetadata, null, 2)}\n`;
 }
 
-function updateTallTalesIndex(currentMetadataJson: string, frontmatter: TallTaleFrontmatter): string {
+function updateTallTalesIndex(
+	currentMetadataJson: string,
+	frontmatter: TallTaleFrontmatter
+): string {
 	const metadata = JSON.parse(currentMetadataJson) as TallTaleMeta[];
 	const nextEntry: TallTaleMeta = {
 		slug: frontmatter.slug,

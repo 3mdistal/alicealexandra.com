@@ -37,7 +37,7 @@ export interface BlogFrontmatter {
 	notionId: string;
 }
 
-export interface EditableBlogDocument extends EditableMarkdownDocument<BlogFrontmatter> {}
+export type EditableBlogDocument = EditableMarkdownDocument<BlogFrontmatter>;
 
 export function isValidBlogSlug(slug: string): boolean {
 	return isValidContentSlug(slug);

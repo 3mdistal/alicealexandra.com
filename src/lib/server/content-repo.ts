@@ -49,8 +49,8 @@ export function getWritingPublishStatus(): PublishStatus {
 	return {
 		contentRepoConfigured: Boolean(
 			env['CONTENT_REPO_OWNER']?.trim() &&
-				env['CONTENT_REPO_NAME']?.trim() &&
-				(env['GITHUB_WRITE_TOKEN']?.trim() || env['GITHUB_TOKEN']?.trim())
+			env['CONTENT_REPO_NAME']?.trim() &&
+			(env['GITHUB_WRITE_TOKEN']?.trim() || env['GITHUB_TOKEN']?.trim())
 		)
 	};
 }

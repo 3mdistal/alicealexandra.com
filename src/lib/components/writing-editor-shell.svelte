@@ -32,14 +32,29 @@
 		<div class="editor-toolbar-actions">
 			<a class="editor-action secondary" href="/owner">Owner</a>
 			{#if isEditMode}
-				<button class="editor-action secondary" type="button" on:click={() => dispatch('close')} disabled={isSaving}>
+				<button
+					class="editor-action secondary"
+					type="button"
+					on:click={() => dispatch('close')}
+					disabled={isSaving}
+				>
 					Cancel
 				</button>
-				<button class="editor-action primary" type="button" on:click={() => dispatch('save')} disabled={isSaving}>
+				<button
+					class="editor-action primary"
+					type="button"
+					on:click={() => dispatch('save')}
+					disabled={isSaving}
+				>
 					{isSaving ? 'Saving…' : 'Save & publish'}
 				</button>
 			{:else}
-				<button class="editor-action primary" type="button" on:click={() => dispatch('open')} disabled={isLoadingEditor}>
+				<button
+					class="editor-action primary"
+					type="button"
+					on:click={() => dispatch('open')}
+					disabled={isLoadingEditor}
+				>
 					{isLoadingEditor ? 'Loading…' : 'Edit'}
 				</button>
 			{/if}

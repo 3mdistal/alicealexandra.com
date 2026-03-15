@@ -45,7 +45,7 @@ export interface PoemFrontmatter {
 	notionId: string;
 }
 
-export interface EditablePoemDocument extends EditableMarkdownDocument<PoemFrontmatter> {}
+export type EditablePoemDocument = EditableMarkdownDocument<PoemFrontmatter>;
 
 function createEmptyPoemFrontmatter(): PoemFrontmatter {
 	return {

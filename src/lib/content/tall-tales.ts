@@ -73,7 +73,7 @@ export interface TallTaleFrontmatter {
 	sections: TallTaleSectionFrontmatter[];
 }
 
-export interface EditableTallTaleDocument extends EditableMarkdownDocument<TallTaleFrontmatter> {}
+export type EditableTallTaleDocument = EditableMarkdownDocument<TallTaleFrontmatter>;
 
 function createEmptyTallTaleFrontmatter(): TallTaleFrontmatter {
 	return {

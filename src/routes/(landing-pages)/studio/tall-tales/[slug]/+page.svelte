@@ -244,9 +244,9 @@
 			<WritingEditorShell
 				ownerName={ownerStatus.owner?.name || ownerStatus.owner?.login || 'owner'}
 				fileLabel={`${tale.slug}.md`}
-				isEditMode={isEditMode}
-				isLoadingEditor={isLoadingEditor}
-				isSaving={isSaving}
+				{isEditMode}
+				{isLoadingEditor}
+				{isSaving}
 				errorMessage={editorError}
 				noticeMessage={editorNotice}
 				commitUrl={editorCommitUrl}
@@ -272,7 +272,10 @@
 							</label>
 							<label class="editor-field editor-field-wide">
 								<span class="editor-field-label">Description</span>
-								<textarea bind:value={editorDraft.description} class="editor-textarea editor-meta-textarea"></textarea>
+								<textarea
+									bind:value={editorDraft.description}
+									class="editor-textarea editor-meta-textarea"
+								></textarea>
 							</label>
 							<label class="editor-field editor-field-wide">
 								<span class="editor-field-label">Cover image URL</span>
@@ -291,7 +294,11 @@
 							</label>
 							<label class="editor-field editor-checkbox-field">
 								<span class="editor-field-label">Loop audio</span>
-								<input bind:checked={editorDraft.audio.loop} class="editor-checkbox" type="checkbox" />
+								<input
+									bind:checked={editorDraft.audio.loop}
+									class="editor-checkbox"
+									type="checkbox"
+								/>
 							</label>
 						</div>
 
@@ -310,7 +317,11 @@
 										<div class="editor-section-fields">
 											<label class="editor-field editor-field-wide">
 												<span class="editor-field-label">Background image URL</span>
-												<input bind:value={section.backgroundImage} class="editor-input" type="url" />
+												<input
+													bind:value={section.backgroundImage}
+													class="editor-input"
+													type="url"
+												/>
 											</label>
 											<label class="editor-field">
 												<span class="editor-field-label">Text color</span>
@@ -318,11 +329,22 @@
 											</label>
 											<label class="editor-field">
 												<span class="editor-field-label">Background opacity</span>
-												<input bind:value={section.backgroundImageOpacity} class="editor-input" type="number" min="0" max="1" step="0.05" />
+												<input
+													bind:value={section.backgroundImageOpacity}
+													class="editor-input"
+													type="number"
+													min="0"
+													max="1"
+													step="0.05"
+												/>
 											</label>
 											<label class="editor-field">
 												<span class="editor-field-label">Background color</span>
-												<input bind:value={section.backgroundColor} class="editor-input" type="text" />
+												<input
+													bind:value={section.backgroundColor}
+													class="editor-input"
+													type="text"
+												/>
 											</label>
 											<label class="editor-field">
 												<span class="editor-field-label">Overlay color</span>
@@ -339,7 +361,10 @@
 
 							<label class="editor-field editor-markdown-field">
 								<span class="editor-field-label">Markdown source</span>
-								<textarea bind:value={editorDraft.content} class="editor-textarea editor-markdown-input"></textarea>
+								<textarea
+									bind:value={editorDraft.content}
+									class="editor-textarea editor-markdown-input"
+								></textarea>
 							</label>
 						</div>
 					</form>
@@ -430,7 +455,9 @@
 		{:else}
 			<div class="not-found">
 				<h1>Story not found</h1>
-				<LinkButton href="/studio/tall-tales" variant="solid" size="md">← Back to Stories</LinkButton>
+				<LinkButton href="/studio/tall-tales" variant="solid" size="md"
+					>← Back to Stories</LinkButton
+				>
 			</div>
 		{/if}
 	{/if}

@@ -192,8 +192,7 @@
 			editorNotice =
 				'Saved to teenylilcontent. Your existing site deploy should publish it automatically.';
 		} catch (caughtError) {
-			editorError =
-				caughtError instanceof Error ? caughtError.message : 'Failed to save postcard.';
+			editorError = caughtError instanceof Error ? caughtError.message : 'Failed to save postcard.';
 		} finally {
 			isSaving = false;
 		}
@@ -245,9 +244,9 @@
 		<WritingEditorShell
 			ownerName={ownerStatus.owner?.name || ownerStatus.owner?.login || 'owner'}
 			fileLabel={`${postcard.slug}.md`}
-			isEditMode={isEditMode}
-			isLoadingEditor={isLoadingEditor}
-			isSaving={isSaving}
+			{isEditMode}
+			{isLoadingEditor}
+			{isSaving}
 			errorMessage={editorError}
 			noticeMessage={editorNotice}
 			commitUrl={editorCommitUrl}
@@ -263,7 +262,8 @@
 				<div class="editor-pane-header">
 					<h2 class="editor-pane-title">Edit source</h2>
 					<p class="editor-pane-copy">
-						Edit the postcard metadata and markdown together. The publish step also refreshes postcard listing metadata.
+						Edit the postcard metadata and markdown together. The publish step also refreshes
+						postcard listing metadata.
 					</p>
 				</div>
 
@@ -274,7 +274,10 @@
 					</label>
 					<label class="editor-field editor-field-wide">
 						<span class="editor-field-label">Description</span>
-						<textarea bind:value={editorDraft.description} class="editor-textarea editor-meta-textarea"></textarea>
+						<textarea
+							bind:value={editorDraft.description}
+							class="editor-textarea editor-meta-textarea"
+						></textarea>
 					</label>
 					<label class="editor-field editor-field-wide">
 						<span class="editor-field-label">Hero image URL</span>
@@ -290,7 +293,8 @@
 
 				<label class="editor-field editor-markdown-field">
 					<span class="editor-field-label">Markdown source</span>
-					<textarea bind:value={editorDraft.content} class="editor-textarea editor-markdown-input"></textarea>
+					<textarea bind:value={editorDraft.content} class="editor-textarea editor-markdown-input"
+					></textarea>
 				</label>
 			</form>
 
@@ -304,7 +308,10 @@
 				<div class="editor-preview-scroll-region">
 					<div class="editor-preview-card">
 						{#if displayedPostcard.heroImage}
-							<div class="editor-preview-hero-image" style="background-image: url('{displayedPostcard.heroImage}')"></div>
+							<div
+								class="editor-preview-hero-image"
+								style="background-image: url('{displayedPostcard.heroImage}')"
+							></div>
 						{/if}
 						<div class="editor-preview-copy">
 							<h2 class="editor-preview-title">{displayedPostcard.title}</h2>

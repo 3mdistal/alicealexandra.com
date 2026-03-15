@@ -400,9 +400,9 @@
 			<WritingEditorShell
 				ownerName={ownerStatus.owner?.name || ownerStatus.owner?.login || 'owner'}
 				fileLabel={`${post.slug}.md`}
-				isEditMode={isEditMode}
-				isLoadingEditor={isLoadingEditor}
-				isSaving={isSaving}
+				{isEditMode}
+				{isLoadingEditor}
+				{isSaving}
 				errorMessage={editorError}
 				noticeMessage={editorNotice}
 				commitUrl={editorCommitUrl}
@@ -442,15 +442,25 @@
 						</label>
 						<label class="editor-field editor-field-wide">
 							<span class="editor-field-label">Formatted publication date</span>
-							<input bind:value={editorDraft.formattedPublicationDate} class="editor-input" type="text" />
+							<input
+								bind:value={editorDraft.formattedPublicationDate}
+								class="editor-input"
+								type="text"
+							/>
 						</label>
 						<label class="editor-field editor-field-wide">
 							<span class="editor-field-label">Summary</span>
-							<textarea bind:value={editorDraft.summary} class="editor-textarea editor-meta-textarea"></textarea>
+							<textarea
+								bind:value={editorDraft.summary}
+								class="editor-textarea editor-meta-textarea"
+							></textarea>
 						</label>
 						<label class="editor-field editor-field-wide">
 							<span class="editor-field-label">Open graph description</span>
-							<textarea bind:value={editorDraft.ogDescription} class="editor-textarea editor-meta-textarea"></textarea>
+							<textarea
+								bind:value={editorDraft.ogDescription}
+								class="editor-textarea editor-meta-textarea"
+							></textarea>
 						</label>
 						<label class="editor-field editor-field-wide">
 							<span class="editor-field-label">Cover image URL</span>
@@ -490,7 +500,10 @@
 						bind:this={editorPreviewScrollRegion}
 						on:scroll={handlePreviewScroll}
 					>
-						<BlogMarkdownContent markdown={editorDraft.content} contentClass="prose editor-preview-content" />
+						<BlogMarkdownContent
+							markdown={editorDraft.content}
+							contentClass="prose editor-preview-content"
+						/>
 					</div>
 				</section>
 			</div>
@@ -720,5 +733,4 @@
 			max-height: calc(100vh - 8rem);
 		}
 	}
-
 </style>
