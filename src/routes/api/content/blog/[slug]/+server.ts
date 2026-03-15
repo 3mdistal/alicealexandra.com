@@ -1,5 +1,10 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
-import { loadRawBlogMarkdownBySlug } from '$lib/content/blog-source';
+import {
+	createBlogSourceChecksum,
+	isValidBlogSlug,
+	parseBlogMarkdown
+} from '$lib/content/blog-source';
+import { loadPreferredContentTextFile } from '$lib/server/content-repo';
 
 export const GET: RequestHandler = async ({ locals, params }) => {
 	if (!locals.isOwner) {
@@ -7,19 +12,20 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 	}
 
 	const slug = params.slug;
-	if (!slug) {
+	if (!slug || !isValidBlogSlug(slug)) {
 		throw error(400, 'Invalid blog slug.');
 	}
 
-	const document = await loadRawBlogMarkdownBySlug(slug);
-	if (!document) {
+	const source = await loadPreferredContentTextFile(`blog/${slug}.md`);
+	if (!source) {
 		throw error(404, 'Blog post not found.');
 	}
 
+	const document = parseBlogMarkdown(source.content);
 	return json({
 		frontmatter: document.frontmatter,
-		content: document.content,
-		checksum: document.checksum,
-		rawSource: document.rawSource
+		content: document.body,
+		checksum: createBlogSourceChecksum(source.content),
+		rawSource: source.content
 	});
 };

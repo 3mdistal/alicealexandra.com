@@ -4,8 +4,21 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import {
+	createContentSourceChecksum,
+	type EditableMarkdownDocument
+} from '$lib/content/editable-source';
 
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'tall-tales');
+const TALL_TALE_TOP_LEVEL_FIELDS = [
+	'title',
+	'slug',
+	'description',
+	'heroImage',
+	'lastEditedTime',
+	'notionId',
+	'sectionDivider'
+] as const;
 
 export interface SectionTheme {
 	backgroundImage: string;
@@ -34,6 +47,45 @@ export interface TallTaleSection {
 
 export interface TallTale extends TallTaleMeta {
 	sections: TallTaleSection[];
+}
+
+export interface TallTaleSectionFrontmatter {
+	backgroundImage: string;
+	backgroundImageOpacity?: number;
+	backgroundColor?: string;
+	overlayColor?: string;
+	textColor: string;
+	fontFamily?: string;
+}
+
+export interface TallTaleFrontmatter {
+	title: string;
+	slug: string;
+	description: string;
+	heroImage: string;
+	lastEditedTime: string;
+	notionId: string;
+	sectionDivider: 'hr' | 'heading';
+	audio?: {
+		src: string;
+		loop?: boolean;
+	};
+	sections: TallTaleSectionFrontmatter[];
+}
+
+export interface EditableTallTaleDocument extends EditableMarkdownDocument<TallTaleFrontmatter> {}
+
+function createEmptyTallTaleFrontmatter(): TallTaleFrontmatter {
+	return {
+		title: '',
+		slug: '',
+		description: '',
+		heroImage: '',
+		lastEditedTime: '',
+		notionId: '',
+		sectionDivider: 'hr',
+		sections: []
+	};
 }
 
 export function normalizeHeroImage(value: unknown): string | undefined {
@@ -71,8 +123,47 @@ export function normalizeHeroImage(value: unknown): string | undefined {
 	return url;
 }
 
-function parseFrontmatterAndSections(content: string) {
-	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
+function parseScalarValue(value: string): string | number | boolean {
+	if (
+		(value.startsWith('"') && value.endsWith('"')) ||
+		(value.startsWith("'") && value.endsWith("'"))
+	) {
+		return value.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
+	}
+
+	if (value === 'true') {
+		return true;
+	}
+
+	if (value === 'false') {
+		return false;
+	}
+
+	if (!Number.isNaN(Number(value))) {
+		return Number(value);
+	}
+
+	return value;
+}
+
+function escapeYamlString(value: string): string {
+	return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
+function parseSectionValue(key: keyof TallTaleSectionFrontmatter, rawValue: string) {
+	const value = parseScalarValue(rawValue);
+	if (key === 'backgroundImageOpacity') {
+		return typeof value === 'number' ? value : undefined;
+	}
+
+	return typeof value === 'string' ? value : String(value);
+}
+
+export function parseTallTaleMarkdown(content: string): {
+	frontmatter: TallTaleFrontmatter;
+	body: string;
+} {
+	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n?/;
 	const match = content.match(frontmatterRegex);
 
 	if (!match || !match[1]) {
@@ -80,113 +171,216 @@ function parseFrontmatterAndSections(content: string) {
 	}
 
 	const frontmatterStr = match[1];
-	const body = content.slice(match[0].length);
-
-	const frontmatter: any = { sections: [] };
-	
+	const body = content.slice(match[0].length).trim();
+	const frontmatter = createEmptyTallTaleFrontmatter();
 	let inSections = false;
-	let currentSection: any = null;
+	let inAudio = false;
+	let currentSection: TallTaleSectionFrontmatter | null = null;
+	let currentAudio: TallTaleFrontmatter['audio'] | null = null;
 
-	const lines = frontmatterStr.split('\n');
-	for (let i = 0; i < lines.length; i++) {
-		const line = lines[i];
-		if (line === undefined) continue;
-		
-		if (line.trim() === '') continue;
-		
+	const flushSection = () => {
+		if (currentSection) {
+			frontmatter.sections.push({
+				backgroundImage: currentSection.backgroundImage || '',
+				textColor: currentSection.textColor || '#ffffff',
+				...(currentSection.backgroundImageOpacity !== undefined
+					? { backgroundImageOpacity: currentSection.backgroundImageOpacity }
+					: {}),
+				...(currentSection.backgroundColor ? { backgroundColor: currentSection.backgroundColor } : {}),
+				...(currentSection.overlayColor ? { overlayColor: currentSection.overlayColor } : {}),
+				...(currentSection.fontFamily ? { fontFamily: currentSection.fontFamily } : {})
+			});
+			currentSection = null;
+		}
+	};
+
+	const flushAudio = () => {
+		if (currentAudio?.src) {
+			frontmatter.audio = currentAudio;
+		}
+		currentAudio = null;
+	};
+
+	for (const line of frontmatterStr.split('\n')) {
+		if (!line.trim()) {
+			continue;
+		}
+
 		if (line.startsWith('sections:')) {
+			flushAudio();
+			inAudio = false;
 			inSections = true;
 			continue;
 		}
 
-		if (inSections && line.startsWith('  -')) {
-			if (currentSection) {
-				frontmatter.sections.push(currentSection);
-			}
-			currentSection = {};
-			
-			const keyVal = line.slice(3).trim(); // remove '  -'
-			const colonIndex = keyVal.indexOf(':');
-			if (colonIndex > 0) {
-				const key = keyVal.slice(0, colonIndex).trim();
-				let val = keyVal.slice(colonIndex + 1).trim();
-				if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-					val = val.slice(1, -1);
-				}
-				currentSection[key] = val;
-			}
-			continue;
-		}
-		
-		if (inSections && line.startsWith('    ')) {
-			const keyVal = line.trim();
-			const colonIndex = keyVal.indexOf(':');
-			if (colonIndex > 0) {
-				const key = keyVal.slice(0, colonIndex).trim();
-				let val = keyVal.slice(colonIndex + 1).trim();
-				if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-					val = val.slice(1, -1);
-				}
-				if (currentSection) {
-					currentSection[key] = val;
-				}
-			}
-			continue;
-		}
-		
-		if (inSections && !line.startsWith(' ')) {
+		if (line.startsWith('audio:')) {
+			flushSection();
 			inSections = false;
-			if (currentSection) {
-				frontmatter.sections.push(currentSection);
-				currentSection = null;
-			}
+			inAudio = true;
+			currentAudio = { src: '' };
+			continue;
 		}
 
-		if (!inSections) {
-			const colonIndex = line.indexOf(':');
+		if (inSections && line.startsWith('  -')) {
+			flushSection();
+			currentSection = { backgroundImage: '', textColor: '#ffffff' };
+
+			const keyValue = line.slice(3).trim();
+			const colonIndex = keyValue.indexOf(':');
 			if (colonIndex > 0) {
-				const key = line.slice(0, colonIndex).trim();
-				let val: any = line.slice(colonIndex + 1).trim();
-				if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-					val = val.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
-				} else if (val === 'true') val = true;
-				else if (val === 'false') val = false;
-				else if (!isNaN(Number(val))) val = Number(val);
-				
-				frontmatter[key] = val;
+				const key = keyValue.slice(0, colonIndex).trim() as keyof TallTaleSectionFrontmatter;
+				const value = keyValue.slice(colonIndex + 1).trim();
+				currentSection[key] = parseSectionValue(key, value) as never;
 			}
+			continue;
 		}
-	}
-	
-	if (currentSection) {
-		frontmatter.sections.push(currentSection);
+
+		if (inSections && line.startsWith('    ')) {
+			const keyValue = line.trim();
+			const colonIndex = keyValue.indexOf(':');
+			if (colonIndex > 0 && currentSection) {
+				const key = keyValue.slice(0, colonIndex).trim() as keyof TallTaleSectionFrontmatter;
+				const value = keyValue.slice(colonIndex + 1).trim();
+				currentSection[key] = parseSectionValue(key, value) as never;
+			}
+			continue;
+		}
+
+		if (inAudio && line.startsWith('  ')) {
+			const keyValue = line.trim();
+			const colonIndex = keyValue.indexOf(':');
+			if (colonIndex > 0 && currentAudio) {
+				const key = keyValue.slice(0, colonIndex).trim();
+				const value = parseScalarValue(keyValue.slice(colonIndex + 1).trim());
+				if (key === 'src') {
+					currentAudio.src = String(value);
+				}
+				if (key === 'loop') {
+					currentAudio.loop = value === true;
+				}
+			}
+			continue;
+		}
+
+		if (inSections && !line.startsWith(' ')) {
+			flushSection();
+			inSections = false;
+		}
+
+		if (inAudio && !line.startsWith(' ')) {
+			flushAudio();
+			inAudio = false;
+		}
+
+		const colonIndex = line.indexOf(':');
+		if (colonIndex <= 0) {
+			continue;
+		}
+
+		const key = line.slice(0, colonIndex).trim() as (typeof TALL_TALE_TOP_LEVEL_FIELDS)[number];
+		const value = parseScalarValue(line.slice(colonIndex + 1).trim());
+		if (key === 'sectionDivider') {
+			frontmatter.sectionDivider = value === 'heading' ? 'heading' : 'hr';
+			continue;
+		}
+
+		frontmatter[key] = String(value) as never;
 	}
 
-	// Parse sections based on divider
-	const divider = frontmatter.sectionDivider === 'hr' ? '\n---\n' : '\n## ';
-	let rawSections = body.split(divider);
-	
-	// Clean up '## ' prefix if we split by '## '
-	if (frontmatter.sectionDivider !== 'hr') {
-		rawSections = rawSections.map((s, i) => i === 0 ? s : '## ' + s);
-	}
-
-	const sections = frontmatter.sections.map((theme: any, index: number) => ({
-		theme: {
-			backgroundImage: normalizeHeroImage(theme.backgroundImage) || '',
-			backgroundImageOpacity: theme.backgroundImageOpacity !== undefined ? Number(theme.backgroundImageOpacity) : undefined,
-			backgroundColor: theme.backgroundColor,
-			overlayColor: theme.overlayColor,
-			textColor: theme.textColor || '#ffffff',
-			fontFamily: theme.fontFamily
-		},
-		content: rawSections[index]?.trim() || ''
-	}));
+	flushSection();
+	flushAudio();
 
 	return {
 		frontmatter,
-		sections
+		body
 	};
+}
+
+export function serializeTallTaleMarkdown(frontmatter: TallTaleFrontmatter, body: string): string {
+	const frontmatterLines = TALL_TALE_TOP_LEVEL_FIELDS.map((field) => {
+		if (field === 'sectionDivider') {
+			return `${field}: "${frontmatter.sectionDivider}"`;
+		}
+
+		return `${field}: "${escapeYamlString(frontmatter[field] ?? '')}"`;
+	});
+
+	if (frontmatter.audio?.src.trim()) {
+		frontmatterLines.push('audio:');
+		frontmatterLines.push(`  src: "${escapeYamlString(frontmatter.audio.src)}"`);
+		if (frontmatter.audio.loop !== undefined) {
+			frontmatterLines.push(`  loop: ${frontmatter.audio.loop ? 'true' : 'false'}`);
+		}
+	}
+
+	frontmatterLines.push('sections:');
+	for (const section of frontmatter.sections) {
+		frontmatterLines.push(
+			`  - backgroundImage: "${escapeYamlString(section.backgroundImage || '')}"`
+		);
+		if (section.backgroundImageOpacity !== undefined) {
+			frontmatterLines.push(`    backgroundImageOpacity: ${section.backgroundImageOpacity}`);
+		}
+		if (section.backgroundColor) {
+			frontmatterLines.push(`    backgroundColor: "${escapeYamlString(section.backgroundColor)}"`);
+		}
+		if (section.overlayColor) {
+			frontmatterLines.push(`    overlayColor: "${escapeYamlString(section.overlayColor)}"`);
+		}
+		frontmatterLines.push(`    textColor: "${escapeYamlString(section.textColor || '#ffffff')}"`);
+		if (section.fontFamily) {
+			frontmatterLines.push(`    fontFamily: "${escapeYamlString(section.fontFamily)}"`);
+		}
+	}
+
+	return `---\n${frontmatterLines.join('\n')}\n---\n\n${body.trim()}\n`;
+}
+
+export function buildTallTaleSections(
+	frontmatter: TallTaleFrontmatter,
+	body: string
+): TallTaleSection[] {
+	const divider = frontmatter.sectionDivider === 'hr' ? '\n---\n' : '\n## ';
+	let rawSections = body.split(divider);
+
+	if (frontmatter.sectionDivider !== 'hr') {
+		rawSections = rawSections.map((section, index) => (index === 0 ? section : `## ${section}`));
+	}
+
+	return frontmatter.sections.map((theme, index) => ({
+		theme: {
+			backgroundImage: normalizeHeroImage(theme.backgroundImage) || '',
+			textColor: theme.textColor || '#ffffff',
+			...(theme.backgroundImageOpacity !== undefined
+				? { backgroundImageOpacity: Number(theme.backgroundImageOpacity) }
+				: {}),
+			...(theme.backgroundColor ? { backgroundColor: theme.backgroundColor } : {}),
+			...(theme.overlayColor ? { overlayColor: theme.overlayColor } : {}),
+			...(theme.fontFamily ? { fontFamily: theme.fontFamily } : {})
+		},
+		content: rawSections[index]?.trim() || ''
+	}));
+}
+
+export async function loadRawTallTaleMarkdownBySlug(
+	slug: string
+): Promise<EditableTallTaleDocument | null> {
+	const filePath = path.join(CONTENT_PATH, `${slug}.md`);
+	try {
+		const rawSource = await fs.readFile(filePath, 'utf-8');
+		const { frontmatter, body } = parseTallTaleMarkdown(rawSource);
+
+		return {
+			frontmatter,
+			content: body,
+			rawSource,
+			checksum: createContentSourceChecksum(rawSource)
+		};
+	} catch (err: any) {
+		if (err?.code === 'ENOENT') return null;
+		const message = err instanceof Error ? err.message : String(err);
+		throw new Error(`Failed to load tall tale "${slug}" from ${filePath}: ${message}`);
+	}
 }
 
 export async function loadTallTalesMeta(): Promise<TallTaleMeta[]> {
@@ -194,7 +388,7 @@ export async function loadTallTalesMeta(): Promise<TallTaleMeta[]> {
 	try {
 		const content = await fs.readFile(metadataPath, 'utf-8');
 		const metadata = JSON.parse(content) as TallTaleMeta[];
-		return metadata.map(meta => ({
+		return metadata.map((meta) => ({
 			...meta,
 			coverImage: normalizeHeroImage(meta.coverImage) || meta.coverImage
 		}));
@@ -207,16 +401,19 @@ export async function loadTallTalesMeta(): Promise<TallTaleMeta[]> {
 export async function loadTallTaleBySlug(slug: string): Promise<TallTale | null> {
 	const filePath = path.join(CONTENT_PATH, `${slug}.md`);
 	try {
-		const fileContent = await fs.readFile(filePath, 'utf-8');
-		const { frontmatter, sections } = parseFrontmatterAndSections(fileContent);
+		const editableTallTale = await loadRawTallTaleMarkdownBySlug(slug);
+		if (!editableTallTale) {
+			return null;
+		}
 
+		const { frontmatter, content } = editableTallTale;
 		return {
 			slug: frontmatter.slug,
 			title: frontmatter.title,
 			description: frontmatter.description,
 			coverImage: normalizeHeroImage(frontmatter.heroImage) || '',
-			audio: frontmatter.audio,
-			sections
+			...(frontmatter.audio ? { audio: frontmatter.audio } : {}),
+			sections: buildTallTaleSections(frontmatter, content)
 		};
 	} catch (err: any) {
 		if (err?.code === 'ENOENT') return null;

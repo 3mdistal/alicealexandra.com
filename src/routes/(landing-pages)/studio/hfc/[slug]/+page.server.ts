@@ -21,5 +21,5 @@ export async function load({ params }: { params: { slug: string } }) {
 	const section = sections.find((s) => s.name === poem.sectionName);
 	const backgroundImage = section?.secondaryImage || null;
 
-	return { poem, backgroundImage };
+	return { poem, backgroundImage, sections };
 }

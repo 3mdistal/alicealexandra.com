@@ -4,9 +4,21 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import {
+	createContentSourceChecksum,
+	type EditableMarkdownDocument
+} from '$lib/content/editable-source';
 
 // Use process.cwd() which works during SvelteKit build
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'postcards');
+const POSTCARD_FRONTMATTER_FIELDS = [
+	'title',
+	'slug',
+	'description',
+	'heroImage',
+	'lastEditedTime',
+	'notionId'
+] as const;
 
 export interface PostcardMeta {
 	id: string;
@@ -22,13 +34,37 @@ export interface Postcard extends PostcardMeta {
 	content: string;
 }
 
-interface PostcardFrontmatter {
+export interface PostcardFrontmatter {
 	title: string;
 	slug: string;
 	description: string;
 	heroImage: string;
 	lastEditedTime: string;
 	notionId: string;
+}
+
+export interface EditablePostcardDocument extends EditableMarkdownDocument<PostcardFrontmatter> {}
+
+function createEmptyPostcardFrontmatter(): PostcardFrontmatter {
+	return {
+		title: '',
+		slug: '',
+		description: '',
+		heroImage: '',
+		lastEditedTime: '',
+		notionId: ''
+	};
+}
+
+export function normalizePostcardFrontmatter(
+	frontmatter: Partial<PostcardFrontmatter>,
+	slug: string
+): PostcardFrontmatter {
+	return {
+		...createEmptyPostcardFrontmatter(),
+		...frontmatter,
+		slug
+	};
 }
 
 export function normalizeHeroImage(value: unknown): string | undefined {
@@ -66,41 +102,79 @@ export function normalizeHeroImage(value: unknown): string | undefined {
 	return url;
 }
 
-function parseFrontmatter(content: string): { frontmatter: PostcardFrontmatter; body: string } {
-	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
+function escapeYamlString(value: string): string {
+	return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
+export function parsePostcardMarkdown(content: string): {
+	frontmatter: PostcardFrontmatter;
+	body: string;
+} {
+	const frontmatterRegex = /^---\n([\s\S]*?)\n---\n?/;
 	const match = content.match(frontmatterRegex);
 
 	if (!match || !match[1]) {
 		throw new Error('No frontmatter found in markdown file');
 	}
 
-	const frontmatterStr: string = match[1];
+	const frontmatterStr = match[1];
 	const body = content.slice(match[0].length);
-
-	const frontmatter: Record<string, any> = {};
+	const frontmatter = createEmptyPostcardFrontmatter();
 	for (const line of frontmatterStr.split('\n')) {
 		const colonIndex = line.indexOf(':');
-		if (colonIndex > 0) {
-			const key = line.slice(0, colonIndex).trim();
-			let value: any = line.slice(colonIndex + 1).trim();
+		if (colonIndex <= 0) {
+			continue;
+		}
 
-			if (
-				(value.startsWith('"') && value.endsWith('"')) ||
-				(value.startsWith("'") && value.endsWith("'"))
-			) {
-				value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
-			} else if (value === 'true') value = true;
-			else if (value === 'false') value = false;
-			else if (!isNaN(Number(value))) value = Number(value);
+		const key = line.slice(0, colonIndex).trim() as keyof PostcardFrontmatter;
+		let value = line.slice(colonIndex + 1).trim();
 
+		if (
+			(value.startsWith('"') && value.endsWith('"')) ||
+			(value.startsWith("'") && value.endsWith("'"))
+		) {
+			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\'/g, "'");
+		}
+
+		if (key in frontmatter) {
 			frontmatter[key] = value;
 		}
 	}
 
 	return {
-		frontmatter: frontmatter as PostcardFrontmatter,
+		frontmatter,
 		body: body.trim()
 	};
+}
+
+export function serializePostcardMarkdown(frontmatter: PostcardFrontmatter, body: string): string {
+	const normalizedBody = body.trim();
+	const frontmatterLines = POSTCARD_FRONTMATTER_FIELDS.map(
+		(field) => `${field}: "${escapeYamlString(frontmatter[field] ?? '')}"`
+	);
+
+	return `---\n${frontmatterLines.join('\n')}\n---\n\n${normalizedBody}\n`;
+}
+
+export async function loadRawPostcardMarkdownBySlug(
+	slug: string
+): Promise<EditablePostcardDocument | null> {
+	const filePath = path.join(CONTENT_PATH, `${slug}.md`);
+	try {
+		const rawSource = await fs.readFile(filePath, 'utf-8');
+		const { frontmatter, body } = parsePostcardMarkdown(rawSource);
+
+		return {
+			frontmatter,
+			content: body,
+			rawSource,
+			checksum: createContentSourceChecksum(rawSource)
+		};
+	} catch (err: any) {
+		if (err?.code === 'ENOENT') return null;
+		const message = err instanceof Error ? err.message : String(err);
+		throw new Error(`Failed to load postcard "${slug}" from ${filePath}: ${message}`);
+	}
 }
 
 /**
@@ -131,12 +205,14 @@ export async function loadPostcardsMeta(): Promise<PostcardMeta[]> {
  * Load a single postcard by slug (for detail page)
  */
 export async function loadPostcardBySlug(slug: string): Promise<Postcard | null> {
-	const filePath = path.join(CONTENT_PATH, `${slug}.md`);
 	try {
-		const fileContent = await fs.readFile(filePath, 'utf-8');
-		const { frontmatter, body } = parseFrontmatter(fileContent);
-		const heroImage = normalizeHeroImage(frontmatter.heroImage);
+		const editablePostcard = await loadRawPostcardMarkdownBySlug(slug);
+		if (!editablePostcard) {
+			return null;
+		}
 
+		const { frontmatter, content } = editablePostcard;
+		const heroImage = normalizeHeroImage(frontmatter.heroImage);
 		const base: Postcard = {
 			id: frontmatter.notionId,
 			notionId: frontmatter.notionId,
@@ -144,13 +220,13 @@ export async function loadPostcardBySlug(slug: string): Promise<Postcard | null>
 			title: frontmatter.title,
 			description: frontmatter.description,
 			lastEditedTime: frontmatter.lastEditedTime,
-			content: body
+			content
 		};
 
 		return heroImage ? { ...base, heroImage } : base;
 	} catch (err: any) {
 		if (err?.code === 'ENOENT') return null;
 		const message = err instanceof Error ? err.message : String(err);
-		throw new Error(`Failed to load postcard "${slug}" from ${filePath}: ${message}`);
+		throw new Error(`Failed to load postcard "${slug}" from ${path.join(CONTENT_PATH, `${slug}.md`)}: ${message}`);
 	}
 }
