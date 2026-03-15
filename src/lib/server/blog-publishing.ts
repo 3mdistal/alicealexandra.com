@@ -12,7 +12,8 @@ import {
 	serializePostcardMarkdown
 } from '$lib/content/postcards';
 import type { PostcardFrontmatter, PostcardMeta } from '$lib/content/postcards';
-import { createContentSourceChecksum, isValidContentSlug } from '$lib/content/editable-source';
+import { isValidContentSlug } from '$lib/content/editable-source';
+import { createContentSourceChecksum } from '$lib/content/editable-source.server';
 import {
 	type TallTaleFrontmatter,
 	type TallTaleMeta,

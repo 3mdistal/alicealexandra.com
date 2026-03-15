@@ -4,10 +4,8 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import {
-	createContentSourceChecksum,
-	type EditableMarkdownDocument
-} from '$lib/content/editable-source';
+import { type EditableMarkdownDocument } from '$lib/content/editable-source';
+import { createContentSourceChecksum } from '$lib/content/editable-source.server';
 
 // Use process.cwd() which works during SvelteKit build
 // This points to project root during both local dev and Vercel build

@@ -1,10 +1,7 @@
 import fs from 'node:fs/promises';
 import * as path from 'node:path';
-import {
-	createContentSourceChecksum,
-	isValidContentSlug,
-	type EditableMarkdownDocument
-} from '$lib/content/editable-source';
+import { type EditableMarkdownDocument, isValidContentSlug } from '$lib/content/editable-source';
+import { createContentSourceChecksum } from '$lib/content/editable-source.server';
 
 const BLOG_CONTENT_PATH = path.join(process.cwd(), 'content', 'blog');
 const BLOG_READING_SPEED_WORDS_PER_MINUTE = 225;

@@ -4,7 +4,8 @@ import {
 	isValidBlogSlug,
 	parseBlogMarkdown
 } from '$lib/content/blog-source';
-import { createContentSourceChecksum, isValidContentSlug } from '$lib/content/editable-source';
+import { isValidContentSlug } from '$lib/content/editable-source';
+import { createContentSourceChecksum } from '$lib/content/editable-source.server';
 import { parsePoemMarkdown } from '$lib/content/poems';
 import { parsePostcardMarkdown } from '$lib/content/postcards';
 import { parseTallTaleMarkdown } from '$lib/content/tall-tales';

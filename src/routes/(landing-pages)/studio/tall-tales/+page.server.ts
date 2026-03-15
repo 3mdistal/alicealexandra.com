@@ -1,4 +1,4 @@
-import { loadTallTalesMeta } from '$lib/content/tall-tales';
+import { loadTallTalesMeta } from '$lib/content/tall-tales.server';
 
 export const prerender = true;
 
