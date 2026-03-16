@@ -129,16 +129,18 @@
 	.ribbon-content {
 		display: flex;
 		position: relative;
-		align-items: flex-end;
 		z-index: 2;
+		align-items: flex-end;
 		box-sizing: border-box;
 		padding: var(--space-7);
 		width: 100%;
-		min-width: 0;
 		min-height: 100%;
+		min-width: 0;
 	}
 
 	.active-story-content {
+		--_button-accent: var(--color-neutral-0);
+		--_button-bg: var(--color-neutral-900);
 		max-width: 500px;
 	}
 
