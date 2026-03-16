@@ -39,10 +39,7 @@
 			<div class="ribbon-overlay"></div>
 			<div class="ribbon-content">
 				{#if expandedSlug === tale.slug}
-					<div
-						class="active-story-content"
-						transition:fade={{ duration: transitionDuration(250) }}
-					>
+					<div class="active-story-content" transition:fade={{ duration: transitionDuration(250) }}>
 						<h2 class="title">{tale.title}</h2>
 						<p class="description">{tale.description}</p>
 						<LinkButton
@@ -128,13 +125,13 @@
 	.ribbon-content {
 		display: flex;
 		position: relative;
-		z-index: 2;
 		align-items: flex-end;
+		z-index: 2;
 		box-sizing: border-box;
 		padding: var(--space-7);
 		width: 100%;
-		min-height: 100%;
 		min-width: 0;
+		min-height: 100%;
 	}
 
 	.active-story-content {
