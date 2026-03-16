@@ -129,13 +129,13 @@
 	.ribbon-content {
 		display: flex;
 		position: relative;
-		z-index: 2;
 		align-items: flex-end;
+		z-index: 2;
 		box-sizing: border-box;
 		padding: var(--space-7);
 		width: 100%;
-		min-height: 100%;
 		min-width: 0;
+		min-height: 100%;
 	}
 
 	.active-story-content {
