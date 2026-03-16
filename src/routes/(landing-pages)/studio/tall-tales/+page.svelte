@@ -1,5 +1,7 @@
 <script lang="ts">
 	import LinkButton from '$lib/components/ui/link-button.svelte';
+	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
+	import { fade } from 'svelte/transition';
 
 	let { data } = $props();
 	const tales = $derived(data.tales || []);
@@ -13,6 +15,10 @@
 			expandedSlug = slug;
 		}
 	}
+
+	function transitionDuration(duration: number): number {
+		return $prefersReducedMotion ? 1 : duration;
+	}
 </script>
 
 <svelte:head>
@@ -23,17 +29,21 @@
 <div class="ribbon-container">
 	{#each tales as tale}
 		<button
+			type="button"
 			class="ribbon {expandedSlug === tale.slug ? 'expanded' : ''}"
 			onclick={() => toggleExpanded(tale.slug)}
 			style="--bg-image: url('{tale.coverImage}')"
 			aria-expanded={expandedSlug === tale.slug}
+			aria-label={expandedSlug === tale.slug ? `Collapse ${tale.title}` : `Expand ${tale.title}`}
 		>
 			<div class="ribbon-overlay"></div>
 			<div class="ribbon-content">
-				<h2 class="title">{tale.title}</h2>
-
 				{#if expandedSlug === tale.slug}
-					<div class="details">
+					<div
+						class="active-story-content"
+						transition:fade={{ duration: transitionDuration(250) }}
+					>
+						<h2 class="title">{tale.title}</h2>
 						<p class="description">{tale.description}</p>
 						<LinkButton
 							href="/studio/tall-tales/{tale.slug}"
@@ -116,15 +126,22 @@
 	}
 
 	.ribbon-content {
+		display: flex;
 		position: relative;
 		z-index: 2;
+		align-items: flex-end;
+		box-sizing: border-box;
 		padding: var(--space-7);
-		min-width: 300px;
+		width: 100%;
+		min-height: 100%;
+		min-width: 0;
+	}
+
+	.active-story-content {
+		max-width: 500px;
 	}
 
 	.title {
-		transform-origin: left bottom;
-		transition: transform 0.4s ease;
 		margin: 0;
 		font-size: var(--font-size-3xl);
 		line-height: var(--line-height-tight);
@@ -132,28 +149,11 @@
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 	}
 
-	.details {
-		animation: fadeIn 0.6s ease forwards;
-		margin-top: var(--space-4);
-	}
-
 	.description {
-		margin-bottom: var(--space-6);
-		max-width: 500px;
+		margin: var(--space-4) 0 var(--space-6);
 		font-size: var(--font-size-lg);
 		line-height: var(--line-height-body);
 		font-family: var(--font-serif);
-	}
-
-	@keyframes fadeIn {
-		from {
-			transform: translateY(10px);
-			opacity: 0;
-		}
-		to {
-			transform: translateY(0);
-			opacity: 1;
-		}
 	}
 
 	.empty-state {
