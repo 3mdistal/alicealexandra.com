@@ -25,6 +25,8 @@ test('homepage negotiates machine-readable Markdown without changing HTML defaul
 	const unsupportedResponse = await request.get('/', { headers: { Accept: 'application/pdf' } });
 	expect(unsupportedResponse.status()).toBe(406);
 	expect(unsupportedResponse.headers()['vary']).toContain('Accept');
+	const postResponse = await request.post('/', { headers: { Accept: 'text/markdown' } });
+	expect(postResponse.status()).toBe(405);
 
 	await page.goto('/');
 	await expect(page.getByRole('heading', { level: 1, name: 'tempo immaterial' })).toBeVisible();

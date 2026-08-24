@@ -22,13 +22,17 @@ describe('agent-facing resources', () => {
 			{ path: '/about' },
 			{ path: '/blog/example', lastmod: '2026-08-20' },
 			{ path: '/about', lastmod: 'not-a-date' },
+			{ path: '/blog/impossible-date', lastmod: '2026-02-31' },
 			{ path: 'not-absolute' }
 		]);
 		const parsed = new XMLParser().parse(xml);
 		const urls = parsed.urlset.url as Array<{ loc: string; lastmod?: string }>;
 
-		expect(urls).toHaveLength(2);
+		expect(urls).toHaveLength(3);
 		expect(urls).toContainEqual({ loc: 'https://www.alicealexandra.com/about' });
+		expect(urls).toContainEqual({
+			loc: 'https://www.alicealexandra.com/blog/impossible-date'
+		});
 		expect(urls).toContainEqual({
 			loc: 'https://www.alicealexandra.com/blog/example',
 			lastmod: '2026-08-20T00:00:00.000Z'

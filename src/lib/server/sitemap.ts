@@ -31,6 +31,34 @@ function escapeXml(value: string): string {
 
 function normalizeLastmod(value: string | undefined): string | undefined {
 	if (!value?.trim()) return undefined;
+	const match = value.match(
+		/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,9}))?(Z|[+-]\d{2}:\d{2}))?$/
+	);
+	if (!match) return undefined;
+
+	const [, yearText, monthText, dayText, hourText, minuteText, secondText, , timezone] = match;
+	const year = Number(yearText);
+	const month = Number(monthText);
+	const day = Number(dayText);
+	const calendarDate = new Date(Date.UTC(year, month - 1, day));
+	if (
+		calendarDate.getUTCFullYear() !== year ||
+		calendarDate.getUTCMonth() !== month - 1 ||
+		calendarDate.getUTCDate() !== day
+	) {
+		return undefined;
+	}
+
+	if (hourText !== undefined) {
+		if (Number(hourText) > 23 || Number(minuteText) > 59 || Number(secondText) > 59) {
+			return undefined;
+		}
+		if (timezone && timezone !== 'Z') {
+			const [offsetHour, offsetMinute] = timezone.slice(1).split(':').map(Number);
+			if ((offsetHour ?? 0) > 14 || (offsetMinute ?? 0) > 59) return undefined;
+		}
+	}
+
 	const date = new Date(value);
 	return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
 }

@@ -8,7 +8,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.owner = owner;
 	event.locals.isOwner = Boolean(owner);
 
-	if (event.url.pathname !== '/') return resolve(event);
+	if (
+		event.url.pathname !== '/' ||
+		(event.request.method !== 'GET' && event.request.method !== 'HEAD')
+	) {
+		return resolve(event);
+	}
 
 	const representation = selectHomepageRepresentation(event.request.headers.get('accept'));
 	if (!representation) {
