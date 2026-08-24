@@ -6,6 +6,8 @@
 	import { onMount } from 'svelte';
 	import { IMAGE_DOMAIN } from '$lib/utils/images';
 
+	const canonicalUrl = 'https://www.alicealexandra.com/';
+
 	onMount(() => {
 		pageState.set('home');
 	});
@@ -17,9 +19,21 @@
 		name="description"
 		content="The studio of Alice Alexandra Moore. Creative work, ramblings, career and more."
 	/>
+	<link rel="canonical" href={canonicalUrl} />
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Alice Alexandra Moore",
+			"alternateName": "Tempo Immaterial",
+			"url": "https://www.alicealexandra.com/",
+			"description": "A queer multidisciplinary artist, writer, designer, and developer.",
+			"sameAs": ["https://hachyderm.io/@tempoimmaterial"]
+		}
+	</script>
 
 	<!-- Facebook Meta Tags -->
-	<meta property="og:url" content="https://www.alicealexandra.com" />
+	<meta property="og:url" content={canonicalUrl} />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Tempo Immaterial" />
 	<meta
@@ -33,7 +47,7 @@
 	<meta name="twitter:site" content="@tempoimmaterial" />
 	<meta name="twitter:creator" content="@tempoimmaterial" />
 	<meta name="twitter:domain" content="alicealexandra.com" />
-	<meta name="twitter:url" content="https://www.alicealexandra.com" />
+	<meta name="twitter:url" content={canonicalUrl} />
 	<meta name="twitter:title" content="Tempo Immaterial" />
 	<meta
 		name="twitter:description"
