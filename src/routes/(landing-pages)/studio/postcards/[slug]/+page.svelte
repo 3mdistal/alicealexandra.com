@@ -276,8 +276,7 @@
 						<span class="editor-field-label">Description</span>
 						<textarea
 							bind:value={editorDraft.description}
-							class="editor-textarea editor-meta-textarea"
-						></textarea>
+							class="editor-textarea editor-meta-textarea"></textarea>
 					</label>
 					<label class="editor-field editor-field-wide">
 						<span class="editor-field-label">Hero image URL</span>

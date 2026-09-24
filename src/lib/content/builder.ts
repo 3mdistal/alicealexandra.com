@@ -55,7 +55,8 @@ export async function loadBuilderSnapshot(): Promise<BuilderSnapshot> {
 			throw error;
 		}
 		throw new Error(
-			`Builder snapshot: Failed to load ${SNAPSHOT_FILE}. ${error instanceof Error ? error.message : String(error)}`
+			`Builder snapshot: Failed to load ${SNAPSHOT_FILE}. ${error instanceof Error ? error.message : String(error)}`,
+			{ cause: error }
 		);
 	}
 }

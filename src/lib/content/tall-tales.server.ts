@@ -29,7 +29,7 @@ export async function loadRawTallTaleMarkdownBySlug(
 	} catch (err: any) {
 		if (err?.code === 'ENOENT') return null;
 		const message = err instanceof Error ? err.message : String(err);
-		throw new Error(`Failed to load tall tale "${slug}" from ${filePath}: ${message}`);
+		throw new Error(`Failed to load tall tale "${slug}" from ${filePath}: ${message}`, { cause: err });
 	}
 }
 
@@ -68,6 +68,6 @@ export async function loadTallTaleBySlug(slug: string): Promise<TallTale | null>
 	} catch (err: any) {
 		if (err?.code === 'ENOENT') return null;
 		const message = err instanceof Error ? err.message : String(err);
-		throw new Error(`Failed to load tall tale "${slug}" from ${filePath}: ${message}`);
+		throw new Error(`Failed to load tall tale "${slug}" from ${filePath}: ${message}`, { cause: err });
 	}
 }

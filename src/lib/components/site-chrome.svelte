@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
 	import { page } from '$app/stores';
+	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
 	import { isActive, navItems } from '$lib/chrome/nav-model';
 
 	const logo = '/images/logo/logo.png';
@@ -28,9 +30,7 @@
 
 	onMount(() => {
 		const query = window.matchMedia('(max-width: 767px)');
-		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-		if (!prefersReducedMotion.matches) {
+		if (!get(prefersReducedMotion)) {
 			playIntroSpin = true;
 		}
 

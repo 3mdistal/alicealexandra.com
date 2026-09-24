@@ -24,6 +24,9 @@ export default tseslint.config(
 			parserOptions: {
 				parser: tseslint.parser
 			}
+		},
+		rules: {
+			'no-useless-assignment': 'off'
 		}
 	},
 	{

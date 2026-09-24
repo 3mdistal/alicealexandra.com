@@ -274,8 +274,7 @@
 								<span class="editor-field-label">Description</span>
 								<textarea
 									bind:value={editorDraft.description}
-									class="editor-textarea editor-meta-textarea"
-								></textarea>
+									class="editor-textarea editor-meta-textarea"></textarea>
 							</label>
 							<label class="editor-field editor-field-wide">
 								<span class="editor-field-label">Cover image URL</span>
@@ -363,8 +362,7 @@
 								<span class="editor-field-label">Markdown source</span>
 								<textarea
 									bind:value={editorDraft.content}
-									class="editor-textarea editor-markdown-input"
-								></textarea>
+									class="editor-textarea editor-markdown-input"></textarea>
 							</label>
 						</div>
 					</form>

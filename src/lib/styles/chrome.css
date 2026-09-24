@@ -25,10 +25,6 @@
 
 #content {
 	min-height: 100vh;
-
-	&:focus-visible {
-		outline: none;
-	}
 }
 
 .site-chrome {
