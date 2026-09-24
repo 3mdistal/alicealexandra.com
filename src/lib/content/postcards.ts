@@ -171,7 +171,7 @@ export async function loadRawPostcardMarkdownBySlug(
 	} catch (err: any) {
 		if (err?.code === 'ENOENT') return null;
 		const message = err instanceof Error ? err.message : String(err);
-		throw new Error(`Failed to load postcard "${slug}" from ${filePath}: ${message}`);
+		throw new Error(`Failed to load postcard "${slug}" from ${filePath}: ${message}`, { cause: err });
 	}
 }
 
@@ -225,6 +225,6 @@ export async function loadPostcardBySlug(slug: string): Promise<Postcard | null>
 	} catch (err: any) {
 		if (err?.code === 'ENOENT') return null;
 		const message = err instanceof Error ? err.message : String(err);
-		throw new Error(`Failed to load postcard "${slug}" from ${path.join(CONTENT_PATH, `${slug}.md`)}: ${message}`);
+		throw new Error(`Failed to load postcard "${slug}" from ${path.join(CONTENT_PATH, `${slug}.md`)}: ${message}`, { cause: err });
 	}
 }

@@ -85,8 +85,7 @@ function updatePostsIndex(
 	content: string
 ): string {
 	const parsed = JSON.parse(currentPostsJson) as
-		| { $schema?: string; data?: BlogPostMeta[] }
-		| BlogPostMeta[];
+		{ $schema?: string; data?: BlogPostMeta[] } | BlogPostMeta[];
 	const posts = Array.isArray(parsed) ? parsed : (parsed.data ?? []);
 	const nextPost: BlogPostMeta = {
 		id: frontmatter.notionId,

@@ -54,8 +54,9 @@
 		background: rgba(0, 0, 0, 0.8);
 	}
 
-	.audio-toggle:focus {
-		outline: none;
+	.audio-toggle:focus-visible {
+		outline: 2px solid white;
+		outline-offset: 3px;
 		border-color: white;
 	}
 </style>

@@ -452,15 +452,13 @@
 							<span class="editor-field-label">Summary</span>
 							<textarea
 								bind:value={editorDraft.summary}
-								class="editor-textarea editor-meta-textarea"
-							></textarea>
+								class="editor-textarea editor-meta-textarea"></textarea>
 						</label>
 						<label class="editor-field editor-field-wide">
 							<span class="editor-field-label">Open graph description</span>
 							<textarea
 								bind:value={editorDraft.ogDescription}
-								class="editor-textarea editor-meta-textarea"
-							></textarea>
+								class="editor-textarea editor-meta-textarea"></textarea>
 						</label>
 						<label class="editor-field editor-field-wide">
 							<span class="editor-field-label">Cover image URL</span>
@@ -483,8 +481,7 @@
 							bind:this={editorSourceInput}
 							bind:value={editorDraft.content}
 							class="editor-textarea editor-markdown-input"
-							on:scroll={handleSourceScroll}
-						></textarea>
+							on:scroll={handleSourceScroll}></textarea>
 					</label>
 				</form>
 

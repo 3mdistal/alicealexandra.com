@@ -85,8 +85,7 @@
 		}
 
 		const animationOrigin = (page.state as any)?.animationOrigin as
-			| { x: number; y: number; width: number; height: number }
-			| undefined;
+			{ x: number; y: number; width: number; height: number } | undefined;
 
 		if (animationOrigin && modalContentElement) {
 			// Get calculated modal dimensions
@@ -185,8 +184,7 @@
 
 	function closeWithAnimation() {
 		const animationOrigin = (page.state as any)?.animationOrigin as
-			| { x: number; y: number; width: number; height: number }
-			| undefined;
+			{ x: number; y: number; width: number; height: number } | undefined;
 
 		if (animationOrigin && modalContentElement) {
 			// Get current modal position
