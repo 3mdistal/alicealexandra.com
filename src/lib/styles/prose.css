@@ -3,7 +3,7 @@
 
 .prose {
 	margin: 0 auto;
-	max-width: 900px;
+	max-width: var(--content-column);
 	font-size: var(--content-font-size-body);
 	line-height: 1.75rem;
 }
@@ -101,6 +101,22 @@
 	width: 100%;
 	height: auto;
 	object-fit: contain;
+}
+
+/* Image captions: a paragraph containing only <small>, right after an image */
+.prose p:has(> img):has(+ p > small:only-child) {
+	margin-bottom: var(--content-space-xs);
+}
+
+.prose p:has(> img):has(+ p > small:only-child) > img {
+	margin-bottom: 0;
+}
+
+.prose p:has(> img) + p:has(> small:only-child) {
+	margin-top: 0;
+	margin-bottom: 2em;
+	color: var(--color-content-secondary);
+	line-height: 1.5;
 }
 
 .prose .session-interlude-video {

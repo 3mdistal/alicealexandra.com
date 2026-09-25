@@ -36,11 +36,31 @@
 	--content-space-xs: var(--space-2);
 
 	/* Content layout */
+	--content-column: 900px; /* Reading column shared by blog posts and the blog index */
+	--content-gutter: var(--content-space-sm); /* Side padding around it; grows below */
 	--content-measure: 60ch;
 	--content-measure-subtitle: 45ch;
 	--content-measure-blockquote: 40ch;
 	--content-radius: calc(var(--radius-1) + 2px);
 	--content-radius-sm: var(--radius-1);
+}
+
+@media (min-width: 640px) {
+	:root {
+		--content-gutter: var(--content-space-md);
+	}
+}
+
+@media (min-width: 768px) {
+	:root {
+		--content-gutter: var(--content-space-xl);
+	}
+}
+
+@media (min-width: 1536px) {
+	:root {
+		--content-gutter: var(--content-space-lg);
+	}
 }
 
 /* Content colors - Dark mode */

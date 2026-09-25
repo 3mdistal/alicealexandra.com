@@ -547,25 +547,15 @@
 	.blog-container {
 		margin: 0 auto;
 		background-color: var(--color-content-bg);
-		padding: var(--content-space-lg) var(--content-space-sm);
-		max-width: 900px;
+		padding: var(--content-space-lg) var(--content-gutter);
+		max-width: calc(var(--content-column) + 2 * var(--content-gutter));
 		color: var(--color-content-text);
 
-		@media (min-width: 640px) {
-			padding: var(--content-space-lg) var(--content-space-md);
-		}
-
-		@media (min-width: 768px) {
-			padding: var(--content-space-lg) var(--content-space-xl);
-		}
-
+		/* Wider for the owner editor's two panes; .prose stays centered at
+		   --content-column, so the reading column doesn't move. */
 		@media (min-width: 1280px) {
-			padding: var(--content-space-xl) var(--content-space-xl);
+			padding-block: var(--content-space-xl);
 			max-width: 1320px;
-		}
-
-		@media (min-width: 1536px) {
-			padding: var(--content-space-xl) var(--content-space-lg);
 		}
 	}
 
@@ -696,10 +686,11 @@
 		max-width: none;
 	}
 
+	/* Right-aligned to the reading column, not the wider editor container. */
 	.back-link {
-		margin-top: 4em;
+		margin: 4em auto 0;
 		width: 100%;
-		max-width: var(--content-measure);
+		max-width: var(--content-column);
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		text-align: right;
@@ -711,7 +702,8 @@
 
 		a {
 			display: inline-block;
-			padding: var(--content-space-md);
+			/* No right padding, so the text ends at the column edge. */
+			padding: var(--content-space-md) 0 var(--content-space-md) var(--content-space-md);
 			color: var(--color-content-text);
 			font-family: var(--font-serif);
 		}

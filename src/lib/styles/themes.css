@@ -115,7 +115,8 @@
 }
 
 [data-theme='blog'] {
-	--color-bg: var(--color-steel-500);
+	/* Dark enough for the white index text to meet WCAG AA (4.5:1). */
+	--color-bg: var(--color-steel-600);
 	--color-surface: rgba(20, 23, 35, 0.35);
 	--color-surface-muted: rgba(255, 255, 255, 0.08);
 	--color-text: #f8fafc;

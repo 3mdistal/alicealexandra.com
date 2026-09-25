@@ -103,9 +103,11 @@
 		width: 100%;
 	}
 
+	/* Same reading column as blog posts, so the two pages line up. */
 	.blog-wrapper {
-		position: relative;
-		width: 90%;
+		padding-inline: var(--content-gutter);
+		width: 100%;
+		max-width: calc(var(--content-column) + 2 * var(--content-gutter));
 	}
 
 	.background-container {
@@ -127,12 +129,16 @@
 		object-position: right;
 	}
 
-	@media (min-width: 768px) {
-		.blog-wrapper {
-			left: 2.5rem;
-			width: 60%;
+	/* In light mode the painting's pale areas would lighten the background
+	   behind the white text; multiply lets the bird only darken it. (Set on
+	   the fixed container, which is its own stacking context.) */
+	@media (prefers-color-scheme: light) {
+		.background-container {
+			mix-blend-mode: multiply;
 		}
+	}
 
+	@media (min-width: 768px) {
 		.background-container :global(.background-image) {
 			object-position: 50% 35%;
 		}
