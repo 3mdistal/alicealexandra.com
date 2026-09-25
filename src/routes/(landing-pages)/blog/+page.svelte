@@ -103,9 +103,11 @@
 		width: 100%;
 	}
 
+	/* Same reading column as blog posts, so the two pages line up. */
 	.blog-wrapper {
-		position: relative;
-		width: 90%;
+		padding-inline: var(--content-gutter);
+		width: 100%;
+		max-width: calc(var(--content-column) + 2 * var(--content-gutter));
 	}
 
 	.background-container {
@@ -137,11 +139,6 @@
 	}
 
 	@media (min-width: 768px) {
-		.blog-wrapper {
-			left: 2.5rem;
-			width: 60%;
-		}
-
 		.background-container :global(.background-image) {
 			object-position: 50% 35%;
 		}

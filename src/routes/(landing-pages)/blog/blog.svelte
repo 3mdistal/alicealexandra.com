@@ -17,22 +17,22 @@
 </script>
 
 <h1 class="posts-title" style="color: {accent}">Posts</h1>
-{#each posts as post}
-	<div class="post-item">
-		<p class="post-title-wrapper">
-			<a href="/blog/{post.slug}" class="post-title-link">
-				{post.title}
-			</a>
-		</p>
-		{#if post.subtitle}
-			<p class="post-subtitle">{post.subtitle}</p>
-		{/if}
-		<p class="post-date">{post.formattedPublicationDate}</p>
-		<div class="post-category-wrapper">
+<ul class="post-list">
+	{#each posts as post}
+		<li class="post-item">
+			<h2 class="post-title-wrapper">
+				<a href="/blog/{post.slug}" class="post-title-link">
+					{post.title}
+				</a>
+			</h2>
+			{#if post.subtitle}
+				<p class="post-subtitle">{post.subtitle}</p>
+			{/if}
+			<p class="post-date">{post.formattedPublicationDate}</p>
 			<p class="post-category">{post.category}</p>
-		</div>
-	</div>
-{/each}
+		</li>
+	{/each}
+</ul>
 
 <style>
 	.posts-title {
@@ -41,10 +41,17 @@
 		font-size: 4rem;
 	}
 
+	.post-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	/* Phones: title, subtitle, then one meta line ("Lyric · September 10, 2026"). */
 	.post-item {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		column-gap: var(--space-4);
+		grid-template-columns: auto 1fr;
+		column-gap: var(--space-2);
 		margin-bottom: 3rem;
 
 		/* The title takes the free width; the date column hugs the date. */
@@ -56,7 +63,9 @@
 
 	.post-title-wrapper {
 		grid-column: span 2;
-		margin-bottom: 0;
+		margin: 0;
+		font-weight: inherit;
+		font-size: inherit;
 
 		@media (min-width: 768px) {
 			grid-column: 1;
@@ -69,7 +78,7 @@
 		color: var(--color-text);
 		font-weight: 500;
 		font-size: var(--content-font-size-heading-md);
-		line-height: 1;
+		line-height: 1.15;
 		font-family: var(--font-serif);
 
 		@media (max-width: 767px) {
@@ -93,7 +102,7 @@
 		color: var(--color-text);
 		font-style: italic;
 		font-size: var(--content-font-size-body);
-		line-height: 1;
+		line-height: 1.35;
 		text-wrap: balance;
 
 		@media (min-width: 768px) {
@@ -103,32 +112,28 @@
 
 	.post-date {
 		grid-row-start: 3;
+		grid-column-start: 2;
 		color: var(--color-text-muted);
+
+		&::before {
+			margin-right: var(--space-2);
+			content: '·';
+			content: '·' / '';
+		}
 
 		@media (min-width: 768px) {
 			grid-row-start: 1;
-			grid-column-start: 2;
 			align-self: baseline;
-		}
-	}
 
-	.post-category-wrapper {
-		display: flex;
-		grid-column-start: 2;
-		justify-content: flex-end;
-
-		@media (min-width: 768px) {
-			grid-column-start: 1;
-			justify-content: flex-start;
+			&::before {
+				content: none;
+			}
 		}
 	}
 
 	.post-category {
-		display: none;
+		grid-row-start: 3;
+		grid-column-start: 1;
 		color: var(--color-text-muted);
-
-		@media (min-width: 768px) {
-			display: block;
-		}
 	}
 </style>

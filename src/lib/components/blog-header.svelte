@@ -66,14 +66,13 @@
 </div>
 
 <style>
-	/* --blog-gutter and --blog-column come from the post page, so the header's
-	   text column always matches the body's. */
+	/* Same column and gutter as the post body, so their text always lines up. */
 	.blog-header {
 		margin: 0 auto;
 		margin-top: 80px; /* More space from top */
-		padding: var(--content-space-lg) var(--blog-gutter) 0;
+		padding: var(--content-space-lg) var(--content-gutter) 0;
 		width: 100%;
-		max-width: calc(var(--blog-column) + 2 * var(--blog-gutter));
+		max-width: calc(var(--content-column) + 2 * var(--content-gutter));
 		color: var(--color-content-text);
 
 		@media (min-width: 1280px) {

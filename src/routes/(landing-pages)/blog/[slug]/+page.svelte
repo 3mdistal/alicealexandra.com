@@ -538,37 +538,21 @@
 	}
 
 	.page-wrapper {
-		/* Shared with BlogHeader so the header and body text columns line up.
-		   --blog-column matches the .prose max-width in prose.css. */
-		--blog-column: 900px;
-		--blog-gutter: var(--content-space-sm);
 		position: relative;
 		z-index: 1;
 		background-color: var(--color-content-bg);
 		min-height: 100vh;
-
-		@media (min-width: 640px) {
-			--blog-gutter: var(--content-space-md);
-		}
-
-		@media (min-width: 768px) {
-			--blog-gutter: var(--content-space-xl);
-		}
-
-		@media (min-width: 1536px) {
-			--blog-gutter: var(--content-space-lg);
-		}
 	}
 
 	.blog-container {
 		margin: 0 auto;
 		background-color: var(--color-content-bg);
-		padding: var(--content-space-lg) var(--blog-gutter);
-		max-width: calc(var(--blog-column) + 2 * var(--blog-gutter));
+		padding: var(--content-space-lg) var(--content-gutter);
+		max-width: calc(var(--content-column) + 2 * var(--content-gutter));
 		color: var(--color-content-text);
 
 		/* Wider for the owner editor's two panes; .prose stays centered at
-		   --blog-column, so the reading column doesn't move. */
+		   --content-column, so the reading column doesn't move. */
 		@media (min-width: 1280px) {
 			padding-block: var(--content-space-xl);
 			max-width: 1320px;
@@ -706,7 +690,7 @@
 	.back-link {
 		margin: 4em auto 0;
 		width: 100%;
-		max-width: var(--blog-column);
+		max-width: var(--content-column);
 		font-size: 2.25rem;
 		line-height: 2.5rem;
 		text-align: right;

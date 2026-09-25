@@ -3,7 +3,7 @@
 
 .prose {
 	margin: 0 auto;
-	max-width: 900px;
+	max-width: var(--content-column);
 	font-size: var(--content-font-size-body);
 	line-height: 1.75rem;
 }
