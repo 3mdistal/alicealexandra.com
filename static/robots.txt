@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /api/
+Disallow: /owner
+
+Sitemap: https://www.alicealexandra.com/sitemap.xml
