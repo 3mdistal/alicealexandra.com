@@ -18,9 +18,7 @@
 </script>
 
 <svelte:head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image" href="/images/logo/logo.png" />
-	<meta name="viewport" content="width=device-width" />
+	<link rel="icon" type="image/png" href="/images/logo/logo.png" />
 </svelte:head>
 
 <div

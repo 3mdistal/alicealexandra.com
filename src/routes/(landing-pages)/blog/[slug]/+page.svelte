@@ -351,28 +351,39 @@
 </script>
 
 <svelte:head>
-	<title>{displayedPost.title || 'Blog'}</title>
-	<meta name="og:title" content={displayedPost.title || 'Blog'} />
+	<title>{displayedPost.title || 'Blog'} | Alice Alexandra Moore</title>
 	<meta name="description" content={displayedPost.ogDescription} />
+	<link rel="canonical" href="https://www.alicealexandra.com/blog/{displayedPost.slug}" />
 
 	<meta property="og:url" content="https://www.alicealexandra.com/blog/{displayedPost.slug}" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Blog - {displayedPost.title || 'Blog'}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:site_name" content="Alice Alexandra Moore" />
+	<meta property="og:title" content={displayedPost.title || 'Blog'} />
 	<meta property="og:description" content={displayedPost.ogDescription} />
-	<meta property="og:image" content={displayedPost.coverImage || 'https://unsplash.it/1200/600'} />
+	{#if displayedPost.publicationDate}
+		<meta property="article:published_time" content={displayedPost.publicationDate} />
+	{/if}
+	{#if displayedPost.coverImage}
+		<meta property="og:image" content={displayedPost.coverImage} />
+	{/if}
 
-	<meta name="twitter:card" content="summary_large_image" />
+	<meta
+		name="twitter:card"
+		content={displayedPost.coverImage ? 'summary_large_image' : 'summary'}
+	/>
 	<meta name="twitter:site" content="@tempoimmaterial" />
 	<meta name="twitter:creator" content="@tempoimmaterial" />
 	<meta name="twitter:domain" content="alicealexandra.com" />
-	<meta name="twitter:url" content="https://www.alicealexandra.com/blog" />
-	<meta name="twitter:title" content="Blog - {displayedPost.title || 'Blog'}" />
+	<meta name="twitter:url" content="https://www.alicealexandra.com/blog/{displayedPost.slug}" />
+	<meta name="twitter:title" content={displayedPost.title || 'Blog'} />
 	<meta name="twitter:description" content={displayedPost.ogDescription} />
-	<meta name="twitter:image" content={displayedPost.coverImage || 'https://unsplash.it/1200/600'} />
-	<meta
-		name="twitter:image:alt"
-		content="Open graph representation of this blog article, {displayedPost.title || 'Blog'}."
-	/>
+	{#if displayedPost.coverImage}
+		<meta name="twitter:image" content={displayedPost.coverImage} />
+		<meta
+			name="twitter:image:alt"
+			content="Open graph representation of this blog article, {displayedPost.title || 'Blog'}."
+		/>
+	{/if}
 
 	<link
 		rel="stylesheet"
@@ -392,6 +403,7 @@
 		subtitle={displayedPost.subtitle}
 		category={displayedPost.category || 'Article'}
 		publishedDate={displayedPost.formattedPublicationDate}
+		publishedDateIso={displayedPost.publicationDate}
 		readTime={displayedPost.readTime}
 	/>
 

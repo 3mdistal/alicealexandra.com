@@ -44,6 +44,7 @@
 	.post-item {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
+		column-gap: var(--space-4);
 		margin-bottom: 3rem;
 
 		@media (min-width: 768px) {
@@ -111,10 +112,11 @@
 	}
 
 	.post-category {
+		display: none;
 		color: var(--color-text-muted);
 
-		@media (max-width: 768px) {
-			display: none;
+		@media (min-width: 768px) {
+			display: block;
 		}
 	}
 </style>

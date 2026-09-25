@@ -1,10 +1,5 @@
 import { loadPostsMeta, loadPostBySlug } from '$lib/content/blog';
-import { error, redirect } from '@sveltejs/kit';
-
-// Permanent redirects for old slugs
-const SLUG_REDIRECTS: Record<string, string> = {
-	'thinking-in-quantum': 'the-shady-side-of-the-hill'
-};
+import { error } from '@sveltejs/kit';
 
 // Prerender all blog posts at build time
 export const prerender = true;
@@ -16,12 +11,6 @@ export async function entries() {
 }
 
 export async function load({ params }: { params: { slug: string } }) {
-	// Handle permanent redirects for old slugs
-	const redirectTo = SLUG_REDIRECTS[params.slug];
-	if (redirectTo) {
-		redirect(301, `/blog/${redirectTo}`);
-	}
-
 	const post = await loadPostBySlug(params.slug);
 
 	if (!post) {
