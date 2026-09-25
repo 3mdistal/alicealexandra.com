@@ -33,6 +33,8 @@
 	color: var(--color-content-heading);
 	font-weight: 300;
 	font-family: var(--font-serif);
+	/* Safari only supports the prefixed property */
+	-webkit-initial-letter: 2;
 	initial-letter: 2;
 }
 
