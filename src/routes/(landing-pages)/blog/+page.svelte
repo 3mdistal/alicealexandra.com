@@ -127,6 +127,15 @@
 		object-position: right;
 	}
 
+	/* In light mode the painting's pale areas would lighten the background
+	   behind the white text; multiply lets the bird only darken it. (Set on
+	   the fixed container, which is its own stacking context.) */
+	@media (prefers-color-scheme: light) {
+		.background-container {
+			mix-blend-mode: multiply;
+		}
+	}
+
 	@media (min-width: 768px) {
 		.blog-wrapper {
 			left: 2.5rem;

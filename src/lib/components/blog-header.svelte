@@ -66,33 +66,18 @@
 </div>
 
 <style>
+	/* --blog-gutter and --blog-column come from the post page, so the header's
+	   text column always matches the body's. */
 	.blog-header {
 		margin: 0 auto;
 		margin-top: 80px; /* More space from top */
-		padding: var(--content-space-lg) var(--content-space-sm);
+		padding: var(--content-space-lg) var(--blog-gutter) 0;
 		width: 100%;
-		max-width: 900px;
+		max-width: calc(var(--blog-column) + 2 * var(--blog-gutter));
 		color: var(--color-content-text);
 
-		@media (min-width: 640px) {
-			padding: var(--content-space-lg) var(--content-space-md);
-		}
-
-		@media (min-width: 768px) {
-			padding: var(--content-space-lg) var(--content-space-xl);
-		}
-
-		/* From 1280px the post container widens for the editor, leaving the
-		   900px .prose column centered inside it. Add the padding to max-width
-		   so the header text is also 900px wide and shares the body's left edge. */
 		@media (min-width: 1280px) {
-			padding: var(--content-space-xl) var(--content-space-xl);
-			max-width: calc(900px + 2 * var(--content-space-xl));
-		}
-
-		@media (min-width: 1536px) {
-			padding: var(--content-space-xl) var(--content-space-lg);
-			max-width: calc(900px + 2 * var(--content-space-lg));
+			padding-top: var(--content-space-xl);
 		}
 	}
 
@@ -192,7 +177,7 @@
 		flex-direction: column;
 		align-items: flex-start;
 		gap: var(--content-space-xs);
-		margin-bottom: var(--content-space-md);
+		margin-bottom: var(--content-space-sm);
 		border-bottom: 1px solid var(--color-content-border);
 		padding-bottom: var(--content-space-md);
 
