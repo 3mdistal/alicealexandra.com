@@ -4,6 +4,7 @@
 		subtitle?: string;
 		category?: string;
 		publishedDate?: string;
+		publishedDateIso?: string;
 		readTime?: string;
 	}
 
@@ -12,6 +13,7 @@
 		subtitle = '',
 		category = '',
 		publishedDate = '',
+		publishedDateIso = '',
 		readTime = ''
 	}: Props = $props();
 </script>
@@ -56,7 +58,7 @@
 		</div>
 
 		{#if publishedDate}
-			<time class="publish-date" datetime={publishedDate}>
+			<time class="publish-date" datetime={publishedDateIso || publishedDate}>
 				{publishedDate}
 			</time>
 		{/if}
@@ -138,12 +140,12 @@
 		font-weight: 500;
 	}
 
-	/* Title */
+	/* Title (mobile-first: base size is the <640px/phone size) */
 	.blog-title {
 		margin: 0 0 var(--content-space-sm) 0;
 		color: var(--color-content-heading);
 		font-weight: 500;
-		font-size: 2.25rem;
+		font-size: 1.875rem;
 		line-height: 2.5rem;
 		font-family: var(--font-serif);
 
@@ -179,15 +181,22 @@
 		}
 	}
 
-	/* Article Metadata */
+	/* Article Metadata (mobile-first: stacked on phones, row from 640px up) */
 	.article-metadata {
 		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: var(--content-space-md);
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--content-space-xs);
 		margin-bottom: var(--content-space-md);
 		border-bottom: 1px solid var(--color-content-border);
 		padding-bottom: var(--content-space-md);
+
+		@media (min-width: 640px) {
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: var(--content-space-md);
+		}
 	}
 
 	.reading-time {
@@ -217,18 +226,5 @@
 	.publish-date {
 		color: var(--color-content-secondary);
 		font-size: var(--content-font-size-body-sm);
-	}
-
-	/* Responsive Design */
-	@media (max-width: 768px) {
-		.blog-title {
-			font-size: 1.875rem;
-		}
-
-		.article-metadata {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: var(--content-space-xs);
-		}
 	}
 </style>
