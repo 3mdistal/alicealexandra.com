@@ -47,14 +47,21 @@
 		column-gap: var(--space-4);
 		margin-bottom: 3rem;
 
+		/* The title takes the free width; the date column hugs the date. */
 		@media (min-width: 768px) {
-			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-columns: minmax(0, 1fr) auto;
+			column-gap: var(--space-7);
 		}
 	}
 
 	.post-title-wrapper {
 		grid-column: span 2;
 		margin-bottom: 0;
+
+		@media (min-width: 768px) {
+			grid-column: 1;
+			align-self: baseline;
+		}
 	}
 
 	.post-title-link {
@@ -65,7 +72,7 @@
 		line-height: 1;
 		font-family: var(--font-serif);
 
-		@media (max-width: 768px) {
+		@media (max-width: 767px) {
 			font-size: 1.75rem;
 		}
 
@@ -88,6 +95,10 @@
 		font-size: var(--content-font-size-body);
 		line-height: 1;
 		text-wrap: balance;
+
+		@media (min-width: 768px) {
+			grid-column: 1;
+		}
 	}
 
 	.post-date {
@@ -96,7 +107,8 @@
 
 		@media (min-width: 768px) {
 			grid-row-start: 1;
-			grid-column-start: 3;
+			grid-column-start: 2;
+			align-self: baseline;
 		}
 	}
 
