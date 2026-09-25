@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Blog from './blog.svelte';
 	import type { BlogPostMeta } from '$lib/content/blog';
-	import { onMount, onDestroy } from 'svelte';
-	import { gsap } from 'gsap';
+	import { onDestroy } from 'svelte';
 	import { pageState } from '$lib/stores';
 	import { IMAGE_DOMAIN } from '$lib/utils/images';
 	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
@@ -11,32 +10,49 @@
 
 	const Bird = `https://${IMAGE_DOMAIN}/site/images/bird.webp`;
 
-	function fadeIn() {
-		gsap.to('.opacity-0', {
-			duration: 1,
-			opacity: 1,
-			ease: 'power2.inOut'
-		});
-	}
-
-	onMount(() => {
-		fadeIn();
-	});
-
 	onDestroy(() => {
 		pageState.set('home');
 	});
 </script>
 
 <svelte:head>
-	<title>Blog</title>
+	<title>Blog | Alice Alexandra Moore</title>
 	<meta
 		name="description"
 		content="Blog entries and writing that doesn't quite fit anywhere else, from Alice Alexandra Moore."
 	/>
+	<link rel="canonical" href="https://www.alicealexandra.com/blog" />
+
+	<meta property="og:url" content="https://www.alicealexandra.com/blog" />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Alice Alexandra Moore" />
+	<meta property="og:title" content="Blog" />
+	<meta
+		property="og:description"
+		content="Blog entries and writing that doesn't quite fit anywhere else, from Alice Alexandra Moore."
+	/>
+	<meta
+		property="og:image"
+		content="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bird.webp"
+	/>
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@tempoimmaterial" />
+	<meta name="twitter:creator" content="@tempoimmaterial" />
+	<meta name="twitter:domain" content="alicealexandra.com" />
+	<meta name="twitter:url" content="https://www.alicealexandra.com/blog" />
+	<meta name="twitter:title" content="Blog" />
+	<meta
+		name="twitter:description"
+		content="Blog entries and writing that doesn't quite fit anywhere else, from Alice Alexandra Moore."
+	/>
+	<meta
+		name="twitter:image"
+		content="https://pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev/site/images/bird.webp"
+	/>
 </svelte:head>
 
-<div class="opacity-0 blog-page">
+<div class="blog-page">
 	<div class="blog-content">
 		<div class="blog-wrapper">
 			<Blog posts={data.posts} />
@@ -59,8 +75,21 @@
 		min-height: 100vh;
 	}
 
-	.opacity-0 {
-		opacity: 0;
+	/* Content is visible by default (no-JS / pre-hydration safe). The fade-in
+	   below is a progressive enhancement for users who don't mind motion. */
+	@media (prefers-reduced-motion: no-preference) {
+		.blog-page {
+			animation: blog-page-fade-in 1s ease-in-out;
+		}
+	}
+
+	@keyframes blog-page-fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
 	}
 
 	.blog-content {
