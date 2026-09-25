@@ -82,12 +82,17 @@
 			padding: var(--content-space-lg) var(--content-space-xl);
 		}
 
+		/* From 1280px the post container widens for the editor, leaving the
+		   900px .prose column centered inside it. Add the padding to max-width
+		   so the header text is also 900px wide and shares the body's left edge. */
 		@media (min-width: 1280px) {
 			padding: var(--content-space-xl) var(--content-space-xl);
+			max-width: calc(900px + 2 * var(--content-space-xl));
 		}
 
 		@media (min-width: 1536px) {
 			padding: var(--content-space-xl) var(--content-space-lg);
+			max-width: calc(900px + 2 * var(--content-space-lg));
 		}
 	}
 
