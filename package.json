@@ -20,6 +20,10 @@
 	"devDependencies": {
 		"@aws-sdk/client-s3": "^3.1138.0",
 		"@eslint/js": "^10.0.1",
+		"@fontsource/cutive-mono": "^5.3.0",
+		"@fontsource/euphoria-script": "^5.3.0",
+		"@fontsource/lato": "^5.3.0",
+		"@fontsource/spectral": "^5.3.0",
 		"@notionhq/client": "^5.26.0",
 		"@playwright/test": "1.63.0",
 		"@sveltejs/adapter-auto": "^7.0.1",

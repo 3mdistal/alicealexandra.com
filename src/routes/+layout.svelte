@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '$lib/styles/fonts';
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { getSurface, getTheme, type SiteSurface, type SiteTheme } from '$lib/theme/route-theme';
