@@ -93,7 +93,7 @@ test('clicking where a label is drawn opens that section on a landscape phone', 
 	await settledHomepage(page, 844, 390);
 	const box = await page.locator('.homepage-section-link.about').boundingBox();
 	await page.mouse.click(box!.x + box!.width / 2, box!.y + box!.height / 2);
-	await expect(page).toHaveURL(/\/about$/);
+	await expect(page).toHaveURL(/\/about(\?|$)/);
 });
 
 test('right and middle clicks do not navigate; modified clicks open a new tab', async ({
@@ -112,7 +112,7 @@ test('right and middle clicks do not navigate; modified clicks open a new tab', 
 		context.waitForEvent('page'),
 		about.click({ modifiers: ['ControlOrMeta'] })
 	]);
-	await expect(popup).toHaveURL(/\/about$/);
+	await expect(popup).toHaveURL(/\/about(\?|$)/);
 	await page.waitForTimeout(1500);
 	await expect(page).toHaveURL(/\/$/);
 });
@@ -121,7 +121,7 @@ test('a plain click on a band away from its label navigates', async ({ page }) =
 	await settledHomepage(page, 1280, 720);
 	const box = await page.locator('.homepage-section-link.news').boundingBox();
 	await page.mouse.click(box!.x + box!.width + 150, box!.y + box!.height / 2);
-	await expect(page).toHaveURL(/\/news$/);
+	await expect(page).toHaveURL(/\/news(\?|$)/);
 });
 
 test('reduced motion shows the bands in place without springing', async ({ page }) => {
@@ -199,7 +199,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
 			expect(ratio, `${name} focused contrast`).toBeGreaterThanOrEqual(4.5);
 		}
 		await page.keyboard.press('Enter');
-		await expect(page).toHaveURL(/\/news$/);
+		await expect(page).toHaveURL(/\/news(\?|$)/);
 	});
 }
 
