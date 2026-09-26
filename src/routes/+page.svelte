@@ -5,6 +5,8 @@
 	import { pageState } from '../lib/stores';
 	import { onMount } from 'svelte';
 	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import latoLight from '@fontsource/lato/files/lato-latin-300-normal.woff2?url';
+	import spectralLight from '@fontsource/spectral/files/spectral-latin-300-normal.woff2?url';
 
 	const canonicalUrl = 'https://www.alicealexandra.com/';
 
@@ -15,6 +17,8 @@
 
 <svelte:head>
 	<title>Tempo Immaterial</title>
+	<link rel="preload" href={latoLight} as="font" type="font/woff2" crossorigin="anonymous" />
+	<link rel="preload" href={spectralLight} as="font" type="font/woff2" crossorigin="anonymous" />
 	<meta
 		name="description"
 		content="The studio of Alice Alexandra Moore. Creative work, ramblings, career and more."
@@ -57,7 +61,7 @@
 	<meta name="twitter:image:alt" content="The homepage of alicealexandra.com." />
 </svelte:head>
 
-<div class="main-container homepage">
+<main class="main-container homepage">
 	<!-- SVG clipPath defs must exist before homepage sections render to avoid a flash of unclipped blocks -->
 	<Svgs />
 	<SiteTitle />
@@ -65,7 +69,7 @@
 	<div class="mastodon-link">
 		<a rel="me" href="https://hachyderm.io/@tempoimmaterial">Mastodon</a>
 	</div>
-</div>
+</main>
 
 <style>
 	.homepage {
@@ -73,7 +77,7 @@
 	}
 
 	.main-container {
-		--top-padding: 10vh;
+		--top-padding: 10dvh;
 		display: flex;
 		position: relative;
 		flex-direction: column;
@@ -87,9 +91,9 @@
 		display: none;
 	}
 
-	@media (min-width: 768px) {
+	@media (min-width: 768px), (orientation: landscape) and (min-width: 600px) {
 		.main-container {
-			--top-padding: 6vh;
+			--top-padding: 6dvh;
 		}
 	}
 </style>

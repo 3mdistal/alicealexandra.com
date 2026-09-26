@@ -25,12 +25,7 @@
 	}
 
 	function animateOut() {
-		if ($prefersReducedMotion) {
-			navigate();
-			return;
-		}
-
-		if (!gsap) {
+		if ($prefersReducedMotion || !gsap) {
 			navigate();
 			return;
 		}
@@ -44,20 +39,38 @@
 		});
 	}
 
-	function handleMouseEnter() {
-		if (hover) {
-			ease(-30);
-		}
+	function lift() {
+		if (hover) ease(-30);
 	}
 
-	function handleMouseLeave() {
-		if (hover) {
-			ease(0);
-		}
+	function settle() {
+		if (hover) ease(0);
+	}
+
+	function handleFocus(event: FocusEvent) {
+		if ((event.currentTarget as HTMLElement).matches(':focus-visible')) lift();
 	}
 
 	function navigate() {
 		goto(name);
+	}
+
+	// Plain primary clicks animate; anything else (new tab, context menu) stays native.
+	function isPlainClick(event: MouseEvent) {
+		return (
+			event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey
+		);
+	}
+
+	function handleLinkClick(event: MouseEvent) {
+		if (!isPlainClick(event)) return;
+		event.preventDefault();
+		activate();
+	}
+
+	function handleBandClick(event: MouseEvent) {
+		if (!isPlainClick(event)) return;
+		activate();
 	}
 
 	function activate() {
@@ -71,21 +84,24 @@
 	}
 </script>
 
+<!-- The band is a larger pointer target for the link inside it; keyboard users use the link. -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	class="homepage-section {name}"
 	bind:this={section}
-	on:mouseenter={handleMouseEnter}
-	on:mouseleave={handleMouseLeave}
-	on:pointerdown={activate}
+	on:mouseenter={lift}
+	on:mouseleave={settle}
+	on:click={handleBandClick}
 	role="presentation"
 >
 	<a
 		href={name}
-		title={name}
 		class="homepage-section-link {name}"
-		on:click|preventDefault={activate}
+		on:click={handleLinkClick}
+		on:focus={handleFocus}
+		on:blur={settle}
 	>
-		<h2>{name}</h2>
+		{name}
 	</a>
 </div>
 
@@ -110,24 +126,25 @@
 		}
 	}
 
-	.homepage-section-link:focus-visible {
-		background: color-mix(in srgb, var(--color-surface) 88%, transparent);
-	}
-
 	.homepage-section-link {
-		--a11y-focus-offset-local: calc(var(--a11y-focus-offset) + 1px);
-		--a11y-focus-radius-local: var(--radius-pill);
 		display: inline-block;
 		position: absolute;
 		border-radius: var(--radius-pill);
 		padding: 0.35rem 0.75rem;
 		color: inherit;
+		font-weight: 300;
+		font-size: 1.125rem;
+		line-height: 1.6;
+		font-family: var(--font-serif);
 		text-decoration: none;
 	}
 
-	.homepage-section-link h2 {
-		font-weight: 300;
-		font-size: 1.125rem;
+	/* A pill plus a ring in the page text color reads against every band in both themes. */
+	.homepage-section-link:focus-visible {
+		outline: var(--a11y-focus-width) solid var(--color-text);
+		outline-offset: 1px;
+		background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+		color: var(--color-text);
 	}
 
 	.homepage-section {
@@ -140,109 +157,117 @@
 		&.studio {
 			--home-section-bg: var(--home-studio-bg);
 			--home-section-label: var(--home-studio-label);
-			clip-path: url(#studio-path);
+			clip-path: url(#studio-path-mobile);
+			height: 90%;
 		}
 
 		&.career {
 			--home-section-bg: var(--home-career-bg);
 			--home-section-label: var(--home-career-label);
-			clip-path: url(#career-path);
-			height: 82%;
+			clip-path: url(#career-path-mobile);
+			height: 78%;
 		}
 
 		&.blog {
 			--home-section-bg: var(--home-blog-bg);
 			--home-section-label: var(--home-blog-label);
-			clip-path: url(#blog-path);
-			height: 75%;
+			clip-path: url(#blog-path-mobile);
+			height: 68%;
 		}
 
 		&.news {
 			--home-section-bg: var(--home-news-bg);
 			--home-section-label: var(--home-news-label);
 			clip-path: url(#news-path);
-			height: 50%;
+			height: 55%;
 		}
 	}
 
 	.homepage-section-link.about {
-		top: 15%;
+		top: 10%;
 		left: 33%;
 	}
 
 	.homepage-section-link.studio {
-		top: 8%;
-		right: 18%;
+		top: 6%;
+		right: 14%;
 	}
 
 	.homepage-section-link.career {
 		top: 9%;
-		right: 36%;
+		right: 30%;
 	}
 
 	.homepage-section-link.blog {
-		top: 22%;
+		top: 12%;
 		right: 20%;
 	}
 
 	.homepage-section-link.news {
 		top: 12%;
-		left: 27%;
-	}
-
-	@media screen and (max-width: 1024px) {
-		.homepage-section {
-			&.studio {
-				clip-path: url(#studio-path-mobile);
-				height: 90%;
-			}
-
-			&.career {
-				clip-path: url(#career-path-mobile);
-				height: 78%;
-			}
-
-			&.blog {
-				clip-path: url(#blog-path-mobile);
-				height: 68%;
-			}
-
-			&.news {
-				height: 55%;
-			}
-		}
-
-		.homepage-section-link.about {
-			top: 10%;
-		}
-
-		.homepage-section-link.studio {
-			top: 6%;
-			right: 14%;
-		}
-
-		.homepage-section-link.career {
-			right: 30%;
-		}
-
-		.homepage-section-link.blog {
-			top: 12%;
-		}
-
-		.homepage-section-link.news {
-			left: 23%;
-		}
+		left: 23%;
 	}
 
 	@media (min-width: 768px) {
-		.homepage-section-link h2 {
+		.homepage-section-link {
 			font-size: 1.5rem;
 		}
 	}
 
-	@media (min-width: 1024px) {
-		.homepage-section-link h2 {
-			font-size: 1.875rem;
+	/* Wide composition: desktops, plus landscape phones and tablets. Keep in sync with the homepage. */
+	@media (min-width: 1024px), (orientation: landscape) and (min-width: 600px) {
+		.homepage-section {
+			&.studio {
+				clip-path: url(#studio-path);
+				height: 100%;
+			}
+
+			&.career {
+				clip-path: url(#career-path);
+				height: 82%;
+			}
+
+			&.blog {
+				clip-path: url(#blog-path);
+				height: 75%;
+			}
+
+			&.news {
+				height: 50%;
+			}
+		}
+
+		.homepage-section-link {
+			font-size: clamp(1.125rem, min(2.4vw, 4.2dvh), 1.875rem);
+		}
+
+		.homepage-section-link.about {
+			top: 15%;
+		}
+
+		.homepage-section-link.studio {
+			top: 8%;
+			right: 18%;
+		}
+
+		.homepage-section-link.career {
+			right: 36%;
+		}
+
+		.homepage-section-link.blog {
+			top: 22%;
+		}
+
+		/* The news band runs off the bottom of the screen; keep its label above the fold. */
+		.homepage-section-link.news {
+			top: min(12%, calc(15dvh - 1.6em - 0.7rem - 4px));
+			left: 27%;
+		}
+	}
+
+	@media (min-width: 2200px) and (min-height: 1200px) {
+		.homepage-section-link {
+			font-size: clamp(1.875rem, min(2.4vw, 4.2dvh), 2.5rem);
 		}
 	}
 </style>
