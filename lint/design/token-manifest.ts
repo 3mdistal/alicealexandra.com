@@ -51,7 +51,7 @@ const cache = new Map<string, { stamp: string; manifest: TokenManifest }>();
 /** Reads the token files, reusing the last result until one of them changes on disk. */
 export function loadTokenManifest(files: readonly string[]): TokenManifest {
 	const key = files.join('\n');
-	const stamp = files.map((file) => statSync(file).mtimeMs).join(',');
+	const stamp = files.map(modifiedTime).join(',');
 	const cached = cache.get(key);
 	if (cached?.stamp === stamp) return cached.manifest;
 
@@ -67,4 +67,14 @@ export function loadTokenManifest(files: readonly string[]): TokenManifest {
 	const manifest = { definitions };
 	cache.set(key, { stamp, manifest });
 	return manifest;
+}
+
+function modifiedTime(file: string): number {
+	try {
+		return statSync(file).mtimeMs;
+	} catch {
+		throw new Error(
+			`Token file not found: ${file}. Check \`settings.design.tokenFiles\` in eslint.config.js.`
+		);
+	}
 }

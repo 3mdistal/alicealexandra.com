@@ -15,7 +15,7 @@ export function findVarReferences(value: string): VarReference[] {
 	const references: VarReference[] = [];
 	valueParser(value).walk((node) => {
 		if (node.type !== 'function' || node.value.toLowerCase() !== 'var') return;
-		const [first] = node.nodes;
+		const first = node.nodes.find((child) => child.type !== 'comment' && child.type !== 'space');
 		if (first?.type !== 'word' || !first.value.startsWith('--')) return;
 		references.push({
 			name: first.value,

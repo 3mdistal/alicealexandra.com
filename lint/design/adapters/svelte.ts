@@ -1,10 +1,9 @@
 import type { Rule } from 'eslint';
+import postcss from 'postcss';
 import type { AST, StyleContext } from 'svelte-eslint-parser';
 import type { StyleDeclaration, StyleSource, StyleVisitor } from '../style-source.ts';
 
 type CallExpression = Extract<Rule.Node, { type: 'CallExpression' }>;
-
-const CUSTOM_PROPERTY_IN_STYLE_ATTRIBUTE = /(--[\w-]+)\s*:/g;
 
 /**
  * Reads a `.svelte` file's `<style>` block, plus the custom properties its markup and script set:
@@ -20,12 +19,7 @@ export function svelteStyleVisitor(
 		SvelteAttribute(node) {
 			const attribute = node as AST.SvelteAttribute;
 			if (attribute.key.name !== 'style') return;
-			for (const part of attribute.value) {
-				if (part.type !== 'SvelteLiteral') continue;
-				for (const [, name] of part.value.matchAll(CUSTOM_PROPERTY_IN_STYLE_ATTRIBUTE)) {
-					if (name) localDefinitions.add(name);
-				}
-			}
+			for (const name of customPropertiesIn(attribute)) localDefinitions.add(name);
 		},
 		SvelteStyleDirective(node) {
 			const { name } = (node as AST.SvelteStyleDirective).key;
@@ -38,6 +32,9 @@ export function svelteStyleVisitor(
 				callee.type === 'MemberExpression' &&
 				callee.property.type === 'Identifier' &&
 				callee.property.name === 'setProperty' &&
+				callee.object.type === 'MemberExpression' &&
+				callee.object.property.type === 'Identifier' &&
+				callee.object.property.name === 'style' &&
 				first?.type === 'Literal' &&
 				typeof first.value === 'string' &&
 				first.value.startsWith('--')
@@ -67,4 +64,23 @@ export function svelteStyleVisitor(
 			check({ declarations, localDefinitions });
 		}
 	};
+}
+
+/**
+ * The custom properties a `style="…"` attribute sets. Each `{expression}` becomes an empty comment,
+ * which fits both in a value (`--delay: {i * 0.1}s`) and where a whole declaration would go.
+ */
+function customPropertiesIn(attribute: AST.SvelteAttribute): string[] {
+	const text = attribute.value
+		.map((part) => (part.type === 'SvelteLiteral' ? part.value : '/**/'))
+		.join('');
+	try {
+		const names: string[] = [];
+		postcss.parse(`a{${text}}`).walkDecls((declaration) => {
+			if (declaration.prop.startsWith('--')) names.push(declaration.prop);
+		});
+		return names;
+	} catch {
+		return [];
+	}
 }

@@ -34,6 +34,14 @@ svelte.run('no-unknown-token in .svelte files', rule, {
 			code: '<li style="--delay: {i * 0.1}s"></li><style>li { animation-delay: var(--delay); }</style>'
 		},
 		{
+			filename: 'ExpressionDeclaration.svelte',
+			code: "<p style=\"{image ? `--bg: url('${image}');` : ''} --text: {color};\"></p><style>p { color: var(--text); }</style>"
+		},
+		{
+			filename: 'AccentedName.svelte',
+			code: '<p style="--café: red"></p><style>p { color: var(--café); }</style>'
+		},
+		{
 			filename: 'StyleDirective.svelte',
 			code: '<li style:--index={i}></li><style>li { order: var(--index); }</style>'
 		},
@@ -69,6 +77,26 @@ svelte.run('no-unknown-token in .svelte files', rule, {
 				{ messageId: 'unknownToken', column: 26 },
 				{ messageId: 'unknownToken', column: 58 }
 			]
+		},
+		{
+			filename: 'LeadingComment.svelte',
+			code: '<style>p { color: var(/* input */ --missing); }</style>',
+			errors: [{ messageId: 'unknownToken', data: { name: '--missing', suggestion: '' } }]
+		},
+		{
+			filename: 'CommentedOutAttribute.svelte',
+			code: '<p style="/* --x: red */"></p><style>p { color: var(--x); }</style>',
+			errors: [{ messageId: 'unknownToken' }]
+		},
+		{
+			filename: 'StringInAttribute.svelte',
+			code: `<p style="content: '--x: red'"></p><style>p { color: var(--x); }</style>`,
+			errors: [{ messageId: 'unknownToken' }]
+		},
+		{
+			filename: 'OtherSetProperty.svelte',
+			code: "<script>foo.setProperty('--x', 1);</script><style>p { order: var(--x); }</style>",
+			errors: [{ messageId: 'unknownToken' }]
 		}
 	]
 });
@@ -95,6 +123,16 @@ stylesheet.run('no-unknown-token in .css files', rule, {
 			filename: 'chrome.css',
 			code: '.link { margin: 0 var(--nowhere-at-all) !important; }',
 			errors: [{ messageId: 'unknownToken', data: { name: '--nowhere-at-all', suggestion: '' } }]
+		},
+		{
+			filename: 'chrome.css',
+			code: '.link { color: var(--color-accent); &:hover { color: var(--missing); } }',
+			errors: [{ messageId: 'unknownToken', column: 54, endColumn: 68 }]
+		},
+		{
+			filename: 'chrome.css',
+			code: 'p { color/*:var(--phantom)*/: var(--missing); }',
+			errors: [{ messageId: 'unknownToken', data: { name: '--missing', suggestion: '' } }]
 		}
 	]
 });

@@ -17,7 +17,7 @@ const tokenFiles = [
 
 export default defineConfig(
 	{
-		files: ['**/*.{js,mjs,cjs,ts,mts,cts,svelte}'],
+		files: ['**/*.{js,mjs,cjs,ts,tsx,mts,cts,svelte}'],
 		extends: [
 			eslint.configs.recommended,
 			tseslint.configs.recommended,

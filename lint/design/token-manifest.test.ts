@@ -20,4 +20,10 @@ describe('loadTokenManifest', () => {
 			context: ["[data-theme='blog']"]
 		});
 	});
+
+	it('names the setting to fix when a token file is missing', () => {
+		expect(() => loadTokenManifest([tokens, '/nowhere/tokens.css'])).toThrow(
+			'Token file not found: /nowhere/tokens.css. Check `settings.design.tokenFiles` in eslint.config.js.'
+		);
+	});
 });

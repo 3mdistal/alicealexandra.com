@@ -29,6 +29,12 @@ describe('findVarReferences', () => {
 		]);
 	});
 
+	it('reads the name after a leading comment', () => {
+		expect(
+			findVarReferences('var(/* input */ --a) var(--b, var(/**/--c))').map(({ name }) => name)
+		).toEqual(['--a', '--b', '--c']);
+	});
+
 	it('ignores other functions and malformed var() calls', () => {
 		expect(findVarReferences('env(safe-area-inset-top) var() var(  )')).toEqual([]);
 	});
