@@ -8,7 +8,8 @@
 	--color-accent: var(--color-neutral-900);
 	--color-accent-strong: var(--color-neutral-700);
 	--color-border: var(--color-neutral-200);
-	--color-shadow: rgba(15, 23, 42, 0.12);
+	--color-shadow: color-mix(in srgb, var(--color-slate-900) 12%, transparent);
+	--a11y-focus-color: var(--color-sky-500);
 
 	--chrome-bg: color-mix(in srgb, var(--color-neutral-50) 82%, transparent);
 	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 90%, transparent);
@@ -17,7 +18,7 @@
 	--chrome-border: color-mix(in srgb, var(--color-neutral-900) 12%, transparent);
 	--chrome-accent: var(--color-neutral-900);
 	--chrome-accent-strong: var(--color-neutral-700);
-	--chrome-shadow: 0 14px 40px rgba(15, 23, 42, 0.18);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-slate-900) 18%, transparent);
 	--chrome-logo-text: var(--color-neutral-0);
 	--chrome-mobile-bg: var(--color-bg);
 }
@@ -39,13 +40,13 @@
 	--chrome-border: color-mix(in srgb, var(--color-neutral-900) 14%, transparent);
 	--chrome-accent: var(--color-neutral-900);
 	--chrome-accent-strong: var(--color-neutral-700);
-	--chrome-shadow: 0 14px 40px rgba(15, 23, 42, 0.18);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-slate-900) 18%, transparent);
 
 	--home-about-bg: var(--color-mauve-400);
-	--home-studio-bg: #d6ddf0;
+	--home-studio-bg: var(--color-indigo-250);
 	--home-career-bg: var(--color-warm-200);
 	--home-blog-bg: var(--color-steel-600);
-	--home-news-bg: #eeeded;
+	--home-news-bg: var(--color-gray-150);
 
 	--home-about-label: var(--color-neutral-900);
 	--home-studio-label: var(--color-neutral-900);
@@ -62,253 +63,253 @@
 	--color-text-muted: var(--color-neutral-700);
 	--color-accent: var(--color-violet-800);
 	--color-accent-strong: var(--color-violet-800);
-	--color-border: rgba(39, 22, 71, 0.2);
+	--color-border: color-mix(in srgb, var(--color-violet-800) 20%, transparent);
 
-	--chrome-bg: color-mix(in srgb, #b2a6c6 58%, transparent);
-	--chrome-surface: color-mix(in srgb, #ffffff 84%, transparent);
-	--chrome-text: #211536;
-	--chrome-text-muted: #3f2d5e;
-	--chrome-border: rgba(39, 22, 71, 0.25);
-	--chrome-accent: #271647;
-	--chrome-accent-strong: #190f2e;
-	--chrome-shadow: 0 14px 40px rgba(39, 22, 71, 0.25);
+	--chrome-bg: color-mix(in srgb, var(--color-mauve-450) 58%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 84%, transparent);
+	--chrome-text: var(--color-violet-850);
+	--chrome-text-muted: var(--color-violet-700);
+	--chrome-border: color-mix(in srgb, var(--color-violet-800) 25%, transparent);
+	--chrome-accent: var(--color-violet-800);
+	--chrome-accent-strong: var(--color-violet-900);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-violet-800) 25%, transparent);
 }
 
 [data-theme='studio'] {
-	--color-bg: #d6ddf0;
+	--color-bg: var(--color-indigo-250);
 	--color-surface: var(--color-neutral-0);
-	--color-surface-muted: #eef1f8;
+	--color-surface-muted: var(--color-cloud-60);
 	--color-text: var(--color-neutral-900);
 	--color-text-muted: var(--color-neutral-700);
 	--color-accent: var(--color-indigo-800);
-	--color-accent-strong: #1a2a5f;
-	--color-border: rgba(36, 50, 105, 0.2);
+	--color-accent-strong: var(--color-indigo-850);
+	--color-border: color-mix(in srgb, var(--color-indigo-800) 20%, transparent);
 
-	--chrome-bg: color-mix(in srgb, #b9c6e4 60%, transparent);
-	--chrome-surface: color-mix(in srgb, #ffffff 82%, transparent);
-	--chrome-text: #1d2a52;
-	--chrome-text-muted: #32457d;
-	--chrome-border: rgba(36, 50, 105, 0.25);
-	--chrome-accent: #243269;
-	--chrome-accent-strong: #1a2a5f;
-	--chrome-shadow: 0 14px 40px rgba(36, 50, 105, 0.24);
+	--chrome-bg: color-mix(in srgb, var(--color-indigo-350) 60%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 82%, transparent);
+	--chrome-text: var(--color-indigo-860);
+	--chrome-text-muted: var(--color-indigo-700);
+	--chrome-border: color-mix(in srgb, var(--color-indigo-800) 25%, transparent);
+	--chrome-accent: var(--color-indigo-800);
+	--chrome-accent-strong: var(--color-indigo-850);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-indigo-800) 24%, transparent);
 }
 
 [data-theme='career'] {
 	--color-bg: var(--color-warm-200);
 	--color-surface: var(--color-warm-50);
-	--color-surface-muted: #efe5dd;
+	--color-surface-muted: var(--color-warm-100);
 	--color-text: var(--color-neutral-900);
-	--color-text-muted: #665f5b;
+	--color-text-muted: var(--color-warm-600);
 	--color-accent: var(--color-clay-700);
 	--color-accent-strong: var(--color-clay-600);
-	--color-border: rgba(100, 46, 26, 0.2);
+	--color-border: color-mix(in srgb, var(--color-clay-700) 20%, transparent);
 
-	--chrome-bg: color-mix(in srgb, #dbc4b5 60%, transparent);
-	--chrome-surface: color-mix(in srgb, #f7efe9 84%, transparent);
-	--chrome-text: #4a2417;
-	--chrome-text-muted: #6a3f2e;
-	--chrome-border: rgba(100, 46, 26, 0.25);
-	--chrome-accent: #642e1a;
-	--chrome-accent-strong: #8b4513;
-	--chrome-shadow: 0 14px 40px rgba(100, 46, 26, 0.24);
+	--chrome-bg: color-mix(in srgb, var(--color-warm-250) 60%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-warm-40) 84%, transparent);
+	--chrome-text: var(--color-clay-800);
+	--chrome-text-muted: var(--color-clay-650);
+	--chrome-border: color-mix(in srgb, var(--color-clay-700) 25%, transparent);
+	--chrome-accent: var(--color-clay-700);
+	--chrome-accent-strong: var(--color-clay-600);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-clay-700) 24%, transparent);
 }
 
 [data-theme='blog'] {
 	/* Dark enough for the white index text to meet WCAG AA (4.5:1). */
 	--color-bg: var(--color-steel-600);
-	--color-surface: rgba(20, 23, 35, 0.35);
-	--color-surface-muted: rgba(255, 255, 255, 0.08);
-	--color-text: #f8fafc;
-	--color-text-muted: #e2e8f0;
+	--color-surface: color-mix(in srgb, var(--color-steel-900) 35%, transparent);
+	--color-surface-muted: color-mix(in srgb, var(--color-neutral-0) 8%, transparent);
+	--color-text: var(--color-slate-50);
+	--color-text-muted: var(--color-slate-200);
 	--color-accent: var(--color-cloud-200);
-	--color-accent-strong: #f0f4fb;
-	--color-border: rgba(226, 232, 240, 0.35);
+	--color-accent-strong: var(--color-cloud-50);
+	--color-border: color-mix(in srgb, var(--color-slate-200) 35%, transparent);
 
-	--chrome-bg: color-mix(in srgb, #5f6272 68%, transparent);
-	--chrome-surface: color-mix(in srgb, #1c1f2f 66%, transparent);
-	--chrome-text: #f8fafc;
-	--chrome-text-muted: #d7dee9;
-	--chrome-border: rgba(226, 232, 240, 0.35);
-	--chrome-accent: #d1dce7;
-	--chrome-accent-strong: #f0f4fb;
-	--chrome-shadow: 0 14px 40px rgba(12, 15, 24, 0.45);
+	--chrome-bg: color-mix(in srgb, var(--color-steel-650) 68%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-steel-850) 66%, transparent);
+	--chrome-text: var(--color-slate-50);
+	--chrome-text-muted: var(--color-cloud-160);
+	--chrome-border: color-mix(in srgb, var(--color-slate-200) 35%, transparent);
+	--chrome-accent: var(--color-cloud-200);
+	--chrome-accent-strong: var(--color-cloud-50);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-steel-925) 45%, transparent);
 }
 
 [data-theme='news'] {
-	--color-bg: #eeeded;
-	--color-surface: rgba(255, 255, 255, 0.75);
-	--color-surface-muted: rgba(255, 255, 255, 0.55);
-	--color-text: #2b2b2b;
-	--color-text-muted: rgba(75, 70, 13, 0.8);
+	--color-bg: var(--color-gray-150);
+	--color-surface: color-mix(in srgb, var(--color-neutral-0) 75%, transparent);
+	--color-surface-muted: color-mix(in srgb, var(--color-neutral-0) 55%, transparent);
+	--color-text: var(--color-gray-800);
+	--color-text-muted: color-mix(in srgb, var(--color-olive-800) 80%, transparent);
 	--color-accent: var(--color-olive-700);
 	--color-accent-strong: var(--color-olive-800);
-	--color-border: rgba(114, 106, 18, 0.2);
+	--color-border: color-mix(in srgb, var(--color-olive-700) 20%, transparent);
 
-	--chrome-bg: color-mix(in srgb, #d6d2bf 66%, transparent);
-	--chrome-surface: color-mix(in srgb, #ffffff 78%, transparent);
-	--chrome-text: #3c3911;
-	--chrome-text-muted: #5e591f;
-	--chrome-border: rgba(114, 106, 18, 0.24);
-	--chrome-accent: #726a12;
-	--chrome-accent-strong: #4b460d;
-	--chrome-shadow: 0 14px 40px rgba(66, 61, 22, 0.28);
+	--chrome-bg: color-mix(in srgb, var(--color-olive-300) 66%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 78%, transparent);
+	--chrome-text: var(--color-olive-900);
+	--chrome-text-muted: var(--color-olive-750);
+	--chrome-border: color-mix(in srgb, var(--color-olive-700) 24%, transparent);
+	--chrome-accent: var(--color-olive-700);
+	--chrome-accent-strong: var(--color-olive-800);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-olive-850) 28%, transparent);
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-bg: #0f172a;
-		--color-surface: #111827;
-		--color-surface-muted: #1f2937;
-		--color-text: #f3f4f6;
-		--color-text-muted: #cbd5f5;
-		--color-accent: #e5e7eb;
-		--color-accent-strong: #94a3b8;
-		--color-border: #334155;
-		--color-shadow: rgba(15, 23, 42, 0.6);
-		--a11y-focus-color: #38bdf8;
+		--color-bg: var(--color-slate-900);
+		--color-surface: var(--color-neutral-950);
+		--color-surface-muted: var(--color-neutral-900);
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: var(--color-indigo-300);
+		--color-accent: var(--color-neutral-200);
+		--color-accent-strong: var(--color-slate-400);
+		--color-border: var(--color-slate-700);
+		--color-shadow: color-mix(in srgb, var(--color-slate-900) 60%, transparent);
+		--a11y-focus-color: var(--color-sky-400);
 
-		--chrome-bg: color-mix(in srgb, #0f172a 82%, transparent);
-		--chrome-surface: color-mix(in srgb, #111827 82%, transparent);
-		--chrome-text: #f3f4f6;
-		--chrome-text-muted: #cbd5e1;
-		--chrome-border: rgba(148, 163, 184, 0.35);
-		--chrome-accent: #e5e7eb;
-		--chrome-accent-strong: #cbd5e1;
-		--chrome-shadow: 0 18px 48px rgba(2, 6, 23, 0.6);
+		--chrome-bg: color-mix(in srgb, var(--color-slate-900) 82%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-neutral-950) 82%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-slate-300);
+		--chrome-border: color-mix(in srgb, var(--color-slate-400) 35%, transparent);
+		--chrome-accent: var(--color-neutral-200);
+		--chrome-accent-strong: var(--color-slate-300);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-slate-950) 60%, transparent);
 		--chrome-logo-text: var(--color-neutral-0);
 		--chrome-mobile-bg: var(--color-bg);
 	}
 
 	[data-theme='home'] {
 		--color-bg: var(--color-content-bg);
-		--color-surface: rgba(255, 255, 255, 0.06);
-		--color-surface-muted: rgba(255, 255, 255, 0.09);
-		--color-text: #f3f4f6;
-		--color-text-muted: rgba(243, 244, 246, 0.72);
-		--color-accent: #e5e7eb;
-		--color-accent-strong: #cbd5e1;
-		--color-border: rgba(226, 232, 240, 0.22);
+		--color-surface: color-mix(in srgb, var(--color-neutral-0) 6%, transparent);
+		--color-surface-muted: color-mix(in srgb, var(--color-neutral-0) 9%, transparent);
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: var(--color-neutral-200);
+		--color-accent-strong: var(--color-slate-300);
+		--color-border: color-mix(in srgb, var(--color-slate-200) 22%, transparent);
 
-		--chrome-bg: color-mix(in srgb, #141414 80%, transparent);
-		--chrome-surface: color-mix(in srgb, #222831 72%, transparent);
-		--chrome-text: #f3f4f6;
-		--chrome-text-muted: #d8dde5;
-		--chrome-border: rgba(226, 232, 240, 0.28);
-		--chrome-accent: #f3f4f6;
-		--chrome-accent-strong: #d8dee9;
-		--chrome-shadow: 0 18px 48px rgba(2, 6, 23, 0.65);
-		--home-about-bg: #4f425b;
-		--home-studio-bg: #2d3844;
-		--home-career-bg: #5a4548;
-		--home-blog-bg: #1c1f2b;
-		--home-news-bg: #3b3529;
+		--chrome-bg: color-mix(in srgb, var(--color-gray-900) 80%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-slate-800) 72%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-cloud-170);
+		--chrome-border: color-mix(in srgb, var(--color-slate-200) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-cloud-150);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-slate-950) 65%, transparent);
+		--home-about-bg: var(--color-mauve-700);
+		--home-studio-bg: var(--color-slate-750);
+		--home-career-bg: var(--color-warm-700);
+		--home-blog-bg: var(--color-steel-860);
+		--home-news-bg: var(--color-olive-910);
 
-		--home-about-label: rgba(243, 244, 246, 0.86);
-		--home-studio-label: rgba(243, 244, 246, 0.88);
-		--home-career-label: rgba(243, 244, 246, 0.86);
-		--home-blog-label: rgba(243, 244, 246, 0.92);
-		--home-news-label: rgba(243, 244, 246, 0.86);
+		--home-about-label: color-mix(in srgb, var(--color-neutral-100) 86%, transparent);
+		--home-studio-label: color-mix(in srgb, var(--color-neutral-100) 88%, transparent);
+		--home-career-label: color-mix(in srgb, var(--color-neutral-100) 86%, transparent);
+		--home-blog-label: color-mix(in srgb, var(--color-neutral-100) 92%, transparent);
+		--home-news-label: color-mix(in srgb, var(--color-neutral-100) 86%, transparent);
 	}
 
 	[data-theme='about'] {
-		--color-bg: #4f425b;
-		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
-		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
-		--color-text: #f3f4f6;
-		--color-text-muted: rgba(243, 244, 246, 0.72);
-		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
-		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
-		--color-border: rgba(243, 244, 246, 0.18);
+		--color-bg: var(--color-mauve-700);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
 
 		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
 		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
-		--chrome-text: #f3f4f6;
-		--chrome-text-muted: #ded1f2;
-		--chrome-border: rgba(243, 244, 246, 0.28);
-		--chrome-accent: #f3f4f6;
-		--chrome-accent-strong: #e9def8;
-		--chrome-shadow: 0 18px 48px rgba(11, 8, 18, 0.62);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-violet-300);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-violet-200);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-violet-950) 62%, transparent);
 	}
 
 	[data-theme='studio'] {
-		--color-bg: #2d3844;
-		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
-		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
-		--color-text: #f3f4f6;
-		--color-text-muted: rgba(243, 244, 246, 0.72);
-		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
-		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
-		--color-border: rgba(243, 244, 246, 0.18);
+		--color-bg: var(--color-slate-750);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
 
 		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
 		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
-		--chrome-text: #f3f4f6;
-		--chrome-text-muted: #d6e6ec;
-		--chrome-border: rgba(243, 244, 246, 0.28);
-		--chrome-accent: #f3f4f6;
-		--chrome-accent-strong: #dce9f4;
-		--chrome-shadow: 0 18px 48px rgba(5, 15, 20, 0.62);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-cloud-125);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-cloud-100);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-slate-925) 62%, transparent);
 	}
 
 	[data-theme='career'] {
-		--color-bg: #5a4548;
-		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
-		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
-		--color-text: #f3f4f6;
-		--color-text-muted: rgba(243, 244, 246, 0.72);
-		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
-		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
-		--color-border: rgba(243, 244, 246, 0.18);
+		--color-bg: var(--color-warm-700);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
 
 		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
 		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
-		--chrome-text: #f3f4f6;
-		--chrome-text-muted: #f2deca;
-		--chrome-border: rgba(243, 244, 246, 0.28);
-		--chrome-accent: #f3f4f6;
-		--chrome-accent-strong: #ead8ca;
-		--chrome-shadow: 0 18px 48px rgba(21, 12, 7, 0.62);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-warm-125);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-warm-150);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-warm-950) 62%, transparent);
 	}
 
 	[data-theme='blog'] {
-		--color-bg: #1c1f2b;
-		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
-		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
-		--color-text: #f3f4f6;
-		--color-text-muted: rgba(243, 244, 246, 0.72);
-		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
-		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
-		--color-border: rgba(243, 244, 246, 0.18);
+		--color-bg: var(--color-steel-860);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
 
 		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
 		--chrome-surface: color-mix(in srgb, var(--color-bg) 74%, transparent);
-		--chrome-text: #f3f4f6;
-		--chrome-text-muted: #e2e8f0;
-		--chrome-border: rgba(243, 244, 246, 0.28);
-		--chrome-accent: #f3f4f6;
-		--chrome-accent-strong: #e2e8f0;
-		--chrome-shadow: 0 18px 48px rgba(8, 10, 16, 0.62);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-slate-200);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-slate-200);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-steel-950) 62%, transparent);
 	}
 
 	[data-theme='news'] {
-		--color-bg: #3b3529;
-		--color-surface: color-mix(in srgb, var(--color-bg) 92%, white);
-		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, white);
-		--color-text: #f3f4f6;
-		--color-text-muted: rgba(243, 244, 246, 0.72);
-		--color-accent: color-mix(in srgb, var(--color-bg) 20%, #f3f4f6);
-		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, #f3f4f6);
-		--color-border: rgba(243, 244, 246, 0.18);
+		--color-bg: var(--color-olive-910);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
 
 		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
 		--chrome-surface: color-mix(in srgb, var(--color-bg) 72%, transparent);
-		--chrome-text: #f3f4f6;
-		--chrome-text-muted: #efe7b8;
-		--chrome-border: rgba(243, 244, 246, 0.28);
-		--chrome-accent: #f3f4f6;
-		--chrome-accent-strong: #efe7b8;
-		--chrome-shadow: 0 18px 48px rgba(16, 14, 4, 0.62);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-olive-200);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-olive-200);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-olive-950) 62%, transparent);
 	}
 }
 
