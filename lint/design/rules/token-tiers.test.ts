@@ -32,6 +32,15 @@ stylesheet.run('token-tiers in role token files', rule, {
 			@media (prefers-color-scheme: dark) { :root { --color-bg: var(--color-slate-900); } }`
 		},
 		{ filename: themes, code: ":root { --mask: url('#fff'); }" },
+		{
+			filename: themes,
+			code: '@supports (color: color-mix(in srgb, red 50%, blue)) { :root { --color-bg: var(--color-white); } }'
+		},
+		// Words that are names here, not colors.
+		{
+			filename: themes,
+			code: ':root { animation-name: orange; grid-area: tan; font-family: Gold, serif; }'
+		},
 		// Files outside the token files are for the color and length rules.
 		{ filename: 'chrome.css', code: '.link { color: #0ea5e9; --space-1: 2px; }' }
 	],
@@ -90,6 +99,34 @@ stylesheet.run('token-tiers in role token files', rule, {
 		},
 		{
 			filename: themes,
+			code: ':root { --color-none: rgba(0, 0, 0, 0); }',
+			errors: [
+				{
+					messageId: 'rawColor',
+					data: {
+						text: 'rgba(0, 0, 0, 0)',
+						primitives: 'primitives.css',
+						suggestion: 'Use `transparent`.'
+					}
+				}
+			]
+		},
+		{
+			filename: themes,
+			code: ':root { --color-text: CanvasText; }',
+			errors: [
+				{
+					messageId: 'rawColor',
+					data: {
+						text: 'CanvasText',
+						primitives: 'primitives.css',
+						suggestion: 'Add it as a primitive and reference that.'
+					}
+				}
+			]
+		},
+		{
+			filename: themes,
 			code: '@media (prefers-color-scheme: dark) { :root { --color-sky-500: var(--color-white); } }',
 			errors: [{ messageId: 'redefinedPrimitive', data: { name: '--color-sky-500' }, column: 47 }]
 		}
@@ -117,6 +154,17 @@ stylesheet.run('token-tiers in the primitives file', rule, {
 			]
 		},
 		{
+			// The `color` in the condition is a test, not a declaration, so only the placement is wrong.
+			filename: primitives,
+			code: '@supports (color: red) { :root { --space-1: 0.25rem; } }',
+			errors: [
+				{
+					messageId: 'notOnRoot',
+					data: { name: '--space-1', where: '@supports (color: red) :root' }
+				}
+			]
+		},
+		{
 			filename: primitives,
 			code: "[data-theme='blog'] { --color-white: #fafafa; }",
 			errors: [
@@ -130,6 +178,20 @@ stylesheet.run('token-tiers in the primitives file', rule, {
 				{ messageId: 'notRaw', data: { name: '--space-2', part: 'calc()' } },
 				{ messageId: 'notRaw', data: { name: '--color-bg', part: 'var()' } }
 			]
+		},
+		{
+			filename: primitives,
+			code: ':root { --color-ink: light-dark(#000, #fff); --inset: env(safe-area-inset-top); --step: round(1.5px, 1px); }',
+			errors: [
+				{ messageId: 'notRaw', data: { name: '--color-ink', part: 'light-dark()' } },
+				{ messageId: 'notRaw', data: { name: '--inset', part: 'env()' } },
+				{ messageId: 'notRaw', data: { name: '--step', part: 'round()' } }
+			]
+		},
+		{
+			filename: primitives,
+			code: ':ROOT { --color-gray: color-mix(in srgb, #fff 50%, #000); }',
+			errors: [{ messageId: 'notRaw', data: { name: '--color-gray', part: 'color-mix()' } }]
 		},
 		{
 			filename: primitives,

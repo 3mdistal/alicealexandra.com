@@ -7,7 +7,16 @@ import { visitStyles } from '../style-source.ts';
 import { suggestColor, type ColorPrimitive } from '../suggest.ts';
 import { loadTokenManifest } from '../token-manifest.ts';
 
-const MATH_FUNCTIONS = new Set(['calc', 'clamp', 'min', 'max']);
+/** Functions whose result depends on other tokens, math, the color scheme or the environment. */
+const NOT_RAW_FUNCTIONS = new Set([
+	'var',
+	'env',
+	'attr',
+	'light-dark',
+	'color-mix',
+	...['calc', 'clamp', 'min', 'max', 'round', 'mod', 'rem', 'abs', 'sign'],
+	...['sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'atan2', 'pow', 'sqrt', 'hypot', 'log', 'exp']
+]);
 
 /**
  * The token files come in two tiers. Primitives (`settings.design.primitivesFile`) are raw values,
@@ -35,7 +44,7 @@ const rule: Rule.RuleModule = {
 			notAToken:
 				"`{{name}}` isn't a custom property. {{primitives}} only defines primitives; put styles in a role token file or a component.",
 			notRaw:
-				'`{{name}}` is built from `{{part}}`. Primitives are raw values; a token made from other tokens or math is a role token, so define it in a role token file.',
+				'`{{name}}` is built from `{{part}}`. Primitives are raw values; a token that depends on other tokens, math, the color scheme or the environment is a role token, so define it in a role token file.',
 			duplicate: '`{{name}}` is already defined on line {{line}}. Define each primitive once.'
 		},
 		schema: []
@@ -72,7 +81,7 @@ const rule: Rule.RuleModule = {
 					}
 					const part = nonRawPart(value);
 					if (part) context.report({ loc, messageId: 'notRaw', data: { name, part } });
-					if (where.length !== 1 || where[0] !== ':root') {
+					if (where.length !== 1 || where[0]?.toLowerCase() !== ':root') {
 						context.report({ loc, messageId: 'notOnRoot', data: { name, where: where.join(' ') } });
 						continue;
 					}
@@ -101,7 +110,7 @@ const rule: Rule.RuleModule = {
 						data: { name: property }
 					});
 				}
-				for (const color of findRawColors(value)) {
+				for (const color of findRawColors(value, property)) {
 					context.report({
 						loc: locOf(valueStart + color.start, valueStart + color.end),
 						messageId: 'rawColor',
@@ -117,13 +126,13 @@ const rule: Rule.RuleModule = {
 	}
 };
 
-/** The first `var()` or math function in a value, such as `var(--space-1)`, or undefined if it's raw. */
+/** The first function in a value that keeps it from being raw, such as `var()`, or undefined. */
 function nonRawPart(value: string): string | undefined {
 	let part: string | undefined;
 	valueParser(value).walk((node) => {
 		if (part || node.type !== 'function') return;
 		const name = node.value.toLowerCase();
-		if (name === 'var' || MATH_FUNCTIONS.has(name)) part = `${name}()`;
+		if (NOT_RAW_FUNCTIONS.has(name)) part = `${name}()`;
 	});
 	return part;
 }

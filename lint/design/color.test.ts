@@ -11,6 +11,18 @@ describe('parseColor', () => {
 		expect(parseColor('White')).toEqual({ r: 255, g: 255, b: 255, a: 1 });
 	});
 
+	it('wraps hues, reads angle units and clamps out-of-range values', () => {
+		const blue = { r: 0, g: 0, b: 255, a: 1 };
+		expect(parseColor('hsl(-120 100% 50%)')).toEqual(blue);
+		expect(parseColor('hsl(0.6667turn 100% 50%)')).toMatchObject({
+			r: expect.closeTo(0, 0),
+			b: 255
+		});
+		expect(parseColor('hsl(400grad 100% 50%)')).toEqual({ r: 255, g: 0, b: 0, a: 1 });
+		expect(parseColor('rgb(300 -5 0 / 150%)')).toEqual({ r: 255, g: 0, b: 0, a: 1 });
+		expect(parseColor('hsl(10% 100% 50%)')).toBeUndefined();
+	});
+
 	it("returns undefined for anything that isn't one plain color", () => {
 		expect(parseColor('transparent')).toBeUndefined();
 		expect(parseColor('oklch(70% 0.1 200)')).toBeUndefined();
@@ -28,6 +40,13 @@ describe('findRawColors', () => {
 			{ text: 'rgb(0 0 0 / 10%)', start: 33, end: 49 },
 			{ text: '#abc', start: 72, end: 76 }
 		]);
+	});
+
+	it('reads named and system colors as colors, except where a property takes names', () => {
+		expect(findRawColors('Canvas')).toMatchObject([{ text: 'Canvas', color: undefined }]);
+		expect(findRawColors('orange 1s', 'animation')).toEqual([]);
+		expect(findRawColors('Gold, serif', 'font-family')).toEqual([]);
+		expect(findRawColors('#zzz')).toEqual([]);
 	});
 });
 

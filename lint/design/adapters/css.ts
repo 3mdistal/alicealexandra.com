@@ -32,8 +32,16 @@ export function cssStyleVisitor(
 	const enclosing: string[] = [];
 	const textOf = (node: Partial<Located> | null) =>
 		node?.loc ? text.slice(node.loc.start.offset, node.loc.end.offset).trim() : '';
+	// CSSTree parses the `(color: red)` in `@supports (color: red)` as a declaration; it's only a test.
+	let preludeDepth = 0;
 
 	return {
+		AtrulePrelude() {
+			preludeDepth += 1;
+		},
+		'AtrulePrelude:exit'() {
+			preludeDepth -= 1;
+		},
 		Rule(node) {
 			enclosing.push(textOf((node as CssRuleNode).prelude));
 		},
@@ -48,6 +56,7 @@ export function cssStyleVisitor(
 			enclosing.pop();
 		},
 		Declaration(node) {
+			if (preludeDepth > 0) return;
 			const { property, value, loc } = node as CssDeclarationNode;
 			if (property.startsWith('--')) localDefinitions.add(property);
 			if (!value.loc) return;

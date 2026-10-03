@@ -50,6 +50,7 @@ export interface ColorPrimitive {
  */
 export function suggestColor(color: Rgba | undefined, primitives: ColorPrimitive[]): string {
 	if (!color) return 'Add it as a primitive and reference that.';
+	if (color.a === 0) return 'Use `transparent`.';
 
 	const opaque = { ...color, a: 1 };
 	const exact = primitives.find((primitive) => sameColor(primitive.color, opaque));

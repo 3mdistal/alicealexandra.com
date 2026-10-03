@@ -112,11 +112,36 @@ const PAGES: Array<{ name: string; theme: SiteTheme; surface: SiteSurface; pairs
 	{ name: 'prose', theme: 'blog', surface: 'default', pairs: PROSE_PAIRS }
 ];
 
+describe('the cascade model', () => {
+	const declaration = (atRules: string[], value = 'var(--color-slate-900)'): TokenDeclaration => ({
+		name: '--color-text',
+		value,
+		selectors: [':root'],
+		atRules
+	});
+	const slate = { name: '--color-slate-900', value: '#0f172a', selectors: [':root'], atRules: [] };
+
+	it("fails on an at-rule it can't evaluate instead of skipping it", () => {
+		const dark = declaration(['@media screen and (prefers-color-scheme: dark)']);
+		expect(() => resolveTokens([slate, dark], 'home', 'default', 'dark')).toThrow(
+			"doesn't know whether `@media screen and (prefers-color-scheme: dark)` applies"
+		);
+	});
+
+	it('fails when a color changes inside a width query', () => {
+		const wide = declaration(['@media (min-width: 768px)']);
+		const base = declaration([], '#fff');
+		expect(() => resolveTokens([slate, base, wide], 'home', 'default', 'light')).toThrow(
+			'--color-text is a color that changes inside `@media (min-width: 768px)`'
+		);
+	});
+});
+
 describe('WCAG AA text contrast', () => {
 	for (const page of PAGES) {
 		for (const scheme of SCHEMES) {
 			it(`${page.name} in ${scheme} mode`, () => {
-				const tokens = resolveTokens(page.theme, page.surface, scheme);
+				const tokens = resolveTokens(tokenDeclarations, page.theme, page.surface, scheme);
 				const failures = page.pairs.flatMap(([text, backgrounds]) => {
 					const missing = [text, ...backgrounds].filter((name) => !tokens.has(name));
 					if (missing.length > 0) {
@@ -151,11 +176,12 @@ interface TokenDeclaration {
 	name: string;
 	value: string;
 	selectors: string[];
-	media: string[];
+	/** The at-rules around the declaration, such as `@media (prefers-color-scheme: dark)`. */
+	atRules: string[];
 }
 
 /** Custom property declarations from the token files, in the order `app.css` imports them. */
-const declarations: TokenDeclaration[] = (() => {
+const tokenDeclarations: TokenDeclaration[] = (() => {
 	const app = readFileSync(new URL('../../../app.css', import.meta.url), 'utf8');
 	const files = [...app.matchAll(/@import '\$lib\/styles\/tokens\/([\w-]+\.css)'/g)].map(
 		([, file]) => new URL(`./${file}`, import.meta.url)
@@ -167,11 +193,13 @@ const declarations: TokenDeclaration[] = (() => {
 			const rule = declaration.parent;
 			const selectors =
 				rule?.type === 'rule' && 'selectors' in rule ? (rule.selectors as string[]) : [];
-			const media: string[] = [];
+			const atRules: string[] = [];
 			for (let parent = rule?.parent; parent; parent = parent.parent) {
-				if (parent.type === 'atrule' && 'params' in parent) media.push(String(parent.params));
+				if (parent.type === 'atrule' && 'name' in parent && 'params' in parent) {
+					atRules.push(`@${String(parent.name)} ${String(parent.params)}`);
+				}
 			}
-			found.push({ name: declaration.prop, value: declaration.value, selectors, media });
+			found.push({ name: declaration.prop, value: declaration.value, selectors, atRules });
 		});
 		return found;
 	});
@@ -183,12 +211,18 @@ const declarations: TokenDeclaration[] = (() => {
  * decides; `.app` inherits from `<html>` and then applies its own `[data-theme]` rules. Each element
  * resolves `var()` against its own values, as the browser does.
  *
- * Media queries other than the color scheme hold layout and motion tokens, so the test leaves them
- * off, as on a narrow screen with motion allowed.
+ * Width and reduced-motion queries hold layout and motion tokens, so the test leaves them off, as on
+ * a narrow screen with motion allowed, and fails if a color changes inside one. It also fails on any
+ * other at-rule rather than guess whether it applies.
  */
-function resolveTokens(theme: SiteTheme, surface: SiteSurface, scheme: Scheme): Map<string, Rgba> {
+function resolveTokens(
+	declarations: TokenDeclaration[],
+	theme: SiteTheme,
+	surface: SiteSurface,
+	scheme: Scheme
+): Map<string, Rgba> {
 	const matches = (isRoot: boolean) => (declaration: TokenDeclaration) =>
-		declaration.media.every((query) => query === `(prefers-color-scheme: ${scheme})`) &&
+		declaration.atRules.map((atRule) => atRuleApplies(atRule, scheme)).every(Boolean) &&
 		declaration.selectors.some((selector) => {
 			if (selector === ':root') return isRoot;
 			const attribute = /^\[data-(theme|surface)='([\w-]+)'\]$/.exec(selector);
@@ -205,7 +239,25 @@ function resolveTokens(theme: SiteTheme, surface: SiteSurface, scheme: Scheme): 
 		const color = evaluateColor(value);
 		if (color) colors.set(name, color);
 	}
+	for (const { name, atRules } of declarations) {
+		const leftOff = atRules.filter((atRule) => !atRule.includes('prefers-color-scheme'));
+		if (leftOff.length > 0 && colors.has(name)) {
+			throw new Error(
+				`${name} is a color that changes inside \`${leftOff.join(' ')}\`, which the contrast test leaves off.`
+			);
+		}
+	}
 	return colors;
+}
+
+/** Whether an at-rule applies in this color scheme, on a narrow screen with motion allowed. */
+function atRuleApplies(atRule: string, scheme: Scheme): boolean {
+	const colorScheme = /^@media \(prefers-color-scheme: (light|dark)\)$/.exec(atRule);
+	if (colorScheme) return colorScheme[1] === scheme;
+	if (/^@media \((min-width: [\d.]+(px|r?em)|prefers-reduced-motion: reduce)\)$/.test(atRule)) {
+		return false;
+	}
+	throw new Error(`The contrast test doesn't know whether \`${atRule}\` applies.`);
 }
 
 /** Applies declarations in order over inherited values, then substitutes every `var()`. */

@@ -31,13 +31,79 @@ const COLOR_FUNCTIONS = new Set([
 	'color'
 ]);
 
-/** Finds every literal color in a value, skipping keywords like `transparent` and `currentColor`. */
-export function findRawColors(value: string): RawColor[] {
+/**
+ * Properties whose words are names, not colors, so `animation-name: orange` or `grid-area: tan` isn't
+ * a color.
+ */
+const NAME_PROPERTIES = new Set([
+	'animation',
+	'animation-name',
+	'animation-timeline',
+	'anchor-name',
+	'container',
+	'container-name',
+	'counter-increment',
+	'counter-reset',
+	'counter-set',
+	'font',
+	'font-family',
+	'grid-area',
+	'grid-column',
+	'grid-column-end',
+	'grid-column-start',
+	'grid-row',
+	'grid-row-end',
+	'grid-row-start',
+	'grid-template',
+	'grid-template-areas',
+	'list-style-type',
+	'page',
+	'position-anchor',
+	'scroll-timeline-name',
+	'timeline-scope',
+	'transition',
+	'transition-property',
+	'view-timeline-name',
+	'view-transition-name',
+	'will-change'
+]);
+
+/** Colors the browser picks from the user's system theme, such as `Canvas`; they have no fixed value. */
+const SYSTEM_COLORS = new Set(
+	[
+		'AccentColor',
+		'AccentColorText',
+		'ActiveText',
+		'ButtonBorder',
+		'ButtonFace',
+		'ButtonText',
+		'Canvas',
+		'CanvasText',
+		'Field',
+		'FieldText',
+		'GrayText',
+		'Highlight',
+		'HighlightText',
+		'LinkText',
+		'Mark',
+		'MarkText',
+		'SelectedItem',
+		'SelectedItemText',
+		'VisitedText'
+	].map((name) => name.toLowerCase())
+);
+
+/**
+ * Finds every literal color in a declaration's value, skipping keywords like `transparent` and
+ * `currentColor`. Pass the property so names in properties like `animation-name` aren't read as colors.
+ */
+export function findRawColors(value: string, property = ''): RawColor[] {
+	const namesAreColors = !NAME_PROPERTIES.has(property.toLowerCase());
 	const colors: RawColor[] = [];
 	valueParser(value).walk((node) => {
 		if (node.type === 'function') {
 			if (node.value.toLowerCase() === 'url') return false;
-			if (!COLOR_FUNCTIONS.has(node.value.toLowerCase())) return;
+			if (!COLOR_FUNCTIONS.has(node.value.toLowerCase())) return undefined;
 			const text = valueParser.stringify(node);
 			colors.push({
 				text,
@@ -47,14 +113,18 @@ export function findRawColors(value: string): RawColor[] {
 			});
 			return false;
 		}
-		if (
-			node.type === 'word' &&
-			(node.value.startsWith('#') || NAMED_COLORS.has(node.value.toLowerCase()))
-		) {
-			const color = parseColor(node.value);
-			if (color) {
-				colors.push({ text: node.value, color, start: node.sourceIndex, end: node.sourceEndIndex });
-			}
+		if (node.type !== 'word') return undefined;
+		const word = node.value.toLowerCase();
+		const isColor =
+			(word.startsWith('#') && parseColor(word)) ||
+			(namesAreColors && (NAMED_COLORS.has(word) || SYSTEM_COLORS.has(word)));
+		if (isColor) {
+			colors.push({
+				text: node.value,
+				color: parseColor(word),
+				start: node.sourceIndex,
+				end: node.sourceEndIndex
+			});
 		}
 		return undefined;
 	});
@@ -81,19 +151,43 @@ export function parseColor(text: string): Rgba | undefined {
 	const parts = body
 		.split(/[\s,/]+/)
 		.filter(Boolean)
-		.map((part) => ({ number: parseFloat(part), percent: part.endsWith('%') }));
-	if (parts.length < 3 || parts.some(({ number }) => Number.isNaN(number))) return undefined;
+		.map((part) => /^([-+]?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?)([a-z%]*)$/.exec(part))
+		.map((match) => match && { number: Number(match[1]), unit: match[2] ?? '' });
+	if (parts.length < 3 || parts.length > 4 || parts.some((part) => !part)) return undefined;
 	const [first, second, third, fourth] = parts as [Part, Part, Part, Part | undefined];
-	const a = fourth ? (fourth.percent ? fourth.number / 100 : fourth.number) : 1;
+	const a = clamp(fourth ? (fourth.unit === '%' ? fourth.number / 100 : fourth.number) : 1, 0, 1);
 
 	if (name.startsWith('rgb')) {
-		const channel = ({ number, percent }: Part) => (percent ? (number * 255) / 100 : number);
+		const channel = ({ number, unit }: Part) =>
+			clamp(unit === '%' ? (number * 255) / 100 : number, 0, 255);
 		return { r: channel(first), g: channel(second), b: channel(third), a };
 	}
-	return { ...hslToRgb(first.number, second.number / 100, third.number / 100), a };
+	const hue = degrees(first);
+	if (hue === undefined) return undefined;
+	const fraction = ({ number }: Part) => clamp(number / 100, 0, 1);
+	return { ...hslToRgb(hue, fraction(second), fraction(third)), a };
 }
 
-type Part = { number: number; percent: boolean };
+type Part = { number: number; unit: string };
+
+const DEGREES_PER_UNIT: Record<string, number> = {
+	'': 1,
+	deg: 1,
+	grad: 0.9,
+	rad: 180 / Math.PI,
+	turn: 360
+};
+
+/** A hue in degrees from 0 up to 360, or undefined for a unit that isn't an angle. */
+function degrees({ number, unit }: Part): number | undefined {
+	const perUnit = DEGREES_PER_UNIT[unit];
+	if (perUnit === undefined) return undefined;
+	return (((number * perUnit) % 360) + 360) % 360;
+}
+
+function clamp(value: number, min: number, max: number): number {
+	return Math.min(max, Math.max(min, value));
+}
 
 function hslToRgb(hue: number, saturation: number, lightness: number) {
 	const k = (n: number) => (n + hue / 30) % 12;
