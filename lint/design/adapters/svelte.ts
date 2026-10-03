@@ -2,6 +2,7 @@ import type { Rule } from 'eslint';
 import postcss from 'postcss';
 import type { AST, StyleContext } from 'svelte-eslint-parser';
 import type { StyleDeclaration, StyleSource, StyleVisitor } from '../style-source.ts';
+import { contextOf } from '../token-manifest.ts';
 
 type CallExpression = Extract<Rule.Node, { type: 'CallExpression' }>;
 
@@ -57,7 +58,9 @@ export function svelteStyleVisitor(
 				declarations.push({
 					property: declaration.prop,
 					value: raws.value?.raw ?? declaration.value,
-					valueStart: start + declaration.prop.length + (raws.between ?? ':').length
+					start,
+					valueStart: start + declaration.prop.length + (raws.between ?? ':').length,
+					context: contextOf(declaration)
 				});
 			});
 

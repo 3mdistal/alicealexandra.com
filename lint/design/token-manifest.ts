@@ -34,7 +34,8 @@ export function parseTokenFile(file: string, css: string): TokenDefinition[] {
 	return definitions;
 }
 
-function contextOf(node: Node): string[] {
+/** The selectors and at-rules around a PostCSS node, outermost first. */
+export function contextOf(node: Node): string[] {
 	const context: string[] = [];
 	for (let parent = node.parent; parent; parent = parent.parent) {
 		if (parent.type === 'rule' && 'selector' in parent) {

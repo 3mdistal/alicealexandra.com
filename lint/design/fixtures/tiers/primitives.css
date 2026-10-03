@@ -1,0 +1,8 @@
+:root {
+	--space-1: 0.25rem;
+	--shadow-1: 0 1px 3px rgba(15, 23, 42, 0.12);
+	--color-white: #ffffff;
+	--color-slate-900: #0f172a;
+	--color-sky-500: #0ea5e9;
+	--color-clay-700: #642e1a;
+}

@@ -6,8 +6,12 @@ import { svelteStyleVisitor } from './adapters/svelte.ts';
 export interface StyleDeclaration {
 	property: string;
 	value: string;
+	/** Where the declaration, and so its property name, starts in the file's full text. */
+	start: number;
 	/** Where `value` starts in the file's full text. */
 	valueStart: number;
+	/** Selectors and at-rules around the declaration, outermost first, such as `['@media (min-width: 640px)', ':root']`. */
+	context: string[];
 }
 
 /**
