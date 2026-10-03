@@ -1,11 +1,11 @@
-@import '$lib/styles/tokens.css';
+@import '$lib/styles/tokens/primitives.css';
 @import '$lib/styles/career-pages.css';
-@import '$lib/styles/themes.css';
-@import '$lib/styles/motion.css';
+@import '$lib/styles/tokens/themes.css';
+@import '$lib/styles/tokens/motion.css';
 @import '$lib/styles/a11y.css';
 @import '$lib/styles/chrome.css';
-@import '$lib/styles/components.css';
-@import '$lib/styles/prose-variables.css';
+@import '$lib/styles/tokens/components.css';
+@import '$lib/styles/tokens/prose.css';
 
 * {
 	box-sizing: border-box;

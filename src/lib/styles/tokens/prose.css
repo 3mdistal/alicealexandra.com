@@ -1,5 +1,4 @@
-/* src/lib/styles/prose-variables.css */
-/* Global content/prose tokens (replaces legacy prose namespace) */
+/* Prose tokens: colors, type sizes, spacing and layout for long-form content. */
 
 :root {
 	/* Content colors - Light mode */

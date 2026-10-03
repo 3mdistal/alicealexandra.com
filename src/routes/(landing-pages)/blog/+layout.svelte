@@ -1,5 +1,5 @@
 <script>
-	// Blog layout - CSS variables are now in src/lib/styles/prose-variables.css
+	// Blog layout - CSS variables are in src/lib/styles/tokens/prose.css
 </script>
 
 <slot />

@@ -8,12 +8,12 @@ import tseslint from 'typescript-eslint';
 import design from './lint/design/index.ts';
 
 const tokenFiles = [
-	'tokens.css',
+	'primitives.css',
 	'themes.css',
-	'prose-variables.css',
+	'prose.css',
 	'components.css',
 	'motion.css'
-].map((file) => `${import.meta.dirname}/src/lib/styles/${file}`);
+].map((file) => `${import.meta.dirname}/src/lib/styles/tokens/${file}`);
 
 export default defineConfig(
 	{
