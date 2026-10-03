@@ -1,0 +1,18 @@
+:root {
+	--font-size-sm: 0.875rem;
+	--font-size-base: 1rem;
+	--font-size-lg: 1.25rem;
+	--space-4: 1rem;
+	--color-accent: #642e1a;
+	--color-accent-strong: #3f1c10;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-accent: #dcc9c6;
+	}
+}
+
+[data-theme='blog'] {
+	--color-bg: var(--color-accent);
+}

@@ -16,6 +16,12 @@ const config = {
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
+		typescript: {
+			// Type-check the site's ESLint plugin along with the app.
+			config: (tsconfig) => {
+				tsconfig.include.push('../lint/**/*.ts');
+			}
+		},
 		prerender: {
 			handleHttpError: ({ path, referrer, message }) => {
 				// Ignore 404s for internal links that may not exist yet
