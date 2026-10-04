@@ -75,7 +75,7 @@
 <style>
 	.game-container {
 		position: relative;
-		background-color: var(--color-neutral-1000);
+		background-color: black;
 		width: 100vw;
 		height: 100vh;
 	}
@@ -87,18 +87,18 @@
 		z-index: 1001;
 		transition: all 0.2s ease;
 		cursor: pointer;
-		border: 2px solid var(--color-gray-775);
+		border: 2px solid #333;
 		border-radius: 8px;
-		background: color-mix(in srgb, var(--color-neutral-1000) 80%, transparent);
+		background: rgba(0, 0, 0, 0.8);
 		padding: 10px 20px;
-		color: var(--color-neutral-0);
+		color: white;
 		font-size: 14px;
 		font-family: monospace;
 	}
 
 	.parameters-button:hover {
-		border-color: var(--color-gray-625);
-		background: color-mix(in srgb, var(--color-gray-775) 90%, transparent);
+		border-color: #555;
+		background: rgba(50, 50, 50, 0.9);
 	}
 
 	.parameters-button:active {
@@ -112,18 +112,18 @@
 		transform: translate(-50%, -50%);
 		z-index: 999;
 		animation: fadeIn 0.5s ease-in;
-		border: 2px solid var(--color-gray-775);
+		border: 2px solid #333;
 		border-radius: 12px;
-		background: color-mix(in srgb, var(--color-neutral-1000) 90%, transparent);
+		background: rgba(0, 0, 0, 0.9);
 		padding: 30px;
-		color: var(--color-neutral-0);
+		color: white;
 		font-family: monospace;
 		text-align: center;
 	}
 
 	.instructions h3 {
 		margin: 0 0 20px 0;
-		color: var(--color-neutral-0);
+		color: #fff;
 		font-size: 18px;
 		font-family: monospace;
 	}
@@ -136,24 +136,24 @@
 	}
 
 	.control-item {
-		color: var(--color-gray-250);
+		color: #ccc;
 		font-size: 14px;
 		font-family: monospace;
 	}
 
 	.keys {
-		border: 1px solid var(--color-gray-625);
+		border: 1px solid #555;
 		border-radius: 4px;
-		background: var(--color-gray-775);
+		background: #333;
 		padding: 4px 8px;
-		color: var(--color-neutral-0);
+		color: #fff;
 		font-weight: bold;
 		font-family: monospace;
 	}
 
 	.hint {
 		margin-top: 8px;
-		color: var(--color-gray-475);
+		color: #888;
 		font-style: italic;
 		font-size: 12px;
 		font-family: monospace;

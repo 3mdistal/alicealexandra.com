@@ -4,8 +4,6 @@
 
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
-	/** The scene's background color, read from the design tokens so the canvas matches it. */
-	let background = '';
 
 	let field: FlowField;
 	let particles: Particle[] = [];
@@ -48,10 +46,8 @@
 		baseHue = (baseHue + 0.08) % 360;
 
 		// Fade the canvas slightly each frame — creates trailing effect
-		ctx.globalAlpha = 0.18;
-		ctx.fillStyle = background;
+		ctx.fillStyle = 'rgba(8, 6, 18, 0.18)';
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
-		ctx.globalAlpha = 1;
 
 		field.update(deltaTime);
 
@@ -87,17 +83,16 @@
 		canvas.height = window.innerHeight;
 		field.resize(canvas.width, canvas.height);
 		// Refill the background so resize doesn't leave a white flash
-		ctx.fillStyle = background;
+		ctx.fillStyle = 'rgb(8, 6, 18)';
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 	}
 
 	onMount(() => {
 		ctx = canvas.getContext('2d')!;
-		background = getComputedStyle(canvas).getPropertyValue('--color-violet-975').trim();
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
 
-		ctx.fillStyle = background;
+		ctx.fillStyle = 'rgb(8, 6, 18)';
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 		field = new FlowField(canvas.width, canvas.height, 22);
@@ -121,7 +116,7 @@
 <style>
 	.scene {
 		position: relative;
-		background: var(--color-violet-975);
+		background: rgb(8, 6, 18);
 		width: 100vw;
 		height: 100vh;
 		overflow: hidden;
@@ -137,7 +132,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		pointer-events: none;
-		color: color-mix(in srgb, var(--color-neutral-0) 25%, transparent);
+		color: rgba(255, 255, 255, 0.25);
 		font-size: 0.85rem;
 		letter-spacing: 0.08em;
 		user-select: none;

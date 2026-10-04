@@ -115,12 +115,12 @@
 		transform: translateY(-50%);
 		z-index: 1000;
 		transition: left 0.3s ease-in-out;
-		border: 2px solid var(--color-gray-775);
+		border: 2px solid #333;
 		border-radius: 8px;
-		background: color-mix(in srgb, var(--color-neutral-1000) 90%, transparent);
+		background: rgba(0, 0, 0, 0.9);
 		padding: 20px;
 		width: 300px;
-		color: var(--color-neutral-0);
+		color: white;
 		font-family: monospace;
 	}
 
@@ -133,13 +133,13 @@
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 20px;
-		border-bottom: 1px solid var(--color-gray-775);
+		border-bottom: 1px solid #333;
 		padding-bottom: 10px;
 	}
 
 	.panel-header h3 {
 		margin: 0;
-		color: var(--color-neutral-0);
+		color: #fff;
 		font-size: 16px;
 		font-family: monospace;
 	}
@@ -147,17 +147,17 @@
 	.reset-button {
 		transition: background 0.2s;
 		cursor: pointer;
-		border: 1px solid var(--color-gray-625);
+		border: 1px solid #555;
 		border-radius: 4px;
-		background: var(--color-gray-775);
+		background: #333;
 		padding: 4px 8px;
-		color: var(--color-neutral-0);
+		color: white;
 		font-size: 12px;
 		font-family: monospace;
 	}
 
 	.reset-button:hover {
-		background: var(--color-gray-625);
+		background: #555;
 	}
 
 	.parameters-list {
@@ -179,7 +179,7 @@
 	}
 
 	.parameter-group label {
-		color: var(--color-gray-250);
+		color: #ccc;
 		font-size: 12px;
 		font-family: monospace;
 		text-transform: capitalize;
@@ -197,18 +197,18 @@
 		transition: background 0.2s;
 		cursor: help;
 		border-radius: 50%;
-		background: var(--color-gray-625);
+		background: #555;
 		width: 14px;
 		height: 14px;
-		color: var(--color-gray-250);
+		color: #ccc;
 		font-style: italic;
 		font-size: 10px;
 		font-family: monospace;
 	}
 
 	.info-icon:hover {
-		background: var(--color-gray-525);
-		color: var(--color-neutral-0);
+		background: #777;
+		color: #fff;
 	}
 
 	.tooltip {
@@ -222,13 +222,13 @@
 		transition:
 			opacity 0.2s,
 			visibility 0.2s;
-		box-shadow: 0 2px 8px color-mix(in srgb, var(--color-neutral-1000) 30%, transparent);
-		border: 1px solid var(--color-gray-625);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+		border: 1px solid #555;
 		border-radius: 6px;
-		background: color-mix(in srgb, var(--color-neutral-1000) 95%, transparent);
+		background: rgba(0, 0, 0, 0.95);
 		padding: 8px 12px;
 		width: 200px;
-		color: var(--color-neutral-0);
+		color: white;
 		font-size: 11px;
 		font-family: monospace;
 		text-align: left;
@@ -241,7 +241,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		border: 4px solid transparent;
-		border-top-color: color-mix(in srgb, var(--color-neutral-1000) 95%, transparent);
+		border-top-color: rgba(0, 0, 0, 0.95);
 		content: '';
 	}
 
@@ -261,33 +261,33 @@
 		flex: 1;
 		cursor: pointer;
 		border-radius: 2px;
-		background: var(--color-gray-775);
+		background: #333;
 		height: 4px;
 	}
 
 	.parameter-slider::-webkit-slider-thumb {
 		appearance: none;
 		cursor: pointer;
-		box-shadow: 0 0 4px color-mix(in srgb, var(--color-neutral-1000) 30%, transparent);
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 		border-radius: 50%;
-		background: var(--color-neutral-0);
+		background: white;
 		width: 16px;
 		height: 16px;
 	}
 
 	.parameter-slider::-moz-range-thumb {
 		cursor: pointer;
-		box-shadow: 0 0 4px color-mix(in srgb, var(--color-neutral-1000) 30%, transparent);
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 		border: none;
 		border-radius: 50%;
-		background: var(--color-neutral-0);
+		background: white;
 		width: 16px;
 		height: 16px;
 	}
 
 	.parameter-value {
 		min-width: 40px;
-		color: var(--color-neutral-0);
+		color: #fff;
 		font-size: 12px;
 		font-family: monospace;
 		text-align: right;

@@ -185,7 +185,7 @@
 
 <style>
 	.background-canvas {
-		background-color: var(--color-neutral-1000);
+		background-color: black;
 	}
 
 	.sidebar {
@@ -196,7 +196,7 @@
 		flex-direction: column;
 		justify-content: center;
 		gap: 2.5rem;
-		background-color: var(--color-gray-825);
+		background-color: #222222;
 		padding-right: 1rem;
 		padding-left: 1rem;
 		height: 100vh;

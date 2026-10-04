@@ -83,6 +83,6 @@
 		position: absolute;
 		bottom: 0;
 		pointer-events: none;
-		color: var(--color-neutral-500); /* text-gray-500 */
+		color: #6b7280; /* text-gray-500 */
 	}
 </style>
