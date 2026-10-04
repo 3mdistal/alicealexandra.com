@@ -205,8 +205,8 @@
 		position: relative;
 		justify-content: center;
 		cursor: default;
-		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-		border: 2px solid white;
+		box-shadow: 0 25px 50px -12px color-mix(in srgb, var(--color-neutral-1000) 25%, transparent);
+		border: 2px solid var(--color-neutral-0);
 		border-radius: 1.5rem;
 		aspect-ratio: 2/3;
 		width: 20rem;
@@ -246,7 +246,7 @@
 		opacity: 0;
 		box-sizing: border-box;
 		padding: 6rem 3rem;
-		--_button-accent: white;
+		--_button-accent: var(--color-neutral-0);
 		--_button-bg: var(--studio-card-bg);
 	}
 
@@ -256,7 +256,7 @@
 		justify-content: center;
 		align-items: center;
 		z-index: 10;
-		border: 2px solid white;
+		border: 2px solid var(--color-neutral-0);
 		border-radius: 50%;
 		background-color: var(--studio-card-bg);
 		width: 4.5rem;
@@ -264,7 +264,7 @@
 	}
 
 	.logo-text {
-		color: white;
+		color: var(--color-neutral-0);
 		font-weight: 500;
 		font-size: 2.75rem;
 		font-family: 'Euphoria Script', cursive;
@@ -276,7 +276,7 @@
 
 	.title-container h2 {
 		margin-bottom: 1.5rem;
-		color: white;
+		color: var(--color-neutral-0);
 		font-weight: 300;
 		font-size: 2.25rem;
 		letter-spacing: 0.15em;
@@ -289,7 +289,7 @@
 	}
 
 	.title-container em {
-		color: white;
+		color: var(--color-neutral-0);
 	}
 
 	:global(.background-image) {
@@ -305,7 +305,7 @@
 		opacity: 0.8;
 		background: linear-gradient(
 			to top,
-			color-mix(in srgb, var(--studio-card-bg) 92%, black),
+			color-mix(in srgb, var(--studio-card-bg) 92%, var(--color-neutral-1000)),
 			transparent
 		);
 		width: 100%;
@@ -321,7 +321,7 @@
 	}
 
 	.description em {
-		color: white;
+		color: var(--color-neutral-0);
 	}
 
 	.spin-poles {

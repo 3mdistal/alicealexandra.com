@@ -1,5 +1,7 @@
 import { readFileSync, statSync } from 'node:fs';
 import postcss, { type Node } from 'postcss';
+import { parseColor, type Rgba } from './color.ts';
+import { samePath } from './settings.ts';
 
 /** One definition of a custom property in a token file. */
 export interface TokenDefinition {
@@ -45,6 +47,29 @@ export function contextOf(node: Node): string[] {
 		}
 	}
 	return context;
+}
+
+/** A primitive color token, such as `--color-sky-500` and its parsed value. */
+export interface ColorPrimitive {
+	name: string;
+	color: Rgba;
+}
+
+/** The tokens defined in the primitives file, and which of them are colors. */
+export function primitivesIn(
+	definitions: TokenManifest['definitions'],
+	primitivesFile: string
+): { all: string[]; colors: ColorPrimitive[] } {
+	const all: string[] = [];
+	const colors: ColorPrimitive[] = [];
+	for (const [name, list] of definitions) {
+		const primitive = list.find((definition) => samePath(definition.file, primitivesFile));
+		if (!primitive) continue;
+		all.push(name);
+		const color = parseColor(primitive.value);
+		if (color) colors.push({ name, color });
+	}
+	return { all, colors };
 }
 
 const cache = new Map<string, { stamp: string; manifest: TokenManifest }>();

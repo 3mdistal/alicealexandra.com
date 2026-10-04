@@ -80,7 +80,7 @@
 	}
 
 	.game-canvas {
-		border: 2px solid black;
+		border: 2px solid var(--color-neutral-1000);
 		aspect-ratio: 16 / 9;
 		width: 1080px;
 	}

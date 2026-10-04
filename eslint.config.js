@@ -79,6 +79,7 @@ export default defineConfig(
 		plugins: { design },
 		settings: { design: { tokenFiles, primitivesFile } },
 		rules: {
+			'design/no-raw-color': 'error',
 			'design/no-unknown-token': 'error',
 			'design/token-tiers': 'error'
 		}

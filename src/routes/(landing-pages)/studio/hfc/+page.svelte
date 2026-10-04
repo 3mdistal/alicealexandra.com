@@ -336,7 +336,7 @@
 
 <style>
 	.page-container {
-		background-color: black;
+		background-color: var(--color-neutral-1000);
 		height: 100vh;
 		overflow-y: scroll;
 	}
@@ -366,7 +366,7 @@
 		z-index: 10;
 
 		h1 {
-			color: white;
+			color: var(--color-neutral-0);
 			font-size: 1.875rem;
 
 			@media (min-width: 768px) {
@@ -383,14 +383,14 @@
 		}
 
 		p {
-			color: white;
+			color: var(--color-neutral-0);
 		}
 	}
 
 	.hero-overlay {
 		position: absolute;
 		opacity: 0.6;
-		background-color: black;
+		background-color: var(--color-neutral-1000);
 		width: 100%;
 		height: 100%;
 	}
@@ -415,7 +415,7 @@
 		max-width: 60ch;
 
 		h2 {
-			color: white;
+			color: var(--color-neutral-0);
 			font-weight: 300;
 			font-size: 1.5rem;
 
@@ -441,7 +441,7 @@
 			}
 
 			em {
-				color: #cfcdcb;
+				color: var(--color-gray-250);
 			}
 		}
 	}
@@ -451,7 +451,7 @@
 		flex-direction: column;
 		justify-content: center;
 		gap: 6rem;
-		background-color: #bcbab7;
+		background-color: var(--color-gray-300);
 		padding: 1rem;
 		min-height: 100lvh;
 		scroll-snap-align: start;
@@ -498,12 +498,12 @@
 		position: absolute;
 		grid-row-start: 5;
 		grid-column-start: 3;
-		background-color: white;
+		background-color: var(--color-neutral-0);
 		padding: 2rem 1rem;
 		min-width: 60vw;
 
 		&:hover {
-			background-color: #deddda;
+			background-color: var(--color-gray-200);
 			text-decoration: none;
 		}
 
@@ -526,7 +526,7 @@
 	}
 
 	.section-act {
-		color: black;
+		color: var(--color-neutral-1000);
 		font-size: 0.875rem;
 		text-align: center;
 
@@ -537,7 +537,7 @@
 
 	.section-title {
 		margin: 0;
-		color: black;
+		color: var(--color-neutral-1000);
 		font-weight: 300;
 		font-size: 1.5rem;
 		text-align: center;
@@ -574,7 +574,7 @@
 	}
 
 	.section-quote {
-		background-color: black;
+		background-color: var(--color-neutral-1000);
 		padding: 2rem;
 
 		@media (min-width: 1024px) {
@@ -595,12 +595,12 @@
 		}
 
 		em {
-			color: #cfcdcb;
+			color: var(--color-gray-250);
 		}
 	}
 
 	.quote-author {
-		color: white;
+		color: var(--color-neutral-0);
 		font-size: 0.875rem;
 
 		@media (min-width: 768px) {
@@ -626,7 +626,7 @@
 	.poem-overlay {
 		position: absolute;
 		opacity: 0.8;
-		background-color: black;
+		background-color: var(--color-neutral-1000);
 		width: 100%;
 		height: 100%;
 	}
@@ -660,12 +660,12 @@
 		}
 
 		&:hover h3 {
-			color: #bcbab7;
+			color: var(--color-gray-300);
 		}
 	}
 
 	.poem-title {
-		color: white;
+		color: var(--color-neutral-0);
 		font-weight: 300;
 		font-size: 1.875rem;
 		text-align: center;
@@ -686,7 +686,7 @@
 
 	.poem-stanza {
 		margin-bottom: 2rem;
-		color: white;
+		color: var(--color-neutral-0);
 		font-size: 0.875rem;
 
 		@media (min-width: 640px) {
@@ -704,12 +704,12 @@
 
 	.close-poem {
 		margin-top: 8rem;
-		color: white;
+		color: var(--color-neutral-0);
 		font-size: 1.5rem;
 		text-align: right;
 
 		&:hover {
-			color: #bcbab7;
+			color: var(--color-gray-300);
 			text-decoration: none;
 		}
 
