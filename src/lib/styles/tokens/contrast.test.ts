@@ -68,38 +68,6 @@ const PROSE_PAIRS: Pair[] = [
 	].map((text): Pair => [text, ['--color-content-bg']])
 ];
 
-/**
- * Pairs below AA today, awaiting Alice's decision: approve the exception, or change the colors and
- * delete the entry. The ratios are pinned so a change that makes one worse also fails.
- */
-const EXCEPTIONS: Record<string, string[]> = {
-	'about dark': [
-		'--color-text-muted on --color-surface over --color-bg: 4.39',
-		'--color-text-muted on --color-surface-muted over --color-bg: 3.82'
-	],
-	'career light': [
-		'--color-text-muted on --color-bg: 3.94',
-		'--color-accent-strong on --color-bg: 4.47'
-	],
-	'career dark': [
-		'--color-text-muted on --color-surface over --color-bg: 4.23',
-		'--color-text-muted on --color-surface-muted over --color-bg: 3.69'
-	],
-	'blog light': [
-		'--color-text-muted on --color-surface-muted over --color-bg: 3.83',
-		'--color-accent on --color-bg: 4.06'
-	],
-	'news light': ['--chrome-accent on --chrome-bg over --chrome-surface over --color-bg: 4.19'],
-	'studio content surface light': [
-		'--color-text-muted on --color-bg: 3.90',
-		'--color-text-muted on --color-surface-muted over --color-bg: 4.28'
-	],
-	'prose light': [
-		'--color-content-secondary on --color-content-bg: 3.90',
-		'--color-content-mention on --color-content-bg: 4.42'
-	]
-};
-
 /** The pages to check: each route theme, plus the paper-and-ink surface some studio pages use. */
 const PAGES: Array<{ name: string; theme: SiteTheme; surface: SiteSurface; pairs: Pair[] }> = [
 	...THEMES.map((theme) => ({
@@ -151,7 +119,7 @@ describe('WCAG AA text contrast', () => {
 					const label = `${text} on ${backgrounds.join(' over ')}`;
 					return ratio < AA ? [`${label}: ${ratio.toFixed(2)}`] : [];
 				});
-				expect(failures).toEqual(EXCEPTIONS[`${page.name} ${scheme}`] ?? []);
+				expect(failures).toEqual([]);
 			});
 		}
 	}

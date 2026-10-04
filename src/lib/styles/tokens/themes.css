@@ -119,10 +119,10 @@
 	/* Dark enough for the white index text to meet WCAG AA (4.5:1). */
 	--color-bg: var(--color-steel-600);
 	--color-surface: color-mix(in srgb, var(--color-steel-900) 35%, transparent);
-	--color-surface-muted: color-mix(in srgb, var(--color-neutral-0) 8%, transparent);
+	--color-surface-muted: color-mix(in srgb, var(--color-steel-900) 8%, transparent);
 	--color-text: var(--color-slate-50);
 	--color-text-muted: var(--color-slate-200);
-	--color-accent: var(--color-cloud-200);
+	--color-accent: var(--color-cloud-100);
 	--color-accent-strong: var(--color-cloud-50);
 	--color-border: color-mix(in srgb, var(--color-slate-200) 35%, transparent);
 
@@ -131,7 +131,7 @@
 	--chrome-text: var(--color-slate-50);
 	--chrome-text-muted: var(--color-cloud-160);
 	--chrome-border: color-mix(in srgb, var(--color-slate-200) 35%, transparent);
-	--chrome-accent: var(--color-cloud-200);
+	--chrome-accent: var(--color-cloud-100);
 	--chrome-accent-strong: var(--color-cloud-50);
 	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-steel-925) 45%, transparent);
 }
@@ -215,9 +215,9 @@
 	[data-theme='about'] {
 		--color-bg: var(--color-mauve-700);
 		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
-		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 88%, var(--color-neutral-0));
 		--color-text: var(--color-neutral-100);
-		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 81%, transparent);
 		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
 		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
@@ -255,9 +255,9 @@
 	[data-theme='career'] {
 		--color-bg: var(--color-warm-700);
 		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
-		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 88%, var(--color-neutral-0));
 		--color-text: var(--color-neutral-100);
-		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 84%, transparent);
 		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
 		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
 		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
