@@ -97,7 +97,7 @@
 
 	.home-text {
 		z-index: 10;
-		color: white;
+		color: var(--color-neutral-0);
 		font-weight: 500;
 		font-size: 0.875rem;
 	}

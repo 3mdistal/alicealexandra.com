@@ -1,11 +1,11 @@
 import type { Rule } from 'eslint';
 import { basename } from 'node:path';
 import valueParser from 'postcss-value-parser';
-import { findRawColors, parseColor } from '../color.ts';
+import { findRawColors } from '../color.ts';
 import { designSettings, samePath } from '../settings.ts';
 import { visitStyles } from '../style-source.ts';
-import { suggestColor, type ColorPrimitive } from '../suggest.ts';
-import { loadTokenManifest } from '../token-manifest.ts';
+import { suggestColor } from '../suggest.ts';
+import { loadTokenManifest, primitivesIn } from '../token-manifest.ts';
 
 /** Functions whose result depends on other tokens, math, the color scheme or the environment. */
 const NOT_RAW_FUNCTIONS = new Set([
@@ -135,22 +135,6 @@ function nonRawPart(value: string): string | undefined {
 		if (NOT_RAW_FUNCTIONS.has(name)) part = `${name}()`;
 	});
 	return part;
-}
-
-function primitivesIn(
-	definitions: ReturnType<typeof loadTokenManifest>['definitions'],
-	primitivesFile: string
-): { all: string[]; colors: ColorPrimitive[] } {
-	const all: string[] = [];
-	const colors: ColorPrimitive[] = [];
-	for (const [name, list] of definitions) {
-		const primitive = list.find((definition) => samePath(definition.file, primitivesFile));
-		if (!primitive) continue;
-		all.push(name);
-		const color = parseColor(primitive.value);
-		if (color) colors.push({ name, color });
-	}
-	return { all, colors };
 }
 
 export default rule;

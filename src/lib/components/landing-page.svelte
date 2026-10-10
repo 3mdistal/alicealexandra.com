@@ -125,8 +125,8 @@
 		border-radius: 0 1rem 1rem 0;
 		background: linear-gradient(
 			135deg,
-			rgba(255, 255, 255, 0.15) 0%,
-			rgba(255, 255, 255, 0.05) 100%
+			color-mix(in srgb, var(--color-neutral-0) 15%, transparent) 0%,
+			color-mix(in srgb, var(--color-neutral-0) 5%, transparent) 100%
 		);
 		padding: 5rem 2.5rem;
 	}
@@ -237,6 +237,6 @@
 	}
 
 	.text-white {
-		color: white;
+		color: var(--color-neutral-0);
 	}
 </style>

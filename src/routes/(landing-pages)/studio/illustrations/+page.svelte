@@ -208,13 +208,13 @@
 		transform: translateY(-4px);
 		box-shadow:
 			0 0 0 2px color-mix(in srgb, var(--color-content-text) 55%, transparent),
-			0 4px 6px rgba(0, 0, 0, 0.1);
+			0 4px 6px color-mix(in srgb, var(--color-neutral-1000) 10%, transparent);
 	}
 
 	.image-wrapper {
 		position: relative;
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 6px color-mix(in srgb, var(--color-neutral-1000) 10%, transparent);
 		border-radius: 8px;
 		overflow: hidden;
 	}
@@ -233,7 +233,11 @@
 		left: 0;
 		transform: translateY(100%);
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-		background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+		background: linear-gradient(
+			to top,
+			color-mix(in srgb, var(--color-neutral-1000) 80%, transparent),
+			transparent
+		);
 		padding: 1.5rem;
 	}
 
@@ -253,14 +257,14 @@
 
 	.image-overlay h3 {
 		margin: 0;
-		color: white;
+		color: var(--color-neutral-0);
 		font-weight: 500;
 		font-size: 1.2rem;
 	}
 
 	.image-overlay .date {
 		margin: 0.5rem 0 0;
-		color: rgba(255, 255, 255, 0.8);
+		color: color-mix(in srgb, var(--color-neutral-0) 80%, transparent);
 		font-size: 0.9rem;
 	}
 
@@ -309,7 +313,7 @@
 		justify-content: center;
 		align-items: center;
 		z-index: 1000;
-		background-color: rgba(0, 0, 0, 0.95);
+		background-color: color-mix(in srgb, var(--color-neutral-1000) 95%, transparent);
 		padding: 2rem;
 		overflow-y: auto;
 	}
@@ -426,7 +430,7 @@
 			top: 0.5rem;
 			right: 0.5rem;
 			z-index: 2;
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			box-shadow: 0 2px 8px color-mix(in srgb, var(--color-neutral-1000) 10%, transparent);
 			background-color: var(--color-content-bg);
 		}
 

@@ -518,7 +518,10 @@
 		z-index: 1;
 		mix-blend-mode: multiply;
 		inset: 0;
-		background-color: var(--overlay-color, rgba(0, 0, 0, 0.6));
+		background-color: var(
+			--overlay-color,
+			color-mix(in srgb, var(--color-neutral-1000) 60%, transparent)
+		);
 		content: '';
 	}
 

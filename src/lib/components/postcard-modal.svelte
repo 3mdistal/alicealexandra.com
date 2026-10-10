@@ -361,13 +361,13 @@
 		justify-content: center;
 		align-items: center;
 		z-index: 1000;
-		background: rgba(0, 0, 0, 0.8);
+		background: color-mix(in srgb, var(--color-neutral-1000) 80%, transparent);
 		padding: var(--modal-margin);
 	}
 
 	.modal-content {
 		position: relative;
-		box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+		box-shadow: 0 25px 50px color-mix(in srgb, var(--color-neutral-1000) 50%, transparent);
 		border: 2px dotted color-mix(in srgb, var(--color-content-border) 70%, transparent);
 		border-radius: 20px;
 		background: var(--color-content-bg);
@@ -493,12 +493,12 @@
 	}
 
 	.not-found h1 {
-		color: #666;
+		color: var(--color-gray-550);
 	}
 
 	.not-found p {
 		margin-bottom: 2rem;
-		color: #999;
+		color: var(--color-gray-450);
 	}
 
 	/* Responsive adjustments */

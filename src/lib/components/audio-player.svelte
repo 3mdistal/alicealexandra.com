@@ -41,22 +41,22 @@
 		backdrop-filter: blur(4px);
 		transition: all 0.3s ease;
 		cursor: pointer;
-		border: 1px solid rgba(255, 255, 255, 0.2);
+		border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
 		border-radius: 50%;
-		background: rgba(0, 0, 0, 0.6);
+		background: color-mix(in srgb, var(--color-neutral-1000) 60%, transparent);
 		width: 3.5rem;
 		height: 3.5rem;
-		color: white;
+		color: var(--color-neutral-0);
 	}
 
 	.audio-toggle:hover {
 		transform: scale(1.05);
-		background: rgba(0, 0, 0, 0.8);
+		background: color-mix(in srgb, var(--color-neutral-1000) 80%, transparent);
 	}
 
 	.audio-toggle:focus-visible {
-		outline: 2px solid white;
+		outline: 2px solid var(--color-neutral-0);
 		outline-offset: 3px;
-		border-color: white;
+		border-color: var(--color-neutral-0);
 	}
 </style>

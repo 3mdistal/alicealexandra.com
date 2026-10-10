@@ -79,8 +79,19 @@ export default defineConfig(
 		plugins: { design },
 		settings: { design: { tokenFiles, primitivesFile } },
 		rules: {
+			'design/no-raw-color': 'error',
 			'design/no-unknown-token': 'error',
 			'design/token-tiers': 'error'
+		}
+	},
+	{
+		// The arcade games are standalone demos with their own palettes, not site UI.
+		files: [
+			'src/routes/(landing-pages)/studio/arcade/*/**',
+			'src/lib/components/parameters-panel.svelte'
+		],
+		rules: {
+			'design/no-raw-color': 'off'
 		}
 	}
 );

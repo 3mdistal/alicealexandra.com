@@ -1,4 +1,5 @@
 import { colorDistance, sameColor, type Rgba } from './color.ts';
+import type { ColorPrimitive, TokenManifest } from './token-manifest.ts';
 
 const MAX_FAMILY_SIZE = 12;
 const MAX_SUGGESTIONS = 3;
@@ -38,10 +39,32 @@ export function suggestTokens(name: string, known: Iterable<string>): string {
 	return closest.length > 0 ? `Did you mean ${listOf(closest)}?` : '';
 }
 
-/** A primitive color token, such as `--color-sky-500` and its parsed value. */
-export interface ColorPrimitive {
-	name: string;
-	color: Rgba;
+/** A primitive that renders a raw color exactly, and the text to write instead of the color. */
+export interface ColorMatch {
+	/** The matching primitive, or undefined for a fully transparent color. */
+	primitive: ColorPrimitive | undefined;
+	replacement: string;
+}
+
+/**
+ * The exact replacement for a raw color: `var()` for an opaque match, `color-mix()` for a translucent
+ * one, `transparent` for no color at all. Undefined when no primitive matches.
+ */
+export function matchColor(
+	color: Rgba | undefined,
+	primitives: ColorPrimitive[]
+): ColorMatch | undefined {
+	if (!color) return undefined;
+	if (color.a === 0) return { primitive: undefined, replacement: 'transparent' };
+	const opaque = { ...color, a: 1 };
+	const primitive = primitives.find((candidate) => sameColor(candidate.color, opaque));
+	if (!primitive) return undefined;
+	if (color.a > 0.998) return { primitive, replacement: `var(${primitive.name})` };
+	const percent = Number((color.a * 100).toFixed(2));
+	return {
+		primitive,
+		replacement: `color-mix(in srgb, var(${primitive.name}) ${percent}%, transparent)`
+	};
 }
 
 /**
@@ -50,16 +73,12 @@ export interface ColorPrimitive {
  */
 export function suggestColor(color: Rgba | undefined, primitives: ColorPrimitive[]): string {
 	if (!color) return 'Add it as a primitive and reference that.';
-	if (color.a === 0) return 'Use `transparent`.';
+	const match = matchColor(color, primitives);
+	if (match && !match.primitive) return 'Use `transparent`.';
+	if (match && color.a > 0.998) return `Use \`${match.replacement}\`, which has the same value.`;
+	if (match) return `Use \`${match.replacement}\`, which renders the same.`;
 
 	const opaque = { ...color, a: 1 };
-	const exact = primitives.find((primitive) => sameColor(primitive.color, opaque));
-	if (exact && color.a > 0.998) return `Use \`var(${exact.name})\`, which has the same value.`;
-	if (exact) {
-		const percent = Number((color.a * 100).toFixed(2));
-		return `Use \`color-mix(in srgb, var(${exact.name}) ${percent}%, transparent)\`, which renders the same.`;
-	}
-
 	const closest = primitives
 		.filter((primitive) => primitive.color.a > 0.998)
 		.map((primitive) => ({ ...primitive, distance: colorDistance(primitive.color, opaque) }))
@@ -67,6 +86,42 @@ export function suggestColor(color: Rgba | undefined, primitives: ColorPrimitive
 		.slice(0, MAX_SUGGESTIONS)
 		.map(({ name }) => `\`${name}\``);
 	return `No primitive has this color. Closest: ${closest.join(', ')}. Use one of those, or add the color as a primitive.`;
+}
+
+/** The words a role token's name tends to use for each kind of property. */
+const ROLE_WORDS: Array<[property: RegExp, name: RegExp]> = [
+	[
+		/^(color|caret-color|text-decoration-color|-webkit-text-fill-color|fill|stroke)$/,
+		/text|accent|label|link|heading|mention|ink/
+	],
+	[/^background/, /bg|surface/],
+	[/^(border|outline)/, /border|accent/],
+	[/shadow/, /shadow/]
+];
+
+/**
+ * Role tokens set straight to `primitive` in some theme or color scheme, such as `--color-surface`
+ * for `--color-neutral-0`, preferring ones whose names fit `property`. A role token follows the route
+ * theme and color scheme, so it isn't the same color everywhere; it's a suggestion, never a fix.
+ */
+export function suggestRoles(
+	primitive: string,
+	property: string,
+	definitions: TokenManifest['definitions'],
+	isPrimitive: (name: string) => boolean
+): string {
+	const roles = [...definitions]
+		.filter(
+			([name, list]) =>
+				!isPrimitive(name) && list.some(({ value }) => value.trim() === `var(${primitive})`)
+		)
+		.map(([name]) => name);
+	const words = ROLE_WORDS.find(([pattern]) => pattern.test(property))?.[1];
+	const fitting = (words ? roles.filter((name) => words.test(name)) : roles)
+		.slice(0, MAX_SUGGESTIONS)
+		.map((name) => `\`${name}\``);
+	if (fitting.length === 0) return '';
+	return ` To follow the route theme and color scheme instead, use a role token such as ${listOf(fitting)}.`;
 }
 
 /** `a`, `a or b`, `a, b, or c` */

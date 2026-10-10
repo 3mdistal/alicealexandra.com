@@ -120,9 +120,9 @@
 		z-index: 1;
 		background: linear-gradient(
 			to top,
-			rgba(0, 0, 0, 0.9) 0%,
-			rgba(0, 0, 0, 0.2) 50%,
-			rgba(0, 0, 0, 0.1) 100%
+			color-mix(in srgb, var(--color-neutral-1000) 90%, transparent) 0%,
+			color-mix(in srgb, var(--color-neutral-1000) 20%, transparent) 50%,
+			color-mix(in srgb, var(--color-neutral-1000) 10%, transparent) 100%
 		);
 	}
 
@@ -149,7 +149,7 @@
 		font-size: var(--font-size-3xl);
 		line-height: var(--line-height-tight);
 		font-family: var(--font-serif);
-		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+		text-shadow: 0 2px 4px color-mix(in srgb, var(--color-neutral-1000) 80%, transparent);
 	}
 
 	.description {

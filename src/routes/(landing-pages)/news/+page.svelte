@@ -375,7 +375,7 @@
 		cursor: pointer;
 		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: 999px;
-		background: color-mix(in srgb, var(--color-surface) 92%, white);
+		background: color-mix(in srgb, var(--color-surface) 92%, var(--color-neutral-0));
 		padding: 0.72rem 1.2rem;
 		color: var(--color-text-muted);
 		font-weight: 500;
@@ -427,7 +427,7 @@
 
 		&:hover {
 			filter: none;
-			background: color-mix(in srgb, var(--color-surface) 92%, white);
+			background: color-mix(in srgb, var(--color-surface) 92%, var(--color-neutral-0));
 		}
 	}
 
@@ -446,7 +446,7 @@
 		display: grid;
 		grid-template-columns: 190px 1fr;
 		gap: 1.5rem;
-		box-shadow: 0 12px 30px -22px rgba(0, 0, 0, 0.35);
+		box-shadow: 0 12px 30px -22px color-mix(in srgb, var(--color-neutral-1000) 35%, transparent);
 		border-radius: 18px;
 	}
 
@@ -582,9 +582,9 @@
 	.coming-soon {
 		margin: 2rem 0;
 		border-radius: 12px;
-		background: rgba(255, 255, 255, 0.3);
+		background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
 		padding: 2rem;
-		color: rgba(75, 70, 13, 0.75);
+		color: color-mix(in srgb, var(--color-olive-800) 75%, transparent);
 		font-style: italic;
 		font-size: 1.12rem;
 		line-height: 1.6;
@@ -602,7 +602,7 @@
 	.changelog-content :global(h2) {
 		margin-top: 2rem;
 		margin-bottom: 1rem;
-		color: #726a12;
+		color: var(--color-accent);
 	}
 
 	.changelog-content :global(ul) {
@@ -622,7 +622,7 @@
 	/* Markdown code styling (CHANGELOG.md renders via `marked` → <code>/<pre>) */
 	.changelog-content :global(code) {
 		border-radius: 4px;
-		background-color: rgba(31, 41, 55, 0.08);
+		background-color: color-mix(in srgb, var(--color-neutral-900) 8%, transparent);
 		padding: 0.15rem 0.35rem;
 		font-size: 0.95em;
 		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
@@ -632,7 +632,7 @@
 	.changelog-content :global(pre) {
 		margin: 1rem 0 1.5rem;
 		border-radius: 10px;
-		background-color: rgba(31, 41, 55, 0.08);
+		background-color: color-mix(in srgb, var(--color-neutral-900) 8%, transparent);
 		padding: 1rem;
 		overflow-x: auto;
 	}
@@ -655,7 +655,7 @@
 		border: none;
 		background: transparent;
 		padding: 0;
-		color: rgba(75, 70, 13, 0.95);
+		color: color-mix(in srgb, var(--color-olive-800) 95%, transparent);
 		font-weight: 500;
 		font-size: 1.03rem;
 		text-decoration: underline;

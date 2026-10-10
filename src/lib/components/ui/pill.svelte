@@ -39,8 +39,8 @@
 	}
 
 	.ui-pill.removed {
-		border-color: color-mix(in srgb, #c94b4b 45%, var(--color-border));
-		background: color-mix(in srgb, #c94b4b 14%, var(--color-surface));
-		color: color-mix(in srgb, #912a2a 75%, var(--color-text));
+		border-color: color-mix(in srgb, var(--color-red-500) 45%, var(--color-border));
+		background: color-mix(in srgb, var(--color-red-500) 14%, var(--color-surface));
+		color: color-mix(in srgb, var(--color-red-600) 75%, var(--color-text));
 	}
 </style>

@@ -395,7 +395,7 @@
 		position: relative;
 		background-position: center;
 		background-size: cover;
-		background-color: black;
+		background-color: var(--color-neutral-1000);
 		min-height: 100vh;
 	}
 
@@ -404,7 +404,7 @@
 		top: 0;
 		left: 0;
 		opacity: 0.8;
-		background-color: black;
+		background-color: var(--color-neutral-1000);
 		width: 100%;
 		height: 100%;
 	}
@@ -426,7 +426,7 @@
 
 	.collection-name {
 		margin-bottom: 0.5rem;
-		color: #888;
+		color: var(--color-gray-475);
 		font-size: 0.875rem;
 		letter-spacing: 0.1em;
 		text-transform: lowercase;
@@ -434,13 +434,13 @@
 
 	h1 {
 		margin-bottom: 0.5rem;
-		color: white;
+		color: var(--color-neutral-0);
 		font-weight: 300;
 		font-size: 2.25rem;
 	}
 
 	.section-name {
-		color: #bcbab7;
+		color: var(--color-gray-300);
 		font-style: italic;
 		font-size: 1rem;
 	}
@@ -454,7 +454,7 @@
 
 	.poem-stanza {
 		margin-bottom: 2rem;
-		color: white;
+		color: var(--color-neutral-0);
 		font-size: 1.125rem;
 		line-height: 1.8;
 	}
@@ -473,13 +473,13 @@
 
 	.back-link a {
 		transition: color 0.2s;
-		color: #888;
+		color: var(--color-gray-475);
 		font-size: 1.125rem;
 		text-decoration: none;
 	}
 
 	.back-link a:hover {
-		color: #bcbab7;
+		color: var(--color-gray-300);
 	}
 
 	.editor-layout {
