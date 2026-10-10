@@ -506,7 +506,7 @@
 		opacity: var(--bg-opacity, 0.4);
 		z-index: 0;
 		inset: 0;
-		background-image: var(--bg-image);
+		background-image: var(--bg-image, none);
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;

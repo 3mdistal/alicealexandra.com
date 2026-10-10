@@ -7,6 +7,6 @@ export default defineConfig({
 		noExternal: ['gsap']
 	},
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}']
+		include: ['src/**/*.{test,spec}.{js,ts}', 'lint/**/*.test.ts']
 	}
 });
