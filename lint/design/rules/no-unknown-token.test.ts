@@ -111,6 +111,11 @@ stylesheet.run('no-unknown-token in .css files', rule, {
 		{
 			filename: 'chrome.css',
 			code: '.link { color: var(--color-accent); &:hover { color: var(--color-bg); } }'
+		},
+		// A condition in `@supports` only tests whether the browser understands it.
+		{
+			filename: 'chrome.css',
+			code: '@supports (color: var(--probe)) { p { color: var(--color-bg); } }'
 		}
 	],
 	invalid: [

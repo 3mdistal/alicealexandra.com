@@ -1,3 +1,5 @@
+import { colorDistance, sameColor, type Rgba } from './color.ts';
+
 const MAX_FAMILY_SIZE = 12;
 const MAX_SUGGESTIONS = 3;
 
@@ -34,6 +36,37 @@ export function suggestTokens(name: string, known: Iterable<string>): string {
 		.map(({ other }) => `\`${other}\``);
 
 	return closest.length > 0 ? `Did you mean ${listOf(closest)}?` : '';
+}
+
+/** A primitive color token, such as `--color-sky-500` and its parsed value. */
+export interface ColorPrimitive {
+	name: string;
+	color: Rgba;
+}
+
+/**
+ * Builds the "use this instead" half of a message for a raw color. A color that matches a
+ * primitive, at any opacity, gets the exact replacement; anything else gets the closest primitives.
+ */
+export function suggestColor(color: Rgba | undefined, primitives: ColorPrimitive[]): string {
+	if (!color) return 'Add it as a primitive and reference that.';
+	if (color.a === 0) return 'Use `transparent`.';
+
+	const opaque = { ...color, a: 1 };
+	const exact = primitives.find((primitive) => sameColor(primitive.color, opaque));
+	if (exact && color.a > 0.998) return `Use \`var(${exact.name})\`, which has the same value.`;
+	if (exact) {
+		const percent = Number((color.a * 100).toFixed(2));
+		return `Use \`color-mix(in srgb, var(${exact.name}) ${percent}%, transparent)\`, which renders the same.`;
+	}
+
+	const closest = primitives
+		.filter((primitive) => primitive.color.a > 0.998)
+		.map((primitive) => ({ ...primitive, distance: colorDistance(primitive.color, opaque) }))
+		.sort((a, b) => a.distance - b.distance)
+		.slice(0, MAX_SUGGESTIONS)
+		.map(({ name }) => `\`${name}\``);
+	return `No primitive has this color. Closest: ${closest.join(', ')}. Use one of those, or add the color as a primitive.`;
 }
 
 /** `a`, `a or b`, `a, b, or c` */

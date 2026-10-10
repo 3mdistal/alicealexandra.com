@@ -8,12 +8,13 @@ import tseslint from 'typescript-eslint';
 import design from './lint/design/index.ts';
 
 const tokenFiles = [
-	'tokens.css',
+	'primitives.css',
 	'themes.css',
-	'prose-variables.css',
+	'prose.css',
 	'components.css',
 	'motion.css'
-].map((file) => `${import.meta.dirname}/src/lib/styles/${file}`);
+].map((file) => `${import.meta.dirname}/src/lib/styles/tokens/${file}`);
+const [primitivesFile] = tokenFiles;
 
 export default defineConfig(
 	{
@@ -55,7 +56,7 @@ export default defineConfig(
 		}
 	},
 	{
-		ignores: ['build/', '.svelte-kit/', 'dist/', 'content/', 'archived/']
+		ignores: ['build/', '.svelte-kit/', 'dist/', 'content/', 'archived/', 'lint/design/fixtures/']
 	},
 	{
 		linterOptions: {
@@ -76,9 +77,10 @@ export default defineConfig(
 	{
 		files: ['**/*.svelte', '**/*.css'],
 		plugins: { design },
-		settings: { design: { tokenFiles } },
+		settings: { design: { tokenFiles, primitivesFile } },
 		rules: {
-			'design/no-unknown-token': 'error'
+			'design/no-unknown-token': 'error',
+			'design/token-tiers': 'error'
 		}
 	}
 );

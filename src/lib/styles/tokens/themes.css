@@ -1,0 +1,324 @@
+:root {
+	color-scheme: light dark;
+	--color-bg: var(--color-neutral-50);
+	--color-surface: var(--color-neutral-0);
+	--color-surface-muted: var(--color-neutral-100);
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-600);
+	--color-accent: var(--color-neutral-900);
+	--color-accent-strong: var(--color-neutral-700);
+	--color-border: var(--color-neutral-200);
+	--color-shadow: color-mix(in srgb, var(--color-slate-900) 12%, transparent);
+	--a11y-focus-color: var(--color-sky-500);
+
+	--chrome-bg: color-mix(in srgb, var(--color-neutral-50) 82%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 90%, transparent);
+	--chrome-text: var(--color-neutral-900);
+	--chrome-text-muted: var(--color-neutral-700);
+	--chrome-border: color-mix(in srgb, var(--color-neutral-900) 12%, transparent);
+	--chrome-accent: var(--color-neutral-900);
+	--chrome-accent-strong: var(--color-neutral-700);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-slate-900) 18%, transparent);
+	--chrome-logo-text: var(--color-neutral-0);
+	--chrome-mobile-bg: var(--color-bg);
+}
+
+[data-theme='home'] {
+	--color-bg: var(--color-content-bg);
+	--color-surface: var(--color-neutral-0);
+	--color-surface-muted: var(--color-neutral-100);
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-600);
+	--color-accent: var(--color-neutral-900);
+	--color-accent-strong: var(--color-neutral-700);
+	--color-border: var(--color-neutral-200);
+
+	--chrome-bg: color-mix(in srgb, var(--color-content-bg) 70%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 88%, transparent);
+	--chrome-text: var(--color-neutral-900);
+	--chrome-text-muted: var(--color-neutral-700);
+	--chrome-border: color-mix(in srgb, var(--color-neutral-900) 14%, transparent);
+	--chrome-accent: var(--color-neutral-900);
+	--chrome-accent-strong: var(--color-neutral-700);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-slate-900) 18%, transparent);
+
+	--home-about-bg: var(--color-mauve-400);
+	--home-studio-bg: var(--color-indigo-250);
+	--home-career-bg: var(--color-warm-200);
+	--home-blog-bg: var(--color-steel-600);
+	--home-news-bg: var(--color-gray-150);
+
+	--home-about-label: var(--color-neutral-900);
+	--home-studio-label: var(--color-neutral-900);
+	--home-career-label: var(--color-neutral-900);
+	--home-blog-label: var(--color-neutral-50);
+	--home-news-label: var(--color-neutral-900);
+}
+
+[data-theme='about'] {
+	--color-bg: var(--color-mauve-400);
+	--color-surface: var(--color-neutral-0);
+	--color-surface-muted: var(--color-neutral-100);
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-700);
+	--color-accent: var(--color-violet-800);
+	--color-accent-strong: var(--color-violet-800);
+	--color-border: color-mix(in srgb, var(--color-violet-800) 20%, transparent);
+
+	--chrome-bg: color-mix(in srgb, var(--color-mauve-450) 58%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 84%, transparent);
+	--chrome-text: var(--color-violet-850);
+	--chrome-text-muted: var(--color-violet-700);
+	--chrome-border: color-mix(in srgb, var(--color-violet-800) 25%, transparent);
+	--chrome-accent: var(--color-violet-800);
+	--chrome-accent-strong: var(--color-violet-900);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-violet-800) 25%, transparent);
+}
+
+[data-theme='studio'] {
+	--color-bg: var(--color-indigo-250);
+	--color-surface: var(--color-neutral-0);
+	--color-surface-muted: var(--color-cloud-60);
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-700);
+	--color-accent: var(--color-indigo-800);
+	--color-accent-strong: var(--color-indigo-850);
+	--color-border: color-mix(in srgb, var(--color-indigo-800) 20%, transparent);
+
+	--chrome-bg: color-mix(in srgb, var(--color-indigo-350) 60%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 82%, transparent);
+	--chrome-text: var(--color-indigo-860);
+	--chrome-text-muted: var(--color-indigo-700);
+	--chrome-border: color-mix(in srgb, var(--color-indigo-800) 25%, transparent);
+	--chrome-accent: var(--color-indigo-800);
+	--chrome-accent-strong: var(--color-indigo-850);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-indigo-800) 24%, transparent);
+}
+
+[data-theme='career'] {
+	--color-bg: var(--color-warm-200);
+	--color-surface: var(--color-warm-50);
+	--color-surface-muted: var(--color-warm-100);
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-warm-600);
+	--color-accent: var(--color-clay-700);
+	--color-accent-strong: var(--color-clay-600);
+	--color-border: color-mix(in srgb, var(--color-clay-700) 20%, transparent);
+
+	--chrome-bg: color-mix(in srgb, var(--color-warm-250) 60%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-warm-40) 84%, transparent);
+	--chrome-text: var(--color-clay-800);
+	--chrome-text-muted: var(--color-clay-650);
+	--chrome-border: color-mix(in srgb, var(--color-clay-700) 25%, transparent);
+	--chrome-accent: var(--color-clay-700);
+	--chrome-accent-strong: var(--color-clay-600);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-clay-700) 24%, transparent);
+}
+
+[data-theme='blog'] {
+	/* Dark enough for the white index text to meet WCAG AA (4.5:1). */
+	--color-bg: var(--color-steel-600);
+	--color-surface: color-mix(in srgb, var(--color-steel-900) 35%, transparent);
+	--color-surface-muted: color-mix(in srgb, var(--color-neutral-0) 8%, transparent);
+	--color-text: var(--color-slate-50);
+	--color-text-muted: var(--color-slate-200);
+	--color-accent: var(--color-cloud-200);
+	--color-accent-strong: var(--color-cloud-50);
+	--color-border: color-mix(in srgb, var(--color-slate-200) 35%, transparent);
+
+	--chrome-bg: color-mix(in srgb, var(--color-steel-650) 68%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-steel-850) 66%, transparent);
+	--chrome-text: var(--color-slate-50);
+	--chrome-text-muted: var(--color-cloud-160);
+	--chrome-border: color-mix(in srgb, var(--color-slate-200) 35%, transparent);
+	--chrome-accent: var(--color-cloud-200);
+	--chrome-accent-strong: var(--color-cloud-50);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-steel-925) 45%, transparent);
+}
+
+[data-theme='news'] {
+	--color-bg: var(--color-gray-150);
+	--color-surface: color-mix(in srgb, var(--color-neutral-0) 75%, transparent);
+	--color-surface-muted: color-mix(in srgb, var(--color-neutral-0) 55%, transparent);
+	--color-text: var(--color-gray-800);
+	--color-text-muted: color-mix(in srgb, var(--color-olive-800) 80%, transparent);
+	--color-accent: var(--color-olive-700);
+	--color-accent-strong: var(--color-olive-800);
+	--color-border: color-mix(in srgb, var(--color-olive-700) 20%, transparent);
+
+	--chrome-bg: color-mix(in srgb, var(--color-olive-300) 66%, transparent);
+	--chrome-surface: color-mix(in srgb, var(--color-neutral-0) 78%, transparent);
+	--chrome-text: var(--color-olive-900);
+	--chrome-text-muted: var(--color-olive-750);
+	--chrome-border: color-mix(in srgb, var(--color-olive-700) 24%, transparent);
+	--chrome-accent: var(--color-olive-700);
+	--chrome-accent-strong: var(--color-olive-800);
+	--chrome-shadow: 0 14px 40px color-mix(in srgb, var(--color-olive-850) 28%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-bg: var(--color-slate-900);
+		--color-surface: var(--color-neutral-950);
+		--color-surface-muted: var(--color-neutral-900);
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: var(--color-indigo-300);
+		--color-accent: var(--color-neutral-200);
+		--color-accent-strong: var(--color-slate-400);
+		--color-border: var(--color-slate-700);
+		--color-shadow: color-mix(in srgb, var(--color-slate-900) 60%, transparent);
+		--a11y-focus-color: var(--color-sky-400);
+
+		--chrome-bg: color-mix(in srgb, var(--color-slate-900) 82%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-neutral-950) 82%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-slate-300);
+		--chrome-border: color-mix(in srgb, var(--color-slate-400) 35%, transparent);
+		--chrome-accent: var(--color-neutral-200);
+		--chrome-accent-strong: var(--color-slate-300);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-slate-950) 60%, transparent);
+		--chrome-logo-text: var(--color-neutral-0);
+		--chrome-mobile-bg: var(--color-bg);
+	}
+
+	[data-theme='home'] {
+		--color-bg: var(--color-content-bg);
+		--color-surface: color-mix(in srgb, var(--color-neutral-0) 6%, transparent);
+		--color-surface-muted: color-mix(in srgb, var(--color-neutral-0) 9%, transparent);
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: var(--color-neutral-200);
+		--color-accent-strong: var(--color-slate-300);
+		--color-border: color-mix(in srgb, var(--color-slate-200) 22%, transparent);
+
+		--chrome-bg: color-mix(in srgb, var(--color-gray-900) 80%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-slate-800) 72%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-cloud-170);
+		--chrome-border: color-mix(in srgb, var(--color-slate-200) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-cloud-150);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-slate-950) 65%, transparent);
+		--home-about-bg: var(--color-mauve-700);
+		--home-studio-bg: var(--color-slate-750);
+		--home-career-bg: var(--color-warm-700);
+		--home-blog-bg: var(--color-steel-860);
+		--home-news-bg: var(--color-olive-910);
+
+		--home-about-label: color-mix(in srgb, var(--color-neutral-100) 86%, transparent);
+		--home-studio-label: color-mix(in srgb, var(--color-neutral-100) 88%, transparent);
+		--home-career-label: color-mix(in srgb, var(--color-neutral-100) 86%, transparent);
+		--home-blog-label: color-mix(in srgb, var(--color-neutral-100) 92%, transparent);
+		--home-news-label: color-mix(in srgb, var(--color-neutral-100) 86%, transparent);
+	}
+
+	[data-theme='about'] {
+		--color-bg: var(--color-mauve-700);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
+
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-violet-300);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-violet-200);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-violet-950) 62%, transparent);
+	}
+
+	[data-theme='studio'] {
+		--color-bg: var(--color-slate-750);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
+
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-cloud-125);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-cloud-100);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-slate-925) 62%, transparent);
+	}
+
+	[data-theme='career'] {
+		--color-bg: var(--color-warm-700);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
+
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 70%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-warm-125);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-warm-150);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-warm-950) 62%, transparent);
+	}
+
+	[data-theme='blog'] {
+		--color-bg: var(--color-steel-860);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
+
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 74%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-slate-200);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-slate-200);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-steel-950) 62%, transparent);
+	}
+
+	[data-theme='news'] {
+		--color-bg: var(--color-olive-910);
+		--color-surface: color-mix(in srgb, var(--color-bg) 92%, var(--color-neutral-0));
+		--color-surface-muted: color-mix(in srgb, var(--color-bg) 86%, var(--color-neutral-0));
+		--color-text: var(--color-neutral-100);
+		--color-text-muted: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);
+		--color-accent: color-mix(in srgb, var(--color-bg) 20%, var(--color-neutral-100));
+		--color-accent-strong: color-mix(in srgb, var(--color-bg) 10%, var(--color-neutral-100));
+		--color-border: color-mix(in srgb, var(--color-neutral-100) 18%, transparent);
+
+		--chrome-bg: color-mix(in srgb, var(--color-bg) 78%, transparent);
+		--chrome-surface: color-mix(in srgb, var(--color-bg) 72%, transparent);
+		--chrome-text: var(--color-neutral-100);
+		--chrome-text-muted: var(--color-olive-200);
+		--chrome-border: color-mix(in srgb, var(--color-neutral-100) 28%, transparent);
+		--chrome-accent: var(--color-neutral-100);
+		--chrome-accent-strong: var(--color-olive-200);
+		--chrome-shadow: 0 18px 48px color-mix(in srgb, var(--color-olive-950) 62%, transparent);
+	}
+}
+
+/* Neutral paper/ink surface override for selected routes */
+[data-surface='content'] {
+	--color-bg: var(--color-content-bg);
+	--color-text: var(--color-content-text);
+	--color-text-muted: var(--color-content-secondary);
+	--color-border: var(--color-content-border);
+	--color-accent: var(--color-content-heading);
+	--color-accent-strong: var(--color-content-link);
+}

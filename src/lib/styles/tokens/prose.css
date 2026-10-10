@@ -1,0 +1,84 @@
+/* Prose tokens: colors, type sizes, spacing and layout for long-form content. */
+
+:root {
+	/* Content colors - Light mode */
+	--color-content-text: var(--color-neutral-950);
+	--color-content-bg: var(--color-neutral-200);
+	--color-content-link: var(--color-teal-750);
+	--color-content-link-hover: var(--color-teal-900);
+	--color-content-accent: var(--color-neutral-700);
+	--color-content-secondary: var(--color-neutral-500);
+	--color-content-heading: var(--color-neutral-950);
+	--color-content-callout-bg: var(--color-neutral-300);
+	--color-content-quote-bg: var(--color-neutral-100);
+	--color-content-code-bg: var(--color-neutral-300);
+	--color-content-inline-code-bg: var(--color-neutral-200);
+	--color-content-divider: var(--color-neutral-500);
+	--color-content-mention: var(--color-teal-700);
+	--color-content-equation: var(--color-neutral-600);
+	--color-content-border: var(--color-gray-450);
+
+	/* Content typography */
+	--content-font-size-heading-lg: 3.75rem;
+	--content-font-size-heading-md: 2.25rem;
+	--content-font-size-heading-sm: 1.5rem;
+	--content-font-size-body-lg: 1.5rem;
+	--content-font-size-body: 1.25rem;
+	--content-font-size-body-sm: 1.125rem;
+	--content-font-size-code: 1.125rem;
+
+	/* Content spacing */
+	--content-space-xl: var(--space-8);
+	--content-space-lg: calc(var(--space-6) + var(--space-2));
+	--content-space-md: var(--space-5);
+	--content-space-sm: var(--space-4);
+	--content-space-xs: var(--space-2);
+
+	/* Content layout */
+	--content-column: 900px; /* Reading column shared by blog posts and the blog index */
+	--content-gutter: var(--content-space-sm); /* Side padding around it; grows below */
+	--content-measure: 60ch;
+	--content-measure-subtitle: 45ch;
+	--content-measure-blockquote: 40ch;
+	--content-radius: calc(var(--radius-1) + 2px);
+	--content-radius-sm: var(--radius-1);
+}
+
+@media (min-width: 640px) {
+	:root {
+		--content-gutter: var(--content-space-md);
+	}
+}
+
+@media (min-width: 768px) {
+	:root {
+		--content-gutter: var(--content-space-xl);
+	}
+}
+
+@media (min-width: 1536px) {
+	:root {
+		--content-gutter: var(--content-space-lg);
+	}
+}
+
+/* Content colors - Dark mode */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-content-text: var(--color-neutral-200);
+		--color-content-bg: var(--color-gray-900);
+		--color-content-link: var(--color-cyan-300);
+		--color-content-link-hover: var(--color-cyan-200);
+		--color-content-accent: var(--color-neutral-300);
+		--color-content-secondary: var(--color-neutral-300);
+		--color-content-heading: var(--color-neutral-100);
+		--color-content-callout-bg: var(--color-neutral-900);
+		--color-content-quote-bg: var(--color-neutral-900);
+		--color-content-code-bg: var(--color-gray-850);
+		--color-content-inline-code-bg: var(--color-neutral-900);
+		--color-content-divider: var(--color-neutral-600);
+		--color-content-mention: var(--color-emerald-400);
+		--color-content-equation: var(--color-neutral-300);
+		--color-content-border: var(--color-gray-550);
+	}
+}
