@@ -19,25 +19,27 @@
 			<h2 class="policy-title">Sarah Game Videos</h2>
 			<p>
 				Sarah Game Videos is a small tool I made for myself. When I finish recording a game session,
-				it uploads the recording to my own YouTube channel as a private video, so I can share it with
-				a friend.
+				it uploads the recording to my own YouTube channel as a private video, so I can share it
+				with a friend.
 			</p>
 			<ul>
 				<li>Only I use it, on my own computer. It isn't offered to anyone else.</li>
 				<li>
-					It asks Google for two permissions: to upload videos to my channel, and to see my channel's
-					videos. It uses them only to upload my recordings and check that they arrived.
+					It asks Google for two permissions: to upload videos to my channel, and to see my
+					channel's videos. It uses them only to upload my recordings and check that they arrived.
 				</li>
 				<li>
-					Its Google sign-in stays on my computer. It doesn't collect, sell or share anything, and it
-					sends nothing anywhere but YouTube.
+					Its Google sign-in stays on my computer. It doesn't collect, sell or share anything, and
+					it sends nothing anywhere but YouTube.
 				</li>
 				<li>
 					To remove its access, go to
 					<a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
 				</li>
 			</ul>
-			<p>Questions? Reach out on any of the socials on my <a href="/about#connect">about page</a>.</p>
+			<p>
+				Questions? Reach out on any of the socials on my <a href="/about#connect">about page</a>.
+			</p>
 		</section>
 	</div>
 </main>
