@@ -119,6 +119,11 @@
 	line-height: 1.5;
 }
 
+.prose .session-interlude {
+	position: relative;
+	margin: 2em 0;
+}
+
 .prose .session-interlude-video {
 	display: block;
 	margin: 2em 0;
@@ -126,6 +131,45 @@
 	width: 100%;
 	height: auto;
 	object-fit: contain;
+}
+
+.prose .session-interlude > .session-interlude-video {
+	margin: 0;
+}
+
+/* An interlude video's play/pause button, in its corner; it matches the audio player's toggle. */
+.prose .session-interlude-toggle {
+	display: flex;
+	position: absolute;
+	right: var(--space-4);
+	bottom: var(--space-4);
+	justify-content: center;
+	align-items: center;
+	backdrop-filter: blur(4px);
+	transition: background var(--duration-base) var(--ease-standard);
+	cursor: pointer;
+	border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+	border-radius: var(--radius-pill);
+	background: color-mix(in srgb, var(--color-neutral-1000) 60%, transparent);
+	padding: 0;
+	width: 2.75rem;
+	height: 2.75rem;
+	color: var(--color-neutral-0);
+}
+
+.prose .session-interlude-toggle[hidden] {
+	display: none;
+}
+
+.prose .session-interlude-toggle:hover {
+	background: color-mix(in srgb, var(--color-neutral-1000) 80%, transparent);
+}
+
+/* A light ring on a dark one, so focus shows over light and dark frames alike */
+.prose .session-interlude-toggle:focus-visible {
+	outline: 2px solid var(--color-neutral-0);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 6px var(--color-neutral-1000);
 }
 
 @media (min-width: 1024px) {
