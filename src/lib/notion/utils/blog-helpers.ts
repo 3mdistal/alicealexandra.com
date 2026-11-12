@@ -2,23 +2,6 @@
  * Utility functions for blog content processing
  */
 
-import type { TOCEntry } from '../types/notion-types';
-
-/**
- * Replaces custom superscript and subscript markers in HTML content
- * @param context - The HTML element containing the content to process
- */
-export function subAndSuper(context: HTMLElement): void {
-	const content = Array.from(context.querySelectorAll('p, h1, h2, h3, li'));
-	const superscript = /\{super:([^}]*)\}/g;
-	const subscript = /\{sub:([^}]*)\}/g;
-	content.forEach((e) => {
-		e.innerHTML = e.innerHTML
-			.replace(superscript, '<sup>$1</sup>')
-			.replace(subscript, '<sub>$1</sub>');
-	});
-}
-
 /**
  * Groups list items into ordered or unordered lists based on their sibling relationships
  * @param context - The HTML element containing the list items to process
@@ -52,29 +35,6 @@ export function wrapLists(context: HTMLElement): void {
 			newParent.appendChild(i);
 		}
 	});
-}
-
-/**
- * Creates a table of contents based on h2 headers in the document
- * @returns An array of TOC entries
- */
-export function createTOC(): TOCEntry[] {
-	const headerTwos = Array.from(document.querySelectorAll('h2'));
-	const tocEntries: TOCEntry[] = [];
-
-	for (let i = 1; i <= headerTwos.length; i++) {
-		const headerTwo: HTMLHeadingElement = headerTwos[i - 1]!;
-		const id = i.toString();
-		headerTwo.id = id;
-
-		tocEntries.push({
-			id,
-			text: headerTwo.innerText,
-			level: 2
-		});
-	}
-
-	return tocEntries;
 }
 
 /**

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '$lib/styles/prose.css';
 	import { afterUpdate, onMount, tick } from 'svelte';
-	import { createTOC, subAndSuper } from '$lib/notion/utils/blog-helpers';
 	import { enhanceInterludeVideos } from '$lib/blog/interlude-videos';
 	import { renderBlogMarkdown } from '$lib/blog/render-markdown';
 
@@ -22,8 +21,6 @@
 			return;
 		}
 
-		subAndSuper(context);
-		createTOC();
 		cleanupInlineVideos = enhanceInterludeVideos(context);
 	};
 
