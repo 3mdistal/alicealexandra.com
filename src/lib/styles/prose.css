@@ -178,6 +178,11 @@
 	}
 }
 
+/* A link to a section (#session-3) stops short of its heading, clear of the floating logo. */
+.prose :is(h2, h3, h4) {
+	scroll-margin-top: var(--space-8);
+}
+
 /* Heading 2 */
 .prose h2 {
 	margin-top: 3.5em;

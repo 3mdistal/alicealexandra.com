@@ -33,10 +33,9 @@ export function escapeXml(value: string): string {
 
 /**
  * Replaces the site's custom `{super:x}` / `{sub:x}` markers with real
- * `<sup>`/`<sub>` tags. This is the feed-safe (pure string) equivalent of
- * `subAndSuper` in `$lib/notion/utils/blog-helpers.ts`, which mutates the
- * DOM in the browser. Feed readers never run that browser code, so raw
- * markers would otherwise leak into `content:encoded`.
+ * `<sup>`/`<sub>` tags. `renderBlogMarkdown` already does this for posts;
+ * this pass keeps raw markers out of `content:encoded` for any HTML that
+ * reaches the feed another way.
  */
 export function applySubAndSuperMarkers(html: string): string {
 	return html

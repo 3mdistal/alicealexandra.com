@@ -1,4 +1,4 @@
-import { Marked } from 'marked';
+import { Marked, type TokenizerAndRendererExtension } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js/lib/core';
 import typescript from 'highlight.js/lib/languages/typescript';
@@ -19,6 +19,68 @@ const TOGGLE_ICONS = {
 export function interludeToggleIcon(playing: boolean): string {
 	const icon = playing ? TOGGLE_ICONS.pause : TOGGLE_ICONS.play;
 	return `<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">${icon}</svg>`;
+}
+
+const SCRIPT_MARKER = /^\{(super|sub):([^}]*)\}/;
+
+/** Posts write superscript and subscript as `{super:TM}` and `{sub:2}`. */
+const scriptMarkers: TokenizerAndRendererExtension = {
+	name: 'scriptMarker',
+	level: 'inline',
+	start(src) {
+		return src.match(/\{(?:super|sub):/)?.index;
+	},
+	tokenizer(src) {
+		const match = SCRIPT_MARKER.exec(src);
+
+		if (!match) {
+			return undefined;
+		}
+
+		return {
+			type: 'scriptMarker',
+			raw: match[0],
+			tag: match[1] === 'super' ? 'sup' : 'sub',
+			tokens: this.lexer.inlineTokens(match[2] ?? '')
+		};
+	},
+	renderer(token) {
+		const tag = token['tag'] === 'sup' ? 'sup' : 'sub';
+		return `<${tag}>${this.parser.parseInline(token.tokens ?? [])}</${tag}>`;
+	}
+};
+
+const ESCAPED: Record<string, string> = {
+	'&amp;': '&',
+	'&lt;': '<',
+	'&gt;': '>',
+	'&quot;': '"',
+	'&#39;': "'"
+};
+
+/** A heading's ID from its rendered HTML: its words, lowercased and hyphenated ("Session 1" → "session-1"). */
+export function headingSlug(html: string): string {
+	return html
+		.replace(/<[^>]*>/g, '')
+		.replace(/&(?:amp|lt|gt|quot|#39);/g, (entity) => ESCAPED[entity] ?? entity)
+		.normalize('NFKD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+		.replace(/['’]/g, '')
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '');
+}
+
+/** `base`, or `base-2`, `base-3`… when an earlier heading in the post already took it. */
+function claimId(base: string, taken: Set<string>): string {
+	let id = base;
+
+	for (let n = 2; taken.has(id); n++) {
+		id = `${base}-${n}`;
+	}
+
+	taken.add(id);
+	return id;
 }
 
 export interface BlogMarkdownOptions {
@@ -53,6 +115,20 @@ function createRenderer({ interludeVideoControls = false }: BlogMarkdownOptions)
 			}
 		})
 	);
+
+	// A renderer serves one post, so its headings share one set of IDs.
+	const headingIds = new Set<string>();
+
+	marked.use({
+		extensions: [scriptMarkers],
+		renderer: {
+			heading({ tokens, depth }) {
+				const html = this.parser.parseInline(tokens);
+				const id = claimId(headingSlug(html) || 'section', headingIds);
+				return `<h${depth} id="${id}">${html}</h${depth}>\n`;
+			}
+		}
+	});
 
 	if (interludeVideoControls) {
 		marked.use({
