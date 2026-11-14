@@ -2,6 +2,7 @@
 	import '$lib/styles/prose.css';
 	import { afterUpdate, onMount, tick } from 'svelte';
 	import { createTOC, subAndSuper } from '$lib/notion/utils/blog-helpers';
+	import { enhanceInterludeVideos } from '$lib/blog/interlude-videos';
 	import { renderBlogMarkdown } from '$lib/blog/render-markdown';
 
 	export let markdown = '';
@@ -11,51 +12,7 @@
 	let context: HTMLElement;
 	let cleanupInlineVideos = () => {};
 
-	$: htmlContent = renderBlogMarkdown(markdown);
-
-	const setupInlineVideos = () => {
-		if (!context || typeof IntersectionObserver === 'undefined') {
-			return () => {};
-		}
-
-		const videos = Array.from(
-			context.querySelectorAll<HTMLVideoElement>('.session-interlude-video')
-		);
-
-		if (!videos.length) {
-			return () => {};
-		}
-
-		videos.forEach((video) => {
-			video.controls = false;
-			video.muted = true;
-			video.loop = true;
-			video.playsInline = true;
-		});
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					const video = entry.target as HTMLVideoElement;
-
-					if (entry.isIntersecting) {
-						void video.play().catch(() => {});
-						return;
-					}
-
-					video.pause();
-				});
-			},
-			{ threshold: 0.5 }
-		);
-
-		videos.forEach((video) => observer.observe(video));
-
-		return () => {
-			observer.disconnect();
-			videos.forEach((video) => video.pause());
-		};
-	};
+	$: htmlContent = renderBlogMarkdown(markdown, { interludeVideoControls: true });
 
 	const refreshEnhancements = async () => {
 		await tick();
@@ -67,7 +24,7 @@
 
 		subAndSuper(context);
 		createTOC();
-		cleanupInlineVideos = setupInlineVideos();
+		cleanupInlineVideos = enhanceInterludeVideos(context);
 	};
 
 	onMount(() => {

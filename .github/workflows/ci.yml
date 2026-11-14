@@ -74,6 +74,35 @@ jobs:
           Hello from CI.
           EOF
 
+          # For tests/e2e/interlude-videos.spec.ts, which serves the video itself. Left out of
+          # posts.json, so the blog index and feeds don't change.
+          {
+            cat <<'EOF'
+          ---
+          title: "CI Interlude Video"
+          slug: "ci-interlude-video"
+          subtitle: "Placeholder"
+          summary: "Placeholder"
+          ogDescription: "Placeholder"
+          category: "CI"
+          publicationDate: "2026-01-01"
+          formattedPublicationDate: "Jan 1, 2026"
+          coverImage: "/images/placeholder.jpg"
+          coverImageCaption: "Placeholder"
+          notionId: "ci-interlude-video"
+          ---
+          EOF
+            for i in $(seq 12); do printf 'Before the video, paragraph %s.\n\n' "$i"; done
+            cat <<'EOF'
+          <video class="session-interlude-video" loop muted playsinline preload="metadata">
+            <source src="/e2e-fixtures/interlude.webm" type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+
+          EOF
+            for i in $(seq 12); do printf 'After the video, paragraph %s.\n\n' "$i"; done
+          } > content/blog/ci-interlude-video.md
+
           cat > content/poems/sections.json <<'EOF'
           [
             {
