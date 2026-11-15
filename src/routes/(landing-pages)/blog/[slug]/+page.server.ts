@@ -1,4 +1,5 @@
 import { loadPostsMeta, loadPostBySlug } from '$lib/content/blog';
+import { measurePostImages } from '$lib/server/blog-image-sizes';
 import { error } from '@sveltejs/kit';
 
 // Prerender all blog posts at build time
@@ -10,12 +11,18 @@ export async function entries() {
 	return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function load({ params }: { params: { slug: string } }) {
+export async function load({
+	params,
+	fetch
+}: {
+	params: { slug: string };
+	fetch: typeof globalThis.fetch;
+}) {
 	const post = await loadPostBySlug(params.slug);
 
 	if (!post) {
 		throw error(404, 'Blog post not found');
 	}
 
-	return { post };
+	return { post, imageSizes: await measurePostImages(post.content, fetch) };
 }

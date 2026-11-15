@@ -1,6 +1,7 @@
 <script lang="ts">
 	import BlogHeader from '$lib/components/blog-header.svelte';
 	import BlogMarkdownContent from '$lib/components/blog-markdown-content.svelte';
+	import type { ImageSize } from '$lib/blog/image-size';
 	import WritingEditorShell from '$lib/components/writing-editor-shell.svelte';
 	import type { BlogPost } from '$lib/content/blog';
 	import type { BlogFrontmatter } from '$lib/content/blog-source';
@@ -34,7 +35,7 @@
 		readTime: string;
 	};
 
-	export let data: { post: BlogPost };
+	export let data: { post: BlogPost; imageSizes: Record<string, ImageSize> };
 
 	let post: BlogPost = data.post;
 	let displayedPost: BlogPost = post;
@@ -512,6 +513,7 @@
 						<BlogMarkdownContent
 							markdown={editorDraft.content}
 							contentClass="prose editor-preview-content"
+							imageSizes={data.imageSizes}
 						/>
 					</div>
 				</section>
@@ -519,7 +521,7 @@
 		{/if}
 
 		{#if !isEditMode}
-			<BlogMarkdownContent markdown={post.content} />
+			<BlogMarkdownContent markdown={post.content} imageSizes={data.imageSizes} />
 		{/if}
 
 		<p class="back-link">
