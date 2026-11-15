@@ -2,13 +2,13 @@ import { describe, expect, it, vi } from 'vitest';
 import { measurePostImages } from './blog-image-sizes';
 
 /** The first 24 bytes of a PNG of the given size. */
-function pngHead(width: number, height: number): Uint8Array {
+function pngHead(width: number, height: number): ArrayBuffer {
 	const head = new Uint8Array(24);
 	const view = new DataView(head.buffer);
 	head.set([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 13, 0x49, 0x48, 0x44, 0x52]);
 	view.setUint32(16, width);
 	view.setUint32(20, height);
-	return head;
+	return head.buffer;
 }
 
 // Each test uses its own URLs, since sizes stay cached for the life of the server.
