@@ -2,16 +2,18 @@
 	import '$lib/styles/prose.css';
 	import { afterUpdate, onMount, tick } from 'svelte';
 	import { enhanceInterludeVideos } from '$lib/blog/interlude-videos';
+	import type { ImageSize } from '$lib/blog/image-size';
 	import { renderBlogMarkdown } from '$lib/blog/render-markdown';
 
 	export let markdown = '';
 	export let contentClass = 'prose';
 	export let emptyText = 'No content available.';
+	export let imageSizes: Record<string, ImageSize> = {};
 
 	let context: HTMLElement;
 	let cleanupInlineVideos = () => {};
 
-	$: htmlContent = renderBlogMarkdown(markdown, { interludeVideoControls: true });
+	$: htmlContent = renderBlogMarkdown(markdown, { interludeVideoControls: true, imageSizes });
 
 	const refreshEnhancements = async () => {
 		await tick();

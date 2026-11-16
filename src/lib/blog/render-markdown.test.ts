@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { headingSlug, renderBlogMarkdown } from './render-markdown';
+import { headingSlug, postImageUrls, renderBlogMarkdown } from './render-markdown';
 
 const interlude = [
 	'Before the video.',
@@ -92,5 +92,42 @@ describe('superscript and subscript markers', () => {
 
 	it('leaves code alone', () => {
 		expect(renderBlogMarkdown('`{super:TM}`')).toContain('<code>{super:TM}</code>');
+	});
+});
+
+describe('images', () => {
+	const yarrow = 'https://example.com/blog/images/yarrow.webp';
+
+	it('gives an image its measured size and loads it lazily', () => {
+		const html = renderBlogMarkdown(`![A yarrow plant.](${yarrow})`, {
+			imageSizes: { [yarrow]: { width: 1200, height: 1154 } }
+		});
+
+		expect(html).toBe(
+			`<p><img src="${yarrow}" alt="A yarrow plant." width="1200" height="1154" loading="lazy" decoding="async"></p>\n`
+		);
+	});
+
+	it('still loads an unmeasured image lazily, keeping its title', () => {
+		expect(renderBlogMarkdown(`![Boo, "sleepy"](${yarrow} "Bored")`)).toBe(
+			`<p><img src="${yarrow}" alt="Boo, &quot;sleepy&quot;" title="Bored" loading="lazy" decoding="async"></p>\n`
+		);
+	});
+});
+
+describe('postImageUrls', () => {
+	it('lists each remote image once, skipping local paths and code', () => {
+		const markdown = [
+			'![One](https://example.com/one.webp)',
+			'',
+			'- ![Two](https://example.com/two.webp) and ![One again](https://example.com/one.webp)',
+			'',
+			'![Local](/images/local.webp) `![Code](https://example.com/code.webp)`'
+		].join('\n');
+
+		expect(postImageUrls(markdown)).toEqual([
+			'https://example.com/one.webp',
+			'https://example.com/two.webp'
+		]);
 	});
 });

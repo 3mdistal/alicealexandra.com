@@ -1,9 +1,10 @@
-import { Marked, type TokenizerAndRendererExtension } from 'marked';
+import { Marked, Renderer, type TokenizerAndRendererExtension } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js/lib/core';
 import typescript from 'highlight.js/lib/languages/typescript';
 import javascript from 'highlight.js/lib/languages/javascript';
 import plaintext from 'highlight.js/lib/languages/plaintext';
+import type { ImageSize } from './image-size';
 
 let languagesRegistered = false;
 
@@ -89,6 +90,11 @@ export interface BlogMarkdownOptions {
 	 * up (see interlude-videos.ts). Feeds leave it off, since they can't run that script.
 	 */
 	interludeVideoControls?: boolean;
+	/**
+	 * Each image's size by its URL, as the post page measures them (see blog-image-sizes.ts), so the
+	 * page holds an image's space before it loads.
+	 */
+	imageSizes?: Record<string, ImageSize>;
 }
 
 function ensureHighlightLanguages() {
@@ -102,7 +108,7 @@ function ensureHighlightLanguages() {
 	languagesRegistered = true;
 }
 
-function createRenderer({ interludeVideoControls = false }: BlogMarkdownOptions) {
+function createRenderer({ interludeVideoControls = false, imageSizes = {} }: BlogMarkdownOptions) {
 	ensureHighlightLanguages();
 
 	const marked = new Marked(
@@ -126,6 +132,18 @@ function createRenderer({ interludeVideoControls = false }: BlogMarkdownOptions)
 				const html = this.parser.parseInline(tokens);
 				const id = claimId(headingSlug(html) || 'section', headingIds);
 				return `<h${depth} id="${id}">${html}</h${depth}>\n`;
+			},
+			// Marked's own <img>, sized when its size is known, and fetched only as the reader nears it.
+			image(token) {
+				const html = Renderer.prototype.image.call(this, token);
+
+				if (!html.startsWith('<img ')) {
+					return html;
+				}
+
+				const size = imageSizes[token.href];
+				const sizeAttributes = size ? ` width="${size.width}" height="${size.height}"` : '';
+				return `${html.slice(0, -1)}${sizeAttributes} loading="lazy" decoding="async">`;
 			}
 		}
 	});
@@ -150,4 +168,18 @@ function createRenderer({ interludeVideoControls = false }: BlogMarkdownOptions)
 
 export function renderBlogMarkdown(markdown: string, options: BlogMarkdownOptions = {}): string {
 	return createRenderer(options).parse(markdown) as string;
+}
+
+/** The remote images a post's Markdown shows, each once, in order. */
+export function postImageUrls(markdown: string): string[] {
+	const marked = createRenderer({});
+	const urls = new Set<string>();
+
+	marked.walkTokens(marked.lexer(markdown), (token) => {
+		if (token.type === 'image' && /^https?:\/\//.test(token.href)) {
+			urls.add(token.href);
+		}
+	});
+
+	return [...urls];
 }
