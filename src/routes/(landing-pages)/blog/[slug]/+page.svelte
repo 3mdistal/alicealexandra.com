@@ -2,6 +2,7 @@
 	import BlogHeader from '$lib/components/blog-header.svelte';
 	import BlogMarkdownContent from '$lib/components/blog-markdown-content.svelte';
 	import type { ImageSize } from '$lib/blog/image-size';
+	import { shareImageUrl } from '$lib/blog/share-image';
 	import WritingEditorShell from '$lib/components/writing-editor-shell.svelte';
 	import type { BlogPost } from '$lib/content/blog';
 	import type { BlogFrontmatter } from '$lib/content/blog-source';
@@ -365,7 +366,7 @@
 		<meta property="article:published_time" content={displayedPost.publicationDate} />
 	{/if}
 	{#if displayedPost.coverImage}
-		<meta property="og:image" content={displayedPost.coverImage} />
+		<meta property="og:image" content={shareImageUrl(displayedPost.coverImage)} />
 	{/if}
 
 	<meta
@@ -379,7 +380,7 @@
 	<meta name="twitter:title" content={displayedPost.title || 'Blog'} />
 	<meta name="twitter:description" content={displayedPost.ogDescription} />
 	{#if displayedPost.coverImage}
-		<meta name="twitter:image" content={displayedPost.coverImage} />
+		<meta name="twitter:image" content={shareImageUrl(displayedPost.coverImage)} />
 		<meta
 			name="twitter:image:alt"
 			content="Open graph representation of this blog article, {displayedPost.title || 'Blog'}."
