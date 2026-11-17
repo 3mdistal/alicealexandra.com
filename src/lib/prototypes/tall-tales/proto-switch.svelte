@@ -49,4 +49,14 @@
 		background: rgba(255, 255, 255, 0.9);
 		color: #000;
 	}
+
+	/* On phones the bottom edge holds titles, so the switch moves to the top centre. */
+	@media (max-width: 760px) {
+		.proto-switch {
+			top: 20px;
+			bottom: auto;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
 </style>

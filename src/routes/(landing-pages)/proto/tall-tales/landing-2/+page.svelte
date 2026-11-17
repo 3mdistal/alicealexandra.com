@@ -169,7 +169,7 @@
 		.hill {
 			top: 0;
 			flex: none;
-			margin-top: -22vw;
+			margin-top: -4vw;
 			width: 78vw;
 			height: 112vw;
 		}
@@ -180,12 +180,10 @@
 
 		.hill:nth-child(even) {
 			align-self: flex-end;
-			margin-right: -6vw;
 		}
 
 		.hill:nth-child(odd) {
 			align-self: flex-start;
-			margin-left: -6vw;
 		}
 
 		.title {

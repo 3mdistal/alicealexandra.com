@@ -114,10 +114,10 @@
 	</footer>
 </article>
 
-<div class="gauge" aria-hidden="true">
-	<span class="gauge-fill" style="transform: scaleY({progress})"></span>
+<div class="gauge" aria-hidden="true" style="--progress: {progress}">
+	<span class="gauge-fill"></span>
 	{#each ticks as tick}
-		<span class="tick" style="top: {tick * 100}%"></span>
+		<span class="tick" style="--at: {tick * 100}%"></span>
 	{/each}
 </div>
 
@@ -311,6 +311,7 @@
 
 	.gauge-fill {
 		position: absolute;
+		transform: scaleY(var(--progress));
 		transform-origin: top;
 		inset: 0;
 		background: color-mix(in srgb, var(--color-neutral-0) 85%, transparent);
@@ -318,15 +319,29 @@
 
 	.tick {
 		position: absolute;
+		top: var(--at);
 		left: -3px;
 		background: color-mix(in srgb, var(--color-neutral-0) 60%, transparent);
 		width: 7px;
 		height: 1px;
 	}
 
+	/* On phones the column fills the width, so the gauge becomes a hairline along the top. */
 	@media (max-width: 760px) {
 		.gauge {
-			left: 8px;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 2px;
+		}
+
+		.gauge-fill {
+			transform: scaleX(var(--progress));
+			transform-origin: left;
+		}
+
+		.tick {
+			display: none;
 		}
 	}
 
