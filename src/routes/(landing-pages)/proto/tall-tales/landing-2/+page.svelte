@@ -27,11 +27,11 @@
 				href="/studio/tall-tales/{tale.slug}"
 				style="--cover: url('{tale.coverImage}'); --lift: {lifts[i % lifts.length]}; --fill: {fills[
 					i % fills.length
-				]}; z-index: {i + 1};"
+				]}; --order: {i};"
 			>
 				<span class="painting" aria-hidden="true"></span>
 				<svg class="ground" viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
-					<path class="ground-fill" d="M0,120 C140,20 460,20 600,120 L600,240 L0,240 Z" />
+					<path class="ground-fill" d="M0,120 C140,20 460,20 600,120 L600,1600 L0,1600 Z" />
 					<path class="ground-line" d="M0,120 C140,20 460,20 600,120" />
 				</svg>
 				<span class="title">{tale.title}</span>
@@ -72,6 +72,7 @@
 		position: relative;
 		justify-content: center;
 		align-items: flex-end;
+		isolation: isolate;
 		box-sizing: border-box;
 		padding: 14vh 4vw 0;
 		height: 100vh;
@@ -81,8 +82,8 @@
 	.hill {
 		display: block;
 		position: relative;
+		top: var(--lift);
 		flex: 0 1 23vw;
-		transform: translateY(var(--lift));
 		height: 74vh;
 		color: var(--color-indigo-800);
 		text-decoration: none;
@@ -90,6 +91,7 @@
 
 	.painting {
 		position: absolute;
+		z-index: calc(var(--order) * 2 + 1);
 		inset: 0 17% 24% 17%;
 		filter: saturate(0.8);
 		transition:
@@ -106,7 +108,9 @@
 		position: absolute;
 		bottom: -2px;
 		left: -32%;
+		z-index: calc(var(--order) * 2 + 2);
 		width: 164%;
+		max-width: none;
 		height: 46%;
 		overflow: visible;
 	}
@@ -127,7 +131,7 @@
 		right: 0;
 		bottom: 12%;
 		left: 0;
-		z-index: 1;
+		z-index: 100;
 		padding: 0 var(--space-2);
 		font-weight: var(--font-weight-light);
 		font-size: clamp(1.1rem, 1.7vw, 1.75rem);
@@ -163,8 +167,8 @@
 		}
 
 		.hill {
+			top: 0;
 			flex: none;
-			transform: none;
 			margin-top: -22vw;
 			width: 78vw;
 			height: 112vw;

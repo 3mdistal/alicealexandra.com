@@ -184,28 +184,37 @@
 	.dots {
 		display: flex;
 		position: fixed;
-		top: 50%;
 		right: var(--space-5);
+		bottom: var(--space-5);
 		flex-direction: column;
-		gap: 10px;
-		transform: translateY(-50%);
 		z-index: 10;
 	}
 
 	.dots button {
+		display: grid;
+		place-items: center;
+		cursor: pointer;
+		border: none;
+		background: transparent;
+		padding: 0;
+		width: 24px;
+		min-width: 0;
+		height: 24px;
+		min-height: 0;
+	}
+
+	.dots button::before {
 		transition:
 			background 0.3s ease,
 			transform 0.3s ease;
-		cursor: pointer;
 		border: 1px solid color-mix(in srgb, var(--color-neutral-0) 80%, transparent);
 		border-radius: 50%;
-		background: transparent;
-		padding: 0;
 		width: 9px;
 		height: 9px;
+		content: '';
 	}
 
-	.dots button.active {
+	.dots button.active::before {
 		transform: scale(1.25);
 		background: var(--color-neutral-0);
 	}
