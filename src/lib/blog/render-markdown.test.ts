@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { headingSlug, postImageUrls, renderBlogMarkdown } from './render-markdown';
+import { hasCodeBlock, headingSlug, postImageUrls, renderBlogMarkdown } from './render-markdown';
 
 const interlude = [
 	'Before the video.',
@@ -112,6 +112,19 @@ describe('images', () => {
 		expect(renderBlogMarkdown(`![Boo, "sleepy"](${yarrow} "Bored")`)).toBe(
 			`<p><img src="${yarrow}" alt="Boo, &quot;sleepy&quot;" title="Bored" loading="lazy" decoding="async"></p>\n`
 		);
+	});
+});
+
+describe('hasCodeBlock', () => {
+	it('finds fenced and indented code blocks, with or without a language', () => {
+		const blocks = ['```ts\nconst a = 1;\n```', '```\nplain\n```', 'Text.\n\n    indented'];
+
+		for (const markdown of blocks) expect(hasCodeBlock(renderBlogMarkdown(markdown))).toBe(true);
+	});
+
+	it('ignores inline code and plain prose', () => {
+		expect(hasCodeBlock(renderBlogMarkdown('Inline `code` only.'))).toBe(false);
+		expect(hasCodeBlock(renderBlogMarkdown('Just words.'))).toBe(false);
 	});
 });
 
