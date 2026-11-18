@@ -386,17 +386,6 @@
 			content="Open graph representation of this blog article, {displayedPost.title || 'Blog'}."
 		/>
 	{/if}
-
-	<link
-		rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-		media="(prefers-color-scheme: light)"
-	/>
-	<link
-		rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
-		media="(prefers-color-scheme: dark)"
-	/>
 </svelte:head>
 
 <div class="page-wrapper">

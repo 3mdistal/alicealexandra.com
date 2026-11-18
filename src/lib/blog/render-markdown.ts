@@ -170,6 +170,14 @@ export function renderBlogMarkdown(markdown: string, options: BlogMarkdownOption
 	return createRenderer(options).parse(markdown) as string;
 }
 
+/**
+ * Whether rendered post HTML has a code block, the only thing highlight.js's theme styles.
+ * Every block gets the `hljs` class (`emptyLangClass` and `langPrefix` above); inline code doesn't.
+ */
+export function hasCodeBlock(html: string): boolean {
+	return html.includes('<code class="hljs');
+}
+
 /** The remote images a post's Markdown shows, each once, in order. */
 export function postImageUrls(markdown: string): string[] {
 	const marked = createRenderer({});
