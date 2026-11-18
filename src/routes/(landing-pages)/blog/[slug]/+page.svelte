@@ -4,7 +4,7 @@
 	import type { ImageSize } from '$lib/blog/image-size';
 	import { calculateBlogReadTimeFromContent } from '$lib/blog/read-time';
 	import { shareImageUrl } from '$lib/blog/share-image';
-	import { blogPostingJsonLd } from '$lib/blog/structured-data';
+	import { blogPostingScriptTag } from '$lib/blog/structured-data';
 	import WritingEditorShell from '$lib/components/writing-editor-shell.svelte';
 	import type { BlogPost } from '$lib/content/blog';
 	import type { BlogFrontmatter } from '$lib/content/blog-source';
@@ -383,7 +383,7 @@
 		/>
 	{/if}
 
-	{@html `<script type="application/ld+json">${blogPostingJsonLd(displayedPost)}</script>`}
+	{@html blogPostingScriptTag(displayedPost)}
 </svelte:head>
 
 <div class="page-wrapper">

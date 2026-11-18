@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { blogPostingJsonLd } from './structured-data';
+import { blogPostingJsonLd, blogPostingScriptTag } from './structured-data';
 
 const post = {
 	slug: 'a-post',
@@ -43,5 +43,13 @@ describe('blogPostingJsonLd', () => {
 
 		expect(json).not.toContain('</script>');
 		expect(JSON.parse(json).headline).toBe('Why </script> matters');
+	});
+
+	it('wraps the JSON in one JSON-LD script tag', () => {
+		const tag = blogPostingScriptTag({ ...post, title: 'Why </script> matters' });
+
+		expect(tag.startsWith('<script type="application/ld+json">{')).toBe(true);
+		expect(tag.endsWith('}</script>')).toBe(true);
+		expect(tag.split('</script>')).toHaveLength(2);
 	});
 });

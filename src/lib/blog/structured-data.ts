@@ -32,3 +32,11 @@ export function blogPostingJsonLd(post: BlogPostingFields): string {
 	};
 	return JSON.stringify(data).replace(/</g, '\\u003c');
 }
+
+/**
+ * The BlogPosting in its script tag, for `{@html}` in a page's `<svelte:head>`. It's built here
+ * because ESLint's Svelte parser reads a `<script` written inside a template as a real tag.
+ */
+export function blogPostingScriptTag(post: BlogPostingFields): string {
+	return `<script type="application/ld+json">${blogPostingJsonLd(post)}</script>`;
+}
