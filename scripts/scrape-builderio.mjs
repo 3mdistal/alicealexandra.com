@@ -3,14 +3,16 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
 	extractRssItems,
+	extractSitemapIndexUrls,
 	extractSitemapUrls,
 	extractBlogMetadata,
+	keepsPreviousSnapshot,
 	normalizeCanonicalUrl
 } from './scrape-builderio/core.mjs';
 
 const DEFAULT_OUTPUT = 'content/career/builder.json';
 const AUTHOR_ALLOWLIST = ['Alice Moore', 'Alice Alexandra Moore'];
-const RSS_URL = 'https://www.builder.io/blog/rss.xml';
+const RSS_URL = 'https://www.builder.io/blog/feed.xml';
 const SITEMAP_URL = 'https://www.builder.io/sitemap.xml';
 
 const args = parseArgs(process.argv.slice(2));
@@ -81,6 +83,7 @@ try {
 	});
 
 	const previousSnapshot = await readPreviousSnapshot(outputPath);
+	const keepPrevious = keepsPreviousSnapshot(previousSnapshot?.data, data);
 	const generatedAt = new Date().toISOString();
 	const dataUpdatedAt = hasSameData(previousSnapshot?.data, data)
 		? (previousSnapshot?.dataUpdatedAt ?? generatedAt)
@@ -100,7 +103,7 @@ try {
 		data
 	};
 
-	if (!args.dryRun) {
+	if (!args.dryRun && !keepPrevious) {
 		await fs.mkdir(path.dirname(outputPath), { recursive: true });
 		await fs.writeFile(outputPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
 	}
@@ -116,6 +119,11 @@ try {
 				.join(', ')}`
 		);
 	}
+	if (keepPrevious) {
+		console.warn(
+			`Builder scraper: Found no posts, so kept the ${previousSnapshot.data.length} already in ${args.out}.`
+		);
+	}
 	if (args.dryRun) {
 		console.log('Builder scraper: Dry run enabled; no file written.');
 	}
@@ -126,21 +134,36 @@ try {
 	process.exit(1);
 }
 
+// The sitemap lists every blog post; the RSS feed only the latest 30, so it is the fallback.
 async function getCandidateUrls() {
 	try {
-		const rssXml = await fetchText(RSS_URL);
-		const items = extractRssItems(rssXml);
-		if (items.length > 0) {
-			return [...new Set(items.map((item) => item.url))];
+		const urls = await getSitemapUrls(SITEMAP_URL);
+		if (urls.length > 0) {
+			return urls;
 		}
 	} catch (error) {
 		console.log(
-			`Builder scraper: RSS fetch failed (${RSS_URL}) - ${error instanceof Error ? error.message : error}`
+			`Builder scraper: Sitemap fetch failed (${SITEMAP_URL}) - ${error instanceof Error ? error.message : error}`
 		);
 	}
 
-	const sitemapXml = await fetchText(SITEMAP_URL);
-	return extractSitemapUrls(sitemapXml);
+	const rssXml = await fetchText(RSS_URL);
+	return [...new Set(extractRssItems(rssXml).map((item) => item.url))];
+}
+
+// builder.io's sitemap is an index of other sitemaps, one of them for the blog.
+async function getSitemapUrls(url) {
+	const xml = await fetchText(url);
+	const sitemaps = extractSitemapIndexUrls(xml);
+	if (sitemaps.length === 0) {
+		return extractSitemapUrls(xml);
+	}
+
+	const urls = [];
+	for (const sitemap of sitemaps) {
+		urls.push(...extractSitemapUrls(await fetchText(sitemap)));
+	}
+	return [...new Set(urls)];
 }
 
 function parseArgs(cliArgs) {

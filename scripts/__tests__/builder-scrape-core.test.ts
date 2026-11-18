@@ -5,7 +5,9 @@ import fs from 'node:fs/promises';
 import {
 	extractBlogMetadata,
 	extractRssItems,
+	extractSitemapIndexUrls,
 	extractSitemapUrls,
+	keepsPreviousSnapshot,
 	normalizeCanonicalUrl
 } from '../scrape-builderio/core.mjs';
 
@@ -21,6 +23,28 @@ describe('builder scrape core', () => {
 			'https://www.builder.io/blog/with-trailing-space',
 			'https://www.builder.io/blog/valid-slug'
 		]);
+	});
+
+	it('lists the sitemaps in a sitemap index, as builder.io serves', () => {
+		const index = [
+			'<?xml version="1.0" encoding="UTF-8"?>',
+			'<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+			'<sitemap><loc>https://www.builder.io/sitemap.pages.xml</loc></sitemap>',
+			'<sitemap><loc> https://www.builder.io/sitemap.blog.xml </loc></sitemap>',
+			'</sitemapindex>'
+		].join('');
+
+		expect(extractSitemapIndexUrls(index)).toEqual([
+			'https://www.builder.io/sitemap.pages.xml',
+			'https://www.builder.io/sitemap.blog.xml'
+		]);
+		expect(extractSitemapUrls(index)).toEqual([]);
+	});
+
+	it('finds no sitemaps in a plain sitemap', async () => {
+		const xmlPath = path.join(__dirname, '..', '__fixtures__', 'builder-sitemap.xml');
+
+		expect(extractSitemapIndexUrls(await fs.readFile(xmlPath, 'utf8'))).toEqual([]);
 	});
 
 	it('extracts RSS items', async () => {
@@ -51,5 +75,14 @@ describe('builder scrape core', () => {
 			'https://www.builder.io/blog/valid-slug'
 		);
 		expect(normalizeCanonicalUrl('https://www.builder.io/blog')).toBeNull();
+	});
+
+	it('keeps the previous snapshot only when a scrape finds no posts', () => {
+		const post = { id: 'a', title: 'A', description: 'A.', url: 'https://www.builder.io/blog/a' };
+
+		expect(keepsPreviousSnapshot([post], [])).toBe(true);
+		expect(keepsPreviousSnapshot([post, post], [post])).toBe(false);
+		expect(keepsPreviousSnapshot([], [])).toBe(false);
+		expect(keepsPreviousSnapshot(undefined, [])).toBe(false);
 	});
 });
