@@ -23,6 +23,29 @@ export function extractSitemapUrls(xml) {
 		.filter(isBuilderBlogUrl);
 }
 
+/** The sitemaps a sitemap index lists, or none when the XML is a plain sitemap. */
+export function extractSitemapIndexUrls(xml) {
+	if (!xml) return [];
+	let parsed;
+	try {
+		parsed = xmlParser.parse(xml);
+	} catch {
+		return [];
+	}
+
+	return normalizeArray(parsed?.sitemapindex?.sitemap)
+		.map((entry) => String(entry?.loc ?? '').trim())
+		.filter((loc) => loc);
+}
+
+/**
+ * Whether a scrape that found `nextData` should leave the previous snapshot in place. Finding no
+ * posts at all means builder.io changed or couldn't be reached, not that every post is gone.
+ */
+export function keepsPreviousSnapshot(previousData, nextData) {
+	return nextData.length === 0 && Array.isArray(previousData) && previousData.length > 0;
+}
+
 export function extractRssItems(xml) {
 	if (!xml) return [];
 	let parsed;
