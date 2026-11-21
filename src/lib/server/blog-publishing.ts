@@ -1,6 +1,6 @@
+import { calculateBlogReadTimeFromContent } from '$lib/blog/read-time';
 import type { BlogPostMeta } from '$lib/content/blog';
 import {
-	calculateBlogReadTimeFromContent,
 	createBlogSourceChecksum,
 	type BlogFrontmatter,
 	isValidBlogSlug,

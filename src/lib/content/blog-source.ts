@@ -4,7 +4,6 @@ import { type EditableMarkdownDocument, isValidContentSlug } from '$lib/content/
 import { createContentSourceChecksum } from '$lib/content/editable-source.server';
 
 const BLOG_CONTENT_PATH = path.join(process.cwd(), 'content', 'blog');
-const BLOG_READING_SPEED_WORDS_PER_MINUTE = 225;
 
 const BLOG_FRONTMATTER_FIELDS = [
 	'title',
@@ -117,12 +116,6 @@ export function serializeBlogMarkdown(frontmatter: BlogFrontmatter, body: string
 	);
 
 	return `---\n${frontmatterLines.join('\n')}\n---\n\n${normalizedBody}\n`;
-}
-
-export function calculateBlogReadTimeFromContent(content: string): string {
-	const wordCount = content.match(/\b[\w'-]+\b/g)?.length ?? 0;
-	const minutes = Math.max(1, Math.ceil(wordCount / BLOG_READING_SPEED_WORDS_PER_MINUTE));
-	return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
 }
 
 export function createBlogSourceChecksum(source: string): string {
