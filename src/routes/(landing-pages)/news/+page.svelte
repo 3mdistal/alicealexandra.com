@@ -582,9 +582,10 @@
 	.coming-soon {
 		margin: 2rem 0;
 		border-radius: 12px;
-		background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
+		/* A faint card: 30% white in light mode, a slight lift off the page in dark mode */
+		background: color-mix(in srgb, var(--color-surface) 40%, transparent);
 		padding: 2rem;
-		color: color-mix(in srgb, var(--color-olive-800) 75%, transparent);
+		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.12rem;
 		line-height: 1.6;
@@ -655,7 +656,7 @@
 		border: none;
 		background: transparent;
 		padding: 0;
-		color: color-mix(in srgb, var(--color-olive-800) 95%, transparent);
+		color: var(--color-accent-strong);
 		font-weight: 500;
 		font-size: 1.03rem;
 		text-decoration: underline;
