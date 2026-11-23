@@ -97,7 +97,7 @@
 		background-size: cover;
 		padding: 0;
 		overflow: hidden;
-		color: var(--color-neutral-0);
+		color: var(--color-fixed-white);
 		text-align: left;
 	}
 
@@ -120,9 +120,9 @@
 		z-index: 1;
 		background: linear-gradient(
 			to top,
-			color-mix(in srgb, var(--color-neutral-1000) 90%, transparent) 0%,
-			color-mix(in srgb, var(--color-neutral-1000) 20%, transparent) 50%,
-			color-mix(in srgb, var(--color-neutral-1000) 10%, transparent) 100%
+			color-mix(in srgb, var(--color-fixed-black) 90%, transparent) 0%,
+			color-mix(in srgb, var(--color-fixed-black) 20%, transparent) 50%,
+			color-mix(in srgb, var(--color-fixed-black) 10%, transparent) 100%
 		);
 	}
 
@@ -139,8 +139,8 @@
 	}
 
 	.active-story-content {
-		--_button-accent: var(--color-neutral-0);
-		--_button-bg: var(--color-neutral-900);
+		--_button-accent: var(--color-fixed-white);
+		--_button-bg: var(--color-fixed-charcoal);
 		max-width: 500px;
 	}
 
@@ -149,7 +149,7 @@
 		font-size: var(--font-size-3xl);
 		line-height: var(--line-height-tight);
 		font-family: var(--font-serif);
-		text-shadow: 0 2px 4px color-mix(in srgb, var(--color-neutral-1000) 80%, transparent);
+		text-shadow: 0 2px 4px color-mix(in srgb, var(--color-fixed-black) 80%, transparent);
 	}
 
 	.description {

@@ -79,6 +79,7 @@ export default defineConfig(
 		plugins: { design },
 		settings: { design: { tokenFiles, primitivesFile } },
 		rules: {
+			'design/no-primitive-color': 'error',
 			'design/no-raw-color': 'error',
 			'design/no-unknown-token': 'error',
 			'design/token-tiers': 'error'
@@ -91,7 +92,15 @@ export default defineConfig(
 			'src/lib/components/parameters-panel.svelte'
 		],
 		rules: {
+			'design/no-primitive-color': 'off',
 			'design/no-raw-color': 'off'
+		}
+	},
+	{
+		// HFC is dark art with its own black, white and gray palette, the same in light and dark mode.
+		files: ['src/routes/(landing-pages)/studio/hfc/**'],
+		rules: {
+			'design/no-primitive-color': 'off'
 		}
 	}
 );

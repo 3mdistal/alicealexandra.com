@@ -148,13 +148,13 @@
 	backdrop-filter: blur(4px);
 	transition: background var(--duration-base) var(--ease-standard);
 	cursor: pointer;
-	border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+	border: 1px solid color-mix(in srgb, var(--color-fixed-white) 20%, transparent);
 	border-radius: var(--radius-pill);
-	background: color-mix(in srgb, var(--color-neutral-1000) 60%, transparent);
+	background: color-mix(in srgb, var(--color-fixed-black) 60%, transparent);
 	padding: 0;
 	width: 2.75rem;
 	height: 2.75rem;
-	color: var(--color-neutral-0);
+	color: var(--color-fixed-white);
 }
 
 .prose .session-interlude-toggle[hidden] {
@@ -162,14 +162,14 @@
 }
 
 .prose .session-interlude-toggle:hover {
-	background: color-mix(in srgb, var(--color-neutral-1000) 80%, transparent);
+	background: color-mix(in srgb, var(--color-fixed-black) 80%, transparent);
 }
 
 /* A light ring on a dark one, so focus shows over light and dark frames alike */
 .prose .session-interlude-toggle:focus-visible {
-	outline: 2px solid var(--color-neutral-0);
+	outline: 2px solid var(--color-fixed-white);
 	outline-offset: 2px;
-	box-shadow: 0 0 0 6px var(--color-neutral-1000);
+	box-shadow: 0 0 0 6px var(--color-fixed-black);
 }
 
 @media (min-width: 1024px) {

@@ -220,9 +220,9 @@
 		--postcard-ink: var(--color-content-text);
 		--postcard-ink-muted: var(--color-content-secondary);
 		--postcard-border: var(--color-content-border);
-		--postcard-shadow: 0 4px 12px color-mix(in srgb, var(--color-neutral-1000) 15%, transparent);
+		--postcard-shadow: 0 4px 12px color-mix(in srgb, var(--color-fixed-black) 15%, transparent);
 		--postcard-shadow-hover: 0 25px 50px
-			color-mix(in srgb, var(--color-neutral-1000) 25%, transparent);
+			color-mix(in srgb, var(--color-fixed-black) 25%, transparent);
 		color: inherit;
 		text-decoration: none;
 
@@ -244,9 +244,9 @@
 
 	@media (prefers-color-scheme: dark) {
 		.postcard-link {
-			--postcard-shadow: 0 18px 55px color-mix(in srgb, var(--color-neutral-1000) 70%, transparent);
+			--postcard-shadow: 0 18px 55px color-mix(in srgb, var(--color-fixed-black) 70%, transparent);
 			--postcard-shadow-hover:
-				0 30px 80px color-mix(in srgb, var(--color-neutral-1000) 80%, transparent),
+				0 30px 80px color-mix(in srgb, var(--color-fixed-black) 80%, transparent),
 				0 0 0 1px color-mix(in srgb, var(--postcard-border) 65%, transparent);
 		}
 	}

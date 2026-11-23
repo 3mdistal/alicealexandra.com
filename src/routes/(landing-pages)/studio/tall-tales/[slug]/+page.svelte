@@ -489,7 +489,7 @@
 		padding: var(--space-9) var(--space-6);
 		min-height: 100vh;
 		overflow: hidden;
-		color: var(--text-color, var(--color-neutral-0));
+		color: var(--text-color, var(--color-fixed-white));
 	}
 
 	.preview-pane {
@@ -520,7 +520,7 @@
 		inset: 0;
 		background-color: var(
 			--overlay-color,
-			color-mix(in srgb, var(--color-neutral-1000) 60%, transparent)
+			color-mix(in srgb, var(--color-fixed-black) 60%, transparent)
 		);
 		content: '';
 	}

@@ -1,3 +1,4 @@
 :root {
 	--color-bg: var(--color-white);
+	--color-fixed-white: var(--color-white);
 }

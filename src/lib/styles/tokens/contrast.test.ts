@@ -49,6 +49,11 @@ const HOME_PAIRS: Pair[] = ['about', 'studio', 'career', 'blog', 'news'].map((se
 	[`--home-${section}-bg`]
 ]);
 
+// The changelog's "Removed" pills.
+const NEWS_PAIRS: Pair[] = [['--color-danger-text', ['--color-surface', '--color-bg']]];
+
+const THEME_PAIRS: Partial<Record<SiteTheme, Pair[]>> = { home: HOME_PAIRS, news: NEWS_PAIRS };
+
 const PROSE_PAIRS: Pair[] = [
 	...[
 		'--color-content-bg',
@@ -74,7 +79,7 @@ const PAGES: Array<{ name: string; theme: SiteTheme; surface: SiteSurface; pairs
 		name: theme,
 		theme,
 		surface: 'default' as const,
-		pairs: theme === 'home' ? [...ROUTE_PAIRS, ...HOME_PAIRS] : ROUTE_PAIRS
+		pairs: [...ROUTE_PAIRS, ...(THEME_PAIRS[theme] ?? [])]
 	})),
 	{ name: 'studio content surface', theme: 'studio', surface: 'content', pairs: ROUTE_PAIRS },
 	{ name: 'prose', theme: 'blog', surface: 'default', pairs: PROSE_PAIRS }
