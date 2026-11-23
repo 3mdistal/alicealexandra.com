@@ -99,6 +99,22 @@ const ROLE_WORDS: Array<[property: RegExp, name: RegExp]> = [
 	[/shadow/, /shadow/]
 ];
 
+/** The general color roles for each kind of property, for when no role is set to the same primitive. */
+const GENERAL_ROLES: Array<[property: RegExp, roles: string[]]> = [
+	[/^background/, ['--color-bg', '--color-surface', '--color-surface-muted']],
+	[/^(border|outline)/, ['--color-border', '--color-accent']],
+	[/shadow/, ['--color-shadow']]
+];
+const GENERAL_TEXT_ROLES = ['--color-text', '--color-text-muted', '--color-accent'];
+
+/**
+ * Roles named `--color-fixed-*` are the same in every route theme and color scheme, for what mustn't
+ * follow the theme, such as text over a photo. They're never offered as a way to follow the theme.
+ */
+export function isFixedRole(name: string): boolean {
+	return name.startsWith('--color-fixed-');
+}
+
 /**
  * Role tokens set straight to `primitive` in some theme or color scheme, such as `--color-surface`
  * for `--color-neutral-0`, preferring ones whose names fit `property`. A role token follows the route
@@ -110,18 +126,66 @@ export function suggestRoles(
 	definitions: TokenManifest['definitions'],
 	isPrimitive: (name: string) => boolean
 ): string {
-	const roles = [...definitions]
+	const fitting = fittingRoles(primitive, property, definitions, isPrimitive).map(
+		(name) => `\`${name}\``
+	);
+	if (fitting.length === 0) return '';
+	return ` To follow the route theme and color scheme instead, use a role token such as ${listOf(fitting)}.`;
+}
+
+/**
+ * Builds the "use this instead" half of a message for a primitive color in a component: color roles
+ * set to that primitive whose names fit `property`, or the general roles for that kind of property,
+ * and any fixed role set to it.
+ */
+export function suggestInsteadOfPrimitive(
+	primitive: string,
+	property: string,
+	definitions: TokenManifest['definitions'],
+	isPrimitive: (name: string) => boolean
+): string {
+	// Chrome and homepage roles belong to those parts of the site.
+	const matching = fittingRoles(primitive, property, definitions, isPrimitive, (name) =>
+		name.startsWith('--color-')
+	);
+	const general =
+		GENERAL_ROLES.find(([pattern]) => pattern.test(property))?.[1] ?? GENERAL_TEXT_ROLES;
+	const themed = (matching.length > 0 ? matching : general).map((name) => `\`${name}\``);
+	const fixed = rolesSetTo(primitive, definitions, isPrimitive)
+		.filter(isFixedRole)
+		.map((name) => `\`${name}\``);
+	const suggestion = `Use a role token that follows them, such as ${listOf(themed)}.`;
+	if (fixed.length === 0) return suggestion;
+	return `${suggestion} If it must stay the same in every theme, as text and scrims over a photo do, use ${listOf(fixed)}.`;
+}
+
+/** Roles set to `primitive` that follow the theme, preferring ones whose names fit `property`. */
+function fittingRoles(
+	primitive: string,
+	property: string,
+	definitions: TokenManifest['definitions'],
+	isPrimitive: (name: string) => boolean,
+	keep: (name: string) => boolean = () => true
+): string[] {
+	const roles = rolesSetTo(primitive, definitions, isPrimitive).filter(
+		(name) => !isFixedRole(name) && keep(name)
+	);
+	const words = ROLE_WORDS.find(([pattern]) => pattern.test(property))?.[1];
+	return (words ? roles.filter((name) => words.test(name)) : roles).slice(0, MAX_SUGGESTIONS);
+}
+
+/** Tokens set straight to `primitive` in some theme or color scheme, other than primitives. */
+function rolesSetTo(
+	primitive: string,
+	definitions: TokenManifest['definitions'],
+	isPrimitive: (name: string) => boolean
+): string[] {
+	return [...definitions]
 		.filter(
 			([name, list]) =>
 				!isPrimitive(name) && list.some(({ value }) => value.trim() === `var(${primitive})`)
 		)
 		.map(([name]) => name);
-	const words = ROLE_WORDS.find(([pattern]) => pattern.test(property))?.[1];
-	const fitting = (words ? roles.filter((name) => words.test(name)) : roles)
-		.slice(0, MAX_SUGGESTIONS)
-		.map((name) => `\`${name}\``);
-	if (fitting.length === 0) return '';
-	return ` To follow the route theme and color scheme instead, use a role token such as ${listOf(fitting)}.`;
 }
 
 /** `a`, `a or b`, `a, b, or c` */

@@ -375,7 +375,7 @@
 		cursor: pointer;
 		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: 999px;
-		background: color-mix(in srgb, var(--color-surface) 92%, var(--color-neutral-0));
+		background: color-mix(in srgb, var(--color-surface) 92%, var(--color-fixed-white));
 		padding: 0.72rem 1.2rem;
 		color: var(--color-text-muted);
 		font-weight: 500;
@@ -427,7 +427,7 @@
 
 		&:hover {
 			filter: none;
-			background: color-mix(in srgb, var(--color-surface) 92%, var(--color-neutral-0));
+			background: color-mix(in srgb, var(--color-surface) 92%, var(--color-fixed-white));
 		}
 	}
 
@@ -446,7 +446,7 @@
 		display: grid;
 		grid-template-columns: 190px 1fr;
 		gap: 1.5rem;
-		box-shadow: 0 12px 30px -22px color-mix(in srgb, var(--color-neutral-1000) 35%, transparent);
+		box-shadow: 0 12px 30px -22px color-mix(in srgb, var(--color-fixed-black) 35%, transparent);
 		border-radius: 18px;
 	}
 
@@ -623,7 +623,7 @@
 	/* Markdown code styling (CHANGELOG.md renders via `marked` → <code>/<pre>) */
 	.changelog-content :global(code) {
 		border-radius: 4px;
-		background-color: color-mix(in srgb, var(--color-neutral-900) 8%, transparent);
+		background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
 		padding: 0.15rem 0.35rem;
 		font-size: 0.95em;
 		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
@@ -633,7 +633,7 @@
 	.changelog-content :global(pre) {
 		margin: 1rem 0 1.5rem;
 		border-radius: 10px;
-		background-color: color-mix(in srgb, var(--color-neutral-900) 8%, transparent);
+		background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
 		padding: 1rem;
 		overflow-x: auto;
 	}
