@@ -81,6 +81,8 @@ export default defineConfig(
 		rules: {
 			'design/no-primitive-color': 'error',
 			'design/no-raw-color': 'error',
+			// A warning until every remaining length is a step on its scale or a token of its own.
+			'design/no-raw-length': 'warn',
 			'design/no-unknown-token': 'error',
 			'design/token-tiers': 'error'
 		}
@@ -93,7 +95,8 @@ export default defineConfig(
 		],
 		rules: {
 			'design/no-primitive-color': 'off',
-			'design/no-raw-color': 'off'
+			'design/no-raw-color': 'off',
+			'design/no-raw-length': 'off'
 		}
 	},
 	{

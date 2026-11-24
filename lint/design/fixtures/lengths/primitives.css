@@ -1,0 +1,9 @@
+:root {
+	--space-1: 0.25rem;
+	--space-4: 1rem;
+	--space-6: 2rem;
+	--font-size-base: 1rem;
+	--font-size-lg: 1.25rem;
+	--radius-2: 8px;
+	--radius-pill: 999px;
+}

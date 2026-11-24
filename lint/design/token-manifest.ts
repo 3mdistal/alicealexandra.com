@@ -1,6 +1,7 @@
 import { readFileSync, statSync } from 'node:fs';
 import postcss, { type Node } from 'postcss';
 import { parseColor, type Rgba } from './color.ts';
+import { parseLength, type Length } from './length.ts';
 import { samePath } from './settings.ts';
 
 /** One definition of a custom property in a token file. */
@@ -55,21 +56,30 @@ export interface ColorPrimitive {
 	color: Rgba;
 }
 
-/** The tokens defined in the primitives file, and which of them are colors. */
+/** A primitive length token, such as `--space-4` and its parsed value. */
+export interface LengthPrimitive {
+	name: string;
+	length: Length;
+}
+
+/** The tokens defined in the primitives file, and which of them are colors or lengths. */
 export function primitivesIn(
 	definitions: TokenManifest['definitions'],
 	primitivesFile: string
-): { all: string[]; colors: ColorPrimitive[] } {
+): { all: string[]; colors: ColorPrimitive[]; lengths: LengthPrimitive[] } {
 	const all: string[] = [];
 	const colors: ColorPrimitive[] = [];
+	const lengths: LengthPrimitive[] = [];
 	for (const [name, list] of definitions) {
 		const primitive = list.find((definition) => samePath(definition.file, primitivesFile));
 		if (!primitive) continue;
 		all.push(name);
 		const color = parseColor(primitive.value);
 		if (color) colors.push({ name, color });
+		const length = parseLength(primitive.value);
+		if (length) lengths.push({ name, length });
 	}
-	return { all, colors };
+	return { all, colors, lengths };
 }
 
 const cache = new Map<string, { stamp: string; manifest: TokenManifest }>();

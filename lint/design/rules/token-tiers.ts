@@ -2,6 +2,7 @@ import type { Rule } from 'eslint';
 import { basename } from 'node:path';
 import valueParser from 'postcss-value-parser';
 import { findRawColors } from '../color.ts';
+import { MATH_FUNCTIONS } from '../length.ts';
 import { designSettings, samePath } from '../settings.ts';
 import { visitStyles } from '../style-source.ts';
 import { suggestColor } from '../suggest.ts';
@@ -14,8 +15,7 @@ const NOT_RAW_FUNCTIONS = new Set([
 	'attr',
 	'light-dark',
 	'color-mix',
-	...['calc', 'clamp', 'min', 'max', 'round', 'mod', 'rem', 'abs', 'sign'],
-	...['sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'atan2', 'pow', 'sqrt', 'hypot', 'log', 'exp']
+	...MATH_FUNCTIONS
 ]);
 
 /**
