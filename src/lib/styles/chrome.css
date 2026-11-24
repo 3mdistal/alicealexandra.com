@@ -44,7 +44,7 @@
 	gap: 0;
 	z-index: var(--chrome-z-index);
 	transition: border-radius var(--duration-chrome-slide) var(--ease-standard);
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	isolation: isolate;
 	padding: var(--space-4);
 	max-width: min(92vw, 44rem);
@@ -57,7 +57,7 @@
 	transform: translateZ(0);
 	transition: transform var(--duration-chrome-home) var(--ease-standard);
 	outline-offset: 2px;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	width: var(--chrome-button-size);
 	height: var(--chrome-button-size);
 
@@ -105,7 +105,7 @@
 		opacity var(--chrome-flip-duration) var(--ease-standard),
 		transform var(--chrome-flip-duration) var(--ease-standard);
 	inset: 0;
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 }
 
 .site-chrome__logo {
@@ -328,7 +328,7 @@
 	}
 
 	.site-chrome__home-label {
-		font-size: 1.25rem;
+		font-size: var(--font-size-lg);
 	}
 }
 

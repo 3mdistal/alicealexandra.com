@@ -128,9 +128,9 @@
 
 	header {
 		margin-right: auto;
-		margin-bottom: 3rem;
+		margin-bottom: var(--space-7);
 		margin-left: auto;
-		padding: 2rem;
+		padding: var(--space-6);
 		max-width: 800px;
 		text-align: center;
 	}
@@ -143,13 +143,13 @@
 	}
 
 	h1 {
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 		color: var(--color-content-text);
-		font-size: 2.5rem;
+		font-size: var(--font-size-3xl);
 	}
 
 	.subtitle {
-		margin-top: 0.5rem;
+		margin-top: var(--space-2);
 		color: var(--color-content-secondary);
 		font-style: italic;
 		font-weight: 300;
@@ -162,7 +162,7 @@
 		grid-template-columns: 1fr;
 		gap: 2.5rem;
 		margin: 0 auto;
-		padding: 0 2rem 4rem 2rem;
+		padding: 0 var(--space-6) var(--space-8) var(--space-6);
 		max-width: 600px;
 	}
 
@@ -171,8 +171,8 @@
 		.postcards-grid {
 			grid-template-columns: 1fr 1fr;
 			align-items: start;
-			gap: 3rem 4rem;
-			padding-bottom: 6rem;
+			gap: var(--space-7) var(--space-8);
+			padding-bottom: var(--space-9);
 			max-width: 1200px;
 		}
 
@@ -191,17 +191,17 @@
 
 	@media (max-width: 768px) {
 		.postcards-grid {
-			gap: 2rem;
-			padding: 0 1rem;
+			gap: var(--space-6);
+			padding: 0 var(--space-4);
 		}
 
 		header {
-			padding: 1.5rem;
+			padding: var(--space-5);
 		}
 	}
 
 	.no-postcards {
-		margin-top: 4rem;
+		margin-top: var(--space-8);
 		color: var(--color-content-secondary);
 		font-style: italic;
 		font-size: 1.1rem;

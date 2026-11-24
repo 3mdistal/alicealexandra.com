@@ -168,16 +168,16 @@
 <style>
 	.background {
 		background-color: var(--color-content-bg);
-		padding: 1rem;
+		padding: var(--space-4);
 		min-height: 100vh;
 		color: var(--color-content-text);
 	}
 
 	.art-grid {
-		column-gap: 1.5rem;
+		column-gap: var(--space-5);
 		columns: 1;
 		margin: 0 auto;
-		padding: 1rem;
+		padding: var(--space-4);
 		width: 100%;
 		max-width: 1800px;
 	}
@@ -195,7 +195,7 @@
 		animation-delay: var(--delay);
 		cursor: pointer;
 		contain: paint;
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--space-5);
 		border: none;
 		background: transparent;
 		isolation: isolate;
@@ -215,7 +215,7 @@
 		position: relative;
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		box-shadow: 0 4px 6px color-mix(in srgb, var(--color-fixed-black) 10%, transparent);
-		border-radius: 8px;
+		border-radius: var(--radius-2);
 		overflow: hidden;
 	}
 
@@ -238,7 +238,7 @@
 			color-mix(in srgb, var(--color-fixed-black) 80%, transparent),
 			transparent
 		);
-		padding: 1.5rem;
+		padding: var(--space-5);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
@@ -263,7 +263,7 @@
 	}
 
 	.image-overlay .date {
-		margin: 0.5rem 0 0;
+		margin: var(--space-2) 0 0;
 		color: color-mix(in srgb, var(--color-fixed-white) 80%, transparent);
 		font-size: 0.9rem;
 	}
@@ -314,7 +314,7 @@
 		align-items: center;
 		z-index: 1000;
 		background-color: color-mix(in srgb, var(--color-fixed-black) 95%, transparent);
-		padding: 2rem;
+		padding: var(--space-6);
 		overflow-y: auto;
 	}
 
@@ -338,9 +338,9 @@
 		align-items: center;
 		z-index: 1;
 		backdrop-filter: blur(10px);
-		border-radius: 12px;
+		border-radius: var(--radius-3);
 		background-color: var(--color-content-bg);
-		padding: 2rem;
+		padding: var(--space-6);
 		max-width: 90vw;
 		max-height: 90vh;
 		color: var(--color-content-text);
@@ -348,28 +348,28 @@
 
 	.modal-image {
 		transition: opacity 0.3s ease;
-		border-radius: 4px;
+		border-radius: var(--radius-1);
 		max-width: 100%;
 		max-height: 70vh;
 		object-fit: contain;
 	}
 
 	.modal-info {
-		margin-top: 1.5rem;
+		margin-top: var(--space-5);
 		width: 100%;
 		max-width: 600px;
 		text-align: center;
 	}
 
 	.modal-info h2 {
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 		color: var(--color-content-text);
 		font-size: 1.75rem;
 	}
 
 	.modal-info .date em {
 		opacity: 0.9;
-		margin: 1rem 0;
+		margin: var(--space-4) 0;
 		color: var(--color-content-secondary);
 		font-style: italic;
 		font-size: 1.1rem;
@@ -397,7 +397,7 @@
 		width: 2.5rem;
 		height: 2.5rem;
 		color: var(--color-content-text);
-		font-size: 1.5rem;
+		font-size: var(--font-size-xl);
 	}
 
 	.close-button:hover {
@@ -412,7 +412,7 @@
 		.modal-content {
 			justify-content: flex-start;
 			border-radius: 0;
-			padding: 3.5rem 0.5rem 1.5rem 0.5rem;
+			padding: 3.5rem var(--space-2) var(--space-5) var(--space-2);
 			width: 100%;
 			max-width: 100vw;
 			height: 100%;
@@ -436,7 +436,7 @@
 
 		.modal-info {
 			margin-bottom: auto;
-			padding: 0 0.5rem;
+			padding: 0 var(--space-2);
 		}
 	}
 </style>

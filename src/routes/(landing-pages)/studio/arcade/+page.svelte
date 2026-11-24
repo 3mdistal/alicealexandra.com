@@ -54,7 +54,7 @@
 		padding: 2.5rem;
 		width: 100%;
 		min-height: 100vh;
-		font-size: 1.5rem;
+		font-size: var(--font-size-xl);
 	}
 
 	h1 {

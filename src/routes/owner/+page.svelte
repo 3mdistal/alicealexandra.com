@@ -110,20 +110,20 @@
 		justify-content: center;
 		align-items: center;
 		background: var(--color-bg);
-		padding: 7rem 1.5rem 3rem;
+		padding: 7rem var(--space-5) var(--space-7);
 		min-height: 100vh;
 	}
 
 	.owner-card {
 		border: 1px solid var(--color-content-border);
 		background: var(--color-content-bg);
-		padding: 2rem;
+		padding: var(--space-6);
 		width: min(100%, 40rem);
 		color: var(--color-content-text);
 	}
 
 	.owner-kicker {
-		margin: 0 0 0.75rem;
+		margin: 0 0 var(--space-3);
 		color: var(--color-content-secondary);
 		font-size: var(--content-font-size-body-sm);
 		letter-spacing: 0.08em;
@@ -131,7 +131,7 @@
 	}
 
 	.owner-title {
-		margin: 0 0 1rem;
+		margin: 0 0 var(--space-4);
 		color: var(--color-content-heading);
 		font-size: clamp(2rem, 4vw, 3.5rem);
 		line-height: 1;
@@ -147,37 +147,37 @@
 	}
 
 	.owner-copy {
-		margin: 0 0 1.5rem;
+		margin: 0 0 var(--space-5);
 	}
 
 	.owner-error {
-		margin: 0 0 1rem;
+		margin: 0 0 var(--space-4);
 		color: var(--color-content-link);
 	}
 
 	.owner-status-group {
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--space-5);
 		border-top: 1px solid var(--color-content-border);
 		border-bottom: 1px solid var(--color-content-border);
-		padding: 1rem 0;
+		padding: var(--space-4) 0;
 	}
 
 	.owner-status-row {
 		display: flex;
 		justify-content: space-between;
-		gap: 1rem;
+		gap: var(--space-4);
 		margin: 0;
 	}
 
 	.owner-status-row + .owner-status-row {
-		margin-top: 0.5rem;
+		margin-top: var(--space-2);
 	}
 
 	.owner-actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-top: 1.5rem;
+		gap: var(--space-3);
+		margin-top: var(--space-5);
 	}
 
 	.owner-button {
@@ -200,11 +200,11 @@
 
 	@media (max-width: 640px) {
 		.owner-page {
-			padding-top: 6rem;
+			padding-top: var(--space-9);
 		}
 
 		.owner-card {
-			padding: 1.5rem;
+			padding: var(--space-5);
 		}
 
 		.owner-status-row {

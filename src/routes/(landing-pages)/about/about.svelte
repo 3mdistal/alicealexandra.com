@@ -134,7 +134,7 @@
 	}
 
 	.socials-container {
-		margin-top: 1rem;
+		margin-top: var(--space-4);
 	}
 
 	@media (min-width: 768px) {

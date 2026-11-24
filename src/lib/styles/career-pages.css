@@ -15,7 +15,7 @@
 	z-index: 10;
 	box-shadow: var(--chrome-shadow, 0 12px 40px var(--color-shadow));
 	background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
-	padding: 6rem 2rem 4rem;
+	padding: var(--space-9) var(--space-6) var(--space-8);
 	overflow: hidden;
 	text-align: center;
 }
@@ -46,12 +46,12 @@
 	box-shadow: var(--shadow-2);
 	border-radius: var(--radius-4);
 	background-color: var(--color-surface);
-	padding: 3rem;
+	padding: var(--space-7);
 	max-width: 800px;
 }
 
 .career-detail-surface h1 {
-	margin-bottom: 1rem;
+	margin-bottom: var(--space-4);
 	font-weight: var(--font-weight-medium);
 	font-size: clamp(2rem, 5vw, 3.5rem);
 	line-height: var(--line-height-tight);
@@ -72,27 +72,27 @@
 
 .career-detail-surface .content {
 	margin: 0 auto;
-	padding: 4rem 2rem;
+	padding: var(--space-8) var(--space-6);
 	max-width: 1200px;
 }
 
 .career-detail-surface .footer {
-	margin-top: 2rem;
+	margin-top: var(--space-6);
 	border-top: 1px solid var(--color-border);
-	padding: 2rem;
+	padding: var(--space-6);
 	text-align: center;
 }
 
 .career-detail-surface .back-link {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.5rem;
+	gap: var(--space-2);
 	transition: all var(--duration-fast) var(--ease-standard);
-	margin-bottom: 1.5rem;
+	margin-bottom: var(--space-5);
 	border: 2px solid var(--color-accent);
 	border-radius: var(--radius-2);
 	background-color: transparent;
-	padding: 0.75rem 1.5rem;
+	padding: var(--space-3) var(--space-5);
 	color: var(--color-accent);
 	font-weight: var(--font-weight-medium);
 	font-size: var(--font-size-base);
@@ -108,16 +108,16 @@
 
 @media (min-width: 768px) {
 	.career-detail-surface .hero {
-		padding: 8rem 4rem 6rem;
+		padding: 8rem var(--space-8) var(--space-9);
 	}
 
 	.career-detail-surface .content {
-		padding: 6rem 4rem;
+		padding: var(--space-9) var(--space-8);
 	}
 }
 
 @media (min-width: 1024px) {
 	.career-detail-surface .content {
-		padding: 8rem 6rem;
+		padding: 8rem var(--space-9);
 	}
 }

@@ -346,7 +346,7 @@
 			color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)),
 			var(--color-bg)
 		);
-		padding: 6rem 1.25rem 8rem;
+		padding: var(--space-9) 1.25rem 8rem;
 		min-height: 100lvh;
 	}
 
@@ -363,8 +363,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 0.5rem;
-		margin: 0 auto 2rem;
+		gap: var(--space-2);
+		margin: 0 auto var(--space-6);
 		width: 100%;
 		max-width: 980px;
 	}
@@ -374,7 +374,7 @@
 		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
 		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
-		border-radius: 999px;
+		border-radius: var(--radius-pill);
 		background: color-mix(in srgb, var(--color-surface) 92%, var(--color-fixed-white));
 		padding: 0.72rem 1.2rem;
 		color: var(--color-text-muted);
@@ -410,17 +410,17 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 0.5rem;
-		margin: 0 0 1.5rem;
+		gap: var(--space-2);
+		margin: 0 0 var(--space-5);
 	}
 
 	.subtab-button {
 		transition: all var(--duration-base) var(--ease-standard);
 		cursor: pointer;
 		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
-		border-radius: 999px;
+		border-radius: var(--radius-pill);
 		background: var(--color-surface-muted);
-		padding: 0.5rem 0.95rem;
+		padding: var(--space-2) 0.95rem;
 		color: var(--color-text-muted);
 		font-weight: 450;
 		font-size: 0.98rem;
@@ -439,13 +439,13 @@
 	.entries {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: var(--space-3);
 	}
 
 	:global(.entry) {
 		display: grid;
 		grid-template-columns: 190px 1fr;
-		gap: 1.5rem;
+		gap: var(--space-5);
 		box-shadow: 0 12px 30px -22px color-mix(in srgb, var(--color-fixed-black) 35%, transparent);
 		border-radius: 18px;
 	}
@@ -479,7 +479,7 @@
 		pointer-events: none;
 		content: '→';
 		color: var(--color-text-muted);
-		font-size: 1.25rem;
+		font-size: var(--font-size-lg);
 	}
 
 	:global(.entry--link.entry--studio:hover)::after {
@@ -508,7 +508,7 @@
 	.entry-left {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 
 	/* Used by the Site tab summary layout */
@@ -539,7 +539,7 @@
 	.entry-category {
 		color: var(--color-text-muted);
 		font-weight: 600;
-		font-size: 1rem;
+		font-size: var(--font-size-base);
 		line-height: 1.2;
 		letter-spacing: 0.01em;
 	}
@@ -565,13 +565,13 @@
 	}
 
 	.entry-bullets li {
-		margin: 0.25rem 0;
+		margin: var(--space-1) 0;
 		font-size: 1.04rem;
 	}
 
 	/* Inline code in the Site tab cards (generated from `parseChangelogSummaries`) */
 	.entry-text :global(code) {
-		border-radius: 4px;
+		border-radius: var(--radius-1);
 		background-color: var(--color-surface-muted);
 		padding: 0.12rem 0.3rem;
 		font-size: 0.95em;
@@ -580,11 +580,11 @@
 	}
 
 	.coming-soon {
-		margin: 2rem 0;
-		border-radius: 12px;
+		margin: var(--space-6) 0;
+		border-radius: var(--radius-3);
 		/* A faint card: 30% white in light mode, a slight lift off the page in dark mode */
 		background: color-mix(in srgb, var(--color-surface) 40%, transparent);
-		padding: 2rem;
+		padding: var(--space-6);
 		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: 1.12rem;
@@ -601,28 +601,28 @@
 	}
 
 	.changelog-content :global(h2) {
-		margin-top: 2rem;
-		margin-bottom: 1rem;
+		margin-top: var(--space-6);
+		margin-bottom: var(--space-4);
 		color: var(--color-accent);
 	}
 
 	.changelog-content :global(ul) {
-		margin-bottom: 1.5rem;
-		margin-left: 1.5rem;
+		margin-bottom: var(--space-5);
+		margin-left: var(--space-5);
 		list-style-type: disc;
 	}
 
 	.changelog-content :global(li) {
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 	}
 
 	.changelog-content :global(p) {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 	}
 
 	/* Markdown code styling (CHANGELOG.md renders via `marked` → <code>/<pre>) */
 	.changelog-content :global(code) {
-		border-radius: 4px;
+		border-radius: var(--radius-1);
 		background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
 		padding: 0.15rem 0.35rem;
 		font-size: 0.95em;
@@ -631,10 +631,10 @@
 	}
 
 	.changelog-content :global(pre) {
-		margin: 1rem 0 1.5rem;
+		margin: var(--space-4) 0 var(--space-5);
 		border-radius: 10px;
 		background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
-		padding: 1rem;
+		padding: var(--space-4);
 		overflow-x: auto;
 	}
 
@@ -648,7 +648,7 @@
 	}
 
 	.site-actions {
-		margin: 1rem 0 0;
+		margin: var(--space-4) 0 0;
 	}
 
 	.toggle-full {
@@ -666,7 +666,7 @@
 	@media (max-width: 640px) {
 		:global(.entry) {
 			grid-template-columns: 1fr;
-			gap: 0.25rem;
+			gap: var(--space-1);
 		}
 
 		:global(.entry--studio) {

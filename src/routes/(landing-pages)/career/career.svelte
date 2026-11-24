@@ -33,20 +33,20 @@
 	.content {
 		margin: 0 auto;
 		background-color: var(--color-bg);
-		padding: 4rem 2rem;
+		padding: var(--space-8) var(--space-6);
 		max-width: 800px;
 	}
 
 	.section {
-		margin-bottom: 3rem;
+		margin-bottom: var(--space-7);
 
 		& h2 {
-			margin-bottom: 1rem;
-			font-size: 2rem;
+			margin-bottom: var(--space-4);
+			font-size: var(--font-size-2xl);
 		}
 
 		& p {
-			margin-bottom: 1.5rem;
+			margin-bottom: var(--space-5);
 			font-size: 1.125rem;
 			line-height: 1.6;
 		}
@@ -56,11 +56,11 @@
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
-		margin-bottom: 2rem;
+		margin-bottom: var(--space-6);
 		border: 2px solid transparent;
 		border-radius: 10px;
 		background-color: var(--color-surface);
-		padding: 2rem;
+		padding: var(--space-6);
 	}
 
 	.work-link:hover {
@@ -76,9 +76,9 @@
 
 	.work-link h3 {
 		transition: color 0.2s ease;
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 		font-weight: 500;
-		font-size: 1.5rem;
+		font-size: var(--font-size-xl);
 	}
 
 	.work-link:hover h3 {
@@ -97,15 +97,15 @@
 
 	@media (min-width: 768px) {
 		.content {
-			padding: 6rem 4rem;
+			padding: var(--space-9) var(--space-8);
 		}
 
 		.section h2 {
-			font-size: 2.5rem;
+			font-size: var(--font-size-3xl);
 		}
 
 		.section p {
-			font-size: 1.25rem;
+			font-size: var(--font-size-lg);
 		}
 
 		.work-link {
