@@ -235,7 +235,7 @@
 		position: relative;
 		cursor: pointer;
 		box-shadow: var(--postcard-shadow);
-		border-radius: 16px;
+		border-radius: var(--radius-16);
 		background: var(--postcard-paper);
 		aspect-ratio: 3 / 2;
 		width: 100%;
@@ -345,7 +345,7 @@
 
 	@media (max-width: 480px) {
 		.postcard-overlay {
-			padding: 1.25rem;
+			padding: var(--space-20);
 		}
 
 		h2 {

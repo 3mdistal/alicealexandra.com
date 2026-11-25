@@ -114,7 +114,7 @@
 	}
 
 	.text :global(*) {
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-40);
 	}
 
 	.text :global(*:last-child) {
@@ -137,7 +137,7 @@
 	.image-container :global(img) {
 		display: block;
 		filter: grayscale(0.1);
-		border-radius: 1.5rem;
+		border-radius: var(--radius-24);
 		width: 100%;
 		height: 100%;
 		overflow: hidden;

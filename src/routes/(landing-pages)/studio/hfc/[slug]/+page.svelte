@@ -436,7 +436,7 @@
 		margin-bottom: var(--space-8);
 		color: var(--color-neutral-0);
 		font-weight: 300;
-		font-size: 2.25rem;
+		font-size: var(--font-size-36);
 	}
 
 	.section-name {
@@ -455,7 +455,7 @@
 	.poem-stanza {
 		margin-bottom: var(--space-32);
 		color: var(--color-neutral-0);
-		font-size: 1.125rem;
+		font-size: var(--font-size-18);
 		line-height: 1.8;
 	}
 
@@ -474,7 +474,7 @@
 	.back-link a {
 		transition: color 0.2s;
 		color: var(--color-gray-475);
-		font-size: 1.125rem;
+		font-size: var(--font-size-18);
 		text-decoration: none;
 	}
 
@@ -598,11 +598,11 @@
 		}
 
 		main {
-			padding: var(--space-64) var(--space-32) 8rem;
+			padding: var(--space-64) var(--space-32) var(--space-128);
 		}
 
 		h1 {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 		}
 
 		.poem-stanza {
@@ -622,7 +622,7 @@
 
 	@media (min-width: 1024px) {
 		h1 {
-			font-size: 3.75rem;
+			font-size: var(--font-size-60);
 		}
 
 		.poem-stanza {

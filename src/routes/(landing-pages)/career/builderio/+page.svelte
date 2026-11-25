@@ -91,7 +91,7 @@
 	.placeholder p {
 		margin: 0 0 var(--space-24);
 		color: var(--color-text-muted);
-		font-size: 1.125rem;
+		font-size: var(--font-size-18);
 		line-height: 1.6;
 	}
 
@@ -147,7 +147,7 @@
 
 	@media (min-width: 768px) {
 		.hero {
-			padding: 8rem var(--space-64) var(--space-96);
+			padding: var(--space-128) var(--space-64) var(--space-96);
 		}
 
 		.content {

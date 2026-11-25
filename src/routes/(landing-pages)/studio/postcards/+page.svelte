@@ -138,7 +138,7 @@
 	/* More space on desktop due to offset postcards */
 	@media (min-width: 1024px) {
 		header {
-			margin-bottom: 5rem;
+			margin-bottom: var(--space-80);
 		}
 	}
 
@@ -160,7 +160,7 @@
 	.postcards-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 2.5rem;
+		gap: var(--space-40);
 		margin: 0 auto;
 		padding: 0 var(--space-32) var(--space-64) var(--space-32);
 		max-width: 600px;

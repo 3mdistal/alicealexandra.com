@@ -133,7 +133,7 @@
 		padding: 0.35rem var(--space-12);
 		color: inherit;
 		font-weight: 300;
-		font-size: 1.125rem;
+		font-size: var(--font-size-18);
 		line-height: 1.6;
 		font-family: var(--font-serif);
 		text-decoration: none;

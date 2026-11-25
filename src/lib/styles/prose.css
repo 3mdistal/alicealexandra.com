@@ -97,7 +97,7 @@
 .prose img {
 	margin-top: 2em;
 	margin-bottom: 2em;
-	border-radius: 1.5rem;
+	border-radius: var(--radius-24);
 	width: 100%;
 	height: auto;
 	object-fit: contain;
@@ -127,7 +127,7 @@
 .prose .session-interlude-video {
 	display: block;
 	margin: 2em 0;
-	border-radius: 1.5rem;
+	border-radius: var(--radius-24);
 	width: 100%;
 	height: auto;
 	object-fit: contain;
@@ -207,7 +207,7 @@
 
 @media (min-width: 1024px) {
 	.prose h2 {
-		font-size: 3rem;
+		font-size: var(--font-size-48);
 	}
 }
 
@@ -290,7 +290,7 @@
 	gap: var(--space-16);
 	margin-top: var(--content-space-lg);
 	margin-bottom: var(--content-space-md);
-	border-radius: 0.5rem;
+	border-radius: var(--radius-8);
 	background-color: var(--color-content-callout-bg);
 	padding: var(--content-space-lg) var(--content-space-sm) var(--content-space-md);
 }
@@ -298,8 +298,8 @@
 @media (min-width: 768px) {
 	.prose div.callout {
 		gap: var(--content-space-lg);
-		padding-right: 5rem;
-		padding-left: 5rem;
+		padding-right: var(--space-80);
+		padding-left: var(--space-80);
 	}
 }
 

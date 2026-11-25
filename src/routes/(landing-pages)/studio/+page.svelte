@@ -151,8 +151,8 @@
 	@media (min-width: 640px) {
 		.card-div {
 			justify-content: center;
-			padding-right: 2.5rem;
-			padding-left: 2.5rem;
+			padding-right: var(--space-40);
+			padding-left: var(--space-40);
 		}
 	}
 </style>

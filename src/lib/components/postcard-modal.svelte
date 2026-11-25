@@ -405,7 +405,7 @@
 			var(--color-content-bg) 100%
 		);
 		padding: var(--space-32);
-		padding-bottom: 10rem;
+		padding-bottom: var(--space-160);
 	}
 
 	.modal-hero-content {
@@ -417,7 +417,7 @@
 		margin: 0 0 var(--space-8) 0;
 		color: var(--color-content-text);
 		font-weight: 500;
-		font-size: 3rem;
+		font-size: var(--font-size-48);
 		line-height: 1.1;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
@@ -482,7 +482,7 @@
 	.modal-content-area {
 		position: relative;
 		z-index: 1;
-		margin: -6rem auto 0;
+		margin: calc(-1 * var(--space-96)) auto 0;
 		padding: 0 var(--space-32) 18rem;
 		max-width: 800px;
 	}
@@ -522,7 +522,7 @@
 		}
 
 		.modal-content-area {
-			margin-top: -4rem;
+			margin-top: calc(-1 * var(--space-64));
 			padding: 0 var(--space-24) var(--space-24);
 		}
 	}
@@ -534,12 +534,12 @@
 		}
 
 		.modal-content {
-			border-radius: 16px;
+			border-radius: var(--radius-16);
 		}
 
 		.modal-hero-overlay {
 			padding: var(--space-16);
-			padding-bottom: 5rem;
+			padding-bottom: var(--space-80);
 		}
 
 		.modal-hero-content h1 {
@@ -551,7 +551,7 @@
 		}
 
 		.modal-content-area {
-			margin-top: -3rem;
+			margin-top: calc(-1 * var(--space-48));
 		}
 	}
 </style>

@@ -346,12 +346,12 @@
 			color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)),
 			var(--color-bg)
 		);
-		padding: var(--space-96) 1.25rem 8rem;
+		padding: var(--space-96) var(--space-20) var(--space-128);
 		min-height: 100lvh;
 	}
 
 	h1 {
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-40);
 		color: var(--color-accent);
 		font-weight: 500;
 		font-size: clamp(3rem, 4.4vw, 4.25rem);
@@ -463,7 +463,7 @@
 	:global(.entry--link.entry--studio) {
 		position: relative;
 		/* leave room for the hover chevron */
-		padding-right: 2.5rem;
+		padding-right: var(--space-40);
 	}
 
 	:global(.entry--link.entry--studio)::after {
@@ -560,7 +560,7 @@
 
 	.entry-bullets {
 		margin: 0.35rem 0 0;
-		padding-left: 1.25rem;
+		padding-left: var(--space-20);
 		list-style-type: disc;
 	}
 

@@ -108,7 +108,7 @@
 
 @media (min-width: 768px) {
 	.career-detail-surface .hero {
-		padding: 8rem var(--space-64) var(--space-96);
+		padding: var(--space-128) var(--space-64) var(--space-96);
 	}
 
 	.career-detail-surface .content {
@@ -118,6 +118,6 @@
 
 @media (min-width: 1024px) {
 	.career-detail-surface .content {
-		padding: 8rem var(--space-96);
+		padding: var(--space-128) var(--space-96);
 	}
 }

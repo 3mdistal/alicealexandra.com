@@ -418,7 +418,7 @@
 	main {
 		position: relative;
 		z-index: 1;
-		margin: -10rem auto 0;
+		margin: calc(-1 * var(--space-160)) auto 0;
 		background-color: transparent;
 		padding: var(--space-32);
 		max-width: 800px;
@@ -592,11 +592,11 @@
 	@media (max-width: 768px) {
 		.hero-overlay {
 			padding: var(--space-32);
-			padding-bottom: 10rem;
+			padding-bottom: var(--space-160);
 		}
 
 		.hero-content h1 {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 		}
 
 		.hero-content .description {
@@ -604,7 +604,7 @@
 		}
 
 		main {
-			margin-top: -8rem;
+			margin-top: calc(-1 * var(--space-128));
 		}
 
 		.editor-metadata-grid {
@@ -615,7 +615,7 @@
 	@media (max-width: 480px) {
 		.hero-overlay {
 			padding: var(--space-24);
-			padding-bottom: 8rem;
+			padding-bottom: var(--space-128);
 		}
 
 		.hero-content h1 {
@@ -627,7 +627,7 @@
 		}
 
 		main {
-			margin-top: -6rem;
+			margin-top: calc(-1 * var(--space-96));
 		}
 	}
 

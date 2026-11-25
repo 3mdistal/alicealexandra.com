@@ -184,7 +184,7 @@
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0.85rem 1.25rem;
+		padding: 0.85rem var(--space-20);
 		text-decoration: none;
 	}
 

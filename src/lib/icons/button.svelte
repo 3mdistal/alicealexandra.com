@@ -41,7 +41,7 @@
 <style>
 	:global(.legacy-icon-button) {
 		border-width: 2px;
-		border-radius: 0.75rem;
+		border-radius: var(--radius-12);
 		font-weight: var(--font-weight-regular);
 	}
 

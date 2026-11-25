@@ -84,7 +84,7 @@
 <style>
 	.container {
 		background-color: var(--landing-bg, var(--color-bg));
-		padding-top: 10rem;
+		padding-top: var(--space-160);
 	}
 
 	.container > * {
@@ -95,8 +95,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 2.5rem;
-		padding: 0 1.25rem;
+		gap: var(--space-40);
+		padding: 0 var(--space-20);
 	}
 
 	@media (min-width: 768px) {
@@ -107,7 +107,7 @@
 
 	@media (min-width: 1024px) {
 		.content-wrapper {
-			padding: 0 5rem;
+			padding: 0 var(--space-80);
 		}
 	}
 
@@ -122,18 +122,18 @@
 	.bordered-content {
 		box-sizing: border-box;
 		border-left: 4px solid var(--landing-accent, var(--color-accent));
-		border-radius: 0 1rem 1rem 0;
+		border-radius: 0 var(--radius-16) var(--radius-16) 0;
 		background: linear-gradient(
 			135deg,
 			color-mix(in srgb, var(--color-fixed-white) 15%, transparent) 0%,
 			color-mix(in srgb, var(--color-fixed-white) 5%, transparent) 100%
 		);
-		padding: 5rem 2.5rem;
+		padding: var(--space-80) var(--space-40);
 	}
 
 	@media (min-width: 640px) {
 		.bordered-content {
-			padding: 5rem 3.75rem;
+			padding: var(--space-80) 3.75rem;
 		}
 	}
 
@@ -145,12 +145,12 @@
 
 	@media (min-width: 1024px) {
 		.bordered-content {
-			padding: 10rem 5rem;
+			padding: var(--space-160) var(--space-80);
 		}
 	}
 
 	.bordered-content h2 {
-		margin-bottom: 1.25rem;
+		margin-bottom: var(--space-20);
 		color: var(--landing-accent, var(--color-accent));
 		font-weight: var(--font-weight-light);
 		font-size: var(--font-size-40);
@@ -159,7 +159,7 @@
 
 	@media (min-width: 768px) {
 		.bordered-content h2 {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 		}
 	}
 
@@ -178,8 +178,8 @@
 	.button-wrapper {
 		display: flex;
 		justify-content: flex-end;
-		margin-top: 2.5rem;
-		margin-right: 1.25rem;
+		margin-top: var(--space-40);
+		margin-right: var(--space-20);
 	}
 
 	.image-wrapper {
@@ -194,8 +194,8 @@
 	}
 
 	.image-wrapper.no-padding {
-		margin-right: -1.25rem;
-		margin-left: -1.25rem;
+		margin-right: calc(-1 * var(--space-20));
+		margin-left: calc(-1 * var(--space-20));
 	}
 
 	@media (min-width: 768px) {
@@ -206,7 +206,7 @@
 
 	@media (min-width: 1024px) {
 		.image-wrapper.no-padding {
-			margin-right: -5rem;
+			margin-right: calc(-1 * var(--space-80));
 		}
 	}
 
@@ -225,14 +225,14 @@
 	}
 
 	.slot-image-wrapper {
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-40);
 	}
 
 	@media (min-width: 768px) {
 		.slot-image-wrapper {
 			flex-basis: 33.333333%;
 			margin-bottom: 0;
-			margin-left: 5rem;
+			margin-left: var(--space-80);
 		}
 	}
 

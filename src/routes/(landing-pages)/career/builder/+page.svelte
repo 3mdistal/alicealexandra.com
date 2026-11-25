@@ -70,11 +70,11 @@
 
 <style>
 	.posts-section {
-		margin-bottom: 5rem;
+		margin-bottom: var(--space-80);
 		box-shadow: var(--shadow-2);
 		border-radius: var(--radius-12);
 		background-color: var(--color-surface);
-		padding: 2.5rem;
+		padding: var(--space-40);
 	}
 
 	.posts-section-title {
@@ -86,7 +86,7 @@
 	}
 
 	.posts-section-subtitle {
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-40);
 		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: var(--font-size-20);
@@ -114,7 +114,7 @@
 	.post-link {
 		display: block;
 		transition: all 0.3s ease;
-		margin: -1rem;
+		margin: calc(-1 * var(--space-16));
 		border-radius: var(--radius-8);
 		padding: var(--space-16);
 		text-decoration: none;

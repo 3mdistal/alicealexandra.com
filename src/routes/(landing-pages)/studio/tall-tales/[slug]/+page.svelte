@@ -474,7 +474,7 @@
 
 	.editor-host {
 		margin: 0 auto;
-		padding: 8rem var(--space-32) var(--space-48);
+		padding: var(--space-128) var(--space-32) var(--space-48);
 		max-width: 1440px;
 	}
 
@@ -578,7 +578,7 @@
 	.tale-breadcrumb-link {
 		display: inline-flex;
 		align-items: center;
-		gap: 6px;
+		gap: var(--space-6);
 		opacity: 0.7;
 		transition: opacity 0.2s;
 		color: var(--text-color);
@@ -610,13 +610,13 @@
 		margin: 0 0 var(--content-space-sm) 0;
 		color: var(--text-color);
 		font-weight: 500;
-		font-size: 2.25rem;
+		font-size: var(--font-size-36);
 		line-height: 2.5rem;
 	}
 
 	@media (min-width: 640px) {
 		.tale-title {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 			line-height: 1;
 		}
 	}
@@ -630,7 +630,7 @@
 
 	@media (min-width: 1024px) {
 		.tale-title {
-			font-size: 4.5rem;
+			font-size: var(--font-size-72);
 			line-height: 1;
 		}
 	}

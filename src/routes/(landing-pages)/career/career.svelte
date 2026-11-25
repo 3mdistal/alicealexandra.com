@@ -47,7 +47,7 @@
 
 		& p {
 			margin-bottom: var(--space-24);
-			font-size: 1.125rem;
+			font-size: var(--font-size-18);
 			line-height: 1.6;
 		}
 	}
@@ -109,7 +109,7 @@
 		}
 
 		.work-link {
-			padding: 2.5rem;
+			padding: var(--space-40);
 		}
 
 		.work-link h3 {

@@ -681,7 +681,7 @@
 		margin: 4em auto 0;
 		width: 100%;
 		max-width: var(--content-column);
-		font-size: 2.25rem;
+		font-size: var(--font-size-36);
 		line-height: 2.5rem;
 		text-align: right;
 

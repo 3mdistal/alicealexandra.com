@@ -71,7 +71,7 @@
 	/* Same column and gutter as the post body, so their text always lines up. */
 	.blog-header {
 		margin: 0 auto;
-		margin-top: 80px; /* More space from top */
+		margin-top: var(--space-80); /* More space from top */
 		padding: var(--content-space-lg) var(--content-gutter) 0;
 		width: 100%;
 		max-width: calc(var(--content-column) + 2 * var(--content-gutter));
@@ -86,7 +86,7 @@
 	.breadcrumb {
 		display: inline-flex;
 		align-items: center;
-		gap: 6px;
+		gap: var(--space-6);
 		margin-bottom: var(--content-space-md);
 		color: var(--color-content-secondary);
 		font-size: var(--content-font-size-body-sm);
@@ -95,7 +95,7 @@
 	.breadcrumb-link {
 		display: inline-flex;
 		align-items: center;
-		gap: 6px;
+		gap: var(--space-6);
 		color: var(--color-content-secondary) !important;
 		font-weight: 500;
 		text-decoration: none;
@@ -136,12 +136,12 @@
 		margin: 0 0 var(--content-space-sm) 0;
 		color: var(--color-content-heading);
 		font-weight: 500;
-		font-size: 1.875rem;
+		font-size: var(--font-size-30);
 		line-height: 2.5rem;
 		font-family: var(--font-serif);
 
 		@media (min-width: 640px) {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 			line-height: 1;
 		}
 
@@ -151,7 +151,7 @@
 		}
 
 		@media (min-width: 1024px) {
-			font-size: 4.5rem;
+			font-size: var(--font-size-72);
 			line-height: 1;
 		}
 	}
@@ -193,7 +193,7 @@
 	.reading-time {
 		display: flex;
 		align-items: center;
-		gap: 6px;
+		gap: var(--space-6);
 		color: var(--color-content-secondary) !important;
 		font-size: var(--content-font-size-body-sm);
 	}
