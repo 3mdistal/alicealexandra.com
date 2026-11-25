@@ -259,7 +259,7 @@
 		left: -2px;
 		z-index: -1;
 		border: 2px dotted color-mix(in srgb, var(--postcard-border) 70%, transparent);
-		border-radius: 18px;
+		border-radius: var(--radius-16);
 		pointer-events: none;
 		content: '';
 	}
@@ -311,7 +311,7 @@
 		margin: 0 0 var(--space-16) 0;
 		color: var(--postcard-ink);
 		font-weight: 600;
-		font-size: 1.8rem;
+		font-size: var(--font-size-30);
 		line-height: 1.2;
 	}
 
@@ -339,7 +339,7 @@
 		.description {
 			-webkit-line-clamp: 2;
 			line-clamp: 2;
-			font-size: 0.9rem;
+			font-size: var(--font-size-14);
 		}
 	}
 
@@ -349,7 +349,7 @@
 		}
 
 		h2 {
-			font-size: 1.3rem;
+			font-size: var(--font-size-20);
 		}
 	}
 </style>

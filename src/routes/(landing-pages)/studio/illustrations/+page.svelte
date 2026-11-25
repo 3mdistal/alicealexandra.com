@@ -259,13 +259,13 @@
 		margin: 0;
 		color: var(--color-fixed-white);
 		font-weight: 500;
-		font-size: 1.2rem;
+		font-size: var(--font-size-20);
 	}
 
 	.image-overlay .date {
 		margin: var(--space-8) 0 0;
 		color: color-mix(in srgb, var(--color-fixed-white) 80%, transparent);
-		font-size: 0.9rem;
+		font-size: var(--font-size-14);
 	}
 
 	@keyframes fadeIn {
@@ -364,7 +364,7 @@
 	.modal-info h2 {
 		margin-bottom: var(--space-8);
 		color: var(--color-content-text);
-		font-size: 1.75rem;
+		font-size: var(--font-size-30);
 	}
 
 	.modal-info .date em {
@@ -372,7 +372,7 @@
 		margin: var(--space-16) 0;
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.1rem;
+		font-size: var(--font-size-18);
 	}
 
 	.modal-info .description {

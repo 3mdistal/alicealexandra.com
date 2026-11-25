@@ -431,7 +431,7 @@
 		margin: 0;
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.3rem;
+		font-size: var(--font-size-20);
 		line-height: 1.4;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
@@ -514,11 +514,11 @@
 		}
 
 		.modal-hero-content h1 {
-			font-size: 2.2rem;
+			font-size: var(--font-size-36);
 		}
 
 		.modal-hero-content .description {
-			font-size: 1.1rem;
+			font-size: var(--font-size-18);
 		}
 
 		.modal-content-area {
@@ -543,7 +543,7 @@
 		}
 
 		.modal-hero-content h1 {
-			font-size: 1.8rem;
+			font-size: var(--font-size-30);
 		}
 
 		.modal-hero-content .description {

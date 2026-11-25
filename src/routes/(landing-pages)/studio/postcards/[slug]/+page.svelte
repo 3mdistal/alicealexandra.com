@@ -392,7 +392,7 @@
 		margin: 0 0 var(--space-12) 0;
 		color: var(--color-content-text);
 		font-weight: 500;
-		font-size: 4.4rem;
+		font-size: var(--font-size-72);
 		line-height: 1.1;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
@@ -406,7 +406,7 @@
 		margin: 0;
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.75rem;
+		font-size: var(--font-size-30);
 		line-height: 1.4;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
@@ -441,7 +441,7 @@
 		border-radius: var(--radius-4);
 		padding: var(--space-8) var(--space-16);
 		color: var(--color-content-secondary);
-		font-size: 1.1rem;
+		font-size: var(--font-size-18);
 		text-decoration: none;
 	}
 
@@ -467,19 +467,19 @@
 	}
 
 	.editor-pane-title {
-		margin: 0 0 0.35rem;
-		font-size: 1.35rem;
+		margin: 0 0 var(--space-6);
+		font-size: var(--font-size-20);
 		font-family: var(--font-serif);
 	}
 
 	.editor-metadata-grid {
 		display: grid;
-		gap: 0.85rem;
+		gap: var(--space-12);
 	}
 
 	.editor-field {
 		display: grid;
-		gap: 0.4rem;
+		gap: var(--space-6);
 	}
 
 	.editor-field-wide {
@@ -494,7 +494,7 @@
 	.editor-textarea {
 		border: 1px solid var(--color-content-border);
 		background: var(--color-content-bg);
-		padding: 0.8rem;
+		padding: var(--space-12);
 		width: 100%;
 		color: var(--color-content-text);
 		font: inherit;
@@ -521,7 +521,7 @@
 	.editor-readonly-row p {
 		display: flex;
 		flex-direction: column;
-		gap: 0.2rem;
+		gap: var(--space-4);
 		margin: 0;
 	}
 
@@ -534,7 +534,7 @@
 	.editor-markdown-input {
 		min-height: 32rem;
 		resize: vertical;
-		font-size: 0.95rem;
+		font-size: var(--font-size-16);
 		line-height: 1.7;
 		font-family:
 			'SFMono-Regular', 'SFMono-Regular Fallback', ui-monospace, 'Cascadia Code', 'Roboto Mono',
@@ -547,7 +547,7 @@
 	}
 
 	.editor-preview-scroll-region {
-		padding-right: 0.35rem;
+		padding-right: var(--space-6);
 		min-height: 32rem;
 		max-height: 70vh;
 		overflow: auto;
@@ -581,7 +581,7 @@
 		margin: 0 0 var(--space-24);
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.2rem;
+		font-size: var(--font-size-20);
 		font-family: 'Spectral', serif;
 	}
 
@@ -600,7 +600,7 @@
 		}
 
 		.hero-content .description {
-			font-size: 1.4rem;
+			font-size: var(--font-size-24);
 		}
 
 		main {
@@ -619,11 +619,11 @@
 		}
 
 		.hero-content h1 {
-			font-size: 2.2rem;
+			font-size: var(--font-size-36);
 		}
 
 		.hero-content .description {
-			font-size: 1.1rem;
+			font-size: var(--font-size-18);
 		}
 
 		main {

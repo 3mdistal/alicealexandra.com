@@ -58,7 +58,7 @@
 			box-shadow 0.2s ease;
 		margin-bottom: var(--space-32);
 		border: 2px solid transparent;
-		border-radius: 10px;
+		border-radius: var(--radius-8);
 		background-color: var(--color-surface);
 		padding: var(--space-32);
 	}
@@ -113,7 +113,7 @@
 		}
 
 		.work-link h3 {
-			font-size: 1.75rem;
+			font-size: var(--font-size-30);
 		}
 	}
 </style>

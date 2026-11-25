@@ -184,7 +184,7 @@
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0.85rem var(--space-20);
+		padding: var(--space-12) var(--space-20);
 		text-decoration: none;
 	}
 
@@ -209,7 +209,7 @@
 
 		.owner-status-row {
 			flex-direction: column;
-			gap: 0.15rem;
+			gap: var(--space-4);
 		}
 	}
 </style>

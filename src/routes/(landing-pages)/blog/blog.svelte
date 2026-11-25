@@ -82,7 +82,7 @@
 		font-family: var(--font-serif);
 
 		@media (max-width: 767px) {
-			font-size: 1.75rem;
+			font-size: var(--font-size-30);
 		}
 
 		&:hover {

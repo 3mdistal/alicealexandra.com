@@ -130,7 +130,7 @@
 		display: inline-block;
 		position: absolute;
 		border-radius: var(--radius-pill);
-		padding: 0.35rem var(--space-12);
+		padding: var(--space-6) var(--space-12);
 		color: inherit;
 		font-weight: 300;
 		font-size: var(--font-size-18);

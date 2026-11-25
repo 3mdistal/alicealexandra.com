@@ -429,7 +429,7 @@
 		}
 
 		p {
-			font-size: 1.1rem;
+			font-size: var(--font-size-18);
 			white-space: pre-line;
 
 			@media (min-width: 640px) {
@@ -584,7 +584,7 @@
 
 	.quote-text {
 		margin-bottom: var(--space-16);
-		font-size: 1.1rem;
+		font-size: var(--font-size-18);
 
 		@media (min-width: 640px) {
 			font-size: var(--font-size-20);

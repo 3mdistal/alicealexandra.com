@@ -153,7 +153,7 @@
 		color: var(--color-content-secondary);
 		font-style: italic;
 		font-weight: 300;
-		font-size: 1.3rem;
+		font-size: var(--font-size-20);
 		letter-spacing: 0.02em;
 	}
 
@@ -179,13 +179,13 @@
 		/* Left column offset higher */
 		.postcards-grid :global(.postcard-link):nth-child(odd) {
 			transform-origin: center center;
-			margin-top: -50px;
+			margin-top: calc(-1 * var(--space-48));
 		}
 
 		/* Right column at normal position */
 		.postcards-grid :global(.postcard-link):nth-child(even) {
 			transform-origin: center center;
-			margin-top: 50px;
+			margin-top: var(--space-48);
 		}
 	}
 
@@ -204,7 +204,7 @@
 		margin-top: var(--space-64);
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.1rem;
+		font-size: var(--font-size-18);
 		text-align: center;
 	}
 </style>

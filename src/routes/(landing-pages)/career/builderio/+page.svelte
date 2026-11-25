@@ -48,7 +48,7 @@
 
 	.hero-content {
 		margin: 0 auto;
-		border-radius: 15px;
+		border-radius: var(--radius-16);
 		background-color: var(--color-surface);
 		padding: var(--space-48);
 		max-width: 800px;
@@ -82,7 +82,7 @@
 
 	.placeholder {
 		box-shadow: var(--shadow-1);
-		border-radius: 10px;
+		border-radius: var(--radius-8);
 		background-color: var(--color-surface);
 		padding: var(--space-48);
 		text-align: center;
@@ -107,7 +107,7 @@
 		border: 2px solid var(--color-accent);
 		border-radius: var(--radius-8);
 		background-color: var(--color-surface);
-		padding: 0.6rem 1.2rem;
+		padding: var(--space-8) var(--space-20);
 		color: var(--color-accent);
 		font-weight: 500;
 		text-decoration: none;

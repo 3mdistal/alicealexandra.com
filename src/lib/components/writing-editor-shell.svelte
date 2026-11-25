@@ -126,7 +126,7 @@
 		cursor: pointer;
 		border: 1px solid var(--color-content-border);
 		background: transparent;
-		padding: 0.7rem var(--space-16);
+		padding: var(--space-12) var(--space-16);
 		color: var(--color-content-text);
 		font: inherit;
 		text-decoration: none;

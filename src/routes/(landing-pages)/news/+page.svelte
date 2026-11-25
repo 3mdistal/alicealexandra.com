@@ -376,10 +376,10 @@
 		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: var(--radius-pill);
 		background: color-mix(in srgb, var(--color-surface) 92%, var(--color-fixed-white));
-		padding: 0.72rem 1.2rem;
+		padding: var(--space-12) var(--space-20);
 		color: var(--color-text-muted);
 		font-weight: 500;
-		font-size: 1.04rem;
+		font-size: var(--font-size-16);
 		letter-spacing: 0.01em;
 
 		&:hover {
@@ -420,10 +420,10 @@
 		border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
 		border-radius: var(--radius-pill);
 		background: var(--color-surface-muted);
-		padding: var(--space-8) 0.95rem;
+		padding: var(--space-8) var(--space-16);
 		color: var(--color-text-muted);
 		font-weight: 450;
-		font-size: 0.98rem;
+		font-size: var(--font-size-16);
 
 		&:hover {
 			filter: none;
@@ -447,7 +447,7 @@
 		grid-template-columns: 190px 1fr;
 		gap: var(--space-24);
 		box-shadow: 0 12px 30px -22px color-mix(in srgb, var(--color-fixed-black) 35%, transparent);
-		border-radius: 18px;
+		border-radius: var(--radius-16);
 	}
 
 	:global(.entry--studio) {
@@ -501,7 +501,7 @@
 
 	.entry-date {
 		color: var(--color-text-muted);
-		font-size: 1.05rem;
+		font-size: var(--font-size-16);
 		font-variant-numeric: tabular-nums;
 	}
 
@@ -513,14 +513,14 @@
 
 	/* Used by the Site tab summary layout */
 	.entry-text {
-		font-size: 1.06rem;
+		font-size: var(--font-size-16);
 		line-height: 1.65;
 	}
 
 	.entry-body {
 		display: flex;
 		flex-direction: column;
-		gap: 0.35rem;
+		gap: var(--space-6);
 		min-width: 0;
 	}
 
@@ -533,7 +533,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 0.35rem;
+		gap: var(--space-6);
 	}
 
 	.entry-category {
@@ -559,21 +559,21 @@
 	}
 
 	.entry-bullets {
-		margin: 0.35rem 0 0;
+		margin: var(--space-6) 0 0;
 		padding-left: var(--space-20);
 		list-style-type: disc;
 	}
 
 	.entry-bullets li {
 		margin: var(--space-4) 0;
-		font-size: 1.04rem;
+		font-size: var(--font-size-16);
 	}
 
 	/* Inline code in the Site tab cards (generated from `parseChangelogSummaries`) */
 	.entry-text :global(code) {
 		border-radius: var(--radius-4);
 		background-color: var(--color-surface-muted);
-		padding: 0.12rem 0.3rem;
+		padding: var(--space-4) var(--space-4);
 		font-size: 0.95em;
 		font-family: var(--font-mono);
 		word-break: break-word;
@@ -587,7 +587,7 @@
 		padding: var(--space-32);
 		color: var(--color-text-muted);
 		font-style: italic;
-		font-size: 1.12rem;
+		font-size: var(--font-size-18);
 		line-height: 1.6;
 		text-align: center;
 	}
@@ -596,7 +596,7 @@
 		margin: 0 auto;
 		width: 100%;
 		max-width: 980px;
-		font-size: 1.06rem;
+		font-size: var(--font-size-16);
 		line-height: 1.7;
 	}
 
@@ -624,7 +624,7 @@
 	.changelog-content :global(code) {
 		border-radius: var(--radius-4);
 		background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
-		padding: 0.15rem 0.35rem;
+		padding: var(--space-4) var(--space-6);
 		font-size: 0.95em;
 		font-family: 'Cutive Mono', 'Courier New', Courier, monospace;
 		word-break: break-word;
@@ -632,7 +632,7 @@
 
 	.changelog-content :global(pre) {
 		margin: var(--space-16) 0 var(--space-24);
-		border-radius: 10px;
+		border-radius: var(--radius-8);
 		background-color: color-mix(in srgb, var(--color-text) 8%, transparent);
 		padding: var(--space-16);
 		overflow-x: auto;
@@ -658,7 +658,7 @@
 		padding: 0;
 		color: var(--color-accent-strong);
 		font-weight: 500;
-		font-size: 1.03rem;
+		font-size: var(--font-size-16);
 		text-decoration: underline;
 		text-underline-offset: 3px;
 	}
@@ -670,7 +670,7 @@
 		}
 
 		:global(.entry--studio) {
-			gap: 0.6rem;
+			gap: var(--space-8);
 		}
 	}
 </style>
