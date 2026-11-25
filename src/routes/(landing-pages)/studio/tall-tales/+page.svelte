@@ -73,8 +73,8 @@
 		position: relative;
 		right: 50%;
 		left: 50%;
-		margin-right: -50vw;
-		margin-left: -50vw;
+		margin-right: var(--layout-full-bleed-margin);
+		margin-left: var(--layout-full-bleed-margin);
 		background: var(--color-bg);
 		width: 100vw;
 		height: 100vh;

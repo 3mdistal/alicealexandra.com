@@ -133,7 +133,8 @@
 
 	@media (min-width: 640px) {
 		.bordered-content {
-			padding: var(--space-80) 3.75rem;
+			--bordered-content-padding-x: 3.75rem;
+			padding: var(--space-80) var(--bordered-content-padding-x);
 		}
 	}
 

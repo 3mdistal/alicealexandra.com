@@ -565,11 +565,12 @@
 		}
 
 		@media (min-width: 1280px) {
-			padding: 0 13rem;
+			--section-quote-padding-x: 13rem;
+			padding: 0 var(--section-quote-padding-x);
 		}
 
 		@media (min-width: 1536px) {
-			padding: 0 26rem;
+			--section-quote-padding-x: 26rem;
 		}
 	}
 

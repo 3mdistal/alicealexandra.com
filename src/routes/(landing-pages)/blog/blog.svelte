@@ -36,9 +36,10 @@
 
 <style>
 	.posts-title {
+		--posts-title-font-size: 4rem;
 		margin-bottom: 1em;
 		font-weight: 500;
-		font-size: 4rem;
+		font-size: var(--posts-title-font-size);
 	}
 
 	.post-list {

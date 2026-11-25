@@ -441,20 +441,22 @@
 	}
 
 	.modal-body {
+		--modal-body-padding-bottom: 9rem;
 		position: relative;
-		padding-bottom: 9rem;
+		padding-bottom: var(--modal-body-padding-bottom);
 		max-height: calc(100vh - var(--modal-margin) * 2);
 		overflow-y: auto;
 	}
 
 	.modal-controls {
+		--modal-controls-overlap: 52px;
 		display: flex;
 		position: sticky;
 		top: 1rem;
 		justify-content: flex-end;
 		gap: var(--space-8);
 		z-index: 10;
-		margin-bottom: -52px;
+		margin-bottom: calc(-1 * var(--modal-controls-overlap));
 		padding-right: var(--space-16);
 		pointer-events: none;
 	}
@@ -480,10 +482,11 @@
 	}
 
 	.modal-content-area {
+		--modal-content-padding-bottom: 18rem;
 		position: relative;
 		z-index: 1;
 		margin: calc(-1 * var(--space-96)) auto 0;
-		padding: 0 var(--space-32) 18rem;
+		padding: 0 var(--space-32) var(--modal-content-padding-bottom);
 		max-width: 800px;
 	}
 
@@ -509,8 +512,9 @@
 		}
 
 		.modal-hero-overlay {
+			--modal-hero-padding-bottom: 7rem;
 			padding: var(--space-24);
-			padding-bottom: 7rem;
+			padding-bottom: var(--modal-hero-padding-bottom);
 		}
 
 		.modal-hero-content h1 {

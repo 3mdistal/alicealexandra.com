@@ -349,8 +349,8 @@
 		position: relative;
 		right: 50%;
 		left: 50%;
-		margin-right: -50vw;
-		margin-left: -50vw;
+		margin-right: var(--layout-full-bleed-margin);
+		margin-left: var(--layout-full-bleed-margin);
 		width: 100vw;
 	}
 
@@ -364,6 +364,7 @@
 	}
 
 	.hero-overlay {
+		--hero-padding-bottom: 14rem;
 		display: flex;
 		position: absolute;
 		top: 0;
@@ -380,7 +381,7 @@
 			var(--color-content-bg) 100%
 		);
 		padding: var(--space-48);
-		padding-bottom: 14rem;
+		padding-bottom: var(--hero-padding-bottom);
 	}
 
 	.hero-content {
@@ -431,7 +432,8 @@
 	}
 
 	.back-link {
-		margin-top: 9rem;
+		--back-link-margin-top: 9rem;
+		margin-top: var(--back-link-margin-top);
 		text-align: center;
 	}
 

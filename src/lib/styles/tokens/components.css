@@ -16,4 +16,8 @@
 	--ui-pill-font-size: var(--font-size-12);
 	--ui-pill-padding-y: 0.18rem;
 	--ui-pill-padding-x: 0.5rem;
+
+	/* Pulls a full-width section out of the centered column. With `left: 50%`, `right: 50%` and
+	   `width: 100vw`, a negative margin of half the window on each side spans the whole window. */
+	--layout-full-bleed-margin: -50vw;
 }

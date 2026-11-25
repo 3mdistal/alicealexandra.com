@@ -117,8 +117,8 @@
 		right: 50%;
 		left: 50%;
 		margin: 0;
-		margin-right: -50vw;
-		margin-left: -50vw;
+		margin-right: var(--layout-full-bleed-margin);
+		margin-left: var(--layout-full-bleed-margin);
 		background-color: var(--color-content-bg);
 		padding: 0;
 		width: 100vw;

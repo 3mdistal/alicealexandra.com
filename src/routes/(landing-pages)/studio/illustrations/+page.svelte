@@ -410,9 +410,10 @@
 		}
 
 		.modal-content {
+			--modal-content-padding-top: 3.5rem;
 			justify-content: flex-start;
 			border-radius: 0;
-			padding: 3.5rem var(--space-8) var(--space-24) var(--space-8);
+			padding: var(--modal-content-padding-top) var(--space-8) var(--space-24) var(--space-8);
 			width: 100%;
 			max-width: 100vw;
 			height: 100%;

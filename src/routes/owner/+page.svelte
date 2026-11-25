@@ -106,11 +106,12 @@
 
 <style>
 	.owner-page {
+		--owner-page-padding-top: 7rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		background: var(--color-bg);
-		padding: 7rem var(--space-24) var(--space-48);
+		padding: var(--owner-page-padding-top) var(--space-24) var(--space-48);
 		min-height: 100vh;
 	}
 

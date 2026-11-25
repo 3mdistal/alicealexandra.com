@@ -264,9 +264,10 @@
 	}
 
 	.logo-text {
+		--logo-text-font-size: 2.75rem;
 		color: var(--color-fixed-white);
 		font-weight: 500;
-		font-size: 2.75rem;
+		font-size: var(--logo-text-font-size);
 		font-family: 'Euphoria Script', cursive;
 	}
 

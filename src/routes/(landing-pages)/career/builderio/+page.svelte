@@ -155,7 +155,8 @@
 		}
 
 		.placeholder {
-			padding: 3.5rem;
+			--placeholder-padding: 3.5rem;
+			padding: var(--placeholder-padding);
 		}
 	}
 </style>
