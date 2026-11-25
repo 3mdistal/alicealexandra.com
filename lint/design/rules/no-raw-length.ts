@@ -9,7 +9,8 @@ import { loadTokenManifest, primitivesIn } from '../token-manifest.ts';
  * Margins, paddings, gaps, font sizes and corner radii come from the design tokens. A raw length such
  * as `13px` in a `.svelte` style block or a stylesheet is reported, including inside math and a `var()`
  * fallback, so each scale stays in one place. A custom property may hold a raw length, which names it,
- * and so may a keyframe. The token files themselves are left to `design/token-tiers`.
+ * and so may a keyframe. A length in `em` is allowed: like a percentage, it follows the text it sits in,
+ * which is what spacing in prose wants. The token files themselves are left to `design/token-tiers`.
  *
  * A length equal to a primitive on the property's own scale is fixed automatically, since a primitive
  * has the same value everywhere. The fix is skipped where the value's first `var()` would stop an older
@@ -56,6 +57,7 @@ const rule: Rule.RuleModule = {
 				const steps = primitives.lengths.filter(({ name }) => name.startsWith(scale.prefix));
 				const fixable = canTakeVar(value);
 				for (const { text, length, start, end } of findRawLengths(value, property)) {
+					if (length.unit === 'em') continue;
 					const range: [number, number] = [valueStart + start, valueStart + end];
 					const match = matchLength(length, steps);
 					context.report({

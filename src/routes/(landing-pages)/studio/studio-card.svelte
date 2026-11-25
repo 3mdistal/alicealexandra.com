@@ -235,7 +235,7 @@
 	}
 
 	.card-front {
-		gap: var(--space-8);
+		gap: var(--space-64);
 	}
 
 	.card-back {
@@ -245,7 +245,7 @@
 		align-items: center;
 		opacity: 0;
 		box-sizing: border-box;
-		padding: var(--space-9) var(--space-7);
+		padding: var(--space-96) var(--space-48);
 		--_button-accent: var(--color-fixed-white);
 		--_button-bg: var(--studio-card-bg);
 	}
@@ -275,7 +275,7 @@
 	}
 
 	.title-container h2 {
-		margin-bottom: var(--space-5);
+		margin-bottom: var(--space-24);
 		color: var(--color-fixed-white);
 		font-weight: 300;
 		font-size: 2.25rem;
@@ -284,7 +284,7 @@
 	}
 
 	.title-container p {
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-24);
 		text-align: center;
 	}
 
@@ -314,9 +314,9 @@
 	}
 
 	.description {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-32);
 		max-width: 100%;
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-24);
 		text-align: center;
 	}
 
@@ -348,7 +348,7 @@
 
 	@media (min-width: 640px) {
 		.card-back {
-			padding: 2.5rem var(--space-4);
+			padding: 2.5rem var(--space-16);
 		}
 	}
 </style>

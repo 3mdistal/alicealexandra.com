@@ -29,7 +29,7 @@
 	}
 
 	.ui-card.padded {
-		padding: var(--space-5);
+		padding: var(--space-24);
 	}
 
 	.ui-card.elevated {

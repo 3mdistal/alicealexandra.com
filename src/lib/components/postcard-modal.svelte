@@ -369,7 +369,7 @@
 		position: relative;
 		box-shadow: 0 25px 50px color-mix(in srgb, var(--color-fixed-black) 50%, transparent);
 		border: 2px dotted color-mix(in srgb, var(--color-content-border) 70%, transparent);
-		border-radius: var(--radius-4);
+		border-radius: var(--radius-20);
 		background: var(--color-content-bg);
 		/* Remove CSS sizing - let GSAP handle dimensions */
 		overflow: hidden;
@@ -404,7 +404,7 @@
 			color-mix(in srgb, transparent 35%, var(--color-content-bg)) 70%,
 			var(--color-content-bg) 100%
 		);
-		padding: var(--space-6);
+		padding: var(--space-32);
 		padding-bottom: 10rem;
 	}
 
@@ -414,7 +414,7 @@
 	}
 
 	.modal-hero-content h1 {
-		margin: 0 0 var(--space-2) 0;
+		margin: 0 0 var(--space-8) 0;
 		color: var(--color-content-text);
 		font-weight: 500;
 		font-size: 3rem;
@@ -452,10 +452,10 @@
 		position: sticky;
 		top: 1rem;
 		justify-content: flex-end;
-		gap: var(--space-2);
+		gap: var(--space-8);
 		z-index: 10;
 		margin-bottom: -52px;
-		padding-right: var(--space-4);
+		padding-right: var(--space-16);
 		pointer-events: none;
 	}
 
@@ -483,12 +483,12 @@
 		position: relative;
 		z-index: 1;
 		margin: -6rem auto 0;
-		padding: 0 var(--space-6) 18rem;
+		padding: 0 var(--space-32) 18rem;
 		max-width: 800px;
 	}
 
 	.not-found {
-		padding: var(--space-8) var(--space-6);
+		padding: var(--space-64) var(--space-32);
 		text-align: center;
 	}
 
@@ -497,7 +497,7 @@
 	}
 
 	.not-found p {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-32);
 		color: var(--color-content-secondary);
 	}
 
@@ -509,7 +509,7 @@
 		}
 
 		.modal-hero-overlay {
-			padding: var(--space-5);
+			padding: var(--space-24);
 			padding-bottom: 7rem;
 		}
 
@@ -523,7 +523,7 @@
 
 		.modal-content-area {
 			margin-top: -4rem;
-			padding: 0 var(--space-5) var(--space-5);
+			padding: 0 var(--space-24) var(--space-24);
 		}
 	}
 
@@ -538,7 +538,7 @@
 		}
 
 		.modal-hero-overlay {
-			padding: var(--space-4);
+			padding: var(--space-16);
 			padding-bottom: 5rem;
 		}
 
@@ -547,7 +547,7 @@
 		}
 
 		.modal-hero-content .description {
-			font-size: var(--font-size-base);
+			font-size: var(--font-size-16);
 		}
 
 		.modal-content-area {

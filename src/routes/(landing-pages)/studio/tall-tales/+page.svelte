@@ -132,7 +132,7 @@
 		align-items: flex-end;
 		z-index: 2;
 		box-sizing: border-box;
-		padding: var(--space-7);
+		padding: var(--space-48);
 		width: 100%;
 		min-width: 0;
 		min-height: 100%;
@@ -146,15 +146,15 @@
 
 	.title {
 		margin: 0;
-		font-size: var(--font-size-3xl);
+		font-size: var(--font-size-40);
 		line-height: var(--line-height-tight);
 		font-family: var(--font-serif);
 		text-shadow: 0 2px 4px color-mix(in srgb, var(--color-fixed-black) 80%, transparent);
 	}
 
 	.description {
-		margin: var(--space-4) 0 var(--space-6);
-		font-size: var(--font-size-lg);
+		margin: var(--space-16) 0 var(--space-32);
+		font-size: var(--font-size-20);
 		line-height: var(--line-height-body);
 		font-family: var(--font-serif);
 	}
@@ -175,11 +175,11 @@
 		}
 
 		.ribbon-content {
-			padding: var(--space-5);
+			padding: var(--space-24);
 		}
 
 		.title {
-			font-size: var(--font-size-2xl);
+			font-size: var(--font-size-32);
 		}
 	}
 </style>

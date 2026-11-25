@@ -28,11 +28,11 @@
 	--content-font-size-code: 1.125rem;
 
 	/* Content spacing */
-	--content-space-xl: var(--space-8);
-	--content-space-lg: calc(var(--space-6) + var(--space-2));
-	--content-space-md: var(--space-5);
-	--content-space-sm: var(--space-4);
-	--content-space-xs: var(--space-2);
+	--content-space-xl: var(--space-64);
+	--content-space-lg: calc(var(--space-32) + var(--space-8));
+	--content-space-md: var(--space-24);
+	--content-space-sm: var(--space-16);
+	--content-space-xs: var(--space-8);
 
 	/* Content layout */
 	--content-column: 900px; /* Reading column shared by blog posts and the blog index */
@@ -40,8 +40,8 @@
 	--content-measure: 60ch;
 	--content-measure-subtitle: 45ch;
 	--content-measure-blockquote: 40ch;
-	--content-radius: calc(var(--radius-1) + 2px);
-	--content-radius-sm: var(--radius-1);
+	--content-radius: calc(var(--radius-4) + 2px);
+	--content-radius-sm: var(--radius-4);
 }
 
 @media (min-width: 640px) {

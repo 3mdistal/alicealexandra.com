@@ -168,16 +168,16 @@
 <style>
 	.background {
 		background-color: var(--color-content-bg);
-		padding: var(--space-4);
+		padding: var(--space-16);
 		min-height: 100vh;
 		color: var(--color-content-text);
 	}
 
 	.art-grid {
-		column-gap: var(--space-5);
+		column-gap: var(--space-24);
 		columns: 1;
 		margin: 0 auto;
-		padding: var(--space-4);
+		padding: var(--space-16);
 		width: 100%;
 		max-width: 1800px;
 	}
@@ -195,7 +195,7 @@
 		animation-delay: var(--delay);
 		cursor: pointer;
 		contain: paint;
-		margin-bottom: var(--space-5);
+		margin-bottom: var(--space-24);
 		border: none;
 		background: transparent;
 		isolation: isolate;
@@ -215,7 +215,7 @@
 		position: relative;
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		box-shadow: 0 4px 6px color-mix(in srgb, var(--color-fixed-black) 10%, transparent);
-		border-radius: var(--radius-2);
+		border-radius: var(--radius-8);
 		overflow: hidden;
 	}
 
@@ -238,7 +238,7 @@
 			color-mix(in srgb, var(--color-fixed-black) 80%, transparent),
 			transparent
 		);
-		padding: var(--space-5);
+		padding: var(--space-24);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
@@ -263,7 +263,7 @@
 	}
 
 	.image-overlay .date {
-		margin: var(--space-2) 0 0;
+		margin: var(--space-8) 0 0;
 		color: color-mix(in srgb, var(--color-fixed-white) 80%, transparent);
 		font-size: 0.9rem;
 	}
@@ -314,7 +314,7 @@
 		align-items: center;
 		z-index: 1000;
 		background-color: color-mix(in srgb, var(--color-fixed-black) 95%, transparent);
-		padding: var(--space-6);
+		padding: var(--space-32);
 		overflow-y: auto;
 	}
 
@@ -338,9 +338,9 @@
 		align-items: center;
 		z-index: 1;
 		backdrop-filter: blur(10px);
-		border-radius: var(--radius-3);
+		border-radius: var(--radius-12);
 		background-color: var(--color-content-bg);
-		padding: var(--space-6);
+		padding: var(--space-32);
 		max-width: 90vw;
 		max-height: 90vh;
 		color: var(--color-content-text);
@@ -348,28 +348,28 @@
 
 	.modal-image {
 		transition: opacity 0.3s ease;
-		border-radius: var(--radius-1);
+		border-radius: var(--radius-4);
 		max-width: 100%;
 		max-height: 70vh;
 		object-fit: contain;
 	}
 
 	.modal-info {
-		margin-top: var(--space-5);
+		margin-top: var(--space-24);
 		width: 100%;
 		max-width: 600px;
 		text-align: center;
 	}
 
 	.modal-info h2 {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-8);
 		color: var(--color-content-text);
 		font-size: 1.75rem;
 	}
 
 	.modal-info .date em {
 		opacity: 0.9;
-		margin: var(--space-4) 0;
+		margin: var(--space-16) 0;
 		color: var(--color-content-secondary);
 		font-style: italic;
 		font-size: 1.1rem;
@@ -397,7 +397,7 @@
 		width: 2.5rem;
 		height: 2.5rem;
 		color: var(--color-content-text);
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-24);
 	}
 
 	.close-button:hover {
@@ -412,7 +412,7 @@
 		.modal-content {
 			justify-content: flex-start;
 			border-radius: 0;
-			padding: 3.5rem var(--space-2) var(--space-5) var(--space-2);
+			padding: 3.5rem var(--space-8) var(--space-24) var(--space-8);
 			width: 100%;
 			max-width: 100vw;
 			height: 100%;
@@ -436,7 +436,7 @@
 
 		.modal-info {
 			margin-bottom: auto;
-			padding: 0 var(--space-2);
+			padding: 0 var(--space-8);
 		}
 	}
 </style>

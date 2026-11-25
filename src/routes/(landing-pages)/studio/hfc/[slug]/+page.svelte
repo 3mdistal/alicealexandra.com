@@ -415,25 +415,25 @@
 		flex-direction: column;
 		align-items: center;
 		z-index: 1;
-		padding: var(--space-7) var(--space-5) var(--space-9);
+		padding: var(--space-48) var(--space-24) var(--space-96);
 	}
 
 	header {
-		margin-bottom: var(--space-8);
+		margin-bottom: var(--space-64);
 		max-width: 60ch;
 		text-align: center;
 	}
 
 	.collection-name {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-8);
 		color: var(--color-gray-475);
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-14);
 		letter-spacing: 0.1em;
 		text-transform: lowercase;
 	}
 
 	h1 {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-8);
 		color: var(--color-neutral-0);
 		font-weight: 300;
 		font-size: 2.25rem;
@@ -442,18 +442,18 @@
 	.section-name {
 		color: var(--color-gray-300);
 		font-style: italic;
-		font-size: var(--font-size-base);
+		font-size: var(--font-size-16);
 	}
 
 	.poem-content {
-		margin-bottom: var(--space-9);
+		margin-bottom: var(--space-96);
 		width: fit-content;
 		max-width: 100%;
 		overflow-x: auto;
 	}
 
 	.poem-stanza {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-32);
 		color: var(--color-neutral-0);
 		font-size: 1.125rem;
 		line-height: 1.8;
@@ -484,19 +484,19 @@
 
 	.editor-layout {
 		display: grid;
-		gap: var(--space-5);
-		margin-bottom: var(--space-6);
+		gap: var(--space-24);
+		margin-bottom: var(--space-32);
 	}
 
 	.editor-pane {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 		min-width: 0;
 	}
 
 	.editor-pane-header {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 	}
 
 	.editor-pane-title {
@@ -545,10 +545,10 @@
 
 	.editor-readonly-row {
 		display: grid;
-		gap: var(--space-3);
-		margin: var(--space-4) 0;
+		gap: var(--space-12);
+		margin: var(--space-16) 0;
 		border-top: 1px solid var(--color-content-border);
-		padding-top: var(--space-4);
+		padding-top: var(--space-16);
 		color: var(--color-content-secondary);
 	}
 
@@ -598,7 +598,7 @@
 		}
 
 		main {
-			padding: var(--space-8) var(--space-6) 8rem;
+			padding: var(--space-64) var(--space-32) 8rem;
 		}
 
 		h1 {
@@ -606,7 +606,7 @@
 		}
 
 		.poem-stanza {
-			font-size: var(--font-size-lg);
+			font-size: var(--font-size-20);
 		}
 	}
 
@@ -626,7 +626,7 @@
 		}
 
 		.poem-stanza {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 	}
 

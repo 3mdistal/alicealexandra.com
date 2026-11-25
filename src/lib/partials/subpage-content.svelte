@@ -83,9 +83,9 @@
 	}
 
 	h2 {
-		margin-bottom: var(--space-5);
+		margin-bottom: var(--space-24);
 		font-weight: var(--font-weight-medium);
-		font-size: var(--font-size-2xl);
+		font-size: var(--font-size-32);
 		line-height: var(--line-height-tight);
 		text-align: left;
 	}
@@ -104,7 +104,7 @@
 
 	.text {
 		max-width: min(60ch, 50%);
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-20);
 		line-height: 1.75;
 		text-align: left;
 
@@ -147,7 +147,7 @@
 
 	@media (min-width: 1024px) {
 		h2 {
-			font-size: var(--font-size-3xl);
+			font-size: var(--font-size-40);
 			text-align: center;
 		}
 
@@ -157,7 +157,7 @@
 		}
 
 		.text {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 
 		.image-container {

@@ -573,19 +573,19 @@
 
 	.editor-layout {
 		display: grid;
-		gap: var(--space-5);
-		margin-bottom: var(--space-6);
+		gap: var(--space-24);
+		margin-bottom: var(--space-32);
 	}
 
 	.editor-pane {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 		min-width: 0;
 	}
 
 	.editor-pane-header {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 	}
 
 	.editor-pane-title {
@@ -629,10 +629,10 @@
 
 	.editor-readonly-row {
 		display: grid;
-		gap: var(--space-3);
-		margin: var(--space-4) 0;
+		gap: var(--space-12);
+		margin: var(--space-16) 0;
 		border-top: 1px solid var(--color-content-border);
-		padding-top: var(--space-4);
+		padding-top: var(--space-16);
 		color: var(--color-content-secondary);
 	}
 

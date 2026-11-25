@@ -31,7 +31,7 @@ stylesheet.run('no-primitive-color in stylesheets', rule, {
 			code: `.card {
 				color: var(--color-bg);
 				background: color-mix(in srgb, var(--color-bg) 92%, var(--color-fixed-white));
-				padding: var(--space-1);
+				padding: var(--space-4);
 				box-shadow: var(--shadow-1);
 			}`
 		},

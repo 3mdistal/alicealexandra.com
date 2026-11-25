@@ -474,7 +474,7 @@
 
 	.editor-host {
 		margin: 0 auto;
-		padding: 8rem var(--space-6) var(--space-7);
+		padding: 8rem var(--space-32) var(--space-48);
 		max-width: 1440px;
 	}
 
@@ -486,7 +486,7 @@
 		align-items: center;
 		box-sizing: border-box;
 		background-color: var(--bg-color, transparent);
-		padding: var(--space-9) var(--space-6);
+		padding: var(--space-96) var(--space-32);
 		min-height: 100vh;
 		overflow: hidden;
 		color: var(--text-color, var(--color-fixed-white));
@@ -566,13 +566,13 @@
 	}
 
 	.section-content :global(p) {
-		margin-bottom: var(--space-5);
+		margin-bottom: var(--space-24);
 	}
 
 	.tale-breadcrumb {
 		display: inline-flex;
 		align-items: center;
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 	}
 
 	.tale-breadcrumb-link {
@@ -600,9 +600,9 @@
 	}
 
 	.tale-hero {
-		margin-bottom: var(--space-8);
+		margin-bottom: var(--space-64);
 		border-bottom: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
-		padding-bottom: var(--space-6);
+		padding-bottom: var(--space-32);
 		text-align: left;
 	}
 
@@ -655,19 +655,19 @@
 
 	.editor-layout {
 		display: grid;
-		gap: var(--space-5);
-		margin-top: var(--space-5);
+		gap: var(--space-24);
+		margin-top: var(--space-24);
 	}
 
 	.editor-pane {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 		min-width: 0;
 	}
 
 	.editor-pane-header {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 	}
 
 	.editor-pane-title {
@@ -723,10 +723,10 @@
 
 	.editor-readonly-row {
 		display: grid;
-		gap: var(--space-3);
-		margin: var(--space-4) 0;
+		gap: var(--space-12);
+		margin: var(--space-16) 0;
 		border-top: 1px solid var(--color-content-border);
-		padding-top: var(--space-4);
+		padding-top: var(--space-16);
 		color: var(--color-content-secondary);
 	}
 
@@ -749,7 +749,7 @@
 
 	.editor-section-list {
 		display: grid;
-		gap: var(--space-4);
+		gap: var(--space-16);
 	}
 
 	.editor-subtitle {
@@ -762,11 +762,11 @@
 	.editor-section-card {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 	}
 
 	.editor-section-kicker {
-		margin: 0 0 var(--space-3);
+		margin: 0 0 var(--space-12);
 		color: var(--color-content-secondary);
 		font-size: var(--content-font-size-body-sm);
 		letter-spacing: 0.08em;
@@ -792,7 +792,7 @@
 
 	.editor-preview-story {
 		display: grid;
-		gap: var(--space-4);
+		gap: var(--space-16);
 	}
 
 	.not-found {
@@ -800,7 +800,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: var(--space-4);
+		gap: var(--space-16);
 		min-height: 100vh;
 		color: var(--color-text);
 	}

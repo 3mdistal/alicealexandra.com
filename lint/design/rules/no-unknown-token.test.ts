@@ -14,13 +14,13 @@ const settings = {
 };
 
 const fontSizeMessage =
-	"`--font-size-md` isn't defined in a token file or in this file, so the property silently resets to its inherited or initial value. Defined `--font-size-*` tokens: sm, base, lg. If a parent component sets it, give it a fallback: `var(--font-size-md, …)`.";
+	"`--font-size-md` isn't defined in a token file or in this file, so the property silently resets to its inherited or initial value. Defined `--font-size-*` tokens: 14, 16, 20. If a parent component sets it, give it a fallback: `var(--font-size-md, …)`.";
 
 const svelte = new RuleTester({ languageOptions: { parser: svelteParser }, settings });
 
 svelte.run('no-unknown-token in .svelte files', rule, {
 	valid: [
-		{ filename: 'Tokens.svelte', code: '<style>p { margin: var(--space-4); }</style>' },
+		{ filename: 'Tokens.svelte', code: '<style>p { margin: var(--space-16); }</style>' },
 		{
 			filename: 'Input.svelte',
 			code: '<style>p { color: var(--label-color, var(--color-accent)); }</style>'
@@ -105,7 +105,7 @@ const stylesheet = new RuleTester({ plugins: { css }, language: 'css/css', setti
 
 stylesheet.run('no-unknown-token in .css files', rule, {
 	valid: [
-		{ filename: 'chrome.css', code: '.link { font-size: var(--font-size-base); }' },
+		{ filename: 'chrome.css', code: '.link { font-size: var(--font-size-16); }' },
 		{ filename: 'chrome.css', code: '.link { --size: 1rem; font-size: var(--size); }' },
 		{ filename: 'chrome.css', code: '.link { font-size: var(--size, 1rem); }' },
 		{

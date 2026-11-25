@@ -3,10 +3,10 @@ import { findVarReferences } from './var-references.ts';
 
 describe('findVarReferences', () => {
 	it('finds a plain reference and where it sits in the value', () => {
-		const value = ' 0 var(--space-4)';
+		const value = ' 0 var(--space-16)';
 		const [reference] = findVarReferences(value);
-		expect(reference).toEqual({ name: '--space-4', hasFallback: false, start: 3, end: 17 });
-		expect(value.slice(reference?.start, reference?.end)).toBe('var(--space-4)');
+		expect(reference).toEqual({ name: '--space-16', hasFallback: false, start: 3, end: 18 });
+		expect(value.slice(reference?.start, reference?.end)).toBe('var(--space-16)');
 	});
 
 	it('treats any comma, even an empty fallback, as a fallback', () => {

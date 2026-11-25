@@ -79,13 +79,13 @@
 	}
 
 	.ui-link-button.sm {
-		--ui-control-font-size: var(--font-size-sm);
+		--ui-control-font-size: var(--font-size-14);
 		--ui-control-padding-y: 0.45rem;
 		--ui-control-padding-x: 0.75rem;
 	}
 
 	.ui-link-button.lg {
-		--ui-control-font-size: var(--font-size-lg);
+		--ui-control-font-size: var(--font-size-20);
 		--ui-control-padding-y: 0.75rem;
 		--ui-control-padding-x: 1.25rem;
 	}

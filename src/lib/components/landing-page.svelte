@@ -153,7 +153,7 @@
 		margin-bottom: 1.25rem;
 		color: var(--landing-accent, var(--color-accent));
 		font-weight: var(--font-weight-light);
-		font-size: var(--font-size-3xl);
+		font-size: var(--font-size-40);
 		line-height: var(--line-height-tight);
 	}
 
@@ -165,13 +165,13 @@
 
 	.bordered-content p {
 		max-width: 50ch;
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-20);
 		line-height: 1.75;
 	}
 
 	@media (min-width: 1024px) {
 		.bordered-content p {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 	}
 

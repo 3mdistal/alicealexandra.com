@@ -93,7 +93,7 @@
 
 	p {
 		margin-bottom: 1.5em;
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-20);
 		line-height: 1.75;
 	}
 
@@ -104,20 +104,20 @@
 	}
 
 	.about-footer-heading {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 		max-width: 80%;
 		font-weight: var(--font-weight-medium);
-		font-size: var(--font-size-2xl);
+		font-size: var(--font-size-32);
 		line-height: var(--line-height-tight);
 	}
 
 	@media (min-width: 1024px) {
 		.about-footer-heading {
-			font-size: var(--font-size-3xl);
+			font-size: var(--font-size-40);
 		}
 
 		p {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 	}
 
@@ -134,7 +134,7 @@
 	}
 
 	.socials-container {
-		margin-top: var(--space-4);
+		margin-top: var(--space-16);
 	}
 
 	@media (min-width: 768px) {
