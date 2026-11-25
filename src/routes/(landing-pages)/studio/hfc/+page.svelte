@@ -417,7 +417,7 @@
 		h2 {
 			color: var(--color-neutral-0);
 			font-weight: 300;
-			font-size: 1.5rem;
+			font-size: var(--font-size-xl);
 
 			@media (min-width: 640px) {
 				font-size: 1.875rem;
@@ -433,11 +433,11 @@
 			white-space: pre-line;
 
 			@media (min-width: 640px) {
-				font-size: 1.25rem;
+				font-size: var(--font-size-lg);
 			}
 
 			@media (min-width: 768px) {
-				font-size: 1.5rem;
+				font-size: var(--font-size-xl);
 			}
 
 			em {
@@ -450,9 +450,9 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		gap: 6rem;
+		gap: var(--space-9);
 		background-color: var(--color-gray-300);
-		padding: 1rem;
+		padding: var(--space-4);
 		min-height: 100lvh;
 		scroll-snap-align: start;
 
@@ -461,7 +461,7 @@
 		}
 
 		@media (min-width: 1024px) {
-			gap: 3rem;
+			gap: var(--space-7);
 		}
 	}
 
@@ -499,7 +499,7 @@
 		grid-row-start: 5;
 		grid-column-start: 3;
 		background-color: var(--color-neutral-0);
-		padding: 2rem 1rem;
+		padding: var(--space-6) var(--space-4);
 		min-width: 60vw;
 
 		&:hover {
@@ -517,7 +517,7 @@
 			grid-column-start: 4;
 			transform: translate(-2.5rem, 5rem);
 			min-width: 35ch;
-			font-size: 1.5rem;
+			font-size: var(--font-size-xl);
 		}
 
 		@media (min-width: 1280px) {
@@ -527,7 +527,7 @@
 
 	.section-act {
 		color: var(--color-neutral-1000);
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		text-align: center;
 
 		@media (min-width: 640px) {
@@ -539,7 +539,7 @@
 		margin: 0;
 		color: var(--color-neutral-1000);
 		font-weight: 300;
-		font-size: 1.5rem;
+		font-size: var(--font-size-xl);
 		text-align: center;
 
 		@media (min-width: 640px) {
@@ -575,7 +575,7 @@
 
 	.section-quote {
 		background-color: var(--color-neutral-1000);
-		padding: 2rem;
+		padding: var(--space-6);
 
 		@media (min-width: 1024px) {
 			padding: 5rem;
@@ -583,15 +583,15 @@
 	}
 
 	.quote-text {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 		font-size: 1.1rem;
 
 		@media (min-width: 640px) {
-			font-size: 1.25rem;
+			font-size: var(--font-size-lg);
 		}
 
 		@media (min-width: 768px) {
-			font-size: 1.5rem;
+			font-size: var(--font-size-xl);
 		}
 
 		em {
@@ -601,7 +601,7 @@
 
 	.quote-author {
 		color: var(--color-neutral-0);
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 
 		@media (min-width: 768px) {
 			font-size: 1.125rem;
@@ -651,7 +651,7 @@
 		cursor: pointer;
 		border: 0;
 		background: none;
-		padding: 1rem;
+		padding: var(--space-4);
 		color: inherit;
 		font: inherit;
 
@@ -685,27 +685,27 @@
 	}
 
 	.poem-stanza {
-		margin-bottom: 2rem;
+		margin-bottom: var(--space-6);
 		color: var(--color-neutral-0);
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 
 		@media (min-width: 640px) {
 			font-size: 1.125rem;
 		}
 
 		@media (min-width: 768px) {
-			font-size: 1.25rem;
+			font-size: var(--font-size-lg);
 		}
 
 		@media (min-width: 1280px) {
-			font-size: 1.5rem;
+			font-size: var(--font-size-xl);
 		}
 	}
 
 	.close-poem {
 		margin-top: 8rem;
 		color: var(--color-neutral-0);
-		font-size: 1.5rem;
+		font-size: var(--font-size-xl);
 		text-align: right;
 
 		&:hover {

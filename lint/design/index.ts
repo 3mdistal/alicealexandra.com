@@ -5,6 +5,7 @@
  */
 import noPrimitiveColor from './rules/no-primitive-color.ts';
 import noRawColor from './rules/no-raw-color.ts';
+import noRawLength from './rules/no-raw-length.ts';
 import noUnknownToken from './rules/no-unknown-token.ts';
 import tokenTiers from './rules/token-tiers.ts';
 
@@ -13,6 +14,7 @@ export default {
 	rules: {
 		'no-primitive-color': noPrimitiveColor,
 		'no-raw-color': noRawColor,
+		'no-raw-length': noRawLength,
 		'no-unknown-token': noUnknownToken,
 		'token-tiers': tokenTiers
 	}

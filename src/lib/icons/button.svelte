@@ -47,7 +47,7 @@
 
 	@media (min-width: 1024px) {
 		:global(.legacy-icon-button) {
-			font-size: 1.25rem;
+			font-size: var(--font-size-lg);
 		}
 	}
 </style>

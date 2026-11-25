@@ -52,7 +52,7 @@
 		display: grid;
 		grid-template-columns: auto 1fr;
 		column-gap: var(--space-2);
-		margin-bottom: 3rem;
+		margin-bottom: var(--space-7);
 
 		/* The title takes the free width; the date column hugs the date. */
 		@media (min-width: 768px) {

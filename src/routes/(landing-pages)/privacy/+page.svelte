@@ -58,7 +58,7 @@
 	}
 
 	.policy-title {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 		color: var(--color-accent);
 		font-weight: var(--font-weight-medium);
 		font-size: var(--font-size-2xl);
@@ -66,12 +66,12 @@
 	}
 
 	.policy ul {
-		margin: 1.5rem 0;
-		padding-left: 1.5rem;
+		margin: var(--space-5) 0;
+		padding-left: var(--space-5);
 	}
 
 	.policy li + li {
-		margin-top: 0.75rem;
+		margin-top: var(--space-3);
 	}
 
 	.policy a {
@@ -80,7 +80,7 @@
 
 	@media (min-width: 640px) {
 		.policy {
-			padding: 3rem;
+			padding: var(--space-7);
 		}
 	}
 </style>

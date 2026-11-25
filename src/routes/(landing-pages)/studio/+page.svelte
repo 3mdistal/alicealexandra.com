@@ -143,7 +143,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		align-items: flex-start;
-		gap: 3rem;
+		gap: var(--space-7);
 		opacity: 0;
 		z-index: 1;
 	}

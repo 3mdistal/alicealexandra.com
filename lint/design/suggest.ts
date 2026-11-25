@@ -1,5 +1,6 @@
 import { colorDistance, sameColor, type Rgba } from './color.ts';
-import type { ColorPrimitive, TokenManifest } from './token-manifest.ts';
+import { defaultPixels, parseLength, sameLength, type Length, type LengthScale } from './length.ts';
+import type { ColorPrimitive, LengthPrimitive, TokenManifest } from './token-manifest.ts';
 
 const MAX_FAMILY_SIZE = 12;
 const MAX_SUGGESTIONS = 3;
@@ -186,6 +187,87 @@ function rolesSetTo(
 				!isPrimitive(name) && list.some(({ value }) => value.trim() === `var(${primitive})`)
 		)
 		.map(([name]) => name);
+}
+
+/** The step on a scale with exactly this length, or undefined. */
+export function matchLength(length: Length, steps: LengthPrimitive[]): LengthPrimitive | undefined {
+	return steps.find((step) => sameLength(step.length, length));
+}
+
+/**
+ * Builds the "use this instead" half of a message for a raw length: the step with the same value, the
+ * step that's the same size until a reader changes their text size, or the closest steps. It also
+ * names role tokens with the same value, which can change by route or width.
+ */
+export function suggestLength(
+	length: Length,
+	scale: LengthScale,
+	steps: LengthPrimitive[],
+	definitions: TokenManifest['definitions'],
+	isPrimitive: (name: string) => boolean
+): string {
+	const negative = length.number < 0;
+	const size = { ...length, number: Math.abs(length.number) };
+	const usage = ({ name }: LengthPrimitive) =>
+		negative ? `\`calc(-1 * var(${name}))\`` : `\`var(${name})\``;
+	const describe = (step: LengthPrimitive) => `\`${step.name}\` (${textOf(step.length)})`;
+
+	const match = matchLength(size, steps);
+	const roles = negative ? [] : rolesWithLength(size, match, scale, definitions, isPrimitive);
+	const roleNote =
+		roles.length > 0
+			? ` ${roles.length > 1 ? 'Role tokens' : 'A role token'} with this value: ${listOf(roles)}.`
+			: '';
+	if (match) {
+		return `Use ${usage(match)}, which ${negative ? 'renders the same' : 'has the same value'}.${roleNote}`;
+	}
+
+	const pixels = defaultPixels(size);
+	if (pixels === undefined) {
+		return `No token is in \`${length.unit}\`. Use a step on the scale (${listOf(steps.map(describe))}), or add a token.`;
+	}
+	const sameSize = steps.find((step) => defaultPixels(step.length) === pixels);
+	if (sameSize) {
+		return `${describe(sameSize)} is the same size until a reader changes their browser's text size. If that's fine here, use ${usage(sameSize)}.${roleNote}`;
+	}
+	return `No step on the scale has this value. Closest: ${listOf(closestSteps(pixels, steps).map(describe))}. Use one of those, or add a token.${roleNote}`;
+}
+
+/** The two steps nearest a size in pixels. */
+function closestSteps(pixels: number, steps: LengthPrimitive[]): LengthPrimitive[] {
+	const distance = (step: LengthPrimitive) =>
+		Math.abs((defaultPixels(step.length) ?? Infinity) - pixels);
+	return [...steps].sort((a, b) => distance(a) - distance(b)).slice(0, 2);
+}
+
+/** Role tokens for a scale with this length, set straight to it or to the primitive that has it. */
+function rolesWithLength(
+	length: Length,
+	match: LengthPrimitive | undefined,
+	scale: LengthScale,
+	definitions: TokenManifest['definitions'],
+	isPrimitive: (name: string) => boolean
+): string[] {
+	const written = [...definitions]
+		.filter(
+			([name, list]) =>
+				!isPrimitive(name) &&
+				list.some(({ value }) => {
+					const parsed = parseLength(value);
+					return parsed && sameLength(parsed, length);
+				})
+		)
+		.map(([name]) => name);
+	const referenced = match ? rolesSetTo(match.name, definitions, isPrimitive) : [];
+	return [...referenced, ...written]
+		.filter((name) => scale.role.test(name))
+		.slice(0, MAX_SUGGESTIONS)
+		.map((name) => `\`${name}\``);
+}
+
+/** `1rem` */
+function textOf({ number, unit }: Length): string {
+	return `${number}${unit}`;
 }
 
 /** `a`, `a or b`, `a, b, or c` */

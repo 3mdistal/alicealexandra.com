@@ -299,7 +299,7 @@
 			color-mix(in srgb, transparent 25%, var(--postcard-paper)) 70%,
 			var(--postcard-paper) 100%
 		);
-		padding: 2rem;
+		padding: var(--space-6);
 	}
 
 	.postcard-content {
@@ -308,7 +308,7 @@
 	}
 
 	h2 {
-		margin: 0 0 1rem 0;
+		margin: 0 0 var(--space-4) 0;
 		color: var(--postcard-ink);
 		font-weight: 600;
 		font-size: 1.8rem;
@@ -321,7 +321,7 @@
 		-webkit-line-clamp: 3;
 		line-clamp: 3;
 		color: var(--postcard-ink-muted);
-		font-size: 1rem;
+		font-size: var(--font-size-base);
 		line-height: 1.5;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
@@ -329,11 +329,11 @@
 
 	@media (max-width: 768px) {
 		.postcard-overlay {
-			padding: 1.5rem;
+			padding: var(--space-5);
 		}
 
 		h2 {
-			font-size: 1.5rem;
+			font-size: var(--font-size-xl);
 		}
 
 		.description {

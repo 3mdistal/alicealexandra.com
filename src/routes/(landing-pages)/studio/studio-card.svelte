@@ -235,7 +235,7 @@
 	}
 
 	.card-front {
-		gap: 4rem;
+		gap: var(--space-8);
 	}
 
 	.card-back {
@@ -245,7 +245,7 @@
 		align-items: center;
 		opacity: 0;
 		box-sizing: border-box;
-		padding: 6rem 3rem;
+		padding: var(--space-9) var(--space-7);
 		--_button-accent: var(--color-fixed-white);
 		--_button-bg: var(--studio-card-bg);
 	}
@@ -275,7 +275,7 @@
 	}
 
 	.title-container h2 {
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--space-5);
 		color: var(--color-fixed-white);
 		font-weight: 300;
 		font-size: 2.25rem;
@@ -284,7 +284,7 @@
 	}
 
 	.title-container p {
-		font-size: 1.5rem;
+		font-size: var(--font-size-xl);
 		text-align: center;
 	}
 
@@ -314,9 +314,9 @@
 	}
 
 	.description {
-		margin-bottom: 2rem;
+		margin-bottom: var(--space-6);
 		max-width: 100%;
-		font-size: 1.5rem;
+		font-size: var(--font-size-xl);
 		text-align: center;
 	}
 
@@ -348,7 +348,7 @@
 
 	@media (min-width: 640px) {
 		.card-back {
-			padding: 2.5rem 1rem;
+			padding: 2.5rem var(--space-4);
 		}
 	}
 </style>

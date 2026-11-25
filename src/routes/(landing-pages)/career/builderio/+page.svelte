@@ -42,7 +42,7 @@
 
 	.hero {
 		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
-		padding: 6rem 2rem 4rem;
+		padding: var(--space-9) var(--space-6) var(--space-8);
 		text-align: center;
 	}
 
@@ -50,12 +50,12 @@
 		margin: 0 auto;
 		border-radius: 15px;
 		background-color: var(--color-surface);
-		padding: 3rem;
+		padding: var(--space-7);
 		max-width: 800px;
 	}
 
 	h1 {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 		font-weight: 500;
 		font-size: clamp(2rem, 5vw, 3.25rem);
 		line-height: 1.2;
@@ -76,7 +76,7 @@
 
 	.content {
 		margin: 0 auto;
-		padding: 4rem 2rem;
+		padding: var(--space-8) var(--space-6);
 		max-width: 900px;
 	}
 
@@ -84,12 +84,12 @@
 		box-shadow: var(--shadow-1);
 		border-radius: 10px;
 		background-color: var(--color-surface);
-		padding: 3rem;
+		padding: var(--space-7);
 		text-align: center;
 	}
 
 	.placeholder p {
-		margin: 0 0 1.5rem;
+		margin: 0 0 var(--space-5);
 		color: var(--color-text-muted);
 		font-size: 1.125rem;
 		line-height: 1.6;
@@ -105,7 +105,7 @@
 		display: inline-block;
 		transition: all 0.2s ease;
 		border: 2px solid var(--color-accent);
-		border-radius: 8px;
+		border-radius: var(--radius-2);
 		background-color: var(--color-surface);
 		padding: 0.6rem 1.2rem;
 		color: var(--color-accent);
@@ -120,9 +120,9 @@
 	}
 
 	.footer {
-		margin-top: 2rem;
+		margin-top: var(--space-6);
 		border-top: 1px solid var(--color-border);
-		padding: 2rem;
+		padding: var(--space-6);
 		text-align: center;
 	}
 
@@ -130,12 +130,12 @@
 		display: inline-block;
 		transition: all 0.2s ease;
 		border: 2px solid var(--color-accent);
-		border-radius: 8px;
+		border-radius: var(--radius-2);
 		background-color: var(--color-surface);
-		padding: 0.5rem 1rem;
+		padding: var(--space-2) var(--space-4);
 		color: var(--color-accent);
 		font-weight: 500;
-		font-size: 1rem;
+		font-size: var(--font-size-base);
 		text-decoration: none;
 	}
 
@@ -147,11 +147,11 @@
 
 	@media (min-width: 768px) {
 		.hero {
-			padding: 8rem 4rem 6rem;
+			padding: 8rem var(--space-8) var(--space-9);
 		}
 
 		.content {
-			padding: 6rem 4rem;
+			padding: var(--space-9) var(--space-8);
 		}
 
 		.placeholder {

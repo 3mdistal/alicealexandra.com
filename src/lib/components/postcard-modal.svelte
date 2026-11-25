@@ -369,7 +369,7 @@
 		position: relative;
 		box-shadow: 0 25px 50px color-mix(in srgb, var(--color-fixed-black) 50%, transparent);
 		border: 2px dotted color-mix(in srgb, var(--color-content-border) 70%, transparent);
-		border-radius: 20px;
+		border-radius: var(--radius-4);
 		background: var(--color-content-bg);
 		/* Remove CSS sizing - let GSAP handle dimensions */
 		overflow: hidden;
@@ -404,7 +404,7 @@
 			color-mix(in srgb, transparent 35%, var(--color-content-bg)) 70%,
 			var(--color-content-bg) 100%
 		);
-		padding: 2rem;
+		padding: var(--space-6);
 		padding-bottom: 10rem;
 	}
 
@@ -414,7 +414,7 @@
 	}
 
 	.modal-hero-content h1 {
-		margin: 0 0 0.5rem 0;
+		margin: 0 0 var(--space-2) 0;
 		color: var(--color-content-text);
 		font-weight: 500;
 		font-size: 3rem;
@@ -452,10 +452,10 @@
 		position: sticky;
 		top: 1rem;
 		justify-content: flex-end;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		z-index: 10;
 		margin-bottom: -52px;
-		padding-right: 1rem;
+		padding-right: var(--space-4);
 		pointer-events: none;
 	}
 
@@ -483,12 +483,12 @@
 		position: relative;
 		z-index: 1;
 		margin: -6rem auto 0;
-		padding: 0 2rem 18rem;
+		padding: 0 var(--space-6) 18rem;
 		max-width: 800px;
 	}
 
 	.not-found {
-		padding: 4rem 2rem;
+		padding: var(--space-8) var(--space-6);
 		text-align: center;
 	}
 
@@ -497,7 +497,7 @@
 	}
 
 	.not-found p {
-		margin-bottom: 2rem;
+		margin-bottom: var(--space-6);
 		color: var(--color-content-secondary);
 	}
 
@@ -509,7 +509,7 @@
 		}
 
 		.modal-hero-overlay {
-			padding: 1.5rem;
+			padding: var(--space-5);
 			padding-bottom: 7rem;
 		}
 
@@ -523,7 +523,7 @@
 
 		.modal-content-area {
 			margin-top: -4rem;
-			padding: 0 1.5rem 1.5rem;
+			padding: 0 var(--space-5) var(--space-5);
 		}
 	}
 
@@ -538,7 +538,7 @@
 		}
 
 		.modal-hero-overlay {
-			padding: 1rem;
+			padding: var(--space-4);
 			padding-bottom: 5rem;
 		}
 
@@ -547,7 +547,7 @@
 		}
 
 		.modal-hero-content .description {
-			font-size: 1rem;
+			font-size: var(--font-size-base);
 		}
 
 		.modal-content-area {

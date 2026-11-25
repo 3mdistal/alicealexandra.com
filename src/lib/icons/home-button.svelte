@@ -99,7 +99,7 @@
 		z-index: 10;
 		color: var(--color-fixed-white);
 		font-weight: 500;
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 	}
 
 	@media (min-width: 768px) {
@@ -114,7 +114,7 @@
 		}
 
 		.home-text {
-			font-size: 1.25rem;
+			font-size: var(--font-size-lg);
 		}
 	}
 </style>

@@ -379,7 +379,7 @@
 			color-mix(in srgb, transparent 35%, var(--color-content-bg)) 70%,
 			var(--color-content-bg) 100%
 		);
-		padding: 3rem;
+		padding: var(--space-7);
 		padding-bottom: 14rem;
 	}
 
@@ -389,7 +389,7 @@
 	}
 
 	.hero-content h1 {
-		margin: 0 0 0.75rem 0;
+		margin: 0 0 var(--space-3) 0;
 		color: var(--color-content-text);
 		font-weight: 500;
 		font-size: 4.4rem;
@@ -420,14 +420,14 @@
 		z-index: 1;
 		margin: -10rem auto 0;
 		background-color: transparent;
-		padding: 2rem;
+		padding: var(--space-6);
 		max-width: 800px;
 		min-height: 100vh;
 		line-height: 1.6;
 	}
 
 	.postcard-content {
-		margin-bottom: 3rem;
+		margin-bottom: var(--space-7);
 	}
 
 	.back-link {
@@ -438,8 +438,8 @@
 	.back-link a {
 		transition: background-color 0.2s;
 		border: 1px solid var(--color-content-border);
-		border-radius: 4px;
-		padding: 0.5rem 1rem;
+		border-radius: var(--radius-1);
+		padding: var(--space-2) var(--space-4);
 		color: var(--color-content-secondary);
 		font-size: 1.1rem;
 		text-decoration: none;
@@ -451,19 +451,19 @@
 
 	.editor-layout {
 		display: grid;
-		gap: 1.5rem;
-		margin-bottom: 2rem;
+		gap: var(--space-5);
+		margin-bottom: var(--space-6);
 	}
 
 	.editor-pane {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: 1rem;
+		padding: var(--space-4);
 		min-width: 0;
 	}
 
 	.editor-pane-header {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 	}
 
 	.editor-pane-title {
@@ -507,10 +507,10 @@
 
 	.editor-readonly-row {
 		display: grid;
-		gap: 0.75rem;
-		margin: 1rem 0;
+		gap: var(--space-3);
+		margin: var(--space-4) 0;
 		border-top: 1px solid var(--color-content-border);
-		padding-top: 1rem;
+		padding-top: var(--space-4);
 		color: var(--color-content-secondary);
 	}
 
@@ -567,18 +567,18 @@
 	}
 
 	.editor-preview-copy {
-		padding: 1.5rem;
+		padding: var(--space-5);
 	}
 
 	.editor-preview-title {
-		margin: 0 0 0.75rem;
+		margin: 0 0 var(--space-3);
 		color: var(--color-content-text);
-		font-size: 2rem;
+		font-size: var(--font-size-2xl);
 		font-family: 'Spectral', serif;
 	}
 
 	.editor-preview-description {
-		margin: 0 0 1.5rem;
+		margin: 0 0 var(--space-5);
 		color: var(--color-content-secondary);
 		font-style: italic;
 		font-size: 1.2rem;
@@ -591,7 +591,7 @@
 
 	@media (max-width: 768px) {
 		.hero-overlay {
-			padding: 2rem;
+			padding: var(--space-6);
 			padding-bottom: 10rem;
 		}
 
@@ -614,7 +614,7 @@
 
 	@media (max-width: 480px) {
 		.hero-overlay {
-			padding: 1.5rem;
+			padding: var(--space-5);
 			padding-bottom: 8rem;
 		}
 

@@ -65,7 +65,7 @@
 	}
 
 	.section-title {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 		color: var(--publication-accent, var(--color-accent));
 		font-weight: var(--font-weight-medium);
 		font-size: var(--font-size-2xl);
@@ -87,9 +87,9 @@
 	}
 
 	.publication-item {
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--space-5);
 		border-bottom: 1px solid var(--color-border);
-		padding-bottom: 1.5rem;
+		padding-bottom: var(--space-5);
 	}
 
 	.publication-item:last-child {
@@ -103,7 +103,7 @@
 		transition: all 0.3s ease;
 		margin: -1rem;
 		border-radius: var(--radius-2);
-		padding: 1rem;
+		padding: var(--space-4);
 		text-decoration: none;
 	}
 
@@ -115,8 +115,8 @@
 	.item-header {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-		margin-bottom: 0.5rem;
+		gap: var(--space-2);
+		margin-bottom: var(--space-2);
 	}
 
 	.item-title {
@@ -142,7 +142,7 @@
 	}
 
 	.description {
-		margin: 0 0 1rem 0;
+		margin: 0 0 var(--space-4) 0;
 		color: var(--color-text-muted);
 		font-style: italic;
 		font-size: var(--font-size-base);
@@ -167,7 +167,7 @@
 
 	.arrow {
 		transition: transform 0.2s ease;
-		margin-left: 0.25rem;
+		margin-left: var(--space-1);
 	}
 
 	.publication-link:hover .arrow {
@@ -176,7 +176,7 @@
 
 	@media (min-width: 640px) {
 		.publications-section {
-			padding: 3rem;
+			padding: var(--space-7);
 		}
 
 		.item-header {
@@ -187,7 +187,7 @@
 
 		.item-date {
 			flex-shrink: 0;
-			margin-left: 1rem;
+			margin-left: var(--space-4);
 		}
 	}
 

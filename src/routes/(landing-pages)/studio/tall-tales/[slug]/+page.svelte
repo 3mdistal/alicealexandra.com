@@ -474,7 +474,7 @@
 
 	.editor-host {
 		margin: 0 auto;
-		padding: 8rem var(--space-6) 3rem;
+		padding: 8rem var(--space-6) var(--space-7);
 		max-width: 1440px;
 	}
 
@@ -655,19 +655,19 @@
 
 	.editor-layout {
 		display: grid;
-		gap: 1.5rem;
-		margin-top: 1.5rem;
+		gap: var(--space-5);
+		margin-top: var(--space-5);
 	}
 
 	.editor-pane {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: 1rem;
+		padding: var(--space-4);
 		min-width: 0;
 	}
 
 	.editor-pane-header {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 	}
 
 	.editor-pane-title {
@@ -723,10 +723,10 @@
 
 	.editor-readonly-row {
 		display: grid;
-		gap: 0.75rem;
-		margin: 1rem 0;
+		gap: var(--space-3);
+		margin: var(--space-4) 0;
 		border-top: 1px solid var(--color-content-border);
-		padding-top: 1rem;
+		padding-top: var(--space-4);
 		color: var(--color-content-secondary);
 	}
 
@@ -749,7 +749,7 @@
 
 	.editor-section-list {
 		display: grid;
-		gap: 1rem;
+		gap: var(--space-4);
 	}
 
 	.editor-subtitle {
@@ -762,11 +762,11 @@
 	.editor-section-card {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: 1rem;
+		padding: var(--space-4);
 	}
 
 	.editor-section-kicker {
-		margin: 0 0 0.75rem;
+		margin: 0 0 var(--space-3);
 		color: var(--color-content-secondary);
 		font-size: var(--content-font-size-body-sm);
 		letter-spacing: 0.08em;
@@ -792,7 +792,7 @@
 
 	.editor-preview-story {
 		display: grid;
-		gap: 1rem;
+		gap: var(--space-4);
 	}
 
 	.not-found {
