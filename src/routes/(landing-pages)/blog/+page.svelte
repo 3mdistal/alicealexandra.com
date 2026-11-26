@@ -98,8 +98,8 @@
 		justify-content: center;
 		align-items: center;
 		z-index: 20;
-		padding-top: 5rem;
-		padding-bottom: 5rem;
+		padding-top: var(--space-80);
+		padding-bottom: var(--space-80);
 		width: 100%;
 	}
 

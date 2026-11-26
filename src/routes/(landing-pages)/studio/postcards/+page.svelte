@@ -117,8 +117,8 @@
 		right: 50%;
 		left: 50%;
 		margin: 0;
-		margin-right: -50vw;
-		margin-left: -50vw;
+		margin-right: var(--layout-full-bleed-margin);
+		margin-left: var(--layout-full-bleed-margin);
 		background-color: var(--color-content-bg);
 		padding: 0;
 		width: 100vw;
@@ -128,9 +128,9 @@
 
 	header {
 		margin-right: auto;
-		margin-bottom: var(--space-7);
+		margin-bottom: var(--space-48);
 		margin-left: auto;
-		padding: var(--space-6);
+		padding: var(--space-32);
 		max-width: 800px;
 		text-align: center;
 	}
@@ -138,31 +138,31 @@
 	/* More space on desktop due to offset postcards */
 	@media (min-width: 1024px) {
 		header {
-			margin-bottom: 5rem;
+			margin-bottom: var(--space-80);
 		}
 	}
 
 	h1 {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-8);
 		color: var(--color-content-text);
-		font-size: var(--font-size-3xl);
+		font-size: var(--font-size-40);
 	}
 
 	.subtitle {
-		margin-top: var(--space-2);
+		margin-top: var(--space-8);
 		color: var(--color-content-secondary);
 		font-style: italic;
 		font-weight: 300;
-		font-size: 1.3rem;
+		font-size: var(--font-size-20);
 		letter-spacing: 0.02em;
 	}
 
 	.postcards-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 2.5rem;
+		gap: var(--space-40);
 		margin: 0 auto;
-		padding: 0 var(--space-6) var(--space-8) var(--space-6);
+		padding: 0 var(--space-32) var(--space-64) var(--space-32);
 		max-width: 600px;
 	}
 
@@ -171,40 +171,40 @@
 		.postcards-grid {
 			grid-template-columns: 1fr 1fr;
 			align-items: start;
-			gap: var(--space-7) var(--space-8);
-			padding-bottom: var(--space-9);
+			gap: var(--space-48) var(--space-64);
+			padding-bottom: var(--space-96);
 			max-width: 1200px;
 		}
 
 		/* Left column offset higher */
 		.postcards-grid :global(.postcard-link):nth-child(odd) {
 			transform-origin: center center;
-			margin-top: -50px;
+			margin-top: calc(-1 * var(--space-48));
 		}
 
 		/* Right column at normal position */
 		.postcards-grid :global(.postcard-link):nth-child(even) {
 			transform-origin: center center;
-			margin-top: 50px;
+			margin-top: var(--space-48);
 		}
 	}
 
 	@media (max-width: 768px) {
 		.postcards-grid {
-			gap: var(--space-6);
-			padding: 0 var(--space-4);
+			gap: var(--space-32);
+			padding: 0 var(--space-16);
 		}
 
 		header {
-			padding: var(--space-5);
+			padding: var(--space-24);
 		}
 	}
 
 	.no-postcards {
-		margin-top: var(--space-8);
+		margin-top: var(--space-64);
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.1rem;
+		font-size: var(--font-size-18);
 		text-align: center;
 	}
 </style>

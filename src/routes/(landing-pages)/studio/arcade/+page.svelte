@@ -48,35 +48,35 @@
 		display: flex;
 		flex-direction: column;
 		place-items: center;
-		gap: 2.5rem;
+		gap: var(--space-40);
 		box-sizing: border-box;
 		background-color: var(--color-bg);
-		padding: 2.5rem;
+		padding: var(--space-40);
 		width: 100%;
 		min-height: 100vh;
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-24);
 	}
 
 	h1 {
 		width: 100%;
-		font-size: 2.25rem;
+		font-size: var(--font-size-36);
 		text-align: left;
 	}
 
 	.content {
 		display: flex;
 		flex-direction: column-reverse;
-		gap: 2.5rem;
+		gap: var(--space-40);
 	}
 
 	.text-content p {
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-40);
 	}
 
 	.links {
 		display: flex;
 		flex-direction: column;
-		gap: 2.5rem;
+		gap: var(--space-40);
 	}
 
 	.links a {
@@ -97,22 +97,22 @@
 		}
 
 		.links {
-			padding: 0 5rem;
+			padding: 0 var(--space-80);
 			width: 50%;
 		}
 	}
 
 	@media (min-width: 1024px) {
 		.container {
-			padding-right: 5rem;
-			padding-left: 5rem;
+			padding-right: var(--space-80);
+			padding-left: var(--space-80);
 		}
 	}
 
 	@media (min-width: 1280px) {
 		.container {
-			padding-right: 10rem;
-			padding-left: 10rem;
+			padding-right: var(--space-160);
+			padding-left: var(--space-160);
 		}
 	}
 </style>

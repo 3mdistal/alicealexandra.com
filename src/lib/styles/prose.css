@@ -29,7 +29,7 @@
 .prose > p:first-child:not(.dropcap-opt-out)::first-letter,
 .prose > h2 + p:not(.dropcap-opt-out)::first-letter,
 .prose > hr + p:not(.dropcap-opt-out)::first-letter {
-	margin-right: var(--space-2);
+	margin-right: var(--space-8);
 	color: var(--color-content-heading);
 	font-weight: 300;
 	font-family: var(--font-serif);
@@ -97,7 +97,7 @@
 .prose img {
 	margin-top: 2em;
 	margin-bottom: 2em;
-	border-radius: 1.5rem;
+	border-radius: var(--radius-24);
 	width: 100%;
 	height: auto;
 	object-fit: contain;
@@ -127,7 +127,7 @@
 .prose .session-interlude-video {
 	display: block;
 	margin: 2em 0;
-	border-radius: 1.5rem;
+	border-radius: var(--radius-24);
 	width: 100%;
 	height: auto;
 	object-fit: contain;
@@ -141,8 +141,8 @@
 .prose .session-interlude-toggle {
 	display: flex;
 	position: absolute;
-	right: var(--space-4);
-	bottom: var(--space-4);
+	right: var(--space-16);
+	bottom: var(--space-16);
 	justify-content: center;
 	align-items: center;
 	backdrop-filter: blur(4px);
@@ -180,7 +180,7 @@
 
 /* A link to a section (#session-3) stops short of its heading, clear of the floating logo. */
 .prose :is(h2, h3, h4) {
-	scroll-margin-top: var(--space-8);
+	scroll-margin-top: var(--space-64);
 }
 
 /* Heading 2 */
@@ -189,7 +189,7 @@
 	margin-bottom: 2em;
 	color: var(--color-content-heading);
 	font-weight: 400;
-	font-size: var(--font-size-2xl);
+	font-size: var(--font-size-32);
 	line-height: 1.3;
 	font-family: var(--font-serif);
 	text-align: center;
@@ -201,13 +201,13 @@
 
 @media (min-width: 768px) {
 	.prose h2 {
-		font-size: var(--font-size-3xl);
+		font-size: var(--font-size-40);
 	}
 }
 
 @media (min-width: 1024px) {
 	.prose h2 {
-		font-size: 3rem;
+		font-size: var(--font-size-48);
 	}
 }
 
@@ -287,10 +287,10 @@
 .prose div.callout {
 	display: flex;
 	align-items: flex-start;
-	gap: var(--space-4);
+	gap: var(--space-16);
 	margin-top: var(--content-space-lg);
 	margin-bottom: var(--content-space-md);
-	border-radius: 0.5rem;
+	border-radius: var(--radius-8);
 	background-color: var(--color-content-callout-bg);
 	padding: var(--content-space-lg) var(--content-space-sm) var(--content-space-md);
 }
@@ -298,8 +298,8 @@
 @media (min-width: 768px) {
 	.prose div.callout {
 		gap: var(--content-space-lg);
-		padding-right: 5rem;
-		padding-left: 5rem;
+		padding-right: var(--space-80);
+		padding-left: var(--space-80);
 	}
 }
 

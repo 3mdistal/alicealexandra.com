@@ -367,18 +367,18 @@
 
 		h1 {
 			color: var(--color-neutral-0);
-			font-size: 1.875rem;
+			font-size: var(--font-size-30);
 
 			@media (min-width: 768px) {
-				font-size: 2.25rem;
+				font-size: var(--font-size-36);
 			}
 
 			@media (min-width: 1024px) {
-				font-size: 3rem;
+				font-size: var(--font-size-48);
 			}
 
 			@media (min-width: 1280px) {
-				font-size: 3.75rem;
+				font-size: var(--font-size-60);
 			}
 		}
 
@@ -400,12 +400,12 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding: 2.5rem 1.25rem;
+		padding: var(--space-40) var(--space-20);
 		min-height: 100lvh;
 		scroll-snap-align: start;
 
 		@media (min-width: 768px) {
-			padding: 2.5rem;
+			padding: var(--space-40);
 		}
 	}
 
@@ -417,27 +417,27 @@
 		h2 {
 			color: var(--color-neutral-0);
 			font-weight: 300;
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 
 			@media (min-width: 640px) {
-				font-size: 1.875rem;
+				font-size: var(--font-size-30);
 			}
 
 			@media (min-width: 1280px) {
-				font-size: 2.25rem;
+				font-size: var(--font-size-36);
 			}
 		}
 
 		p {
-			font-size: 1.1rem;
+			font-size: var(--font-size-18);
 			white-space: pre-line;
 
 			@media (min-width: 640px) {
-				font-size: var(--font-size-lg);
+				font-size: var(--font-size-20);
 			}
 
 			@media (min-width: 768px) {
-				font-size: var(--font-size-xl);
+				font-size: var(--font-size-24);
 			}
 
 			em {
@@ -450,18 +450,18 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		gap: var(--space-9);
+		gap: var(--space-96);
 		background-color: var(--color-gray-300);
-		padding: var(--space-4);
+		padding: var(--space-16);
 		min-height: 100lvh;
 		scroll-snap-align: start;
 
 		@media (min-width: 640px) {
-			gap: 8rem;
+			gap: var(--space-128);
 		}
 
 		@media (min-width: 1024px) {
-			gap: var(--space-7);
+			gap: var(--space-48);
 		}
 	}
 
@@ -478,7 +478,7 @@
 		}
 
 		@media (min-width: 1536px) {
-			padding: 0 8rem;
+			padding: 0 var(--space-128);
 		}
 	}
 
@@ -499,7 +499,7 @@
 		grid-row-start: 5;
 		grid-column-start: 3;
 		background-color: var(--color-neutral-0);
-		padding: var(--space-6) var(--space-4);
+		padding: var(--space-32) var(--space-16);
 		min-width: 60vw;
 
 		&:hover {
@@ -517,21 +517,21 @@
 			grid-column-start: 4;
 			transform: translate(-2.5rem, 5rem);
 			min-width: 35ch;
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 
 		@media (min-width: 1280px) {
-			font-size: 1.875rem;
+			font-size: var(--font-size-30);
 		}
 	}
 
 	.section-act {
 		color: var(--color-neutral-1000);
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-14);
 		text-align: center;
 
 		@media (min-width: 640px) {
-			font-size: 1.125rem;
+			font-size: var(--font-size-18);
 		}
 	}
 
@@ -539,59 +539,60 @@
 		margin: 0;
 		color: var(--color-neutral-1000);
 		font-weight: 300;
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-24);
 		text-align: center;
 
 		@media (min-width: 640px) {
-			font-size: 1.875rem;
+			font-size: var(--font-size-30);
 		}
 
 		@media (min-width: 1280px) {
-			font-size: 2.25rem;
+			font-size: var(--font-size-36);
 		}
 	}
 
 	.section-quote-container {
 		@media (min-width: 640px) {
-			padding: 0 2.5rem;
+			padding: 0 var(--space-40);
 		}
 
 		@media (min-width: 768px) {
-			padding: 0 5rem;
+			padding: 0 var(--space-80);
 		}
 
 		@media (min-width: 1024px) {
-			padding: 0 8rem;
+			padding: 0 var(--space-128);
 		}
 
 		@media (min-width: 1280px) {
-			padding: 0 13rem;
+			--section-quote-padding-x: 13rem;
+			padding: 0 var(--section-quote-padding-x);
 		}
 
 		@media (min-width: 1536px) {
-			padding: 0 26rem;
+			--section-quote-padding-x: 26rem;
 		}
 	}
 
 	.section-quote {
 		background-color: var(--color-neutral-1000);
-		padding: var(--space-6);
+		padding: var(--space-32);
 
 		@media (min-width: 1024px) {
-			padding: 5rem;
+			padding: var(--space-80);
 		}
 	}
 
 	.quote-text {
-		margin-bottom: var(--space-4);
-		font-size: 1.1rem;
+		margin-bottom: var(--space-16);
+		font-size: var(--font-size-18);
 
 		@media (min-width: 640px) {
-			font-size: var(--font-size-lg);
+			font-size: var(--font-size-20);
 		}
 
 		@media (min-width: 768px) {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 
 		em {
@@ -601,10 +602,10 @@
 
 	.quote-author {
 		color: var(--color-neutral-0);
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-14);
 
 		@media (min-width: 768px) {
-			font-size: 1.125rem;
+			font-size: var(--font-size-18);
 		}
 	}
 
@@ -614,7 +615,7 @@
 		align-items: center;
 		background-position: center;
 		background-size: cover;
-		padding: 5rem 0;
+		padding: var(--space-80) 0;
 		min-height: 100lvh;
 		scroll-snap-align: start;
 
@@ -635,9 +636,9 @@
 		display: flex;
 		position: relative;
 		flex-direction: column;
-		gap: 5rem;
+		gap: var(--space-80);
 		z-index: 10;
-		padding: 0 1.25rem;
+		padding: 0 var(--space-20);
 		width: 100%;
 		overflow-x: scroll;
 
@@ -651,7 +652,7 @@
 		cursor: pointer;
 		border: 0;
 		background: none;
-		padding: var(--space-4);
+		padding: var(--space-16);
 		color: inherit;
 		font: inherit;
 
@@ -667,45 +668,45 @@
 	.poem-title {
 		color: var(--color-neutral-0);
 		font-weight: 300;
-		font-size: 1.875rem;
+		font-size: var(--font-size-30);
 		text-align: center;
 
 		@media (min-width: 768px) {
-			font-size: 2.25rem;
+			font-size: var(--font-size-36);
 		}
 
 		@media (min-width: 1024px) {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 		}
 	}
 
 	.poem-content {
-		margin-top: -3rem;
+		margin-top: calc(-1 * var(--space-48));
 		width: fit-content;
 	}
 
 	.poem-stanza {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-32);
 		color: var(--color-neutral-0);
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-14);
 
 		@media (min-width: 640px) {
-			font-size: 1.125rem;
+			font-size: var(--font-size-18);
 		}
 
 		@media (min-width: 768px) {
-			font-size: var(--font-size-lg);
+			font-size: var(--font-size-20);
 		}
 
 		@media (min-width: 1280px) {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 	}
 
 	.close-poem {
-		margin-top: 8rem;
+		margin-top: var(--space-128);
 		color: var(--color-neutral-0);
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-24);
 		text-align: right;
 
 		&:hover {
@@ -714,11 +715,11 @@
 		}
 
 		@media (min-width: 768px) {
-			font-size: 1.875rem;
+			font-size: var(--font-size-30);
 		}
 
 		@media (min-width: 1024px) {
-			font-size: 2.25rem;
+			font-size: var(--font-size-36);
 		}
 	}
 </style>

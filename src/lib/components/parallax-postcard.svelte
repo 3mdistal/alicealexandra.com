@@ -235,7 +235,7 @@
 		position: relative;
 		cursor: pointer;
 		box-shadow: var(--postcard-shadow);
-		border-radius: 16px;
+		border-radius: var(--radius-16);
 		background: var(--postcard-paper);
 		aspect-ratio: 3 / 2;
 		width: 100%;
@@ -259,7 +259,7 @@
 		left: -2px;
 		z-index: -1;
 		border: 2px dotted color-mix(in srgb, var(--postcard-border) 70%, transparent);
-		border-radius: 18px;
+		border-radius: var(--radius-16);
 		pointer-events: none;
 		content: '';
 	}
@@ -299,7 +299,7 @@
 			color-mix(in srgb, transparent 25%, var(--postcard-paper)) 70%,
 			var(--postcard-paper) 100%
 		);
-		padding: var(--space-6);
+		padding: var(--space-32);
 	}
 
 	.postcard-content {
@@ -308,10 +308,10 @@
 	}
 
 	h2 {
-		margin: 0 0 var(--space-4) 0;
+		margin: 0 0 var(--space-16) 0;
 		color: var(--postcard-ink);
 		font-weight: 600;
-		font-size: 1.8rem;
+		font-size: var(--font-size-30);
 		line-height: 1.2;
 	}
 
@@ -321,7 +321,7 @@
 		-webkit-line-clamp: 3;
 		line-clamp: 3;
 		color: var(--postcard-ink-muted);
-		font-size: var(--font-size-base);
+		font-size: var(--font-size-16);
 		line-height: 1.5;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
@@ -329,27 +329,27 @@
 
 	@media (max-width: 768px) {
 		.postcard-overlay {
-			padding: var(--space-5);
+			padding: var(--space-24);
 		}
 
 		h2 {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 
 		.description {
 			-webkit-line-clamp: 2;
 			line-clamp: 2;
-			font-size: 0.9rem;
+			font-size: var(--font-size-14);
 		}
 	}
 
 	@media (max-width: 480px) {
 		.postcard-overlay {
-			padding: 1.25rem;
+			padding: var(--space-20);
 		}
 
 		h2 {
-			font-size: 1.3rem;
+			font-size: var(--font-size-20);
 		}
 	}
 </style>

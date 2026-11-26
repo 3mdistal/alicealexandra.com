@@ -56,7 +56,7 @@ export interface ColorPrimitive {
 	color: Rgba;
 }
 
-/** A primitive length token, such as `--space-4` and its parsed value. */
+/** A primitive length token, such as `--space-16` and its parsed value. */
 export interface LengthPrimitive {
 	name: string;
 	length: Length;

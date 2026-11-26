@@ -466,15 +466,15 @@
 		position: relative;
 		right: 50%;
 		left: 50%;
-		margin-right: -50vw;
-		margin-left: -50vw;
+		margin-right: var(--layout-full-bleed-margin);
+		margin-left: var(--layout-full-bleed-margin);
 		background: var(--color-bg);
 		width: 100vw;
 	}
 
 	.editor-host {
 		margin: 0 auto;
-		padding: 8rem var(--space-6) var(--space-7);
+		padding: var(--space-128) var(--space-32) var(--space-48);
 		max-width: 1440px;
 	}
 
@@ -486,7 +486,7 @@
 		align-items: center;
 		box-sizing: border-box;
 		background-color: var(--bg-color, transparent);
-		padding: var(--space-9) var(--space-6);
+		padding: var(--space-96) var(--space-32);
 		min-height: 100vh;
 		overflow: hidden;
 		color: var(--text-color, var(--color-fixed-white));
@@ -566,19 +566,19 @@
 	}
 
 	.section-content :global(p) {
-		margin-bottom: var(--space-5);
+		margin-bottom: var(--space-24);
 	}
 
 	.tale-breadcrumb {
 		display: inline-flex;
 		align-items: center;
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 	}
 
 	.tale-breadcrumb-link {
 		display: inline-flex;
 		align-items: center;
-		gap: 6px;
+		gap: var(--space-6);
 		opacity: 0.7;
 		transition: opacity 0.2s;
 		color: var(--text-color);
@@ -600,9 +600,9 @@
 	}
 
 	.tale-hero {
-		margin-bottom: var(--space-8);
+		margin-bottom: var(--space-64);
 		border-bottom: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
-		padding-bottom: var(--space-6);
+		padding-bottom: var(--space-32);
 		text-align: left;
 	}
 
@@ -610,13 +610,13 @@
 		margin: 0 0 var(--content-space-sm) 0;
 		color: var(--text-color);
 		font-weight: 500;
-		font-size: 2.25rem;
+		font-size: var(--font-size-36);
 		line-height: 2.5rem;
 	}
 
 	@media (min-width: 640px) {
 		.tale-title {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 			line-height: 1;
 		}
 	}
@@ -630,7 +630,7 @@
 
 	@media (min-width: 1024px) {
 		.tale-title {
-			font-size: 4.5rem;
+			font-size: var(--font-size-72);
 			line-height: 1;
 		}
 	}
@@ -655,24 +655,24 @@
 
 	.editor-layout {
 		display: grid;
-		gap: var(--space-5);
-		margin-top: var(--space-5);
+		gap: var(--space-24);
+		margin-top: var(--space-24);
 	}
 
 	.editor-pane {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 		min-width: 0;
 	}
 
 	.editor-pane-header {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 	}
 
 	.editor-pane-title {
-		margin: 0 0 0.35rem;
-		font-size: 1.35rem;
+		margin: 0 0 var(--space-6);
+		font-size: var(--font-size-20);
 		font-family: var(--font-serif);
 	}
 
@@ -680,12 +680,12 @@
 	.editor-section-fields,
 	.editor-sections-grid {
 		display: grid;
-		gap: 0.85rem;
+		gap: var(--space-12);
 	}
 
 	.editor-field {
 		display: grid;
-		gap: 0.4rem;
+		gap: var(--space-6);
 	}
 
 	.editor-field-wide {
@@ -700,7 +700,7 @@
 	.editor-textarea {
 		border: 1px solid var(--color-content-border);
 		background: var(--color-content-bg);
-		padding: 0.8rem;
+		padding: var(--space-12);
 		width: 100%;
 		color: var(--color-content-text);
 		font: inherit;
@@ -723,10 +723,10 @@
 
 	.editor-readonly-row {
 		display: grid;
-		gap: var(--space-3);
-		margin: var(--space-4) 0;
+		gap: var(--space-12);
+		margin: var(--space-16) 0;
 		border-top: 1px solid var(--color-content-border);
-		padding-top: var(--space-4);
+		padding-top: var(--space-16);
 		color: var(--color-content-secondary);
 	}
 
@@ -737,7 +737,7 @@
 	.editor-readonly-row p {
 		display: flex;
 		flex-direction: column;
-		gap: 0.2rem;
+		gap: var(--space-4);
 		margin: 0;
 	}
 
@@ -749,24 +749,24 @@
 
 	.editor-section-list {
 		display: grid;
-		gap: var(--space-4);
+		gap: var(--space-16);
 	}
 
 	.editor-subtitle {
 		margin: 0;
 		color: var(--color-content-text);
-		font-size: 1.1rem;
+		font-size: var(--font-size-18);
 		font-family: var(--font-serif);
 	}
 
 	.editor-section-card {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 	}
 
 	.editor-section-kicker {
-		margin: 0 0 var(--space-3);
+		margin: 0 0 var(--space-12);
 		color: var(--color-content-secondary);
 		font-size: var(--content-font-size-body-sm);
 		letter-spacing: 0.08em;
@@ -776,7 +776,7 @@
 	.editor-markdown-input {
 		min-height: 28rem;
 		resize: vertical;
-		font-size: 0.95rem;
+		font-size: var(--font-size-16);
 		line-height: 1.7;
 		font-family:
 			'SFMono-Regular', 'SFMono-Regular Fallback', ui-monospace, 'Cascadia Code', 'Roboto Mono',
@@ -784,7 +784,7 @@
 	}
 
 	.editor-preview-scroll-region {
-		padding-right: 0.35rem;
+		padding-right: var(--space-6);
 		min-height: 32rem;
 		max-height: 70vh;
 		overflow: auto;
@@ -792,7 +792,7 @@
 
 	.editor-preview-story {
 		display: grid;
-		gap: var(--space-4);
+		gap: var(--space-16);
 	}
 
 	.not-found {
@@ -800,7 +800,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: var(--space-4);
+		gap: var(--space-16);
 		min-height: 100vh;
 		color: var(--color-text);
 	}

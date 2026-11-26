@@ -77,26 +77,26 @@
 
 <style>
 	.writing-editor-shell {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-32);
 	}
 
 	.editor-toolbar,
 	.editor-feedback {
-		margin: 0 auto var(--space-5);
+		margin: 0 auto var(--space-24);
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 92%, var(--color-content-text) 8%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 	}
 
 	.editor-toolbar {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		gap: var(--space-4);
+		gap: var(--space-16);
 	}
 
 	.editor-toolbar-kicker {
-		margin: 0 0 var(--space-1);
+		margin: 0 0 var(--space-4);
 		color: var(--color-content-secondary);
 		font-size: var(--content-font-size-body-sm);
 		letter-spacing: 0.08em;
@@ -116,7 +116,7 @@
 	.editor-toolbar-actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--space-3);
+		gap: var(--space-12);
 	}
 
 	.editor-action {
@@ -126,7 +126,7 @@
 		cursor: pointer;
 		border: 1px solid var(--color-content-border);
 		background: transparent;
-		padding: 0.7rem var(--space-4);
+		padding: var(--space-12) var(--space-16);
 		color: var(--color-content-text);
 		font: inherit;
 		text-decoration: none;
@@ -146,7 +146,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		gap: var(--space-4);
+		gap: var(--space-16);
 	}
 
 	.editor-feedback a {

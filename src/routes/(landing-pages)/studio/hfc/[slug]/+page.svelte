@@ -415,47 +415,47 @@
 		flex-direction: column;
 		align-items: center;
 		z-index: 1;
-		padding: var(--space-7) var(--space-5) var(--space-9);
+		padding: var(--space-48) var(--space-24) var(--space-96);
 	}
 
 	header {
-		margin-bottom: var(--space-8);
+		margin-bottom: var(--space-64);
 		max-width: 60ch;
 		text-align: center;
 	}
 
 	.collection-name {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-8);
 		color: var(--color-gray-475);
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-14);
 		letter-spacing: 0.1em;
 		text-transform: lowercase;
 	}
 
 	h1 {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-8);
 		color: var(--color-neutral-0);
 		font-weight: 300;
-		font-size: 2.25rem;
+		font-size: var(--font-size-36);
 	}
 
 	.section-name {
 		color: var(--color-gray-300);
 		font-style: italic;
-		font-size: var(--font-size-base);
+		font-size: var(--font-size-16);
 	}
 
 	.poem-content {
-		margin-bottom: var(--space-9);
+		margin-bottom: var(--space-96);
 		width: fit-content;
 		max-width: 100%;
 		overflow-x: auto;
 	}
 
 	.poem-stanza {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-32);
 		color: var(--color-neutral-0);
-		font-size: 1.125rem;
+		font-size: var(--font-size-18);
 		line-height: 1.8;
 	}
 
@@ -474,7 +474,7 @@
 	.back-link a {
 		transition: color 0.2s;
 		color: var(--color-gray-475);
-		font-size: 1.125rem;
+		font-size: var(--font-size-18);
 		text-decoration: none;
 	}
 
@@ -484,35 +484,35 @@
 
 	.editor-layout {
 		display: grid;
-		gap: var(--space-5);
-		margin-bottom: var(--space-6);
+		gap: var(--space-24);
+		margin-bottom: var(--space-32);
 	}
 
 	.editor-pane {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 		min-width: 0;
 	}
 
 	.editor-pane-header {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 	}
 
 	.editor-pane-title {
-		margin: 0 0 0.35rem;
-		font-size: 1.35rem;
+		margin: 0 0 var(--space-6);
+		font-size: var(--font-size-20);
 		font-family: var(--font-serif);
 	}
 
 	.editor-metadata-grid {
 		display: grid;
-		gap: 0.85rem;
+		gap: var(--space-12);
 	}
 
 	.editor-field {
 		display: grid;
-		gap: 0.4rem;
+		gap: var(--space-6);
 	}
 
 	.editor-field-wide {
@@ -527,7 +527,7 @@
 	.editor-textarea {
 		border: 1px solid var(--color-content-border);
 		background: var(--color-content-bg);
-		padding: 0.8rem;
+		padding: var(--space-12);
 		width: 100%;
 		color: var(--color-content-text);
 		font: inherit;
@@ -545,17 +545,17 @@
 
 	.editor-readonly-row {
 		display: grid;
-		gap: var(--space-3);
-		margin: var(--space-4) 0;
+		gap: var(--space-12);
+		margin: var(--space-16) 0;
 		border-top: 1px solid var(--color-content-border);
-		padding-top: var(--space-4);
+		padding-top: var(--space-16);
 		color: var(--color-content-secondary);
 	}
 
 	.editor-readonly-row p {
 		display: flex;
 		flex-direction: column;
-		gap: 0.2rem;
+		gap: var(--space-4);
 		margin: 0;
 	}
 
@@ -568,7 +568,7 @@
 	.editor-markdown-input {
 		min-height: 32rem;
 		resize: vertical;
-		font-size: 0.95rem;
+		font-size: var(--font-size-16);
 		line-height: 1.7;
 		font-family:
 			'SFMono-Regular', 'SFMono-Regular Fallback', ui-monospace, 'Cascadia Code', 'Roboto Mono',
@@ -581,7 +581,7 @@
 	}
 
 	.editor-preview-scroll-region {
-		padding-right: 0.35rem;
+		padding-right: var(--space-6);
 		min-height: 32rem;
 		max-height: 70vh;
 		overflow: auto;
@@ -598,15 +598,15 @@
 		}
 
 		main {
-			padding: var(--space-8) var(--space-6) 8rem;
+			padding: var(--space-64) var(--space-32) var(--space-128);
 		}
 
 		h1 {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 		}
 
 		.poem-stanza {
-			font-size: var(--font-size-lg);
+			font-size: var(--font-size-20);
 		}
 	}
 
@@ -622,11 +622,11 @@
 
 	@media (min-width: 1024px) {
 		h1 {
-			font-size: 3.75rem;
+			font-size: var(--font-size-60);
 		}
 
 		.poem-stanza {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 	}
 

@@ -42,20 +42,20 @@
 
 	.hero {
 		background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
-		padding: var(--space-9) var(--space-6) var(--space-8);
+		padding: var(--space-96) var(--space-32) var(--space-64);
 		text-align: center;
 	}
 
 	.hero-content {
 		margin: 0 auto;
-		border-radius: 15px;
+		border-radius: var(--radius-16);
 		background-color: var(--color-surface);
-		padding: var(--space-7);
+		padding: var(--space-48);
 		max-width: 800px;
 	}
 
 	h1 {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 		font-weight: 500;
 		font-size: clamp(2rem, 5vw, 3.25rem);
 		line-height: 1.2;
@@ -76,22 +76,22 @@
 
 	.content {
 		margin: 0 auto;
-		padding: var(--space-8) var(--space-6);
+		padding: var(--space-64) var(--space-32);
 		max-width: 900px;
 	}
 
 	.placeholder {
 		box-shadow: var(--shadow-1);
-		border-radius: 10px;
+		border-radius: var(--radius-8);
 		background-color: var(--color-surface);
-		padding: var(--space-7);
+		padding: var(--space-48);
 		text-align: center;
 	}
 
 	.placeholder p {
-		margin: 0 0 var(--space-5);
+		margin: 0 0 var(--space-24);
 		color: var(--color-text-muted);
-		font-size: 1.125rem;
+		font-size: var(--font-size-18);
 		line-height: 1.6;
 	}
 
@@ -105,9 +105,9 @@
 		display: inline-block;
 		transition: all 0.2s ease;
 		border: 2px solid var(--color-accent);
-		border-radius: var(--radius-2);
+		border-radius: var(--radius-8);
 		background-color: var(--color-surface);
-		padding: 0.6rem 1.2rem;
+		padding: var(--space-8) var(--space-20);
 		color: var(--color-accent);
 		font-weight: 500;
 		text-decoration: none;
@@ -120,9 +120,9 @@
 	}
 
 	.footer {
-		margin-top: var(--space-6);
+		margin-top: var(--space-32);
 		border-top: 1px solid var(--color-border);
-		padding: var(--space-6);
+		padding: var(--space-32);
 		text-align: center;
 	}
 
@@ -130,12 +130,12 @@
 		display: inline-block;
 		transition: all 0.2s ease;
 		border: 2px solid var(--color-accent);
-		border-radius: var(--radius-2);
+		border-radius: var(--radius-8);
 		background-color: var(--color-surface);
-		padding: var(--space-2) var(--space-4);
+		padding: var(--space-8) var(--space-16);
 		color: var(--color-accent);
 		font-weight: 500;
-		font-size: var(--font-size-base);
+		font-size: var(--font-size-16);
 		text-decoration: none;
 	}
 
@@ -147,15 +147,16 @@
 
 	@media (min-width: 768px) {
 		.hero {
-			padding: 8rem var(--space-8) var(--space-9);
+			padding: var(--space-128) var(--space-64) var(--space-96);
 		}
 
 		.content {
-			padding: var(--space-9) var(--space-8);
+			padding: var(--space-96) var(--space-64);
 		}
 
 		.placeholder {
-			padding: 3.5rem;
+			--placeholder-padding: 3.5rem;
+			padding: var(--placeholder-padding);
 		}
 	}
 </style>

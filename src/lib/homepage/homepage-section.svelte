@@ -130,10 +130,10 @@
 		display: inline-block;
 		position: absolute;
 		border-radius: var(--radius-pill);
-		padding: 0.35rem var(--space-3);
+		padding: var(--space-6) var(--space-12);
 		color: inherit;
 		font-weight: 300;
-		font-size: 1.125rem;
+		font-size: var(--font-size-18);
 		line-height: 1.6;
 		font-family: var(--font-serif);
 		text-decoration: none;
@@ -210,7 +210,7 @@
 
 	@media (min-width: 768px) {
 		.homepage-section-link {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 	}
 

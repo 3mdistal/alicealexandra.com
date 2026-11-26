@@ -48,30 +48,30 @@
 	.policy {
 		margin: 0 auto;
 		box-shadow: var(--shadow-2);
-		border-radius: var(--radius-3);
+		border-radius: var(--radius-12);
 		background-color: var(--color-surface);
-		padding: 2.5rem;
+		padding: var(--space-40);
 		max-width: 800px;
 		color: var(--color-text);
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-20);
 		line-height: var(--line-height-body);
 	}
 
 	.policy-title {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 		color: var(--color-accent);
 		font-weight: var(--font-weight-medium);
-		font-size: var(--font-size-2xl);
+		font-size: var(--font-size-32);
 		font-family: var(--font-serif);
 	}
 
 	.policy ul {
-		margin: var(--space-5) 0;
-		padding-left: var(--space-5);
+		margin: var(--space-24) 0;
+		padding-left: var(--space-24);
 	}
 
 	.policy li + li {
-		margin-top: var(--space-3);
+		margin-top: var(--space-12);
 	}
 
 	.policy a {
@@ -80,7 +80,7 @@
 
 	@media (min-width: 640px) {
 		.policy {
-			padding: var(--space-7);
+			padding: var(--space-48);
 		}
 	}
 </style>

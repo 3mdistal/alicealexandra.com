@@ -349,8 +349,8 @@
 		position: relative;
 		right: 50%;
 		left: 50%;
-		margin-right: -50vw;
-		margin-left: -50vw;
+		margin-right: var(--layout-full-bleed-margin);
+		margin-left: var(--layout-full-bleed-margin);
 		width: 100vw;
 	}
 
@@ -364,6 +364,7 @@
 	}
 
 	.hero-overlay {
+		--hero-padding-bottom: 14rem;
 		display: flex;
 		position: absolute;
 		top: 0;
@@ -379,8 +380,8 @@
 			color-mix(in srgb, transparent 35%, var(--color-content-bg)) 70%,
 			var(--color-content-bg) 100%
 		);
-		padding: var(--space-7);
-		padding-bottom: 14rem;
+		padding: var(--space-48);
+		padding-bottom: var(--hero-padding-bottom);
 	}
 
 	.hero-content {
@@ -389,10 +390,10 @@
 	}
 
 	.hero-content h1 {
-		margin: 0 0 var(--space-3) 0;
+		margin: 0 0 var(--space-12) 0;
 		color: var(--color-content-text);
 		font-weight: 500;
-		font-size: 4.4rem;
+		font-size: var(--font-size-72);
 		line-height: 1.1;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
@@ -406,7 +407,7 @@
 		margin: 0;
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.75rem;
+		font-size: var(--font-size-30);
 		line-height: 1.4;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
@@ -418,30 +419,31 @@
 	main {
 		position: relative;
 		z-index: 1;
-		margin: -10rem auto 0;
+		margin: calc(-1 * var(--space-160)) auto 0;
 		background-color: transparent;
-		padding: var(--space-6);
+		padding: var(--space-32);
 		max-width: 800px;
 		min-height: 100vh;
 		line-height: 1.6;
 	}
 
 	.postcard-content {
-		margin-bottom: var(--space-7);
+		margin-bottom: var(--space-48);
 	}
 
 	.back-link {
-		margin-top: 9rem;
+		--back-link-margin-top: 9rem;
+		margin-top: var(--back-link-margin-top);
 		text-align: center;
 	}
 
 	.back-link a {
 		transition: background-color 0.2s;
 		border: 1px solid var(--color-content-border);
-		border-radius: var(--radius-1);
-		padding: var(--space-2) var(--space-4);
+		border-radius: var(--radius-4);
+		padding: var(--space-8) var(--space-16);
 		color: var(--color-content-secondary);
-		font-size: 1.1rem;
+		font-size: var(--font-size-18);
 		text-decoration: none;
 	}
 
@@ -451,35 +453,35 @@
 
 	.editor-layout {
 		display: grid;
-		gap: var(--space-5);
-		margin-bottom: var(--space-6);
+		gap: var(--space-24);
+		margin-bottom: var(--space-32);
 	}
 
 	.editor-pane {
 		border: 1px solid var(--color-content-border);
 		background: color-mix(in srgb, var(--color-content-bg) 96%, var(--color-content-text) 4%);
-		padding: var(--space-4);
+		padding: var(--space-16);
 		min-width: 0;
 	}
 
 	.editor-pane-header {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 	}
 
 	.editor-pane-title {
-		margin: 0 0 0.35rem;
-		font-size: 1.35rem;
+		margin: 0 0 var(--space-6);
+		font-size: var(--font-size-20);
 		font-family: var(--font-serif);
 	}
 
 	.editor-metadata-grid {
 		display: grid;
-		gap: 0.85rem;
+		gap: var(--space-12);
 	}
 
 	.editor-field {
 		display: grid;
-		gap: 0.4rem;
+		gap: var(--space-6);
 	}
 
 	.editor-field-wide {
@@ -494,7 +496,7 @@
 	.editor-textarea {
 		border: 1px solid var(--color-content-border);
 		background: var(--color-content-bg);
-		padding: 0.8rem;
+		padding: var(--space-12);
 		width: 100%;
 		color: var(--color-content-text);
 		font: inherit;
@@ -507,10 +509,10 @@
 
 	.editor-readonly-row {
 		display: grid;
-		gap: var(--space-3);
-		margin: var(--space-4) 0;
+		gap: var(--space-12);
+		margin: var(--space-16) 0;
 		border-top: 1px solid var(--color-content-border);
-		padding-top: var(--space-4);
+		padding-top: var(--space-16);
 		color: var(--color-content-secondary);
 	}
 
@@ -521,7 +523,7 @@
 	.editor-readonly-row p {
 		display: flex;
 		flex-direction: column;
-		gap: 0.2rem;
+		gap: var(--space-4);
 		margin: 0;
 	}
 
@@ -534,7 +536,7 @@
 	.editor-markdown-input {
 		min-height: 32rem;
 		resize: vertical;
-		font-size: 0.95rem;
+		font-size: var(--font-size-16);
 		line-height: 1.7;
 		font-family:
 			'SFMono-Regular', 'SFMono-Regular Fallback', ui-monospace, 'Cascadia Code', 'Roboto Mono',
@@ -547,7 +549,7 @@
 	}
 
 	.editor-preview-scroll-region {
-		padding-right: 0.35rem;
+		padding-right: var(--space-6);
 		min-height: 32rem;
 		max-height: 70vh;
 		overflow: auto;
@@ -567,21 +569,21 @@
 	}
 
 	.editor-preview-copy {
-		padding: var(--space-5);
+		padding: var(--space-24);
 	}
 
 	.editor-preview-title {
-		margin: 0 0 var(--space-3);
+		margin: 0 0 var(--space-12);
 		color: var(--color-content-text);
-		font-size: var(--font-size-2xl);
+		font-size: var(--font-size-32);
 		font-family: 'Spectral', serif;
 	}
 
 	.editor-preview-description {
-		margin: 0 0 var(--space-5);
+		margin: 0 0 var(--space-24);
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.2rem;
+		font-size: var(--font-size-20);
 		font-family: 'Spectral', serif;
 	}
 
@@ -591,20 +593,20 @@
 
 	@media (max-width: 768px) {
 		.hero-overlay {
-			padding: var(--space-6);
-			padding-bottom: 10rem;
+			padding: var(--space-32);
+			padding-bottom: var(--space-160);
 		}
 
 		.hero-content h1 {
-			font-size: 3rem;
+			font-size: var(--font-size-48);
 		}
 
 		.hero-content .description {
-			font-size: 1.4rem;
+			font-size: var(--font-size-24);
 		}
 
 		main {
-			margin-top: -8rem;
+			margin-top: calc(-1 * var(--space-128));
 		}
 
 		.editor-metadata-grid {
@@ -614,20 +616,20 @@
 
 	@media (max-width: 480px) {
 		.hero-overlay {
-			padding: var(--space-5);
-			padding-bottom: 8rem;
+			padding: var(--space-24);
+			padding-bottom: var(--space-128);
 		}
 
 		.hero-content h1 {
-			font-size: 2.2rem;
+			font-size: var(--font-size-36);
 		}
 
 		.hero-content .description {
-			font-size: 1.1rem;
+			font-size: var(--font-size-18);
 		}
 
 		main {
-			margin-top: -6rem;
+			margin-top: calc(-1 * var(--space-96));
 		}
 	}
 

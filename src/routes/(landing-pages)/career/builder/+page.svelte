@@ -70,26 +70,26 @@
 
 <style>
 	.posts-section {
-		margin-bottom: 5rem;
+		margin-bottom: var(--space-80);
 		box-shadow: var(--shadow-2);
-		border-radius: var(--radius-3);
+		border-radius: var(--radius-12);
 		background-color: var(--color-surface);
-		padding: 2.5rem;
+		padding: var(--space-40);
 	}
 
 	.posts-section-title {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-16);
 		color: var(--color-accent);
 		font-weight: var(--font-weight-medium);
-		font-size: var(--font-size-2xl);
+		font-size: var(--font-size-32);
 		font-family: var(--font-serif);
 	}
 
 	.posts-section-subtitle {
-		margin-bottom: 2.5rem;
+		margin-bottom: var(--space-40);
 		color: var(--color-text-muted);
 		font-style: italic;
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-20);
 		line-height: var(--line-height-body);
 	}
 
@@ -100,9 +100,9 @@
 	}
 
 	.post-item {
-		margin-bottom: var(--space-5);
+		margin-bottom: var(--space-24);
 		border-bottom: 1px solid var(--color-border);
-		padding-bottom: var(--space-5);
+		padding-bottom: var(--space-24);
 	}
 
 	.post-item:last-child {
@@ -114,9 +114,9 @@
 	.post-link {
 		display: block;
 		transition: all 0.3s ease;
-		margin: -1rem;
-		border-radius: var(--radius-2);
-		padding: var(--space-4);
+		margin: calc(-1 * var(--space-16));
+		border-radius: var(--radius-8);
+		padding: var(--space-16);
 		text-decoration: none;
 	}
 
@@ -128,8 +128,8 @@
 	.post-header {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-2);
-		margin-bottom: var(--space-2);
+		gap: var(--space-8);
+		margin-bottom: var(--space-8);
 	}
 
 	.post-title {
@@ -137,7 +137,7 @@
 		margin: 0;
 		color: var(--color-text);
 		font-weight: var(--font-weight-medium);
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-20);
 		line-height: var(--line-height-tight);
 		font-family: var(--font-serif);
 	}
@@ -148,17 +148,17 @@
 
 	.post-date {
 		color: var(--color-text-muted);
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-14);
 		font-family: var(--font-mono);
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
 	}
 
 	.post-description {
-		margin: 0 0 var(--space-4) 0;
+		margin: 0 0 var(--space-16) 0;
 		color: var(--color-text-muted);
 		font-style: italic;
-		font-size: var(--font-size-base);
+		font-size: var(--font-size-16);
 		line-height: var(--line-height-body);
 	}
 
@@ -175,7 +175,7 @@
 		transition: opacity 0.2s ease;
 		color: var(--color-accent);
 		font-weight: var(--font-weight-medium);
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-14);
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
 	}
@@ -186,7 +186,7 @@
 
 	.arrow {
 		transition: transform 0.2s ease;
-		margin-left: var(--space-1);
+		margin-left: var(--space-4);
 	}
 
 	.post-link:hover .arrow {
@@ -195,7 +195,7 @@
 
 	@media (min-width: 640px) {
 		.posts-section {
-			padding: var(--space-7);
+			padding: var(--space-48);
 		}
 
 		.post-header {
@@ -206,17 +206,17 @@
 
 		.post-date {
 			flex-shrink: 0;
-			margin-left: var(--space-4);
+			margin-left: var(--space-16);
 		}
 	}
 
 	@media (min-width: 768px) {
 		.posts-section-title {
-			font-size: var(--font-size-3xl);
+			font-size: var(--font-size-40);
 		}
 
 		.post-title {
-			font-size: var(--font-size-xl);
+			font-size: var(--font-size-24);
 		}
 	}
 </style>

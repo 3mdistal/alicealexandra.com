@@ -106,24 +106,25 @@
 
 <style>
 	.owner-page {
+		--owner-page-padding-top: 7rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		background: var(--color-bg);
-		padding: 7rem var(--space-5) var(--space-7);
+		padding: var(--owner-page-padding-top) var(--space-24) var(--space-48);
 		min-height: 100vh;
 	}
 
 	.owner-card {
 		border: 1px solid var(--color-content-border);
 		background: var(--color-content-bg);
-		padding: var(--space-6);
+		padding: var(--space-32);
 		width: min(100%, 40rem);
 		color: var(--color-content-text);
 	}
 
 	.owner-kicker {
-		margin: 0 0 var(--space-3);
+		margin: 0 0 var(--space-12);
 		color: var(--color-content-secondary);
 		font-size: var(--content-font-size-body-sm);
 		letter-spacing: 0.08em;
@@ -131,7 +132,7 @@
 	}
 
 	.owner-title {
-		margin: 0 0 var(--space-4);
+		margin: 0 0 var(--space-16);
 		color: var(--color-content-heading);
 		font-size: clamp(2rem, 4vw, 3.5rem);
 		line-height: 1;
@@ -147,44 +148,44 @@
 	}
 
 	.owner-copy {
-		margin: 0 0 var(--space-5);
+		margin: 0 0 var(--space-24);
 	}
 
 	.owner-error {
-		margin: 0 0 var(--space-4);
+		margin: 0 0 var(--space-16);
 		color: var(--color-content-link);
 	}
 
 	.owner-status-group {
-		margin-bottom: var(--space-5);
+		margin-bottom: var(--space-24);
 		border-top: 1px solid var(--color-content-border);
 		border-bottom: 1px solid var(--color-content-border);
-		padding: var(--space-4) 0;
+		padding: var(--space-16) 0;
 	}
 
 	.owner-status-row {
 		display: flex;
 		justify-content: space-between;
-		gap: var(--space-4);
+		gap: var(--space-16);
 		margin: 0;
 	}
 
 	.owner-status-row + .owner-status-row {
-		margin-top: var(--space-2);
+		margin-top: var(--space-8);
 	}
 
 	.owner-actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--space-3);
-		margin-top: var(--space-5);
+		gap: var(--space-12);
+		margin-top: var(--space-24);
 	}
 
 	.owner-button {
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0.85rem 1.25rem;
+		padding: var(--space-12) var(--space-20);
 		text-decoration: none;
 	}
 
@@ -200,16 +201,16 @@
 
 	@media (max-width: 640px) {
 		.owner-page {
-			padding-top: var(--space-9);
+			padding-top: var(--space-96);
 		}
 
 		.owner-card {
-			padding: var(--space-5);
+			padding: var(--space-24);
 		}
 
 		.owner-status-row {
 			flex-direction: column;
-			gap: 0.15rem;
+			gap: var(--space-4);
 		}
 	}
 </style>

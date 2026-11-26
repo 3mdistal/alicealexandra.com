@@ -41,13 +41,13 @@
 <style>
 	:global(.legacy-icon-button) {
 		border-width: 2px;
-		border-radius: 0.75rem;
+		border-radius: var(--radius-12);
 		font-weight: var(--font-weight-regular);
 	}
 
 	@media (min-width: 1024px) {
 		:global(.legacy-icon-button) {
-			font-size: var(--font-size-lg);
+			font-size: var(--font-size-20);
 		}
 	}
 </style>

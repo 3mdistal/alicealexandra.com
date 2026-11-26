@@ -36,9 +36,10 @@
 
 <style>
 	.posts-title {
+		--posts-title-font-size: 4rem;
 		margin-bottom: 1em;
 		font-weight: 500;
-		font-size: 4rem;
+		font-size: var(--posts-title-font-size);
 	}
 
 	.post-list {
@@ -51,13 +52,13 @@
 	.post-item {
 		display: grid;
 		grid-template-columns: auto 1fr;
-		column-gap: var(--space-2);
-		margin-bottom: var(--space-7);
+		column-gap: var(--space-8);
+		margin-bottom: var(--space-48);
 
 		/* The title takes the free width; the date column hugs the date. */
 		@media (min-width: 768px) {
 			grid-template-columns: minmax(0, 1fr) auto;
-			column-gap: var(--space-7);
+			column-gap: var(--space-48);
 		}
 	}
 
@@ -82,7 +83,7 @@
 		font-family: var(--font-serif);
 
 		@media (max-width: 767px) {
-			font-size: 1.75rem;
+			font-size: var(--font-size-30);
 		}
 
 		&:hover {
@@ -97,7 +98,7 @@
 	.post-subtitle {
 		grid-row-start: 2;
 		grid-column: span 2;
-		margin: var(--space-2) 0 var(--space-4);
+		margin: var(--space-8) 0 var(--space-16);
 		max-width: var(--content-measure-subtitle);
 		color: var(--color-text);
 		font-style: italic;
@@ -116,7 +117,7 @@
 		color: var(--color-text-muted);
 
 		&::before {
-			margin-right: var(--space-2);
+			margin-right: var(--space-8);
 			content: '·';
 			content: '·' / '';
 		}

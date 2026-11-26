@@ -369,7 +369,7 @@
 		position: relative;
 		box-shadow: 0 25px 50px color-mix(in srgb, var(--color-fixed-black) 50%, transparent);
 		border: 2px dotted color-mix(in srgb, var(--color-content-border) 70%, transparent);
-		border-radius: var(--radius-4);
+		border-radius: var(--radius-20);
 		background: var(--color-content-bg);
 		/* Remove CSS sizing - let GSAP handle dimensions */
 		overflow: hidden;
@@ -404,8 +404,8 @@
 			color-mix(in srgb, transparent 35%, var(--color-content-bg)) 70%,
 			var(--color-content-bg) 100%
 		);
-		padding: var(--space-6);
-		padding-bottom: 10rem;
+		padding: var(--space-32);
+		padding-bottom: var(--space-160);
 	}
 
 	.modal-hero-content {
@@ -414,10 +414,10 @@
 	}
 
 	.modal-hero-content h1 {
-		margin: 0 0 var(--space-2) 0;
+		margin: 0 0 var(--space-8) 0;
 		color: var(--color-content-text);
 		font-weight: 500;
-		font-size: 3rem;
+		font-size: var(--font-size-48);
 		line-height: 1.1;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
@@ -431,7 +431,7 @@
 		margin: 0;
 		color: var(--color-content-secondary);
 		font-style: italic;
-		font-size: 1.3rem;
+		font-size: var(--font-size-20);
 		line-height: 1.4;
 		font-family: 'Spectral', serif;
 		letter-spacing: 0.05em;
@@ -441,21 +441,23 @@
 	}
 
 	.modal-body {
+		--modal-body-padding-bottom: 9rem;
 		position: relative;
-		padding-bottom: 9rem;
+		padding-bottom: var(--modal-body-padding-bottom);
 		max-height: calc(100vh - var(--modal-margin) * 2);
 		overflow-y: auto;
 	}
 
 	.modal-controls {
+		--modal-controls-overlap: 52px;
 		display: flex;
 		position: sticky;
 		top: 1rem;
 		justify-content: flex-end;
-		gap: var(--space-2);
+		gap: var(--space-8);
 		z-index: 10;
-		margin-bottom: -52px;
-		padding-right: var(--space-4);
+		margin-bottom: calc(-1 * var(--modal-controls-overlap));
+		padding-right: var(--space-16);
 		pointer-events: none;
 	}
 
@@ -480,15 +482,16 @@
 	}
 
 	.modal-content-area {
+		--modal-content-padding-bottom: 18rem;
 		position: relative;
 		z-index: 1;
-		margin: -6rem auto 0;
-		padding: 0 var(--space-6) 18rem;
+		margin: calc(-1 * var(--space-96)) auto 0;
+		padding: 0 var(--space-32) var(--modal-content-padding-bottom);
 		max-width: 800px;
 	}
 
 	.not-found {
-		padding: var(--space-8) var(--space-6);
+		padding: var(--space-64) var(--space-32);
 		text-align: center;
 	}
 
@@ -497,7 +500,7 @@
 	}
 
 	.not-found p {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-32);
 		color: var(--color-content-secondary);
 	}
 
@@ -509,21 +512,22 @@
 		}
 
 		.modal-hero-overlay {
-			padding: var(--space-5);
-			padding-bottom: 7rem;
+			--modal-hero-padding-bottom: 7rem;
+			padding: var(--space-24);
+			padding-bottom: var(--modal-hero-padding-bottom);
 		}
 
 		.modal-hero-content h1 {
-			font-size: 2.2rem;
+			font-size: var(--font-size-36);
 		}
 
 		.modal-hero-content .description {
-			font-size: 1.1rem;
+			font-size: var(--font-size-18);
 		}
 
 		.modal-content-area {
-			margin-top: -4rem;
-			padding: 0 var(--space-5) var(--space-5);
+			margin-top: calc(-1 * var(--space-64));
+			padding: 0 var(--space-24) var(--space-24);
 		}
 	}
 
@@ -534,24 +538,24 @@
 		}
 
 		.modal-content {
-			border-radius: 16px;
+			border-radius: var(--radius-16);
 		}
 
 		.modal-hero-overlay {
-			padding: var(--space-4);
-			padding-bottom: 5rem;
+			padding: var(--space-16);
+			padding-bottom: var(--space-80);
 		}
 
 		.modal-hero-content h1 {
-			font-size: 1.8rem;
+			font-size: var(--font-size-30);
 		}
 
 		.modal-hero-content .description {
-			font-size: var(--font-size-base);
+			font-size: var(--font-size-16);
 		}
 
 		.modal-content-area {
-			margin-top: -3rem;
+			margin-top: calc(-1 * var(--space-48));
 		}
 	}
 </style>

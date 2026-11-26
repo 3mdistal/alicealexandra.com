@@ -33,21 +33,21 @@
 	.content {
 		margin: 0 auto;
 		background-color: var(--color-bg);
-		padding: var(--space-8) var(--space-6);
+		padding: var(--space-64) var(--space-32);
 		max-width: 800px;
 	}
 
 	.section {
-		margin-bottom: var(--space-7);
+		margin-bottom: var(--space-48);
 
 		& h2 {
-			margin-bottom: var(--space-4);
-			font-size: var(--font-size-2xl);
+			margin-bottom: var(--space-16);
+			font-size: var(--font-size-32);
 		}
 
 		& p {
-			margin-bottom: var(--space-5);
-			font-size: 1.125rem;
+			margin-bottom: var(--space-24);
+			font-size: var(--font-size-18);
 			line-height: 1.6;
 		}
 	}
@@ -56,11 +56,11 @@
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-32);
 		border: 2px solid transparent;
-		border-radius: 10px;
+		border-radius: var(--radius-8);
 		background-color: var(--color-surface);
-		padding: var(--space-6);
+		padding: var(--space-32);
 	}
 
 	.work-link:hover {
@@ -76,9 +76,9 @@
 
 	.work-link h3 {
 		transition: color 0.2s ease;
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-8);
 		font-weight: 500;
-		font-size: var(--font-size-xl);
+		font-size: var(--font-size-24);
 	}
 
 	.work-link:hover h3 {
@@ -97,23 +97,23 @@
 
 	@media (min-width: 768px) {
 		.content {
-			padding: var(--space-9) var(--space-8);
+			padding: var(--space-96) var(--space-64);
 		}
 
 		.section h2 {
-			font-size: var(--font-size-3xl);
+			font-size: var(--font-size-40);
 		}
 
 		.section p {
-			font-size: var(--font-size-lg);
+			font-size: var(--font-size-20);
 		}
 
 		.work-link {
-			padding: 2.5rem;
+			padding: var(--space-40);
 		}
 
 		.work-link h3 {
-			font-size: 1.75rem;
+			font-size: var(--font-size-30);
 		}
 	}
 </style>

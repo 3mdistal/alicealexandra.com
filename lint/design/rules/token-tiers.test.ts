@@ -42,7 +42,7 @@ stylesheet.run('token-tiers in role token files', rule, {
 			code: ':root { animation-name: orange; grid-area: tan; font-family: Gold, serif; }'
 		},
 		// Files outside the token files are for the color and length rules.
-		{ filename: 'chrome.css', code: '.link { color: #0ea5e9; --space-1: 2px; }' }
+		{ filename: 'chrome.css', code: '.link { color: #0ea5e9; --space-4: 2px; }' }
 	],
 	invalid: [
 		{
@@ -137,17 +137,17 @@ stylesheet.run('token-tiers in the primitives file', rule, {
 	valid: [
 		{
 			filename: primitives,
-			code: ':root { --space-1: 0.25rem; --shadow-1: 0 1px 3px rgba(15, 23, 42, 0.12); --color-white: #fff; }'
+			code: ':root { --space-4: 0.25rem; --shadow-1: 0 1px 3px rgba(15, 23, 42, 0.12); --color-white: #fff; }'
 		}
 	],
 	invalid: [
 		{
 			filename: primitives,
-			code: ':root { --space-1: 0.25rem; }\n@media (min-width: 640px) {\n\t:root { --space-1: 0.5rem; }\n}',
+			code: ':root { --space-4: 0.25rem; }\n@media (min-width: 640px) {\n\t:root { --space-4: 0.5rem; }\n}',
 			errors: [
 				{
 					message:
-						'`--space-1` is defined inside `@media (min-width: 640px) :root`. A primitive has one value everywhere, so define it only on the top-level `:root`, and put themed or responsive values in a role token file.',
+						'`--space-4` is defined inside `@media (min-width: 640px) :root`. A primitive has one value everywhere, so define it only on the top-level `:root`, and put themed or responsive values in a role token file.',
 					line: 3,
 					column: 10
 				}
@@ -156,11 +156,11 @@ stylesheet.run('token-tiers in the primitives file', rule, {
 		{
 			// The `color` in the condition is a test, not a declaration, so only the placement is wrong.
 			filename: primitives,
-			code: '@supports (color: red) { :root { --space-1: 0.25rem; } }',
+			code: '@supports (color: red) { :root { --space-4: 0.25rem; } }',
 			errors: [
 				{
 					messageId: 'notOnRoot',
-					data: { name: '--space-1', where: '@supports (color: red) :root' }
+					data: { name: '--space-4', where: '@supports (color: red) :root' }
 				}
 			]
 		},
@@ -173,9 +173,9 @@ stylesheet.run('token-tiers in the primitives file', rule, {
 		},
 		{
 			filename: primitives,
-			code: ':root { --space-2: calc(var(--space-1) * 2); --color-bg: var(--color-white); }',
+			code: ':root { --space-8: calc(var(--space-4) * 2); --color-bg: var(--color-white); }',
 			errors: [
-				{ messageId: 'notRaw', data: { name: '--space-2', part: 'calc()' } },
+				{ messageId: 'notRaw', data: { name: '--space-8', part: 'calc()' } },
 				{ messageId: 'notRaw', data: { name: '--color-bg', part: 'var()' } }
 			]
 		},
@@ -195,8 +195,8 @@ stylesheet.run('token-tiers in the primitives file', rule, {
 		},
 		{
 			filename: primitives,
-			code: ':root {\n\t--space-1: 0.25rem;\n\t--space-1: 0.3rem;\n}',
-			errors: [{ messageId: 'duplicate', data: { name: '--space-1', line: '2' }, line: 3 }]
+			code: ':root {\n\t--space-4: 0.25rem;\n\t--space-4: 0.3rem;\n}',
+			errors: [{ messageId: 'duplicate', data: { name: '--space-4', line: '2' }, line: 3 }]
 		},
 		{
 			filename: primitives,

@@ -1,4 +1,4 @@
 :root {
-	--ui-gap: var(--space-4);
+	--ui-gap: var(--space-16);
 	--content-font-size-body: 1.125rem;
 }

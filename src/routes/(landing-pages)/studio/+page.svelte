@@ -143,7 +143,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		align-items: flex-start;
-		gap: var(--space-7);
+		gap: var(--space-48);
 		opacity: 0;
 		z-index: 1;
 	}
@@ -151,8 +151,8 @@
 	@media (min-width: 640px) {
 		.card-div {
 			justify-content: center;
-			padding-right: 2.5rem;
-			padding-left: 2.5rem;
+			padding-right: var(--space-40);
+			padding-left: var(--space-40);
 		}
 	}
 </style>
