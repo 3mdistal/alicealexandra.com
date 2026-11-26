@@ -573,7 +573,7 @@
 	.entry-text :global(code) {
 		border-radius: var(--radius-4);
 		background-color: var(--color-surface-muted);
-		padding: var(--space-4) var(--space-4);
+		padding: var(--space-4);
 		font-size: 0.95em;
 		font-family: var(--font-mono);
 		word-break: break-word;
