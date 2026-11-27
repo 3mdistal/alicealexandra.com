@@ -3,9 +3,9 @@
 </script>
 
 <script lang="ts">
-	import HomepageSection from '$lib/homepage/homepage-section.svelte';
+	import HomepageSection from '#lib/homepage/homepage-section.svelte';
 	import { names } from '../stores';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 

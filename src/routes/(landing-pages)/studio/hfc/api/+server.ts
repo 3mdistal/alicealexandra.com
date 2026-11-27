@@ -1,4 +1,4 @@
-import { loadPoemContent } from '$lib/content/poems';
+import { loadPoemContent } from '#lib/content/poems.ts';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {

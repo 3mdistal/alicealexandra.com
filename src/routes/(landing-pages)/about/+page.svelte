@@ -1,7 +1,7 @@
 <script>
 	import About from './about.svelte';
-	import LandingPage from '$lib/components/landing-page.svelte';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import LandingPage from '#lib/components/landing-page.svelte';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
 
 	const Hand = `https://${IMAGE_DOMAIN}/site/images/flowers-in-hand.webp`;
 </script>

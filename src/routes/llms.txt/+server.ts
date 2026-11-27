@@ -1,4 +1,4 @@
-import { LLMS_TEXT } from '$lib/server/agent-readiness';
+import { LLMS_TEXT } from '#lib/server/agent-readiness.ts';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;

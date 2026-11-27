@@ -1,8 +1,8 @@
 <script lang="ts">
 	import gsap from 'gsap';
-	import { loadScrollTrigger } from '$lib/partials/load-scroll-trigger';
+	import { loadScrollTrigger } from '#lib/partials/load-scroll-trigger.ts';
 	import { onMount } from 'svelte';
-	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
+	import OptimizedImage from '#lib/components/ui/optimized-image.svelte';
 
 	export let flexDirection = 'row-reverse';
 	export let accent = 'var(--color-accent)';

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { MovingCircle } from '$lib/arcade/shapes';
-	import { InputHandler } from '$lib/arcade/input-handling';
-	import ParametersPanel from '$lib/components/parameters-panel.svelte';
+	import { MovingCircle } from '#lib/arcade/shapes.ts';
+	import { InputHandler } from '#lib/arcade/input-handling.ts';
+	import ParametersPanel from '#lib/components/parameters-panel.svelte';
 
 	let backgroundCanvas: HTMLCanvasElement;
 	let ctxBackground: CanvasRenderingContext2D;

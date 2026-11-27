@@ -1,6 +1,6 @@
 <script lang="ts">
-	import LinkButton from '$lib/components/ui/link-button.svelte';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
+	import LinkButton from '#lib/components/ui/link-button.svelte';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
 	import { fade } from 'svelte/transition';
 
 	let { data } = $props();

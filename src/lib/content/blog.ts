@@ -1,7 +1,7 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { calculateBlogReadTimeFromContent } from '$lib/blog/read-time';
-import { parseBlogMarkdown } from '$lib/content/blog-source';
+import { calculateBlogReadTimeFromContent } from '#lib/blog/read-time.ts';
+import { parseBlogMarkdown } from '#lib/content/blog-source.ts';
 
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'blog');
 

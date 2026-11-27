@@ -5,7 +5,7 @@ import {
 	isOwnerAuthConfigured,
 	sanitizeRedirectTo,
 	storeOwnerOAuthState
-} from '$lib/server/owner-session';
+} from '#lib/server/owner-session.ts';
 
 export const GET: RequestHandler = ({ cookies, url }) => {
 	if (!isOwnerAuthConfigured()) {

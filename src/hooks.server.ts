@@ -1,8 +1,8 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit/hooks';
 import { redirect } from '@sveltejs/kit';
-import { HOMEPAGE_MARKDOWN } from '$lib/server/agent-readiness';
-import { selectHomepageRepresentation } from '$lib/server/content-negotiation';
-import { readOwnerSession } from '$lib/server/owner-session';
+import { HOMEPAGE_MARKDOWN } from '#lib/server/agent-readiness.ts';
+import { selectHomepageRepresentation } from '#lib/server/content-negotiation.ts';
+import { readOwnerSession } from '#lib/server/owner-session.ts';
 
 // Permanent redirects for old blog post slugs that no longer exist as
 // prerendered entries, so they can still 301 instead of 404ing.

@@ -1,4 +1,4 @@
-import { loadIllustrations } from '$lib/content/studio';
+import { loadIllustrations } from '#lib/content/studio.ts';
 
 export async function load() {
 	const illustrations = await loadIllustrations();

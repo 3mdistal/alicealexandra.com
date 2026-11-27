@@ -1,4 +1,4 @@
-import { dev } from '$app/environment';
+import { dev } from '$app/env';
 
 export const CLOUDFLARE_IMAGE_VARIANTS = [320, 640, 960, 1200];
 export const IMAGE_DOMAIN = 'pub-a1233e2ec22b407fb8ef2b8a06521728.r2.dev';

@@ -1,4 +1,4 @@
-import { CANONICAL_ORIGIN } from '$lib/server/agent-readiness';
+import { CANONICAL_ORIGIN } from '#lib/server/agent-readiness.ts';
 
 export interface SitemapEntry {
 	path: string;

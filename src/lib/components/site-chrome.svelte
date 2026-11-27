@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { page } from '$app/stores';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
-	import { isActive, navItems } from '$lib/chrome/nav-model';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
+	import { isActive, navItems } from '#lib/chrome/nav-model.ts';
 
 	const logo = '/images/logo/logo.png';
 	const plainCircle = '/images/logo/plain-circle.svg';
@@ -63,6 +63,8 @@
 		};
 	});
 </script>
+
+<!-- @migration-task could not auto-migrate `$app/stores` to `$app/state`: legacy reactive statement (`$:`); migrate manually -->
 
 <nav
 	class="site-chrome"

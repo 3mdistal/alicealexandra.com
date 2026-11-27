@@ -1,7 +1,7 @@
 <script>
 	import Career from './career.svelte';
-	import LandingPage from '$lib/components/landing-page.svelte';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import LandingPage from '#lib/components/landing-page.svelte';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
 
 	const Rabbit = `https://${IMAGE_DOMAIN}/site/images/rabbit-in-hat.webp`;
 </script>

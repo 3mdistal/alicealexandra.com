@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Publication } from '$lib/content/career';
+	import type { Publication } from '#lib/content/career.ts';
 
 	type PublicationTypes =
 		| 'Landing Page'

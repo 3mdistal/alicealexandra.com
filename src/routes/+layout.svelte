@@ -1,8 +1,13 @@
 <script lang="ts">
-	import '$lib/styles/fonts';
+	import '#lib/styles/fonts.ts';
 	import '../app.css';
 	import { page } from '$app/stores';
-	import { getSurface, getTheme, type SiteSurface, type SiteTheme } from '$lib/theme/route-theme';
+	import {
+		getSurface,
+		getTheme,
+		type SiteSurface,
+		type SiteTheme
+	} from '#lib/theme/route-theme.ts';
 
 	let theme: SiteTheme = 'home';
 	let surface: SiteSurface = 'default';
@@ -18,6 +23,8 @@
 	}
 </script>
 
+<!-- @migration-task could not auto-migrate `$app/stores` to `$app/state`: legacy reactive statement (`$:`); migrate manually -->
+
 <svelte:head>
 	<link rel="icon" type="image/png" href="/images/logo/logo.png" />
 </svelte:head>
@@ -30,7 +37,5 @@
 	data-sveltekit-preload-code="eager"
 >
 	<a class="skip-link" href="#content">Skip to content</a>
-	<div id="content" tabindex="-1">
-		<slot />
-	</div>
+	<div id="content" tabindex="-1"><slot></slot></div>
 </div>

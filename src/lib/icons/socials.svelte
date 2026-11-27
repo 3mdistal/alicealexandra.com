@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
-	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
+	import OptimizedImage from '#lib/components/ui/optimized-image.svelte';
 
 	const InstagramBear = `https://${IMAGE_DOMAIN}/site/images/instagram-bear.webp`;
 	const BskySquirrel = `https://${IMAGE_DOMAIN}/site/images/bsky-squirrel.webp`;

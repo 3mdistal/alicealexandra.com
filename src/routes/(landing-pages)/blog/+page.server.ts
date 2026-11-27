@@ -1,4 +1,4 @@
-import { loadPostsMeta } from '$lib/content/blog';
+import { loadPostsMeta } from '#lib/content/blog.ts';
 
 // Prerender this page at build time - no runtime API calls needed
 export const prerender = true;

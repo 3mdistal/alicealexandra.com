@@ -1,5 +1,13 @@
-import { dev } from '$app/environment';
-import { env } from '$env/dynamic/private';
+import { dev } from '$app/env';
+
+import {
+	CONTENT_REPO_OWNER,
+	CONTENT_REPO_NAME,
+	CONTENT_REPO_BRANCH,
+	GITHUB_WRITE_TOKEN,
+	GITHUB_TOKEN
+} from '$app/env/private';
+
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 
@@ -14,7 +22,6 @@ interface ContentRepoConfig {
 	branch: string;
 	token: string;
 }
-
 interface PublishStatus {
 	contentRepoConfigured: boolean;
 }
@@ -30,10 +37,10 @@ export class PublishError extends Error {
 }
 
 function getContentRepoConfig(): ContentRepoConfig {
-	const owner = env['CONTENT_REPO_OWNER']?.trim() || '';
-	const repo = env['CONTENT_REPO_NAME']?.trim() || '';
-	const branch = env['CONTENT_REPO_BRANCH']?.trim() || 'main';
-	const token = env['GITHUB_WRITE_TOKEN']?.trim() || env['GITHUB_TOKEN']?.trim() || '';
+	const owner = CONTENT_REPO_OWNER?.trim() || '';
+	const repo = CONTENT_REPO_NAME?.trim() || '';
+	const branch = CONTENT_REPO_BRANCH?.trim() || 'main';
+	const token = GITHUB_WRITE_TOKEN?.trim() || GITHUB_TOKEN?.trim() || '';
 
 	if (!owner || !repo || !token) {
 		throw new PublishError(
@@ -48,9 +55,9 @@ function getContentRepoConfig(): ContentRepoConfig {
 export function getWritingPublishStatus(): PublishStatus {
 	return {
 		contentRepoConfigured: Boolean(
-			env['CONTENT_REPO_OWNER']?.trim() &&
-			env['CONTENT_REPO_NAME']?.trim() &&
-			(env['GITHUB_WRITE_TOKEN']?.trim() || env['GITHUB_TOKEN']?.trim())
+			CONTENT_REPO_OWNER?.trim() &&
+			CONTENT_REPO_NAME?.trim() &&
+			(GITHUB_WRITE_TOKEN?.trim() || GITHUB_TOKEN?.trim())
 		)
 	};
 }
@@ -96,16 +103,12 @@ export async function loadGitHubFile(filePath: string): Promise<GitHubContentFil
 		.split('/')
 		.map((segment) => encodeURIComponent(segment))
 		.join('/');
-
 	const response = await githubRequest<{ sha: string; content: string }>(
 		config,
 		`/repos/${config.owner}/${config.repo}/contents/${encodedPath}?ref=${encodeURIComponent(config.branch)}`
 	);
 
-	return {
-		sha: response.sha,
-		content: response.content
-	};
+	return { sha: response.sha, content: response.content };
 }
 
 async function loadLocalContentTextFile(filePath: string): Promise<string | null> {

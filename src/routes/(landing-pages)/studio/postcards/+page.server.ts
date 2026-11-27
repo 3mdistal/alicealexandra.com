@@ -1,4 +1,4 @@
-import { loadPostcardsMeta } from '$lib/content/postcards';
+import { loadPostcardsMeta } from '#lib/content/postcards.ts';
 
 // Prerender this page at build time - no runtime API calls needed
 export const prerender = true;

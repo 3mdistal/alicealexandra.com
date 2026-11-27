@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { type EditableMarkdownDocument, isValidContentSlug } from '$lib/content/editable-source';
-import { createContentSourceChecksum } from '$lib/content/editable-source.server';
+import { type EditableMarkdownDocument, isValidContentSlug } from '#lib/content/editable-source.ts';
+import { createContentSourceChecksum } from '#lib/content/editable-source.server.ts';
 
 const BLOG_CONTENT_PATH = path.join(process.cwd(), 'content', 'blog');
 

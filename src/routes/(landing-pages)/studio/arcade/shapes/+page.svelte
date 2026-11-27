@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Triangle, Circle, Square, Heart, Star, Clear } from '$lib/arcade/shapes';
-	import { ADSR } from '$lib/arcade/notes';
+	import { Triangle, Circle, Square, Heart, Star, Clear } from '#lib/arcade/shapes.ts';
+	import { ADSR } from '#lib/arcade/notes.ts';
 
 	const sidebarShapes = [
 		{ id: 'triangle', Shape: Triangle },

@@ -3,7 +3,7 @@ import {
 	loadAllPoems,
 	transformSectionsToNotionFormat,
 	type Poem
-} from '$lib/content/poems';
+} from '#lib/content/poems.ts';
 
 // Prerender this page at build time - no runtime file access needed
 export const prerender = true;

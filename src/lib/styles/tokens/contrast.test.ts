@@ -9,7 +9,7 @@ import {
 	parseColor,
 	type Rgba
 } from '../../../../lint/design/color.ts';
-import type { SiteSurface, SiteTheme } from '$lib/theme/route-theme';
+import type { SiteSurface, SiteTheme } from '#lib/theme/route-theme.ts';
 
 /**
  * WCAG AA asks for a contrast ratio of at least 4.5:1 between text and its background. This test

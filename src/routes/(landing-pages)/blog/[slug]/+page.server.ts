@@ -1,5 +1,5 @@
-import { loadPostsMeta, loadPostBySlug } from '$lib/content/blog';
-import { measurePostImages } from '$lib/server/blog-image-sizes';
+import { loadPostsMeta, loadPostBySlug } from '#lib/content/blog.ts';
+import { measurePostImages } from '#lib/server/blog-image-sizes.ts';
 import { error } from '@sveltejs/kit';
 
 // Prerender all blog posts at build time

@@ -4,8 +4,8 @@
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { type EditableMarkdownDocument } from '$lib/content/editable-source';
-import { createContentSourceChecksum } from '$lib/content/editable-source.server';
+import { type EditableMarkdownDocument } from '#lib/content/editable-source.ts';
+import { createContentSourceChecksum } from '#lib/content/editable-source.server.ts';
 
 // Use process.cwd() which works during SvelteKit build
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'postcards');

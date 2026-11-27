@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { onDestroy } from 'svelte';
 	import { pageState } from '../stores';
-	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
+	import OptimizedImage from '#lib/components/ui/optimized-image.svelte';
 
 	export let src = '';
 	export let alt = '';

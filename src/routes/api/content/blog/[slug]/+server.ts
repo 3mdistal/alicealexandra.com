@@ -3,8 +3,8 @@ import {
 	createBlogSourceChecksum,
 	isValidBlogSlug,
 	parseBlogMarkdown
-} from '$lib/content/blog-source';
-import { loadPreferredContentTextFile } from '$lib/server/content-repo';
+} from '#lib/content/blog-source.ts';
+import { loadPreferredContentTextFile } from '#lib/server/content-repo.ts';
 
 export const GET: RequestHandler = async ({ locals, params }) => {
 	if (!locals.isOwner) {

@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import { pageState } from '$lib/stores';
+	import { pageState } from '#lib/stores.ts';
 	import { marked } from 'marked';
-	import Card from '$lib/components/ui/card.svelte';
-	import Pill from '$lib/components/ui/pill.svelte';
+	import Card from '#lib/components/ui/card.svelte';
+	import Pill from '#lib/components/ui/pill.svelte';
 	import {
 		STUDIO_NEWS,
 		type NewsMainTab,
 		type StudioNewsAction,
 		type StudioNewsCategory
-	} from '$lib/news/updates';
-	import { parseChangelogSummaries } from '$lib/news/site-changelog';
+	} from '#lib/news/updates.ts';
+	import { parseChangelogSummaries } from '#lib/news/site-changelog.ts';
 
 	export let data: { blogEntries?: any[]; careerEntries?: any[] };
 

@@ -3,8 +3,8 @@ import {
 	normalizeBlogFrontmatter,
 	type BlogFrontmatter,
 	isValidBlogSlug
-} from '$lib/content/blog-source';
-import { PublishError, saveBlogPost } from '$lib/server/blog-publishing';
+} from '#lib/content/blog-source.ts';
+import { PublishError, saveBlogPost } from '#lib/server/blog-publishing.ts';
 
 interface SaveBlogRequest {
 	frontmatter?: Partial<BlogFrontmatter>;

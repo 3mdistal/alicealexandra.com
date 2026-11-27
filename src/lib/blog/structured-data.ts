@@ -1,4 +1,4 @@
-import { shareImageUrl } from '$lib/blog/share-image';
+import { shareImageUrl } from '#lib/blog/share-image.ts';
 
 const SITE_URL = 'https://www.alicealexandra.com';
 

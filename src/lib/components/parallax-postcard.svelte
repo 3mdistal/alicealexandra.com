@@ -3,7 +3,7 @@
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { get } from 'svelte/store';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
 
 	interface Props {
 		title: string;

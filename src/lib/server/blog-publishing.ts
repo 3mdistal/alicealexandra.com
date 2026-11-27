@@ -1,32 +1,32 @@
-import { calculateBlogReadTimeFromContent } from '$lib/blog/read-time';
-import type { BlogPostMeta } from '$lib/content/blog';
+import { calculateBlogReadTimeFromContent } from '#lib/blog/read-time.ts';
+import type { BlogPostMeta } from '#lib/content/blog.ts';
 import {
 	createBlogSourceChecksum,
 	type BlogFrontmatter,
 	isValidBlogSlug,
 	serializeBlogMarkdown
-} from '$lib/content/blog-source';
-import type { PoemFrontmatter } from '$lib/content/poems';
+} from '#lib/content/blog-source.ts';
+import type { PoemFrontmatter } from '#lib/content/poems.ts';
 import {
 	normalizeHeroImage as normalizePostcardHeroImage,
 	serializePostcardMarkdown
-} from '$lib/content/postcards';
-import type { PostcardFrontmatter, PostcardMeta } from '$lib/content/postcards';
-import { isValidContentSlug } from '$lib/content/editable-source';
-import { createContentSourceChecksum } from '$lib/content/editable-source.server';
+} from '#lib/content/postcards.ts';
+import type { PostcardFrontmatter, PostcardMeta } from '#lib/content/postcards.ts';
+import { isValidContentSlug } from '#lib/content/editable-source.ts';
+import { createContentSourceChecksum } from '#lib/content/editable-source.server.ts';
 import {
 	type TallTaleFrontmatter,
 	type TallTaleMeta,
 	serializeTallTaleMarkdown
-} from '$lib/content/tall-tales';
+} from '#lib/content/tall-tales.ts';
 import {
 	createContentRepoCommit,
 	decodeGitHubContent,
 	getWritingPublishStatus,
 	loadGitHubFile,
 	PublishError
-} from '$lib/server/content-repo';
-import { normalizePoemFrontmatter, serializePoemMarkdown } from '$lib/content/poems';
+} from '#lib/server/content-repo.ts';
+import { normalizePoemFrontmatter, serializePoemMarkdown } from '#lib/content/poems.ts';
 
 interface SaveBlogPostInput {
 	slug: string;

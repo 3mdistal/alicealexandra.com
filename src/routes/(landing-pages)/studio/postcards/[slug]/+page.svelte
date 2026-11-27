@@ -1,8 +1,8 @@
 <script lang="ts">
-	import '$lib/styles/prose.css';
+	import '#lib/styles/prose.css';
 	import { marked } from 'marked';
-	import WritingEditorShell from '$lib/components/writing-editor-shell.svelte';
-	import type { Postcard, PostcardFrontmatter } from '$lib/content/postcards';
+	import WritingEditorShell from '#lib/components/writing-editor-shell.svelte';
+	import type { Postcard, PostcardFrontmatter } from '#lib/content/postcards.ts';
 	import { onMount } from 'svelte';
 
 	type OwnerStatus = {

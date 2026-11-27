@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
-	import TextMacro from '$lib/notion/components/text-macro.svelte';
-	import WritingEditorShell from '$lib/components/writing-editor-shell.svelte';
-	import type { Poem, PoemFrontmatter, Section } from '$lib/content/poems';
+	import type { RichTextItemResponse } from '#lib/notion/types/notion-types.ts';
+	import TextMacro from '#lib/notion/components/text-macro.svelte';
+	import WritingEditorShell from '#lib/components/writing-editor-shell.svelte';
+	import type { Poem, PoemFrontmatter, Section } from '#lib/content/poems.ts';
 	import { onMount } from 'svelte';
 
 	type OwnerStatus = {

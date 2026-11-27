@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import Button from '$lib/components/ui/button.svelte';
-	import LinkButton from '$lib/components/ui/link-button.svelte';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
-	import type { StudioCard } from '$lib/content/studio';
-	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
+	import Button from '#lib/components/ui/button.svelte';
+	import LinkButton from '#lib/components/ui/link-button.svelte';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
+	import type { StudioCard } from '#lib/content/studio.ts';
+	import OptimizedImage from '#lib/components/ui/optimized-image.svelte';
 
 	// Card Data
 	export let card: StudioCard;

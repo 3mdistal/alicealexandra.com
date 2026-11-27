@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { createContentSourceChecksum } from '$lib/content/editable-source.server';
+import { createContentSourceChecksum } from '#lib/content/editable-source.server.ts';
 import {
 	buildTallTaleSections,
 	normalizeHeroImage,
@@ -8,7 +8,7 @@ import {
 	type EditableTallTaleDocument,
 	type TallTale,
 	type TallTaleMeta
-} from '$lib/content/tall-tales';
+} from '#lib/content/tall-tales.ts';
 
 const CONTENT_PATH = path.join(process.cwd(), 'content', 'tall-tales');
 

@@ -3,13 +3,13 @@ import {
 	createBlogSourceChecksum,
 	isValidBlogSlug,
 	parseBlogMarkdown
-} from '$lib/content/blog-source';
-import { isValidContentSlug } from '$lib/content/editable-source';
-import { createContentSourceChecksum } from '$lib/content/editable-source.server';
-import { parsePoemMarkdown } from '$lib/content/poems';
-import { parsePostcardMarkdown } from '$lib/content/postcards';
-import { parseTallTaleMarkdown } from '$lib/content/tall-tales';
-import { loadPreferredContentTextFile } from '$lib/server/content-repo';
+} from '#lib/content/blog-source.ts';
+import { isValidContentSlug } from '#lib/content/editable-source.ts';
+import { createContentSourceChecksum } from '#lib/content/editable-source.server.ts';
+import { parsePoemMarkdown } from '#lib/content/poems.ts';
+import { parsePostcardMarkdown } from '#lib/content/postcards.ts';
+import { parseTallTaleMarkdown } from '#lib/content/tall-tales.ts';
+import { loadPreferredContentTextFile } from '#lib/server/content-repo.ts';
 
 const SURFACE_PATHS: Record<string, (slug: string) => string> = {
 	blog: (slug) => `blog/${slug}.md`,

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import TextMacro from '$lib/notion/components/text-macro.svelte';
-	import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
-	import { pushState, replaceState } from '$app/navigation';
+	import TextMacro from '#lib/notion/components/text-macro.svelte';
+	import type { RichTextItemResponse } from '#lib/notion/types/notion-types.ts';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
 
 	let { data }: { data: Data } = $props();
 
@@ -170,10 +170,10 @@
 
 		if (isOpening) {
 			// Update URL when opening a poem (shallow routing)
-			pushState(`/studio/hfc/${poemId}`, { openPoemId: poemId });
+			goto(`/studio/hfc/${poemId}`, { shallow: true, state: { openPoemId: poemId } });
 		} else {
 			// Reset URL when closing
-			replaceState('/studio/hfc', {});
+			goto('/studio/hfc', { shallow: true, replace: true });
 		}
 	}
 

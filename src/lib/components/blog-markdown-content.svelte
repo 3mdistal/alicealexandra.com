@@ -1,9 +1,9 @@
 <script lang="ts">
-	import '$lib/styles/prose.css';
+	import '#lib/styles/prose.css';
 	import { afterUpdate, onMount, tick } from 'svelte';
-	import { enhanceInterludeVideos } from '$lib/blog/interlude-videos';
-	import type { ImageSize } from '$lib/blog/image-size';
-	import { hasCodeBlock, renderBlogMarkdown } from '$lib/blog/render-markdown';
+	import { enhanceInterludeVideos } from '#lib/blog/interlude-videos.ts';
+	import type { ImageSize } from '#lib/blog/image-size.ts';
+	import { hasCodeBlock, renderBlogMarkdown } from '#lib/blog/render-markdown.ts';
 	import lightCodeTheme from 'highlight.js/styles/github.min.css?url';
 	import darkCodeTheme from 'highlight.js/styles/github-dark.min.css?url';
 

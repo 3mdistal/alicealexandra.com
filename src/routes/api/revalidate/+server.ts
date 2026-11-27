@@ -1,5 +1,5 @@
 import { json, error } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
+import { BYPASS_TOKEN } from '$app/env/private';
 import type { RequestHandler } from './$types';
 
 // Allowed routes for revalidation to prevent abuse
@@ -29,7 +29,7 @@ export const POST: RequestHandler = async ({ request, url, fetch: serverFetch })
 			throw error(403, `Route '${route}' is not allowed for revalidation`);
 		}
 
-		const bypassToken = env['BYPASS_TOKEN'];
+		const bypassToken = BYPASS_TOKEN;
 		if (!bypassToken) {
 			throw error(500, 'Missing required BYPASS_TOKEN environment variable');
 		}

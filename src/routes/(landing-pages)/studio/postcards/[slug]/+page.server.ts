@@ -1,4 +1,4 @@
-import { loadPostcardBySlug, loadPostcardsMeta } from '$lib/content/postcards';
+import { loadPostcardBySlug, loadPostcardsMeta } from '#lib/content/postcards.ts';
 import { error } from '@sveltejs/kit';
 
 // Prerender all postcards at build time

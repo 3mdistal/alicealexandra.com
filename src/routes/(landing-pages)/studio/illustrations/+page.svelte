@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { fade, scale } from 'svelte/transition';
-	import type { Illustration } from '$lib/content/studio';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import type { Illustration } from '#lib/content/studio.ts';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
 
 	// Props
 	export let data;

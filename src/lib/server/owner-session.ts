@@ -1,7 +1,14 @@
 import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
 import type { Cookies } from '@sveltejs/kit';
-import { dev } from '$app/environment';
-import { env } from '$env/dynamic/private';
+import { dev } from '$app/env';
+
+import {
+	OWNER_SESSION_SECRET,
+	GITHUB_OAUTH_CLIENT_ID,
+	GITHUB_OAUTH_CLIENT_SECRET,
+	OWNER_GITHUB_LOGIN,
+	OWNER_GITHUB_ID
+} from '$app/env/private';
 
 const OWNER_SESSION_COOKIE = 'owner_session';
 const OWNER_STATE_COOKIE = 'owner_oauth_state';
@@ -56,7 +63,7 @@ function base64UrlDecode(value: string): string {
 }
 
 function getOwnerSessionSecret(): string | null {
-	return env['OWNER_SESSION_SECRET']?.trim() || null;
+	return OWNER_SESSION_SECRET?.trim() || null;
 }
 
 function signValue(value: string, secret: string): string {
@@ -99,10 +106,10 @@ function readSignedToken<T extends { expiresAt: number }>(token: string, secret:
 
 export function getOwnerAuthConfiguration() {
 	return {
-		clientId: env['GITHUB_OAUTH_CLIENT_ID']?.trim() || '',
-		clientSecret: env['GITHUB_OAUTH_CLIENT_SECRET']?.trim() || '',
-		allowedLogin: env['OWNER_GITHUB_LOGIN']?.trim() || '',
-		allowedId: env['OWNER_GITHUB_ID']?.trim() || ''
+		clientId: GITHUB_OAUTH_CLIENT_ID?.trim() || '',
+		clientSecret: GITHUB_OAUTH_CLIENT_SECRET?.trim() || '',
+		allowedLogin: OWNER_GITHUB_LOGIN?.trim() || '',
+		allowedId: OWNER_GITHUB_ID?.trim() || ''
 	};
 }
 
