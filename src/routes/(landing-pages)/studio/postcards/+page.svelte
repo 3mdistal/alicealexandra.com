@@ -86,13 +86,16 @@
 
 					if (result.type === 'loaded' && result.status === 200) {
 						// Use shallow routing to show the modal with animation data
-						pushState(href, {
-							selectedPostcard: result.data,
-							animationOrigin: {
-								x: rect.left,
-								y: rect.top,
-								width: rect.width,
-								height: rect.height
+						goto(href, {
+							shallow: true,
+							state: {
+								selectedPostcard: result.data,
+								animationOrigin: {
+									x: rect.left,
+									y: rect.top,
+									width: rect.width,
+									height: rect.height
+								}
 							}
 						});
 					} else {

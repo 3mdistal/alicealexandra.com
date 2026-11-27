@@ -23,5 +23,5 @@ export const GET: RequestHandler = ({ cookies, url }) => {
 	githubAuthorizeUrl.searchParams.set('state', state);
 
 	storeOwnerOAuthState(cookies, state);
-	throw redirect(302, githubAuthorizeUrl.toString());
+	throw redirect(302, githubAuthorizeUrl.toString(), { external: ['https://github.com'] });
 };

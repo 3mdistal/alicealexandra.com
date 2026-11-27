@@ -513,7 +513,7 @@
 		{/if}
 
 		<p class="back-link">
-			<a href="/blog" data-sveltekit-noscroll>back.</a>
+			<a href="/blog" data-sveltekit-reset="false">back.</a>
 		</p>
 	</div>
 </div>

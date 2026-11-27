@@ -1,6 +1,7 @@
 import { defineEnvVars } from '@sveltejs/kit/env';
 
-// @migration-task Review dynamic environment variables. They accept missing values (`undefined`), add stricter validation where a value is required.
+// Server-only and read at runtime, like `$env/dynamic/private` before. Each one may be missing:
+// the code that reads it handles that.
 export const variables = defineEnvVars({
 	BYPASS_TOKEN: { schema: (input) => input },
 	CONTENT_REPO_OWNER: { schema: (input) => input },

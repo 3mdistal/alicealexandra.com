@@ -156,7 +156,7 @@ interface TokenDeclaration {
 /** Custom property declarations from the token files, in the order `app.css` imports them. */
 const tokenDeclarations: TokenDeclaration[] = (() => {
 	const app = readFileSync(new URL('../../../app.css', import.meta.url), 'utf8');
-	const files = [...app.matchAll(/@import '\$lib\/styles\/tokens\/([\w-]+\.css)'/g)].map(
+	const files = [...app.matchAll(/@import '\.\/lib\/styles\/tokens\/([\w-]+\.css)'/g)].map(
 		([, file]) => new URL(`./${file}`, import.meta.url)
 	);
 	return files.flatMap((file) => {

@@ -1,29 +1,20 @@
 <script lang="ts">
 	import '#lib/styles/fonts.ts';
 	import '../app.css';
-	import { page } from '$app/stores';
-	import {
-		getSurface,
-		getTheme,
-		type SiteSurface,
-		type SiteTheme
-	} from '#lib/theme/route-theme.ts';
+	import type { Snippet } from 'svelte';
+	import { page } from '$app/state';
+	import { getSurface, getTheme } from '#lib/theme/route-theme.ts';
 
-	let theme: SiteTheme = 'home';
-	let surface: SiteSurface = 'default';
+	let { children }: { children: Snippet } = $props();
 
-	$: theme = getTheme($page.url.pathname);
-	$: surface = getSurface($page.url.pathname);
+	const theme = $derived(getTheme(page.url.pathname));
+	const surface = $derived(getSurface(page.url.pathname));
 
-	$: {
-		if (typeof document !== 'undefined') {
-			document.documentElement.dataset['theme'] = theme;
-			document.documentElement.dataset['surface'] = surface;
-		}
-	}
+	$effect.pre(() => {
+		document.documentElement.dataset['theme'] = theme;
+		document.documentElement.dataset['surface'] = surface;
+	});
 </script>
-
-<!-- @migration-task could not auto-migrate `$app/stores` to `$app/state`: legacy reactive statement (`$:`); migrate manually -->
 
 <svelte:head>
 	<link rel="icon" type="image/png" href="/images/logo/logo.png" />
@@ -37,5 +28,7 @@
 	data-sveltekit-preload-code="eager"
 >
 	<a class="skip-link" href="#content">Skip to content</a>
-	<div id="content" tabindex="-1"><slot></slot></div>
+	<div id="content" tabindex="-1">
+		{@render children()}
+	</div>
 </div>
