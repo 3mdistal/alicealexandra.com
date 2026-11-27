@@ -1,4 +1,4 @@
-import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { error, type RequestHandler } from '@sveltejs/kit';
 import {
 	createBlogSourceChecksum,
 	isValidBlogSlug,
@@ -22,7 +22,7 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 	}
 
 	const document = parseBlogMarkdown(source.content);
-	return json({
+	return Response.json({
 		frontmatter: document.frontmatter,
 		content: document.body,
 		checksum: createBlogSourceChecksum(source.content),

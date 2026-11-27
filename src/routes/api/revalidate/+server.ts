@@ -1,4 +1,4 @@
-import { json, error } from '@sveltejs/kit';
+import { error, isHttpError } from '@sveltejs/kit';
 import { BYPASS_TOKEN } from '$app/env/private';
 import type { RequestHandler } from './$types';
 
@@ -46,7 +46,7 @@ export const POST: RequestHandler = async ({ request, url, fetch: serverFetch })
 		});
 
 		if (response.ok) {
-			return json({
+			return Response.json({
 				success: true,
 				route,
 				revalidated: true,
@@ -59,7 +59,7 @@ export const POST: RequestHandler = async ({ request, url, fetch: serverFetch })
 			);
 		}
 	} catch (err) {
-		if (err instanceof Error && 'status' in err) {
+		if (isHttpError(err)) {
 			throw err; // Re-throw SvelteKit errors
 		}
 

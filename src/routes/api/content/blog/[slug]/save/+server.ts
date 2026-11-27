@@ -1,4 +1,4 @@
-import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { error, type RequestHandler } from '@sveltejs/kit';
 import {
 	normalizeBlogFrontmatter,
 	type BlogFrontmatter,
@@ -38,7 +38,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 			originalChecksum
 		});
 
-		return json(result);
+		return Response.json(result);
 	} catch (caughtError) {
 		if (caughtError instanceof PublishError) {
 			throw error(caughtError.status, caughtError.message);

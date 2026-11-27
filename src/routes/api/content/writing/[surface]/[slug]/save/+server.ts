@@ -1,4 +1,4 @@
-import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { error, type RequestHandler } from '@sveltejs/kit';
 import type { BlogFrontmatter } from '#lib/content/blog-source.ts';
 import { isValidBlogSlug } from '#lib/content/blog-source.ts';
 import type { PoemFrontmatter } from '#lib/content/poems.ts';
@@ -94,7 +94,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 	try {
 		if (surface === 'blog') {
 			const blogFrontmatter = (payload.frontmatter ?? {}) as Partial<BlogFrontmatter>;
-			return json(
+			return Response.json(
 				await saveBlogPost({
 					slug,
 					frontmatter: {
@@ -128,7 +128,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 		}
 
 		if (surface === 'poems') {
-			return json(
+			return Response.json(
 				await savePoem({
 					slug,
 					frontmatter: normalizePoemFrontmatter(
@@ -141,7 +141,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 		}
 
 		if (surface === 'postcards') {
-			return json(
+			return Response.json(
 				await savePostcard({
 					slug,
 					frontmatter: normalizePostcardFrontmatter(
@@ -155,7 +155,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 		}
 
 		if (surface === 'tall-tales') {
-			return json(
+			return Response.json(
 				await saveTallTale({
 					slug,
 					frontmatter: normalizeTallTaleFrontmatter(
