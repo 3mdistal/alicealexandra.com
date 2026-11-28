@@ -1,4 +1,4 @@
-import { loadTallTaleBySlug, loadTallTalesMeta } from '$lib/content/tall-tales.server';
+import { loadTallTaleBySlug, loadTallTalesMeta } from '#lib/content/tall-tales.server.ts';
 import { error } from '@sveltejs/kit';
 
 // Prerender all tall tales at build time

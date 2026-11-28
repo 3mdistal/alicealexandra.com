@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import StudioCard from './studio-card.svelte';
-	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
+	import OptimizedImage from '#lib/components/ui/optimized-image.svelte';
 	import gsap from 'gsap';
-	import { pageState } from '$lib/stores';
-	import type { StudioCard as StudioCardType } from '$lib/content/studio';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import { pageState } from '#lib/stores.ts';
+	import type { StudioCard as StudioCardType } from '#lib/content/studio.ts';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
 
 	export let data;
 

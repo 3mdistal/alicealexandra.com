@@ -1,13 +1,13 @@
 <script lang="ts">
-	import BlogHeader from '$lib/components/blog-header.svelte';
-	import BlogMarkdownContent from '$lib/components/blog-markdown-content.svelte';
-	import type { ImageSize } from '$lib/blog/image-size';
-	import { calculateBlogReadTimeFromContent } from '$lib/blog/read-time';
-	import { shareImageUrl } from '$lib/blog/share-image';
-	import { blogPostingScriptTag } from '$lib/blog/structured-data';
-	import WritingEditorShell from '$lib/components/writing-editor-shell.svelte';
-	import type { BlogPost } from '$lib/content/blog';
-	import type { BlogFrontmatter } from '$lib/content/blog-source';
+	import BlogHeader from '#lib/components/blog-header.svelte';
+	import BlogMarkdownContent from '#lib/components/blog-markdown-content.svelte';
+	import type { ImageSize } from '#lib/blog/image-size.ts';
+	import { calculateBlogReadTimeFromContent } from '#lib/blog/read-time.ts';
+	import { shareImageUrl } from '#lib/blog/share-image.ts';
+	import { blogPostingScriptTag } from '#lib/blog/structured-data.ts';
+	import WritingEditorShell from '#lib/components/writing-editor-shell.svelte';
+	import type { BlogPost } from '#lib/content/blog.ts';
+	import type { BlogFrontmatter } from '#lib/content/blog-source.ts';
 	import { onMount, tick } from 'svelte';
 
 	type OwnerStatus = {
@@ -513,7 +513,7 @@
 		{/if}
 
 		<p class="back-link">
-			<a href="/blog" data-sveltekit-noscroll>back.</a>
+			<a href="/blog" data-sveltekit-reset="false">back.</a>
 		</p>
 	</div>
 </div>

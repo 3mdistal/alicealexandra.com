@@ -1,4 +1,4 @@
-import { loadPoemBySlug, loadPoemsMeta, loadSections } from '$lib/content/poems';
+import { loadPoemBySlug, loadPoemsMeta, loadSections } from '#lib/content/poems.ts';
 import { error } from '@sveltejs/kit';
 
 // Prerender all poems at build time

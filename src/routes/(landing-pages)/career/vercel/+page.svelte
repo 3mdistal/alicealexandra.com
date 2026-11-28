@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PublicationsSection from './publications-section.svelte';
-	import type { Publication } from '$lib/content/career';
+	import type { Publication } from '#lib/content/career.ts';
 
 	export let data: { publications: Publication[] };
 

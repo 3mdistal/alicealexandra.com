@@ -1,5 +1,5 @@
-import { loadPoemContent } from '$lib/content/poems';
-import { json, type RequestHandler } from '@sveltejs/kit';
+import { loadPoemContent } from '#lib/content/poems.ts';
+import type { RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { id } = await request.json();
@@ -19,10 +19,10 @@ export const POST: RequestHandler = async ({ request }) => {
 			}
 		}));
 
-		return json({ results });
+		return Response.json({ results });
 	} catch (error) {
 		console.error('Failed to load poem content:', error);
-		return json({ results: [] }, { status: 404 });
+		return Response.json({ results: [] }, { status: 404 });
 	}
 };
 

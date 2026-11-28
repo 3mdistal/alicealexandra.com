@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { cubicIn } from 'svelte/easing';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
 	import { get } from 'svelte/store';
-	import { pageState } from '$lib/stores';
+	import { pageState } from '#lib/stores.ts';
 
 	function reducedMotionEnabled(): boolean {
 		return get(prefersReducedMotion);

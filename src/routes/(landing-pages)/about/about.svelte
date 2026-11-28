@@ -1,15 +1,15 @@
 <script lang="ts">
-	import SubpageContent from '$lib/partials/subpage-content.svelte';
-	import AboutSection1 from '$lib/content-components/about/section-1.svelte';
-	import AboutSection2 from '$lib/content-components/about/section-2.svelte';
-	import AboutSection3 from '$lib/content-components/about/section-3.svelte';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import SubpageContent from '#lib/partials/subpage-content.svelte';
+	import AboutSection1 from '#lib/content-components/about/section-1.svelte';
+	import AboutSection2 from '#lib/content-components/about/section-2.svelte';
+	import AboutSection3 from '#lib/content-components/about/section-3.svelte';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
 	const AuthorPhoto = `https://${IMAGE_DOMAIN}/site/images/author-photo.webp`;
 	const Mirror = `https://${IMAGE_DOMAIN}/site/images/mirror.webp`;
 	const Owl = `https://${IMAGE_DOMAIN}/site/images/owl.webp`;
-	import Socials from '$lib/icons/socials.svelte';
+	import Socials from '#lib/icons/socials.svelte';
 	import { onDestroy } from 'svelte';
-	import { pageState } from '$lib/stores';
+	import { pageState } from '#lib/stores.ts';
 
 	export let accent = 'var(--color-accent)';
 

@@ -5,7 +5,7 @@ import {
 	isOwnerAuthConfigured,
 	sanitizeRedirectTo,
 	storeOwnerOAuthState
-} from '$lib/server/owner-session';
+} from '#lib/server/owner-session.ts';
 
 export const GET: RequestHandler = ({ cookies, url }) => {
 	if (!isOwnerAuthConfigured()) {
@@ -23,5 +23,5 @@ export const GET: RequestHandler = ({ cookies, url }) => {
 	githubAuthorizeUrl.searchParams.set('state', state);
 
 	storeOwnerOAuthState(cookies, state);
-	throw redirect(302, githubAuthorizeUrl.toString());
+	throw redirect(302, githubAuthorizeUrl.toString(), { external: ['https://github.com'] });
 };

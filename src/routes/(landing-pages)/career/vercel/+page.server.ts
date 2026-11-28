@@ -1,4 +1,4 @@
-import { loadPublications, type Publication } from '$lib/content/career';
+import { loadPublications, type Publication } from '#lib/content/career.ts';
 
 export async function load() {
 	const publications = await loadPublications();

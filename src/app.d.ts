@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-import type { OwnerSession } from '$lib/server/owner-session';
+import type { OwnerSession } from '#lib/server/owner-session.ts';
 
 declare global {
 	namespace App {

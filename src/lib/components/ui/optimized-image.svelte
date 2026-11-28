@@ -3,7 +3,7 @@
 		generateSrcSet,
 		getOptimizedImageUrl,
 		CLOUDFLARE_IMAGE_VARIANTS
-	} from '$lib/utils/images';
+	} from '#lib/utils/images.ts';
 
 	export let src: string;
 	export let alt: string;

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import HomepageWrapper from '../lib/homepage/homepage-wrapper.svelte';
 	import SiteTitle from '../lib/homepage/site-title.svelte';
-	import Svgs from '$lib/icons/svgs.svelte';
+	import Svgs from '#lib/icons/svgs.svelte';
 	import { pageState } from '../lib/stores';
 	import { onMount } from 'svelte';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
 	import latoLight from '@fontsource/lato/files/lato-latin-300-normal.woff2?url';
 	import spectralLight from '@fontsource/spectral/files/spectral-latin-300-normal.woff2?url';
 

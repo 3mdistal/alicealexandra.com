@@ -1,8 +1,11 @@
-import { loadPostsMeta } from '$lib/content/blog';
-import { loadPoemsMeta } from '$lib/content/poems';
-import { loadPostcardsMeta } from '$lib/content/postcards';
-import { loadRawTallTaleMarkdownBySlug, loadTallTalesMeta } from '$lib/content/tall-tales.server';
-import { serializeSitemap, STATIC_SITEMAP_PATHS, type SitemapEntry } from '$lib/server/sitemap';
+import { loadPostsMeta } from '#lib/content/blog.ts';
+import { loadPoemsMeta } from '#lib/content/poems.ts';
+import { loadPostcardsMeta } from '#lib/content/postcards.ts';
+import {
+	loadRawTallTaleMarkdownBySlug,
+	loadTallTalesMeta
+} from '#lib/content/tall-tales.server.ts';
+import { serializeSitemap, STATIC_SITEMAP_PATHS, type SitemapEntry } from '#lib/server/sitemap.ts';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;

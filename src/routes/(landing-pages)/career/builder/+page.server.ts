@@ -1,4 +1,4 @@
-import { loadBuilderSnapshot, type BuilderSnapshot } from '$lib/content/builder';
+import { loadBuilderSnapshot, type BuilderSnapshot } from '#lib/content/builder.ts';
 
 export async function load() {
 	const snapshot = await loadBuilderSnapshot();

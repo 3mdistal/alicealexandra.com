@@ -1,19 +1,19 @@
-import { error, json, type RequestHandler } from '@sveltejs/kit';
-import type { BlogFrontmatter } from '$lib/content/blog-source';
-import { isValidBlogSlug } from '$lib/content/blog-source';
-import type { PoemFrontmatter } from '$lib/content/poems';
-import { normalizePoemFrontmatter } from '$lib/content/poems';
-import type { PostcardFrontmatter } from '$lib/content/postcards';
-import { normalizePostcardFrontmatter } from '$lib/content/postcards';
-import type { TallTaleFrontmatter } from '$lib/content/tall-tales';
-import { isValidContentSlug } from '$lib/content/editable-source';
+import { error, type RequestHandler } from '@sveltejs/kit';
+import type { BlogFrontmatter } from '#lib/content/blog-source.ts';
+import { isValidBlogSlug } from '#lib/content/blog-source.ts';
+import type { PoemFrontmatter } from '#lib/content/poems.ts';
+import { normalizePoemFrontmatter } from '#lib/content/poems.ts';
+import type { PostcardFrontmatter } from '#lib/content/postcards.ts';
+import { normalizePostcardFrontmatter } from '#lib/content/postcards.ts';
+import type { TallTaleFrontmatter } from '#lib/content/tall-tales.ts';
+import { isValidContentSlug } from '#lib/content/editable-source.ts';
 import {
 	PublishError,
 	saveBlogPost,
 	savePoem,
 	savePostcard,
 	saveTallTale
-} from '$lib/server/blog-publishing';
+} from '#lib/server/blog-publishing.ts';
 
 interface SaveWritingRequest {
 	frontmatter?:
@@ -94,7 +94,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 	try {
 		if (surface === 'blog') {
 			const blogFrontmatter = (payload.frontmatter ?? {}) as Partial<BlogFrontmatter>;
-			return json(
+			return Response.json(
 				await saveBlogPost({
 					slug,
 					frontmatter: {
@@ -128,7 +128,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 		}
 
 		if (surface === 'poems') {
-			return json(
+			return Response.json(
 				await savePoem({
 					slug,
 					frontmatter: normalizePoemFrontmatter(
@@ -141,7 +141,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 		}
 
 		if (surface === 'postcards') {
-			return json(
+			return Response.json(
 				await savePostcard({
 					slug,
 					frontmatter: normalizePostcardFrontmatter(
@@ -155,7 +155,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 		}
 
 		if (surface === 'tall-tales') {
-			return json(
+			return Response.json(
 				await saveTallTale({
 					slug,
 					frontmatter: normalizeTallTaleFrontmatter(

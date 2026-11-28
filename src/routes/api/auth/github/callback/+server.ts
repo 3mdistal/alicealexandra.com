@@ -5,7 +5,7 @@ import {
 	isAllowedOwner,
 	readOwnerOAuthState,
 	setOwnerSession
-} from '$lib/server/owner-session';
+} from '#lib/server/owner-session.ts';
 
 interface GitHubAccessTokenResponse {
 	access_token?: string;

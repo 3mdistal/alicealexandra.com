@@ -1,6 +1,6 @@
-import { loadPostsMeta } from '$lib/content/blog';
-import { loadPublications } from '$lib/content/career';
-import { loadBuilderSnapshot } from '$lib/content/builder';
+import { loadPostsMeta } from '#lib/content/blog.ts';
+import { loadPublications } from '#lib/content/career.ts';
+import { loadBuilderSnapshot } from '#lib/content/builder.ts';
 
 export const prerender = true;
 

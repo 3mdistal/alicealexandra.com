@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { BlogPostMeta } from '$lib/content/blog';
+	import type { BlogPostMeta } from '#lib/content/blog.ts';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 

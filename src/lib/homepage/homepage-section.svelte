@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { pageState } from '$lib/stores';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
+	import { pageState } from '#lib/stores.ts';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 

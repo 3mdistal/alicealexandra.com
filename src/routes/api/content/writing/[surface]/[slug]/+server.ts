@@ -1,15 +1,15 @@
-import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { error, type RequestHandler } from '@sveltejs/kit';
 import {
 	createBlogSourceChecksum,
 	isValidBlogSlug,
 	parseBlogMarkdown
-} from '$lib/content/blog-source';
-import { isValidContentSlug } from '$lib/content/editable-source';
-import { createContentSourceChecksum } from '$lib/content/editable-source.server';
-import { parsePoemMarkdown } from '$lib/content/poems';
-import { parsePostcardMarkdown } from '$lib/content/postcards';
-import { parseTallTaleMarkdown } from '$lib/content/tall-tales';
-import { loadPreferredContentTextFile } from '$lib/server/content-repo';
+} from '#lib/content/blog-source.ts';
+import { isValidContentSlug } from '#lib/content/editable-source.ts';
+import { createContentSourceChecksum } from '#lib/content/editable-source.server.ts';
+import { parsePoemMarkdown } from '#lib/content/poems.ts';
+import { parsePostcardMarkdown } from '#lib/content/postcards.ts';
+import { parseTallTaleMarkdown } from '#lib/content/tall-tales.ts';
+import { loadPreferredContentTextFile } from '#lib/server/content-repo.ts';
 
 const SURFACE_PATHS: Record<string, (slug: string) => string> = {
 	blog: (slug) => `blog/${slug}.md`,
@@ -45,7 +45,7 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 
 	if (surface === 'blog') {
 		const document = parseBlogMarkdown(source.content);
-		return json({
+		return Response.json({
 			frontmatter: document.frontmatter,
 			content: document.body,
 			checksum: createBlogSourceChecksum(source.content),
@@ -55,7 +55,7 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 
 	if (surface === 'poems') {
 		const document = parsePoemMarkdown(source.content);
-		return json({
+		return Response.json({
 			frontmatter: document.frontmatter,
 			content: document.body,
 			checksum: createContentSourceChecksum(source.content),
@@ -65,7 +65,7 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 
 	if (surface === 'postcards') {
 		const document = parsePostcardMarkdown(source.content);
-		return json({
+		return Response.json({
 			frontmatter: document.frontmatter,
 			content: document.body,
 			checksum: createContentSourceChecksum(source.content),
@@ -74,7 +74,7 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 	}
 
 	const document = parseTallTaleMarkdown(source.content);
-	return json({
+	return Response.json({
 		frontmatter: document.frontmatter,
 		content: document.body,
 		checksum: createContentSourceChecksum(source.content),

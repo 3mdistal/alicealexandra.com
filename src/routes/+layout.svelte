@@ -1,21 +1,19 @@
 <script lang="ts">
-	import '$lib/styles/fonts';
+	import '#lib/styles/fonts.ts';
 	import '../app.css';
-	import { page } from '$app/stores';
-	import { getSurface, getTheme, type SiteSurface, type SiteTheme } from '$lib/theme/route-theme';
+	import type { Snippet } from 'svelte';
+	import { page } from '$app/state';
+	import { getSurface, getTheme } from '#lib/theme/route-theme.ts';
 
-	let theme: SiteTheme = 'home';
-	let surface: SiteSurface = 'default';
+	let { children }: { children: Snippet } = $props();
 
-	$: theme = getTheme($page.url.pathname);
-	$: surface = getSurface($page.url.pathname);
+	const theme = $derived(getTheme(page.url.pathname));
+	const surface = $derived(getSurface(page.url.pathname));
 
-	$: {
-		if (typeof document !== 'undefined') {
-			document.documentElement.dataset['theme'] = theme;
-			document.documentElement.dataset['surface'] = surface;
-		}
-	}
+	$effect.pre(() => {
+		document.documentElement.dataset['theme'] = theme;
+		document.documentElement.dataset['surface'] = surface;
+	});
 </script>
 
 <svelte:head>
@@ -31,6 +29,6 @@
 >
 	<a class="skip-link" href="#content">Skip to content</a>
 	<div id="content" tabindex="-1">
-		<slot />
+		{@render children()}
 	</div>
 </div>

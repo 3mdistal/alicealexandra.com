@@ -1,7 +1,7 @@
-import { renderBlogMarkdown } from '$lib/blog/render-markdown';
-import { loadPostBySlug, loadPostsMeta, type BlogPost } from '$lib/content/blog';
-import { CANONICAL_ORIGIN } from '$lib/server/agent-readiness';
-import { serializeRssFeed, type RssFeedItemInput } from '$lib/server/rss';
+import { renderBlogMarkdown } from '#lib/blog/render-markdown.ts';
+import { loadPostBySlug, loadPostsMeta, type BlogPost } from '#lib/content/blog.ts';
+import { CANONICAL_ORIGIN } from '#lib/server/agent-readiness.ts';
+import { serializeRssFeed, type RssFeedItemInput } from '#lib/server/rss.ts';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;

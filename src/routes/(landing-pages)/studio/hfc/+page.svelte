@@ -1,9 +1,10 @@
 <script lang="ts">
-	import TextMacro from '$lib/notion/components/text-macro.svelte';
-	import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
-	import { pushState, replaceState } from '$app/navigation';
+	import TextMacro from '#lib/notion/components/text-macro.svelte';
+	import type { RichTextItemResponse } from '#lib/notion/types/notion-types.ts';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
+	import { untrack } from 'svelte';
 
 	let { data }: { data: Data } = $props();
 
@@ -170,10 +171,10 @@
 
 		if (isOpening) {
 			// Update URL when opening a poem (shallow routing)
-			pushState(`/studio/hfc/${poemId}`, { openPoemId: poemId });
+			goto(`/studio/hfc/${poemId}`, { shallow: true, state: { openPoemId: poemId } });
 		} else {
 			// Reset URL when closing
-			replaceState('/studio/hfc', {});
+			goto('/studio/hfc', { shallow: true, replace: true });
 		}
 	}
 
@@ -181,27 +182,31 @@
 	$effect(() => {
 		const stateOpenPoemId = (page.state as any)?.openPoemId as string | undefined;
 
-		// Skip if this state change was triggered by our own toggleOpen
-		if (stateOpenPoemId === lastToggledPoemId) {
-			return;
-		}
+		// Only page.state reruns this. SvelteKit 3 updates it after goto resolves, by which
+		// time toggleOpen has already changed open and lastToggledPoemId.
+		untrack(() => {
+			// Skip if this state change was triggered by our own toggleOpen
+			if (stateOpenPoemId === lastToggledPoemId) {
+				return;
+			}
 
-		if (stateOpenPoemId) {
-			// Open the poem from state (browser navigation)
-			for (const id of Object.keys(open)) {
-				open[id] = false;
+			if (stateOpenPoemId) {
+				// Open the poem from state (browser navigation)
+				for (const id of Object.keys(open)) {
+					open[id] = false;
+				}
+				open[stateOpenPoemId] = true;
+				lastToggledPoemId = stateOpenPoemId;
+				// Scroll to the poem after a brief delay to allow render
+				setTimeout(() => scroll(`poem-${stateOpenPoemId}`, 'smooth'), 100);
+			} else {
+				// Close all poems when navigating back to base URL
+				for (const id of Object.keys(open)) {
+					open[id] = false;
+				}
+				lastToggledPoemId = null;
 			}
-			open[stateOpenPoemId] = true;
-			lastToggledPoemId = stateOpenPoemId;
-			// Scroll to the poem after a brief delay to allow render
-			setTimeout(() => scroll(`poem-${stateOpenPoemId}`, 'smooth'), 100);
-		} else {
-			// Close all poems when navigating back to base URL
-			for (const id of Object.keys(open)) {
-				open[id] = false;
-			}
-			lastToggledPoemId = null;
-		}
+		});
 	});
 
 	// eslint-disable-next-line

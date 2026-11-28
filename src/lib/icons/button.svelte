@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-	import LinkButton from '$lib/components/ui/link-button.svelte';
+	import LinkButton from '#lib/components/ui/link-button.svelte';
 
 	export let url = '';
 	export let text = '';

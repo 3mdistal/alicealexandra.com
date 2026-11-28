@@ -1,5 +1,5 @@
-import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
-import { interludeToggleIcon } from '$lib/blog/render-markdown';
+import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
+import { interludeToggleIcon } from '#lib/blog/render-markdown.ts';
 
 type ReaderChoice = 'play' | 'pause';
 

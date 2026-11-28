@@ -1,10 +1,10 @@
-import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { error, type RequestHandler } from '@sveltejs/kit';
 import {
 	createBlogSourceChecksum,
 	isValidBlogSlug,
 	parseBlogMarkdown
-} from '$lib/content/blog-source';
-import { loadPreferredContentTextFile } from '$lib/server/content-repo';
+} from '#lib/content/blog-source.ts';
+import { loadPreferredContentTextFile } from '#lib/server/content-repo.ts';
 
 export const GET: RequestHandler = async ({ locals, params }) => {
 	if (!locals.isOwner) {
@@ -22,7 +22,7 @@ export const GET: RequestHandler = async ({ locals, params }) => {
 	}
 
 	const document = parseBlogMarkdown(source.content);
-	return json({
+	return Response.json({
 		frontmatter: document.frontmatter,
 		content: document.body,
 		checksum: createBlogSourceChecksum(source.content),

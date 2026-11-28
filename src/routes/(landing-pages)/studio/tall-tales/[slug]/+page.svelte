@@ -1,14 +1,14 @@
 <script lang="ts">
-	import '$lib/styles/prose.css';
+	import '#lib/styles/prose.css';
 	import { marked } from 'marked';
-	import AudioPlayer from '$lib/components/audio-player.svelte';
-	import LinkButton from '$lib/components/ui/link-button.svelte';
-	import WritingEditorShell from '$lib/components/writing-editor-shell.svelte';
+	import AudioPlayer from '#lib/components/audio-player.svelte';
+	import LinkButton from '#lib/components/ui/link-button.svelte';
+	import WritingEditorShell from '#lib/components/writing-editor-shell.svelte';
 	import {
 		buildTallTaleSections,
 		type TallTale,
 		type TallTaleFrontmatter
-	} from '$lib/content/tall-tales';
+	} from '#lib/content/tall-tales.ts';
 	import { onMount } from 'svelte';
 
 	type OwnerStatus = {

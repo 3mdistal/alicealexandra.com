@@ -1,24 +1,22 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import { page } from '$app/stores';
-	import { prefersReducedMotion } from '$lib/accessibility/prefers-reduced-motion';
-	import { isActive, navItems } from '$lib/chrome/nav-model';
+	import { page } from '$app/state';
+	import { prefersReducedMotion } from '#lib/accessibility/prefers-reduced-motion.ts';
+	import { isActive, navItems } from '#lib/chrome/nav-model.ts';
 
 	const logo = '/images/logo/logo.png';
 	const plainCircle = '/images/logo/plain-circle.svg';
 
-	let mobileMenuOpen = false;
-	let isMobile = false;
-	let playIntroSpin = false;
+	let mobileMenuOpen = $state(false);
+	let isMobile = $state(false);
+	let playIntroSpin = $state(false);
 
-	$: pathname = $page.url.pathname;
+	const pathname = $derived(page.url.pathname);
 
-	$: {
-		if (typeof document !== 'undefined') {
-			document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
-		}
-	}
+	$effect(() => {
+		document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+	});
 
 	function handleMobileMenuToggle(): void {
 		mobileMenuOpen = !mobileMenuOpen;
@@ -74,7 +72,7 @@
 		<button
 			type="button"
 			class="site-chrome__home site-chrome__home-button"
-			on:click={handleMobileMenuToggle}
+			onclick={handleMobileMenuToggle}
 			aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
 			aria-expanded={mobileMenuOpen}
 			aria-controls="mobile-site-menu"
@@ -124,7 +122,7 @@
 				href={item.href}
 				class="site-chrome-mobile__link"
 				class:site-chrome-mobile__link--active={isActive(pathname, item.href)}
-				on:click={closeMobileMenu}
+				onclick={closeMobileMenu}
 			>
 				{item.label}
 			</a>

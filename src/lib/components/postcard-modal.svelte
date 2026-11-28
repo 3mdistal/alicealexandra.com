@@ -1,10 +1,10 @@
 <script lang="ts">
-	import '$lib/styles/prose.css';
+	import '#lib/styles/prose.css';
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { page } from '$app/state';
 	import { marked } from 'marked';
-	import type { Postcard } from '$lib/content/postcards';
+	import type { Postcard } from '#lib/content/postcards.ts';
 
 	interface Props {
 		data: { postcard: Postcard };

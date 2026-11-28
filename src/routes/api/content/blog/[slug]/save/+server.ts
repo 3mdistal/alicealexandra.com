@@ -1,10 +1,10 @@
-import { error, json, type RequestHandler } from '@sveltejs/kit';
+import { error, type RequestHandler } from '@sveltejs/kit';
 import {
 	normalizeBlogFrontmatter,
 	type BlogFrontmatter,
 	isValidBlogSlug
-} from '$lib/content/blog-source';
-import { PublishError, saveBlogPost } from '$lib/server/blog-publishing';
+} from '#lib/content/blog-source.ts';
+import { PublishError, saveBlogPost } from '#lib/server/blog-publishing.ts';
 
 interface SaveBlogRequest {
 	frontmatter?: Partial<BlogFrontmatter>;
@@ -38,7 +38,7 @@ export const POST: RequestHandler = async ({ locals, params, request }) => {
 			originalChecksum
 		});
 
-		return json(result);
+		return Response.json(result);
 	} catch (caughtError) {
 		if (caughtError instanceof PublishError) {
 			throw error(caughtError.status, caughtError.message);

@@ -2,7 +2,7 @@
  * Utilities for parsing and serializing tall tales markdown content
  */
 
-import type { EditableMarkdownDocument } from '$lib/content/editable-source';
+import type { EditableMarkdownDocument } from '#lib/content/editable-source.ts';
 
 const TALL_TALE_TOP_LEVEL_FIELDS = [
 	'title',

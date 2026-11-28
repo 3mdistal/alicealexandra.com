@@ -9,7 +9,7 @@ import {
 	parseColor,
 	type Rgba
 } from '../../../../lint/design/color.ts';
-import type { SiteSurface, SiteTheme } from '$lib/theme/route-theme';
+import type { SiteSurface, SiteTheme } from '#lib/theme/route-theme.ts';
 
 /**
  * WCAG AA asks for a contrast ratio of at least 4.5:1 between text and its background. This test
@@ -156,7 +156,7 @@ interface TokenDeclaration {
 /** Custom property declarations from the token files, in the order `app.css` imports them. */
 const tokenDeclarations: TokenDeclaration[] = (() => {
 	const app = readFileSync(new URL('../../../app.css', import.meta.url), 'utf8');
-	const files = [...app.matchAll(/@import '\$lib\/styles\/tokens\/([\w-]+\.css)'/g)].map(
+	const files = [...app.matchAll(/@import '\.\/lib\/styles\/tokens\/([\w-]+\.css)'/g)].map(
 		([, file]) => new URL(`./${file}`, import.meta.url)
 	);
 	return files.flatMap((file) => {

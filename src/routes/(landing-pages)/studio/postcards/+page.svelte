@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ParallaxPostcard from '$lib/components/parallax-postcard.svelte';
-	import PostcardModal from '$lib/components/postcard-modal.svelte';
-	import { preloadData, pushState, goto } from '$app/navigation';
+	import ParallaxPostcard from '#lib/components/parallax-postcard.svelte';
+	import PostcardModal from '#lib/components/postcard-modal.svelte';
+	import { preloadData, goto } from '$app/navigation';
 	import { page } from '$app/state';
 
 	let { data } = $props();
@@ -86,13 +86,16 @@
 
 					if (result.type === 'loaded' && result.status === 200) {
 						// Use shallow routing to show the modal with animation data
-						pushState(href, {
-							selectedPostcard: result.data,
-							animationOrigin: {
-								x: rect.left,
-								y: rect.top,
-								width: rect.width,
-								height: rect.height
+						goto(href, {
+							shallow: true,
+							state: {
+								selectedPostcard: result.data,
+								animationOrigin: {
+									x: rect.left,
+									y: rect.top,
+									width: rect.width,
+									height: rect.height
+								}
 							}
 						});
 					} else {

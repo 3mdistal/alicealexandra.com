@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { RichTextItemResponse } from '$lib/notion/types/notion-types';
-	import { isTextRichTextItem } from '$lib/notion/types/guards';
+	import type { RichTextItemResponse } from '#lib/notion/types/notion-types.ts';
+	import { isTextRichTextItem } from '#lib/notion/types/guards.ts';
 	export let type: { rich_text: Array<RichTextItemResponse> };
 	export let paragraphs: boolean = false;
 </script>

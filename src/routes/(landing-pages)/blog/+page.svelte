@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Blog from './blog.svelte';
-	import type { BlogPostMeta } from '$lib/content/blog';
+	import type { BlogPostMeta } from '#lib/content/blog.ts';
 	import { onDestroy } from 'svelte';
-	import { pageState } from '$lib/stores';
-	import { IMAGE_DOMAIN } from '$lib/utils/images';
-	import OptimizedImage from '$lib/components/ui/optimized-image.svelte';
+	import { pageState } from '#lib/stores.ts';
+	import { IMAGE_DOMAIN } from '#lib/utils/images.ts';
+	import OptimizedImage from '#lib/components/ui/optimized-image.svelte';
 
 	export let data: { posts: BlogPostMeta[] };
 

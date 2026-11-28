@@ -5,7 +5,7 @@
 		parameterRanges,
 		physicsParams,
 		type PhysicsParams
-	} from '$lib/arcade/physics-params';
+	} from '#lib/arcade/physics-params.ts';
 
 	export let isOpen: boolean = false;
 

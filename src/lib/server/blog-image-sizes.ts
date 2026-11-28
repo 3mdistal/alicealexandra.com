@@ -1,5 +1,5 @@
-import { readImageSize, type ImageSize } from '$lib/blog/image-size';
-import { postImageUrls } from '$lib/blog/render-markdown';
+import { readImageSize, type ImageSize } from '#lib/blog/image-size.ts';
+import { postImageUrls } from '#lib/blog/render-markdown.ts';
 
 /** Enough of a file to reach its size: WebP, PNG and GIF hold it in 30 bytes, a JPEG after its metadata. */
 const HEAD_BYTES = 64 * 1024;

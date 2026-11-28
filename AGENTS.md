@@ -102,7 +102,7 @@ The Notion API client and database operations have been removed after migrating 
 
 ### mdsvex / markdown rendering
 
-- mdsvex is enabled in `svelte.config.js` using `mdsvex.config.js` extensions.
+- mdsvex is enabled in the `sveltekit()` plugin options in `vite.config.ts` (SvelteKit 3 has no `svelte.config.js`), using `mdsvex.config.js` extensions.
 - Content loaders currently parse frontmatter themselves (regex + simple `key: value` parsing) rather than relying on mdsvex frontmatter parsing.
 
 ### “Arcade” mini-apps
@@ -112,7 +112,7 @@ The Notion API client and database operations have been removed after migrating 
 
 ## Environment variables
 
-See `.env.example` for local setup.
+See `.env.example` for local setup. Server code reads runtime variables from `$app/env/private`; each one is declared in `src/env.ts`, so add a new one there first.
 
 Commonly referenced variables:
 
